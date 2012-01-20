@@ -1,0 +1,651 @@
+Using System
+Using System.Text
+Using System.Drawing
+
+Using Disney.SRR
+
+DclNameSpace Disney.SRR
+
+BegClass SRRgrid4 Access(*Public)
+
+	DclFld SRRkeyColor  Type(Disney.SRR.SRRkeyColor)
+	DclFld SRRuplift    Type(Disney.SRR.SRRuplift)
+	DclFld SRRsmooth    Type(Disney.SRR.SRRsmooth)
+	DclFld SRRcutOff    Type(Disney.SRR.SRRcutOff)
+	DclFld SRRalloc     Type(Disney.SRR.SRRalloc)
+	DclFld SRRgradeList Type(Disney.SRR.SRRGradeList)
+	
+	DclFld ErrorCount      Type(*Integer2) Inz(*Zero)
+	DclFld _SelectedRow    Type(*Integer4)
+	DclFld Filtering       Type(*Boolean)
+	DclFld _GridCleared    Type(*Boolean)
+
+	DclEvent UpLift_Changed Access(*Public)
+		DclSrParm GridName Type(*String)
+	
+	DclEvent Smooth_Changed Access(*Public)
+		DclSrParm GridName Type(*String)
+		
+	DclEvent CutOff_Changed Access(*Public)
+		DclSrParm GridName Type(*String)
+		
+	DclEvent Alloc_Changed  Access(*Public)
+		DclSrParm GridName Type(*String)
+	
+	DclDS GradeList
+		DclDsFld Market    Type(*Char)  Len(2)
+		DclDsFld DeptGrade Type(*Char)  Len(3)
+		DclDsFld Store     Type(*Zoned) Len(3,0)
+		DclDsFld StrName   Type(*Char)  Len(25)
+		DclDsFld GradeNm   Type(*Char)  Len(25)
+		
+	/Region Constructor & Destructor
+	BegConstructor Access(*Public)
+		DclSrParm SRRkeyColor  Type(Disney.SRR.SRRkeyColor)
+		DclSrParm SRRuplift    Type(Disney.SRR.SRRuplift)
+		DclSrParm SRRsmooth    Type(Disney.SRR.SRRsmooth)
+		DclSrParm SRRcutOff    Type(Disney.SRR.SRRcutOff)
+		DclSrParm SRRalloc     Type(Disney.SRR.SRRalloc)
+		DclSrParm SRRgradeList Type(Disney.SRR.SRRGradeList)
+
+		*this.SRRkeyColor  = SRRkeyColor
+		*this.SRRuplift    = SRRuplift
+		*this.SRRsmooth    = SRRsmooth
+		*this.SRRcutOff    = SRRcutoff
+		*this.SRRalloc     = SRRalloc
+		*this.SRRgradeList = SRRgradeList
+		
+	EndConstructor
+	/EndRegion
+	
+	/Region Property definitions
+	BegProp HasValidationErrors Type(*Boolean) Access(*Public)
+		BegGet
+			If ErrorCount > *Zero
+				LeaveSR *True
+			Else
+				LeaveSR *False
+			EndIf
+		EndGet
+	EndProp
+	
+	BegProp isFiltered Type(*Boolean) Access(*Public)
+		BegGet
+			LeaveSR Filtering
+		EndGet
+	EndProp
+	
+	BegProp SelectedRow Type(*Integer4) Access(*Public)
+		BegGet
+			LeaveSR _SelectedRow
+		EndGet
+		BegSet
+			_SelectedRow = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp GridCleared Type(*Boolean) Access(*Public)
+		BegGet
+			LeaveSR _GridCleared
+		EndGet
+	EndProp
+	/EndRegion
+	
+	/Region Methods
+	BegSR Fill_Grid Access(*Public)
+		DclSrParm Grid4      Type(System.Windows.Forms.DataGridView)
+		DclSrParm SRRdetails Type(Disney.SRR.SRRdetails)
+		
+		DclFld _Uplift Type(*Zoned)  Len(3,2)
+		DclFld _Smooth Type(*Zoned)  Len(5,2)
+		DclFld _CutOff Type(*Zoned)  Len(5,2)
+		DclFld _Alloc  Type(*Char)   Len(1)
+	
+		DclFld Row       Type(*Integer4)
+		DclFld RowCount  Type(*Integer4)
+		DclFld ColorChar Type(*String)
+		
+		Grid4.Rows.Clear()
+		SRRgradeList.SetMarket()
+		
+		DoUntil SRRgradeList.IsEoMkt
+			GradeList = SRRgradeList.GetDetails()
+			If Not SRRgradeList.IsEoMkt
+				Grid4.Rows.Add()
+				RowCount = Grid4.Rows.Count
+				Row = RowCount - 1
+				
+				// Find inherited value
+				_UpLift = SRRuplift.GetDftUplift(Market, DeptGrade)
+				_Smooth = SRRsmooth.GetDftSmooth(Market, DeptGrade)
+				_CutOff = SRRcutoff.GetDftCutOff(Market, DeptGrade)
+				_Alloc  = SRRalloc.GetDftAlloc(Market, DeptGrade)
+
+				ColorChar = SRRkeyColor.MarketColor(Market)
+
+				Grid4.Rows[Row].Cells['G4Market'].Value     = Market
+				Grid4.Item['G4Market',Row].Style.BackColor  = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4DeptGrad'].Value    = DeptGrade
+				Grid4.Item['G4DeptGrad',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4GradeNm'].Value    = GradeNm
+				Grid4.Item['G4GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4Store'].Value      = Store
+				Grid4.Item['G4Store',Row].Style.BackColor   = Color.FromArgb(Convert.ToInt32(ColorChar))				
+				
+				Grid4.Rows[Row].Cells['G4StoreNm'].Value    = StrName
+				Grid4.Item['G4StoreNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))				
+			
+				Grid4 = Populate_Row(Grid4, Row, Market, DeptGrade, +
+					_UpLift, _Smooth, _CutOff, _Alloc)
+				
+								
+				// Stock requirement - Grade does not exist in DTL, we have to accumulate by Store within
+				// the grade we are dealing with
+				If SRRdetails <> *Nothing
+					SRRdetails.GetStkReq(Store)
+					If SRRdetails.StockReq <> *Zero
+						Grid4.Item['G4StkReq',Row].Value = SRRdetails.StockReq
+					EndIf
+	
+					If SRRdetails.IdealQty <> *Zero
+						Grid4.Item['G4IdealQty',Row].Value = SRRdetails.IdealQty
+					EndIf
+						
+					If SRRdetails.ProposedQty <> *Zero
+						Grid4.Item['G4PropQty',Row].Value = SRRdetails.ProposedQty
+					EndIf
+				EndIf
+			EndIf
+		EndDo
+		
+		DoEvents
+		
+		Filtering    = *False
+		_SelectedRow = -1
+		_GridCleared = *False
+	EndSR
+	
+	BegSR Fill_Grid Access(*Public)
+		DclSrParm Grid4      Type(System.Windows.Forms.DataGridView)
+		DclSrParm SRRdetails Type(Disney.SRR.SRRdetails)
+		DclSrParm Market     Type(*Char) Len(2)
+		
+		DclFld _Uplift Type(*Zoned)  Len(3,2)
+		DclFld _Smooth Type(*Zoned)  Len(5,2)
+		DclFld _CutOff Type(*Zoned)  Len(5,2)
+		DclFld _Alloc  Type(*Char)   Len(1)
+	
+		DclFld Row       Type(*Integer4)
+		DclFld RowCount  Type(*Integer4)
+		DclFld ColorChar Type(*String)
+		
+		Grid4.Rows.Clear()
+		SRRgradeList.SetMarket(Market)
+		
+		DoUntil SRRgradeList.IsEoMkt
+			GradeList = SRRgradeList.GetDetails(Market)
+			If Not SRRgradeList.IsEoMkt
+				Grid4.Rows.Add()
+				RowCount = Grid4.Rows.Count
+				Row = RowCount - 1
+				
+				// Find inherited value
+				_UpLift = SRRuplift.GetDftUplift(Market, DeptGrade)
+				_Smooth = SRRsmooth.GetDftSmooth(Market, DeptGrade)
+				_CutOff = SRRcutoff.GetDftCutOff(Market, DeptGrade)
+				_Alloc  = SRRalloc.GetDftAlloc(Market, DeptGrade)
+
+				ColorChar = SRRkeyColor.MarketColor(Market)
+
+				Grid4.Rows[Row].Cells['G4Market'].Value     = Market
+				Grid4.Item['G4Market',Row].Style.BackColor  = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4DeptGrad'].Value    = DeptGrade
+				Grid4.Item['G4DeptGrad',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4GradeNm'].Value    = GradeNm
+				Grid4.Item['G4GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4Store'].Value      = Store
+				Grid4.Item['G4Store',Row].Style.BackColor   = Color.FromArgb(Convert.ToInt32(ColorChar))				
+				
+				Grid4.Rows[Row].Cells['G4StoreNm'].Value    = StrName
+				Grid4.Item['G4StoreNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))				
+			
+				Grid4 = Populate_Row(Grid4, Row, Market, DeptGrade, +
+					_UpLift, _Smooth, _CutOff, _Alloc)
+				
+								
+				// Stock requirement - Grade does not exist in DTL, we have to accumulate by Store within
+				// the grade we are dealing with
+				If SRRdetails <> *Nothing
+					SRRdetails.GetStkReq(Store)
+					If SRRdetails.StockReq <> *Zero
+						Grid4.Item['G4StkReq',Row].Value = SRRdetails.StockReq
+					EndIf
+	
+					If SRRdetails.IdealQty <> *Zero
+						Grid4.Item['G4IdealQty',Row].Value = SRRdetails.IdealQty
+					EndIf
+						
+					If SRRdetails.ProposedQty <> *Zero
+						Grid4.Item['G4PropQty',Row].Value = SRRdetails.ProposedQty
+					EndIf
+				EndIf
+			EndIf
+		EndDo
+		
+		DoEvents
+		
+		Filtering = *True
+		_SelectedRow = -1
+		_GridCleared = *False
+	EndSR
+	
+	BegSR Fill_Grid Access(*Public)
+		DclSrParm Grid4      Type(System.Windows.Forms.DataGridView)
+		DclSrParm SRRdetails Type(Disney.SRR.SRRdetails)
+		DclSrParm Market     Type(*Char) Len(2)
+		DclSrParm Grade      Type(*Char) Len(3)
+		
+		DclFld _Uplift Type(*Zoned)  Len(3,2)
+		DclFld _Smooth Type(*Zoned)  Len(5,2)
+		DclFld _CutOff Type(*Zoned)  Len(5,2)
+		DclFld _Alloc  Type(*Char)   Len(1)
+	
+		DclFld Row       Type(*Integer4)
+		DclFld RowCount  Type(*Integer4)
+		DclFld ColorChar Type(*String)
+		
+		Grid4.Rows.Clear()
+		SRRgradeList.SetMarket(Market)
+		
+		DoUntil SRRgradeList.IsEoMkt
+			GradeList = SRRgradeList.GetDetails(Market)
+			If Not SRRgradeList.IsEoMkt
+			
+				If GradeList.DeptGrade <> Grade
+					Iterate
+				EndIf
+				
+				Grid4.Rows.Add()
+				RowCount = Grid4.Rows.Count
+				Row = RowCount - 1
+				
+				// Find inherited value
+				_UpLift = SRRuplift.GetDftUplift(Market, DeptGrade)
+				_Smooth = SRRsmooth.GetDftSmooth(Market, DeptGrade)
+				_CutOff = SRRcutoff.GetDftCutOff(Market, DeptGrade)
+				_Alloc  = SRRalloc.GetDftAlloc(Market, DeptGrade)
+
+				ColorChar = SRRkeyColor.MarketColor(Market)
+
+				Grid4.Rows[Row].Cells['G4Market'].Value     = Market
+				Grid4.Item['G4Market',Row].Style.BackColor  = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4DeptGrad'].Value    = DeptGrade
+				Grid4.Item['G4DeptGrad',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4GradeNm'].Value    = GradeNm
+				Grid4.Item['G4GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid4.Rows[Row].Cells['G4Store'].Value      = Store
+				Grid4.Item['G4Store',Row].Style.BackColor   = Color.FromArgb(Convert.ToInt32(ColorChar))				
+				
+				Grid4.Rows[Row].Cells['G4StoreNm'].Value    = StrName
+				Grid4.Item['G4StoreNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))				
+			
+				Grid4 = Populate_Row(Grid4, Row, Market, DeptGrade, +
+					_UpLift, _Smooth, _CutOff, _Alloc)
+				
+								
+				// Stock requirement - Grade does not exist in DTL, we have to accumulate by Store within
+				// the grade we are dealing with
+				If SRRdetails <> *Nothing
+					SRRdetails.GetStkReq(Store)
+					If SRRdetails.StockReq <> *Zero
+						Grid4.Item['G4StkReq',Row].Value = SRRdetails.StockReq
+					EndIf
+	
+					If SRRdetails.IdealQty <> *Zero
+						Grid4.Item['G4IdealQty',Row].Value = SRRdetails.IdealQty
+					EndIf
+						
+					If SRRdetails.ProposedQty <> *Zero
+						Grid4.Item['G4PropQty',Row].Value = SRRdetails.ProposedQty
+					EndIf
+				EndIf
+			EndIf
+		EndDo
+		
+		DoEvents
+		
+		Filtering    = *True
+		_GridCleared = *False
+		_SelectedRow = -1
+	EndSR
+	
+	BegSR ClearGrid Access(*Public)
+		DclSrParm Grid4  Type(System.Windows.Forms.DataGridView)
+		
+		Grid4.Rows.Clear()
+		_GridCleared = *True
+	EndSR
+
+	BegFunc Populate_Row Type(system.Windows.Forms.DataGridView)
+		DclSrParm Grid4   Type(system.Windows.Forms.DataGridView)
+		DclSrParm Row     Type(*Integer4)
+		DclSrParm Market  Type(*Char)  Len(2)
+		DclSrParm Grade   Type(*Char)  Len(3)
+		DclSrParm _UpLift Type(*Zoned) Len(3,2)
+		DclSrParm _Smooth Type(*Zoned) Len(5,2)
+		DclSrParm _CutOff Type(*Zoned) Len(5,2)
+		DclSrParm _Alloc  Type(*Char)  Len(1)
+		
+		DclFld BoldFont    Type(System.Drawing.Font) New(Grid4.Font, FontStyle.Bold)
+		DclFld RegularFont Type(System.Drawing.Font) New(Grid4.Font, FontStyle.Regular)
+		
+		DclFld Uplift Type(*Zoned)  Len(3,2)
+		DclFld CutOff Type(*Zoned)  Len(5,2)
+		DclFld Alloc  Type(*Char)   Len(1)
+
+	
+		// Uplift factor
+		SRRuplift.GetUplift(Market, DeptGrade, Store)
+		If SRRuplift.IsFound
+			UpLift = SRRuplift.Value
+			Grid4.Item['G4UpLift',Row].Style.Font = RegularFont
+			
+			If SRRuplift.IsChanged
+				Grid4.Item['G4UpLift',Row].Style.ForeColor = Color.Red
+			Else
+				Grid4.Item['G4UpLift',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			UpLift = _Uplift
+			Grid4.Item['G4UpLift',Row].Style.ForeColor = Color.Blue
+			Grid4.Item['G4UpLift',Row].Style.Font      = BoldFont
+		EndIf
+		If Uplift <> *Zero
+			Grid4.Item['G4UpLift',Row].Value = Uplift
+		EndIf
+		If SRRuplift.ExceptionsBelow
+			Grid4.Item['G4UpLift',Row].Style.BackColor = Color.Yellow
+		EndIf
+
+
+		// Smoothing factor
+		SRRsmooth.GetSmooth(Market, DeptGrade, Store)
+		If SRRsmooth.IsFound
+			Grid4.Item['G4Smooth',Row].Value      = SRRsmooth.Value
+			Grid4.Item['G4Smooth',Row].Style.Font = RegularFont
+			
+			If SRRsmooth.IsChanged
+				Grid4.Item['G4Smooth',Row].Style.ForeColor = Color.Red
+			Else
+				Grid4.Item['G4Smooth',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			Grid4.Item['G4Smooth',Row].Value           = _Smooth
+			Grid4.Item['G4Smooth',Row].Style.ForeColor = Color.Blue
+			Grid4.Item['G4Smooth',Row].Style.Font      = BoldFont
+		EndIf
+		If SRRsmooth.ExceptionsBelow
+			Grid4.Item['G4Smooth',Row].Style.BackColor = Color.Yellow
+		EndIf	
+				
+				
+		// Cover Cut-Off factor
+		SRRcutoff.GetCutOff(Market, DeptGrade, Store)
+		If SRRcutoff.IsFound
+			CutOff = SRRcutoff.Value
+			Grid4.Item['G4CutOff',Row].Style.Font = RegularFont
+			
+			If SRRcutoff.IsChanged
+				Grid4.Item['G4CutOff',Row].Style.ForeColor = Color.Red
+			Else
+				Grid4.Item['G4CutOff',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			CutOff = _CutOff
+			Grid4.Item['G4CutOff',Row].Style.ForeColor = Color.Blue
+			Grid4.Item['G4CutOff',Row].Style.Font      = BoldFont
+		EndIf
+		If CutOff <> *Zero
+			Grid4.Item['G4CutOff',Row].Value = CutOff
+		EndIf
+		If SRRcutoff.ExceptionsBelow
+			Grid4.Item['G4CutOff',Row].Style.BackColor = Color.Yellow
+		EndIf
+				
+				
+		// Allocation flag
+		SRRalloc.GetAlloc(Market, DeptGrade, Store)
+		If SRRalloc.IsFound
+			Alloc = SRRalloc.Value
+			Grid4.Item['G4Alloc',Row].Style.Font = RegularFont
+			
+			If SRRalloc.IsChanged
+				Grid4.Item['G4Alloc',Row].Style.ForeColor = Color.Red
+			Else
+				Grid4.Item['G4Alloc',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			Alloc = _Alloc
+			Grid4.Item['G4Alloc',Row].Style.ForeColor = Color.Blue
+			Grid4.Item['G4Alloc',Row].Style.Font      = BoldFont
+		EndIf
+		If Alloc <> *Blank
+			Grid4.Item['G4Alloc',Row].Value = Alloc
+		EndIf
+		If SRRalloc.ExceptionsBelow
+			Grid4.Item['G4Alloc',Row].Style.BackColor = Color.Yellow
+		EndIf
+				
+		LeaveSR Grid4
+	EndFunc
+	
+	BegSR CellValueChanged Access(*Public)
+		DclSrParm sender Type(*Object)
+		DclSrParm e      Type(System.Windows.Forms.DataGridViewCellEventArgs)
+		DclSrParm Grid4  Type(System.Windows.Forms.DataGridView)
+
+		DclFld BoldFont    Type(System.Drawing.Font) New(Grid4.Font, FontStyle.Bold)
+		DclFld RegularFont Type(System.Drawing.Font) New(Grid4.Font, FontStyle.Regular)
+		
+		DclFld ColumnName Type( *String )
+		DclFld CellValue  Type( *String )
+		
+		DclFld Column Type(*Integer4)
+		DclFld Row    Type(*Integer4)
+		
+		DclFld Market    Type(*Char)  Len(2)
+		DclFld DeptGrade Type(*Char)  Len(3)
+		DclFld Store     Type(*Zoned) Len(3,0)
+		    
+		DclFld Uplift Type(*Zoned) Len(5,2)
+		DclFld Smooth Type(*Zoned) Len(5,2)
+		DclFld CutOff Type(*Zoned) Len(5,2)
+		DclFld Alloc  Type(*Char)  Len(1)
+
+		Column = e.ColumnIndex
+		Row    = e.RowIndex
+		
+		If Column >= *Zero and Row >= *Zero
+			ColumnName = Grid4.Columns[Column].Name.ToUpper()
+			Try
+				CellValue = Grid4.Item[Column, Row].Value.ToString().Trim()
+			Catch Err Exception
+				CellValue = String.Empty
+			EndTry
+			
+			// Get Market value from grid
+			Market    = Grid4.Item['G4Market', Row].Value.ToString().Trim()
+			DeptGrade = Grid4.Item['G4DeptGrad', Row].Value.ToString().Trim()
+			Store     = Grid4.Item['G4Store', Row].Value.ToString().Trim()
+
+			Select
+			When ColumnName = 'G4UPLIFT'
+				If Grid4.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					Grid4.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+				
+				If CellValue = String.Empty
+					Grid4.Item[Column, Row].Value           = SRRuplift.GetDftUplift(Market, DeptGrade)
+					Grid4.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid4.Item[Column, Row].Style.Font      = BoldFont
+
+					// Flag record as deleted that was found at this level
+					SRRuplift.DeleteUplift(Market, DeptGrade, Store)
+				Else
+					Try
+						Uplift = Convert.ToDecimal( CellValue )
+					Catch Err Exception
+						Grid4.Item[Column,Row].ErrorText = 'Invalid Number'
+						ErrorCount += 1
+						LeaveSR
+					EndTry
+					
+					If Uplift < 0.01 Or Uplift > 9.99
+						Grid4.Item[Column,Row].ErrorText = 'Value must be between Zero and Ten'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+					
+					Grid4.Item[Column,Row].Style.ForeColor = Color.Red
+					Grid4.Item[Column,Row].Style.Font      = RegularFont
+					
+					SRRuplift.UpdateUplift(Market, DeptGrade, Store, UpLift)
+					UpLift_Changed('Grid4')
+				EndIf
+				
+					
+			When ColumnName = 'G4SMOOTH'
+				If Grid4.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					Grid4.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+			
+				If CellValue = String.Empty
+					Grid4.Item[Column, Row].Value           = SRRsmooth.GetDftSmooth(Market, DeptGrade)
+					Grid4.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid4.Item[Column, Row].Style.Font      = BoldFont
+
+					SRRsmooth.DeleteSmooth(Market, DeptGrade, Store)
+				Else
+					Try
+						Smooth = Convert.ToDecimal( CellValue )
+					Catch Err Exception
+						Grid4.Item[Column,Row].ErrorText = 'Invalid Number'
+						ErrorCount += 1
+						LeaveSR
+					EndTry
+					
+					If Smooth > 1 Or Smooth < *Zero
+						Grid4.Item[Column,Row].ErrorText = 'Value must be between 0 and 1'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+				
+					Grid4.Item[Column,Row].Style.ForeColor = Color.Red
+					Grid4.Item[Column,Row].Style.Font      = RegularFont
+				
+					SRRsmooth.UpdateSmooth(Market, DeptGrade, Store, Smooth)
+					Smooth_Changed('Grid4')
+				EndIf
+				
+				
+			When ColumnName = 'G4CUTOFF'
+				If Grid4.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					Grid4.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+				
+				If CellValue = String.Empty
+					Grid4.Item[Column, Row].Value           = SRRcutoff.GetDftCutOff(Market, DeptGrade)
+					Grid4.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid4.Item[Column, Row].Style.Font      = BoldFont
+					
+					SRRcutoff.DeleteCutOff(Market, DeptGrade, Store)
+				Else
+					Try
+						CutOff = Convert.ToDecimal( CellValue )
+					Catch Err Exception
+						grid4.Item[Column,Row].ErrorText = 'Invalid Number'
+						ErrorCount += 1
+						LeaveSR
+					EndTry
+					
+					If CutOff <= *Zero
+						grid4.Item[Column,Row].ErrorText = 'Value must be greater than zero'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+					
+					Grid4.Item[Column,Row].Style.ForeColor = Color.Red
+					Grid4.Item[Column,Row].Style.Font      = RegularFont
+					
+					SRRcutoff.UpdateCutOff(Market, DeptGrade, Store, CutOff)
+					CutOff_Changed('Grid4')
+				EndIf
+				
+				
+			When ColumnName = 'G4ALLOC'
+				If Grid4.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					Grid4.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+				
+				If CellValue = String.Empty
+					Grid4.Item[Column, Row].Value           = SRRalloc.GetDftAlloc(Market, DeptGrade)
+					Grid4.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid4.Item[Column, Row].Style.Font      = BoldFont
+					
+					SRRalloc.DeleteAlloc(Market, DeptGrade, Store)
+				Else
+					Alloc = CellValue.ToUpper().Trim()
+					If Alloc = 'Y' Or Alloc = 'N'
+						Grid4.Item[Column, Row].Value = Alloc
+						Grid4.Item[Column,Row].Style.ForeColor = Color.Red
+						Grid4.Item[Column,Row].Style.Font      = RegularFont
+					
+						SRRalloc.UpdateAlloc(Market, DeptGrade, Store, Alloc)
+						Alloc_Changed('Grid4')
+					Else
+						grid4.Item[Column,Row].ErrorText = 'Invalid Flag (Must be Y or N)'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+				EndIf
+			EndSL
+		EndIf
+	EndSR
+			
+	BegSr RmvExceptions Access(*Public)
+		DclSrParm Grid4 Type(System.Windows.Forms.DataGridView)
+	
+		DclFld Market    Type(*Char)  Len(2)
+		DclFld DeptGrade Type(*Char)  Len(3)
+		DclFld Store     Type(*Zoned) Len(3,0)
+		DclFld Row       Type(*Integer2)
+		
+		Do FromVal(0) ToVal(Grid4.Rows.Count-1) Index(Row)
+			Market = Grid4.Item['G4Market', Row].Value.ToString().Trim()
+			DeptGrade = Grid4.Item['G4DeptGrad', Row].Value.ToString().Trim()
+			Store     = Convert.ToInt16(Grid4.Item['G4Store', Row].Value)
+
+			// Find Dept/Market/DeptGrade/Store level records and delete
+			SRRuplift.DeleteUpLift(Market, DeptGrade, Store)
+			SRRsmooth.DeleteSmooth(Market, DeptGrade, Store)
+			SRRcutoff.DeleteCutOff(Market, DeptGrade, Store)
+			SRRalloc.DeleteAlloc(Market, DeptGrade, Store)
+			
+			ErrorCount = *Zero
+		EndDo
+	EndSr
+	/EndRegion
+EndClass

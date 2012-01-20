@@ -1,0 +1,942 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.SRR
+
+DclNameSpace Disney.SRR
+
+BegClass DummyWorkBenchIM Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/region Windows Form Designer generated code
+	
+	DclFld uxUPC2 System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxChanging2 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld rbWeekly2 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbDaily2 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld uxShowFP2 System.Windows.Forms.CheckBox Access(*Public) WithEvents(*Yes)
+	DclFld uxMore System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld uxShowMD2 System.Windows.Forms.CheckBox Access(*Public) WithEvents(*Yes)
+	DclFld uxItmsiz System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxItmclr System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxItmsty System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxItmven System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld chkExcludeZeroStock System.Windows.Forms.CheckBox Access(*Public) WithEvents(*Yes)
+	DclFld uxStoreGroup System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld label18 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxCoordinateGroup System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld label17 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxPromoCode System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld label16 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxGrade System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxMarket System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxFamilyCode System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxItmcls System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxDept System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxUsingFilegroup System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxUser System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld label14 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label13 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxPromoEvent System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxStore System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld label10 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label9 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label11 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label7 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxModelRun System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld uxApply System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld uxBack System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld uxExit System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld dataGridView1 System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld Item System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Description System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Store System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld StoreName System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld StrType System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld WrkBnch System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	
+	BegSr InitializeComponent
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.uxUPC2 = *new System.Windows.Forms.TextBox()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.uxChanging2 = *new System.Windows.Forms.GroupBox()
+		*this.rbWeekly2 = *new System.Windows.Forms.RadioButton()
+		*this.rbDaily2 = *new System.Windows.Forms.RadioButton()
+		*this.uxShowFP2 = *new System.Windows.Forms.CheckBox()
+		*this.uxMore = *new System.Windows.Forms.Button()
+		*this.uxShowMD2 = *new System.Windows.Forms.CheckBox()
+		*this.uxItmsiz = *new System.Windows.Forms.TextBox()
+		*this.uxItmclr = *new System.Windows.Forms.TextBox()
+		*this.uxItmsty = *new System.Windows.Forms.TextBox()
+		*this.uxItmven = *new System.Windows.Forms.TextBox()
+		*this.chkExcludeZeroStock = *new System.Windows.Forms.CheckBox()
+		*this.uxStoreGroup = *new System.Windows.Forms.TextBox()
+		*this.label18 = *new System.Windows.Forms.Label()
+		*this.uxCoordinateGroup = *new System.Windows.Forms.TextBox()
+		*this.label17 = *new System.Windows.Forms.Label()
+		*this.uxPromoCode = *new System.Windows.Forms.TextBox()
+		*this.label16 = *new System.Windows.Forms.Label()
+		*this.uxGrade = *new System.Windows.Forms.TextBox()
+		*this.uxMarket = *new System.Windows.Forms.TextBox()
+		*this.uxFamilyCode = *new System.Windows.Forms.TextBox()
+		*this.uxItmcls = *new System.Windows.Forms.TextBox()
+		*this.uxDept = *new System.Windows.Forms.TextBox()
+		*this.uxUsingFilegroup = *new System.Windows.Forms.TextBox()
+		*this.uxUser = *new System.Windows.Forms.TextBox()
+		*this.label14 = *new System.Windows.Forms.Label()
+		*this.label13 = *new System.Windows.Forms.Label()
+		*this.uxPromoEvent = *new System.Windows.Forms.TextBox()
+		*this.uxStore = *new System.Windows.Forms.TextBox()
+		*this.label10 = *new System.Windows.Forms.Label()
+		*this.label9 = *new System.Windows.Forms.Label()
+		*this.label11 = *new System.Windows.Forms.Label()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.uxModelRun = *new System.Windows.Forms.Button()
+		*this.uxApply = *new System.Windows.Forms.Button()
+		*this.uxBack = *new System.Windows.Forms.Button()
+		*this.uxExit = *new System.Windows.Forms.Button()
+		*this.dataGridView1 = *new System.Windows.Forms.DataGridView()
+		*this.Item = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Description = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Store = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.StoreName = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.StrType = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.WrkBnch = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.uxChanging2.SuspendLayout()
+		(*this.dataGridView1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//uxUPC2
+		//
+		*this.uxUPC2.BackColor = System.Drawing.Color.White
+		*this.uxUPC2.Enabled = *False
+		*this.uxUPC2.Location = *new System.Drawing.Point(104, 169)
+		*this.uxUPC2.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxUPC2.Name = "uxUPC2"
+		*this.uxUPC2.ReadOnly = *True
+		*this.uxUPC2.Size = *new System.Drawing.Size(98, 20)
+		*this.uxUPC2.TabIndex = 112
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(11, 172)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(29, 13)
+		*this.label3.TabIndex = 111
+		*this.label3.Text = "UPC"
+		//
+		//uxChanging2
+		//
+		*this.uxChanging2.Controls.Add(*this.rbWeekly2)
+		*this.uxChanging2.Controls.Add(*this.rbDaily2)
+		*this.uxChanging2.Enabled = *False
+		*this.uxChanging2.Location = *new System.Drawing.Point(837, 51)
+		*this.uxChanging2.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxChanging2.Name = "uxChanging2"
+		*this.uxChanging2.Padding = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxChanging2.Size = *new System.Drawing.Size(99, 109)
+		*this.uxChanging2.TabIndex = 108
+		*this.uxChanging2.TabStop = *False
+		*this.uxChanging2.Text = "Changing"
+		//
+		//rbWeekly2
+		//
+		*this.rbWeekly2.AutoSize = *True
+		*this.rbWeekly2.Enabled = *False
+		*this.rbWeekly2.Location = *new System.Drawing.Point(23, 65)
+		*this.rbWeekly2.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbWeekly2.Name = "rbWeekly2"
+		*this.rbWeekly2.Size = *new System.Drawing.Size(61, 17)
+		*this.rbWeekly2.TabIndex = 1
+		*this.rbWeekly2.Text = "Weekly"
+		*this.rbWeekly2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		*this.rbWeekly2.UseVisualStyleBackColor = *True
+		//
+		//rbDaily2
+		//
+		*this.rbDaily2.AutoSize = *True
+		*this.rbDaily2.Checked = *True
+		*this.rbDaily2.Enabled = *False
+		*this.rbDaily2.Location = *new System.Drawing.Point(23, 34)
+		*this.rbDaily2.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbDaily2.Name = "rbDaily2"
+		*this.rbDaily2.Size = *new System.Drawing.Size(48, 17)
+		*this.rbDaily2.TabIndex = 0
+		*this.rbDaily2.TabStop = *True
+		*this.rbDaily2.Text = "Daily"
+		*this.rbDaily2.UseVisualStyleBackColor = *True
+		//
+		//uxShowFP2
+		//
+		*this.uxShowFP2.AutoSize = *True
+		*this.uxShowFP2.Checked = *True
+		*this.uxShowFP2.CheckState = System.Windows.Forms.CheckState.Checked
+		*this.uxShowFP2.Enabled = *False
+		*this.uxShowFP2.Location = *new System.Drawing.Point(557, 51)
+		*this.uxShowFP2.Name = "uxShowFP2"
+		*this.uxShowFP2.Size = *new System.Drawing.Size(127, 17)
+		*this.uxShowFP2.TabIndex = 110
+		*this.uxShowFP2.Text = "Show Full Price Lines"
+		*this.uxShowFP2.UseVisualStyleBackColor = *True
+		//
+		//uxMore
+		//
+		*this.uxMore.Anchor = ((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxMore.Location = *new System.Drawing.Point(840, 176)
+		*this.uxMore.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxMore.Name = "uxMore"
+		*this.uxMore.Size = *new System.Drawing.Size(100, 28)
+		*this.uxMore.TabIndex = 107
+		*this.uxMore.Text = "&More>>"
+		*this.uxMore.UseVisualStyleBackColor = *True
+		//
+		//uxShowMD2
+		//
+		*this.uxShowMD2.AutoSize = *True
+		*this.uxShowMD2.Checked = *True
+		*this.uxShowMD2.CheckState = System.Windows.Forms.CheckState.Checked
+		*this.uxShowMD2.Enabled = *False
+		*this.uxShowMD2.Location = *new System.Drawing.Point(557, 78)
+		*this.uxShowMD2.Name = "uxShowMD2"
+		*this.uxShowMD2.Size = *new System.Drawing.Size(137, 17)
+		*this.uxShowMD2.TabIndex = 109
+		*this.uxShowMD2.Text = "Show Markdown Lines "
+		*this.uxShowMD2.UseVisualStyleBackColor = *True
+		//
+		//uxItmsiz
+		//
+		*this.uxItmsiz.BackColor = System.Drawing.Color.White
+		*this.uxItmsiz.Enabled = *False
+		*this.uxItmsiz.Location = *new System.Drawing.Point(308, 79)
+		*this.uxItmsiz.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxItmsiz.Name = "uxItmsiz"
+		*this.uxItmsiz.ReadOnly = *True
+		*this.uxItmsiz.Size = *new System.Drawing.Size(47, 20)
+		*this.uxItmsiz.TabIndex = 106
+		//
+		//uxItmclr
+		//
+		*this.uxItmclr.BackColor = System.Drawing.Color.White
+		*this.uxItmclr.Enabled = *False
+		*this.uxItmclr.Location = *new System.Drawing.Point(257, 79)
+		*this.uxItmclr.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxItmclr.Name = "uxItmclr"
+		*this.uxItmclr.ReadOnly = *True
+		*this.uxItmclr.Size = *new System.Drawing.Size(47, 20)
+		*this.uxItmclr.TabIndex = 105
+		//
+		//uxItmsty
+		//
+		*this.uxItmsty.BackColor = System.Drawing.Color.White
+		*this.uxItmsty.Enabled = *False
+		*this.uxItmsty.Location = *new System.Drawing.Point(206, 79)
+		*this.uxItmsty.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxItmsty.Name = "uxItmsty"
+		*this.uxItmsty.ReadOnly = *True
+		*this.uxItmsty.Size = *new System.Drawing.Size(47, 20)
+		*this.uxItmsty.TabIndex = 104
+		//
+		//uxItmven
+		//
+		*this.uxItmven.BackColor = System.Drawing.Color.White
+		*this.uxItmven.Enabled = *False
+		*this.uxItmven.Location = *new System.Drawing.Point(155, 79)
+		*this.uxItmven.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxItmven.Name = "uxItmven"
+		*this.uxItmven.ReadOnly = *True
+		*this.uxItmven.Size = *new System.Drawing.Size(47, 20)
+		*this.uxItmven.TabIndex = 103
+		//
+		//chkExcludeZeroStock
+		//
+		*this.chkExcludeZeroStock.AutoSize = *True
+		*this.chkExcludeZeroStock.Checked = *True
+		*this.chkExcludeZeroStock.CheckState = System.Windows.Forms.CheckState.Checked
+		*this.chkExcludeZeroStock.Enabled = *False
+		*this.chkExcludeZeroStock.Location = *new System.Drawing.Point(557, 108)
+		*this.chkExcludeZeroStock.Name = "chkExcludeZeroStock"
+		*this.chkExcludeZeroStock.Size = *new System.Drawing.Size(210, 17)
+		*this.chkExcludeZeroStock.TabIndex = 102
+		*this.chkExcludeZeroStock.Text = "Exclude Items with Zero Stock at EDC "
+		*this.chkExcludeZeroStock.UseVisualStyleBackColor = *True
+		//
+		//uxStoreGroup
+		//
+		*this.uxStoreGroup.BackColor = System.Drawing.Color.White
+		*this.uxStoreGroup.Enabled = *False
+		*this.uxStoreGroup.Location = *new System.Drawing.Point(458, 176)
+		*this.uxStoreGroup.Name = "uxStoreGroup"
+		*this.uxStoreGroup.ReadOnly = *True
+		*this.uxStoreGroup.Size = *new System.Drawing.Size(57, 20)
+		*this.uxStoreGroup.TabIndex = 101
+		//
+		//label18
+		//
+		*this.label18.AutoSize = *True
+		*this.label18.Location = *new System.Drawing.Point(368, 179)
+		*this.label18.Name = "label18"
+		*this.label18.Size = *new System.Drawing.Size(64, 13)
+		*this.label18.TabIndex = 100
+		*this.label18.Text = "Store Group"
+		//
+		//uxCoordinateGroup
+		//
+		*this.uxCoordinateGroup.BackColor = System.Drawing.Color.White
+		*this.uxCoordinateGroup.Enabled = *False
+		*this.uxCoordinateGroup.Location = *new System.Drawing.Point(104, 140)
+		*this.uxCoordinateGroup.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxCoordinateGroup.Name = "uxCoordinateGroup"
+		*this.uxCoordinateGroup.ReadOnly = *True
+		*this.uxCoordinateGroup.Size = *new System.Drawing.Size(47, 20)
+		*this.uxCoordinateGroup.TabIndex = 99
+		//
+		//label17
+		//
+		*this.label17.AutoSize = *True
+		*this.label17.Location = *new System.Drawing.Point(9, 147)
+		*this.label17.Name = "label17"
+		*this.label17.Size = *new System.Drawing.Size(90, 13)
+		*this.label17.TabIndex = 98
+		*this.label17.Text = "Coordinate Group"
+		//
+		//uxPromoCode
+		//
+		*this.uxPromoCode.BackColor = System.Drawing.Color.White
+		*this.uxPromoCode.Enabled = *False
+		*this.uxPromoCode.Location = *new System.Drawing.Point(458, 108)
+		*this.uxPromoCode.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxPromoCode.Name = "uxPromoCode"
+		*this.uxPromoCode.ReadOnly = *True
+		*this.uxPromoCode.Size = *new System.Drawing.Size(47, 20)
+		*this.uxPromoCode.TabIndex = 97
+		//
+		//label16
+		//
+		*this.label16.AutoSize = *True
+		*this.label16.Location = *new System.Drawing.Point(370, 112)
+		*this.label16.Name = "label16"
+		*this.label16.Size = *new System.Drawing.Size(63, 13)
+		*this.label16.TabIndex = 96
+		*this.label16.Text = "Event Code"
+		//
+		//uxGrade
+		//
+		*this.uxGrade.BackColor = System.Drawing.Color.White
+		*this.uxGrade.Enabled = *False
+		*this.uxGrade.Location = *new System.Drawing.Point(611, 176)
+		*this.uxGrade.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxGrade.Name = "uxGrade"
+		*this.uxGrade.ReadOnly = *True
+		*this.uxGrade.Size = *new System.Drawing.Size(73, 20)
+		*this.uxGrade.TabIndex = 94
+		//
+		//uxMarket
+		//
+		*this.uxMarket.BackColor = System.Drawing.Color.White
+		*this.uxMarket.Enabled = *False
+		*this.uxMarket.Location = *new System.Drawing.Point(611, 140)
+		*this.uxMarket.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxMarket.Name = "uxMarket"
+		*this.uxMarket.ReadOnly = *True
+		*this.uxMarket.Size = *new System.Drawing.Size(73, 20)
+		*this.uxMarket.TabIndex = 93
+		//
+		//uxFamilyCode
+		//
+		*this.uxFamilyCode.BackColor = System.Drawing.Color.White
+		*this.uxFamilyCode.Enabled = *False
+		*this.uxFamilyCode.Location = *new System.Drawing.Point(104, 108)
+		*this.uxFamilyCode.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxFamilyCode.Name = "uxFamilyCode"
+		*this.uxFamilyCode.ReadOnly = *True
+		*this.uxFamilyCode.Size = *new System.Drawing.Size(47, 20)
+		*this.uxFamilyCode.TabIndex = 92
+		//
+		//uxItmcls
+		//
+		*this.uxItmcls.BackColor = System.Drawing.Color.White
+		*this.uxItmcls.Enabled = *False
+		*this.uxItmcls.Location = *new System.Drawing.Point(104, 78)
+		*this.uxItmcls.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxItmcls.Name = "uxItmcls"
+		*this.uxItmcls.ReadOnly = *True
+		*this.uxItmcls.Size = *new System.Drawing.Size(47, 20)
+		*this.uxItmcls.TabIndex = 91
+		//
+		//uxDept
+		//
+		*this.uxDept.BackColor = System.Drawing.Color.White
+		*this.uxDept.Enabled = *False
+		*this.uxDept.Location = *new System.Drawing.Point(458, 41)
+		*this.uxDept.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxDept.Name = "uxDept"
+		*this.uxDept.ReadOnly = *True
+		*this.uxDept.Size = *new System.Drawing.Size(47, 20)
+		*this.uxDept.TabIndex = 90
+		//
+		//uxUsingFilegroup
+		//
+		*this.uxUsingFilegroup.BackColor = System.Drawing.Color.White
+		*this.uxUsingFilegroup.Enabled = *False
+		*this.uxUsingFilegroup.Location = *new System.Drawing.Point(308, 41)
+		*this.uxUsingFilegroup.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxUsingFilegroup.Name = "uxUsingFilegroup"
+		*this.uxUsingFilegroup.Size = *new System.Drawing.Size(27, 20)
+		*this.uxUsingFilegroup.TabIndex = 89
+		//
+		//uxUser
+		//
+		*this.uxUser.BackColor = System.Drawing.Color.White
+		*this.uxUser.Enabled = *False
+		*this.uxUser.ForeColor = System.Drawing.SystemColors.WindowText
+		*this.uxUser.Location = *new System.Drawing.Point(104, 43)
+		*this.uxUser.Margin = *new System.Windows.Forms.Padding(2)
+		*this.uxUser.Name = "uxUser"
+		*this.uxUser.ReadOnly = *True
+		*this.uxUser.Size = *new System.Drawing.Size(88, 20)
+		*this.uxUser.TabIndex = 88
+		//
+		//label14
+		//
+		*this.label14.AutoSize = *True
+		*this.label14.Location = *new System.Drawing.Point(220, 46)
+		*this.label14.Margin = *new System.Windows.Forms.Padding(2, 0, 2, 0)
+		*this.label14.Name = "label14"
+		*this.label14.Size = *new System.Drawing.Size(83, 13)
+		*this.label14.TabIndex = 87
+		*this.label14.Text = "Using Filegroup:"
+		//
+		//label13
+		//
+		*this.label13.AutoSize = *True
+		*this.label13.Location = *new System.Drawing.Point(9, 44)
+		*this.label13.Margin = *new System.Windows.Forms.Padding(2, 0, 2, 0)
+		*this.label13.Name = "label13"
+		*this.label13.Size = *new System.Drawing.Size(47, 13)
+		*this.label13.TabIndex = 86
+		*this.label13.Text = "You are:"
+		//
+		//uxPromoEvent
+		//
+		*this.uxPromoEvent.BackColor = System.Drawing.Color.White
+		*this.uxPromoEvent.Enabled = *False
+		*this.uxPromoEvent.Location = *new System.Drawing.Point(458, 79)
+		*this.uxPromoEvent.Name = "uxPromoEvent"
+		*this.uxPromoEvent.ReadOnly = *True
+		*this.uxPromoEvent.Size = *new System.Drawing.Size(73, 20)
+		*this.uxPromoEvent.TabIndex = 84
+		//
+		//uxStore
+		//
+		*this.uxStore.BackColor = System.Drawing.Color.White
+		*this.uxStore.Enabled = *False
+		*this.uxStore.Location = *new System.Drawing.Point(458, 144)
+		*this.uxStore.Name = "uxStore"
+		*this.uxStore.ReadOnly = *True
+		*this.uxStore.Size = *new System.Drawing.Size(37, 20)
+		*this.uxStore.TabIndex = 83
+		//
+		//label10
+		//
+		*this.label10.AutoSize = *True
+		*this.label10.Location = *new System.Drawing.Point(9, 115)
+		*this.label10.Name = "label10"
+		*this.label10.Size = *new System.Drawing.Size(53, 13)
+		*this.label10.TabIndex = 82
+		*this.label10.Text = "Franchise"
+		//
+		//label9
+		//
+		*this.label9.AutoSize = *True
+		*this.label9.Location = *new System.Drawing.Point(368, 147)
+		*this.label9.Name = "label9"
+		*this.label9.Size = *new System.Drawing.Size(32, 13)
+		*this.label9.TabIndex = 81
+		*this.label9.Text = "Store"
+		//
+		//label11
+		//
+		*this.label11.AutoSize = *True
+		*this.label11.Location = *new System.Drawing.Point(368, 82)
+		*this.label11.Name = "label11"
+		*this.label11.Size = *new System.Drawing.Size(59, 13)
+		*this.label11.TabIndex = 85
+		*this.label11.Text = "Promotions"
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(555, 179)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(36, 13)
+		*this.label8.TabIndex = 80
+		*this.label8.Text = "Grade"
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Location = *new System.Drawing.Point(555, 147)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(40, 13)
+		*this.label7.TabIndex = 79
+		*this.label7.Text = "Market"
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(11, 82)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(27, 13)
+		*this.label2.TabIndex = 78
+		*this.label2.Text = "Item"
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(368, 44)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(30, 13)
+		*this.label1.TabIndex = 77
+		*this.label1.Text = "Dept"
+		//
+		//uxModelRun
+		//
+		*this.uxModelRun.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxModelRun.Location = *new System.Drawing.Point(478, 659)
+		*this.uxModelRun.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxModelRun.Name = "uxModelRun"
+		*this.uxModelRun.Size = *new System.Drawing.Size(100, 28)
+		*this.uxModelRun.TabIndex = 116
+		*this.uxModelRun.Text = "&Model Run"
+		*this.uxModelRun.UseVisualStyleBackColor = *True
+		//
+		//uxApply
+		//
+		*this.uxApply.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxApply.Location = *new System.Drawing.Point(596, 659)
+		*this.uxApply.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxApply.Name = "uxApply"
+		*this.uxApply.Size = *new System.Drawing.Size(100, 28)
+		*this.uxApply.TabIndex = 115
+		*this.uxApply.Text = "&Apply"
+		*this.uxApply.UseVisualStyleBackColor = *True
+		//
+		//uxBack
+		//
+		*this.uxBack.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxBack.Location = *new System.Drawing.Point(718, 659)
+		*this.uxBack.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxBack.Name = "uxBack"
+		*this.uxBack.Size = *new System.Drawing.Size(100, 28)
+		*this.uxBack.TabIndex = 114
+		*this.uxBack.Text = "&Back"
+		*this.uxBack.UseVisualStyleBackColor = *True
+		//
+		//uxExit
+		//
+		*this.uxExit.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxExit.Location = *new System.Drawing.Point(839, 659)
+		*this.uxExit.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxExit.Name = "uxExit"
+		*this.uxExit.Size = *new System.Drawing.Size(100, 28)
+		*this.uxExit.TabIndex = 113
+		*this.uxExit.Text = "E&xit"
+		*this.uxExit.UseVisualStyleBackColor = *True
+		//
+		//dataGridView1
+		//
+		*this.dataGridView1.AllowUserToAddRows = *False
+		*this.dataGridView1.AllowUserToDeleteRows = *False
+		dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGreen
+		*this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2
+		*this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dataGridView1.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Item, *this.Description, *this.Store, *this.StoreName, *this.StrType, *this.WrkBnch})
+		*this.dataGridView1.Location = *new System.Drawing.Point(20, 211)
+		*this.dataGridView1.Name = "dataGridView1"
+		*this.dataGridView1.ReadOnly = *True
+		*this.dataGridView1.Size = *new System.Drawing.Size(920, 437)
+		*this.dataGridView1.TabIndex = 117
+		//
+		//Item
+		//
+		*this.Item.DataPropertyName = "Item"
+		*this.Item.Frozen = *True
+		*this.Item.HeaderText = "Item"
+		*this.Item.Name = "Item"
+		*this.Item.ReadOnly = *True
+		//
+		//Description
+		//
+		*this.Description.DataPropertyName = "Description"
+		*this.Description.Frozen = *True
+		*this.Description.HeaderText = "Description"
+		*this.Description.Name = "Description"
+		*this.Description.ReadOnly = *True
+		//
+		//Store
+		//
+		*this.Store.DataPropertyName = "Store"
+		*this.Store.Frozen = *True
+		*this.Store.HeaderText = "Store"
+		*this.Store.Name = "Store"
+		*this.Store.ReadOnly = *True
+		//
+		//StoreName
+		//
+		*this.StoreName.DataPropertyName = "StoreName"
+		*this.StoreName.Frozen = *True
+		*this.StoreName.HeaderText = "Store Name"
+		*this.StoreName.Name = "StoreName"
+		*this.StoreName.ReadOnly = *True
+		//
+		//StrType
+		//
+		*this.StrType.DataPropertyName = "StrType"
+		*this.StrType.Frozen = *True
+		*this.StrType.HeaderText = "Str Type"
+		*this.StrType.Name = "StrType"
+		*this.StrType.ReadOnly = *True
+		//
+		//WrkBnch
+		//
+		*this.WrkBnch.DataPropertyName = "WrkBnch"
+		*this.WrkBnch.Frozen = *True
+		*this.WrkBnch.HeaderText = "Wrk Bnch"
+		*this.WrkBnch.Name = "WrkBnch"
+		*this.WrkBnch.ReadOnly = *True
+		//
+		//DummyWorkBenchIM
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(949, 692)
+		*this.Controls.Add(*this.dataGridView1)
+		*this.Controls.Add(*this.uxModelRun)
+		*this.Controls.Add(*this.uxApply)
+		*this.Controls.Add(*this.uxBack)
+		*this.Controls.Add(*this.uxExit)
+		*this.Controls.Add(*this.uxUPC2)
+		*this.Controls.Add(*this.label3)
+		*this.Controls.Add(*this.uxChanging2)
+		*this.Controls.Add(*this.uxShowFP2)
+		*this.Controls.Add(*this.uxMore)
+		*this.Controls.Add(*this.uxShowMD2)
+		*this.Controls.Add(*this.uxItmsiz)
+		*this.Controls.Add(*this.uxItmclr)
+		*this.Controls.Add(*this.uxItmsty)
+		*this.Controls.Add(*this.uxItmven)
+		*this.Controls.Add(*this.chkExcludeZeroStock)
+		*this.Controls.Add(*this.uxStoreGroup)
+		*this.Controls.Add(*this.label18)
+		*this.Controls.Add(*this.uxCoordinateGroup)
+		*this.Controls.Add(*this.label17)
+		*this.Controls.Add(*this.uxPromoCode)
+		*this.Controls.Add(*this.label16)
+		*this.Controls.Add(*this.uxGrade)
+		*this.Controls.Add(*this.uxMarket)
+		*this.Controls.Add(*this.uxFamilyCode)
+		*this.Controls.Add(*this.uxItmcls)
+		*this.Controls.Add(*this.uxDept)
+		*this.Controls.Add(*this.uxUsingFilegroup)
+		*this.Controls.Add(*this.uxUser)
+		*this.Controls.Add(*this.label14)
+		*this.Controls.Add(*this.label13)
+		*this.Controls.Add(*this.uxPromoEvent)
+		*this.Controls.Add(*this.uxStore)
+		*this.Controls.Add(*this.label10)
+		*this.Controls.Add(*this.label9)
+		*this.Controls.Add(*this.label11)
+		*this.Controls.Add(*this.label8)
+		*this.Controls.Add(*this.label7)
+		*this.Controls.Add(*this.label2)
+		*this.Controls.Add(*this.label1)
+		*this.Name = "DummyWorkBenchIM"
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "DummyWorkBenchIM"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		*this.uxChanging2.ResumeLayout(*False)
+		*this.uxChanging2.PerformLayout()
+		(*this.dataGridView1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	/EndRegion
+	
+	/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+				
+		InitializeComponent()
+
+		*this.PgmDB = PgmDB
+		
+	EndConstructor
+	/EndRegion
+	
+	/Region Defines
+	DclDB PgmDB DBName("TDST")
+    DclDiskFile Name(DSSRWBISMW)   Type(*Input)  Org(*Indexed) File('DSSRWBISMW') Db(PgmDB) ImpOpen(*No)
+    
+    DclFld Table1    Type(DataTable)
+    
+	/EndRegion
+	
+	BegSr DummyWorkBench_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+                
+        CreateTable()
+        PopulateTable()
+						
+		DataGridView1.DataSource = Table1
+		
+	EndSr
+	
+	BegSr CreateTable Access(*Private)
+	
+		
+		Table1 = *New DataTable("Table1")
+
+		Table1.Columns.Add(*New DataColumn("Item", *TypeOf(String)))
+		Table1.Columns["Item"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		Table1.Columns["Description"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Store", *TypeOf(String)))
+		Table1.Columns["Store"].ReadOnly = *True
+				
+		Table1.Columns.Add(*New DataColumn("StoreName", *TypeOf(String)))
+		Table1.Columns["StoreName"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("StrType", *TypeOf(String)))
+		Table1.Columns["StrType"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("WrkBnch", *TypeOf(String)))
+		Table1.Columns["WrkBnch"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Sales LW", *TypeOf(String)))
+		Table1.Columns["Sales LW"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Sales TW", *TypeOf(String)))
+		Table1.Columns["Sales TW"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Smoothed Rate of Sale", *TypeOf(String)))
+		Table1.Columns["Smoothed Rate of Sale"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("New Smoothed Rate of Sale", *TypeOf(String)))
+		Table1.Columns["New Smoothed Rate of Sale"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Store SoH", *TypeOf(String)))
+		Table1.Columns["Store SoH"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Total Store Cover", *TypeOf(String)))
+		Table1.Columns["Total Store Cover"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("OH Store Cover", *TypeOf(String)))
+		Table1.Columns["OH Store Cover"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Total Stock Required", *TypeOf(String)))
+		Table1.Columns["Total Stock Required"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Give back Y/N", *TypeOf(String)))
+		Table1.Columns["Give back Y/N"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Ringfence", *TypeOf(String)))
+		Table1.Columns["Ringfence"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Allocated", *TypeOf(String)))
+		Table1.Columns["Allocated"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Shipped", *TypeOf(String)))
+		Table1.Columns["Shipped"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Min Display Qty", *TypeOf(String)))
+		Table1.Columns["Min Display Qty"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Ideal Stock Req Qty", *TypeOf(String)))
+		Table1.Columns["Ideal Stock Req Qty"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Prop. Alloc Qty", *TypeOf(String)))
+		Table1.Columns["Prop. Alloc Qty"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("EDC Stock", *TypeOf(String)))
+		Table1.Columns["EDC Stock"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("APP Qty", *TypeOf(String)))
+		Table1.Columns["APP Qty"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Smoothed EDC Cover", *TypeOf(String)))
+		Table1.Columns["Smoothed EDC Cover"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Next Delivery Date", *TypeOf(String)))
+		Table1.Columns["Next Delivery Date"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Next Order Qty", *TypeOf(String)))
+		Table1.Columns["Next Order Qty"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Current Pattern", *TypeOf(String)))
+		Table1.Columns["Current Pattern"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("New Pattern", *TypeOf(String)))
+		Table1.Columns["New Pattern"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Current Uplift", *TypeOf(String)))
+		Table1.Columns["Current Uplift"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("New Uplift Factor", *TypeOf(String)))
+		Table1.Columns["New Uplift Factor"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Current Cover C/O", *TypeOf(String)))
+		Table1.Columns["Current Cover C/O"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("New Cover C/O", *TypeOf(String)))
+		Table1.Columns["New Cover C/O"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Current Alloc Flag", *TypeOf(String)))
+		Table1.Columns["Current Alloc Flag"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("New Alloc Flag", *TypeOf(String)))
+		Table1.Columns["New Alloc Flag"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Current Smooth Factor", *TypeOf(String)))
+		Table1.Columns["Current Smooth Factor"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("New Smooth Factor", *TypeOf(String)))
+		Table1.Columns["New Smooth Factor"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Days Out of Stock", *TypeOf(String)))
+		Table1.Columns["Days Out of Stock"].ReadOnly = *True
+				
+		Table1.Columns.Add(*New DataColumn("Locked User", *TypeOf(String)))
+		Table1.Columns["Locked User"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("AP Master Item Codek", *TypeOf(String)))
+		Table1.Columns["AP Master Item Codek"].ReadOnly = *True
+		
+		Table1.Columns.Add(*New DataColumn("Lever Level", *TypeOf(String)))
+		Table1.Columns["Lever Level"].ReadOnly = *True
+	
+	EndSr
+	
+	BegSr PopulateTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSSRWBISMW.IsOpen
+			Open DSSRWBISMW
+		EndIf
+		
+		DoUntil DSSRWBISMW.IsEof
+			Read DSSRWBISMW
+			If Not DSSRWBISMW.IsEof
+				dr = Table1.NewRow()
+				
+				dr.Item["Item"]							= ISCLS + '-' + ISVEN + '-' + ISSTY + '-' + ISCLR.ToString("000") + '-' + ISSIZ.ToString("0000")
+				dr.Item["Description"]					= ISIDES
+				dr.Item["Store"]                        = ISSTR
+				dr.Item["StoreName"]					= ISSNAM
+				dr.Item["StrType"]						= ISSTYP
+				dr.Item["WrkBnch"]						= ISWKB 
+				dr.Item["Sales LW"]						= ISSLUL
+				dr.Item["Sales TW"]						= ISSLUT
+				dr.Item["Smoothed Rate of Sale"]		= ISCSRS
+				dr.Item["New Smoothed Rate of Sale"]	= ISSRSL  
+				dr.Item["Store SoH"]					= ISSSOH 
+				dr.Item["Total Store Cover"]			= ISSWOC
+				dr.Item["OH Store Cover"]				= ISOHSCOV
+				dr.Item["Total Stock Required"]			= ISCSSR
+				dr.Item["Give back Y/N"]				= ISGIVB
+				dr.Item["Ringfence"]					= ISRINGF
+				dr.Item["Allocated"]					= ISINTA
+				dr.Item["Shipped"]						= ISINTS
+				dr.Item["Min Display Qty"]				= ISMDQT
+				dr.Item["Ideal Stock Req Qty"]			= ISNSRQ
+				dr.Item["Prop. Alloc Qty"]				= ISPRAQ
+				dr.Item["EDC Stock"]					= ISESOH
+				dr.Item["APP Qty"]						= ISAPPQ
+				dr.Item["Smoothed EDC Cover"]			= ISEWOC
+				dr.Item["Next Delivery Date"]			= ISNODT
+				dr.Item["Next Order Qty"]				= ISNOQT
+				dr.Item["Current Pattern"]				= ISITPA
+				dr.Item["New Pattern"]					= ISNPAT
+				dr.Item["Current Uplift"]				= ISCFWF
+				dr.Item["New Uplift Factor"]			= ISNFWF
+				dr.Item["Current Cover C/O"]			= ISCCCO
+				dr.Item["New Cover C/O"]                = ISNCCO
+				dr.Item["Current Alloc Flag"]			= ISCAFL
+				dr.Item["New Alloc Flag"]				= ISNAFL
+				dr.Item["Current Smooth Factor"]		= ISSFCT 
+				dr.Item["New Smooth Factor"]            = ISNSMF 
+				dr.Item["Days Out of Stock"]			= ISSTOU
+				dr.Item["Locked User"]					= ISAFLLOCK
+				dr.Item["AP Master Item Codek"]			= ISAPMST
+				dr.Item["Lever Level"]					= ISLVRLV
+								
+				Table1.Rows.Add(dr)
+			EndIf
+		EndDo
+				
+		
+		Close DSSRWBISMW
+	EndSr
+		
+	BegSr uxExit_Click Access(*Private) Event(*this.uxExit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If DSSRWBISMW.IsOpen
+		   Close DSSRWBISMW
+		Endif  
+		
+		Unload *This
+	EndSr
+		
+	BegSr dataGridView1_CellFormatting Access(*Private) Event(*this.dataGridView1.CellFormatting)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellFormattingEventArgs
+		
+		DclFld theRow Type(DataGridViewRow)  
+		theRow = dataGridView1.Rows[e.rowIndex]
+						
+		if theRow.Cells["StrType"].Value.ToString() = 'B&M' and theRow.Cells["WrkBnch"].Value.ToString() = 'WEEK'
+			theRow.DefaultCellStyle.BackColor = Color.LightSalmon
+		Endif
+		
+		if theRow.Cells["StrType"].Value.ToString() = 'B&M' and theRow.Cells["WrkBnch"].Value.ToString() = 'DAY'
+			theRow.DefaultCellStyle.BackColor = Color.Chocolate
+		Endif
+		
+		if theRow.Cells["StrType"].Value.ToString() = 'ONLINE' and theRow.Cells["WrkBnch"].Value.ToString() = 'WEEK'
+			theRow.DefaultCellStyle.BackColor = Color.PaleTurquoise
+		Endif
+		
+		if theRow.Cells["StrType"].Value.ToString() = 'ONLINE' and theRow.Cells["WrkBnch"].Value.ToString() = 'DAY'
+			theRow.DefaultCellStyle.BackColor = Color.Teal
+		Endif 
+		
+	EndSr
+	
+EndClass

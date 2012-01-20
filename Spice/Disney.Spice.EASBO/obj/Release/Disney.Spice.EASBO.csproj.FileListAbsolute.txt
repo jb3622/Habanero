@@ -1,0 +1,5 @@
+C:\IDASH\SPICE\Disney.Spice.EASBO.dll
+C:\IDASH\SPICE\Disney.Spice.EASBO.pdb
+C:\Projects\SPICE\Disney.Spice.EASBO\obj\Release\ResolveAssemblyReference.cache
+C:\Projects\SPICE\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.pdb

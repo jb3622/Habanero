@@ -1,0 +1,247 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.Windows.Forms
+
+DclNameSpace Disney.SRR
+
+BegClass BuildSRRallocations Access(*Public)
+	
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSAPPALC_Read)   Type(*Input)  Org(*Indexed) File('DSAPPALC1') Db(PgmDB) ImpOpen(*No)
+	DclDiskFile Name(DSAPPALC_Update) Type(*Update) Org(*Indexed) File('DSAPPALC') Db(PgmDB) ImpOpen(*No) Rnmfmt(RDSSRALC:ALC_UPDATE)
+	
+	DclFld GetAddUnits Type(GetAddUnits)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	BegFunc BuildData Access(*Public) Type(AllocationData)
+		DclSrParm Class     Type(*Zoned) Len(4,0)
+		DclSrParm Vendor    Type(*Zoned) Len(5,0)
+		DclSrParm Style     Type(*Zoned) Len(4,0)
+		DclSrParm Colour    Type(*Zoned) Len(3,0)
+		DclSrParm Size      Type(*Zoned) Len(4,0)
+		DclSrParm DCholding Type(*Integer4)
+		DclSrParm SetData   Type(SetData)
+		DclSrParm Member    Type(String)
+				
+		DclFld ds                Type(DataSet)
+		DclFld Allocations       Type(DataTable)
+		DclFld SortedAllocations Type(DataTable)
+		DclFld Markets           Type(DataTable)
+		DclFld dc                Type(DataColumn)
+		DclFld dr                Type(DataRow)
+		DclFld dv                Type(DataView)
+		
+		DclFld WrkQty          Type(*Decimal)
+		DclFld Total_Allocated Type(*Decimal)
+		
+		GetAddUnits = *New GetAddUnits(PgmDB,Member)
+				
+		If Not DSAPPALC_Read.IsOpen
+			Open DSAPPALC_Read
+		EndIf
+		
+		ds = *New DataSet("APallocations")
+		
+		//----------------------------------
+		// Create Allocations table
+		Allocations = *New DataTable("Allocations")
+		//ds.Tables.Add(Allocations)
+		
+		dc = *New DataColumn("Market", *TypeOf(String))
+		dc.ReadOnly = *True
+		Allocations.Columns.Add(dc)
+		
+		dc = *New DataColumn("Store", *TypeOf(Int16))
+		dc.ReadOnly = *True
+		Allocations.Columns.Add(dc)
+		
+		dc = *New DataColumn("StoreName", *TypeOf(String))
+		dc.ReadOnly = *True
+		Allocations.Columns.Add(dc)
+				
+		dc = *New DataColumn("StoreGrade", *TypeOf(String))
+		dc.ReadOnly = *True
+		Allocations.Columns.Add(dc)
+		
+		Allocations.Columns.Add(*New DataColumn("Quantity", *TypeOf(Int32)))
+		Allocations.Columns.Item["Quantity"].ReadOnly = *True
+		
+		dc = *New DataColumn("ReleaseQty", *TypeOf(Int32))
+		Allocations.Columns.Add(dc)
+		
+		dc = *New DataColumn("AdditionalUnits", *TypeOf(Int32))
+		Allocations.Columns.Add(dc)		
+
+		dc = *New DataColumn("ReleaseStore", *TypeOf(Boolean))
+		Allocations.Columns.Add(dc)
+		
+		dc = *New DataColumn("ContinentSeq", *TypeOf(String))
+		dc.ReadOnly = *True
+		Allocations.Columns.Add(dc)
+
+		//----------------------------------
+		// Create Market table
+		Markets = *New DataTable("Markets")
+		ds.Tables.Add(Markets)
+		
+		dc = *New DataColumn("Market", *TypeOf(String))
+		dc.Unique = *True
+		dc.ReadOnly = *True
+		Markets.Columns.Add(dc)
+
+		SetLL DSAPPALC_Read Key('',Class,Vendor,Style,Colour,Size)
+		DoUntil DSAPPALC_Read.IsEof
+			ReadE DSAPPALC_Read Key('',Class,Vendor,Style,Colour,Size)
+			If (Not DSAPPALC_Read.IsEof) And IAORIGIN = 'S'
+			
+				dr = Allocations.NewRow()
+			
+				dr.Item["Market"]     = IAMKT
+				dr.Item["Store"]      = IASTR
+				dr.Item["StoreName"]  = IASTRDSC
+				dr.Item["StoreGrade"] = IAGRADE
+				dr.Item["Quantity"]   = IASYSQTY
+				
+				//Rationing process
+				WrkQty = DCholding - IASYSQTY
+				If WrkQty >= *Zero
+					DCholding -= IASYSQTY
+					IARLSQTY   = IASYSQTY
+				Else
+					IARLSQTY  = DCholding
+					DCholding = *Zero
+				EndIf
+				
+				dr.Item["ReleaseQty"] = IARLSQTY
+				Total_Allocated += IARLSQTY
+
+				// Calculate Additional SRR Units
+				If IASYSQTY = IARLSQTY
+					dr.Item["AdditionalUnits"] = IASRRUNT
+				Else
+					Try
+						dr.Item("AdditionalUnits") = GetAddUnits.GetAddUnits(SetData.APSet,IASTR,IARLSQTY)
+					Catch Err Type(System.Exception)
+						dr.Item("AdditionalUnits") = 0
+					EndTry
+				EndIf
+				
+				dr.Item["ReleaseStore"] = *False
+				
+				dr.Item["ContinentSeq"] = IACSEQ
+				
+				Allocations.Rows.Add(dr)
+				
+				DclArray drFiltered Type(DataRow) Rank(1)
+				DclFld   SearchString Type(StringBuilder)
+				
+				SearchString = *New StringBuilder()
+				SearchString.Append("Market = '")
+				SearchString.Append(IAMKT)
+				SearchString.Append("'")
+				
+				drFiltered = ds.Tables["Markets"].Select(SearchString.ToString())
+				If drFiltered.Length = *Zero
+					dr = Markets.NewRow()
+					dr.Item["Market"] = IAMKT
+					ds.Tables["Markets"].Rows.Add(dr)
+				EndIf
+			EndIf
+		EndDo
+		
+		Close DSAPPALC_Read
+		
+		// Sort Table into Continent Seq:Store Grade:Store Number
+		dv = *New DataView(Allocations)
+		dv.Sort = "ContinentSeq ASC,StoreGrade ASC,Store ASC"
+		
+		// Allocate the DC holding until no stock left
+//		ForEach drv Collection(dv) Type(DataRowView)
+//			WrkQty = DCholding - (drv.Item("Quantity") *As System.Int32)
+//			If WrkQty >= *Zero
+//				DCholding -= drv.Item("Quantity") *As System.Int32
+//				drv.Item("ReleaseQty") = drv.Item("Quantity")
+//			Else
+//				drv.Item("ReleaseQty") = DCholding
+//				DCholding = *Zero
+//			EndIf
+//			Total_Allocated += (drv.Item("ReleaseQty") *As System.Int32)
+//		EndFor
+		
+		// Created sorted table
+		SortedAllocations = *New DataTable()
+		SortedAllocations = dv.ToTable("Allocations")
+		ds.Tables.Add(SortedAllocations)
+		
+		// Create resultant DataSet
+		DclFld AllocationData Type(AllocationData) New()
+		AllocationData.AllocationsDS   = ds
+		AllocationData.Total_Allocated = Total_Allocated
+		
+		LeaveSR AllocationData
+	EndFunc
+	
+	BegSr Update_DB Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Colour Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		DclSrParm dv     Type(DataView)
+		
+		DclFld Store Type(System.Int16)
+		
+		If Not DSAPPALC_Update.IsOpen
+			Open DSAPPALC_Update
+		EndIf		
+		
+		ForEach drv Collection(dv) Type(DataRowView)
+			Store = drv.Item["Store"] *As System.Int16
+		
+			Chain DSAPPALC_Update Key(' ',Class,Vendor,Style,Colour,Size,Store)
+			If DSAPPALC_Update.IsFound
+				IARLSQTY = drv.Item["ReleaseQty"] *As System.Int32
+				IARLSYN  = 'Y'
+				IARLSDAT = DateTime.Now
+				IARLSUSR = PgmDB.User.ToUpper()
+				
+				Update ALC_UPDATE
+			EndIf
+		EndFor
+		
+		Close DSAPPALC_Update
+	EndSr
+EndClass
+
+BegClass AllocationData Access(*Public)
+	
+	DclFld Quantity Type(*Decimal) Access(*Private)
+	DclFld ds       Type(DataSet)  Access(*Private)
+
+	BegConstructor Access(*Public)
+	EndConstructor
+
+	BegProp AllocationsDS Type(DataSet) Access(*Public)
+		BegSet
+			ds = *PropVal
+		EndSet
+		BegGet
+			LeaveSR ds
+		EndGet
+	EndProp
+	
+	BegProp Total_Allocated Type(*Decimal) Access(*Public)
+		BegSet
+			Quantity = *PropVal
+		EndSet
+		BegGet
+			LeaveSR Quantity
+		EndGet
+	EndProp
+EndClass

@@ -1,0 +1,8 @@
+..\..\SRR_Dlls\EditLeadTimes.dll
+..\..\SRR_Dlls\EditLeadTimes.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\EditLeadTimes.Form1.resources
+obj\Debug\EditLeadTimes.Resources.resources
+obj\Debug\EditLeadTimes.vrproj.GenerateResource.Cache
+obj\Debug\EditLeadTimes.dll
+obj\Debug\EditLeadTimes.pdb

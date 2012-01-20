@@ -1,0 +1,71 @@
+Using System
+Using System.Text
+Using System.Data
+
+BegClass DSSPACM Access(*Public)
+	
+	DclDB Name(PgmDB) DBName("TDST")
+	DclDiskFile Name(DSSPACML1) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+		
+	BegFunc GetAPPstructure Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		DclFld APPtbl Type(DataTable)
+		DclFld dr     Type(DataRow)
+		
+		If Not DSSPACML1.IsOpen
+			Open DSSPACML1
+		EndIf
+		
+		Chain From(DSSPACML1) Key(Class,Vendor,Style,Colour,Size)
+		DoWhile (Not DSSPACML1.IsEof)
+		
+			If APPtbl = *Nothing
+				APPtbl = CreateTbl()
+			EndIf
+			
+			dr = APPtbl.NewRow()
+			
+			dr.Item("Class")    = ACMCCL
+			dr.Item("Vendor")   = ACMCVN
+			dr.Item("Style")    = ACMCST
+			dr.Item("Colour")   = ACMCCR
+			dr.Item("Size")     = ACMCSZ
+			dr.Item("Quantity") = ACMQTY
+			dr.Item("Sequence") = ACMSEQ
+			
+			APPtbl.Rows.Add(dr)
+			
+			ReadE From(DSSPACML1) Key(Class,Vendor,Style,Colour,Size)
+		EndDo
+		
+		LeaveSR APPtbl
+	EndFunc
+	
+	BegFunc CreateTbl Type(DataTable) Access(*Private)
+	
+		DclFld APPtbl Type(DataTable)
+		
+		APPtbl = *New DataTable()
+		
+		APPtbl.Columns.Add(*New DataColumn('Class', *TypeOf(Int16)))
+		APPtbl.Columns.Add(*New DataColumn('Vendor',*TypeOf(Int32)))
+		APPtbl.Columns.Add(*New DataColumn('Style', *TypeOf(Int16)))
+		APPtbl.Columns.Add(*New DataColumn('Colour',*TypeOf(Int16)))
+		APPtbl.Columns.Add(*New DataColumn('Size',  *TypeOf(Int16)))
+		APPtbl.Columns.Add(*New DataColumn('Quantity',*TypeOf(Int16)))
+		APPtbl.Columns.Add(*New DataColumn('Sequence',*TypeOf(Int16)))
+		
+		LeaveSR APPtbl
+	EndFunc
+EndClass

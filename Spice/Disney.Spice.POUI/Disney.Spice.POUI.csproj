@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{59DC39C9-E9AC-47C6-B8D0-FEE3082DB38D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Disney.Spice.POUI</RootNamespace>
+    <AssemblyName>Disney.Spice.POUI</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\IDASH\SPICE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Compile Include="ComponentDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComponentDetails.Designer.cs">
+      <DependentUpon>ComponentDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropShipMatrixPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DropShipMatrixPO.Designer.cs">
+      <DependentUpon>DropShipMatrixPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EDIdates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EDIdates.Designer.cs">
+      <DependentUpon>EDIdates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCancelPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelPO.Designer.cs">
+      <DependentUpon>frmCancelPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeSSD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeSSD.Designer.cs">
+      <DependentUpon>frmChangeSSD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDropShipMatrix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDropShipMatrix.Designer.cs">
+      <DependentUpon>frmDropShipMatrix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POmodification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POmodification.Designer.cs">
+      <DependentUpon>POmodification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintPO.Designer.cs">
+      <DependentUpon>frmPrintPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubMitToEAS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSubMitToEAS.Designer.cs">
+      <DependentUpon>frmSubMitToEAS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemQuantityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemQuantityForm.Designer.cs">
+      <DependentUpon>ItemQuantityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MarketSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarketSelectionForm.Designer.cs">
+      <DependentUpon>MarketSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POEntryForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POEntryForm1.Designer.cs">
+      <DependentUpon>POEntryForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POHits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POHits.Designer.cs">
+      <DependentUpon>POHits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POLineDetailsPack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POLineDetailsPack.Designer.cs">
+      <DependentUpon>POLineDetailsPack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POLineDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POLineDetails.Designer.cs">
+      <DependentUpon>POLineDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProgressWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressWindow.Designer.cs">
+      <DependentUpon>ProgressWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="QuantityRounding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuantityRounding.Designer.cs">
+      <DependentUpon>QuantityRounding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ASNA.VisualRPG.Runtime, Version=8.1.432.0, Culture=neutral, PublicKeyToken=d7106be54d30c861, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\ASNA.VisualRPG.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.DA.IP400, Version=8.3.1.41751, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.Spice.DAL, Version=8.3.1.13861, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.Spice.ErrorProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.ErrorProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.1.41801, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.Spice.ItemsUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\devtip\bin\SPICE\Disney.Spice.ItemsUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.Spice.LookUp, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.LookUp.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.Spice.POBO, Version=8.3.1.21705, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.POBO.dll</HintPath>
+    </Reference>
+    <Reference Include="Disney.Spice.StoreSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.StoreSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="DisneyMenu, Version=8.3.1.27389, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ComponentDetails.resx">
+      <DependentUpon>ComponentDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropShipMatrixPO.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DropShipMatrixPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EDIdates.resx">
+      <DependentUpon>EDIdates.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCancelPO.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmCancelPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeSSD.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmChangeSSD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDropShipMatrix.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDropShipMatrix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POmodification.resx">
+      <DependentUpon>POmodification.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintPO.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmPrintPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSubMitToEAS.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmSubMitToEAS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemQuantityForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ItemQuantityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarketSelectionForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MarketSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POEntryForm1.resx">
+      <DependentUpon>POEntryForm1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POHits.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>POHits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POLineDetailsPack.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>POLineDetailsPack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POLineDetails.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>POLineDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressWindow.resx">
+      <DependentUpon>ProgressWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuantityRounding.resx">
+      <DependentUpon>QuantityRounding.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>

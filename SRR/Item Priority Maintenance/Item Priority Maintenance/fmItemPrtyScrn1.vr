@@ -1,0 +1,953 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using TheDisneyStore.Dash
+
+
+BegClass fmItemPrtyScrn1 Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Declare Statements
+	
+	DclFld uxBtnCont1 System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld MsgBox System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxItmCls1 System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmVen1 System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmSty1 System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmClr1 System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmSiz1 System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxBtnExit1 System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld uxClass System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxDept System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	//DclFld userCheck  Type(TheDisneyStore.Dash.General_Functions.UserFunctions) new()
+	DclFld errorProvider System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld uxLblClass System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxlblItem System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxLblDept System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld toolStripProgressBar1 System.Windows.Forms.ToolStripProgressBar Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label7 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label6 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label5 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxPriorityCD System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld toolStripStatusLabel1 System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld fmItemPrtyScrn2  Type(fmItemPrtyScrn2) 
+	
+
+    DclFld Scrn_Errors    Type(*Boolean) 
+    DclFld Scrn1_Selection Type(*Char) Len(3) Inz()
+    DclFld wDept          Type(*Zoned) Len(3,0)
+    DclFld wClass         Type(*Zoned) Len(4,0)
+    DclFld wItmCls1       Type(*Zoned) Len(4,0)
+    DclFld wItmVen1       Type(*Zoned) Len(5,0)
+    DclFld wItmSty1       Type(*Char)  Len(4)
+    DclFld wItmClr1       Type(*Char)  Len(3)
+    DclFld wItmSiz1       Type(*Char)  Len(4)
+    DclFld wPriorityCD    Type(*Zoned) Len(3,0)
+    DclFld wPriorityCD2   Type(*Zoned) Len(3,0)
+    DclFld wPriorityCD#   Type(*Char)  Len(3)
+    DclFld wLblDept       Type(*Char)  Len(25)
+    DclFld wLblClass      Type(*Char)  Len(25)
+    DclFld wLblItem       Type(*Char)  Len(25)
+    DclFld Exit           Type(*Boolean)
+    DclFld @Pos           Type(*Integer4) 
+    DclConst Digits Value( '0123456789' )
+    
+          
+    DclDB		AS400			DBName( "TDST" ) 
+	
+	DclDiskFile		Name( IPDEPTS )				+
+					Type( *Input  )					+
+					AddRec(*No)						+
+					Org( *Indexed  )					+
+					Impopen( *No )						+
+					DB( AS400 )						+		
+					File( "*LIBL/IPDEPTS" )
+					
+	DclDiskFile		Name( IPCLASS )				+
+					Type( *Input  )					+
+					AddRec(*No)						+
+					Org( *Indexed  )					+
+					Impopen( *No )						+
+					DB( AS400 )						+		
+					File( "*LIBL/IPCLASS" )
+					
+	DclDiskFile		Name( IPITHDR )				+
+					Type( *Input  )					+
+					AddRec(*No)						+
+					Org( *Indexed  )					+
+					Impopen( *No )						+
+					DB( AS400 )						+		
+					File( "*LIBL/IPITHDR" )								
+					
+	DclDiskFile		Name( DSCONSP )				+
+					Type( *Input  )					+
+					AddRec(*No)						+
+					Org( *Indexed  )					+
+					Impopen( *No )						+
+					DB( AS400 )						+		
+					File( "*LIBL/DSCONSP" )
+								
+	/EndRegion				
+	
+	BegConstructor Access(*Public)
+	
+	  dclsrparm	externalpgmdb	type(asna.VisualRPG.Runtime.Database)
+	
+	   InitializeComponent()
+	  
+	    // Set Connection  
+	 *this.AS400 = externalpgmdb
+	
+	EndConstructor
+
+	/region Windows Form Designer generated code
+    
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(fmItemPrtyScrn1))
+		*this.uxBtnCont1 = *new System.Windows.Forms.Button()
+		*this.uxBtnExit1 = *new System.Windows.Forms.Button()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.uxItmCls1 = *new System.Windows.Forms.TextBox()
+		*this.uxItmVen1 = *new System.Windows.Forms.TextBox()
+		*this.uxItmSty1 = *new System.Windows.Forms.TextBox()
+		*this.uxItmClr1 = *new System.Windows.Forms.TextBox()
+		*this.uxItmSiz1 = *new System.Windows.Forms.TextBox()
+		*this.uxClass = *new System.Windows.Forms.TextBox()
+		*this.uxDept = *new System.Windows.Forms.TextBox()
+		*this.errorProvider = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.uxLblClass = *new System.Windows.Forms.Label()
+		*this.uxlblItem = *new System.Windows.Forms.Label()
+		*this.uxLblDept = *new System.Windows.Forms.Label()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.toolStripStatusLabel1 = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.toolStripProgressBar1 = *new System.Windows.Forms.ToolStripProgressBar()
+		*this.label5 = *new System.Windows.Forms.Label()
+		*this.label6 = *new System.Windows.Forms.Label()
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.uxPriorityCD = *new System.Windows.Forms.TextBox()
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.statusStrip1.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//uxBtnCont1
+		//
+		*this.uxBtnCont1.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxBtnCont1.Location = *new System.Drawing.Point(664, 416)
+		*this.uxBtnCont1.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxBtnCont1.Name = "uxBtnCont1"
+		*this.uxBtnCont1.Size = *new System.Drawing.Size(100, 28)
+		*this.uxBtnCont1.TabIndex = 9
+		*this.uxBtnCont1.Text = "&Continue"
+		*this.uxBtnCont1.UseVisualStyleBackColor = *True
+		//
+		//uxBtnExit1
+		//
+		*this.uxBtnExit1.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxBtnExit1.Location = *new System.Drawing.Point(793, 416)
+		*this.uxBtnExit1.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxBtnExit1.Name = "uxBtnExit1"
+		*this.uxBtnExit1.Size = *new System.Drawing.Size(100, 28)
+		*this.uxBtnExit1.TabIndex = 10
+		*this.uxBtnExit1.Text = "&Exit"
+		*this.uxBtnExit1.UseVisualStyleBackColor = *True
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 11.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label1.Location = *new System.Drawing.Point(15, 21)
+		*this.label1.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(39, 18)
+		*this.label1.TabIndex = 3
+		*this.label1.Text = "Dept"
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Font = *new System.Drawing.Font("Microsoft Sans Serif", 11.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label2.Location = *new System.Drawing.Point(15, 111)
+		*this.label2.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(36, 18)
+		*this.label2.TabIndex = 4
+		*this.label2.Text = "Item"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Font = *new System.Drawing.Font("Microsoft Sans Serif", 11.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label3.Location = *new System.Drawing.Point(15, 70)
+		*this.label3.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(46, 18)
+		*this.label3.TabIndex = 5
+		*this.label3.Text = "Class"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Font = *new System.Drawing.Font("Microsoft Sans Serif", 11.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label4.Location = *new System.Drawing.Point(15, 157)
+		*this.label4.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(94, 18)
+		*this.label4.TabIndex = 6
+		*this.label4.Text = "Priority Code"
+		//
+		//uxItmCls1
+		//
+		*this.uxItmCls1.Location = *new System.Drawing.Point(116, 109)
+		*this.uxItmCls1.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmCls1.MaxLength = 4
+		*this.uxItmCls1.Name = "uxItmCls1"
+		*this.uxItmCls1.Size = *new System.Drawing.Size(68, 22)
+		*this.uxItmCls1.TabIndex = 3
+		*this.uxItmCls1.Tag = "Class"
+		//
+		//uxItmVen1
+		//
+		*this.uxItmVen1.Location = *new System.Drawing.Point(215, 109)
+		*this.uxItmVen1.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmVen1.MaxLength = 5
+		*this.uxItmVen1.Name = "uxItmVen1"
+		*this.uxItmVen1.Size = *new System.Drawing.Size(79, 22)
+		*this.uxItmVen1.TabIndex = 4
+		//
+		//uxItmSty1
+		//
+		*this.uxItmSty1.Location = *new System.Drawing.Point(318, 109)
+		*this.uxItmSty1.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmSty1.MaxLength = 4
+		*this.uxItmSty1.Name = "uxItmSty1"
+		*this.uxItmSty1.Size = *new System.Drawing.Size(68, 22)
+		*this.uxItmSty1.TabIndex = 5
+		//
+		//uxItmClr1
+		//
+		*this.uxItmClr1.Location = *new System.Drawing.Point(420, 109)
+		*this.uxItmClr1.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmClr1.MaxLength = 3
+		*this.uxItmClr1.Name = "uxItmClr1"
+		*this.uxItmClr1.Size = *new System.Drawing.Size(68, 22)
+		*this.uxItmClr1.TabIndex = 6
+		//
+		//uxItmSiz1
+		//
+		*this.uxItmSiz1.Location = *new System.Drawing.Point(522, 109)
+		*this.uxItmSiz1.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmSiz1.MaxLength = 4
+		*this.uxItmSiz1.Name = "uxItmSiz1"
+		*this.uxItmSiz1.Size = *new System.Drawing.Size(68, 22)
+		*this.uxItmSiz1.TabIndex = 7
+		//
+		//uxClass
+		//
+		*this.uxClass.Location = *new System.Drawing.Point(116, 69)
+		*this.uxClass.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxClass.MaxLength = 4
+		*this.uxClass.Name = "uxClass"
+		*this.uxClass.Size = *new System.Drawing.Size(68, 22)
+		*this.uxClass.TabIndex = 2
+		//
+		//uxDept
+		//
+		*this.uxDept.Location = *new System.Drawing.Point(116, 21)
+		*this.uxDept.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxDept.MaxLength = 3
+		*this.uxDept.Name = "uxDept"
+		*this.uxDept.Size = *new System.Drawing.Size(68, 22)
+		*this.uxDept.TabIndex = 1
+		//
+		//errorProvider
+		//
+		*this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.errorProvider.ContainerControl = *this
+		//
+		//uxLblClass
+		//
+		*this.uxLblClass.AutoSize = *True
+		*this.uxLblClass.Location = *new System.Drawing.Point(296, 172)
+		*this.uxLblClass.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.uxLblClass.Name = "uxLblClass"
+		*this.uxLblClass.Size = *new System.Drawing.Size(0, 16)
+		*this.uxLblClass.TabIndex = 20
+		//
+		//uxlblItem
+		//
+		*this.uxlblItem.AutoSize = *True
+		*this.uxlblItem.Location = *new System.Drawing.Point(643, 239)
+		*this.uxlblItem.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.uxlblItem.Name = "uxlblItem"
+		*this.uxlblItem.Size = *new System.Drawing.Size(0, 16)
+		*this.uxlblItem.TabIndex = 21
+		//
+		//uxLblDept
+		//
+		*this.uxLblDept.AutoSize = *True
+		*this.uxLblDept.Location = *new System.Drawing.Point(300, 115)
+		*this.uxLblDept.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.uxLblDept.Name = "uxLblDept"
+		*this.uxLblDept.Size = *new System.Drawing.Size(0, 16)
+		*this.uxLblDept.TabIndex = 23
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.toolStripStatusLabel1, *this.toolStripProgressBar1})
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 456)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Size = *new System.Drawing.Size(929, 22)
+		*this.statusStrip1.TabIndex = 24
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//toolStripStatusLabel1
+		//
+		*this.toolStripStatusLabel1.Name = "toolStripStatusLabel1"
+		*this.toolStripStatusLabel1.Size = *new System.Drawing.Size(88, 17)
+		*this.toolStripStatusLabel1.Text = "fmItemPrtyScrn1"
+		//
+		//toolStripProgressBar1
+		//
+		*this.toolStripProgressBar1.Name = "toolStripProgressBar1"
+		*this.toolStripProgressBar1.Size = *new System.Drawing.Size(100, 16)
+		//
+		//label5
+		//
+		*this.label5.AutoSize = *True
+		*this.label5.Location = *new System.Drawing.Point(191, 112)
+		*this.label5.Name = "label5"
+		*this.label5.Size = *new System.Drawing.Size(12, 16)
+		*this.label5.TabIndex = 25
+		*this.label5.Text = "-"
+		//
+		//label6
+		//
+		*this.label6.AutoSize = *True
+		*this.label6.Location = *new System.Drawing.Point(300, 113)
+		*this.label6.Name = "label6"
+		*this.label6.Size = *new System.Drawing.Size(12, 16)
+		*this.label6.TabIndex = 26
+		*this.label6.Text = "-"
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Location = *new System.Drawing.Point(393, 111)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(12, 16)
+		*this.label7.TabIndex = 27
+		*this.label7.Text = "-"
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(495, 112)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(12, 16)
+		*this.label8.TabIndex = 28
+		*this.label8.Text = "-"
+		//
+		//uxPriorityCD
+		//
+		*this.uxPriorityCD.Location = *new System.Drawing.Point(116, 157)
+		*this.uxPriorityCD.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxPriorityCD.MaxLength = 3
+		*this.uxPriorityCD.Name = "uxPriorityCD"
+		*this.uxPriorityCD.Size = *new System.Drawing.Size(68, 22)
+		*this.uxPriorityCD.TabIndex = 8
+		//
+		//fmItemPrtyScrn1
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(8, 16)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(929, 478)
+		*this.Controls.Add(*this.uxPriorityCD)
+		*this.Controls.Add(*this.label8)
+		*this.Controls.Add(*this.label7)
+		*this.Controls.Add(*this.label6)
+		*this.Controls.Add(*this.label5)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.uxLblDept)
+		*this.Controls.Add(*this.uxlblItem)
+		*this.Controls.Add(*this.uxLblClass)
+		*this.Controls.Add(*this.uxDept)
+		*this.Controls.Add(*this.uxClass)
+		*this.Controls.Add(*this.uxItmSiz1)
+		*this.Controls.Add(*this.uxItmClr1)
+		*this.Controls.Add(*this.uxItmSty1)
+		*this.Controls.Add(*this.uxItmVen1)
+		*this.Controls.Add(*this.uxItmCls1)
+		*this.Controls.Add(*this.label4)
+		*this.Controls.Add(*this.label3)
+		*this.Controls.Add(*this.label2)
+		*this.Controls.Add(*this.label1)
+		*this.Controls.Add(*this.uxBtnExit1)
+		*this.Controls.Add(*this.uxBtnCont1)
+		*this.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.Icon = (resources.GetObject("$this.Icon") *As System.Drawing.Icon)
+		*this.Margin = *new System.Windows.Forms.Padding(4)
+		*this.Name = "fmItemPrtyScrn1"
+		*this.ShowInTaskbar = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Item Priority Maintenance"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.statusStrip1.ResumeLayout(*False)
+		*this.statusStrip1.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+
+	/endregion
+
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+
+// *********************** START MAINLINE *********************************
+BegSr Form1_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+        
+        // Check if user is authorised to this option 
+//		VldUser()
+		
+		// Open files
+		OpenData()
+        
+	EndSr
+
+
+//-----------------------------------------------------------
+// Process user data
+//-----------------------------------------------------------
+	BegSr button1_Click Access(*Private) Event(*this.uxBtnCont1.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		SetMousePtr *Hourglass
+		
+		// Validate fields
+		srVldScrn1()
+		
+		// If all fields are valid then call next screen
+		
+		If Scrn_Errors = *False
+			
+			Try
+             wDept    = System.Convert.ToDecimal( uxDept.Text )
+		   	Catch type( System.Exception )
+		   	 wDept = 0
+		   	Endtry 
+		   	 
+		   	Try 
+		   	 wClass   = System.Convert.ToDecimal( uxClass.Text )
+		   	Catch type( System.Exception ) 
+		   	 wClass = 0
+		   	EndTry
+		   	 
+		   	Try 
+		   	 wItmCls1 = System.Convert.ToDecimal( uxItmCls1.Text )
+		   	Catch type( System.Exception ) 
+		   	 wItmCls1 = 0
+		   	EndTry
+		   	
+		   	Try 
+		   	 wItmVen1 = System.Convert.ToDecimal( uxItmVen1.Text )
+		   	Catch type( System.Exception ) 
+		   	 wItmVen1 = 0
+		   	EndTry 
+		   	 
+		   	 wItmSty1 =  uxItmSty1.Text 
+		   	
+		   	 wItmClr1 =  uxItmClr1.Text 
+		    
+		     wItmSiz1 =  uxItmSiz1.Text 
+		     
+		    Try
+		      wPriorityCD = System.Convert.ToDecimal( uxPriorityCD.Text ) 
+		     Catch type( System.Exception )
+   	   	      wPriorityCD = 0
+	         EndTry
+	        
+	        
+	        // Clear first screen fields
+	        
+	        uxDept.Text = String.Empty
+	        uxClass.Text = String.Empty
+	        uxItmCls1.Text = String.Empty
+	     	uxItmVen1.Text = String.Empty         
+	     	uxItmSty1.Text = String.Empty         
+	     	uxItmClr1.Text = String.Empty 
+	     	uxItmSiz1.Text = String.Empty 
+	     	uxPriorityCD.Text = String.Empty
+	     	Exit = *False
+	     	 	     	         
+		    // Call the constructor of the second screen passing values
+		      
+	         fmItemPrtyScrn2 = *new fmItemPrtyScrn2(Scrn1_Selection: +
+	                                                wDept:          +
+	                                                wClass:         + 
+	                                                wItmCls1:       +
+	                                                wItmVen1:       +
+	                                                wItmSty1:       +
+	                                                wItmClr1:       +
+	                                                wItmSiz1:       +
+	                                                wPriorityCD#:    +
+	                                                wLblDept:       +
+	                                                wLblClass:      +
+	                                                wLblItem:       +
+	                                                AS400:          +
+	                                                Exit)
+	                                                  	                                                      	      
+	      
+	         fmItemPrtyScrn2.showDialog()
+	         Exit = fmItemPrtyScrn2.wExit
+	         
+	        If Exit = *true
+				closedata()
+				
+				Unload *this
+			
+			Endif
+	     	 
+		Endif
+		
+	EndSr
+	
+//-----------------------------------------------------------	
+// Exit	
+//-----------------------------------------------------------
+	
+	BegSr uxBtnExit1_Click Access(*Private) Event(*this.uxBtnExit1.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//Close Files
+		CloseData()
+		
+		//Exit 
+		Unload *this
+		
+	EndSr
+	
+			
+//------------------------------------------------------------
+// Validate First Screen
+//------------------------------------------------------------
+	BegSr  srVldScrn1 Access(*private)
+	
+	  DclFld ErrorCount       Type( *Integer4 ) Inz(0)
+
+    // Reset Errors
+       ClearErrors() 
+	      
+	// If NO Fields are set then set value as SELECTED ALL
+	  	  
+	  If ( uxDept.Text.Trim() = String.Empty ) *And ( uxClass.Text.Trim() = String.Empty ) *And +
+	     ( uxPriorityCD.Text.Trim() = String.Empty ) *And +
+	     ( uxItmCls1.Text.Trim() = String.Empty )
+	     
+	        Scrn1_Selection = "ALL"
+	        
+	      LeaveSR  
+	        
+      EndIf
+	
+		  
+	   // Check individual fields
+	   
+	  If  (uxClass.Text.Trim() <> String.Empty)  *And (uxItmCls1.Text.Trim() <> String.Empty)
+	        errorProvider.SetError( uxClass, "Only one selection allowed")
+	        errorProvider.SetError( uxItmSiz1, "Only one selection allowed")
+            ErrorCount += 1 
+            uxClass.Focus()
+		 
+		   	LeaveSR	   
+	  
+	  EndiF  
+	  
+	  
+	  // Check if Priority code a numeric value
+	   wPriorityCD# = %Subst(uxPriorityCD.Text.Trim():1)
+	  
+	   If  (wPriorityCD# <> *Blanks) 
+	       Try
+		       wPriorityCD2 = System.Convert.ToDecimal( wPriorityCD# ) 
+	         Catch type( System.Exception )
+	           wPriorityCD# = *Blanks
+	           wPriorityCD2 = 0
+	           Scrn_Errors = *True
+   	   	       errorProvider.SetError( uxPriorityCD, "Priority Code must be Numeric")
+               ErrorCount += 1 
+               uxPriorityCD.Focus()
+   	       EndTry
+	   Endif
+	  	
+	  	
+	   // Check Dept field
+	   // ----------------	
+	
+	  If (uxDept.Text.Trim() <> String.Empty)   
+	  	
+	  try
+             DDPT = uxDept.Text
+	     Catch type( System.Exception )
+   	   	     DDPT = 0
+	  EndTry
+	  
+	     Chain IPDEPTS Key(DDPT) Err( *Extended) Access( *NoLock ) 
+		
+		 If  IPDEPTS.IsFound		
+		
+		     wLblDept = DNAM
+		
+		   Else
+		    
+		     Scrn_Errors = *True
+		 
+		 // Add an empty error.
+            errorProvider.SetError( uxDept, "Dept is invalid")
+            ErrorCount += 1 
+            uxDept.Focus()
+		 EndiF
+	
+	    Endif
+	    
+	    
+	   // Check Class field
+	   // ----------------	
+	
+	  If (uxClass.Text.Trim() <> String.Empty)   
+	  	
+	  	Try
+	     CCLS = uxClass.Text
+	     
+	     Catch type( System.Exception )
+	  
+	     CCLS = 0
+	   EndTry  
+	  
+	     Chain IPCLASS Key(CCLS) Err( *Extended) Access( *NoLock ) 
+		
+		 If  IPCLASS.IsFound		
+		
+		    wLblClass = CLNM
+		
+		   Else
+		    
+		     Scrn_Errors = *True
+		 
+		 // Add an empty error.
+            errorProvider.SetError( uxClass, "Class is invalid")
+            ErrorCount += 1 
+            uxClass.Focus()
+		 		   	
+		 EndiF
+	
+	    Endif
+	
+	
+	 // Check Item valid
+	 // ----------------
+	 
+	 	  
+	  If (uxItmCls1.Text.Trim() <> String.Empty) *And + 
+	     (uxItmVen1.Text.Trim() =  String.Empty) 
+	      errorProvider.SetError( uxItmVen1, "Vendor Code must be entered")
+          ErrorCount += 1 
+          uxItmVen1.Focus()
+          Scrn_Errors = *True
+          LeaveSR
+	  Endif 
+	 
+	 // Class
+	    
+		@Pos = %Check(Digits, uxItmCls1.Text)
+		If @Pos <> *Zero
+			ErrorProvider.SetError(uxItmCls1, "Only numbers are allowed")
+		    Scrn_Errors = *True
+		    ErrorCount += 1 
+            uxItmCls1.Focus()
+		EndIf
+		
+	// Vendor
+	    
+		@Pos = %Check(Digits, uxItmVen1.Text)
+		If @Pos <> *Zero
+			ErrorProvider.SetError(uxItmVen1, "Only numbers are allowed")
+			Scrn_Errors = *True
+		    ErrorCount += 1 
+            uxItmVen1.Focus()
+		EndIf
+		
+		
+	// Style
+	    
+		@Pos = %Check(Digits, uxItmSty1.Text)
+		If @Pos <> *Zero
+			ErrorProvider.SetError(uxItmSty1, "Only numbers are allowed")
+			Scrn_Errors = *True
+		    ErrorCount += 1 
+            uxItmSty1.Focus()
+		EndIf
+		
+		
+	// Colour
+	    
+		@Pos = %Check(Digits, uxItmClr1.Text)
+		If @Pos <> *Zero
+			ErrorProvider.SetError(uxItmClr1, "Only numbers are allowed")
+			Scrn_Errors = *True
+		    ErrorCount += 1 
+            uxItmClr1.Focus()
+		EndIf
+				
+		
+	// Size
+	    
+		@Pos = %Check(Digits, uxItmSiz1.Text)
+		If @Pos <> *Zero
+			ErrorProvider.SetError(uxItmSiz1, "Only numbers are allowed")
+			Scrn_Errors = *True
+		    ErrorCount += 1 
+            uxItmSiz1.Focus()
+		EndIf	
+	
+	  
+	  If (uxItmCls1.Text.Trim() <> String.Empty) *And +
+	     (uxItmVen1.Text.Trim() <> String.Empty) *And +
+	     (uxItmSty1.Text.Trim() <> String.Empty) *And +
+	     (uxItmClr1.Text.Trim() <> String.Empty) *And +
+	     (uxItmSiz1.Text.Trim() <> String.Empty)    
+	  	
+	        Try	
+	  	      ICLS = System.Convert.ToDecimal( uxItmCls1.Text ) 
+              IVEN = System.Convert.ToDecimal( uxItmVen1.Text )
+              ISTY = System.Convert.ToDecimal( uxItmSty1.Text )
+              ICLR = System.Convert.ToDecimal( uxItmClr1.Text )
+              ISIZ = System.Convert.ToDecimal( uxItmSiz1.Text )
+       
+	         Catch type( System.Exception )
+	  
+	          ICLS = 0 
+              IVEN = 0
+              ISTY = 0
+              ICLR = 0
+              ISIZ = 0
+	        EndTry
+	   
+	     Chain IPITHDR Key(ICLS,IVEN,ISTY,ICLR,ISIZ) Err( *Extended) Access( *NoLock ) 
+		
+		 If  IPITHDR.IsFound 	
+		 
+		     wLblItem = IDES	
+			    		
+		   Else
+		    
+		     Scrn_Errors = *True
+		 
+		 // Add an empty error.
+            errorProvider.SetError( uxItmSiz1, "Item is invalid")
+            ErrorCount += 1 
+            uxItmSiz1.Focus()
+		 
+		   
+		  EndiF
+	
+	 Endif
+	  	  
+	  	  
+	Endsr 
+	
+	
+ //--------------------------------------------------------------------------
+ // Clear Errors
+ //--------------------------------------------------------------------------
+    BegSr ClearErrors
+       
+        Scrn_Errors = *false
+	    Scrn1_Selection = ""
+        wLblDept = " "
+        wLblClass = " "
+        wLblItem = " "
+        wPriorityCD = 0
+        wPriorityCD# = *Blanks
+       
+        // Clear all errors.
+        errorProvider.SetError( uxDept,  String.Empty ) 
+        errorProvider.SetError( uxClass, String.Empty )
+        errorProvider.SetError( uxItmSiz1, String.Empty )
+        errorProvider.SetError( uxPriorityCD, String.Empty ) 
+        ErrorProvider.SetError(uxItmCls1, String.Empty)
+        ErrorProvider.SetError(uxItmVen1, String.Empty)
+        ErrorProvider.SetError(uxItmSty1, String.Empty)
+        ErrorProvider.SetError(uxItmClr1, String.Empty)
+        ErrorProvider.SetError(uxItmSiz1, String.Empty)
+         
+    EndSr        
+	
+//------------------------------------------------------------
+// Open database & files
+//------------------------------------------------------------
+	BegSr OpenData 
+	
+	// Open DB connection.
+		If Not AS400.IsOpen
+			Connect AS400
+		Endif
+	
+	
+	// Open Department file
+        If NOT IPDEPTS.IsOpen
+			Open IPDEPTS
+		Endif
+	
+	
+	// Open Class file
+        If NOT IPCLASS.IsOpen
+			Open IPCLASS
+		Endif
+		
+	
+	// Open Department file
+        If NOT IPITHDR.IsOpen
+			Open IPITHDR
+		Endif	
+	
+	// Open Constancts File
+	 If NOT DSCONSP.IsOpen
+			Open DSCONSP
+		Endif
+	 
+	
+	EndSr
+	
+//------------------------------------------------------------
+// Close database & files
+//------------------------------------------------------------
+	BegSr CloseData Access( *Public ) 
+	    
+        // Close data files
+        If IPDEPTS.IsOpen
+			Close IPDEPTS
+		Endif
+		
+		  // Close data files
+        If IPCLASS.IsOpen
+			Close IPCLASS
+		Endif
+		
+		  // Close data files
+        If IPITHDR.IsOpen
+			Close IPITHDR
+		Endif
+		
+		
+		// Close data files
+        If DSCONSP.IsOpen
+			Close DSCONSP
+		Endif
+
+    EndSr	
+    
+//------------------------------------------------------------
+// Check if User is authorized to this screen
+//------------------------------------------------------------  
+    
+//    BegSr VldUser
+//    
+//    DclFld user_Valid   Type(*Boolean)
+//        
+//    user_Valid = userCheck.getUserAuth( AS400 )
+//      
+//      If  user_Valid.Equals(*False)
+//		
+//		   MsgBox Msg( "You are not authorised to this screen.  Please contact TDS/IS.") +
+//					   Icon(*Information) Title()
+//					   
+//		   Dispose()
+//		
+//		EndiF
+//    
+//    Endsr    
+		
+	
+// Validate Item Field	
+	BegSr uxItmCls1_TextChanged Access(*Private) Event(*this.uxItmCls1.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		If uxItmCls1.TextLength = 4
+			uxItmVen1.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmVen1_TextChanged Access(*Private) Event(*this.uxItmVen1.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If uxItmVen1.TextLength = 5
+			uxItmSty1.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmSty1_TextChanged Access(*Private) Event(*this.uxItmSty1.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		If uxItmSty1.TextLength = 4
+			uxItmClr1.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmClr1_TextChanged Access(*Private) Event(*this.uxItmClr1.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+			
+		If uxItmClr1.TextLength = 3
+			uxItmSiz1.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmSiz1_TextChanged Access(*Private) Event(*this.uxItmSiz1.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If uxItmSiz1.TextLength = 4
+			uxPriorityCD.Select()
+		EndIf
+		
+	EndSr
+	
+EndClass

@@ -1,0 +1,183 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.IO
+
+BegClass DSFAMLYcls Access(*Public)
+	
+	DclDB Name(PgmDB) DbName("TDST")
+	
+	DclDiskFile Name(DSFAMLY) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*Yes) RnmFmt(FAMLYR:R_FAMLYR)
+	DclDiskFile Name(DSFAMLY1) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)              RnmFmt(FAMLYR:R1_FAMLYR)
+			    
+	DclFld FamilyTbl          Type(DataTable) Access(*Private)
+	DclFld pFamilyCode        Type(String)    Access(*Private)
+	DclFld pFamilyDescription Type(String)    Access(*Private)
+	DclFld pXMLpath           Type(String)    Access(*Private)
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"DSfamily.xml")
+		LoadDataSetFromXML()
+	EndConstructor
+	
+	BegProp FamilyCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pFamilyCode
+		EndGet
+	EndProp
+	
+	BegProp FamilyDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pFamilyDescription
+		EndGet
+	EndProp
+	
+	BegSR LoadDataSetFromXML Access(*Private)
+				
+		If FamilyTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				CreateFamilyXML()
+			Else
+				FamilyTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+		
+		FamilyTbl = *New DataTable("Family")
+
+		FamilyTbl.Columns.Add(*New DataColumn("FamilyCode", *TypeOf(String)))
+		FamilyTbl.Columns["FamilyCode"].ReadOnly = *True
+
+		FamilyTbl.Columns.Add(*New DataColumn("FamilyDescription", *TypeOf(String)))
+		FamilyTbl.Columns["FamilyDescription"].ReadOnly = *True
+		
+		FamilyTbl.Columns.Add(*New DataColumn("FamilyCodeDescription", *TypeOf(String)))
+		FamilyTbl.Columns["FamilyCodeDescription"].Expression = "FamilyCode + ' - ' + FamilyDescription"
+		FamilyTbl.Columns["FamilyDescription"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {FamilyTbl.Columns("FamilyCode")}
+		FamilyTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr CreateFamilyXML Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSfamly1.IsOpen
+			Open DSfamly1
+		EndIf
+		
+		DoUntil DSfamly1.IsEof
+			Read DSfamly1
+			If Not DSfamly1.IsEof
+				dr = FamilyTbl.NewRow()
+				
+				dr.Item["FamilyCode"]        = FMCODE.Trim()
+				dr.Item["FamilyDescription"] = FMDESC.Trim()
+				
+				FamilyTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		FamilyTbl.WriteXml(pXMLpath)
+		
+		Close DSfamly1
+	EndSr
+	
+	BegFunc GetFamilyCode Type(*Boolean) Access(*Public)
+		DclSrParm FamilyCode Type(String)
+		
+		DclFld dr Type(DataRow)
+		
+		dr = FamilyTbl.Rows.Find(FamilyCode)
+		If dr <> *Nothing
+			pFamilyCode        = dr.Item("FamilyCode")         *As String
+			pFamilyDescription = dr.Item["FamilyDescription"]  *As String
+
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetFamilyTbl Type(DataTable) Access(*Public)
+	
+		LeaveSR FamilyTbl
+	EndFunc
+
+	/Region CRUD
+	BegFunc GetFamilyCodeForUpdate Type(*Boolean) Access(*Public)
+		DclSrParm FamilyCode Type(*Char) len(3)
+		
+		If Not DSFAMLY.IsOpen
+			Open DSFAMLY
+		EndIf
+		
+		Chain From(DSFAMLY) Key(FamilyCode) Access(*DFT) Err(*Extended)
+		If not %Found
+			LeaveSR *On
+		EndIf
+		
+		If %Error = *On
+			Throw *New System.Exception('Failed to get record for update (DSFAMLY)')
+			LeaveSR *On
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegSR WriteFamilyCode Access(*Public)
+		DclSrParm FamilyCode Type(*Char) Len(3)
+	
+		If Not DSFAMLY.IsOpen
+			Open DSFAMLY
+		EndIf
+		
+		FMCODE = FamilyCode
+		
+		Write R_FAMLYR Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (DSFAMLY)')
+		EndIf
+		
+		LeaveSR
+	EndSR
+	
+	BegFunc UpdateFamilyCode Type(*Boolean) Access(*Public) 
+		DclSrParm FamilyCode Type(*Char) len(3)
+		
+		Update R_FAMLYR Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to update record (DSFAMLY)')
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegFunc DeleteFamilyCode Type(*Boolean) Access(*Public)
+		DclSrParm FamilyCode Type(*Char) len(3)
+		
+		If Not DSFAMLY.IsOpen
+			Open DSFAMLY
+		EndIf
+		
+		Delete From(R_FAMLYR) Key(FamilyCode) Err(*Extended)
+		If %Error = *On
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *False
+	EndFunc
+	/EndRegion
+EndClass

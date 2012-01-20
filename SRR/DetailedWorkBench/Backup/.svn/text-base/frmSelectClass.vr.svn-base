@@ -1,0 +1,792 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.SRR
+
+DclNameSpace Disney.SRR
+
+BegClass frmSelectClass Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Declarations
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld button1 System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld label13 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label14 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld helpProvider1 System.Windows.Forms.HelpProvider Access(*Private) WithEvents(*Yes)
+	DclFld toolStripStatusLabel1 System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld toolStripProgressBar1 System.Windows.Forms.ToolStripProgressBar Access(*Private) WithEvents(*Yes)
+	DclFld ErrorText System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld BtnContinue System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnBack System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld ClassGrid System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld txtStore System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtUser System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld txtFilegroup System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld txtDept System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld lblCycle System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld ContextMnuStrip System.Windows.Forms.ContextMenuStrip Access(*Private) WithEvents(*Yes)
+	DclFld mnuGoToWorkBench System.Windows.Forms.ToolStripMenuItem Access(*Private) WithEvents(*Yes)
+	DclFld G_Class System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_SLUL System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_SLUT System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_CSRS System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_SSOH System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_SMSC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_ALRT System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_Shipped System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_TotStkReq System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_IdlAlQty System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_PropAlQty System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G_STOU System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	
+	DclFld Department    Type(*Zoned)   Len(3,0)
+	DclFld StoreNumber   Type(*Zoned)   Len(3,0)
+	DclFld FileGroup     Type(*Packed)  Len(3,0)
+	DclFld AS400User     Type(*Char)    Len(10)
+	DclFld QrySelect     Type(*String)
+	DclFld QryKey        Type(*String)
+	DclFld Level         Type(*Char)    Len(2)
+	DclFld LoTyp         Type(*Char)    Len(10)
+	DclFld MemberName    Type(*Char)    Len(10)
+	DclFld ToMbrC        Type(*Char)    Len(10)       
+	
+	DclFld SelectedClass Type(*Zoned)   Len(4,0)
+	DclFld tkShowFP      Type(System.Windows.Forms.CheckBox)
+	DclFld tkShowMD      Type(System.Windows.Forms.CheckBox)
+	DclFld tkExclEDCzero Type(System.Windows.Forms.CheckBox)
+
+	DclFld frmWorkBenchParm Type(frmWorkBenchParm)
+	
+    DclDB AS400 DBName( "TDST" )
+		
+	DclDiskFile  DSSRWBDC Type( *Input  ) Org( *Indexed )  +
+		File( "*Libl/DSSRWBDC" ) DB( AS400 ) ImpOpen( *No )
+	/EndRegion			
+
+	BegConstructor Access(*Public)
+		DclSrParm AS400         Type(asna.VisualRPG.Runtime.Database)
+		DclSrParm StoreNumber   Type(*Zoned)  Len(3,0)
+		DclSrParm Department    Type(*Zoned)  Len(3,0)
+		DclSrParm AS400User     Type(*Char)   Len(10)
+		DclSrParm FileGroup     Type(*Packed) Len(3,0)
+		DclSrParm LoTyp         Type(*Char)   Len(10)
+		DclSrParm tkShowFP      Type(System.Windows.Forms.CheckBox)			// Full Price lines
+		DclSrParm tkShowMD      Type(System.Windows.Forms.CheckBox)			// Mark down lines
+		DclSrParm tkExclEDCzero Type(System.Windows.Forms.CheckBox)			// Exclude EDC zero stock
+		DclSrParm ToMbrC        Type(*Char)   Len(10)                       // To Member
+		
+		DclFld Row      Type(*Integer4)
+		DclFld RowCount Type(*Integer4)
+
+		InitializeComponent()
+		
+		*this.AS400         = AS400
+		*this.StoreNumber   = StoreNumber
+		*this.Department    = Department
+		*this.AS400User     = AS400User
+		*this.FileGroup     = FileGroup
+		*this.LoTyp         = LoTyp
+		*this.tkShowFP      = tkShowFP
+		*this.tkShowMD      = tkShowMD
+		*this.tkExclEDCzero = tkExclEDCzero
+		*this.ToMbrC        = toMbrC
+
+		SetMousePtr *HourGlass
+		
+		If LOTYP = 'Daily'
+			MemberName = 'DLOAD'
+		Else
+			MemberName = 'WELOAD'
+		EndIf
+		
+		DSSRWBDC.MemberName = MemberName.Trim()
+		Open DSSRWBDC
+		
+		SetLL DSSRWBDC Key(StoreNumber, Department)
+        DoUntil DSSRWBDC.IsEof
+			ReadE DSSRWBDC Key(StoreNumber, Department)
+			If Not DSSRWBDC.IsEof
+			
+				ClassGrid.Rows.Add()
+				RowCount = ClassGrid.Rows.Count
+				Row = RowCount - 1
+					
+				With ClassGrid
+					.Item['G_Class',Row].Value      = DCCLS			// Class
+					.Item['G_SLUL',Row].Value       = DCSLUL		// Sales LW
+					.Item['G_SLUT',Row].Value       = DCSLUT		// Sales TW
+					.Item['G_CSRS',Row].Value       = DCCSRS		// Current ROS
+					.Item['G_SSOH',Row].Value       = DCSSOH		// Stock on Hand
+					.Item['G_SMSC',Row].Value       = DCSWOC		// Smoothed store cover
+					.Item['G_ALRT',Row].Value       = DCALRT		// Allocated
+					.Item['G_Shipped',Row].Value    = DCINTS		// Shipped
+					.Item['G_TotStkReq',Row].Value  = DCCSSR		// Total stock required
+					.Item['G_IdlAlQty',Row].Value   = DCNSRQ		// Ideal Allocation Quantity
+					.Item['G_PropAlQty',Row].Value  = IGPRAQ		// Proposed Allocation Quantity
+					.Item['G_STOU',Row].Value       = DCSTOU		// Out of stock
+				EndWith
+					
+			EndIf
+		EndDo
+		
+		Close DSSRWBDC
+	EndConstructor
+
+	/Region Windows Form Designer generated code
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle12 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle3 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle4 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle5 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle6 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle7 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle8 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle9 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle10 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle11 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.toolStripStatusLabel1 = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.toolStripProgressBar1 = *new System.Windows.Forms.ToolStripProgressBar()
+		*this.button1 = *new System.Windows.Forms.Button()
+		*this.label13 = *new System.Windows.Forms.Label()
+		*this.label14 = *new System.Windows.Forms.Label()
+		*this.txtUser = *new System.Windows.Forms.TextBox()
+		*this.txtFilegroup = *new System.Windows.Forms.TextBox()
+		*this.txtDept = *new System.Windows.Forms.TextBox()
+		*this.btnBack = *new System.Windows.Forms.Button()
+		*this.helpProvider1 = *new System.Windows.Forms.HelpProvider()
+		*this.ErrorText = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.ClassGrid = *new System.Windows.Forms.DataGridView()
+		*this.lblCycle = *new System.Windows.Forms.Label()
+		*this.BtnContinue = *new System.Windows.Forms.Button()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.txtStore = *new System.Windows.Forms.TextBox()
+		*this.ContextMnuStrip = *new System.Windows.Forms.ContextMenuStrip(*this.components)
+		*this.mnuGoToWorkBench = *new System.Windows.Forms.ToolStripMenuItem()
+		*this.G_Class = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_SLUL = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_SLUT = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_CSRS = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_SSOH = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_SMSC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_ALRT = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_Shipped = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_TotStkReq = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_IdlAlQty = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_PropAlQty = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G_STOU = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.statusStrip1.SuspendLayout()
+		(*this.ErrorText *As System.ComponentModel.ISupportInitialize).BeginInit()
+		(*this.ClassGrid *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.ContextMnuStrip.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(365, 9)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(30, 13)
+		*this.label1.TabIndex = 0
+		*this.label1.Text = "Dept"
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.toolStripStatusLabel1, *this.toolStripProgressBar1})
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 670)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Size = *new System.Drawing.Size(949, 22)
+		*this.statusStrip1.TabIndex = 9
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//toolStripStatusLabel1
+		//
+		*this.toolStripStatusLabel1.Name = "toolStripStatusLabel1"
+		*this.toolStripStatusLabel1.Size = *new System.Drawing.Size(101, 17)
+		*this.toolStripStatusLabel1.Text = "frmWorkBenchParm"
+		//
+		//toolStripProgressBar1
+		//
+		*this.toolStripProgressBar1.MarqueeAnimationSpeed = 1
+		*this.toolStripProgressBar1.Name = "toolStripProgressBar1"
+		*this.toolStripProgressBar1.Size = *new System.Drawing.Size(100, 16)
+		*this.toolStripProgressBar1.Step = 1
+		*this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+		//
+		//button1
+		//
+		*this.button1.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.button1.DialogResult = System.Windows.Forms.DialogResult.OK
+		*this.button1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.button1.Location = *new System.Drawing.Point(1115, 669)
+		*this.button1.Margin = *new System.Windows.Forms.Padding(2)
+		*this.button1.Name = "button1"
+		*this.button1.Size = *new System.Drawing.Size(75, 29)
+		*this.button1.TabIndex = 20
+		*this.button1.Text = "&OK"
+		*this.button1.UseVisualStyleBackColor = *True
+		//
+		//label13
+		//
+		*this.label13.AutoSize = *True
+		*this.label13.Location = *new System.Drawing.Point(6, 9)
+		*this.label13.Margin = *new System.Windows.Forms.Padding(2, 0, 2, 0)
+		*this.label13.Name = "label13"
+		*this.label13.Size = *new System.Drawing.Size(48, 13)
+		*this.label13.TabIndex = 33
+		*this.label13.Text = "You are:"
+		//
+		//label14
+		//
+		*this.label14.AutoSize = *True
+		*this.label14.Location = *new System.Drawing.Point(185, 9)
+		*this.label14.Margin = *new System.Windows.Forms.Padding(2, 0, 2, 0)
+		*this.label14.Name = "label14"
+		*this.label14.Size = *new System.Drawing.Size(84, 13)
+		*this.label14.TabIndex = 34
+		*this.label14.Text = "Using Filegroup:"
+		//
+		//txtUser
+		//
+		*this.txtUser.BackColor = System.Drawing.Color.White
+		*this.txtUser.Enabled = *False
+		*this.txtUser.ForeColor = System.Drawing.SystemColors.WindowText
+		*this.txtUser.Location = *new System.Drawing.Point(68, 6)
+		*this.txtUser.Margin = *new System.Windows.Forms.Padding(2)
+		*this.txtUser.Name = "txtUser"
+		*this.txtUser.ReadOnly = *True
+		*this.txtUser.Size = *new System.Drawing.Size(88, 20)
+		*this.txtUser.TabIndex = 35
+		//
+		//txtFilegroup
+		//
+		*this.txtFilegroup.BackColor = System.Drawing.Color.White
+		*this.txtFilegroup.Enabled = *False
+		*this.txtFilegroup.Location = *new System.Drawing.Point(305, 6)
+		*this.txtFilegroup.Margin = *new System.Windows.Forms.Padding(2)
+		*this.txtFilegroup.Name = "txtFilegroup"
+		*this.txtFilegroup.Size = *new System.Drawing.Size(27, 20)
+		*this.txtFilegroup.TabIndex = 36
+		//
+		//txtDept
+		//
+		*this.txtDept.BackColor = System.Drawing.Color.White
+		*this.txtDept.Enabled = *False
+		*this.txtDept.Location = *new System.Drawing.Point(409, 6)
+		*this.txtDept.Margin = *new System.Windows.Forms.Padding(2)
+		*this.txtDept.Name = "txtDept"
+		*this.txtDept.ReadOnly = *True
+		*this.txtDept.Size = *new System.Drawing.Size(47, 20)
+		*this.txtDept.TabIndex = 38
+		//
+		//btnBack
+		//
+		*this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnBack.Location = *new System.Drawing.Point(716, 627)
+		*this.btnBack.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.btnBack.Name = "btnBack"
+		*this.btnBack.Size = *new System.Drawing.Size(100, 28)
+		*this.btnBack.TabIndex = 61
+		*this.btnBack.Text = "&Back"
+		*this.btnBack.UseVisualStyleBackColor = *True
+		//
+		//ErrorText
+		//
+		*this.ErrorText.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.ErrorText.ContainerControl = *this
+		//
+		//ClassGrid
+		//
+		*this.ClassGrid.AllowUserToAddRows = *False
+		*this.ClassGrid.AllowUserToDeleteRows = *False
+		*this.ClassGrid.AllowUserToOrderColumns = *True
+		*this.ClassGrid.AllowUserToResizeRows = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((255 *As System.Byte) *As *Integer4), ((224 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		*this.ClassGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.ClassGrid.Anchor = ((((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Bottom) *BitOr System.Windows.Forms.AnchorStyles.Left) *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.ClassGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
+		*this.ClassGrid.BackgroundColor = System.Drawing.SystemColors.Control
+		*this.ClassGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.ClassGrid.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.G_Class, *this.G_SLUL, *this.G_SLUT, *this.G_CSRS, *this.G_SSOH, *this.G_SMSC, *this.G_ALRT, *this.G_Shipped, *this.G_TotStkReq, *this.G_IdlAlQty, *this.G_PropAlQty, *this.G_STOU})
+		dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+		dataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+		dataGridViewCellStyle12.Font = *new System.Drawing.Font("Tahoma", 8, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
+		dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False
+		*this.ClassGrid.DefaultCellStyle = dataGridViewCellStyle12
+		*this.ErrorText.SetIconAlignment(*this.ClassGrid, System.Windows.Forms.ErrorIconAlignment.MiddleLeft)
+		*this.ClassGrid.Location = *new System.Drawing.Point(17, 50)
+		*this.ClassGrid.MultiSelect = *False
+		*this.ClassGrid.Name = "ClassGrid"
+		*this.ClassGrid.RowHeadersVisible = *False
+		*this.ClassGrid.RowTemplate.Height = 24
+		*this.ClassGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+		*this.ClassGrid.Size = *new System.Drawing.Size(920, 560)
+		*this.ClassGrid.TabIndex = 0
+		//
+		//lblCycle
+		//
+		*this.lblCycle.AutoSize = *True
+		*this.lblCycle.Font = *new System.Drawing.Font("Tahoma", 8, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblCycle.Location = *new System.Drawing.Point(817, 11)
+		*this.lblCycle.Name = "lblCycle"
+		*this.lblCycle.Size = *new System.Drawing.Size(50, 13)
+		*this.lblCycle.TabIndex = 75
+		*this.lblCycle.Text = "lblCycle"
+		//
+		//BtnContinue
+		//
+		*this.BtnContinue.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.BtnContinue.Location = *new System.Drawing.Point(588, 627)
+		*this.BtnContinue.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.BtnContinue.Name = "BtnContinue"
+		*this.BtnContinue.Size = *new System.Drawing.Size(100, 28)
+		*this.BtnContinue.TabIndex = 76
+		*this.BtnContinue.Text = "Continue"
+		*this.BtnContinue.UseVisualStyleBackColor = *True
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(485, 11)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(77, 13)
+		*this.label3.TabIndex = 77
+		*this.label3.Text = "Selected Store"
+		//
+		//txtStore
+		//
+		*this.txtStore.BackColor = System.Drawing.Color.White
+		*this.txtStore.Enabled = *False
+		*this.txtStore.Location = *new System.Drawing.Point(588, 6)
+		*this.txtStore.Margin = *new System.Windows.Forms.Padding(2)
+		*this.txtStore.Name = "txtStore"
+		*this.txtStore.ReadOnly = *True
+		*this.txtStore.Size = *new System.Drawing.Size(47, 20)
+		*this.txtStore.TabIndex = 78
+		//
+		//ContextMnuStrip
+		//
+		*this.ContextMnuStrip.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.mnuGoToWorkBench})
+		*this.ContextMnuStrip.Name = "ContextMnuStrip"
+		*this.ContextMnuStrip.Size = *new System.Drawing.Size(171, 26)
+		//
+		//mnuGoToWorkBench
+		//
+		*this.mnuGoToWorkBench.Name = "mnuGoToWorkBench"
+		*this.mnuGoToWorkBench.Size = *new System.Drawing.Size(170, 22)
+		*this.mnuGoToWorkBench.Text = "Go To WorkBench"
+		//
+		//G_Class
+		//
+		*this.G_Class.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		*this.G_Class.DefaultCellStyle = dataGridViewCellStyle2
+		*this.G_Class.Frozen = *True
+		*this.G_Class.HeaderText = "Class"
+		*this.G_Class.Name = "G_Class"
+		*this.G_Class.ReadOnly = *True
+		*this.G_Class.Width = 57
+		//
+		//G_SLUL
+		//
+		*this.G_SLUL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle3.Format = "N0"
+		dataGridViewCellStyle3.NullValue = *Nothing
+		*this.G_SLUL.DefaultCellStyle = dataGridViewCellStyle3
+		*this.G_SLUL.HeaderText = "Sales LW"
+		*this.G_SLUL.Name = "G_SLUL"
+		*this.G_SLUL.ReadOnly = *True
+		*this.G_SLUL.Width = 72
+		//
+		//G_SLUT
+		//
+		*this.G_SLUT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle4.Format = "N0"
+		dataGridViewCellStyle4.NullValue = *Nothing
+		*this.G_SLUT.DefaultCellStyle = dataGridViewCellStyle4
+		*this.G_SLUT.HeaderText = "Sales TW"
+		*this.G_SLUT.Name = "G_SLUT"
+		*this.G_SLUT.ReadOnly = *True
+		*this.G_SLUT.Width = 73
+		//
+		//G_CSRS
+		//
+		*this.G_CSRS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle5.Format = "N1"
+		dataGridViewCellStyle5.NullValue = *Nothing
+		*this.G_CSRS.DefaultCellStyle = dataGridViewCellStyle5
+		*this.G_CSRS.HeaderText = "Smoothed Rate of Sale"
+		*this.G_CSRS.Name = "G_CSRS"
+		*this.G_CSRS.ReadOnly = *True
+		*this.G_CSRS.Width = 90
+		//
+		//G_SSOH
+		//
+		*this.G_SSOH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle6.Format = "N0"
+		dataGridViewCellStyle6.NullValue = *Nothing
+		*this.G_SSOH.DefaultCellStyle = dataGridViewCellStyle6
+		*this.G_SSOH.HeaderText = "Store SOH "
+		*this.G_SSOH.Name = "G_SSOH"
+		*this.G_SSOH.ReadOnly = *True
+		*this.G_SSOH.ToolTipText = "Store Stock on Hand"
+		*this.G_SSOH.Width = 77
+		//
+		//G_SMSC
+		//
+		*this.G_SMSC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.G_SMSC.HeaderText = "Smoothed Store Cover"
+		*this.G_SMSC.Name = "G_SMSC"
+		*this.G_SMSC.ReadOnly = *True
+		*this.G_SMSC.Width = 102
+		//
+		//G_ALRT
+		//
+		*this.G_ALRT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle7.Format = "N0"
+		dataGridViewCellStyle7.NullValue = *Nothing
+		*this.G_ALRT.DefaultCellStyle = dataGridViewCellStyle7
+		*this.G_ALRT.HeaderText = "Allocated"
+		*this.G_ALRT.Name = "G_ALRT"
+		*this.G_ALRT.ReadOnly = *True
+		*this.G_ALRT.Width = 76
+		//
+		//G_Shipped
+		//
+		*this.G_Shipped.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle8.Format = "N0"
+		dataGridViewCellStyle8.NullValue = *Nothing
+		*this.G_Shipped.DefaultCellStyle = dataGridViewCellStyle8
+		*this.G_Shipped.HeaderText = "Shipped"
+		*this.G_Shipped.Name = "G_Shipped"
+		*this.G_Shipped.ReadOnly = *True
+		*this.G_Shipped.Width = 71
+		//
+		//G_TotStkReq
+		//
+		*this.G_TotStkReq.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Red
+		dataGridViewCellStyle9.Format = "N0"
+		dataGridViewCellStyle9.NullValue = *Nothing
+		*this.G_TotStkReq.DefaultCellStyle = dataGridViewCellStyle9
+		*this.G_TotStkReq.HeaderText = "Total Stock Required"
+		*this.G_TotStkReq.Name = "G_TotStkReq"
+		*this.G_TotStkReq.ReadOnly = *True
+		*this.G_TotStkReq.Width = 122
+		//
+		//G_IdlAlQty
+		//
+		*this.G_IdlAlQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle10.Format = "N0"
+		dataGridViewCellStyle10.NullValue = *Nothing
+		*this.G_IdlAlQty.DefaultCellStyle = dataGridViewCellStyle10
+		*this.G_IdlAlQty.HeaderText = "Ideal Allocation Qty"
+		*this.G_IdlAlQty.Name = "G_IdlAlQty"
+		*this.G_IdlAlQty.ReadOnly = *True
+		*this.G_IdlAlQty.Width = 104
+		//
+		//G_PropAlQty
+		//
+		*this.G_PropAlQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Red
+		dataGridViewCellStyle11.Format = "N0"
+		dataGridViewCellStyle11.NullValue = *Nothing
+		*this.G_PropAlQty.DefaultCellStyle = dataGridViewCellStyle11
+		*this.G_PropAlQty.HeaderText = "Proposed Allocation Qty"
+		*this.G_PropAlQty.Name = "G_PropAlQty"
+		*this.G_PropAlQty.ReadOnly = *True
+		*this.G_PropAlQty.Width = 118
+		//
+		//G_STOU
+		//
+		*this.G_STOU.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.G_STOU.HeaderText = "Items Out Of Stock"
+		*this.G_STOU.Name = "G_STOU"
+		*this.G_STOU.ReadOnly = *True
+		*this.G_STOU.Width = 99
+		//
+		//frmSelectClass
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.BackColor = System.Drawing.SystemColors.Control
+		*this.ClientSize = *new System.Drawing.Size(949, 692)
+		*this.Controls.Add(*this.label3)
+		*this.Controls.Add(*this.txtStore)
+		*this.Controls.Add(*this.BtnContinue)
+		*this.Controls.Add(*this.lblCycle)
+		*this.Controls.Add(*this.ClassGrid)
+		*this.Controls.Add(*this.btnBack)
+		*this.Controls.Add(*this.txtFilegroup)
+		*this.Controls.Add(*this.label13)
+		*this.Controls.Add(*this.txtDept)
+		*this.Controls.Add(*this.txtUser)
+		*this.Controls.Add(*this.button1)
+		*this.Controls.Add(*this.label14)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.label1)
+		*this.Font = *new System.Drawing.Font("Tahoma", 8, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.Name = "frmSelectClass"
+		*this.ShowInTaskbar = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Select Class"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		*this.statusStrip1.ResumeLayout(*False)
+		*this.statusStrip1.PerformLayout()
+		(*this.ErrorText *As System.ComponentModel.ISupportInitialize).EndInit()
+		(*this.ClassGrid *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ContextMnuStrip.ResumeLayout(*False)
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	/EndRegion
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	
+	BegSr btnBack_Click Access(*Private) Event(*this.btnBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		
+		Unload *This
+	EndSr
+	
+	BegSr ClassSelected_Click Access(*Private) Event(*this.ClassGrid.CellClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld Row Type(*Integer2)
+		
+		Row = e.RowIndex
+		If Row < *Zero
+			LeaveSR
+		EndIf
+		
+		SelectedClass = Convert.ToInt32(ClassGrid.Item['G_Class',Row].Value.ToString().Trim())
+	EndSr
+
+	BegSr ClassSelected_DoubleClick Access(*Private) Event(*this.ClassGrid.CellDoubleClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld Row Type(*Integer2)
+		DclFld ClassNumber Type(*String)
+		
+		Row = e.RowIndex
+		If Row < *Zero
+			LeaveSR
+		EndIf
+		
+		ClassNumber = ClassGrid.Item['G_Class',Row].Value.ToString()
+		
+		QrySelect = 'ISCLS = ' + ClassNumber.Trim() + ' *And ISSTR = ' + StoreNumber.Tostring() +    +
+				' *And ISDPT = ' + Department.toString()
+		QryKey = ' '
+		Level     = 'IS'
+		
+		// Add to Query String
+		CheckBoxSelection()
+
+		frmWorkBenchParm = *New frmWorkBenchParm(AS400)
+	
+		frmWorkBenchParm.wAS400User2  = AS400User.Trim()
+		frmWorkBenchParm.wDept2       = Department  
+		frmWorkBenchParm.wDepartment2 = Department.toString()
+		frmWorkBenchParm.wFileGroup2  = FileGroup.toString().Trim()
+		frmWorkBenchParm.wLevel2      = Level.ToUpper()
+		frmWorkBenchParm.wQryString2  = QrySelect.Trim()
+		frmWorkBenchParm.wQryKey2     = QryKey.Trim()
+		frmWorkBenchParm.wClass2      = ClassNumber
+		frmWorkBenchParm.wStore2      = StoreNumber.ToString()
+		frmWorkBenchParm.wFrmMbr2     = MemberName.Trim()
+		frmWorkBenchParm.wToMbr2      = ToMbrC.Trim()  
+		
+    
+		frmWorkBenchParm.chkExcludeZeroStock.Checked = tkExclEDCzero.Checked
+		frmWorkBenchParm.uxShowFP2.Checked           = tkShowFP.Checked
+		frmWorkBenchParm.uxShowMD2.Checked           = tkShowMD.Checked
+		
+		frmWorkBenchParm.ShowDialog()
+		
+		If frmWorkBenchParm.wExit2 *Or frmWorkBenchParm.wApply2
+		   Close *All
+		   Unload *This
+		Endif   
+	EndSr
+	
+	BegSr frmSelectClass_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		txtUser.Text      = AS400User
+		txtFileGroup.Text = FileGroup.ToString('000')
+		txtDept.Text      = Department.ToString('000')
+		txtStore.Text     = StoreNumber.ToString('000')
+		lblCycle.Text     = LoTyp
+	EndSr
+	
+	// This routine determines if the right mouse button was clicked over a grid cell,
+	// the whole row is then highlighted and the context menu is displayed
+	BegSr DG_MouseUp Access(*Private) Event(*this.ClassGrid.MouseUp)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.MouseEventArgs
+		
+		DclFld hti Type(System.Windows.Forms.DataGridView.HitTestInfo)
+		DclFld Row Type(*Integer2)
+		DclFld Column Type(*Integer2)
+		
+		If e.Button = System.Windows.Forms.MouseButtons.Right
+			hti = ClassGrid.HitTest(e.X, e.Y)
+			Row = hti.RowIndex
+			Column = hti.ColumnIndex
+			
+			If hti.Type = DataGridViewHitTestType.Cell
+				If Row <> -1
+					// Highlight current row
+					ClassGrid.Rows[Row].Selected = *True
+					SelectedClass = Convert.ToInt32(ClassGrid.Item['G_Class',Row].Value.ToString().Trim())
+					ContextMnuStrip.Show(ClassGrid, e.X, e.Y)
+				EndIf
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr mnuGoToWorkBench_Click Access(*Private) Event(*this.mnuGoToWorkBench.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+	
+		ContextMnuStrip.Close()
+		DoEvents
+		
+		QrySelect = 'ISCLS = ' + SelectedClass.ToString() + ' *And ISSTR = ' + StoreNumber.Tostring() +   +
+				' *And ISDPT = ' + Department.toString()
+		QryKey = ' '
+		Level     = 'IS'
+		
+		// Add to Query String
+		CheckBoxSelection()
+		
+		frmWorkBenchParm = *New frmWorkBenchParm(AS400)
+		
+		frmWorkBenchParm.wAS400User2  = AS400User.Trim() 
+		frmWorkBenchParm.wDept2       = Department  
+		frmWorkBenchParm.wDepartment2 = Department.toString() 
+		frmWorkBenchParm.wFileGroup2  = FileGroup.toString().Trim()
+		frmWorkBenchParm.wLevel2      = Level.ToUpper()
+		frmWorkBenchParm.wQryString2  = QrySelect.Trim()
+		frmWorkBenchParm.wQryKey2     = QryKey.Trim()
+		frmWorkBenchParm.wClass2      = SelectedClass.ToString()
+		frmWorkBenchParm.wStore2      = StoreNumber.ToString()
+        
+		frmWorkBenchParm.wMode2       = 'F' 
+		frmWorkBenchParm.wFrmMbr2     = MemberName.Trim()
+		frmWorkBenchParm.wToMbr2      = ToMbrC.Trim() 
+        
+		frmWorkBenchParm.wVen2    = *Blanks
+		frmWorkBenchParm.wSty2    = *Blanks
+		frmWorkBenchParm.wClr2    = *Blanks
+		frmWorkBenchParm.wSiz2    = *Blanks
+    
+		frmWorkBenchParm.chkExcludeZeroStock.Checked = tkExclEDCzero.Checked
+		frmWorkBenchParm.uxShowFP2.Checked           = tkShowFP.Checked
+		frmWorkBenchParm.uxShowMD2.Checked           = tkShowMD.Checked
+        
+		frmWorkBenchParm.ShowDialog()
+		
+		If frmWorkBenchParm.wExit2 = *True *Or frmWorkBenchParm.wApply2 = *True
+			Close *All
+			Unload *This
+		Endif   
+	EndSr
+	
+	// Add CheckBox Selection to Query String....
+	BegSR CheckBoxSelection
+	
+		If tkExclEDCzero.Checked = *True
+
+ 			Select
+			When Level = 'IM'
+                 QrySelect += ' *And IMESOH > 0'
+				
+			When Level = 'IG'
+                 QrySelect += ' *And IGESOH > 0'
+				
+			When Level = 'IS'
+                 QrySelect += ' *And ISESOH > 0'
+				
+			When Level = 'IT'
+                 QrySelect += ' *And ITESOH > 0'
+                 
+			EndSL
+		EndIf
+		
+		// If both checked then show ALL
+		If tkShowFP.Checked = *True  And tkShowMD.Checked = *True
+		   LeaveSR
+		Endif
+		
+		If tkShowFP.Checked = *True
+ 
+ 			Select
+			When Level = 'IM'
+                 QrySelect += ' *And IMMDEV = ' + "'" + "'"
+                 
+			When Level = 'IG'
+                 QrySelect += ' *And IGMDEV = ' + "'" + "'"
+                 
+			When Level = 'IS'
+                 QrySelect += ' *And ISMDEV = ' + "'" + "'"
+                 
+			When Level = 'IT'
+                 QrySelect += ' *And ITMDEV = ' + "'" + "'"
+                 
+			EndSL
+		Endif
+		
+		If tkShowMD.Checked = *True
+
+ 			Select
+			When Level = 'IM'
+                 QrySelect += ' *And IMMDEV <> ' + "'" + "'"
+                 
+			When Level = 'IG'
+                 QrySelect += ' *And IGMDEV <> ' + "'" + "'"
+                 
+			When Level = 'IS'
+                 QrySelect += ' *And ISMDEV <> ' + "'" + "'"
+                 
+			When Level = 'IT'
+                 QrySelect += ' *And ITMDEV <> ' + "'" + "'"
+                 
+			EndSL
+		Endif
+	EndSR
+	
+	
+EndClass

@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <CasePack>
+    <CasePackCode>A</CasePackCode>
+    <Description>STANDARD CARTON</Description>
+    <PackCodeDescription>A - STANDARD CARTON</PackCodeDescription>
+    <PackHeight>13.000</PackHeight>
+    <PackWidth>16.000</PackWidth>
+    <PackLength>20.000</PackLength>
+    <PackWeight>14.000</PackWeight>
+    <PackOverrideable>Y</PackOverrideable>
+  </CasePack>
+  <CasePack>
+    <CasePackCode>C</CasePackCode>
+    <Description>DEFAULT CARTON DEFINITON</Description>
+    <PackCodeDescription>C - DEFAULT CARTON DEFINITON</PackCodeDescription>
+    <PackHeight>1.000</PackHeight>
+    <PackWidth>1.000</PackWidth>
+    <PackLength>1.000</PackLength>
+    <PackWeight>1.000</PackWeight>
+    <PackOverrideable>N</PackOverrideable>
+  </CasePack>
+</DocumentElement>

@@ -1,0 +1,173 @@
+<VisualStudioProject>
+    <VisualRPG
+        ProductVersion = "8.0.891.0"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{19F19084-CA73-404A-847C-8581490D731F}"
+        SccProjectName = ""
+        SccLocalPath = ""
+        SccAuxPath = ""
+        SccProvider = ""
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = "App.ico"
+                AssemblyName = "User_Dept_Authority_Maintenance"
+                DefaultNamespace = "User_Dept_Authority_Maintenance"
+                OutputType = "library"
+                StartupObject = "User_Dept_Authority_Maintenance.EnterSearchParameters"
+            >
+                <Config
+                    Name = "Debug"
+                    CheckForOverflowUnderflow = "False"
+                    DefineConstants = "DEBUG;TRACE"
+                    DebugSymbols = "True"
+                    Optimize = "False"
+                    OutputPath = "bin\Debug\"
+                    TreatWarningsAsErrors = "False"
+                    NoWarn = ""
+                    PlatformTarget = "AnyCPU"
+                />
+                <Config
+                    Name = "Release"
+                    CheckForOverflowUnderflow = "False"
+                    DefineConstants = "TRACE"
+                    DebugSymbols = "False"
+                    Optimize = "True"
+                    OutputPath = "bin\Release\"
+                    TreatWarningsAsErrors = "False"
+                    NoWarn = ""
+                    PlatformTarget = "AnyCPU"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "ASNA.DataGate.Client"
+                    AssemblyName = "ASNA.DataGate.Client"
+                    HintPath = "..\..\..\..\..\..\..\Program Files\Common Files\ASNA Shared\Client\v8.0.407\ASNA.DataGate.Client.dll"
+                    CopyLocal = "False"
+                />
+                <Reference
+                    Name = "ASNA.VisualRPG.Runtime"
+                    AssemblyName = "ASNA.VisualRPG.Runtime"
+                    HintPath = "..\..\..\..\..\..\..\Program Files\Common Files\ASNA Shared\Client\v8.0.407\ASNA.VisualRPG.Runtime.dll"
+                    CopyLocal = "False"
+                />
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll"
+                    CopyLocal = "False"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll"
+                    CopyLocal = "False"
+                />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll"
+                    CopyLocal = "False"
+                />
+                <Reference
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll"
+                    CopyLocal = "False"
+                />
+                <Reference
+                    Name = "System.Xml"
+                    AssemblyName = "System.Xml"
+                    HintPath = "..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll"
+                    CopyLocal = "False"
+                />
+            </References>
+            <DynamicReferences>
+            </DynamicReferences>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AddUpdate.vr"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "AddUpdate.resx"
+                    DependentUpon = "AddUpdate.vr"
+                    SubType = "Designer"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "App.ico"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Properties\AssemblyInfo.vr"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "EnterSearchParameters.vr"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "EnterSearchParameters.resx"
+                    DependentUpon = "EnterSearchParameters.vr"
+                    SubType = "Designer"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Properties\Resources.resx"
+                    SubType = "Designer"
+                    BuildAction = "EmbeddedResource"
+                    Generator = "ResXFileCodeGenerator"
+                    LastGenOutput = "Resources.Designer.vr"
+                />
+                <File
+                    RelPath = "Properties\Resources.Designer.vr"
+                    DependentUpon = "Properties\Resources.resx"
+                    BuildAction = "Compile"
+                    AutoGen = "True"
+                />
+                <File
+                    RelPath = "Properties\Settings.settings"
+                    SubType = "Designer"
+                    BuildAction = "None"
+                    Generator = "SettingsSingleFileGenerator"
+                    LastGenOutput = "Settings.Designer.vr"
+                />
+                <File
+                    RelPath = "Properties\Settings.Designer.vr"
+                    DependentUpon = "Properties\Settings.settings"
+                    BuildAction = "Compile"
+                    AutoGen = "True"
+                />
+                <File
+                    RelPath = "UserList.vr"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "UserList.resx"
+                    DependentUpon = "UserList.vr"
+                    SubType = "Designer"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "UserList2.vr"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "UserList2.resx"
+                    DependentUpon = "UserList2.vr"
+                    SubType = "Designer"
+                    BuildAction = "EmbeddedResource"
+                />
+            </Include>
+        </Files>
+    </VisualRPG>
+</VisualStudioProject>

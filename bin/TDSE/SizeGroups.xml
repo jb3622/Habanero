@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <SizeGroups>
+    <Class>1104</Class>
+    <Group>4</Group>
+    <Description>KLZDMBMZDKLB</Description>
+    <GroupDescription>4 - KLZDMBMZDKLB</GroupDescription>
+  </SizeGroups>
+  <SizeGroups>
+    <Class>1201</Class>
+    <Group>1</Group>
+    <Description>TEST</Description>
+    <GroupDescription>1 - TEST</GroupDescription>
+  </SizeGroups>
+  <SizeGroups>
+    <Class>1201</Class>
+    <Group>2</Group>
+    <Description>TEST2</Description>
+    <GroupDescription>2 - TEST2</GroupDescription>
+  </SizeGroups>
+  <SizeGroups>
+    <Class>1203</Class>
+    <Group>7</Group>
+    <Description>TEST</Description>
+    <GroupDescription>7 - TEST</GroupDescription>
+  </SizeGroups>
+  <SizeGroups>
+    <Class>2301</Class>
+    <Group>3</Group>
+    <Description>DFGDGDFG</Description>
+    <GroupDescription>3 - DFGDGDFG</GroupDescription>
+  </SizeGroups>
+  <SizeGroups>
+    <Class>2301</Class>
+    <Group>6</Group>
+    <Description>BLANK AGAIN</Description>
+    <GroupDescription>6 - BLANK AGAIN</GroupDescription>
+  </SizeGroups>
+</DocumentElement>

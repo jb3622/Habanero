@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--This XML file contains Menu library lists -->
+<LibraryLists>
+   <LibraryList EnvironmentName="TDST (QA US)" Name="*DEFAULT" Library1="TDSFILUSY" Library2="TDSFILDSY" Library3="TDSHSTUSY" Library4="TDSDB2DSY"
+                Library5="IPTSQUAUSY" Library6="IPTSQUANAY" Library7="IPTSQUADSY" Library8="IPTSMODUSY" Library9="IPTSMODNAY" Library10="IPTSMODDSY"
+                Library11="IPTSPCH" Library12="IPTSFILUSY" Library13="IPASFILUSY" Library14="IPWMFILUSY" Library15="IPSAFILUSY" 
+                Library16="IPTSPGM" Library17="IPTSUTL" Library18="IPSAPGM" Library19="DSTOOL" Library20="QGPL" Library21="TAATOOL" 
+                Library22="DSTECH" Library23="DB2XML"/> 
+</LibraryLists>

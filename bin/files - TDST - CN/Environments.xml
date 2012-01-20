@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- List of Servers and the Environments held there -->
+<Environments>
+
+
+<!-- Disable Integration
+
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="APAC" EnvironmentName="TDST (Integration CHINA)" Image="BackgroundAP.png" DateFormat="MDY" 
+  PathToEnvironmentXML="TDSCNXML" PathToApplicationXML="U:\SPICE\iDashXML_ITG\TDSCN" EnvironmentType = "*Production" 
+  MenuSettingsFolder="menuxml_apac_itg" BackColor="White"/>
+
+-->
+
+<!-- QA old version ...
+
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="APAC" EnvironmentName="TDST (QA CHINA)" Image="BackgroundAP.png" DateFormat="MDY" 
+   PathToEnvironmentXML="TDSCNXML" PathToApplicationXML="U:\SPICE\iDashXML_QA\iDashXML_QA\TDSCN" EnvironmentType = "*Production" 
+   MenuSettingsFolder="menuxml_apac_qa" BackColor="White"/>
+
+-->
+
+<!-- QA -->
+
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="APAC" EnvironmentName="TDST (QA CHINA)" Image="BackgroundAP.png" DateFormat="MDY" 
+   PathToEnvironmentXML="TDSCNXML" PathToApplicationXML="\iDashXML_QA\TDSCN" EnvironmentType = "*Production" 
+   MenuSettingsFolder="menuxml_apac_qa" BackColor="White"/>
+
+
+
+<!-- Disable Production
+
+  <Environment HostName="TDS3.TDS.DISNEY.COM" Domain="APAC" EnvironmentName="TDS3 (Production CHINA)" Image="BackgroundAP.png" DateFormat="MDY" 
+  PathToEnvironmentXML="TDSCNXML" PathToApplicationXML="U:\SPICE\iDashXML\TDSCN" EnvironmentType = "*Production" 
+  MenuSettingsFolder="menuxml_apac" BackColor="White"/>
+
+-->
+
+
+</Environments>

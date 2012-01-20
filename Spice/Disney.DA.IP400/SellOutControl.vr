@@ -1,0 +1,94 @@
+Using System
+Using System.Data
+Using System.IO
+Using System.Text
+Using System.Xml
+
+BegClass SellOutControl Access(*Public)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSSPSOC) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+
+	DclFld SellOutControlTbl    Type(DataTable) Access(*Private)
+	DclFld pXMLpath  Type(String)    Access(*Private)
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"SellOutControl.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If SellOutControlTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				SellOutControlTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+
+		SellOutControlTbl = *New DataTable("SellOutControlTable")
+
+		SellOutControlTbl.Columns.Add(*New DataColumn("SellOutControlCode", *TypeOf(String)))
+		SellOutControlTbl.Columns["SellOutControlCode"].ReadOnly = *True
+
+		SellOutControlTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		SellOutControlTbl.Columns["Description"].ReadOnly = *True
+		
+		SellOutControlTbl.Columns.Add(*New DataColumn("CodeAndDescription", *TypeOf(String)))
+		SellOutControlTbl.Columns["CodeAndDescription"].ReadOnly = *True
+		
+		SellOutControlTbl.Columns.Add(*New DataColumn("Default", *TypeOf(String)))
+		SellOutControlTbl.Columns["Default"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {SellOutControlTbl.Columns("SellOutControlCode")}
+		SellOutControlTbl.PrimaryKey = Keys
+	EndSr
+
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSSPSOC.IsOpen
+			Open DSSPSOC
+		EndIf
+		
+		DoUntil DSSPSOC.IsEof
+			Read DSSPSOC
+			If Not DSSPSOC.IsEof
+
+				dr = SellOutControlTbl.NewRow()
+				
+				dr.Item["SellOutControlCode"] = SOCCOD
+				dr.Item["SellOutControlCode"] = dr.Item["SellOutControlCode"].ToString().Trim()
+				dr.Item["Description"]        = SOCDES
+				dr.Item["Description"]        = dr.Item["Description"].ToString().Trim()
+				dr.Item["CodeAndDescription"] = dr.Item["SellOutControlCode"].ToString() + " - " + dr.Item["Description"].ToString()
+				dr.Item["Default"]            = SOCDFT
+				
+				SellOutControlTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		SellOutControlTbl.WriteXml(pXMLpath)
+		
+		Close DSSPSOC
+
+	EndSr
+
+	BegFunc GetSellOutControlTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR SellOutControlTbl
+	EndFunc
+EndClass

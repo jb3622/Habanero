@@ -1,0 +1,673 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Ports>
+    <PortCode>7926</PortCode>
+    <Description>FOB TORONTO - CANADA</Description>
+    <PortCodeDescription>7926 - FOB TORONTO - CANADA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>41323</PortCode>
+    <Description>DDP FELIXSTOWE, ENG.</Description>
+    <PortCodeDescription>41323 - DDP FELIXSTOWE, ENG.</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>41352</PortCode>
+    <Description>DDP LONDON (HETHRO), ENG.</Description>
+    <PortCodeDescription>41352 - DDP LONDON (HETHRO), ENG.</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>43174</PortCode>
+    <Description>DDP SOUTHAMPTON, ENG.</Description>
+    <PortCodeDescription>43174 - DDP SOUTHAMPTON, ENG.</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>54201</PortCode>
+    <Description>FOB COLOMBO, SRI LANKA</Description>
+    <PortCodeDescription>54201 - FOB COLOMBO, SRI LANKA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>54901</PortCode>
+    <Description>FOB BANGKOK, THAILAND</Description>
+    <PortCodeDescription>54901 - FOB BANGKOK, THAILAND</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55735</PortCode>
+    <Description>FOB PENANG - MALAYSIA</Description>
+    <PortCodeDescription>55735 - FOB PENANG - MALAYSIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55976</PortCode>
+    <Description>FOB SINGAPORE</Description>
+    <PortCodeDescription>55976 - FOB SINGAPORE</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57035</PortCode>
+    <Description>FOB SHANGHAI - CHINA</Description>
+    <PortCodeDescription>57035 - FOB SHANGHAI - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57071</PortCode>
+    <Description>FCA XIAMEN - CHINA</Description>
+    <PortCodeDescription>57071 - FCA XIAMEN - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58023</PortCode>
+    <Description>FCA BUSAN, KOREA</Description>
+    <PortCodeDescription>58023 - FCA BUSAN, KOREA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58201</PortCode>
+    <Description>FOB HONG KONG</Description>
+    <PortCodeDescription>58201 - FOB HONG KONG</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58301</PortCode>
+    <Description>FCA TAIWAN</Description>
+    <PortCodeDescription>58301 - FCA TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58309</PortCode>
+    <Description>FOB KAOHSUING, TAIWAN</Description>
+    <PortCodeDescription>58309 - FOB KAOHSUING, TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58857</PortCode>
+    <Description>FCA NAGOYA - JAPAN</Description>
+    <PortCodeDescription>58857 - FCA NAGOYA - JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58886</PortCode>
+    <Description>FOB TOKYO, JAPAN</Description>
+    <PortCodeDescription>58886 - FOB TOKYO, JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99977</PortCode>
+    <Description>FOB MONTREAL - CANADA</Description>
+    <PortCodeDescription>99977 - FOB MONTREAL - CANADA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99978</PortCode>
+    <Description>FOB ISTANBUL TURKEY TRUCK</Description>
+    <PortCodeDescription>99978 - FOB ISTANBUL TURKEY TRUCK</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99979</PortCode>
+    <Description>FCA HAIFA, ISRAEL</Description>
+    <PortCodeDescription>99979 - FCA HAIFA, ISRAEL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99980</PortCode>
+    <Description>FOB FLORIDA - USA</Description>
+    <PortCodeDescription>99980 - FOB FLORIDA - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99981</PortCode>
+    <Description>ZZ NOT IN USE (HAIFA, IS)</Description>
+    <PortCodeDescription>99981 - ZZ NOT IN USE (HAIFA, IS)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99982</PortCode>
+    <Description>FOB OSAKA - JAPAN</Description>
+    <PortCodeDescription>99982 - FOB OSAKA - JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99983</PortCode>
+    <Description>FCA SAO PAULO - BRAZIL</Description>
+    <PortCodeDescription>99983 - FCA SAO PAULO - BRAZIL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99984</PortCode>
+    <Description>ZZ NOT IN USE (SHNTAU-CH)</Description>
+    <PortCodeDescription>99984 - ZZ NOT IN USE (SHNTAU-CH)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99985</PortCode>
+    <Description>FOB MANILA - PHILIPPINES</Description>
+    <PortCodeDescription>99985 - FOB MANILA - PHILIPPINES</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99986</PortCode>
+    <Description>FOB LOS ANGELES - USA</Description>
+    <PortCodeDescription>99986 - FOB LOS ANGELES - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99987</PortCode>
+    <Description>FOB CHICAGO - USA</Description>
+    <PortCodeDescription>99987 - FOB CHICAGO - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99988</PortCode>
+    <Description>FOB NEW YORK - USA</Description>
+    <PortCodeDescription>99988 - FOB NEW YORK - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99989</PortCode>
+    <Description>FOB ATLANTA USA</Description>
+    <PortCodeDescription>99989 - FOB ATLANTA USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99990</PortCode>
+    <Description>FOB MEMPHIS - USA</Description>
+    <PortCodeDescription>99990 - FOB MEMPHIS - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99991</PortCode>
+    <Description>DDP COVENTRY - DUTY PAID</Description>
+    <PortCodeDescription>99991 - DDP COVENTRY - DUTY PAID</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99992</PortCode>
+    <Description>DDUP COVENTRY DUTY UNPAID</Description>
+    <PortCodeDescription>99992 - DDUP COVENTRY DUTY UNPAID</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99993</PortCode>
+    <Description>FOB BOMBAY - INDIA</Description>
+    <PortCodeDescription>99993 - FOB BOMBAY - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99994</PortCode>
+    <Description>FOB NEW DELHI - INDIA</Description>
+    <PortCodeDescription>99994 - FOB NEW DELHI - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99995</PortCode>
+    <Description>ZZ NOT IN USE (MONT-CA)</Description>
+    <PortCodeDescription>99995 - ZZ NOT IN USE (MONT-CA)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99998</PortCode>
+    <Description>FOB JAKARTA - INDONESIA</Description>
+    <PortCodeDescription>99998 - FOB JAKARTA - INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99999</PortCode>
+    <Description>FOB HO CHI MINH - VIETNAM</Description>
+    <PortCodeDescription>99999 - FOB HO CHI MINH - VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99976</PortCode>
+    <Description>ZZ NOT IN USE (AMST-HOLL)</Description>
+    <PortCodeDescription>99976 - ZZ NOT IN USE (AMST-HOLL)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99975</PortCode>
+    <Description>ZZ NOT IN USE (WOODLAND)</Description>
+    <PortCodeDescription>99975 - ZZ NOT IN USE (WOODLAND)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99974</PortCode>
+    <Description>FOB IZMIR - TURKEY TRUCK</Description>
+    <PortCodeDescription>99974 - FOB IZMIR - TURKEY TRUCK</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99968</PortCode>
+    <Description>FOB INDIANAPOLIS - USA</Description>
+    <PortCodeDescription>99968 - FOB INDIANAPOLIS - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99972</PortCode>
+    <Description>ZZ NOT IN USE (SBS NY)</Description>
+    <PortCodeDescription>99972 - ZZ NOT IN USE (SBS NY)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99971</PortCode>
+    <Description>ZZ NOT IN USE (SBS LA)</Description>
+    <PortCodeDescription>99971 - ZZ NOT IN USE (SBS LA)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99970</PortCode>
+    <Description>ZZ NOT IN USE -TRIDENT LA</Description>
+    <PortCodeDescription>99970 - ZZ NOT IN USE -TRIDENT LA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99969</PortCode>
+    <Description>FCA SIHANOUKVILLE CAMBODI</Description>
+    <PortCodeDescription>99969 - FCA SIHANOUKVILLE CAMBODI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>10</PortCode>
+    <Description>FCA DHAKA - BANGLADESH</Description>
+    <PortCodeDescription>10 - FCA DHAKA - BANGLADESH</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99967</PortCode>
+    <Description>FCA INDIANAPOLIS - USA</Description>
+    <PortCodeDescription>99967 - FCA INDIANAPOLIS - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>20</PortCode>
+    <Description>FCA PHOM PEHN</Description>
+    <PortCodeDescription>20 - FCA PHOM PEHN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>30</PortCode>
+    <Description>FCA TORONTO - CANANDA</Description>
+    <PortCodeDescription>30 - FCA TORONTO - CANANDA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>40</PortCode>
+    <Description>FCA SHANGHAI - CHINA</Description>
+    <PortCodeDescription>40 - FCA SHANGHAI - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>50</PortCode>
+    <Description>FOB BEIJING - CHINA</Description>
+    <PortCodeDescription>50 - FOB BEIJING - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>60</PortCode>
+    <Description>FCA BEIJING - CHINA</Description>
+    <PortCodeDescription>60 - FCA BEIJING - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>70</PortCode>
+    <Description>FCA DALIAN - CHINA</Description>
+    <PortCodeDescription>70 - FCA DALIAN - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>80</PortCode>
+    <Description>FCA GUANGZHOU - CHINA</Description>
+    <PortCodeDescription>80 - FCA GUANGZHOU - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>90</PortCode>
+    <Description>FCA SHENZEN - CHINA</Description>
+    <PortCodeDescription>90 - FCA SHENZEN - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>100</PortCode>
+    <Description>FCA HONG KONG</Description>
+    <PortCodeDescription>100 - FCA HONG KONG</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>110</PortCode>
+    <Description>FCA BOMBAY - INDIA</Description>
+    <PortCodeDescription>110 - FCA BOMBAY - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>120</PortCode>
+    <Description>FCA NEW DEHLI - INDIA</Description>
+    <PortCodeDescription>120 - FCA NEW DEHLI - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>130</PortCode>
+    <Description>FOB BANGALORE - INDIA</Description>
+    <PortCodeDescription>130 - FOB BANGALORE - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>140</PortCode>
+    <Description>FCA BANGALORE - INDIA</Description>
+    <PortCodeDescription>140 - FCA BANGALORE - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>150</PortCode>
+    <Description>FOB CALCUTTA - INDIA</Description>
+    <PortCodeDescription>150 - FOB CALCUTTA - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>160</PortCode>
+    <Description>FCA CALCUTTA - INDIA</Description>
+    <PortCodeDescription>160 - FCA CALCUTTA - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>170</PortCode>
+    <Description>FCA JAKARTA - INDONESIA</Description>
+    <PortCodeDescription>170 - FCA JAKARTA - INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>180</PortCode>
+    <Description>FOB SARUBAYA - INDONESIA</Description>
+    <PortCodeDescription>180 - FOB SARUBAYA - INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>190</PortCode>
+    <Description>FCA SURABAYA - INDONESIA</Description>
+    <PortCodeDescription>190 - FCA SURABAYA - INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>200</PortCode>
+    <Description>FCA TEL AVIV - ISRAEL</Description>
+    <PortCodeDescription>200 - FCA TEL AVIV - ISRAEL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>210</PortCode>
+    <Description>FCA ASHOD - ISRAEL</Description>
+    <PortCodeDescription>210 - FCA ASHOD - ISRAEL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>220</PortCode>
+    <Description>FCA OSAKA - JAPAN</Description>
+    <PortCodeDescription>220 - FCA OSAKA - JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>230</PortCode>
+    <Description>FCA TOKYO - JAPAN</Description>
+    <PortCodeDescription>230 - FCA TOKYO - JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>240</PortCode>
+    <Description>FCA SEOUL - KOREA</Description>
+    <PortCodeDescription>240 - FCA SEOUL - KOREA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>250</PortCode>
+    <Description>FCA PENANG - MALAYSIA</Description>
+    <PortCodeDescription>250 - FCA PENANG - MALAYSIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>260</PortCode>
+    <Description>FCA KARACHI - PAKISTAN</Description>
+    <PortCodeDescription>260 - FCA KARACHI - PAKISTAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>270</PortCode>
+    <Description>FCA MANILA - PHILIPINES</Description>
+    <PortCodeDescription>270 - FCA MANILA - PHILIPINES</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>280</PortCode>
+    <Description>FCA SEBU CITY - PHILIPINE</Description>
+    <PortCodeDescription>280 - FCA SEBU CITY - PHILIPINE</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>290</PortCode>
+    <Description>FCA SINGAPORE</Description>
+    <PortCodeDescription>290 - FCA SINGAPORE</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>300</PortCode>
+    <Description>FOB CAPE TOWN - SA</Description>
+    <PortCodeDescription>300 - FOB CAPE TOWN - SA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>310</PortCode>
+    <Description>FCA CAPE TOWN - SA</Description>
+    <PortCodeDescription>310 - FCA CAPE TOWN - SA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>320</PortCode>
+    <Description>FCA COLOMBO - SRI LANKA</Description>
+    <PortCodeDescription>320 - FCA COLOMBO - SRI LANKA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>330</PortCode>
+    <Description>FCA TAIWAN</Description>
+    <PortCodeDescription>330 - FCA TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>340</PortCode>
+    <Description>FCA TAIPAI - TAIWAN</Description>
+    <PortCodeDescription>340 - FCA TAIPAI - TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>350</PortCode>
+    <Description>FCA BANGKOK - THAILAND</Description>
+    <PortCodeDescription>350 - FCA BANGKOK - THAILAND</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>360</PortCode>
+    <Description>FCA ISTANBUL - TURKEY</Description>
+    <PortCodeDescription>360 - FCA ISTANBUL - TURKEY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>370</PortCode>
+    <Description>FCA HANOI - VIETNAM</Description>
+    <PortCodeDescription>370 - FCA HANOI - VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>380</PortCode>
+    <Description>FCA HCM CITY - VIETNAM</Description>
+    <PortCodeDescription>380 - FCA HCM CITY - VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>390</PortCode>
+    <Description>FOB SANTOS - BRAZIL</Description>
+    <PortCodeDescription>390 - FOB SANTOS - BRAZIL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>400</PortCode>
+    <Description>FOB SIHANOUKVILLE CAMBODI</Description>
+    <PortCodeDescription>400 - FOB SIHANOUKVILLE CAMBODI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>410</PortCode>
+    <Description>FOV HAIEA - ISRAEL</Description>
+    <PortCodeDescription>410 - FOV HAIEA - ISRAEL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>420</PortCode>
+    <Description>FOB PUSAN - KOREA</Description>
+    <PortCodeDescription>420 - FOB PUSAN - KOREA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>430</PortCode>
+    <Description>FOB KARACHI - PAKISTAN</Description>
+    <PortCodeDescription>430 - FOB KARACHI - PAKISTAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>440</PortCode>
+    <Description>FCA NEW YORK - USA</Description>
+    <PortCodeDescription>440 - FCA NEW YORK - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>450</PortCode>
+    <Description>FCA LOS ANGELES - USA</Description>
+    <PortCodeDescription>450 - FCA LOS ANGELES - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>460</PortCode>
+    <Description>FCA FLORIDA - USA</Description>
+    <PortCodeDescription>460 - FCA FLORIDA - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>470</PortCode>
+    <Description>FCA CHICAGO - USA</Description>
+    <PortCodeDescription>470 - FCA CHICAGO - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>480</PortCode>
+    <Description>FCA ATLANTA - USA</Description>
+    <PortCodeDescription>480 - FCA ATLANTA - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>45</PortCode>
+    <Description>PORT OF ENTRY SOUTHAMPTON</Description>
+    <PortCodeDescription>45 - PORT OF ENTRY SOUTHAMPTON</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>490</PortCode>
+    <Description>FOB DUBAI</Description>
+    <PortCodeDescription>490 - FOB DUBAI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>500</PortCode>
+    <Description>FOB VARACRUZ, MEXICO</Description>
+    <PortCodeDescription>500 - FOB VARACRUZ, MEXICO</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>510</PortCode>
+    <Description>FOB MEXICO CITY, MEXICO</Description>
+    <PortCodeDescription>510 - FOB MEXICO CITY, MEXICO</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>520</PortCode>
+    <Description>FOB GUANGZHOU, CHINA</Description>
+    <PortCodeDescription>520 - FOB GUANGZHOU, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>525</PortCode>
+    <Description>FOB DALLAS, TEXAS - USA</Description>
+    <PortCodeDescription>525 - FOB DALLAS, TEXAS - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>530</PortCode>
+    <Description>FCA DALLAS, TEXAS - USA</Description>
+    <PortCodeDescription>530 - FCA DALLAS, TEXAS - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>535</PortCode>
+    <Description>FOB NEW JERSEY, NY - USA</Description>
+    <PortCodeDescription>535 - FOB NEW JERSEY, NY - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>540</PortCode>
+    <Description>FCA NEW JERSEY, NY - USA</Description>
+    <PortCodeDescription>540 - FCA NEW JERSEY, NY - USA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>550</PortCode>
+    <Description>EX XIAMEN - CHINA</Description>
+    <PortCodeDescription>550 - EX XIAMEN - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>560</PortCode>
+    <Description>EX ELPASO - TEXAS</Description>
+    <PortCodeDescription>560 - EX ELPASO - TEXAS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>570</PortCode>
+    <Description>CFR SOUTHAMPTON</Description>
+    <PortCodeDescription>570 - CFR SOUTHAMPTON</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>580</PortCode>
+    <Description>CFR FELIXSTOWE</Description>
+    <PortCodeDescription>580 - CFR FELIXSTOWE</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>590</PortCode>
+    <Description>FOB XIAMEN - CHINA</Description>
+    <PortCodeDescription>590 - FOB XIAMEN - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>600</PortCode>
+    <Description>FOB YANTIAN   CHINA</Description>
+    <PortCodeDescription>600 - FOB YANTIAN   CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>610</PortCode>
+    <Description>FOB - TAIWAN</Description>
+    <PortCodeDescription>610 - FOB - TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>620</PortCode>
+    <Description>FOB QINGDAO - CHINA</Description>
+    <PortCodeDescription>620 - FOB QINGDAO - CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57000</PortCode>
+    <Description>SHENZHEN, CHINA</Description>
+    <PortCodeDescription>57000 - SHENZHEN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55200</PortCode>
+    <Description>VIETNAM</Description>
+    <PortCodeDescription>55200 - VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53312</PortCode>
+    <Description>BOMBAY, INDIA</Description>
+    <PortCodeDescription>53312 - BOMBAY, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53300</PortCode>
+    <Description>MUMBAI, INDIA</Description>
+    <PortCodeDescription>53300 - MUMBAI, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57017</PortCode>
+    <Description>XINGANG, CHINA</Description>
+    <PortCodeDescription>57017 - XINGANG, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99997</PortCode>
+    <Description>FOB SEMARANG-INDONESIA</Description>
+    <PortCodeDescription>99997 - FOB SEMARANG-INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>630</PortCode>
+    <Description>FOB - MACAU</Description>
+    <PortCodeDescription>630 - FOB - MACAU</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>1</PortCode>
+    <Description>ANY PORT</Description>
+    <PortCodeDescription>1 - ANY PORT</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>640</PortCode>
+    <Description>FOB - OMAN</Description>
+    <PortCodeDescription>640 - FOB - OMAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>650</PortCode>
+    <Description>PORT LOUIS, MAURITIUS</Description>
+    <PortCodeDescription>650 - PORT LOUIS, MAURITIUS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>660</PortCode>
+    <Description>FOB - ITAJAI BRAZIL</Description>
+    <PortCodeDescription>660 - FOB - ITAJAI BRAZIL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>777</PortCode>
+    <Description>FOB  IZMIR - TURKEY</Description>
+    <PortCodeDescription>777 - FOB  IZMIR - TURKEY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>77777</PortCode>
+    <Description>FCA ST LUCIA</Description>
+    <PortCodeDescription>77777 - FCA ST LUCIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>670</PortCode>
+    <Description>FCA NINGBO</Description>
+    <PortCodeDescription>670 - FCA NINGBO</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57001</PortCode>
+    <Description>FOB SHENZHEN, CHINA</Description>
+    <PortCodeDescription>57001 - FOB SHENZHEN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>515</PortCode>
+    <Description>FOB  ALICANTE,SPAIN</Description>
+    <PortCodeDescription>515 - FOB  ALICANTE,SPAIN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>800</PortCode>
+    <Description>FOB MONTELUPO - ITALY</Description>
+    <PortCodeDescription>800 - FOB MONTELUPO - ITALY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>305</PortCode>
+    <Description>FOB FUZHOU</Description>
+    <PortCodeDescription>305 - FOB FUZHOU</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>680</PortCode>
+    <Description>PORT KELANG</Description>
+    <PortCodeDescription>680 - PORT KELANG</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>66666</PortCode>
+    <Description>FOB NINGBO</Description>
+    <PortCodeDescription>66666 - FOB NINGBO</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>595</PortCode>
+    <Description>FOB HAIPHONG - VIETNAM</Description>
+    <PortCodeDescription>595 - FOB HAIPHONG - VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>700</PortCode>
+    <Description>FOB DANANG - VIETNAM</Description>
+    <PortCodeDescription>700 - FOB DANANG - VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53400</PortCode>
+    <Description>FOB CHENNAI, INDIA</Description>
+    <PortCodeDescription>53400 - FOB CHENNAI, INDIA</PortCodeDescription>
+  </Ports>
+</DocumentElement>

@@ -1,0 +1,186 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.IO
+
+DclNameSpace Disney.DA.IP400
+
+BegClass IPCLASScls Access(*Public)
+		
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(IPCLASSB) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(Class:R_ClassB)
+	DclDiskFile Name(DSCLASS)  Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	
+	DclFld pClassCode  Type(Int16)   Access(*Private)
+	DclFld pClassName  Type(String)  Access(*Private)
+	DclFld pDivision   Type(Int16)   Access(*Private)
+	DclFld pDepartment Type(Int16)   Access(*Private)
+	DclFld pStatus     Type(Boolean) Access(*Private)
+	DclFld pXMLpath    Type(String)  Access(*Private)
+	DclFld ClassTbl    Type(DataTable)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB   Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrparm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Class.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	/Region Properties
+	BegProp ClassCode Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR pClassCode
+		EndGet
+	EndProp
+	
+	BegProp ClassName Type(String) Access(*Public)
+		BegGet
+			LeaveSR pClassName
+		EndGet
+		
+		BegSet
+			pClassName = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Division Type(*Zoned) Len(2,0) Access(*Public)
+		BegGet
+			LeaveSR pDivision
+		EndGet
+		
+		BegSet
+			pDivision = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Department Type(*Zoned) Len(3,0) Access(*Public)
+		BegGet
+			LeaveSR pDepartment
+		EndGet
+		
+		BegSet
+			pDepartment = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Status Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pStatus
+		EndGet
+	EndProp
+	/EndRegion
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+	
+		If ClassTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				ClassTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys Type(DataColumn) Rank(1)
+
+		ClassTbl = *New DataTable("Class")
+
+		ClassTbl.Columns.Add(*New DataColumn("Division", *TypeOf(Int16)))
+		ClassTbl.Columns["Division"].ReadOnly = *True
+
+		ClassTbl.Columns.Add(*New DataColumn("Department", *TypeOf(Int16)))
+		ClassTbl.Columns["Department"].ReadOnly = *True
+		
+		ClassTbl.Columns.Add(*New DataColumn("ClassCode", *TypeOf(Int16)))
+		ClassTbl.Columns["ClassCode"].ReadOnly = *True
+		
+		ClassTbl.Columns.Add(*New DataColumn("ClassName", *TypeOf(String)))
+		ClassTbl.Columns["ClassName"].ReadOnly = *True
+
+		ClassTbl.Columns.Add(*New DataColumn("ClassCodeName", *TypeOf(String)))
+
+		ClassTbl.Columns["ClassCodeName"].ReadOnly = *True
+		
+		ClassTbl.Columns.Add(*New DataColumn("Status", *TypeOf(Boolean)))
+		ClassTbl.Columns["Status"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {ClassTbl.Columns("ClassCode")}
+		ClassTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not IPCLASSB.IsOpen
+			Open IPCLASSB
+		EndIf
+		
+		If Not DSCLASS.IsOpen
+			Open DSCLASS
+		EndIf
+		
+		Try
+			DoUntil IPCLASSB.IsEof
+				Read IPCLASSB
+				If Not IPCLASSB.IsEof
+					Chain From(DSCLASS) Key(CCLS)
+					If DSCLASS.IsFound
+						dr = ClassTbl.NewRow()
+						
+						dr.Item("Division")   = CDIV
+						dr.Item["Department"] = CDPT
+						dr.Item["ClassCode"]  = CCLS
+						dr.Item["ClassName"]  = CLNM.Trim()
+						dr.Item["ClassCodeName"] = CCLS.ToString('0000') + ' - ' + CLNM.trim()
+						
+						If CCODE = 'Y'
+							dr.Item["Status"] = *True
+						Else
+							dr.Item["Status"] = *False
+						EndIf
+						
+						ClassTbl.Rows.Add(dr)
+					EndIf
+				EndIf
+			EndDo
+			
+			ClassTbl.WriteXml(pXMLpath)
+		Catch Name(exc) Type(Exception)
+		
+		EndTry
+		
+		Close IPCLASSB
+		Close DSCLASS
+	EndSr
+	
+	BegFunc GetClass Type(Boolean) Access(*Public)
+		DclSrParm Class Type(Int16)
+
+		DclFld dr Type(DataRow)
+		
+		dr = ClassTbl.Rows.Find(Class)
+		If dr <> *Nothing
+			pClassCode  = dr.Item("ClassCode")  *As Int16
+			pClassName  = dr.Item["ClassName"]  *As String
+			pDivision   = dr.Item["Division"]   *As Int16
+			pDepartment = dr.Item["Department"] *As Int16
+			pStatus     = dr.Item["Status"]     *As Boolean
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetClassTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR ClassTbl
+	EndFunc
+EndClass

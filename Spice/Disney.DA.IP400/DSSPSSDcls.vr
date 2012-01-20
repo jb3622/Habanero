@@ -1,0 +1,375 @@
+// ===============================================
+// Joseph Urbina
+// 22nd April 2009
+// DSSPSSDcls	
+// Data Access Layer - Stage Set Dates
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+
+	BegClass DSSPSSDcls Access(*Public)
+		
+	/Region Declare Files and DB
+	DclDB Name(DB) DbName("TDST")
+	DclDiskFile Name(DSSPSSDL01) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*Yes) RnmFmt(Dsspssr:R_Dsspssr01)
+	DclDiskFile Name(DSSPSSDL02) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No) RnmFmt(Dsspssr:R_Dsspssr02) NetBlockFactor(*Calc)
+	/EndRegion
+		
+	/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+	
+	BegConstructor Access(*Public)
+				
+		*this.DB = DB
+	EndConstructor
+			
+	/EndRegion
+			
+	/Region DSSPSSD Properties
+	//StageSetID
+	BegProp StageSet_ID Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR SSDSSI
+		EndGet
+	EndProp
+	
+	//StageSetDate
+	BegProp StageSet_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR SSDDAT
+		EndGet
+		
+		BegSet
+			SSDDAT = *PropVal
+		EndSet
+	EndProp
+	
+	//Create Date
+	BegProp Create_Date Type(*Zoned ) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR SSDCRD
+		EndGet
+		
+		BegSet
+			SSDCRD = *PropVal
+		EndSet
+	EndProp
+	
+	//Create Time
+	BegProp Create_Time Type(*Zoned ) Len(6,0) Access(*Public)
+		BegGet
+			LeaveSR SSDCRT
+		EndGet
+		
+		BegSet
+			SSDCRT = *PropVal
+		EndSet
+	EndProp
+	
+	//Create User
+	BegProp Create_User Type(*Char ) len(10) Access(*Public)
+		BegGet
+			LeaveSR SSDCRU 
+		EndGet
+		
+		BegSet
+			SSDCRU = *PropVal
+		EndSet
+	EndProp
+	
+	//Changed Date
+	BegProp Changed_Date Type(*Zoned ) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR SSDCHD
+		EndGet
+		
+		BegSet
+			SSDCHD = *PropVal
+		EndSet
+	EndProp
+	
+	//Changed Time
+	BegProp Changed_Time Type(*Zoned ) Len(6,0) Access(*Public)
+		BegGet
+			LeaveSR SSDCHT 
+		EndGet
+		
+		BegSet
+			SSDCHT  = *PropVal
+		EndSet
+	EndProp
+	
+	//Changed User
+	BegProp Changed_User Type(*Char ) len(10) Access(*Public)
+		BegGet
+			LeaveSR SSDCHU 
+		EndGet
+		
+		BegSet
+			SSDCHU  = *PropVal
+		EndSet
+	EndProp
+		
+	/EndRegion	
+			
+	/Region Methods
+	//StageSetID Chain  
+	BegFunc GetStageSetID Type(*Boolean) Access(*Public)
+		DclSrParm StageSet_ID Type(*Zoned) len(5,0)
+		
+		If Not DSSPSSDL01.IsOpen
+			Open DSSPSSDL01
+		EndIf
+		
+		Chain From(DSSPSSDL01) Key(StageSet_ID) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+						
+	EndFunc
+	
+	//StageSetDate Chain
+	BegFunc GetStageSetDate Type(*Boolean) Access(*Public)
+		DclSrParm StageSet_Date Type(*Zoned) Len(8,0)
+		
+		If Not DSSPSSDL02.IsOpen
+			Open DSSPSSDL02
+		EndIf
+						
+		Chain From(DSSPSSDL02) Key(StageSet_Date) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+		
+	EndFunc
+	
+	//StageSetID Chain for Update
+	BegFunc GetStageSetIDForUpdate Type(*Boolean) Access(*Public)
+		DclSrParm StageSet_ID Type(*Zoned) len(5,0)
+		
+		If Not DSSPSSDL01.IsOpen
+			Open DSSPSSDL01
+		EndIf
+		
+		Chain From(DSSPSSDL01) Key(StageSet_ID) Access(*DFT) Err(*Extended)
+		If Not %Found
+			LeaveSR *On
+		EndIf
+		
+		If %Error = *On
+			Throw *New System.Exception('Failed to get record for update (DSSPSSDL01)')
+			LeaveSR *On
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	//Writes new record. This method works out the next ID number.			
+	BegSR WriteStageSetID Access(*Public)
+		DclSrParm StageSet_Date Type(*Zoned) Len(8,0)
+						
+		If Not DSSPSSDL01.IsOpen
+			Open DSSPSSDL01
+		EndIf
+		
+		//Get last available ID Number
+		SetGT File(DSSPSSDL01) Key(*Hival)
+		ReadP DSSPSSDL01
+		
+		If %Error = *On
+			Throw *New System.Exception('Record Locked')
+		EndIf
+		
+		//As we have previously read a record we don't want any data hanging arouond.
+		clear R_Dsspssr01 *NoKey
+		
+		//Increment the ID	
+		If Not %Eof(DSSPSSDL01)
+			SSDSSI += 1
+		  Else
+		   SSDSSI  = 1	
+		Endif
+		
+		//Set new record data		
+		SSDDAT = StageSet_Date 
+		Create_Date = %Date
+	    Create_Time = %Time
+	    Create_User = db.User().toUpper()
+		
+		//Write the record
+		Write R_Dsspssr01 Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (DSSPSSDL01)')
+		EndIf
+		
+		LeaveSR 
+	EndSR
+	
+	//Update Method
+	BegFunc UpdateStageSetID Type(*Boolean) Access(*Public) 
+		DclSrParm StageSetID Type(*Zoned) len(5,0)
+		
+		Update R_Dsspssr01 Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to update record (DSSPSSDL01)')
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	
+	//Delete Method
+	BegFunc DeleteStageSetID Type(*Boolean) Access(*Public)
+		DclSrParm StageSetID Type(*Zoned) len(5,0)
+		
+		If Not DSSPSSDL01.IsOpen
+			Open DSSPSSDL01
+		EndIf
+		
+		Delete From(R_Dsspssr01) Key(StageSetID) Err(*Extended)
+		If %Error = *On
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *False
+	EndFunc
+	
+	//Returns the whole File as a Dataset in StageSetDate Order.
+	BegFunc GetStageDataSet Type(DataTable) Access(*Public)
+	
+		DclFld dt Type( DataTable ) New()
+		DclFld dc Type( DataColumn ) 
+		DclFld dr Type( DataRow )
+		
+		DclFld WrkDate Type(*Date)
+								
+		If Not DSSPSSDL02.IsOpen
+			Open DSSPSSDL02
+		EndIf
+		
+		//Create StageSetID Column
+		dc = *New DataColumn( 'clmSSDSSI' )
+		dc.DataType = System.Type.GetType("System.Int32")
+		dc.ColumnName = "clmSSDSSI"
+		dc.Caption = "Stage Set ID"
+		dt.Columns.Add(dc)
+		
+		//Create StageSetDate Column DMY
+		dc = *New DataColumn( 'clmSSDDATDMY' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSSDDATDMY"
+		dc.Caption = "Stage Set Dates"
+		dt.Columns.Add(dc)
+		
+		//Create StageSetDate Column MDY
+		dc = *New DataColumn( 'clmSSDDATMDY' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSSDDATMDY"
+		dc.Caption = "Stage Set Dates"
+		dt.Columns.Add(dc)
+		
+		//Create StageSetDate Column
+		dc = *New DataColumn( 'clmSSDDATNum' )
+		dc.DataType = System.Type.GetType("System.Int32")
+		dc.ColumnName = "clmSSDDATNum"
+		dc.Caption = "Stage Set Dates Numeric"
+		dt.Columns.Add(dc)
+		
+		//Read file and create rows in DataTable				
+		Setll DSSPSSDL02 Key(*Start)
+		DoUntil DSSPSSDL02.IsEof
+			Read DSSPSSDL02 Access(*NoLock)
+			If not DSSPSSDL02.IsEof
+				dr         = dt.NewRow()
+				dr.Item[0] = SSDSSI
+				
+				//Convert Date
+				WrkDate    = SSDDAT
+				dr.Item[1] = WrkDate.ToString('dd - MMM - yyyy').ToUpper()
+				dr.Item[2] = WrkDate.ToString('MMM - dd - yyyy').ToUpper()
+				dr.Item[3] = SSDDAT
+				dt.Rows.Add( dr )
+			Endif
+		Enddo
+		
+			LeaveSR dt
+	EndFunc
+	
+	//Creates a DataSet/DataTable as above but accessed by StageSetDate Key.
+	BegFunc GetStageDataSetDate Type(DataTable) Access(*Public)
+		DclSrParm StageSet_Date Type(*Zoned) len(8,0)
+	
+		DclFld dt Type( DataTable ) New()
+		DclFld dc Type( DataColumn ) 
+		DclFld dr Type( DataRow )
+		
+		DclFld WrkDate Type(*Date)
+								
+		If Not DSSPSSDL02.IsOpen
+			Open DSSPSSDL02
+		EndIf
+		
+		//Create StageSetID Column
+		dc = *New DataColumn( 'clmSSDSSI' )
+		dc.DataType = System.Type.GetType("System.Int32")
+		dc.ColumnName = "clmSSDSSI"
+		dc.Caption = "Stage Set ID"
+		dt.Columns.Add(dc)
+		
+		//Create StageSetDate Column DMY
+		dc = *New DataColumn( 'clmSSDDATDMY' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSSDDATDMY"
+		dc.Caption = "Stage Set Dates"
+		dt.Columns.Add(dc)
+		
+		//Create StageSetDate Column MDY
+		dc = *New DataColumn( 'clmSSDDATMDY' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSSDDATMDY"
+		dc.Caption = "Stage Set Dates"
+		dt.Columns.Add(dc)
+		
+		//Create StageSetDate Column
+		dc = *New DataColumn( 'clmSSDDATNum' )
+		dc.DataType = System.Type.GetType("System.Int32")
+		dc.ColumnName = "clmSSDDATNum"
+		dc.Caption = "Stage Set Dates Numeric"
+		dt.Columns.Add(dc)
+		
+		//Read file by Key and create rows in DataTable				
+		Setll DSSPSSDL02 Key(StageSet_Date)
+		DoUntil DSSPSSDL02.IsEof
+			Read DSSPSSDL02
+			If not DSSPSSDL02.IsEof
+				dr = dt.NewRow()
+				dr.Item[0] = SSDSSI
+				
+				//Convert Date
+				WrkDate    = SSDDAT
+				dr.Item[1] = WrkDate.ToString('dd - MMM - yyyy').ToUpper()
+				dr.Item[2] = WrkDate.ToString('MMM - dd - yyyy').ToUpper()
+				dr.Item[3] = SSDDAT
+				
+				dt.Rows.Add( dr )
+			Endif
+		Enddo
+		
+		LeaveSR dt
+	EndFunc
+	/EndRegion	
+EndClass

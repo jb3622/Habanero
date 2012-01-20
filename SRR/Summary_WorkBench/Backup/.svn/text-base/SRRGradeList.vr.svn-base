@@ -1,0 +1,179 @@
+/Region Documentation
+	// This class provides a SETLL and READ type methods on file DSSRMSG
+	// It is used by Grid3, Grid4, Grid7, and Grid8
+	// DSSRMSG is held in arrays during construction of the Object
+/EndRegion
+
+Using System
+Using System.Text
+
+DclNameSpace Disney.SRR
+
+BegClass SRRGradeList Access(*Public)
+
+	/Region Declare
+	DclDB Name(SRR) DBName("TDST")
+	
+	DclDiskFile Name(DSSRMSG) Type(*Input) Org(*Arrival) +
+		DB(SRR) File('*Libl/DSSRMSG') ImpOpen(*No)
+	
+	DclDS Name(DS_Out)
+		DclDsFld Buffer_Out Type(*Char) Len(58)
+
+	DclDS Name(DS_In)
+		DclDsFld Buffer_In Type(*Char)  Len(58)
+		DclDsFld KyMkt     Type(*Char)  Len(2)    Overlay(Buffer_In, 1)
+		DclDsFld KyGrd     Type(*Char)  Len(3)    Overlay(Buffer_In, 3)
+		DclDsFld KyStr     Type(*Zoned) Len(3,0)  Overlay(Buffer_In, 6)
+		DclDsFld KyStrNm   Type(*Char)  Len(25)   Overlay(Buffer_In, 9)
+		DclDsFld KyGrdNm   Type(*Char)  Len(25)   Overlay(Buffer_In, 34)
+
+	DclArray Msg_Array Type(*Char)      Len(58)   Dim(500)	// Holds the complete Market record
+	DclArray Mkt_Array Type(*Char)      Len(2)    Dim(30)	// Each Market
+	DclArray Mkt_Start Type(*Integer4)            Dim(30)	// Starting index of each Market
+	
+	DclFld Msg_Rrn Type(*Integer4)
+	DclFld Mkt_Rrn Type(*Integer4)							// Holds the last RRN used (*Zero based)
+	
+	DclFld CurrentPointer Type(*Integer4)
+	
+	DclFld _IsEoMkt Type(*Boolean)							// End of file or Market group
+	/EndRegion
+
+	/Region Constructor & Destructor
+	BegConstructor Access(*Public)
+		DclSrParm SRR Type(ASNA.VisualRPG.Runtime.Database)
+		
+		DclFld CurrentMkt     Like(SGMKT)
+
+		*this.SRR = SRR
+		
+		Open DSSRMSG
+	
+		SetLL DSSRMSG Key(*Start)
+		
+		// Load first record and set working field [SGMKT]
+		DoUntil DSSRMSG.IsEof
+			Read DSSRMSG
+			If Not DSSRMSG.IsEof And SGSTR <> 741      // Exclude Internet Store
+				DS_In.KyMkt   = SGMKT
+				DS_In.KyGrd   = SGGRD
+				DS_In.KyGrdNm = SGGNAM
+				DS_In.KyStr   = SGSTR
+				DS_In.KyStrNm = SGSNAM
+				
+				Msg_Rrn = *Zero
+				Msg_Array[Msg_Rrn] = Buffer_In
+				
+				Mkt_Rrn            = *Zero
+				Mkt_Array[Mkt_Rrn] = SGMKT
+				Mkt_Start[Mkt_Rrn] = Msg_Rrn
+				CurrentMkt         = SGMKT
+				Leave
+			EndIf
+		EndDo
+		
+		// Load remaining records from the file
+		DoUntil DSSRMSG.IsEof
+			Read DSSRMSG
+			If Not DSSRMSG.IsEof And SGSTR <> 741      // Exclude Internet Store
+				DS_In.KyMkt   = SGMKT
+				DS_In.KyGrd   = SGGRD
+				DS_In.KyGrdNm = SGGNAM
+				DS_In.KyStr   = SGSTR
+				DS_In.KyStrNm = SGSNAM
+				
+				Msg_Rrn += 1
+				Msg_Array[Msg_Rrn] = Buffer_In
+				
+				If SGMKT <> CurrentMkt
+					Mkt_Rrn += 1
+					Mkt_Array[Mkt_Rrn] = SGMKT
+					Mkt_Start[Mkt_Rrn] = Msg_Rrn
+					CurrentMkt         = SGMKT
+				EndIf
+			EndIf
+		EndDo
+	
+		Close DSSRMSG
+	EndConstructor
+	/EndRegion
+	
+	/Region Property definitions
+	BegProp IsEoMkt Type(*Boolean) Access(*Public)
+		BegGet
+			If _IsEoMkt
+				LeaveSR *True
+			Else
+				LeaveSR *False
+			EndIf
+		EndGet
+	EndProp
+	/EndRegion
+
+	/Region Methods
+	BegFunc SetMarket Type(*Boolean) Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+		
+		DclFld Element Type(*Integer2)
+		
+		Element = %LookUp(Market, Mkt_Array, *Zero, Mkt_Rrn + 1)
+		If Element < *Zero
+			_IsEoMkt = *On
+			LeaveSR *Off
+		EndIf
+		
+		CurrentPointer = Mkt_Start[Element]
+		_IsEoMkt = *Off
+		
+		LeaveSR *On
+	EndFunc
+	
+	BegFunc SetMarket Type(*Boolean) Access(*Public)
+		
+		DclFld Element Type(*Integer2)
+		
+		Element = *Zero
+		
+		CurrentPointer = Mkt_Start[Element]
+		_IsEoMkt = *Off
+		
+		LeaveSR *On
+	EndFunc
+	
+	BegFunc GetDetails Type(*Char) Len(58) Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+	
+		If CurrentPointer > Msg_Rrn
+			_IsEoMkt = *On
+		Else
+			If Not _IsEoMkt
+				Buffer_In = Msg_Array[CurrentPointer]
+				
+				If DS_In.KyMkt <> Market
+					_IsEoMkt = *On
+				Else
+					Buffer_Out = Buffer_In
+					CurrentPointer += 1
+				EndIf
+			EndIf
+		EndIf
+		
+		LeaveSR (Buffer_Out)
+	EndFunc
+	
+	BegFunc GetDetails Type(*Char) Len(58) Access(*Public)
+	
+		If CurrentPointer > Msg_Rrn
+			_IsEoMkt = *On
+		Else
+			Buffer_In  = Msg_Array[CurrentPointer]
+			Buffer_Out = Buffer_In
+			CurrentPointer += 1
+		EndIf
+		
+		LeaveSR (Buffer_Out)
+	EndFunc
+
+	/EndRegion
+EndClass

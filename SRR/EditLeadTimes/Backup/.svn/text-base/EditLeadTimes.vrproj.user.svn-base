@@ -1,0 +1,31 @@
+<VisualStudioProject>
+    <VisualRPG>
+        <Build>
+            <Settings ReferencePath = "">
+                <Config
+                    Name = "Debug"
+                    StartAction = "Project"
+                    StartArguments = ""
+                    StartPage = ""
+                    StartProgram = ""
+                    StartURL = ""
+                    StartWorkingDirectory = ""
+                    StartWithIE = "True"
+                />
+                <Config
+                    Name = "Release"
+                    StartAction = "Project"
+                    StartArguments = ""
+                    StartPage = ""
+                    StartProgram = ""
+                    StartURL = ""
+                    StartWorkingDirectory = ""
+                    StartWithIE = "True"
+                />
+            </Settings>
+        </Build>
+        <OtherProjectSettings
+            ProjectView = "ShowAllFiles"
+        />
+    </VisualRPG>
+</VisualStudioProject>

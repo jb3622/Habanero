@@ -1,0 +1,90 @@
+Using System
+Using System.Data
+Using System.IO
+Using System.Text
+Using System.Xml
+
+BegClass SpecialHandlingCodes Access(*Public)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSSPPZT) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+
+	DclFld SpecialHandlingCodesTbl    Type(DataTable) Access(*Private)
+	DclFld pXMLpath  Type(String)    Access(*Private)
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"SpecialHandlingCodes.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If SpecialHandlingCodesTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				SpecialHandlingCodesTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+
+		SpecialHandlingCodesTbl = *New DataTable("SpecialHandlingCodesTable")
+
+		SpecialHandlingCodesTbl.Columns.Add(*New DataColumn("SpecialHandlingCode", *TypeOf(String)))
+		SpecialHandlingCodesTbl.Columns["SpecialHandlingCode"].ReadOnly = *True
+
+		SpecialHandlingCodesTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		SpecialHandlingCodesTbl.Columns["Description"].ReadOnly = *True
+	
+		SpecialHandlingCodesTbl.Columns.Add(*New DataColumn("CodeAndDescription", *TypeOf(String)))
+		SpecialHandlingCodesTbl.Columns["CodeAndDescription"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {SpecialHandlingCodesTbl.Columns("SpecialHandlingCode")}
+		SpecialHandlingCodesTbl.PrimaryKey = Keys
+	EndSr
+
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSSPPZT.IsOpen
+			Open DSSPPZT
+		EndIf
+		
+		DoUntil DSSPPZT.IsEof
+			Read DSSPPZT
+			If Not DSSPPZT.IsEof
+
+				dr = SpecialHandlingCodesTbl.NewRow()
+				
+				dr.Item["SpecialHandlingCode"] = PZTCOD
+				dr.Item["SpecialHandlingCode"] = dr.Item["SpecialHandlingCode"].ToString().Trim()
+				dr.Item["Description"]         = PZTDES
+				dr.Item["Description"]         = dr.Item["Description"].ToString().Trim()
+				dr.Item["CodeAndDescription"]  = dr.Item["SpecialHandlingCode"].ToString() + " - " + dr.Item["Description"].ToString()
+				
+				SpecialHandlingCodesTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		SpecialHandlingCodesTbl.WriteXml(pXMLpath)
+		
+		Close DSSPPZT
+
+	EndSr
+
+	BegFunc GetSpecialHandlingCodesTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR SpecialHandlingCodesTbl
+	EndFunc
+EndClass

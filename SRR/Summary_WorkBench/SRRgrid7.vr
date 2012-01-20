@@ -1,0 +1,1015 @@
+Using System
+Using System.Text
+Using System.Drawing
+
+Using Disney.SRR
+
+DclNameSpace Disney.SRR
+
+BegClass SRRgrid7 Access(*Public)
+
+	/Region Declare DataBase
+	DclDB Name(SRR) DBName("TDST")
+			
+	DclDiskFile Name(DSCNTAP3) Type(*Input) Org(*Indexed) +
+		DB(SRR) File('*Libl/DSCNTAP3') ImpOpen(*No)
+	
+	DclDiskFile Name(IPCLASSB) Type(*Input) Org(*Indexed) +
+		DB(SRR) File('*Libl/IPCLASSB') ImpOpen(*No)
+	
+	DclDiskFile Name(DSCLASS) Type(*Input) Org(*Indexed) +
+		DB(SRR) File('*Libl/DSCLASS') ImpOpen(*No)
+	/EndRegion
+		
+	DclFld SRRkeyColor  Type(Disney.SRR.SRRkeyColor)
+	DclFld SRRuplift    Type(Disney.SRR.SRRuplift)
+	DclFld SRRsmooth    Type(Disney.SRR.SRRsmooth)
+	DclFld SRRcutOff    Type(Disney.SRR.SRRcutOff)
+	DclFld SRRalloc     Type(Disney.SRR.SRRalloc)
+	DclFld SRRgradeList Type(Disney.SRR.SRRGradeList)
+
+	DclArray ClassArray   Type(*Zoned)    Len(4,0)   Dim(50)
+	DclFld   NoOfClasses  Type(*Integer4)
+	DclArray MarketArray  Type(*Char)     Len(2)     Dim(9)
+	DclFld   NoOfMarkets  Type(*Integer4)
+	DclFld   Department   Type(*Zoned)    Len(3,0)
+	DclFld   ErrorCount   Type(*Integer2)            Inz(*Zero)
+	
+	DclFld   _SelectedRow   Type(*Integer4)
+	DclFld   Filtering      Type(*Boolean)
+	DclFld   _GridCleared   Type(*Boolean)
+
+	DclEvent UpLift_Changed Access(*Public)
+		DclSrParm GridName Type(*String)
+	
+	DclEvent Smooth_Changed Access(*Public)
+		DclSrParm GridName Type(*String)
+	
+	DclEvent CutOff_Changed Access(*Public)
+		DclSrParm GridName Type(*String)
+	
+	DclEvent Alloc_Changed  Access(*Public)
+		DclSrParm GridName Type(*String)
+
+	DclDS GradeList
+		DclDsFld Market    Type(*Char)  Len(2)
+		DclDsFld DeptGrade Type(*Char)  Len(3)
+		DclDsFld Store     Type(*Zoned) Len(3,0)
+		DclDsFld StoreNm   Type(*Char)  Len(25)
+		DclDsFld GradeNm   Type(*Char)  Len(25)
+		
+	/Region Constructor & Destructor
+	BegConstructor Access(*Public)
+		DclSrParm SRR         Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Department  Type(*Zoned) Len(3,0)
+		DclSrParm SRRkeyColor Type(Disney.SRR.SRRkeyColor)
+		DclSrParm SRRuplift   Type(Disney.SRR.SRRuplift)
+		DclSrParm SRRsmooth   Type(Disney.SRR.SRRsmooth)
+		DclSrParm SRRcutOff   Type(Disney.SRR.SRRcutOff)
+		DclSrParm SRRalloc    Type(Disney.SRR.SRRalloc)
+		DclSrParm SRRgradeList Type(Disney.SRR.SRRGradeList)
+		
+		*this.SRR          = SRR
+		*this.Department   = Department
+		*this.SRRkeyColor  = SRRkeyColor
+		*this.SRRuplift    = SRRuplift
+		*this.SRRsmooth    = SRRsmooth
+		*this.SRRcutOff    = SRRcutoff
+		*this.SRRalloc     = SRRalloc
+		*this.SRRgradeList = SRRgradeList
+		
+		LoadClassArray()
+		LoadMarketArray()
+	EndConstructor
+	/EndRegion
+	
+	/Region Property definitions
+	BegProp HasValidationErrors Type(*Boolean) Access(*Public)
+		BegGet
+			If ErrorCount > *Zero
+				LeaveSR *True
+			Else
+				LeaveSR *False
+			EndIf
+		EndGet
+	EndProp
+	
+	BegProp isFiltered Type(*Boolean) Access(*Public)
+		BegGet
+			LeaveSR Filtering
+		EndGet
+	EndProp
+	
+	BegProp SelectedRow Type(*Integer4) Access(*Public)
+		BegGet
+			LeaveSR _SelectedRow
+		EndGet
+		BegSet
+			_SelectedRow = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp GridCleared Type(*Boolean) Access(*Public)
+		BegGet
+			LeaveSR _GridCleared
+		EndGet
+	EndProp
+	/EndRegion
+
+	BegSR Fill_Grid Access(*Public)
+		DclSrParm Grid7      Type(System.Windows.Forms.DataGridView)
+		DclSrParm SRRdetails Type(Disney.SRR.SRRdetails)
+
+		DclFld StkReq   Type(*Packed) Len(9,0)
+		DclFld Ideal    Type(*Packed) Len(9,0)
+		DclFld Proposed Type(*Packed) Len(9,0)
+		
+		DclFld _Uplift Type(*Zoned)  Len(3,2)
+		DclFld _Smooth Type(*Zoned)  Len(5,2)
+		DclFld _CutOff Type(*Zoned)  Len(5,2)
+		DclFld _Alloc  Type(*Char)   Len(1)
+	
+		DclFld Row         Type(*Integer4)
+		DclFld RowCount    Type(*Integer4)
+		DclFld ColorChar   Type(*String)
+		
+		DclFld Class       Type(*Zoned) Len(4,0)
+		DclFld ClassIndex  Type(*Integer4)
+		DclFld Market      Type(*Char)  Len(2)
+		DclFld MarketIndex Type(*Integer4)
+		
+		DclFld CurrentGrade   Type(*Char)  Len(3)
+		DclFld CurrentGradeNm Type(*Char)  Len(25)
+		
+		Grid7.Rows.Clear()
+		
+		// Enumerate Classes
+		Do FromVal(0) ToVal(NoOfClasses) Index(ClassIndex)
+			Class = ClassArray(ClassIndex)
+			
+			// Enumerate Markets
+			Do FromVal(0) ToVal(NoOfMarkets) Index(MarketIndex)
+				Market = MarketArray(MarketIndex)
+
+				If Not SRRgradeList.SetMarket(Market)
+					Iterate
+				EndIf
+
+				// Set First Key values
+				GradeList = SRRgradeList.GetDetails(Market)
+				CurrentGrade   = GradeList.DeptGrade
+				CurrentGradeNm = GradeList.GradeNm
+				
+				// Accumulate first Store's Stock Requirement
+				If SRRdetails <> *Nothing
+					SRRdetails.GetClsReq(Class, GradeList.Store)
+					StkReq   = SRRdetails.StockReq
+					Ideal    = SRRdetails.IdealQty
+					Proposed = SRRdetails.ProposedQty
+				EndIf
+				
+				DoUntil SRRgradeList.IsEoMkt
+					GradeList = SRRgradeList.GetDetails(Market)
+					If Not SRRgradeList.IsEoMkt
+					
+						// If we have the same key as previous record then just accumulate
+						// the Stock requirement
+						If GradeList.DeptGrade = CurrentGrade
+							If SRRdetails <> *Nothing
+								SRRdetails.GetClsReq(Class, GradeList.Store)
+								StkReq   += SRRdetails.StockReq
+								Ideal    += SRRdetails.IdealQty
+								Proposed += SRRdetails.ProposedQty
+							EndIf
+						Else
+							Grid7.Rows.Add()
+							RowCount = Grid7.Rows.Count
+							Row = RowCount - 1
+							
+							// Find Class/Market defaults
+							_UpLift = SRRuplift.GetDftUplift(Class, Market, CurrentGrade)
+							_Smooth = SRRsmooth.GetDftSmooth(Class, Market, CurrentGrade)
+							_CutOff = SRRcutoff.GetDftCutOff(Class, Market, CurrentGrade)
+							_Alloc  = SRRalloc.GetDftAlloc(Class, Market, CurrentGrade)
+
+							ColorChar = SRRkeyColor.MarketColor(Market)
+
+							Grid7.Rows[Row].Cells['G7Class'].Value    = Class
+							Grid7.Item['G7Class',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+							Grid7.Rows[Row].Cells['G7Market'].Value    = Market
+							Grid7.Item['G7Market',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+							Grid7.Rows[Row].Cells['G7Grade'].Value    = CurrentGrade
+							Grid7.Item['G7Grade',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+							
+							Grid7.Rows[Row].Cells['G7GradeNm'].Value    = CurrentGradeNm
+							Grid7.Item['G7GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+							
+							Grid7 = Populate_Row(Grid7, Row, Class, Market, CurrentGrade, +
+								_UpLift, _Smooth, _CutOff, _Alloc)
+							
+							
+							// Stock requirement - by Store
+							If SRRdetails <> *Nothing
+								If StkReq <> *Zero
+									Grid7.Item['G7StkReq',Row].Value = StkReq
+								EndIf
+								
+								If Ideal <> *Zero
+									Grid7.Item['G7IdealQty',Row].Value = Ideal
+								EndIf
+								
+								If Proposed <> *Zero
+									Grid7.Item['G7PropQty',Row].Value = Proposed
+								EndIf
+							EndIf
+							
+							//___________________________________________
+							// Reset to new Market and Grade values
+							CurrentGrade   = GradeList.DeptGrade
+							CurrentGradeNm = GradeList.GradeNm
+							
+							If SRRdetails <> *Nothing
+								SRRdetails.GetClsReq(Class, GradeList.Store)
+								StkReq   = SRRdetails.StockReq
+								Ideal    = SRRdetails.IdealQty
+								Proposed = SRRdetails.ProposedQty
+							EndIf
+						EndIf
+					EndIf
+				EndDo
+				
+				
+				// Add in last record of Market group
+				Grid7.Rows.Add()
+				RowCount = Grid7.Rows.Count
+				Row = RowCount - 1
+				
+				// Find Class/Market defaults
+				_UpLift = SRRuplift.GetDftUplift(Class, Market, CurrentGrade)
+				_Smooth = SRRsmooth.GetDftSmooth(Class, Market, CurrentGrade)
+				_CutOff = SRRcutoff.GetDftCutOff(Class, Market, CurrentGrade)
+				_Alloc  = SRRalloc.GetDftAlloc(Class, Market, CurrentGrade)
+
+				ColorChar = SRRkeyColor.MarketColor(Market)
+
+				Grid7.Rows[Row].Cells['G7Class'].Value = Class
+				Grid7.Item['G7Class',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+				Grid7.Rows[Row].Cells['G7Market'].Value = Market
+				Grid7.Item['G7Market',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+				Grid7.Rows[Row].Cells['G7Grade'].Value = CurrentGrade
+				Grid7.Item['G7Grade',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+				
+				Grid7.Rows[Row].Cells['G7GradeNm'].Value = CurrentGradeNm
+				Grid7.Item['G7GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+		
+				Grid7 = Populate_Row(Grid7, Row, Class, Market, CurrentGrade, +
+					_UpLift, _Smooth, _CutOff, _Alloc)
+				
+				
+				// Stock requirement - by Store
+				If SRRdetails <> *Nothing
+					If StkReq <> *Zero
+						Grid7.Item['G7StkReq',Row].Value = StkReq
+					EndIf
+					
+					If Ideal <> *Zero
+						Grid7.Item['G7IdealQty',Row].Value = Ideal
+					EndIf
+					
+					If Proposed <> *Zero
+						Grid7.Item['G7PropQty',Row].Value = Proposed
+					EndIf
+				EndIf
+			EndDo
+		EndDo
+		
+		DoEvents
+		
+		Filtering    = *False
+		_SelectedRow = -1
+		_GridCleared = *False
+	EndSR
+	
+	BegSR Fill_Grid Access(*Public)
+		DclSrParm Grid7      Type(System.Windows.Forms.DataGridView)
+		DclSrParm SRRdetails Type(Disney.SRR.SRRdetails)
+		DclSrParm Class      Type(*Zoned) Len(4,0)
+		DclSrParm Market     Type(*Char)  Len(2)
+
+		DclFld StkReq   Type(*Packed) Len(9,0)
+		DclFld Ideal    Type(*Packed) Len(9,0)
+		DclFld Proposed Type(*Packed) Len(9,0)
+		
+		DclFld _Uplift Type(*Zoned)  Len(3,2)
+		DclFld _Smooth Type(*Zoned)  Len(5,2)
+		DclFld _CutOff Type(*Zoned)  Len(5,2)
+		DclFld _Alloc  Type(*Char)   Len(1)
+	
+		DclFld Row         Type(*Integer4)
+		DclFld RowCount    Type(*Integer4)
+		DclFld ColorChar   Type(*String)
+		
+		DclFld CurrentGrade   Type(*Char)  Len(3)
+		DclFld CurrentGradeNm Type(*Char)  Len(25)
+		
+		Grid7.Rows.Clear()
+		
+		If Not SRRgradeList.SetMarket(Market)
+			LeaveSR
+		EndIf
+
+		// Set First Key values
+		GradeList = SRRgradeList.GetDetails(Market)
+		CurrentGrade   = GradeList.DeptGrade
+		CurrentGradeNm = GradeList.GradeNm
+		
+		// Accumulate first Store's Stock Requirement
+		If SRRdetails <> *Nothing
+			SRRdetails.GetClsReq(Class, GradeList.Store)
+			StkReq   = SRRdetails.StockReq
+			Ideal    = SRRdetails.IdealQty
+			Proposed = SRRdetails.ProposedQty
+		EndIf
+				
+		DoUntil SRRgradeList.IsEoMkt
+			GradeList = SRRgradeList.GetDetails(Market)
+			If Not SRRgradeList.IsEoMkt
+			
+				// If we have the same key as previous record then just accumulate
+				// the Stock requirement
+				If GradeList.DeptGrade = CurrentGrade
+					If SRRdetails <> *Nothing
+						SRRdetails.GetClsReq(Class, GradeList.Store)
+						StkReq   += SRRdetails.StockReq
+						Ideal    += SRRdetails.IdealQty
+						Proposed += SRRdetails.ProposedQty
+					EndIf
+				Else
+					Grid7.Rows.Add()
+					RowCount = Grid7.Rows.Count
+					Row = RowCount - 1
+					
+					// Find Class/Market defaults
+					_UpLift = SRRuplift.GetDftUplift(Class, Market, CurrentGrade)
+					_Smooth = SRRsmooth.GetDftSmooth(Class, Market, CurrentGrade)
+					_CutOff = SRRcutoff.GetDftCutOff(Class, Market, CurrentGrade)
+					_Alloc  = SRRalloc.GetDftAlloc(Class, Market, CurrentGrade)
+
+					ColorChar = SRRkeyColor.MarketColor(Market)
+
+					Grid7.Rows[Row].Cells['G7Class'].Value    = Class
+					Grid7.Item['G7Class',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+					Grid7.Rows[Row].Cells['G7Market'].Value    = Market
+					Grid7.Item['G7Market',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+					Grid7.Rows[Row].Cells['G7Grade'].Value    = CurrentGrade
+					Grid7.Item['G7Grade',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+					
+					Grid7.Rows[Row].Cells['G7GradeNm'].Value    = CurrentGradeNm
+					Grid7.Item['G7GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+					
+					Grid7 = Populate_Row(Grid7, Row, Class, Market, CurrentGrade, +
+						_UpLift, _Smooth, _CutOff, _Alloc)
+					
+					
+					// Stock requirement - by Store
+					If SRRdetails <> *Nothing
+						If StkReq <> *Zero
+							Grid7.Item['G7StkReq',Row].Value = StkReq
+						EndIf
+						
+						If Ideal <> *Zero
+							Grid7.Item['G7IdealQty',Row].Value = Ideal
+						EndIf
+						
+						If Proposed <> *Zero
+							Grid7.Item['G7PropQty',Row].Value = Proposed
+						EndIf
+					EndIf
+					
+					//___________________________________________
+					// Reset to new Market and Grade values
+					CurrentGrade   = GradeList.DeptGrade
+					CurrentGradeNm = GradeList.GradeNm
+					
+					If SRRdetails <> *Nothing
+						SRRdetails.GetClsReq(Class, GradeList.Store)
+						StkReq   = SRRdetails.StockReq
+						Ideal    = SRRdetails.IdealQty
+						Proposed = SRRdetails.ProposedQty
+					EndIf
+				EndIf
+			EndIf
+		EndDo
+				
+				
+		// Add in last record of Market group
+		Grid7.Rows.Add()
+		RowCount = Grid7.Rows.Count
+		Row = RowCount - 1
+		
+		// Find Class/Market defaults
+		_UpLift = SRRuplift.GetDftUplift(Class, Market, CurrentGrade)
+		_Smooth = SRRsmooth.GetDftSmooth(Class, Market, CurrentGrade)
+		_CutOff = SRRcutoff.GetDftCutOff(Class, Market, CurrentGrade)
+		_Alloc  = SRRalloc.GetDftAlloc(Class, Market, CurrentGrade)
+
+		ColorChar = SRRkeyColor.MarketColor(Market)
+
+		Grid7.Rows[Row].Cells['G7Class'].Value = Class
+		Grid7.Item['G7Class',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+		Grid7.Rows[Row].Cells['G7Market'].Value = Market
+		Grid7.Item['G7Market',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+		Grid7.Rows[Row].Cells['G7Grade'].Value = CurrentGrade
+		Grid7.Item['G7Grade',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+		
+		Grid7.Rows[Row].Cells['G7GradeNm'].Value = CurrentGradeNm
+		Grid7.Item['G7GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+		Grid7 = Populate_Row(Grid7, Row, Class, Market, CurrentGrade, +
+			_UpLift, _Smooth, _CutOff, _Alloc)
+				
+				
+		// Stock requirement - by Store
+		If SRRdetails <> *Nothing
+			If StkReq <> *Zero
+				Grid7.Item['G7StkReq',Row].Value = StkReq
+			EndIf
+			
+			If Ideal <> *Zero
+				Grid7.Item['G7IdealQty',Row].Value = Ideal
+			EndIf
+			
+			If Proposed <> *Zero
+				Grid7.Item['G7PropQty',Row].Value = Proposed
+			EndIf
+		EndIf
+		
+		DoEvents
+		
+		Filtering     = *True
+		_SelectedRow  = -1
+		_GridCleared  = *False
+	EndSR
+	
+	BegSR Fill_Grid Access(*Public)
+		DclSrParm Grid7      Type(System.Windows.Forms.DataGridView)
+		DclSrParm SRRdetails Type(Disney.SRR.SRRdetails)
+		DclSrParm Market     Type(*Char)  Len(2)
+		DclSrParm Grade      Type(*Char)  Len(3)
+
+		DclFld StkReq   Type(*Packed) Len(9,0)
+		DclFld Ideal    Type(*Packed) Len(9,0)
+		DclFld Proposed Type(*Packed) Len(9,0)
+		
+		DclFld _Uplift Type(*Zoned)  Len(3,2)
+		DclFld _Smooth Type(*Zoned)  Len(5,2)
+		DclFld _CutOff Type(*Zoned)  Len(5,2)
+		DclFld _Alloc  Type(*Char)   Len(1)
+		
+		DclFld Class       Type(*Zoned) Len(4,0)
+		DclFld ClassIndex  Type(*Integer4)
+		DclFld Row         Type(*Integer4)
+		DclFld RowCount    Type(*Integer4)
+		DclFld ColorChar   Type(*String)
+		
+		DclFld CurrentGrade   Type(*Char)  Len(3)
+		DclFld CurrentGradeNm Type(*Char)  Len(25)
+		
+		Grid7.Rows.Clear()
+		
+		// Enumerate Classes
+		Do FromVal(0) ToVal(NoOfClasses) Index(ClassIndex)
+			Class = ClassArray(ClassIndex)
+			
+			// Set to Market Value which has been passed in, leave if not found, but this should not happen
+			If Not SRRgradeList.SetMarket(Market)
+				LeaveSR
+			EndIf
+
+			// Find selected grade - we need a list of Store's from this to sum our stock quantities by Grade
+			CurrentGrade = *Blank
+			DoUntil SRRgradeList.IsEoMkt
+				GradeList = SRRgradeList.GetDetails(Market)
+				If Not SRRgradeList.IsEoMkt and GradeList.DeptGrade = Grade
+					CurrentGrade = Grade
+					Leave
+				EndIf		
+			EndDo
+		
+			If CurrentGrade = *Blank
+				LeaveSR
+			EndIf
+		
+			CurrentGradeNm = GradeList.GradeNm
+		
+			// Accumulate first Store's Stock Requirement
+			If SRRdetails <> *Nothing
+				SRRdetails.GetClsReq(Class, GradeList.Store)
+				StkReq   = SRRdetails.StockReq
+				Ideal    = SRRdetails.IdealQty
+				Proposed = SRRdetails.ProposedQty
+			EndIf
+				
+			DoUntil SRRgradeList.IsEoMkt
+				GradeList = SRRgradeList.GetDetails(Market)
+				If Not SRRgradeList.IsEoMkt
+			
+					// If we have the same key as previous record then just accumulate
+					// the Stock requirement
+					If GradeList.DeptGrade = CurrentGrade
+						If SRRdetails <> *Nothing
+							SRRdetails.GetClsReq(Class, GradeList.Store)
+							StkReq   += SRRdetails.StockReq
+							Ideal    += SRRdetails.IdealQty
+							Proposed += SRRdetails.ProposedQty
+						EndIf
+					Else
+						Grid7.Rows.Add()
+						RowCount = Grid7.Rows.Count
+						Row = RowCount - 1
+						
+						// Find Class/Market defaults
+						_UpLift = SRRuplift.GetDftUplift(Class, Market, CurrentGrade)
+						_Smooth = SRRsmooth.GetDftSmooth(Class, Market, CurrentGrade)
+						_CutOff = SRRcutoff.GetDftCutOff(Class, Market, CurrentGrade)
+						_Alloc  = SRRalloc.GetDftAlloc(Class, Market, CurrentGrade)
+
+						ColorChar = SRRkeyColor.MarketColor(Market)
+
+						Grid7.Rows[Row].Cells['G7Class'].Value    = Class
+						Grid7.Item['G7Class',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+						Grid7.Rows[Row].Cells['G7Market'].Value    = Market
+						Grid7.Item['G7Market',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+						Grid7.Rows[Row].Cells['G7Grade'].Value    = CurrentGrade
+						Grid7.Item['G7Grade',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+					
+						Grid7.Rows[Row].Cells['G7GradeNm'].Value    = CurrentGradeNm
+						Grid7.Item['G7GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+						
+						Grid7 = Populate_Row(Grid7, Row, Class, Market, CurrentGrade, +
+							_UpLift, _Smooth, _CutOff, _Alloc)
+						
+						
+						// Stock requirement - by Store
+						If SRRdetails <> *Nothing
+							If StkReq <> *Zero
+								Grid7.Item['G7StkReq',Row].Value = StkReq
+							EndIf
+							
+							If Ideal <> *Zero
+								Grid7.Item['G7IdealQty',Row].Value = Ideal
+							EndIf
+							
+							If Proposed <> *Zero
+								Grid7.Item['G7PropQty',Row].Value = Proposed
+							EndIf
+						EndIf
+					
+						//___________________________________________
+						// Reset to new Market and Grade values
+						CurrentGrade   = GradeList.DeptGrade
+						CurrentGradeNm = GradeList.GradeNm
+						
+						If SRRdetails <> *Nothing
+							SRRdetails.GetClsReq(Class, GradeList.Store)
+							StkReq   = SRRdetails.StockReq
+							Ideal    = SRRdetails.IdealQty
+							Proposed = SRRdetails.ProposedQty
+						EndIf
+					EndIf
+				EndIf
+			EndDo
+				
+				
+			// Add in last record of Market group
+			Grid7.Rows.Add()
+			RowCount = Grid7.Rows.Count
+			Row = RowCount - 1
+			
+			// Find Class/Market defaults
+			_UpLift = SRRuplift.GetDftUplift(Class, Market, CurrentGrade)
+			_Smooth = SRRsmooth.GetDftSmooth(Class, Market, CurrentGrade)
+			_CutOff = SRRcutoff.GetDftCutOff(Class, Market, CurrentGrade)
+			_Alloc  = SRRalloc.GetDftAlloc(Class, Market, CurrentGrade)
+
+			ColorChar = SRRkeyColor.MarketColor(Market)
+
+			Grid7.Rows[Row].Cells['G7Class'].Value = Class
+			Grid7.Item['G7Class',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+			Grid7.Rows[Row].Cells['G7Market'].Value = Market
+			Grid7.Item['G7Market',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+			Grid7.Rows[Row].Cells['G7Grade'].Value = CurrentGrade
+			Grid7.Item['G7Grade',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+			
+			Grid7.Rows[Row].Cells['G7GradeNm'].Value = CurrentGradeNm
+			Grid7.Item['G7GradeNm',Row].Style.BackColor = Color.FromArgb(Convert.ToInt32(ColorChar))
+
+			Grid7 = Populate_Row(Grid7, Row, Class, Market, CurrentGrade, +
+				_UpLift, _Smooth, _CutOff, _Alloc)
+				
+				
+			// Stock requirement - by Store
+			If SRRdetails <> *Nothing
+				If StkReq <> *Zero
+					Grid7.Item['G7StkReq',Row].Value = StkReq
+				EndIf
+				
+				If Ideal <> *Zero
+					Grid7.Item['G7IdealQty',Row].Value = Ideal
+				EndIf
+				
+				If Proposed <> *Zero
+					Grid7.Item['G7PropQty',Row].Value = Proposed
+				EndIf
+			EndIf
+		
+		EndDo
+		
+		DoEvents
+		
+		Filtering     = *True
+		_SelectedRow  = -1
+		_GridCleared  = *False
+	EndSR
+	
+	BegSR ClearGrid Access(*Public)
+		DclSrParm Grid7  Type(System.Windows.Forms.DataGridView)
+		
+		Grid7.Rows.Clear()
+		_GridCleared = *True
+	EndSR
+
+	BegFunc Populate_Row Type(system.Windows.Forms.DataGridView)
+		DclSrParm Grid7  Type(system.Windows.Forms.DataGridView)
+		DclSrParm Row    Type(*Integer4)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char)  Len(2)
+		DclSrParm CurrentGrade  Type(*Char)  Len(3)
+		DclSrParm _UpLift       Type(*Zoned) Len(5,2)
+		DclSrParm _Smooth       Type(*Zoned) Len(5,2)
+		DclSrParm _CutOff       Type(*Zoned) Len(5,2)
+		DclSrParm _Alloc        Type(*Char)  Len(1)
+		
+		DclFld BoldFont    Type(System.Drawing.Font) New(Grid7.Font, FontStyle.Bold)
+		DclFld RegularFont Type(System.Drawing.Font) New(Grid7.Font, FontStyle.Regular)
+
+		DclFld UpLift Like(_UpLift)
+		DclFld CutOff Like(_CutOff)
+		DclFld Alloc  Like(_Alloc)
+
+	
+		// Uplift factor
+		SRRuplift.GetUplift(Class, Market, CurrentGrade)
+		If SRRuplift.IsFound
+			UpLift = SRRuplift.Value
+			Grid7.Item['G7UpLift',Row].Style.Font = RegularFont
+			
+			If SRRuplift.IsChanged
+				Grid7.Item['G7UpLift',Row].Style.ForeColor = Color.Red
+			Else
+				Grid7.Item['G7UpLift',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			UpLift = _Uplift
+			Grid7.Item['G7UpLift',Row].Style.ForeColor = Color.Blue
+			Grid7.Item['G7UpLift',Row].Style.Font      = BoldFont
+		EndIf
+		If Uplift <> *Zero
+			Grid7.Item['G7UpLift',Row].Value = Uplift
+		EndIf
+		If SRRuplift.ExceptionsBelow
+			Grid7.Item['G7UpLift', Row].Style.BackColor = Color.Yellow
+		EndIf
+		
+		
+		// Smoothing factor
+		SRRsmooth.GetSmooth(Class, Market, CurrentGrade)
+		If SRRsmooth.IsFound
+			Grid7.Item['G7Smooth',Row].Value      = SRRsmooth.Value
+			Grid7.Item['G7Smooth',Row].Style.Font = RegularFont
+			
+			If SRRsmooth.IsChanged
+				Grid7.Item['G7Smooth',Row].Style.ForeColor = Color.Red
+			Else
+				Grid7.Item['G7Smooth',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			Grid7.Item['G7Smooth',Row].Value           = _Smooth
+			Grid7.Item['G7Smooth',Row].Style.ForeColor = Color.Blue
+			Grid7.Item['G7Smooth',Row].Style.Font      = BoldFont
+		EndIf
+		If SRRsmooth.ExceptionsBelow
+			Grid7.Item['G7Smooth',Row].Style.BackColor = Color.Yellow
+		EndIf
+
+
+		// Cover Cut-Off factor
+		SRRcutoff.GetCutOff(Class, Market, CurrentGrade)
+		If SRRcutoff.IsFound
+			CutOff = SRRcutoff.Value
+			Grid7.Item['G7CutOff',Row].Style.Font = RegularFont
+			
+			If SRRcutoff.IsChanged
+				Grid7.Item['G7CutOff',Row].Style.ForeColor = Color.Red
+			Else
+				Grid7.Item['G7CutOff',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			CutOff = _CutOff
+			Grid7.Item['G7CutOff',Row].Style.ForeColor = Color.Blue
+			Grid7.Item['G7CutOff',Row].Style.Font      = BoldFont
+		EndIf
+		If CutOff <> *Zero
+			Grid7.Rows[Row].Cells['G7CutOff'].Value = CutOff
+		EndIf
+		If SRRcutoff.ExceptionsBelow
+			Grid7.Item['G7CutOff',Row].Style.BackColor = Color.Yellow
+		EndIf
+				
+				
+		// Allocation flag
+		SRRalloc.GetAlloc(Class, Market, CurrentGrade)
+		If SRRalloc.IsFound
+			Alloc = SRRalloc.Value
+			Grid7.Item['G7Alloc',Row].Style.Font = RegularFont
+			
+			If SRRalloc.IsChanged
+				Grid7.Item['G7Alloc',Row].Style.ForeColor = Color.Red
+			Else
+				Grid7.Item['G7Alloc',Row].Style.ForeColor = Color.Black
+			EndIf
+		Else
+			Alloc = _Alloc
+			Grid7.Item['G7Alloc',Row].Style.ForeColor = Color.Blue
+			Grid7.Item['G7Alloc',Row].Style.Font      = BoldFont
+		EndIf
+		If Alloc <> *Blank
+			Grid7.Item['G7Alloc',Row].Value = Alloc
+		EndIf
+		If SRRalloc.ExceptionsBelow
+			Grid7.Item['G7Alloc',Row].Style.BackColor = Color.Yellow
+		EndIf
+							
+		LeaveSR Grid7
+	EndFunc
+	
+	BegSR CellValueChanged Access(*Public)
+		DclSrParm sender Type(*Object)
+		DclSrParm e      Type(System.Windows.Forms.DataGridViewCellEventArgs)
+		DclSrParm Grid7  Type(System.Windows.Forms.DataGridView)
+		
+		DclFld BoldFont  Type(System.Drawing.Font) New(Grid7.Font, FontStyle.Bold)
+		DclFld RegularFont  Type(System.Drawing.Font) New(Grid7.Font, FontStyle.Bold)
+		
+		DclFld ColumnName Type( *String )
+		DclFld CellValue  Type( *String )
+		
+		DclFld Column Type(*Integer4)
+		DclFld Row    Type(*Integer4)
+
+		DclFld Class  Type(*Zoned) Len(4,0)
+		DclFld Market Type(*Char)  Len(2)
+		DclFld Grade  Type(*Char)  Len(3)
+		DclFld Uplift Type(*Zoned) Len(5,2)
+		DclFld Smooth Type(*Zoned) Len(5,2)
+		DclFld CutOff Type(*Zoned) Len(5,2)
+		DclFld Alloc  Type(*Char)  Len(1)
+
+		Column = e.ColumnIndex
+		Row    = e.RowIndex
+		
+		If Column >= *Zero and Row >= *Zero
+			ColumnName = Grid7.Columns[Column].Name.ToUpper()
+			Try
+				CellValue = Grid7.Item[Column, Row].Value.ToString().Trim()
+			Catch Err Exception
+				CellValue = String.Empty
+			EndTry
+			
+			// Get Market value from grid
+			Class = Convert.ToInt32(Grid7.Item['G7Class', Row].Value.ToString().Trim())
+			Market = Grid7.Item['G7Market', Row].Value.ToString().Trim()
+			Grade = Grid7.Item['G7Grade', Row].Value.ToString().Trim()
+
+			Select
+			When ColumnName = 'G7UPLIFT'
+				If Grid7.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					grid7.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+				
+				If CellValue = String.Empty
+					Grid7.Item[Column, Row].Value           = SRRuplift.GetDftUplift(Class, Market, Grade)
+					Grid7.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid7.Item[Column, Row].Style.Font      = BoldFont
+					
+					SRRuplift.DeleteUplift(Class, Market, Grade)
+				Else
+					Try
+						Uplift = Convert.ToDecimal( CellValue )
+					Catch Err Exception
+						grid7.Item[Column,Row].ErrorText = 'Invalid Number'
+						ErrorCount += 1
+						LeaveSR
+					EndTry
+					
+					If Uplift < 0.01 Or Uplift > 9.99
+						Grid7.Item[Column,Row].ErrorText = 'Value must be between Zero and Ten'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+					
+					Grid7.Item[Column,Row].Style.ForeColor = Color.Red
+					Grid7.Item[Column,Row].Style.Font      = RegularFont
+					
+					SRRuplift.UpdateUplift(Class, Market, Grade, UpLift)
+					UpLift_Changed('Grid7')
+				EndIf
+				
+					
+			When ColumnName = 'G7SMOOTH'
+				If Grid7.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					grid7.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+				
+				If CellValue = String.Empty
+					Grid7.Item[Column, Row].Value           = SRRsmooth.GetDftSmooth(Class, Market, Grade)
+					Grid7.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid7.Item[Column, Row].Style.Font      = BoldFont
+					
+					SRRsmooth.DeleteSmooth(Class, Market, Grade)
+				Else
+					Try
+						Smooth = Convert.ToDecimal( CellValue )
+					Catch Err Exception
+						Grid7.Item[Column,Row].ErrorText = 'Invalid Number'
+						ErrorCount += 1
+						LeaveSR
+					EndTry
+					
+					If Smooth > 1 Or Smooth < *Zero
+						Grid7.Item[Column,Row].ErrorText = 'Value must be between 0 and 1'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+				
+					Grid7.Item[Column,Row].Style.ForeColor = Color.Red
+					Grid7.Item[Column,Row].Style.Font      = RegularFont
+				
+					SRRsmooth.UpdateSmooth(Class, Market, Grade, Smooth)
+					Smooth_Changed('Grid7')
+				EndIf
+				
+				
+			When ColumnName = 'G7CUTOFF'
+				If Grid7.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					grid7.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+				
+				If CellValue = String.Empty
+					Grid7.Item[Column, Row].Value           = SRRcutoff.GetDftCutOff(Class, Market, Grade)
+					Grid7.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid7.Item[Column, Row].Style.Font      = BoldFont
+					
+					SRRcutoff.DeleteCutOff(Class, Market, Grade)
+				Else
+					Try
+						CutOff = Convert.ToDecimal( CellValue )
+					Catch Err Exception
+						grid7.Item[Column,Row].ErrorText = 'Invalid Number'
+						ErrorCount += 1
+						LeaveSR
+					EndTry
+					
+					If CutOff <= *Zero
+						grid7.Item[Column,Row].ErrorText = 'Value must be greater than zero'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+					
+					Grid7.Item[Column,Row].Style.ForeColor = Color.Red
+					Grid7.Item[Column,Row].Style.Font      = RegularFont
+					
+					SRRcutoff.UpdateCutOff(Class, Market, Grade, CutOff)
+					CutOff_Changed('Grid7')
+				EndIf
+				
+				
+			When ColumnName = 'G7ALLOC'
+				If Grid7.Item[Column,Row].ErrorText <> String.Empty
+					ErrorCount -= 1
+					grid7.Item[Column,Row].ErrorText = String.Empty
+				EndIf
+				
+				If CellValue = String.Empty
+					Grid7.Item[Column, Row].Value           = SRRalloc.GetDftAlloc(Class, Market, Grade)
+					Grid7.Item[Column, Row].Style.ForeColor = Color.Blue
+					Grid7.Item[Column, Row].Style.Font      = BoldFont
+					
+					SRRalloc.DeleteAlloc(Class, Market, Grade)
+				Else
+					Alloc = CellValue.ToUpper().Trim()
+					If Alloc = 'Y' Or Alloc = 'N'
+						Grid7.Item[Column, Row].Value = Alloc
+						Grid7.Item[Column,Row].Style.ForeColor = Color.Red
+						Grid7.Item[Column,Row].Style.Font      = RegularFont
+					
+						SRRalloc.UpdateAlloc(Class, Market, Grade, Alloc)
+						Alloc_Changed('Grid7')
+					Else
+						grid7.Item[Column,Row].ErrorText = 'Invalid Flag (Must be Y or N)'
+						ErrorCount += 1
+						LeaveSR
+					EndIf
+				EndIf
+			EndSL
+		EndIf
+	EndSR
+	
+	BegSR RmvExceptions Access(*Public)
+		DclSrParm Grid7 Type(System.Windows.Forms.DataGridView)
+		
+		DclFld Row    Type(*Integer2)
+		DclFld Class  Type(*Zoned)  Len(4,0)
+		DclFld Market Type(*Char)   Len(2)
+		DclFld Grade  Type(*Char)   Len(3)
+
+		Do FromVal(0) ToVal(Grid7.Rows.Count-1) Index(Row)
+			Class = Convert.ToInt32(Grid7.Item['G7Class', Row].Value)
+			Market = Grid7.Item['G7Market', Row].Value.ToString().Trim()
+			Grade = Grid7.Item['G7Grade', Row].Value.ToString().Trim()
+
+			// Find Dept/Market/DeptGrade/Store level records and delete
+			SRRuplift.DeleteUpLift(Class, Market, Grade)
+			SRRsmooth.DeleteSmooth(Class, Market, Grade)
+			SRRcutoff.DeleteCutOff(Class, Market, Grade)
+			SRRalloc.DeleteAlloc(Class, Market, Grade)
+			
+			ErrorCount = *Zero
+		EndDo
+	EndSr
+
+	// Load Class Array
+	BegSR LoadClassArray
+			
+		If Not IPCLASSB.IsOpen
+			Open IPCLASSB
+		EndIf
+		
+		If Not DSCLASS.IsOpen
+			Open DSCLASS
+		EndIf
+		
+		NoOfClasses = -1
+		SetRange IPCLASSB FirstKey(Department)
+		DoUntil IPCLASSB.IsEof
+			Read IPCLASSB
+			If Not IPCLASSB.IsEof
+				Chain DSCLASS Key(CCLS)
+				If DSCLASS.IsFound And CCODE = 'Y'
+					NoOfClasses += 1
+					ClassArray(NoOfClasses) = CCLS
+				EndIf
+			EndIf
+		EndDo
+		
+		Close IPCLASSB
+		Close DSCLASS
+	EndSr
+	
+	// Load array of Markets
+	BegSR LoadMarketArray
+			
+		If Not DSCNTAP3.IsOpen
+			Open DSCNTAP3
+		EndIf
+		
+		NoOfMarkets = -1
+		SetLL DSCNTAP3 Key(*Start)
+		DoUntil DSCNTAP3.IsEof
+			Read DSCNTAP3
+			If Not DSCNTAP3.IsEof
+				If CSDGRP <> *Blank And CSBGRP <> *Blank
+					NoOfMarkets += 1
+					MarketArray(NoOfMarkets) = CSCODE
+				EndIf
+			EndIf
+		EndDo
+		
+		Close DSCNTAP3
+	EndSr
+EndClass

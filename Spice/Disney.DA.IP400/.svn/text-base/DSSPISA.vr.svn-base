@@ -1,0 +1,6 @@
+Using System
+Using System.Text
+
+BegClass DSSPISA Access(*Public)
+
+EndClass

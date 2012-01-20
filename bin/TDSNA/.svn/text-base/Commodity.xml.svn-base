@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Commodity>
+    <Code>* </Code>
+    <CustomsCode />
+    <Description>DEFAULT COMMODITY CODE</Description>
+    <DutyFactor>0.00000</DutyFactor>
+    <Status>true</Status>
+  </Commodity>
+</DocumentElement>

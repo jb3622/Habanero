@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Messages to be displayed to user-->
+<Messages>
+  <Message ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="600" Terminate="0"/>
+  <Message  MessageId="SRR 2:50  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="200" Terminate="0"/>
+  <Message  MessageId="SRR 2:55  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="160" Terminate="0"/>
+  <Message  MessageId="SRR 2:59  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="25" Terminate="0"/>
+  <Message  MessageId="SRR 3:00  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Press OK to Exit iDash" TimeOut="10" Terminate="1"/>
+  <Message  MessageId="SRR BACK  " ToUser="*ALL" Application="SRR" Enabled="0" Text="SRR is Now Available Again" TimeOut="1800" Terminate="0"/>
+  <Message  MessageId="RECLASS1  " ToUser="*ALL" Application="*ALL" Enabled="0" Text="Please Sign Off in 1 minute to allow for todays Re-Class" TimeOut="60" Terminate="0"/>
+<Message  MessageId="RECLASS2  " ToUser="*ALL" Application="*ALL" Enabled="0" Text="Please Sign Off now to allow for todays Re-Class" TimeOut="10" Terminate="1"/>
+
+
+ <Message  MessageId="SPICE 5   " ToUser="*ALL" Application="Spice" Enabled="0" Text="Spice is now available again - Thank you" TimeOut="60" Terminate="0"/>
+
+
+ <Message  MessageId="SRR TEMP 1" ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For Today's SRR run" TimeOut="60" Terminate="0"/>
+ <Message  MessageId="SRR TEMP 2" ToUser="*ALL" Application="SRR" Enabled="0" Text="Please Sign Off in 1 minute to allow for Today's SRR run" TimeOut="60" Terminate="0"/>
+ <Message  MessageId="SRR TEMP 3" ToUser="*ALL" Application="SRR" Enabled="0" Text="Press OK to Exit iDash" TimeOut="10" Terminate="1"/>
+
+</Messages>

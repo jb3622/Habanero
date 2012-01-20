@@ -1,0 +1,9 @@
+..\..\..\SRR_Dlls\Item_Priority_Maintenance.dll
+..\..\..\SRR_Dlls\Item_Priority_Maintenance.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Item_Priority_Maintenance.fmItemPrtyScrn1.resources
+obj\Debug\Item_Priority_Maintenance.fmItemPrtyScrn2.resources
+obj\Debug\Item_Priority_Maintenance.Resources.resources
+obj\Debug\Item Priority Maintenance.vrproj.GenerateResource.Cache
+obj\Debug\Item_Priority_Maintenance.dll
+obj\Debug\Item_Priority_Maintenance.pdb

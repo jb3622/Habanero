@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <ThirdPartySellerTable>
+    <ThirdPartySellerCode />
+    <Description />
+    <CodeAndDescription> - </CodeAndDescription>
+  </ThirdPartySellerTable>
+  <ThirdPartySellerTable>
+    <ThirdPartySellerCode>1</ThirdPartySellerCode>
+    <Description>AMAZON</Description>
+    <CodeAndDescription>1 - AMAZON</CodeAndDescription>
+  </ThirdPartySellerTable>
+  <ThirdPartySellerTable>
+    <ThirdPartySellerCode>2</ThirdPartySellerCode>
+    <Description>EBAY</Description>
+    <CodeAndDescription>2 - EBAY</CodeAndDescription>
+  </ThirdPartySellerTable>
+  <ThirdPartySellerTable>
+    <ThirdPartySellerCode>3</ThirdPartySellerCode>
+    <Description>AMAZON AND EBAY</Description>
+    <CodeAndDescription>3 - AMAZON AND EBAY</CodeAndDescription>
+  </ThirdPartySellerTable>
+</DocumentElement>

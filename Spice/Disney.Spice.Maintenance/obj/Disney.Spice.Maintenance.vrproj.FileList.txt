@@ -1,0 +1,17 @@
+..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.Spice.Maintenance.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Disney.Spice.Maintenance.Resources.resources
+obj\Debug\Disney.Spice.Maintenance.vrproj.GenerateResource.Cache
+obj\Debug\Disney.Spice.Maintenance.pdb
+..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.Spice.Maintenance.dll
+obj\Debug\Disney.Spice.Maintenance.dll
+obj\Debug\Disney.Spice.Maintenance.frmSizGMain.resources
+obj\Debug\Disney.Spice.Maintenance.frmSizeUpd.resources
+obj\Debug\Disney.Spice.Maintenance.frmSizGUpd.resources
+obj\Debug\Disney.Spice.Maintenance.frmStageDate.resources
+obj\Debug\Disney.Spice.Maintenance.frmStgSetDateAdd.resources
+obj\Debug\Disney.Spice.Maintenance.frmStgSetDateUpd.resources
+obj\Debug\Disney.Spice.Maintenance.frmPriceMatrix.resources
+obj\Debug\Disney.Spice.Maintenance.frmPriceMatrixAdd.resources
+obj\Debug\Disney.Spice.Maintenance.frmPriceMatrixUpd.resources
+obj\Debug\Disney.Spice.Maintenance.frmXMLFiles.resources

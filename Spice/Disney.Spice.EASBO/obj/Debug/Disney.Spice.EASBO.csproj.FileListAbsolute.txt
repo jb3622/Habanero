@@ -1,0 +1,48 @@
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\DisneyMenu.exe
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\Disney.MenuServices.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\ASNA.System.Condition.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\ASNA.DataGate.Ole.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\ASNA.DataGate.Client.Security.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\DisneyMenu.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASBO\bin\Debug\Disney.MenuServices.pdb
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.pdb
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\DisneyMenu.exe
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\Disney.MenuServices.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\ASNA.System.Condition.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\ASNA.DataGate.Ole.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\ASNA.DataGate.Client.Security.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\SPICE\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Projects\SPICE\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\Disney.Spice.EASBO.pdb
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\DisneyMenu.exe
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\Disney.MenuServices.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\DevExpress.XtraEditors.v9.3.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\DevExpress.Utils.v9.3.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\DevExpress.Data.v9.3.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\ASNA.System.Condition.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\ASNA.DataGate.Ole.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\ASNA.DataGate.Client.Security.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.pdb
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Projects\SPICE\Disney.Spice.EASBO\bin\Debug\Disney.Spice.DAL.pdb

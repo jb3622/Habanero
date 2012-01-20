@@ -1,0 +1,254 @@
+Using System
+Using System.Text
+
+BegClass DSSPPOC Access(*Public)
+
+	DclDB Name(PgmDB) DBName("TDST")
+	DclDiskFile Name(DSSPPOC)   Type(*Output) Org(*Arrival) DB(PgmDB) ImpOpen(*No)
+	DclDiskFile Name(DSSPPOCL1) Type(*Input)  Org(*Indexed) DB(PgmDB) ImpOpen(*No) RnmFmt(RDSSPPOC:POCFMT)
+
+	DclFld PComment1 Type(String) Access(*Private)
+	DclFld pComment2 Type(String) Access(*Private)
+	DclFld pComment3 Type(String) Access(*Private)
+	DclFld pComment4 Type(String) Access(*Private)
+	DclFld pComment5 Type(String) Access(*Private)
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	/Region Properties
+	BegProp SpicePOnumber Type(String) Access(*Public)
+		BegGet
+			LeaveSR POCSPO
+		EndGet
+		BegSet
+			POCSPO = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp SpicePOversion Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR POCVER
+		EndGet
+		BegSet
+			POCVER = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Comment1 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pComment1
+		EndGet
+		BegSet
+			pComment1 = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Comment2 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pComment2
+		EndGet
+		BegSet
+			pComment2 = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Comment3 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pComment3
+		EndGet
+		BegSet
+			pComment3 = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Comment4 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pComment4
+		EndGet
+		BegSet
+			pComment4 = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Comment5 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pComment5
+		EndGet
+		BegSet
+			pComment5 = *PropVal
+		EndSet
+	EndProp
+	/EndRegion
+	
+	BegFunc GetPOcomments Type(Boolean) Access(*Public)
+		DclSrParm POnumber Type(String)
+		DclSrParm Version  Type(Int16)
+		
+		If Not DSSPPOCL1.IsOpen
+			Open DSSPPOCL1
+		EndIf
+		
+		SetLL DSSPPOCL1 Key(POnumber,Version)
+		If Not DSSPPOCL1.IsFound
+			LeaveSR *False
+		EndIf
+	
+		DoUntil DSSPPOCL1.IsEof
+			ReadE From(DSSPPOCL1) Key(POnumber,Version)
+			If Not DSSPPOCL1.IsEof
+				Select
+				When POCSEQ = 1 And POCCTP = 'V'
+					pComment1 = POCCOM.Trim()
+					
+				When POCSEQ = 2 And POCCTP = 'V'
+					pComment2 = POCCOM.Trim()
+					
+				When POCSEQ = 3 And POCCTP = 'V'
+					pComment3 = POCCOM.Trim()
+
+				When POCSEQ = 1 And POCCTP = 'I'
+					pComment4 = POCCOM.Trim()
+
+				When POCSEQ = 2 And POCCTP = 'I'
+					pComment5 = POCCOM.Trim()
+				EndSL
+			EndIf
+		EndDo
+		
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc UpdatePOcomments Type(Boolean) Access(*Public)
+		DclSrParm POnumber   Type(String)
+		DclSrParm Version    Type(Int16)
+		DclSrParm NewVersion Type(Int16)
+		
+		If Not DSSPPOCL1.IsOpen
+			Open DSSPPOCL1
+		EndIf
+		
+		If Not DSSPPOC.IsOpen
+			Open DSSPPOC
+		EndIf		
+		
+		SetLL DSSPPOCL1 Key(POnumber,Version)
+		DoUntil DSSPPOCL1.IsEof
+			ReadE From(DSSPPOCL1) Key(POnumber,Version)
+			If Not DSSPPOCL1.IsEof
+			
+				Select
+				When POCSEQ = 1 And POCCTP = 'V'
+					 POCCOM = pComment1
+					 POCVER = NewVersion
+					 
+					 Write RDSSPPOC
+					
+				When POCSEQ = 2 And POCCTP = 'V'
+					 POCCOM = pComment2
+					 POCVER = NewVersion
+					 
+					 Write RDSSPPOC
+					
+				When POCSEQ = 3 And POCCTP = 'V'
+					 POCCOM = pComment3
+					 POCVER = NewVersion
+					 
+					 Write RDSSPPOC
+					 
+				When POCSEQ = 1 And POCCTP = 'I'
+					 POCCOM = pComment4
+					 POCVER = NewVersion
+					 
+					 Write RDSSPPOC
+					 
+				When POCSEQ = 2 And POCCTP = 'I'
+					 POCCOM = pComment5
+					 POCVER = NewVersion
+					 
+					 Write RDSSPPOC
+				EndSL
+			EndIf
+		EndDo
+		
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc WritePOcomments Type(Boolean) Access(*Public)
+	
+		If Not DSSPPOC.IsOpen
+			Open DSSPPOC
+		EndIf
+	
+       //Removed 27/05/2010 by order of the business analyst gods	
+//		POCCGS = *Zero
+//		POCCGT = *Blank
+//		POCCHD = 99991231
+//		POCCHT = 235959
+//		POCCHU = *Blank
+//		
+//		POCCRD = CvtFromDateTime(DateTime.Now.Date)
+//		POCCRT = CvtToIPtime(DateTime.Now)
+//		POCCRU = PgmDB.User.ToUpper()
+		
+		POCCTP = 'V'
+		POCSEQ = 1
+		POCCOM = pComment1
+		Write RDSSPPOC
+		
+		POCCTP = 'V'
+		POCSEQ = 2
+		POCCOM = pComment2
+		Write RDSSPPOC
+		
+		POCCTP = 'V'
+		POCSEQ = 3
+		POCCOM = pComment3
+		Write RDSSPPOC
+		
+		POCCTP = 'I'
+		POCSEQ = 1
+		POCCOM = pComment4
+		Write RDSSPPOC
+		
+		POCCTP = 'I'
+		POCSEQ = 2
+		POCCOM = pComment5
+		Write RDSSPPOC
+		
+		LeaveSR *True
+	EndFunc
+	
+//	BegFunc CvtFromDateTime Type(Int32) Access(*Private)
+//		DclSrParm DateValue Type(DateTime)
+//		
+//		DclFld StrDate Type(Stringbuilder)
+//		
+//		If  DateValue = DateTime.MinValue
+//			LeaveSR *Zero
+//		Else
+//			StrDate = *New StringBuilder()
+//			StrDate.Append(DateValue.Year.ToString('0000'))
+//			StrDate.Append(DateValue.Month.ToString('00'))
+//			StrDate.Append(DateValue.Day.ToString('00'))
+//			
+//			LeaveSR (Convert.ToInt32(StrDate.ToString()))
+//		EndIf
+//	EndFunc
+	
+//	BegFunc CvtToIPtime Type(Int32) Access(*Private)
+//		DclSrParm Time Type(DateTime)
+//		
+//		DclFld StrTime Type(Stringbuilder)
+//		
+//		StrTime = *New StringBuilder()
+//		StrTime.Append(Time.Hour.ToString('00'))
+//		StrTime.Append(Time.Minute.ToString('00'))
+//		StrTime.Append(Time.Second.ToString('00'))
+//		
+//		LeaveSR (Convert.ToInt32(StrTime.ToString()))
+//	EndFunc
+EndClass

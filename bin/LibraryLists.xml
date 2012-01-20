@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--This XML file contains Menu library lists -->
+<LibraryLists>
+
+ <LibraryList EnvironmentName="TDST (Integration EU)" Name="*DEFAULT" Library1="QTEMP" Library2="TDSFILDSS2" Library3="TDSFILUKS"
+               Library4="TDSHSTUKS" Library5="TDSDB2DSS" Library6="IPTSFILUKS" Library7="IPSAFILUKS" Library8="IPASFILUKS" Library9="IPWMFILUKS"
+               Library10="IPTSITGUKY" Library11="IPTSITGEUY" Library12="IPTSITGDSY" Library13="IPTSQUAUKY" Library14="IPTSQUAEUY" Library15="IPTSQUADSY"
+               Library16="IPTSMODUKY" Library17="IPTSMODEUY" Library18="IPTSMODDSY" Library19="IPTSPCH" Library20="IPTSPGM" Library21="IPTSUTL"
+               Library22="IPSAPGM" Library23="DISCMDLIS" Library24="DISCMDLIY" Library25="TDSWWFILY"/>	
+
+  <LibraryList EnvironmentName="TDST (Integration NA)" Name="*DEFAULT" Library1="QTEMP" Library2="TDSFILUSS" Library3="TDSFILDSS" 
+               Library4="TDSHSTUSS" Library5="TDSDB2DSS" Library6="IPTSFILUSS" Library7="IPSAFILUSS" Library8="IPASFILUSS" Library9="IPWMFILUSS"
+               Library10="IPTSITGUSY" Library11="IPTSITGNAY" Library12="IPTSITGDSY" Library13="IPTSQUAUSY" Library14="IPTSQUANAY" Library15="IPTSQUADSY"
+               Library16="IPTSMODUSY" Library17="IPTSMODNAY" Library18="IPTSMODDSY" Library19="IPTSPCH" Library20="IPTSPGM" Library21="IPTSUTL"
+               Library22="IPSAPGM" Library23="DISCMDLIS" Library24="DISCMDLIY" Library25="TDSWWFILY" Library26="DEVJXB"/>
+	
+  <LibraryList EnvironmentName="TDST (Integration CHINA)" Name="*DEFAULT" Library1="QTEMP" Library2="TDSFILPCS" Library3="TDSFILDSS3"
+               Library4="TDSHSTPCS" Library5="TDSDB2DSS" Library6="IPTSFILPCS" Library7="IPSAFILPCS" Library8="IPASFILPCS" Library9="IPWMFILPCS"
+               Library10="IPTSITGPCY" Library11="IPTSITGCNY" Library12="IPTSITGDSY" Library13="IPTSQUAPCY" Library14="IPTSQUACNY" Library15="IPTSQUADSY"
+               Library16="IPTSMODPCY" Library17="IPTSMODCNY" Library18="IPTSMODDSY" Library19="IPTSPCH" Library20="IPTSPGM" Library21="IPTSUTL"
+               Library22="IPSAPGM" Library23="DISCMDLIS" Library24="DISCMDLIY" Library25="TDSWWFILY"/>
+
+
+   <LibraryList EnvironmentName="TDST (QA EU)" Name="*DEFAULT" Library1="TDSFILUKY" Library2="TDSFILDSY2" Library3="TDSHSTUKY" Library4="TDSDB2DSY" 
+                Library5="IPTSFILUKY" Library6="IPSAFILUKY" Library7="IPASFILUKY" Library8="IPWMFILUKY" Library9="IPTSQUAUKY" Library10="IPTSMODUKY" 
+                Library11="IPTSQUAEUY" Library12="IPTSMODEUY" Library13="IPTSQUADSY" Library14="IPTSMODDSY"
+                Library15="IPTSPCH" Library16="IPTSPGM" Library17="IPTSUTL" Library18="IPSAPGM" Library19="QGPL" Library20="DSTOOL"
+                Library21="TAATOOL" Library22="DSTECH" Library23="DISCMDLIY" Library24="DB2XML"/> 
+
+   <LibraryList EnvironmentName="TDST (QA NA)" Name="*DEFAULT" Library1="TDSFILUSY" Library2="TDSFILDSY" Library3="TDSHSTUSY" Library4="TDSDB2DSY" 
+                Library5="IPTSFILUSY" Library6="IPSAFILUSY" Library7="IPASFILUSY" Library8="IPWMFILUSY" Library9="IPTSQUAUSY" Library10="IPTSMODUSY" 
+                Library11="IPTSQUANAY" Library12="IPTSMODNAY" Library13="IPTSQUADSY" Library14="IPTSMODDSY"
+                Library15="IPTSPCH" Library16="IPTSPGM" Library17="IPTSUTL" Library18="IPSAPGM" Library19="QGPL" Library20="DSTOOL"
+                Library21="TAATOOL" Library22="DSTECH" Library23="DISCMDLIY" Library24="DB2XML"/>
+
+   <LibraryList EnvironmentName="TDST (QA CHINA)" Name="*DEFAULT" Library1="TDSFILPCY" Library2="TDSFILDSY3" Library3="TDSHSTPCY" Library4="TDSDB2DSY" 
+                Library5="IPTSFILPCY" Library6="IPSAFILPCY" Library7="IPASFILPCY" Library8="IPWMFILPCY" Library9="IPTSQUAPCY" Library10="IPTSMODPCY" 
+                Library11="IPTSQUACNY" Library12="IPTSMODCNY" Library13="IPTSQUADSY" Library14="IPTSMODDSY"
+                Library15="IPTSPCH" Library16="IPTSPGM" Library17="IPTSUTL" Library18="IPSAPGM" Library19="QGPL" Library20="DSTOOL"
+                Library21="TAATOOL" Library22="DSTECH" Library23="DISCMDLIY" Library24="DB2XML"/>
+
+
+  <LibraryList EnvironmentName="TDS2 (Production EU)" Name="*DEFAULT" Library1="TDSFILDSP" Library2="TDSFILUKP" Library3="TDSHSTUKP"
+               Library4="IPTSMODUKP" Library5="IPTSMODEUP" Library6="IPTSMODDSP" Library7="IPTSPCH" Library8="IPTSFILUKP" Library9="IPASFILUKP"
+               Library10="IPWMFILUKP" Library11="IPSAFILUKP" Library12="IPTSPGM" Library13="IPTSUTL" Library14="IPSAPGM" Library15="DSTOOL"
+               Library16="QTEMP" Library17="QGPL" Library18="LASERLIB" Library19="DSTECH"/>
+
+  <LibraryList EnvironmentName="TDS1 (Production NA)" Name="*DEFAULT"
+               Library1="TDSFILUSP" Library2="TDSFILDSP" Library3="TDSHSTUSP"
+               Library4="IPTSMODNAP" Library5="IPTSMODDSP" Library6="IPTSPCH" Library7="IPTSFILUSP" Library8="IPASFILUSP" Library9="IPWMFILUSP"
+               Library10="IPSAFILUSP" Library11="IPTSPGM" Library12="IPTSUTL" Library13="IPSAPGM" Library14="DSTOOL" Library15="QTEMP"
+               Library16="QGPL" Library17="LASERLIB" Library18="TAATOOL" Library19="DSTECH"/>  
+
+  <LibraryList EnvironmentName="TDS3 (Production CHINA)" Name="*DEFAULT"
+               Library1="TDSFILPCP" Library2="TDSFILDSP" Library3="TDSHSTPCP"
+               Library4="IPTSMODCNP" Library5="IPTSMODDSP" Library6="IPTSPCH" Library7="IPTSFILPCP" Library8="IPASFILPCP" Library9="IPWMFILPCP"
+               Library10="IPSAFILPCP" Library11="IPTSPGM" Library12="IPTSUTL" Library13="IPSAPGM" Library14="DSTOOL" Library15="QTEMP"
+               Library16="QGPL" Library17="LASERLIB" Library18="TAATOOL" Library19="DSTECH"/>
+	
+</LibraryLists>

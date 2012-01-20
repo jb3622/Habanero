@@ -1,0 +1,10 @@
+Using System
+Using System.Text
+
+BegClass Constants Access(*Public)
+DclFld APP_SIZE Type( Int16 ) Access( *Public ) Inz( 9999 ) Shared(*Yes) 
+DclFld APPB_SIZE Type( Int16 ) Access( *Public ) Inz( 9998 ) Shared(*Yes) 
+DclFld APPP_COLOUR Type( Int16 ) Access( *Public ) Inz( 999 ) Shared(*Yes)
+DclFld APPB_COLOUR Type( Int16 ) Access( *Public ) Inz( 999 ) Shared(*Yes)
+
+EndClass

@@ -1,0 +1,11 @@
+..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.DA.IP400.dll.config
+..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.DA.IP400.dll
+..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.DA.IP400.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Disney.DA.IP400.Resources.resources
+obj\Debug\Disney.DA.IP400.vrproj.GenerateResource.Cache
+obj\Debug\Disney.DA.IP400.dll
+obj\Debug\Disney.DA.IP400.pdb
+..\..\bin\SPICE\Disney.DA.IP400.dll.config
+..\..\bin\SPICE\Disney.DA.IP400.dll
+..\..\bin\SPICE\Disney.DA.IP400.pdb

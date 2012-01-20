@@ -1,0 +1,385 @@
+// ===============================================
+// Joseph Urbina
+// 3rd August 2009
+// DSSPPOHcls	
+// Data Access Layer - Spice PO Header and Detail Files
+//------------------------------------------------
+// Modifications
+// Re-written by Clayton Jones for DSSPPOI only
+// Added GetPOlines Class, December 9, 2009
+//================================================
+// CJ 18/02/2010
+// Please note that POIUPD is alpha, but data generated in SPICE is held
+// in a Int64. When we put data in this field we need to right justify the
+// value and add leading zeros.  This may involve changes in PO entry etc
+
+Using System
+Using System.Data
+Using System.Text
+
+BegClass DSSPPOIcls Access(*Public)
+	
+	/Region Declares
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(DSSPPOI)   Type(*Output) Org(*Arrival) ImpOpen(*No) DB(PgmDB)
+	DclDiskFile Name(DSSPPOIL1) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPPOI:READPOI)
+	DclDiskFile Name(DSSPPOIL2) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPPOI:READPOI2)
+	
+	DclDiskFIle Name(DSSPXCLL1) Type(*Update)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*Yes)
+	DclDiskFIle Name(DSSPXCHL1) Type(*Update)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*Yes)
+	/EndRegion
+	
+	/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	/EndREgion
+	
+    /Region Methods
+    BegFunc GetPOlines Type(DataTable) Access(*Public)
+		DclSrParm OrderNo Type(String)
+		DclSrParm Version Type(Int16)
+		
+		DclFld LinesTbl Type(DataTable)
+		DclFld dr       Type(DataRow)
+		
+		If Not DSSPPOIL1.IsOpen
+			Open DSSPPOIL1
+		EndIf
+		
+		If Not DSSPXCHL1.IsOpen
+			Open DSSPXCHL1
+		EndIf
+		
+		LinesTbl = CreateItemTable()
+		
+		SetLL File(DSSPPOIL1) Key(OrderNo,Version)
+		DoUntil DSSPPOIL1.IsEof
+			ReadE From(DSSPPOIL1) Key(OrderNo,Version)
+			If Not DSSPPOIL1.IsEof
+				dr = LinesTbl.NewRow()
+				
+				dr["POnumber"] = POISPO
+				dr["Version"]  = POIVER
+				dr["Sequence"] = POISEQ
+				
+				dr["Class"]  = POICLS
+				dr["Vendor"] = POIVEN
+				dr["Style"]  = POISTY
+				dr["Colour"] = POICLR
+				dr["Size"]   = POISIZ
+				
+				dr["SKU"]         = POISKU
+				dr["SKUchk"]      = POICHK
+				dr["UPC"]         = POIUPD
+				dr["Quantity"]    = POIQTY
+				dr["LandedCost"]  = POILNC
+				dr["Retail"]      = POIRET
+				dr["LongDesc"]    = POIDES
+				dr["ShortDesc"]   = POISDS
+				dr["VendorStyle"] = POIVST
+				dr["Season"]      = POICPG
+				dr["SubClass"]    = POISCL
+				dr["Ticket"]      = POITKT
+				dr["CaseQuantity"] = POIMIN
+				dr["DistroQty"]   = POIMLT
+				dr["VendorCost"]  = POIVNC
+				dr["LandFactor"]  = POILNF
+								
+				Chain From(DSSPXCHL1) Key(POISPO) Access(*NoLock)
+				If DSSPXCHL1.IsFound
+					dr["Character"] = XCHCHR
+				Else
+					dr["Character"] = String.Empty
+				EndIf
+				
+				LinesTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+    
+		LeaveSR LinesTbl
+    EndFunc
+    
+    BegFunc UpdatePOlines Type(Boolean) Access(*Public)
+		DclSrParm POnumber      Type(String)
+		DclSrParm OrderLinesTbl Type(DataTable)
+		
+		DclFld Character Type(String)
+		
+    	If Not DSSPPOI.IsOpen
+			Open DSSPPOI
+		EndIf
+		
+		If Not DSSPXCLL1.IsOpen
+			Open DSSPXCLL1
+		EndIf
+		
+		If Not DSSPXCHL1.IsOpen
+			Open DSSPXCHL1
+		EndIf
+		
+		DoUntil Not DSSPXCLL1.IsFound
+			Delete From(DSSPXCLL1) Key(POnumber)
+		EndDo
+		
+		DoUntil Not DSSPXCHL1.IsFound
+			Delete From(DSSPXCHL1) Key(POnumber)
+		EndDo
+		
+		//MsgBox "We are in the Lines DA"
+		
+		If OrderLinesTbl.Rows.Count = *Zero
+			MsgBox "DA - No lines here !"
+			LeaveSR *False
+		EndIf
+		
+		ForEach Row Collection(OrderLinesTbl.Rows) Type(DataRow)
+		
+			If (Row["Quantity"] *As Int32) <> *Zero
+				POISPO = Row["POnumber"] *As String
+				POIVER = Row["Version"]  *As Int16
+				POISEQ = Row["Sequence"] *As Int16
+				
+				POICLS = Row["Class"]  *As Int16
+				POIVEN = Row["Vendor"] *As Int32
+				POISTY = Row["Style"]  *As Int16
+				POICLR = Row["Colour"] *As Int16
+				POISIZ = Row["Size"]   *As Int16
+				
+				POISKU = Row["SKU"]         *As Int32
+				POICHK = Row["SKUchk"]      *As Int16
+				POIUPD = FormatUPC(Row["UPC"] *As String)
+				POIQTY = Row["Quantity"]    *As Int32
+				POILNC = Row["LandedCost"]  *As Decimal
+				POIRET = Row["Retail"]      *As Decimal
+				POIDES = Row["LongDesc"]    *As String
+				POISDS = Row["ShortDesc"]   *As String
+				POIVST = Row["VendorStyle"] *As String
+				POICPG = Row["Season"]      *As String
+				POISCL = Row["SubClass"]    *As String
+				POITKT = Row["Ticket"]      *As String
+				POIMIN = Row["CaseQuantity"] *As Int32
+				POIMLT = Row["DistroQty"]   *As Int32
+				POIVNC = Row["VendorCost"]  *As Decimal
+				POILNF = Row["LandFactor"]  *As Decimal
+				
+				Character = Row["Character"] *As String
+			
+				Write RDSSPPOI
+				
+				// Write to X-ref files
+				Chain From(DSSPXCLL1) Key(POISPO,POICLS)
+				If Not DSSPXCLL1.IsFound
+					XCLSPO = POISPO
+					XCLCLS = POICLS
+					Write RDSSPXCL
+				Else
+					Unlock RDSSPXCL
+				EndIf
+				
+				If Character <> String.Empty
+					Chain From(DSSPXCHL1) Key(POISPO,Character)
+					If Not DSSPXCHL1.IsFound
+						XCHSPO = POISPO
+						XCHCHR = Character
+						Write RDSSPXCH
+					Else
+						Unlock RDSSPXCH
+					EndIf
+				EndIf
+			Else
+				MsgBox "Quantity is Zero or Order Line"
+			EndIf
+		EndFor
+		
+		LeaveSR *True
+    EndFunc
+    
+	BegFunc WritePOlines Type(Boolean) Access(*Public)
+		DclSrParm OrderLinesTbl Type(DataTable)
+		
+		DclFld dv        Type(DataView)
+		DclFld Character Type(String)
+		
+		If Not DSSPPOI.IsOpen
+			Open DSSPPOI
+		EndIf
+		
+		If Not DSSPXCLL1.IsOpen
+			Open DSSPXCLL1
+		EndIf
+		
+		If Not DSSPXCHL1.IsOpen
+			Open DSSPXCHL1
+		EndIf
+		
+		dv = *New DataView(OrderLinesTbl)
+		ForEach Row Collection(dv) Type(DataRowView)
+		
+			If (Row.Item("Quantity") *As Int32) <> *Zero
+				POISPO = Row["POnumber"] *As String
+				POIVER = Row["Version"]  *As Int16
+				POISEQ = Row["Sequence"] *As Int16
+				
+				POICLS = Row["Class"]  *As Int16
+				POIVEN = Row["Vendor"] *As Int32
+				POISTY = Row["Style"]  *As Int16
+				POICLR = Row["Colour"] *As Int16
+				POISIZ = Row["Size"]   *As Int16
+				
+				POISKU = Row["SKU"]          *As Int32
+				POICHK = Row["SKUchk"]       *As Int16
+				POIUPD = FormatUPC(Row["UPC"] *As String)
+				POIQTY = Row["Quantity"]     *As Int32
+				POILNC = Row["LandedCost"]   *As Decimal
+				POIRET = Row["Retail"]       *As Decimal
+				POIDES = Row["LongDesc"]     *As String
+				POISDS = Row["ShortDesc"]    *As String
+				POIVST = Row["VendorStyle"]  *As String
+				POICPG = Row["Season"]       *As String
+				POISCL = Row["SubClass"]     *As String
+				POITKT = Row["Ticket"]       *As String
+				POIMIN = Row["CaseQuantity"] *As Int32
+				POIMLT = Row["DistroQty"]    *As Int32
+				POIVNC = Row["VendorCost"]   *As Decimal
+				POILNF = Row["LandFactor"]   *As Decimal
+				
+				Character = Row["Character"] *As String
+				
+				// Initial new fields added by Bart 16/03/2010
+				POITQR = *Zero
+				POILQR = *Zero
+				POIADQ = *Zero
+				POILRS = *Zero
+				POIR#1 = *Zero
+				POIR#2 = *Zero
+				POIR#3 = *Zero
+				POIR#4 = *Zero
+				POIR#5 = *Zero
+				POIRQ1 = *Zero
+				POIRQ2 = *Zero
+				POIRQ3 = *Zero
+				POIRQ4 = *Zero
+				POIRQ5 = *Zero
+			
+				Write RDSSPPOI
+				
+				// Write to X-ref files
+				Chain From(DSSPXCLL1) Key(POISPO,POICLS)
+				If Not DSSPXCLL1.IsFound
+					XCLSPO = POISPO
+					XCLCLS = POICLS
+					Write RDSSPXCL
+				EndIf
+				
+				Chain From(DSSPXCHL1) Key(POISPO,Character)
+				If Not DSSPXCHL1.IsFound
+					XCHSPO = POISPO
+					XCHCHR = Character
+					Write RDSSPXCH
+				EndIf
+			EndIf
+		EndFor
+		
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc FormatUPC Type(String) Access(*Private)
+		DclSrParm UPC Type(String)
+		
+		DclFld ZeroString Type(StringBuilder)
+		DclFld Count      Type(Int16)
+				
+		If UPC.Length < 12
+			ZeroString = *New StringBuilder()
+			
+			For Index(Count = UPC.Length + 1) To(12)
+				ZeroString.Append("0")
+			EndFor
+			
+			LeaveSR ZeroString.Append(UPC).ToString()
+		Else
+			LeaveSR UPC
+		EndIf
+	EndFunc
+	
+	BegFunc CreateItemTable Type(DataTable) Access(*Private)
+	
+		DclFld LinesTbl Type(DataTable)
+		
+		LinesTbl = *New DataTable("OrderLines")
+		
+		LinesTbl.Columns.Add(*New DataColumn('POnumber',*TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('Version', *TypeOf(Int16)))
+		LinesTbl.Columns.Add(*New DataColumn('Sequence',*TypeOf(Int16)))
+		
+		LinesTbl.Columns.Add(*New DataColumn('Class', *TypeOf(Int16)))
+		LinesTbl.Columns.Add(*New DataColumn('Vendor',*TypeOf(Int32)))
+		LinesTbl.Columns.Add(*New DataColumn('Style', *TypeOf(Int16)))
+		LinesTbl.Columns.Add(*New DataColumn('Colour',*TypeOf(Int16)))
+		LinesTbl.Columns.Add(*New DataColumn('Size',  *TypeOf(Int16)))
+
+		LinesTbl.Columns.Add(*New DataColumn('SKU',        *TypeOf(Int32)))
+		LinesTbl.Columns.Add(*New DataColumn('SKUchk',     *TypeOf(Int16)))
+		LinesTbl.Columns.Add(*New DataColumn('UPC',        *TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('Quantity',   *TypeOf(Int32)))
+		LinesTbl.Columns.Add(*New DataColumn('LandedCost', *TypeOf(Decimal)))
+		LinesTbl.Columns.Add(*New DataColumn('Retail',     *TypeOf(Decimal)))
+		LinesTbl.Columns.Add(*New DataColumn('LongDesc',   *TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('ShortDesc',  *TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('VendorStyle',*TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('Season',     *TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('SubClass',   *TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('Ticket',     *TypeOf(String)))
+		LinesTbl.Columns.Add(*New DataColumn('CaseQuantity',*TypeOf(Int32)))
+		LinesTbl.Columns.Add(*New DataColumn('DistroQty',  *TypeOf(Int32)))
+		LinesTbl.Columns.Add(*New DataColumn('VendorCost', *TypeOf(Decimal)))
+		LinesTbl.Columns.Add(*New DataColumn('LandFactor', *TypeOf(Decimal)))
+		LinesTbl.Columns.Add(*New DataColumn('Character',  *TypeOf(String)))
+		
+		LeaveSR LinesTbl
+	EndFunc
+	
+	BegFunc GetItemLines Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		DclFld LinesTbl Type(DataTable)
+		DclFld dr       Type(DataRow)
+		
+		If Not DSSPPOIL2.IsOpen
+			Open DSSPPOIL2
+		EndIf
+		
+		SetLL DSSPPOIL2 Key(Class,Vendor,Style,Colour,Size)
+		DoUntil DSSPPOIL2.IsEof
+			ReadE DSSPPOIL2 Key(Class,Vendor,Style,Colour,Size)
+			If Not DSSPPOIL2.IsEof
+			
+				If LinesTbl = *Nothing
+					LinesTbl = *New DataTable("OrderLines")
+					LinesTbl.Columns.Add(*New DataColumn("POnumber",*TypeOf(String)))
+					LinesTbl.Columns.Add(*New DataColumn("Version", *TypeOf(Int16)))
+					LinesTbl.Columns.Add(*New DataColumn("Sequence",*TypeOf(Int16)))
+					LinesTbl.Columns.Add(*New DataColumn("Quantity",*TypeOf(Int32)))
+				EndIf
+				
+				dr = LinesTbl.NewRow()
+				dr["POnumber"] = POISPO
+				dr["Version"]  = POIVER
+				dr["Sequence"] = POISEQ
+				dr["Quantity"] = POIQTY
+				
+				LinesTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		LeaveSR LinesTbl
+	EndFunc
+	/EndRegion
+EndClass

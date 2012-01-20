@@ -1,0 +1,2364 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+
+BegClass AddItem1 Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Define Class Objects
+	DclFld label16 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label15 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label14 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label12 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label11 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label7 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label6 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label5 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label9 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld radioButton7 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld radioButton8 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld label10 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label17 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label19 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label25 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label27 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label28 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label29 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label30 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label32 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label33 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label34 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label35 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld dataGridView1 System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld Column1 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Column2 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld label36 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label37 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label38 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label39 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld comboBox3 System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld radioButton11 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld radioButton10 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld radioButton9 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld radioButton3 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld radioButton4 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld comboBox5 System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld label41 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label43 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label44 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblClassDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtClass System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld txtVendor System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblVendorDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtColour System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblColourDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtChar System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSeason System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblSeason System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld radioButton5 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld label18 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld radioButton6 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld label13 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtStyle System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSubClass System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblCharName System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld btnNext System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld txtLongDesc System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtShortDesc System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtVendorStyle System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtUPC System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld btnBack System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld imageList System.Windows.Forms.ImageList Access(*Private) WithEvents(*Yes)
+	DclFld btnClassLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnVendorLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnColourLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnSeasonLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnCharLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld lblMarketList System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblSubClass System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld button1 System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld cboLicence System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld lblClasses System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld btnCommodityLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld txtCommodity System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblCommodityDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtOrigin System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld gbPricing System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld btnCancel System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld lblCompoCodeDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtCompoCode System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld btnCompoCodeLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld lblPromotionDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtPromotion System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld btnPromotionLookUp System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld cboCasePackType System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld lblOrigin System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld button2 System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld lblStyle System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld gbCartonDetails System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld txtDistroQty System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtPackQty System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtPackWidth System.Windows.Forms.TextBox Access(*Internal) WithEvents(*Yes)
+	DclFld txtPackLength System.Windows.Forms.TextBox Access(*Internal) WithEvents(*Yes)
+	DclFld txtPackHeight System.Windows.Forms.TextBox Access(*Internal) WithEvents(*Yes)
+	DclFld txtPackWeight System.Windows.Forms.TextBox Access(*Internal) WithEvents(*Yes)
+	DclFld pnlLocation System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld pnlOnline System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld pnlGender System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld pnlImportDomestic System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld txtRetailPrice System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtVendorCost System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	/EndRegion
+	
+	DclFld PgmDB   Type(ASNA.VisualRPG.Runtime.Database)
+	DclFld User    Type(Disney.Menu.Users)
+	DclFld ItemsBO Type(Disney.Spice.ItemsBO.Items)
+	DclFld SpiceDS Type(DataSet)
+	DclFld MktList Type(String)
+	
+	/Region Constructor and entry code
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB   Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User    Type(Disney.Menu.Users)
+		DclSrParm ItemsBO Type(Disney.Spice.ItemsBO.Items)
+		
+		InitializeComponent()
+		
+		*this.PgmDB = PgmDB
+		*this.User  = User
+		*this.ItemsBO = ItemsBO
+	EndConstructor
+	
+	/Region Designer Bits
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(AddItem1))
+		*this.txtSeason = *new System.Windows.Forms.TextBox()
+		*this.txtCommodity = *new System.Windows.Forms.TextBox()
+		*this.lblCompoCodeDesc = *new System.Windows.Forms.Label()
+		*this.lblClassDesc = *new System.Windows.Forms.Label()
+		*this.cboLicence = *new System.Windows.Forms.ComboBox()
+		*this.txtCompoCode = *new System.Windows.Forms.TextBox()
+		*this.txtOrigin = *new System.Windows.Forms.TextBox()
+		*this.txtChar = *new System.Windows.Forms.TextBox()
+		*this.txtLongDesc = *new System.Windows.Forms.TextBox()
+		*this.txtSubClass = *new System.Windows.Forms.TextBox()
+		*this.txtColour = *new System.Windows.Forms.TextBox()
+		*this.txtVendor = *new System.Windows.Forms.TextBox()
+		*this.txtClass = *new System.Windows.Forms.TextBox()
+		*this.label16 = *new System.Windows.Forms.Label()
+		*this.label15 = *new System.Windows.Forms.Label()
+		*this.label14 = *new System.Windows.Forms.Label()
+		*this.label12 = *new System.Windows.Forms.Label()
+		*this.label11 = *new System.Windows.Forms.Label()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.label6 = *new System.Windows.Forms.Label()
+		*this.label5 = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.lblClasses = *new System.Windows.Forms.Label()
+		*this.label9 = *new System.Windows.Forms.Label()
+		*this.txtShortDesc = *new System.Windows.Forms.TextBox()
+		*this.radioButton7 = *new System.Windows.Forms.RadioButton()
+		*this.radioButton8 = *new System.Windows.Forms.RadioButton()
+		*this.txtVendorStyle = *new System.Windows.Forms.TextBox()
+		*this.label10 = *new System.Windows.Forms.Label()
+		*this.btnNext = *new System.Windows.Forms.Button()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.lblVendorDesc = *new System.Windows.Forms.Label()
+		*this.lblColourDesc = *new System.Windows.Forms.Label()
+		*this.lblSubClass = *new System.Windows.Forms.Label()
+		*this.lblOrigin = *new System.Windows.Forms.Label()
+		*this.lblSeason = *new System.Windows.Forms.Label()
+		*this.lblCharName = *new System.Windows.Forms.Label()
+		*this.lblCommodityDesc = *new System.Windows.Forms.Label()
+		*this.btnBack = *new System.Windows.Forms.Button()
+		*this.label17 = *new System.Windows.Forms.Label()
+		*this.txtStyle = *new System.Windows.Forms.TextBox()
+		*this.label19 = *new System.Windows.Forms.Label()
+		*this.label25 = *new System.Windows.Forms.Label()
+		*this.txtUPC = *new System.Windows.Forms.TextBox()
+		*this.lblMarketList = *new System.Windows.Forms.Label()
+		*this.label27 = *new System.Windows.Forms.Label()
+		*this.gbCartonDetails = *new System.Windows.Forms.GroupBox()
+		*this.txtDistroQty = *new System.Windows.Forms.TextBox()
+		*this.txtPackQty = *new System.Windows.Forms.TextBox()
+		*this.cboCasePackType = *new System.Windows.Forms.ComboBox()
+		*this.txtPackWidth = *new System.Windows.Forms.TextBox()
+		*this.txtPackLength = *new System.Windows.Forms.TextBox()
+		*this.txtPackHeight = *new System.Windows.Forms.TextBox()
+		*this.txtPackWeight = *new System.Windows.Forms.TextBox()
+		*this.label28 = *new System.Windows.Forms.Label()
+		*this.label29 = *new System.Windows.Forms.Label()
+		*this.label30 = *new System.Windows.Forms.Label()
+		*this.label32 = *new System.Windows.Forms.Label()
+		*this.label33 = *new System.Windows.Forms.Label()
+		*this.label34 = *new System.Windows.Forms.Label()
+		*this.label35 = *new System.Windows.Forms.Label()
+		*this.gbPricing = *new System.Windows.Forms.GroupBox()
+		*this.dataGridView1 = *new System.Windows.Forms.DataGridView()
+		*this.Column1 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Column2 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.label36 = *new System.Windows.Forms.Label()
+		*this.label37 = *new System.Windows.Forms.Label()
+		*this.txtRetailPrice = *new System.Windows.Forms.TextBox()
+		*this.txtVendorCost = *new System.Windows.Forms.TextBox()
+		*this.label38 = *new System.Windows.Forms.Label()
+		*this.label39 = *new System.Windows.Forms.Label()
+		*this.comboBox3 = *new System.Windows.Forms.ComboBox()
+		*this.radioButton11 = *new System.Windows.Forms.RadioButton()
+		*this.radioButton10 = *new System.Windows.Forms.RadioButton()
+		*this.radioButton9 = *new System.Windows.Forms.RadioButton()
+		*this.radioButton3 = *new System.Windows.Forms.RadioButton()
+		*this.radioButton4 = *new System.Windows.Forms.RadioButton()
+		*this.comboBox5 = *new System.Windows.Forms.ComboBox()
+		*this.label41 = *new System.Windows.Forms.Label()
+		*this.lblPromotionDesc = *new System.Windows.Forms.Label()
+		*this.txtPromotion = *new System.Windows.Forms.TextBox()
+		*this.label43 = *new System.Windows.Forms.Label()
+		*this.label44 = *new System.Windows.Forms.Label()
+		*this.errorProvider = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.pnlImportDomestic = *new System.Windows.Forms.Panel()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.pnlGender = *new System.Windows.Forms.Panel()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.pnlOnline = *new System.Windows.Forms.Panel()
+		*this.label13 = *new System.Windows.Forms.Label()
+		*this.pnlLocation = *new System.Windows.Forms.Panel()
+		*this.radioButton5 = *new System.Windows.Forms.RadioButton()
+		*this.label18 = *new System.Windows.Forms.Label()
+		*this.radioButton6 = *new System.Windows.Forms.RadioButton()
+		*this.imageList = *new System.Windows.Forms.ImageList(*this.components)
+		*this.btnClassLookUp = *new System.Windows.Forms.Button()
+		*this.btnVendorLookUp = *new System.Windows.Forms.Button()
+		*this.btnColourLookUp = *new System.Windows.Forms.Button()
+		*this.btnSeasonLookUp = *new System.Windows.Forms.Button()
+		*this.btnCharLookUp = *new System.Windows.Forms.Button()
+		*this.button1 = *new System.Windows.Forms.Button()
+		*this.btnCommodityLookUp = *new System.Windows.Forms.Button()
+		*this.btnCancel = *new System.Windows.Forms.Button()
+		*this.btnCompoCodeLookUp = *new System.Windows.Forms.Button()
+		*this.btnPromotionLookUp = *new System.Windows.Forms.Button()
+		*this.button2 = *new System.Windows.Forms.Button()
+		*this.lblStyle = *new System.Windows.Forms.Label()
+		*this.gbCartonDetails.SuspendLayout()
+		*this.gbPricing.SuspendLayout()
+		(*this.dataGridView1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.pnlImportDomestic.SuspendLayout()
+		*this.pnlGender.SuspendLayout()
+		*this.pnlOnline.SuspendLayout()
+		*this.pnlLocation.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//txtSeason
+		//
+		*this.txtSeason.Location = *new System.Drawing.Point(103, 388)
+		*this.txtSeason.MaxLength = 4
+		*this.txtSeason.Name = "txtSeason"
+		*this.txtSeason.Size = *new System.Drawing.Size(40, 20)
+		*this.txtSeason.TabIndex = 14
+		//
+		//txtCommodity
+		//
+		*this.txtCommodity.Location = *new System.Drawing.Point(103, 301)
+		*this.txtCommodity.MaxLength = 2
+		*this.txtCommodity.Name = "txtCommodity"
+		*this.txtCommodity.Size = *new System.Drawing.Size(30, 20)
+		*this.txtCommodity.TabIndex = 11
+		//
+		//lblCompoCodeDesc
+		//
+		*this.lblCompoCodeDesc.AutoSize = *True
+		*this.lblCompoCodeDesc.Location = *new System.Drawing.Point(184, 276)
+		*this.lblCompoCodeDesc.Name = "lblCompoCodeDesc"
+		*this.lblCompoCodeDesc.Size = *new System.Drawing.Size(100, 13)
+		*this.lblCompoCodeDesc.TabIndex = 335
+		*this.lblCompoCodeDesc.Text = "lblCompoCodeDesc"
+		//
+		//lblClassDesc
+		//
+		*this.lblClassDesc.AutoSize = *True
+		*this.lblClassDesc.Location = *new System.Drawing.Point(184, 28)
+		*this.lblClassDesc.Name = "lblClassDesc"
+		*this.lblClassDesc.Size = *new System.Drawing.Size(67, 13)
+		*this.lblClassDesc.TabIndex = 331
+		*this.lblClassDesc.Text = "lblClassDesc"
+		//
+		//cboLicence
+		//
+		*this.cboLicence.FormattingEnabled = *True
+		*this.cboLicence.Items.AddRange(*new System.Object[] {" L  - LICENSED PRODUCT", " N -  NON-MERCHANDISE", " D -  DISNEY INTERNAL", " T - TDSE DEVELOPED"})
+		*this.cboLicence.Location = *new System.Drawing.Point(103, 237)
+		*this.cboLicence.Name = "cboLicence"
+		*this.cboLicence.Size = *new System.Drawing.Size(242, 21)
+		*this.cboLicence.TabIndex = 9
+		*this.cboLicence.Text = "X - XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//txtCompoCode
+		//
+		*this.txtCompoCode.Location = *new System.Drawing.Point(103, 272)
+		*this.txtCompoCode.MaxLength = 3
+		*this.txtCompoCode.Name = "txtCompoCode"
+		*this.txtCompoCode.Size = *new System.Drawing.Size(30, 20)
+		*this.txtCompoCode.TabIndex = 10
+		//
+		//txtOrigin
+		//
+		*this.txtOrigin.Location = *new System.Drawing.Point(103, 330)
+		*this.txtOrigin.Name = "txtOrigin"
+		*this.txtOrigin.Size = *new System.Drawing.Size(30, 20)
+		*this.txtOrigin.TabIndex = 12
+		//
+		//txtChar
+		//
+		*this.txtChar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtChar.Location = *new System.Drawing.Point(103, 359)
+		*this.txtChar.MaxLength = 3
+		*this.txtChar.Name = "txtChar"
+		*this.txtChar.Size = *new System.Drawing.Size(30, 20)
+		*this.txtChar.TabIndex = 13
+		//
+		//txtLongDesc
+		//
+		*this.txtLongDesc.Location = *new System.Drawing.Point(103, 152)
+		*this.txtLongDesc.Name = "txtLongDesc"
+		*this.txtLongDesc.Size = *new System.Drawing.Size(187, 20)
+		*this.txtLongDesc.TabIndex = 5
+		//
+		//txtSubClass
+		//
+		*this.txtSubClass.Location = *new System.Drawing.Point(103, 124)
+		*this.txtSubClass.Name = "txtSubClass"
+		*this.txtSubClass.Size = *new System.Drawing.Size(40, 20)
+		*this.txtSubClass.TabIndex = 4
+		//
+		//txtColour
+		//
+		*this.txtColour.Location = *new System.Drawing.Point(103, 99)
+		*this.txtColour.MaxLength = 3
+		*this.txtColour.Name = "txtColour"
+		*this.txtColour.Size = *new System.Drawing.Size(40, 20)
+		*this.txtColour.TabIndex = 3
+		//
+		//txtVendor
+		//
+		*this.txtVendor.Location = *new System.Drawing.Point(103, 49)
+		*this.txtVendor.Name = "txtVendor"
+		*this.txtVendor.Size = *new System.Drawing.Size(40, 20)
+		*this.txtVendor.TabIndex = 1
+		//
+		//txtClass
+		//
+		*this.txtClass.Location = *new System.Drawing.Point(103, 24)
+		*this.txtClass.MaxLength = 4
+		*this.txtClass.Name = "txtClass"
+		*this.txtClass.Size = *new System.Drawing.Size(40, 20)
+		*this.txtClass.TabIndex = 0
+		//
+		//label16
+		//
+		*this.label16.AutoSize = *True
+		*this.label16.Location = *new System.Drawing.Point(9, 305)
+		*this.label16.Name = "label16"
+		*this.label16.Size = *new System.Drawing.Size(86, 13)
+		*this.label16.TabIndex = 307
+		*this.label16.Text = "Commodity Code"
+		//
+		//label15
+		//
+		*this.label15.AutoSize = *True
+		*this.label15.Location = *new System.Drawing.Point(9, 276)
+		*this.label15.Name = "label15"
+		*this.label15.Size = *new System.Drawing.Size(92, 13)
+		*this.label15.TabIndex = 306
+		*this.label15.Text = "Composition Code"
+		//
+		//label14
+		//
+		*this.label14.AutoSize = *True
+		*this.label14.Location = *new System.Drawing.Point(9, 334)
+		*this.label14.Name = "label14"
+		*this.label14.Size = *new System.Drawing.Size(85, 13)
+		*this.label14.TabIndex = 305
+		*this.label14.Text = "Country of Origin"
+		//
+		//label12
+		//
+		*this.label12.AutoSize = *True
+		*this.label12.Location = *new System.Drawing.Point(9, 362)
+		*this.label12.Name = "label12"
+		*this.label12.Size = *new System.Drawing.Size(81, 13)
+		*this.label12.TabIndex = 304
+		*this.label12.Text = "Character Code"
+		//
+		//label11
+		//
+		*this.label11.AutoSize = *True
+		*this.label11.Location = *new System.Drawing.Point(9, 392)
+		*this.label11.Name = "label11"
+		*this.label11.Size = *new System.Drawing.Size(71, 13)
+		*this.label11.TabIndex = 303
+		*this.label11.Text = "Season Code"
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(9, 156)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(87, 13)
+		*this.label8.TabIndex = 302
+		*this.label8.Text = "Long Description"
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Location = *new System.Drawing.Point(9, 241)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(74, 13)
+		*this.label7.TabIndex = 301
+		*this.label7.Text = "Developed By"
+		//
+		//label6
+		//
+		*this.label6.AutoSize = *True
+		*this.label6.Location = *new System.Drawing.Point(9, 128)
+		*this.label6.Name = "label6"
+		*this.label6.Size = *new System.Drawing.Size(50, 13)
+		*this.label6.TabIndex = 300
+		*this.label6.Text = "Subclass"
+		//
+		//label5
+		//
+		*this.label5.AutoSize = *True
+		*this.label5.Location = *new System.Drawing.Point(9, 102)
+		*this.label5.Name = "label5"
+		*this.label5.Size = *new System.Drawing.Size(37, 13)
+		*this.label5.TabIndex = 299
+		*this.label5.Text = "Colour"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Location = *new System.Drawing.Point(9, 51)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(41, 13)
+		*this.label4.TabIndex = 298
+		*this.label4.Text = "Vendor"
+		//
+		//lblClasses
+		//
+		*this.lblClasses.AutoSize = *True
+		*this.lblClasses.Location = *new System.Drawing.Point(9, 27)
+		*this.lblClasses.Name = "lblClasses"
+		*this.lblClasses.Size = *new System.Drawing.Size(32, 13)
+		*this.lblClasses.TabIndex = 297
+		*this.lblClasses.Text = "Class"
+		//
+		//label9
+		//
+		*this.label9.AutoSize = *True
+		*this.label9.Location = *new System.Drawing.Point(9, 183)
+		*this.label9.Name = "label9"
+		*this.label9.Size = *new System.Drawing.Size(88, 13)
+		*this.label9.TabIndex = 345
+		*this.label9.Text = "Short Description"
+		//
+		//txtShortDesc
+		//
+		*this.txtShortDesc.Location = *new System.Drawing.Point(103, 179)
+		*this.txtShortDesc.Name = "txtShortDesc"
+		*this.txtShortDesc.Size = *new System.Drawing.Size(78, 20)
+		*this.txtShortDesc.TabIndex = 6
+		//
+		//radioButton7
+		//
+		*this.radioButton7.AutoSize = *True
+		*this.radioButton7.Checked = *True
+		*this.radioButton7.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.radioButton7.Location = *new System.Drawing.Point(11, 26)
+		*this.radioButton7.Name = "radioButton7"
+		*this.radioButton7.Size = *new System.Drawing.Size(57, 17)
+		*this.radioButton7.TabIndex = 61
+		*this.radioButton7.TabStop = *True
+		*this.radioButton7.Text = "&Import:"
+		*this.radioButton7.UseVisualStyleBackColor = *True
+		//
+		//radioButton8
+		//
+		*this.radioButton8.AutoSize = *True
+		*this.radioButton8.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.radioButton8.Location = *new System.Drawing.Point(12, 49)
+		*this.radioButton8.Name = "radioButton8"
+		*this.radioButton8.Size = *new System.Drawing.Size(72, 17)
+		*this.radioButton8.TabIndex = 60
+		*this.radioButton8.Text = "&Domestic:"
+		*this.radioButton8.UseVisualStyleBackColor = *True
+		//
+		//txtVendorStyle
+		//
+		*this.txtVendorStyle.Location = *new System.Drawing.Point(103, 206)
+		*this.txtVendorStyle.MaxLength = 15
+		*this.txtVendorStyle.Name = "txtVendorStyle"
+		*this.txtVendorStyle.Size = *new System.Drawing.Size(114, 20)
+		*this.txtVendorStyle.TabIndex = 7
+		//
+		//label10
+		//
+		*this.label10.AutoSize = *True
+		*this.label10.Location = *new System.Drawing.Point(9, 210)
+		*this.label10.Name = "label10"
+		*this.label10.Size = *new System.Drawing.Size(67, 13)
+		*this.label10.TabIndex = 346
+		*this.label10.Text = "Vendor Style"
+		//
+		//btnNext
+		//
+		*this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnNext.Location = *new System.Drawing.Point(379, 548)
+		*this.btnNext.Name = "btnNext"
+		*this.btnNext.Size = *new System.Drawing.Size(75, 23)
+		*this.btnNext.TabIndex = 350
+		*this.btnNext.Text = "Next"
+		*this.btnNext.UseVisualStyleBackColor = *True
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.btnHelp.Location = *new System.Drawing.Point(3, 548)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 348
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//lblVendorDesc
+		//
+		*this.lblVendorDesc.AutoSize = *True
+		*this.lblVendorDesc.Location = *new System.Drawing.Point(184, 52)
+		*this.lblVendorDesc.Name = "lblVendorDesc"
+		*this.lblVendorDesc.Size = *new System.Drawing.Size(76, 13)
+		*this.lblVendorDesc.TabIndex = 351
+		*this.lblVendorDesc.Text = "lblVendorDesc"
+		//
+		//lblColourDesc
+		//
+		*this.lblColourDesc.AutoSize = *True
+		*this.lblColourDesc.Location = *new System.Drawing.Point(184, 103)
+		*this.lblColourDesc.Name = "lblColourDesc"
+		*this.lblColourDesc.Size = *new System.Drawing.Size(72, 13)
+		*this.lblColourDesc.TabIndex = 352
+		*this.lblColourDesc.Text = "lblColourDesc"
+		//
+		//lblSubClass
+		//
+		*this.lblSubClass.AutoSize = *True
+		*this.lblSubClass.Location = *new System.Drawing.Point(184, 129)
+		*this.lblSubClass.Name = "lblSubClass"
+		*this.lblSubClass.Size = *new System.Drawing.Size(61, 13)
+		*this.lblSubClass.TabIndex = 353
+		*this.lblSubClass.Text = "lblSubClass"
+		//
+		//lblOrigin
+		//
+		*this.lblOrigin.AutoSize = *True
+		*this.lblOrigin.Location = *new System.Drawing.Point(184, 336)
+		*this.lblOrigin.Name = "lblOrigin"
+		*this.lblOrigin.Size = *new System.Drawing.Size(44, 13)
+		*this.lblOrigin.TabIndex = 354
+		*this.lblOrigin.Text = "lblOrigin"
+		//
+		//lblSeason
+		//
+		*this.lblSeason.AutoSize = *True
+		*this.lblSeason.Location = *new System.Drawing.Point(184, 393)
+		*this.lblSeason.Name = "lblSeason"
+		*this.lblSeason.Size = *new System.Drawing.Size(53, 13)
+		*this.lblSeason.TabIndex = 355
+		*this.lblSeason.Text = "lblSeason"
+		//
+		//lblCharName
+		//
+		*this.lblCharName.AutoSize = *True
+		*this.lblCharName.Location = *new System.Drawing.Point(184, 364)
+		*this.lblCharName.Name = "lblCharName"
+		*this.lblCharName.Size = *new System.Drawing.Size(67, 13)
+		*this.lblCharName.TabIndex = 356
+		*this.lblCharName.Text = "lblCharName"
+		//
+		//lblCommodityDesc
+		//
+		*this.lblCommodityDesc.AutoSize = *True
+		*this.lblCommodityDesc.Location = *new System.Drawing.Point(184, 306)
+		*this.lblCommodityDesc.Name = "lblCommodityDesc"
+		*this.lblCommodityDesc.Size = *new System.Drawing.Size(93, 13)
+		*this.lblCommodityDesc.TabIndex = 357
+		*this.lblCommodityDesc.Text = "lblCommodityDesc"
+		//
+		//btnBack
+		//
+		*this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.btnBack.Location = *new System.Drawing.Point(102, 548)
+		*this.btnBack.Name = "btnBack"
+		*this.btnBack.Size = *new System.Drawing.Size(75, 23)
+		*this.btnBack.TabIndex = 358
+		*this.btnBack.Text = "Back"
+		*this.btnBack.UseVisualStyleBackColor = *True
+		//
+		//label17
+		//
+		*this.label17.AutoSize = *True
+		*this.label17.Location = *new System.Drawing.Point(9, 77)
+		*this.label17.Name = "label17"
+		*this.label17.Size = *new System.Drawing.Size(30, 13)
+		*this.label17.TabIndex = 359
+		*this.label17.Text = "Style"
+		//
+		//txtStyle
+		//
+		*this.txtStyle.Location = *new System.Drawing.Point(103, 74)
+		*this.txtStyle.MaxLength = 4
+		*this.txtStyle.Name = "txtStyle"
+		*this.txtStyle.Size = *new System.Drawing.Size(40, 20)
+		*this.txtStyle.TabIndex = 2
+		//
+		//label19
+		//
+		*this.label19.AutoSize = *True
+		*this.label19.Location = *new System.Drawing.Point(185, 77)
+		*this.label19.Name = "label19"
+		*this.label19.Size = *new System.Drawing.Size(0, 13)
+		*this.label19.TabIndex = 361
+		//
+		//label25
+		//
+		*this.label25.AutoSize = *True
+		*this.label25.Location = *new System.Drawing.Point(226, 210)
+		*this.label25.Name = "label25"
+		*this.label25.Size = *new System.Drawing.Size(29, 13)
+		*this.label25.TabIndex = 363
+		*this.label25.Text = "UPC"
+		//
+		//txtUPC
+		//
+		*this.txtUPC.Location = *new System.Drawing.Point(261, 206)
+		*this.txtUPC.MaxLength = 12
+		*this.txtUPC.Name = "txtUPC"
+		*this.txtUPC.Size = *new System.Drawing.Size(83, 20)
+		*this.txtUPC.TabIndex = 8
+		//
+		//lblMarketList
+		//
+		*this.lblMarketList.AutoSize = *True
+		*this.lblMarketList.Location = *new System.Drawing.Point(101, 6)
+		*this.lblMarketList.Name = "lblMarketList"
+		*this.lblMarketList.Size = *new System.Drawing.Size(168, 13)
+		*this.lblMarketList.TabIndex = 568
+		*this.lblMarketList.Text = "UK, AU, FR, IT, SP ......................"
+		//
+		//label27
+		//
+		*this.label27.AutoSize = *True
+		*this.label27.Location = *new System.Drawing.Point(9, 6)
+		*this.label27.Name = "label27"
+		*this.label27.Size = *new System.Drawing.Size(45, 13)
+		*this.label27.TabIndex = 567
+		*this.label27.Text = "Markets"
+		//
+		//gbCartonDetails
+		//
+		*this.gbCartonDetails.Anchor = (((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Left) *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.gbCartonDetails.Controls.Add(*this.txtDistroQty)
+		*this.gbCartonDetails.Controls.Add(*this.txtPackQty)
+		*this.gbCartonDetails.Controls.Add(*this.cboCasePackType)
+		*this.gbCartonDetails.Controls.Add(*this.txtPackWidth)
+		*this.gbCartonDetails.Controls.Add(*this.txtPackLength)
+		*this.gbCartonDetails.Controls.Add(*this.txtPackHeight)
+		*this.gbCartonDetails.Controls.Add(*this.txtPackWeight)
+		*this.gbCartonDetails.Controls.Add(*this.label28)
+		*this.gbCartonDetails.Controls.Add(*this.label29)
+		*this.gbCartonDetails.Controls.Add(*this.label30)
+		*this.gbCartonDetails.Controls.Add(*this.label32)
+		*this.gbCartonDetails.Controls.Add(*this.label33)
+		*this.gbCartonDetails.Controls.Add(*this.label34)
+		*this.gbCartonDetails.Controls.Add(*this.label35)
+		*this.gbCartonDetails.Location = *new System.Drawing.Point(491, 11)
+		*this.gbCartonDetails.Name = "gbCartonDetails"
+		*this.gbCartonDetails.Size = *new System.Drawing.Size(463, 125)
+		*this.gbCartonDetails.TabIndex = 569
+		*this.gbCartonDetails.TabStop = *False
+		*this.gbCartonDetails.Text = "Pack/Carton Details"
+		//
+		//txtDistroQty
+		//
+		*this.txtDistroQty.Location = *new System.Drawing.Point(324, 45)
+		*this.txtDistroQty.Name = "txtDistroQty"
+		*this.txtDistroQty.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtDistroQty.Size = *new System.Drawing.Size(43, 20)
+		*this.txtDistroQty.TabIndex = 395
+		*this.txtDistroQty.Text = "99999"
+		//
+		//txtPackQty
+		//
+		*this.txtPackQty.Location = *new System.Drawing.Point(149, 45)
+		*this.txtPackQty.Name = "txtPackQty"
+		*this.txtPackQty.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtPackQty.Size = *new System.Drawing.Size(43, 20)
+		*this.txtPackQty.TabIndex = 394
+		*this.txtPackQty.Text = "99999"
+		//
+		//cboCasePackType
+		//
+		*this.cboCasePackType.FormattingEnabled = *True
+		*this.cboCasePackType.Items.AddRange(*new System.Object[] {"NONE", @"ADULT	   ", @"ALL AGES	   ", @"BABY	   ", @"KIDS	   ", @"TODDLER	   ", @"TEEN	 ", ""})
+		*this.cboCasePackType.Location = *new System.Drawing.Point(149, 18)
+		*this.cboCasePackType.Name = "cboCasePackType"
+		*this.cboCasePackType.Size = *new System.Drawing.Size(218, 21)
+		*this.cboCasePackType.TabIndex = 393
+		*this.cboCasePackType.Text = "X - XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//txtPackWidth
+		//
+		*this.txtPackWidth.Location = *new System.Drawing.Point(370, 78)
+		*this.txtPackWidth.Name = "txtPackWidth"
+		*this.txtPackWidth.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtPackWidth.Size = *new System.Drawing.Size(56, 20)
+		*this.txtPackWidth.TabIndex = 392
+		*this.txtPackWidth.Text = "9999.99"
+		//
+		//txtPackLength
+		//
+		*this.txtPackLength.Location = *new System.Drawing.Point(268, 78)
+		*this.txtPackLength.Name = "txtPackLength"
+		*this.txtPackLength.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtPackLength.Size = *new System.Drawing.Size(56, 20)
+		*this.txtPackLength.TabIndex = 391
+		*this.txtPackLength.Text = "9999.99"
+		//
+		//txtPackHeight
+		//
+		*this.txtPackHeight.Location = *new System.Drawing.Point(161, 80)
+		*this.txtPackHeight.Name = "txtPackHeight"
+		*this.txtPackHeight.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtPackHeight.Size = *new System.Drawing.Size(56, 20)
+		*this.txtPackHeight.TabIndex = 390
+		*this.txtPackHeight.Text = "9999.99"
+		//
+		//txtPackWeight
+		//
+		*this.txtPackWeight.Location = *new System.Drawing.Point(59, 78)
+		*this.txtPackWeight.Name = "txtPackWeight"
+		*this.txtPackWeight.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtPackWeight.Size = *new System.Drawing.Size(56, 20)
+		*this.txtPackWeight.TabIndex = 389
+		*this.txtPackWeight.Text = "9999.99"
+		//
+		//label28
+		//
+		*this.label28.AutoSize = *True
+		*this.label28.Location = *new System.Drawing.Point(330, 82)
+		*this.label28.Name = "label28"
+		*this.label28.Size = *new System.Drawing.Size(35, 13)
+		*this.label28.TabIndex = 388
+		*this.label28.Text = "Width"
+		//
+		//label29
+		//
+		*this.label29.AutoSize = *True
+		*this.label29.Location = *new System.Drawing.Point(222, 82)
+		*this.label29.Name = "label29"
+		*this.label29.Size = *new System.Drawing.Size(40, 13)
+		*this.label29.TabIndex = 387
+		*this.label29.Text = "Length"
+		//
+		//label30
+		//
+		*this.label30.AutoSize = *True
+		*this.label30.Location = *new System.Drawing.Point(119, 82)
+		*this.label30.Name = "label30"
+		*this.label30.Size = *new System.Drawing.Size(38, 13)
+		*this.label30.TabIndex = 386
+		*this.label30.Text = "Height"
+		//
+		//label32
+		//
+		*this.label32.AutoSize = *True
+		*this.label32.Location = *new System.Drawing.Point(13, 82)
+		*this.label32.Name = "label32"
+		*this.label32.Size = *new System.Drawing.Size(41, 13)
+		*this.label32.TabIndex = 385
+		*this.label32.Text = "Weight"
+		//
+		//label33
+		//
+		*this.label33.AutoSize = *True
+		*this.label33.Location = *new System.Drawing.Point(233, 48)
+		*this.label33.Name = "label33"
+		*this.label33.Size = *new System.Drawing.Size(82, 13)
+		*this.label33.TabIndex = 381
+		*this.label33.Text = "Distro/Inner Qty"
+		//
+		//label34
+		//
+		*this.label34.AutoSize = *True
+		*this.label34.Location = *new System.Drawing.Point(61, 48)
+		*this.label34.Name = "label34"
+		*this.label34.Size = *new System.Drawing.Size(78, 13)
+		*this.label34.TabIndex = 380
+		*this.label34.Text = "Case Pack Qty"
+		//
+		//label35
+		//
+		*this.label35.AutoSize = *True
+		*this.label35.Location = *new System.Drawing.Point(61, 21)
+		*this.label35.Name = "label35"
+		*this.label35.Size = *new System.Drawing.Size(86, 13)
+		*this.label35.TabIndex = 379
+		*this.label35.Text = "Case Pack Type"
+		//
+		//gbPricing
+		//
+		*this.gbPricing.Anchor = (((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Left) *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.gbPricing.Controls.Add(*this.dataGridView1)
+		*this.gbPricing.Controls.Add(*this.label36)
+		*this.gbPricing.Controls.Add(*this.label37)
+		*this.gbPricing.Controls.Add(*this.txtRetailPrice)
+		*this.gbPricing.Controls.Add(*this.txtVendorCost)
+		*this.gbPricing.Controls.Add(*this.label38)
+		*this.gbPricing.Controls.Add(*this.label39)
+		*this.gbPricing.Location = *new System.Drawing.Point(491, 142)
+		*this.gbPricing.Name = "gbPricing"
+		*this.gbPricing.Size = *new System.Drawing.Size(463, 194)
+		*this.gbPricing.TabIndex = 570
+		*this.gbPricing.TabStop = *False
+		*this.gbPricing.Text = "Pricing"
+		//
+		//dataGridView1
+		//
+		*this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+		*this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dataGridView1.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Column1, *this.Column2})
+		*this.dataGridView1.Location = *new System.Drawing.Point(215, 19)
+		*this.dataGridView1.Name = "dataGridView1"
+		*this.dataGridView1.RowHeadersVisible = *False
+		*this.dataGridView1.Size = *new System.Drawing.Size(225, 141)
+		*this.dataGridView1.TabIndex = 280
+		//
+		//Column1
+		//
+		*this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.Column1.HeaderText = "CUR"
+		*this.Column1.MaxInputLength = 3
+		*this.Column1.Name = "Column1"
+		*this.Column1.ReadOnly = *True
+		*this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.Column1.Width = 55
+		//
+		//Column2
+		//
+		*this.Column2.HeaderText = "Retail Price"
+		*this.Column2.Name = "Column2"
+		//
+		//label36
+		//
+		*this.label36.AutoSize = *True
+		*this.label36.Location = *new System.Drawing.Point(75, 23)
+		*this.label36.Name = "label36"
+		*this.label36.Size = *new System.Drawing.Size(23, 13)
+		*this.label36.TabIndex = 280
+		*this.label36.Text = "MC"
+		//
+		//label37
+		//
+		*this.label37.AutoSize = *True
+		*this.label37.Location = *new System.Drawing.Point(75, 54)
+		*this.label37.Name = "label37"
+		*this.label37.Size = *new System.Drawing.Size(23, 13)
+		*this.label37.TabIndex = 279
+		*this.label37.Text = "MC"
+		//
+		//txtRetailPrice
+		//
+		*this.txtRetailPrice.Location = *new System.Drawing.Point(124, 50)
+		*this.txtRetailPrice.Name = "txtRetailPrice"
+		*this.txtRetailPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtRetailPrice.Size = *new System.Drawing.Size(52, 20)
+		*this.txtRetailPrice.TabIndex = 278
+		*this.txtRetailPrice.Text = "9999.99"
+		//
+		//txtVendorCost
+		//
+		*this.txtVendorCost.Location = *new System.Drawing.Point(124, 19)
+		*this.txtVendorCost.Name = "txtVendorCost"
+		*this.txtVendorCost.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.txtVendorCost.Size = *new System.Drawing.Size(52, 20)
+		*this.txtVendorCost.TabIndex = 275
+		*this.txtVendorCost.Text = "9999.99"
+		//
+		//label38
+		//
+		*this.label38.AutoSize = *True
+		*this.label38.Location = *new System.Drawing.Point(6, 54)
+		*this.label38.Name = "label38"
+		*this.label38.Size = *new System.Drawing.Size(61, 13)
+		*this.label38.TabIndex = 274
+		*this.label38.Text = "Retail Price"
+		//
+		//label39
+		//
+		*this.label39.AutoSize = *True
+		*this.label39.Location = *new System.Drawing.Point(4, 23)
+		*this.label39.Name = "label39"
+		*this.label39.Size = *new System.Drawing.Size(65, 13)
+		*this.label39.TabIndex = 276
+		*this.label39.Text = "Vendor Cost"
+		//
+		//comboBox3
+		//
+		*this.comboBox3.FormattingEnabled = *True
+		*this.comboBox3.Items.AddRange(*new System.Object[] {"B - PRICE STKR W/UPC 1208D  ", "C - CLEAR SIZESTKR          ", "H - P TKT US PT04           ", "K - KEYCHAIN STKR 2310D     ", "L - LG PRICE STKR 1221D     ", "O - ORNAMENT STKR :1224D    ", "P - PLUSH PRICE TAG: PT05D  ", "S - STD PRICE TKT           ", "X - SM PRICE STKR 1220D     ", "T - STD PRICE TKT           ", "E - P TKT CA PT01           ", "G - HANGTAG PRICE TCKT PT02D"})
+		*this.comboBox3.Location = *new System.Drawing.Point(103, 419)
+		*this.comboBox3.Name = "comboBox3"
+		*this.comboBox3.Size = *new System.Drawing.Size(240, 21)
+		*this.comboBox3.TabIndex = 574
+		//
+		//radioButton11
+		//
+		*this.radioButton11.AutoSize = *True
+		*this.radioButton11.Location = *new System.Drawing.Point(9, 72)
+		*this.radioButton11.Name = "radioButton11"
+		*this.radioButton11.Size = *new System.Drawing.Size(62, 17)
+		*this.radioButton11.TabIndex = 2
+		*this.radioButton11.Text = "Female:"
+		*this.radioButton11.UseVisualStyleBackColor = *True
+		//
+		//radioButton10
+		//
+		*this.radioButton10.AutoSize = *True
+		*this.radioButton10.Location = *new System.Drawing.Point(9, 50)
+		*this.radioButton10.Name = "radioButton10"
+		*this.radioButton10.Size = *new System.Drawing.Size(51, 17)
+		*this.radioButton10.TabIndex = 1
+		*this.radioButton10.Text = "Male:"
+		*this.radioButton10.UseVisualStyleBackColor = *True
+		//
+		//radioButton9
+		//
+		*this.radioButton9.AutoSize = *True
+		*this.radioButton9.Checked = *True
+		*this.radioButton9.Location = *new System.Drawing.Point(9, 27)
+		*this.radioButton9.Name = "radioButton9"
+		*this.radioButton9.Size = *new System.Drawing.Size(57, 17)
+		*this.radioButton9.TabIndex = 0
+		*this.radioButton9.TabStop = *True
+		*this.radioButton9.Text = "Unisex"
+		*this.radioButton9.UseVisualStyleBackColor = *True
+		//
+		//radioButton3
+		//
+		*this.radioButton3.AutoSize = *True
+		*this.radioButton3.Location = *new System.Drawing.Point(9, 49)
+		*this.radioButton3.Name = "radioButton3"
+		*this.radioButton3.Size = *new System.Drawing.Size(46, 17)
+		*this.radioButton3.TabIndex = 61
+		*this.radioButton3.Text = "Yes:"
+		*this.radioButton3.UseVisualStyleBackColor = *True
+		//
+		//radioButton4
+		//
+		*this.radioButton4.AutoSize = *True
+		*this.radioButton4.Checked = *True
+		*this.radioButton4.Location = *new System.Drawing.Point(9, 26)
+		*this.radioButton4.Name = "radioButton4"
+		*this.radioButton4.Size = *new System.Drawing.Size(42, 17)
+		*this.radioButton4.TabIndex = 60
+		*this.radioButton4.TabStop = *True
+		*this.radioButton4.Text = "No:"
+		*this.radioButton4.UseVisualStyleBackColor = *True
+		//
+		//comboBox5
+		//
+		*this.comboBox5.FormattingEnabled = *True
+		*this.comboBox5.Items.AddRange(*new System.Object[] {"ALL - ALL AGES", @"ADULT - ADULT	   ", @"BABY - BABY	   ", @"KIDS - KIDS	   ", @"TODLR - TODDLER	   ", @"TEEN - TEENAGER	 "})
+		*this.comboBox5.Location = *new System.Drawing.Point(103, 447)
+		*this.comboBox5.Name = "comboBox5"
+		*this.comboBox5.Size = *new System.Drawing.Size(241, 21)
+		*this.comboBox5.TabIndex = 644
+		*this.comboBox5.Text = "ALL - ALL AGES"
+		//
+		//label41
+		//
+		*this.label41.AutoSize = *True
+		*this.label41.Location = *new System.Drawing.Point(9, 451)
+		*this.label41.Name = "label41"
+		*this.label41.Size = *new System.Drawing.Size(92, 13)
+		*this.label41.TabIndex = 643
+		*this.label41.Text = "Target Age Group"
+		//
+		//lblPromotionDesc
+		//
+		*this.lblPromotionDesc.AutoSize = *True
+		*this.lblPromotionDesc.Location = *new System.Drawing.Point(184, 479)
+		*this.lblPromotionDesc.Name = "lblPromotionDesc"
+		*this.lblPromotionDesc.Size = *new System.Drawing.Size(89, 13)
+		*this.lblPromotionDesc.TabIndex = 642
+		*this.lblPromotionDesc.Text = "lblPromotionDesc"
+		//
+		//txtPromotion
+		//
+		*this.txtPromotion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtPromotion.Location = *new System.Drawing.Point(103, 475)
+		*this.txtPromotion.MaxLength = 3
+		*this.txtPromotion.Name = "txtPromotion"
+		*this.txtPromotion.Size = *new System.Drawing.Size(30, 20)
+		*this.txtPromotion.TabIndex = 640
+		//
+		//label43
+		//
+		*this.label43.AutoSize = *True
+		*this.label43.Location = *new System.Drawing.Point(9, 477)
+		*this.label43.Name = "label43"
+		*this.label43.Size = *new System.Drawing.Size(65, 13)
+		*this.label43.TabIndex = 639
+		*this.label43.Text = "Promo Code"
+		//
+		//label44
+		//
+		*this.label44.AutoSize = *True
+		*this.label44.Location = *new System.Drawing.Point(9, 422)
+		*this.label44.Name = "label44"
+		*this.label44.Size = *new System.Drawing.Size(64, 13)
+		*this.label44.TabIndex = 647
+		*this.label44.Text = "Ticket Type"
+		//
+		//errorProvider
+		//
+		*this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.errorProvider.ContainerControl = *this
+		//
+		//pnlImportDomestic
+		//
+		*this.pnlImportDomestic.Controls.Add(*this.radioButton8)
+		*this.pnlImportDomestic.Controls.Add(*this.radioButton7)
+		*this.pnlImportDomestic.Controls.Add(*this.label1)
+		*this.pnlImportDomestic.Location = *new System.Drawing.Point(495, 348)
+		*this.pnlImportDomestic.Name = "pnlImportDomestic"
+		*this.pnlImportDomestic.Size = *new System.Drawing.Size(120, 86)
+		*this.pnlImportDomestic.TabIndex = 648
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label1.Location = *new System.Drawing.Point(8, 8)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(85, 13)
+		*this.label1.TabIndex = 0
+		*this.label1.Text = "Import/Domestic"
+		//
+		//pnlGender
+		//
+		*this.pnlGender.Controls.Add(*this.radioButton11)
+		*this.pnlGender.Controls.Add(*this.label2)
+		*this.pnlGender.Controls.Add(*this.radioButton10)
+		*this.pnlGender.Controls.Add(*this.radioButton9)
+		*this.pnlGender.Location = *new System.Drawing.Point(624, 348)
+		*this.pnlGender.Name = "pnlGender"
+		*this.pnlGender.Size = *new System.Drawing.Size(105, 99)
+		*this.pnlGender.TabIndex = 649
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label2.Location = *new System.Drawing.Point(6, 6)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(42, 13)
+		*this.label2.TabIndex = 0
+		*this.label2.Text = "Gender"
+		//
+		//pnlOnline
+		//
+		*this.pnlOnline.Controls.Add(*this.radioButton3)
+		*this.pnlOnline.Controls.Add(*this.label13)
+		*this.pnlOnline.Controls.Add(*this.radioButton4)
+		*this.pnlOnline.Location = *new System.Drawing.Point(739, 348)
+		*this.pnlOnline.Name = "pnlOnline"
+		*this.pnlOnline.Size = *new System.Drawing.Size(102, 83)
+		*this.pnlOnline.TabIndex = 650
+		//
+		//label13
+		//
+		*this.label13.AutoSize = *True
+		*this.label13.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label13.Location = *new System.Drawing.Point(6, 6)
+		*this.label13.Name = "label13"
+		*this.label13.Size = *new System.Drawing.Size(85, 13)
+		*this.label13.TabIndex = 0
+		*this.label13.Text = "Online Exclusive"
+		//
+		//pnlLocation
+		//
+		*this.pnlLocation.Controls.Add(*this.radioButton5)
+		*this.pnlLocation.Controls.Add(*this.label18)
+		*this.pnlLocation.Controls.Add(*this.radioButton6)
+		*this.pnlLocation.Location = *new System.Drawing.Point(849, 348)
+		*this.pnlLocation.Name = "pnlLocation"
+		*this.pnlLocation.Size = *new System.Drawing.Size(105, 83)
+		*this.pnlLocation.TabIndex = 651
+		//
+		//radioButton5
+		//
+		*this.radioButton5.AutoSize = *True
+		*this.radioButton5.Location = *new System.Drawing.Point(9, 49)
+		*this.radioButton5.Name = "radioButton5"
+		*this.radioButton5.Size = *new System.Drawing.Size(46, 17)
+		*this.radioButton5.TabIndex = 61
+		*this.radioButton5.Text = "Yes:"
+		*this.radioButton5.UseVisualStyleBackColor = *True
+		//
+		//label18
+		//
+		*this.label18.AutoSize = *True
+		*this.label18.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label18.Location = *new System.Drawing.Point(6, 6)
+		*this.label18.Name = "label18"
+		*this.label18.Size = *new System.Drawing.Size(89, 13)
+		*this.label18.TabIndex = 0
+		*this.label18.Text = "Location Specific"
+		//
+		//radioButton6
+		//
+		*this.radioButton6.AutoSize = *True
+		*this.radioButton6.Checked = *True
+		*this.radioButton6.Location = *new System.Drawing.Point(9, 26)
+		*this.radioButton6.Name = "radioButton6"
+		*this.radioButton6.Size = *new System.Drawing.Size(42, 17)
+		*this.radioButton6.TabIndex = 60
+		*this.radioButton6.TabStop = *True
+		*this.radioButton6.Text = "No:"
+		*this.radioButton6.UseVisualStyleBackColor = *True
+		//
+		//imageList
+		//
+		*this.imageList.ImageStream = (resources.GetObject("imageList.ImageStream") *As System.Windows.Forms.ImageListStreamer)
+		*this.imageList.TransparentColor = System.Drawing.Color.Transparent
+		*this.imageList.Images.SetKeyName(0, "Magnifying-Glass-256x256.png")
+		//
+		//btnClassLookUp
+		//
+		*this.btnClassLookUp.ImageIndex = 0
+		*this.btnClassLookUp.ImageList = *this.imageList
+		*this.btnClassLookUp.Location = *new System.Drawing.Point(152, 23)
+		*this.btnClassLookUp.Name = "btnClassLookUp"
+		*this.btnClassLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnClassLookUp.TabIndex = 652
+		*this.btnClassLookUp.UseVisualStyleBackColor = *True
+		//
+		//btnVendorLookUp
+		//
+		*this.btnVendorLookUp.ImageIndex = 0
+		*this.btnVendorLookUp.ImageList = *this.imageList
+		*this.btnVendorLookUp.Location = *new System.Drawing.Point(152, 48)
+		*this.btnVendorLookUp.Name = "btnVendorLookUp"
+		*this.btnVendorLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnVendorLookUp.TabIndex = 653
+		*this.btnVendorLookUp.UseVisualStyleBackColor = *True
+		//
+		//btnColourLookUp
+		//
+		*this.btnColourLookUp.ImageIndex = 0
+		*this.btnColourLookUp.ImageList = *this.imageList
+		*this.btnColourLookUp.Location = *new System.Drawing.Point(152, 98)
+		*this.btnColourLookUp.Name = "btnColourLookUp"
+		*this.btnColourLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnColourLookUp.TabIndex = 654
+		*this.btnColourLookUp.UseVisualStyleBackColor = *True
+		//
+		//btnSeasonLookUp
+		//
+		*this.btnSeasonLookUp.ImageIndex = 0
+		*this.btnSeasonLookUp.ImageList = *this.imageList
+		*this.btnSeasonLookUp.Location = *new System.Drawing.Point(152, 387)
+		*this.btnSeasonLookUp.Name = "btnSeasonLookUp"
+		*this.btnSeasonLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnSeasonLookUp.TabIndex = 655
+		*this.btnSeasonLookUp.UseVisualStyleBackColor = *True
+		//
+		//btnCharLookUp
+		//
+		*this.btnCharLookUp.ImageIndex = 0
+		*this.btnCharLookUp.ImageList = *this.imageList
+		*this.btnCharLookUp.Location = *new System.Drawing.Point(152, 359)
+		*this.btnCharLookUp.Name = "btnCharLookUp"
+		*this.btnCharLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnCharLookUp.TabIndex = 656
+		*this.btnCharLookUp.UseVisualStyleBackColor = *True
+		//
+		//button1
+		//
+		*this.button1.ImageIndex = 0
+		*this.button1.ImageList = *this.imageList
+		*this.button1.Location = *new System.Drawing.Point(152, 123)
+		*this.button1.Name = "button1"
+		*this.button1.Size = *new System.Drawing.Size(25, 23)
+		*this.button1.TabIndex = 657
+		*this.button1.UseVisualStyleBackColor = *True
+		//
+		//btnCommodityLookUp
+		//
+		*this.btnCommodityLookUp.ImageIndex = 0
+		*this.btnCommodityLookUp.ImageList = *this.imageList
+		*this.btnCommodityLookUp.Location = *new System.Drawing.Point(152, 300)
+		*this.btnCommodityLookUp.Name = "btnCommodityLookUp"
+		*this.btnCommodityLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnCommodityLookUp.TabIndex = 658
+		*this.btnCommodityLookUp.UseVisualStyleBackColor = *True
+		//
+		//btnCancel
+		//
+		*this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnCancel.Location = *new System.Drawing.Point(495, 548)
+		*this.btnCancel.Name = "btnCancel"
+		*this.btnCancel.Size = *new System.Drawing.Size(75, 23)
+		*this.btnCancel.TabIndex = 659
+		*this.btnCancel.Text = "Cancel"
+		*this.btnCancel.UseVisualStyleBackColor = *True
+		//
+		//btnCompoCodeLookUp
+		//
+		*this.btnCompoCodeLookUp.ImageIndex = 0
+		*this.btnCompoCodeLookUp.ImageList = *this.imageList
+		*this.btnCompoCodeLookUp.Location = *new System.Drawing.Point(152, 271)
+		*this.btnCompoCodeLookUp.Name = "btnCompoCodeLookUp"
+		*this.btnCompoCodeLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnCompoCodeLookUp.TabIndex = 660
+		*this.btnCompoCodeLookUp.UseVisualStyleBackColor = *True
+		//
+		//btnPromotionLookUp
+		//
+		*this.btnPromotionLookUp.ImageIndex = 0
+		*this.btnPromotionLookUp.ImageList = *this.imageList
+		*this.btnPromotionLookUp.Location = *new System.Drawing.Point(152, 473)
+		*this.btnPromotionLookUp.Name = "btnPromotionLookUp"
+		*this.btnPromotionLookUp.Size = *new System.Drawing.Size(25, 23)
+		*this.btnPromotionLookUp.TabIndex = 661
+		*this.btnPromotionLookUp.UseVisualStyleBackColor = *True
+		//
+		//button2
+		//
+		*this.button2.ImageIndex = 0
+		*this.button2.ImageList = *this.imageList
+		*this.button2.Location = *new System.Drawing.Point(152, 330)
+		*this.button2.Name = "button2"
+		*this.button2.Size = *new System.Drawing.Size(25, 23)
+		*this.button2.TabIndex = 662
+		*this.button2.UseVisualStyleBackColor = *True
+		//
+		//lblStyle
+		//
+		*this.lblStyle.AutoSize = *True
+		*this.lblStyle.Location = *new System.Drawing.Point(188, 76)
+		*this.lblStyle.Name = "lblStyle"
+		*this.lblStyle.Size = *new System.Drawing.Size(40, 13)
+		*this.lblStyle.TabIndex = 663
+		*this.lblStyle.Text = "lblStyle"
+		//
+		//AddItem1
+		//
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+		*this.AutoValidate = System.Windows.Forms.AutoValidate.Disable
+		*this.ClientSize = *new System.Drawing.Size(967, 579)
+		*this.Controls.Add(*this.lblStyle)
+		*this.Controls.Add(*this.button2)
+		*this.Controls.Add(*this.btnPromotionLookUp)
+		*this.Controls.Add(*this.btnCompoCodeLookUp)
+		*this.Controls.Add(*this.btnCancel)
+		*this.Controls.Add(*this.btnCommodityLookUp)
+		*this.Controls.Add(*this.button1)
+		*this.Controls.Add(*this.btnCharLookUp)
+		*this.Controls.Add(*this.btnSeasonLookUp)
+		*this.Controls.Add(*this.btnColourLookUp)
+		*this.Controls.Add(*this.btnVendorLookUp)
+		*this.Controls.Add(*this.btnClassLookUp)
+		*this.Controls.Add(*this.pnlLocation)
+		*this.Controls.Add(*this.pnlOnline)
+		*this.Controls.Add(*this.pnlGender)
+		*this.Controls.Add(*this.pnlImportDomestic)
+		*this.Controls.Add(*this.label44)
+		*this.Controls.Add(*this.comboBox5)
+		*this.Controls.Add(*this.label41)
+		*this.Controls.Add(*this.lblPromotionDesc)
+		*this.Controls.Add(*this.txtPromotion)
+		*this.Controls.Add(*this.label43)
+		*this.Controls.Add(*this.comboBox3)
+		*this.Controls.Add(*this.gbPricing)
+		*this.Controls.Add(*this.gbCartonDetails)
+		*this.Controls.Add(*this.lblMarketList)
+		*this.Controls.Add(*this.label27)
+		*this.Controls.Add(*this.label25)
+		*this.Controls.Add(*this.txtUPC)
+		*this.Controls.Add(*this.label19)
+		*this.Controls.Add(*this.txtStyle)
+		*this.Controls.Add(*this.label17)
+		*this.Controls.Add(*this.btnBack)
+		*this.Controls.Add(*this.lblCommodityDesc)
+		*this.Controls.Add(*this.lblCharName)
+		*this.Controls.Add(*this.lblSeason)
+		*this.Controls.Add(*this.lblOrigin)
+		*this.Controls.Add(*this.lblSubClass)
+		*this.Controls.Add(*this.lblColourDesc)
+		*this.Controls.Add(*this.lblVendorDesc)
+		*this.Controls.Add(*this.btnNext)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.txtVendorStyle)
+		*this.Controls.Add(*this.label10)
+		*this.Controls.Add(*this.label9)
+		*this.Controls.Add(*this.txtShortDesc)
+		*this.Controls.Add(*this.txtSeason)
+		*this.Controls.Add(*this.txtCommodity)
+		*this.Controls.Add(*this.lblCompoCodeDesc)
+		*this.Controls.Add(*this.lblClassDesc)
+		*this.Controls.Add(*this.cboLicence)
+		*this.Controls.Add(*this.txtCompoCode)
+		*this.Controls.Add(*this.txtOrigin)
+		*this.Controls.Add(*this.txtChar)
+		*this.Controls.Add(*this.txtLongDesc)
+		*this.Controls.Add(*this.txtSubClass)
+		*this.Controls.Add(*this.txtColour)
+		*this.Controls.Add(*this.txtVendor)
+		*this.Controls.Add(*this.txtClass)
+		*this.Controls.Add(*this.label16)
+		*this.Controls.Add(*this.label15)
+		*this.Controls.Add(*this.label14)
+		*this.Controls.Add(*this.label12)
+		*this.Controls.Add(*this.label11)
+		*this.Controls.Add(*this.label8)
+		*this.Controls.Add(*this.label7)
+		*this.Controls.Add(*this.label6)
+		*this.Controls.Add(*this.label5)
+		*this.Controls.Add(*this.label4)
+		*this.Controls.Add(*this.lblClasses)
+		*this.Name = "AddItem1"
+		*this.ShowIcon = *False
+		*this.Text = "Add Item"
+		*this.gbCartonDetails.ResumeLayout(*False)
+		*this.gbCartonDetails.PerformLayout()
+		*this.gbPricing.ResumeLayout(*False)
+		*this.gbPricing.PerformLayout()
+		(*this.dataGridView1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.pnlImportDomestic.ResumeLayout(*False)
+		*this.pnlImportDomestic.PerformLayout()
+		*this.pnlGender.ResumeLayout(*False)
+		*this.pnlGender.PerformLayout()
+		*this.pnlOnline.ResumeLayout(*False)
+		*this.pnlOnline.PerformLayout()
+		*this.pnlLocation.ResumeLayout(*False)
+		*this.pnlLocation.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	/EndRegion
+	
+	BegSR Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	
+	BegSR AddItem_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+//		If Settings.Default.Maximize = *True
+//			*this.WindowState = FormWindowState.Maximized
+//		EndIf
+		
+		*this.MdiParent = ItemsBO.MdiParent *As System.Windows.Forms.Form
+		lblMarketList.Text = MktList
+		
+		SpiceDS = ItemsBO.GetLicenceTbl()
+		cboLicence.DataSource = SpiceDS.Tables("FilteredLicence")
+		cboLicence.DisplayMember = "cboLicence"
+		
+		ResetScreenFields()
+	EndSR
+
+	BegSR ResetScreenFields Access(*Private)
+	
+		*this.lblCharName.Text      = *Blank
+		*this.lblClassDesc.Text     = *Blank
+		*this.lblVendorDesc.Text    = *Blank
+		*this.lblColourDesc.Text    = *Blank
+		*this.lblSubClass.Text      = *Blank
+		*this.lblCommodityDesc.Text = *Blank
+		*this.lblCompoCodeDesc.Text = *Blank
+		*this.lblSeason.Text        = *Blank
+		*this.lblPromotionDesc.Text = *Blank
+		*this.lblOrigin.Text        = *Blank
+		*this.lblStyle.Text         = *Blank
+		*this.txtPackHeight.Text    = *Blank
+		*this.txtPackLength.Text    = *Blank
+		*this.txtPackQty.Text       = *Blank
+		*this.txtDistroQty.Text     = *Blank
+		*this.txtPackWeight.Text    = *Blank
+		*this.txtPackWidth.Text     = *Blank
+	EndSR
+
+	BegSR AddItem_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+        
+        //Settings.Default.Save()
+	EndSR 
+	/Endregion
+	
+	BegSR Add Access(*Public)
+		DclSrParm MktList Type(String)
+		
+		*this.MktList = MktList
+		*this.ShowDialog()
+	EndSR
+
+	BegSr btnBack_Click Access(*Private) Event(*this.btnBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		*this.DialogResult = DialogResult.Cancel
+	EndSr
+	
+	BegSr btnCancel_Click Access(*Private) Event(*this.btnCancel.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		*this.DialogResult = DialogResult.Abort
+	EndSr
+	
+	BegSr label12_Click Access(*Private) Event(*this.label12.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+	EndSr
+	
+	BegSr label27_Click Access(*Private) Event(*this.label27.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+	EndSr
+	
+	/Region Class Validation
+	BegSr ClassLookUp_Click Access(*Private) Event(*this.btnClassLookUp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld ClassEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtClass,String.Empty)
+		
+		ItemsBO.GetClassTbl()
+		
+		// Load enquiry grid
+		If ClassEnquiry = *Nothing
+			ClassEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("FilteredClasses"),"Classes")
+		EndIf
+		
+		ClassEnquiry.ShowGrid()
+		If ClassEnquiry.DialogResult = DialogResult.OK
+			txtClass.Text     = ClassEnquiry.SelectedValue[0]
+			lblClassDesc.Text = ClassEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtClass,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtClass_TextChanged Access(*Private) Event(*this.txtClass.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblClassDesc.text = String.Empty
+		If txtClass.TextLength = txtClass.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtClass))
+				txtVendor.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtClass_Enter Access(*Private) Event(*this.txtClass.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+		txtClass.SelectAll()
+	EndSr
+	
+	BegSr txtClass_Leave Access(*Private) Event(*this.txtClass.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Class Type(System.Int16)
+
+		If Not String.IsNullOrEmpty(txtClass.Text)
+			Try
+				Class = Convert.ToInt16(txtClass.Text)
+			Catch Name(Err) Type(System.Exception)
+				errorProvider.SetError(sender *As Control,'Invalid number')
+				lblClassDesc.Text = String.Empty
+				LeaveSR
+			EndTry
+						
+			If not ItemsBO.GetClass(Class)
+				errorProvider.SetError(txtClass,'Class is not defined or you are not authorised to it')
+				lblClassDesc.Text = String.Empty
+				txtClass.SelectAll()
+			Else
+				lblClassDesc.Text = ItemsBO.ClassName
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Class')
+			lblClassDesc.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Vendor Validation
+	BegSr VendorLookUp_Click Access(*Private) Event(*this.btnVendorLookUp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld VendorEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtVendor,String.Empty)
+		SpiceDS = ItemsBO.GetVendorTbl()
+		
+		If VendorEnquiry = *Nothing
+			VendorEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("FilteredVendors"),"Vendors")
+		EndIf
+		
+		VendorEnquiry.ShowGrid()
+		If VendorEnquiry.DialogResult = DialogResult.OK
+			txtVendor.Text     = VendorEnquiry.SelectedValue[0]
+			lblVendorDesc.Text = VendorEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtVendor,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtVendor_TextChanged Access(*Private) Event(*this.txtVendor.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblVendorDesc.Text = String.Empty
+		If txtVendor.TextLength = txtVendor.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtVendor))
+				txtStyle.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtVendor_Enter Access(*Private) Event(*this.txtVendor.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtVendor, String.Empty)
+		txtVendor.SelectAll()
+	EndSr
+	
+	BegSr txtVendor_Leave Access(*Private) Event(*this.txtVendor.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Vendor Type(System.Int32)
+
+		If Not String.IsNullOrEmpty(txtVendor.Text)
+			Try
+				Vendor = Convert.ToInt32(txtVendor.Text)
+			Catch Name(Err) Type(System.Exception)
+				errorProvider.SetError(sender *As Control,'Invalid number')
+				lblVendorDesc.Text = String.Empty
+				LeaveSR
+			EndTry
+						
+			If not ItemsBO.GetVendor(Vendor)
+				errorProvider.SetError(txtVendor,'Vendor is not defined or you are not authorised to it')
+				lblVendorDesc.Text = String.Empty
+				txtVendor.SelectAll()
+			Else
+				lblVendorDesc.Text = ItemsBO.VendorName
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Vendor')
+			lblVendorDesc.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Style
+	BegSr txtStyle_TextChanged Access(*Private) Event(*this.txtStyle.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblStyle.Text = String.Empty
+		If txtStyle.TextLength = txtStyle.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtStyle))
+				txtColour.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtStyle_Enter Access(*Private) Event(*this.txtStyle.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtStyle, String.Empty)
+		lblStyle.Text = String.Empty
+		txtStyle.SelectAll()
+	EndSr
+	
+	BegSr txtStyle_Leave Access(*Private) Event(*this.txtStyle.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Style Type(Int16)
+
+		If Not String.IsNullOrEmpty(txtStyle.Text)
+			Try
+				Style = Convert.ToInt16(txtStyle.Text)
+			Catch Name(Err) Type(System.Exception)
+				errorProvider.SetError(sender *As Control,'Invalid number')
+				lblStyle.Text = String.Empty
+				LeaveSR
+			EndTry
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Style')
+			lblStyle.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Colour Validation
+	BegSr ColourLookUp_Click Access(*Private) Event(*this.btnColourLookUp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld ColourEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtColour,String.Empty)
+		SpiceDS = ItemsBO.GetColourTbl()
+		
+		If ColourEnquiry = *Nothing
+			ColourEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("Colour"),"Colour")
+		EndIf
+		
+		ColourEnquiry.ShowGrid()
+		If ColourEnquiry.DialogResult = DialogResult.OK
+			txtColour.Text     = ColourEnquiry.SelectedValue[0]
+			lblColourDesc.Text = ColourEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtColour,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtColour_TextChanged Access(*Private) Event(*this.txtColour.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblColourDesc.Text = String.Empty
+		If txtColour.TextLength = txtColour.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtColour))
+				txtSubClass.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtColour_Enter Access(*Private) Event(*this.txtColour.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtColour, String.Empty)
+		txtColour.SelectAll()
+	EndSr
+	
+	BegSr txtColour_Leave Access(*Private) Event(*this.txtColour.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Colour Type(System.Int16)
+
+		If Not String.IsNullOrEmpty(txtColour.Text)
+			Try
+				Colour = Convert.ToInt16(txtColour.Text)
+			Catch Name(Err) Type(System.Exception)
+				errorProvider.SetError(sender *As Control,'Invalid number')
+				lblColourDesc.Text = String.Empty
+				LeaveSR
+			EndTry
+						
+			If not ItemsBO.GetColour(Colour)
+				errorProvider.SetError(txtColour,'Colour is not defined')
+				lblColourDesc.Text = String.Empty
+				txtColour.SelectAll()
+			Else
+				lblColourDesc.Text = ItemsBO.ColourName
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Colour Code')
+			lblColourDesc.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Item descriptions
+	BegSr txtLongDesc_Enter Access(*Private) Event(*this.txtLongDesc.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld txtBox Type(System.Windows.Forms.TextBox)
+		txtBox = sender *As TextBox
+		
+		errorProvider.SetError(txtBox, String.Empty)
+		txtBox.SelectAll()
+	EndSr
+	
+	BegSr txtLongDesc_Leave Access(*Private) Event(*this.txtLongDesc.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+
+		If txtLongDesc.Text = String.Empty
+			errorProvider.SetError(txtLongDesc,"Please enter a long description")
+		EndIf
+	EndSr
+	
+	BegSr txtShortDesc_Enter Access(*Private) Event(*this.txtShortDesc.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld txtBox Type(System.Windows.Forms.TextBox)
+		txtBox = sender *As TextBox
+		
+		errorProvider.SetError(txtBox, String.Empty)
+		txtBox.SelectAll()
+	EndSr
+	
+	BegSr txtShortDesc_Leave Access(*Private) Event(*this.txtShortDesc.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtShortDesc.Text = String.Empty
+			errorProvider.SetError(sender *As Control,"Please enter a short description")
+		EndIf		
+	EndSr
+	/EndRegion	
+	
+	/Region Vendor Style
+	BegSr txtVendorStyle_Leave Access(*Private) Event(*this.txtVendorStyle.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Not String.IsNullOrEmpty(txtVendorStyle.Text)
+			errorProvider.SetError(sender *As Control,'Please enter a Vendor Style')
+		EndIf
+	EndSr
+	
+	BegSr txtVendorStyle_Enter Access(*Private) Event(*this.txtVendorStyle.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+		
+	EndSr
+	
+	BegSr txtVendorStyle_TextChanged Access(*Private) Event(*this.txtVendorStyle.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtVendorStyle.TextLength = txtVendorStyle.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtVendorStyle))
+				txtUPC.Select()
+			EndIf
+		EndIf
+	EndSR
+	/EndRegion
+	
+	/Region UPC
+	BegSr txtUPC_Leave Access(*Private) Event(*this.txtUPC.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld UPC Type(Int16)
+
+		If Not String.IsNullOrEmpty(txtUPC.Text)
+			Try
+				UPC = Convert.ToInt16(txtStyle.Text)
+			Catch Name(Err) Type(System.Exception)
+				errorProvider.SetError(sender *As Control,'Invalid number')
+				LeaveSR
+			EndTry
+		Else
+			ErrorProvider.SetError(sender *As Control,'Please enter a UPC code')
+		EndIf
+	EndSr
+	
+	BegSr txtUPC_Enter Access(*Private) Event(*this.txtUPC.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtUPC, String.Empty)
+	EndSr
+	
+	BegSr txtUPC_TextChanged Access(*Private) Event(*this.txtUPC.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtUPC.TextLength = txtUPC.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtUPC))
+				cboLicence.Select()
+			EndIf
+		EndIf
+	EndSR
+	/EndRegion
+	
+	/Region Character Validation
+	BegSr CharLookUp_Click Access(*Private) Event(*this.btnCharLookUp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld CharEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtChar,String.Empty)
+		ItemsBO.GetAllFamilyCharTbl("All Families")
+		
+		If CharEnquiry = *Nothing
+			CharEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("Chars"),"Character")
+		EndIf
+		
+		CharEnquiry.ShowGrid()
+		If CharEnquiry.DialogResult = DialogResult.OK
+			txtChar.Text = CharEnquiry.SelectedValue[0]
+			lblCharName.Text = CharEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtChar,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtChar_TextChanged Access(*Private) Event(*this.txtChar.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblCharName.Text = String.Empty
+		If txtChar.TextLength = txtChar.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtChar))
+				txtSeason.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtChar_Enter Access(*Private) Event(*this.txtChar.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtChar, String.Empty)
+		txtChar.SelectAll()
+	EndSr
+	
+	BegSr txtChar_Leave Access(*Private) Event(*this.txtChar.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Not String.IsNullOrEmpty(txtChar.Text)
+		
+			If not ItemsBO.GetChar(txtChar.Text)
+				errorProvider.SetError(txtChar,'Character is not defined')
+				lblCharName.Text = String.Empty
+				txtChar.SelectAll()
+			Else
+				lblCharName.Text = ItemsBO.CharacterName
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Character Code')
+			lblCharName.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Season Code Validation
+	BegSr SeasonLookUp_Click Access(*Private) Event(*this.btnSeasonLookUp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld SeasonsEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtSeason,String.Empty)
+		SpiceDS = ItemsBO.GetSeasonsTbl()
+		
+		If SeasonsEnquiry = *Nothing
+			SeasonsEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("Seasons"),"Seasons")
+		EndIf
+		
+		SeasonsEnquiry.ShowGrid()
+		If SeasonsEnquiry.DialogResult = DialogResult.OK
+			txtSeason.Text = SeasonsEnquiry.SelectedValue[0]
+			lblSeason.Text = SeasonsEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtSeason,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtSeason_TextChanged Access(*Private) Event(*this.txtSeason.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblSeason.Text = String.Empty
+		If txtSeason.TextLength = txtSeason.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtSeason))
+				*this.GetNextControl(*this,*true)
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtSeason_Enter Access(*Private) Event(*this.txtSeason.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+		txtSeason.SelectAll()
+	EndSr
+	
+	BegSr txtSeason_Leave Access(*Private) Event(*this.txtSeason.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Not String.IsNullOrEmpty(txtColour.Text)
+
+			If not ItemsBO.GetSeason(txtSeason.Text)
+				errorProvider.SetError(txtSeason,'Season code is not defined')
+				lblSeason.Text = String.Empty
+				txtSeason.SelectAll()
+			Else
+				lblSeason.Text = ItemsBO.SeasonDesc
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Season Code')
+			lblSeason.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Licence
+	
+	/EndRegion
+	
+	/Region Commodity
+	BegSr CommodityLookUp_Click Access(*Private) Event(*this.btnCommodityLookUp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld CommodityEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtCommodity,String.Empty)
+		SpiceDS = ItemsBO.GetCommodityTbl()
+		
+		If CommodityEnquiry = *Nothing
+			CommodityEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("Commodity"),"Commodity")
+		EndIf
+		
+		CommodityEnquiry.ShowGrid()
+		If CommodityEnquiry.DialogResult = DialogResult.OK
+			txtCommodity.Text     = CommodityEnquiry.SelectedValue[0]
+			lblCommodityDesc.Text = CommodityEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtCommodity,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtCommodity_TextChanged Access(*Private) Event(*this.txtCommodity.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblCommodityDesc.Text = String.Empty
+		If txtCommodity.TextLength = txtCommodity.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtCommodity))
+				txtOrigin.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtCommodity_Enter Access(*Private) Event(*this.txtCommodity.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtCommodity, String.Empty)
+		txtCommodity.SelectAll()
+	EndSr
+	
+	BegSr txtCommodity_Leave Access(*Private) Event(*this.txtCommodity.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Not String.IsNullOrEmpty(txtCommodity.Text)
+			If not ItemsBO.GetCommodityCode(txtCommodity.Text)
+				errorProvider.SetError(txtCommodity,'Commodity Code is not defined')
+				lblCommodityDesc.Text = String.Empty
+				txtCommodity.SelectAll()
+			Else
+				lblCommodityDesc.Text = ItemsBO.CommodityDescription
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Commodity Code')
+			lblCommodityDesc.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Composition Code
+	BegSr CompoCodeLookUp_Click Access(*Private) Event(*this.btnCompoCodeLookUp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld CompoCodeEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtCompoCode,String.Empty)
+		SpiceDS = ItemsBO.GetCompositionTbl()
+		
+		If CompoCodeEnquiry = *Nothing
+			CompoCodeEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("Composition"),"Composition")
+		EndIf
+		
+		CompoCodeEnquiry.ShowGrid()
+		If CompoCodeEnquiry.DialogResult = DialogResult.OK
+			txtCompoCode.Text     = CompoCodeEnquiry.SelectedValue[0]
+			lblCompoCodeDesc.Text = CompoCodeEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtCompoCode,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtCompoCode_TextChanged Access(*Private) Event(*this.txtCompoCode.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblCompoCodeDesc.Text = String.Empty
+		If txtCompoCode.TextLength = txtCompoCode.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtCompoCode))
+				txtCommodity.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtCompoCode_Enter Access(*Private) Event(*this.txtCompoCode.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtCompoCode, String.Empty)
+		txtCompoCode.SelectAll()
+	EndSr
+	
+	BegSr txtCompoCode_Leave Access(*Private) Event(*this.txtCompoCode.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Not String.IsNullOrEmpty(txtCompoCode.Text)
+			If not ItemsBO.GetCompositionCode(txtCompoCode.Text)
+				errorProvider.SetError(txtCompoCode,'Composition Code is not defined')
+				lblCompoCodeDesc.Text = String.Empty
+				txtCompoCode.SelectAll()
+			Else
+				lblCompoCodeDesc.Text = ItemsBO.CompositionDescription
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Commodity Code')
+			lblCompoCodeDesc.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Promotion
+	BegSr PromotionLookUp_Click Access(*Private) Event(*this.btnPromotionLookUp.Click) 
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld PromotionEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrorProvider.SetError(txtPromotion,String.Empty)
+		SpiceDS = ItemsBO.GetPromotionTbl()
+		
+		If PromotionEnquiry = *Nothing
+			PromotionEnquiry = *New Disney.Spice.LookUp.Enquiry(SpiceDS.Tables("Promotion"),"Promotion")
+		EndIf
+		
+		PromotionEnquiry.ShowGrid()
+		If PromotionEnquiry.DialogResult = DialogResult.OK
+			txtPromotion.Text     = PromotionEnquiry.SelectedValue[0]
+			lblPromotionDesc.Text = PromotionEnquiry.SelectedValue[1]
+			errorProvider.SetError(txtPromotion,String.Empty)
+		EndIf
+	EndSr
+	
+	BegSr txtPromotion_TextChanged Access(*Private) Event(*this.txtPromotion.TextChanged) 
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		lblPromotionDesc.Text = String.Empty
+		If txtPromotion.TextLength = txtPromotion.MaxLength
+			If String.IsNullOrEmpty(errorProvider.GetError(txtPromotion))
+				cboCasePackType.Select()
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr txtPromotion_Enter Access(*Private) Event(*this.txtPromotion.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(txtPromotion, String.Empty)
+		txtPromotion.SelectAll()
+	EndSr
+	
+	BegSr txtPromotion_Leave Access(*Private) Event(*this.txtPromotion.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Not String.IsNullOrEmpty(txtPromotion.Text)
+			If not ItemsBO.GetPromotion(txtPromotion.Text)
+				errorProvider.SetError(txtPromotion,'Promotion Code is not defined')
+				lblPromotionDesc.Text = String.Empty
+				txtPromotion.SelectAll()
+			Else
+				lblPromotionDesc.Text = ItemsBO.PromotionDescription
+			EndIf
+		Else
+			errorProvider.SetError(sender *As Control,'Please enter a Promotion Code')
+			lblPromotionDesc.Text = String.Empty
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Case/Pack Details
+	BegSr txtPackQty_Leave Access(*Private) Event(*this.txtPackQty.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld PackQty Type(Int16)
+		
+		If Not String.IsNullOrEmpty(txtPackQty.Text)
+			Try
+				PackQty = Int16.Parse(txtPackQty.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If PackQty < 1 Or PackQty > 9999
+				ErrorProvider.SetError(sender *As Control,'Pack Quantity must be between 1 and 9999')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtPackQty_Enter Access(*Private) Event(*this.txtPackQty.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	
+	BegSr txtDistroQty_Leave Access(*Private) Event(*this.txtDistroQty.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld DistroQty Type(Int16)
+		
+		If Not String.IsNullOrEmpty(txtDistroQty.Text)
+			Try
+				DistroQty = Int16.Parse(txtDistroQty.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If DistroQty < 1 Or DistroQty > 9999
+				ErrorProvider.SetError(sender *As Control,'Distro Quantity must be between 1 and 9999')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtDistroQty_Enter Access(*Private) Event(*this.txtDistroQty.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	
+	BegSr txtPackWeight_Leave Access(*Private) Event(*this.txtPackWeight.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld PackWeight Type(Decimal)
+		
+		If Not String.IsNullOrEmpty(txtPackWeight.Text)
+			Try
+				PackWeight = Decimal.Parse(txtPackWeight.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If PackWeight < .01 Or PackWeight > 9999.99
+				ErrorProvider.SetError(sender *As Control,'Pack Weight must be between .01 and 9999.99')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtPackWeight_Enter Access(*Private) Event(*this.txtPackWeight.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	
+	BegSr txtPackHeight_Leave Access(*Private) Event(*this.txtPackHeight.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld PackHeight Type(Decimal)
+		
+		If Not String.IsNullOrEmpty(txtPackHeight.Text)
+			Try
+				PackHeight = Int16.Parse(txtPackHeight.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If PackHeight < .01 Or PackHeight > 9999.99
+				ErrorProvider.SetError(sender *As Control,'Pack Height must be between .01 and 9999.99')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtPackHeight_Enter Access(*Private) Event(*this.txtPackHeight.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	
+	BegSr txtPackLength_Leave Access(*Private) Event(*this.txtPackLength.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld PackLength Type(Decimal)
+		
+		If Not String.IsNullOrEmpty(txtPackLength.Text)
+			Try
+				PackLength = Int16.Parse(txtPackLength.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If PackLength < .01 Or PackLength > 9999.99
+				ErrorProvider.SetError(sender *As Control,'Pack Length must be between .01 and 9999.99')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtPackLength_Enter Access(*Private) Event(*this.txtPackLength.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	
+	BegSr txtPackWidth_Leave Access(*Private) Event(*this.txtPackWidth.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld PackWidth Type(Int16)
+		
+		If Not String.IsNullOrEmpty(txtPackWidth.Text)
+			Try
+				PackWidth = Int16.Parse(txtPackWidth.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If PackWidth < .01 Or PackWidth > 9999.99
+				ErrorProvider.SetError(sender *As Control,'Pack Width must be between .01 and 9999.99')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtPackWidth_Enter Access(*Private) Event(*this.txtPackWidth.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	/EndRegion
+	
+	/Region Pricing
+	BegSr txtVendorCost_Leave Access(*Private) Event(*this.txtVendorCost.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld VendorCost Type(Decimal)
+		
+		If Not String.IsNullOrEmpty(txtVendorCost.Text)
+			Try
+				VendorCost = Decimal.Parse(txtVendorCost.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If VendorCost < .01 Or VendorCost > 9999.99
+				ErrorProvider.SetError(sender *As Control,'Vendor Cost must be between .01 and 9999.99')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtVendorCost_Enter Access(*Private) Event(*this.txtVendorCost.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	
+	BegSr txtRetailPrice_Leave Access(*Private) Event(*this.txtRetailPrice.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld RetailPrice Type(Decimal)
+		
+		If Not String.IsNullOrEmpty(txtRetailPrice.Text)
+			Try
+				RetailPrice = Decimal.Parse(txtRetailPrice.Text)
+			Catch Err Type(System.Exception)
+				ErrorProvider.SetError(sender *As Control,'Invalid number')
+			EndTry
+			
+			If RetailPrice < .01 Or RetailPrice > 9999.99
+				ErrorProvider.SetError(sender *As Control,'Retail Price must be between .01 and 9999.99')
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr txtRetailPrice_Enter Access(*Private) Event(*this.txtRetailPrice.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.SetError(sender *As Control, String.Empty)
+	EndSr
+	/EndRegion
+	
+	/Region Next Button
+	BegSr btnNext_Click Access(*Private) Event(*this.btnNext.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		Validate()
+		ValidateChildren()
+	EndSr
+	/EndRegion
+EndClass

@@ -1,0 +1,99 @@
+Using System
+Using System.Data
+Using System.IO
+Using System.Text
+Using System.Xml
+
+BegClass TicketType Access(*Public)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSPTCKT) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+
+	DclFld TicketTbl Type(DataTable) Access(*Private)
+	DclFld pXMLpath  Type(String)    Access(*Private)
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"TicketType.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If TicketTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				TicketTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+
+		TicketTbl = *New DataTable("TicketType")
+
+		TicketTbl.Columns.Add(*New DataColumn("TicketTypeCode", *TypeOf(String)))
+		TicketTbl.Columns["TicketTypeCode"].ReadOnly = *True
+
+		TicketTbl.Columns.Add(*New DataColumn("UPC", *TypeOf(String)))
+		TicketTbl.Columns["UPC"].ReadOnly = *True
+		
+		TicketTbl.Columns.Add(*New DataColumn("EANchk", *TypeOf(String)))
+		TicketTbl.Columns["EANchk"].ReadOnly = *True
+		
+		TicketTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		TicketTbl.Columns["Description"].ReadOnly = *True
+		
+		TicketTbl.Columns.Add(*New DataColumn("TicketType", *TypeOf(Int16)))
+		TicketTbl.Columns["TicketType"].ReadOnly = *True
+		
+		TicketTbl.Columns.Add(*New DataColumn("CodeDescription", *TypeOf(System.String)))
+		TicketTbl.Columns["CodeDescription"].Expression = "TicketTypeCode + ' - ' + Description"
+		TicketTbl.Columns["CodeDescription"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {TicketTbl.Columns("TicketTypeCode")}
+		TicketTbl.PrimaryKey = Keys
+	EndSr
+
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSPTCKT.IsOpen
+			Open DSPTCKT
+		EndIf
+		
+		DoUntil DSPTCKT.IsEof
+			Read DSPTCKT
+			If Not DSPTCKT.IsEof
+
+				dr = TicketTbl.NewRow()
+				
+				dr.Item("TicketTypeCode") = PTCODE
+				dr.Item["UPC"]            = PTUPC#.Trim()
+				dr.Item["EANchk"]         = PTEAN#
+				dr.Item["Description"]    = PTDESC.Trim()
+				dr.Item("TicketType")     = PTPCS
+				
+				TicketTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		TicketTbl.WriteXml(pXMLpath)
+		
+		Close DSPTCKT
+	EndSr
+
+	BegFunc GetTicketTypeTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR TicketTbl
+	EndFunc
+EndClass

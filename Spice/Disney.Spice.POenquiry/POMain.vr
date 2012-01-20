@@ -1,0 +1,1714 @@
+// ===============================================
+// Joseph Urbina
+// 3rd August 2009
+// POMain	
+// Spice PO Enquiry 
+//------------------------------------------------
+// Modification
+//================================================
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.IO
+Using System.Windows.Forms
+Using Disney.Spice.ItemsBO
+Using Disney.DA.IP400
+Using Disney.Spice.POUI
+Using Disney.Menu
+
+BegClass POMain Extends(System.Windows.Forms.Form) Access(*Public) 
+
+/Region Define things
+	// No ! don't use DclDB use DCLFLD instead as we are not using DCLDISKFILE here !!!!!
+	//Dcldb  Name(PgmDB) dbname('TDST').........Joseph Urbina 06/05/10 Thanks Clayton.
+	
+	DclFld PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+	DclFld MarketSelectionForm	Type(MarketSelectionForm)
+	DclFld POmodification       Type(POmodification)
+	DclFld frmSubmitToEAS		Type(frmSubmitToEAS)
+	DclFld frmChangeSSD   		Type(frmChangeSSD)
+	DclFld frmCancelPO   		Type(frmCancelPO)
+	DclFld frmPrintPO   		Type(frmPrintPO)
+	DclFld clmSelect System.Windows.Forms.DataGridViewCheckBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmSpicePO System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmRevisionNumber System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmIPPO System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmVendor System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmVendorName System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmShipDate System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmOrderDate System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmMarket System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmStore System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmStatus System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmChangeID System.Windows.Forms.DataGridViewImageColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmPadlock System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld ItemsBO				Type(Items)
+	
+	DclFld MDIform              Type(System.Windows.Forms.Form) 
+	DclFld Environments   		Type(Disney.Menu.Environments)
+	DclFld User					Type(Disney.Menu.Users)
+	DclFld dgvr			        Type(DataGridViewRow)
+	DclFld PurchaseOrder		Type(PurchaseOrder)
+	
+	DclFld dtStatus				Type(DataTable)
+	DclFld dtMarkets			Type(DataTable)
+	DclFld dtStageSetDates		Type(DataTable)
+	DclFld dtOrderH				Type(DataTable)
+	DclFld dtSend				Type(DataTable)
+	DclFld dvDepartments		Type(DataView)
+	DclFld dvOrderH				Type(DataView)
+	DclFld dvStores				Type(DataView)
+	DclFld dvMarkets			Type(DataView)
+	DclFld dvStatus				Type(DataView)
+	DclFld dvVendor				Type(DataView)
+	DclFld drMarkets			Type(DataRow)
+	DclFld SpiceDS				Type(DataSet)
+	DclFld VendorString			Type(StringBuilder)	 
+	DclFld Market				Type(String) 
+	DclFld POFrom				Type(String)
+	DclFld POTo					Type(String)
+	DclFld GridPO				Type(String)
+
+	DclFld CheckBoxCount		Type(Int16)
+	DclFld StatusChk            Type(Boolean)
+	DclFld HoldChar				Type(*Char) Len(5)
+	DclFld HoldChar2            Type(*Char) Len(5) 	
+	DclFld Char_Select          Type(CheckedListBox)
+	DclFld Class_Select         Type(CheckedListBox) 
+    DclFld POStatus_Select      Type(CheckedListBox)
+	DclFld VendorDV		        Type(DataView)
+	DclFld RdoChoice            Type(String) 
+	DclFld PORangeFrom	        Type(String)
+	DclFld PORangeTo	        Type(String)
+	DclFld Market_Select        Type(String)
+	DclFld Store_Select         Type(String)
+	DclFld StageSetDate	        Type(String)	
+	DclFld ShipDateFrom         Type(String) 
+	DclFld ShipDateTo	        Type(String) 
+	DclFld OrderDateFrom        Type(String) 
+	DclFld OrderDateTo	        Type(String) 
+	DclFld xStore_Select        Type(Int16) Inz(0) 
+/EndRegion
+
+/Region Constructors
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB        Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User         Type(Disney.Menu.Users)
+		DclSrParm Environments Type(Disney.Menu.Environments)
+		DclSrParm MDIform      Type(System.Windows.Forms.Form)
+		
+		InitializeComponent()
+				
+		*this.PgmDB        = PgmDB
+		*this.User         = User
+		*this.Environments = Environments
+		*this.MDIform      = MDIform
+		*this.MdiParent    = MDIform
+		
+		PurchaseOrder = *New PurchaseOrder(PgmDB,User, Environments)
+		ItemsBO  = *New Disney.Spice.ItemsBO.Items(PgmDB,User,Environments)	
+	EndConstructor
+/EndRegion	
+
+/Region Default Windows Form Designer generated code
+	DclFld dgvPOMain System.Windows.Forms.DataGridView  					Access(*Private) WithEvents(*Yes)
+	DclFld cmbFamily System.Windows.Forms.ComboBox							Access(*Private) WithEvents(*Yes)
+	DclFld ErrorMsg System.Windows.Forms.ErrorProvider						Access(*Private) WithEvents(*Yes)
+	DclFld cmbMarkets System.Windows.Forms.ComboBox							Access(*Private) WithEvents(*Yes)
+	DclFld cmbSSD System.Windows.Forms.ComboBox								Access(*Private) WithEvents(*Yes)
+	DclFld cmbStores System.Windows.Forms.ComboBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox1 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox4 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox3 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox2 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox11 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox10 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox9 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox8 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox7 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox6 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld groupBox5 System.Windows.Forms.GroupBox							Access(*Private) WithEvents(*Yes)
+	DclFld btnApplyFilters System.Windows.Forms.Button						Access(*Private) WithEvents(*Yes)
+	DclFld btnResetFilters System.Windows.Forms.Button						Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label								Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label								Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label								Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label								Access(*Private) WithEvents(*Yes)
+	DclFld chkLstCharacter System.Windows.Forms.CheckedListBox				Access(*Private) WithEvents(*Yes)
+	DclFld txtToPORange System.Windows.Forms.TextBox						Access(*Private) WithEvents(*Yes)
+	DclFld txtFromPORange System.Windows.Forms.TextBox						Access(*Private) WithEvents(*Yes)
+	DclFld rdoIP System.Windows.Forms.RadioButton							Access(*Private) WithEvents(*Yes)
+	DclFld rdoSpice System.Windows.Forms.RadioButton						Access(*Private) WithEvents(*Yes)
+	DclFld txtVendorName System.Windows.Forms.TextBox						Access(*Private) WithEvents(*Yes)
+	DclFld chkShowMyPO System.Windows.Forms.CheckBox						Access(*Private) WithEvents(*Yes)
+	DclFld chkLstPOStatus System.Windows.Forms.CheckedListBox				Access(*Private) WithEvents(*Yes)
+	DclFld chkLstClass System.Windows.Forms.CheckedListBox					Access(*Private) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button								Access(*Private) WithEvents(*Yes)
+	DclFld btnSelectAll System.Windows.Forms.Button							Access(*Private) WithEvents(*Yes)
+	DclFld btnDeSelectAll System.Windows.Forms.Button						Access(*Private) WithEvents(*Yes)
+	DclFld btnSubmitToEAS System.Windows.Forms.Button						Access(*Private) WithEvents(*Yes)
+	DclFld btnPrintEDI System.Windows.Forms.Button							Access(*Private) WithEvents(*Yes)
+	DclFld btnCancelPO System.Windows.Forms.Button							Access(*Private) WithEvents(*Yes)
+	DclFld btnChangeSSD System.Windows.Forms.Button							Access(*Private) WithEvents(*Yes)
+	DclFld btnNewPO System.Windows.Forms.Button								Access(*Private) WithEvents(*Yes)
+	DclFld btnExit System.Windows.Forms.Button								Access(*Private) WithEvents(*Yes)
+	DclFld dtpToShipDate System.Windows.Forms.DateTimePicker                Access(*Private) WithEvents(*Yes)
+	DclFld dtpFromShipDate System.Windows.Forms.DateTimePicker              Access(*Private) WithEvents(*Yes)
+	DclFld dtpToOrderdate System.Windows.Forms.DateTimePicker               Access(*Private) WithEvents(*Yes)
+	DclFld dtpFromOrderDate System.Windows.Forms.DateTimePicker             Access(*Private) WithEvents(*Yes)
+	DclFld ImageList System.Windows.Forms.ImageList                         Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+		
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle7 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle8 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle11 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle12 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle9 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle10 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(POMain))
+		*this.dgvPOMain = *new System.Windows.Forms.DataGridView()
+		*this.clmSelect = *new System.Windows.Forms.DataGridViewCheckBoxColumn()
+		*this.clmSpicePO = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmRevisionNumber = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmIPPO = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmVendor = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmVendorName = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmShipDate = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmOrderDate = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmMarket = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmStore = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmStatus = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmChangeID = *new System.Windows.Forms.DataGridViewImageColumn()
+		*this.clmPadlock = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.groupBox1 = *new System.Windows.Forms.GroupBox()
+		*this.btnApplyFilters = *new System.Windows.Forms.Button()
+		*this.btnResetFilters = *new System.Windows.Forms.Button()
+		*this.groupBox11 = *new System.Windows.Forms.GroupBox()
+		*this.chkShowMyPO = *new System.Windows.Forms.CheckBox()
+		*this.groupBox10 = *new System.Windows.Forms.GroupBox()
+		*this.dtpToOrderdate = *new System.Windows.Forms.DateTimePicker()
+		*this.dtpFromOrderDate = *new System.Windows.Forms.DateTimePicker()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.groupBox9 = *new System.Windows.Forms.GroupBox()
+		*this.dtpToShipDate = *new System.Windows.Forms.DateTimePicker()
+		*this.dtpFromShipDate = *new System.Windows.Forms.DateTimePicker()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.groupBox8 = *new System.Windows.Forms.GroupBox()
+		*this.chkLstPOStatus = *new System.Windows.Forms.CheckedListBox()
+		*this.groupBox7 = *new System.Windows.Forms.GroupBox()
+		*this.chkLstClass = *new System.Windows.Forms.CheckedListBox()
+		*this.groupBox6 = *new System.Windows.Forms.GroupBox()
+		*this.cmbSSD = *new System.Windows.Forms.ComboBox()
+		*this.groupBox5 = *new System.Windows.Forms.GroupBox()
+		*this.cmbFamily = *new System.Windows.Forms.ComboBox()
+		*this.chkLstCharacter = *new System.Windows.Forms.CheckedListBox()
+		*this.groupBox4 = *new System.Windows.Forms.GroupBox()
+		*this.cmbStores = *new System.Windows.Forms.ComboBox()
+		*this.cmbMarkets = *new System.Windows.Forms.ComboBox()
+		*this.groupBox3 = *new System.Windows.Forms.GroupBox()
+		*this.txtToPORange = *new System.Windows.Forms.TextBox()
+		*this.txtFromPORange = *new System.Windows.Forms.TextBox()
+		*this.rdoIP = *new System.Windows.Forms.RadioButton()
+		*this.rdoSpice = *new System.Windows.Forms.RadioButton()
+		*this.groupBox2 = *new System.Windows.Forms.GroupBox()
+		*this.txtVendorName = *new System.Windows.Forms.TextBox()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.btnSelectAll = *new System.Windows.Forms.Button()
+		*this.btnDeSelectAll = *new System.Windows.Forms.Button()
+		*this.btnSubmitToEAS = *new System.Windows.Forms.Button()
+		*this.btnPrintEDI = *new System.Windows.Forms.Button()
+		*this.btnCancelPO = *new System.Windows.Forms.Button()
+		*this.btnChangeSSD = *new System.Windows.Forms.Button()
+		*this.btnNewPO = *new System.Windows.Forms.Button()
+		*this.btnExit = *new System.Windows.Forms.Button()
+		*this.ErrorMsg = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.ImageList = *new System.Windows.Forms.ImageList(*this.components)
+		(*this.dgvPOMain *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.groupBox1.SuspendLayout()
+		*this.groupBox11.SuspendLayout()
+		*this.groupBox10.SuspendLayout()
+		*this.groupBox9.SuspendLayout()
+		*this.groupBox8.SuspendLayout()
+		*this.groupBox7.SuspendLayout()
+		*this.groupBox6.SuspendLayout()
+		*this.groupBox5.SuspendLayout()
+		*this.groupBox4.SuspendLayout()
+		*this.groupBox3.SuspendLayout()
+		*this.groupBox2.SuspendLayout()
+		(*this.ErrorMsg *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//dgvPOMain
+		//
+		*this.dgvPOMain.AllowUserToAddRows = *False
+		*this.dgvPOMain.AllowUserToDeleteRows = *False
+		*this.dgvPOMain.AllowUserToOrderColumns = *True
+		*this.dgvPOMain.AllowUserToResizeColumns = *False
+		*this.dgvPOMain.AllowUserToResizeRows = *False
+		dataGridViewCellStyle7.BackColor = System.Drawing.Color.AntiqueWhite
+		*this.dgvPOMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7
+		*this.dgvPOMain.CausesValidation = *False
+		dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+		dataGridViewCellStyle8.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+		dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False
+		*this.dgvPOMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8
+		*this.dgvPOMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dgvPOMain.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.clmSelect, *this.clmSpicePO, *this.clmRevisionNumber, *this.clmIPPO, *this.clmVendor, *this.clmVendorName, *this.clmShipDate, *this.clmOrderDate, *this.clmMarket, *this.clmStore, *this.clmStatus, *this.clmChangeID, *this.clmPadlock})
+		dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+		dataGridViewCellStyle11.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+		dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False
+		*this.dgvPOMain.DefaultCellStyle = dataGridViewCellStyle11
+		*this.dgvPOMain.Location = *new System.Drawing.Point(11, 279)
+		*this.dgvPOMain.Name = "dgvPOMain"
+		dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+		dataGridViewCellStyle12.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+		dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False
+		*this.dgvPOMain.RowHeadersDefaultCellStyle = dataGridViewCellStyle12
+		*this.dgvPOMain.RowHeadersVisible = *False
+		*this.dgvPOMain.RowHeadersWidth = 51
+		*this.dgvPOMain.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+		*this.dgvPOMain.RowTemplate.Height = 25
+		*this.dgvPOMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+		*this.dgvPOMain.Size = *new System.Drawing.Size(992, 311)
+		*this.dgvPOMain.TabIndex = 1
+		//
+		//clmSelect
+		//
+		*this.clmSelect.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmSelect.DataPropertyName = "clmSelect"
+		*this.clmSelect.FillWeight = 50
+		*this.clmSelect.HeaderText = "Select"
+		*this.clmSelect.MinimumWidth = 50
+		*this.clmSelect.Name = "clmSelect"
+		*this.clmSelect.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmSelect.Width = 50
+		//
+		//clmSpicePO
+		//
+		*this.clmSpicePO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmSpicePO.DataPropertyName = "clmSpicePO"
+		*this.clmSpicePO.FillWeight = 90
+		*this.clmSpicePO.HeaderText = "Spice PO#"
+		*this.clmSpicePO.Name = "clmSpicePO"
+		*this.clmSpicePO.ReadOnly = *True
+		*this.clmSpicePO.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmSpicePO.Width = 90
+		//
+		//clmRevisionNumber
+		//
+		*this.clmRevisionNumber.DataPropertyName = "clmRevisionNumber"
+		*this.clmRevisionNumber.FillWeight = 70
+		*this.clmRevisionNumber.HeaderText = "Revision"
+		*this.clmRevisionNumber.Name = "clmRevisionNumber"
+		*this.clmRevisionNumber.ReadOnly = *True
+		*this.clmRevisionNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmRevisionNumber.Width = 70
+		//
+		//clmIPPO
+		//
+		*this.clmIPPO.DataPropertyName = "clmIPPO"
+		*this.clmIPPO.FillWeight = 70
+		*this.clmIPPO.HeaderText = "IP PO#"
+		*this.clmIPPO.Name = "clmIPPO"
+		*this.clmIPPO.ReadOnly = *True
+		*this.clmIPPO.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmIPPO.Width = 70
+		//
+		//clmVendor
+		//
+		*this.clmVendor.DataPropertyName = "clmVendor"
+		dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+		*this.clmVendor.DefaultCellStyle = dataGridViewCellStyle9
+		*this.clmVendor.FillWeight = 71
+		*this.clmVendor.HeaderText = "Vendor"
+		*this.clmVendor.MinimumWidth = 71
+		*this.clmVendor.Name = "clmVendor"
+		*this.clmVendor.ReadOnly = *True
+		*this.clmVendor.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmVendor.Width = 71
+		//
+		//clmVendorName
+		//
+		*this.clmVendorName.DataPropertyName = "clmVendorName"
+		dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		*this.clmVendorName.DefaultCellStyle = dataGridViewCellStyle10
+		*this.clmVendorName.FillWeight = 210
+		*this.clmVendorName.HeaderText = "Vendor Name"
+		*this.clmVendorName.MinimumWidth = 210
+		*this.clmVendorName.Name = "clmVendorName"
+		*this.clmVendorName.ReadOnly = *True
+		*this.clmVendorName.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmVendorName.Width = 210
+		//
+		//clmShipDate
+		//
+		*this.clmShipDate.DataPropertyName = "clmShipDate"
+		*this.clmShipDate.FillWeight = 105
+		*this.clmShipDate.HeaderText = "Ship Date"
+		*this.clmShipDate.MinimumWidth = 105
+		*this.clmShipDate.Name = "clmShipDate"
+		*this.clmShipDate.ReadOnly = *True
+		*this.clmShipDate.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmShipDate.Width = 105
+		//
+		//clmOrderDate
+		//
+		*this.clmOrderDate.DataPropertyName = "clmOrderDate"
+		*this.clmOrderDate.FillWeight = 105
+		*this.clmOrderDate.HeaderText = "Order Date"
+		*this.clmOrderDate.MinimumWidth = 105
+		*this.clmOrderDate.Name = "clmOrderDate"
+		*this.clmOrderDate.ReadOnly = *True
+		*this.clmOrderDate.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmOrderDate.Width = 105
+		//
+		//clmMarket
+		//
+		*this.clmMarket.DataPropertyName = "clmMarket"
+		*this.clmMarket.FillWeight = 45
+		*this.clmMarket.HeaderText = "Market"
+		*this.clmMarket.Name = "clmMarket"
+		*this.clmMarket.ReadOnly = *True
+		*this.clmMarket.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmMarket.Width = 45
+		//
+		//clmStore
+		//
+		*this.clmStore.DataPropertyName = "clmStore"
+		*this.clmStore.FillWeight = 45
+		*this.clmStore.HeaderText = "Store"
+		*this.clmStore.Name = "clmStore"
+		*this.clmStore.ReadOnly = *True
+		*this.clmStore.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmStore.Width = 45
+		//
+		//clmStatus
+		//
+		*this.clmStatus.DataPropertyName = "clmStatus"
+		*this.clmStatus.FillWeight = 50
+		*this.clmStatus.HeaderText = "Status"
+		*this.clmStatus.Name = "clmStatus"
+		*this.clmStatus.ReadOnly = *True
+		*this.clmStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmStatus.Width = 50
+		//
+		//clmChangeID
+		//
+		*this.clmChangeID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.clmChangeID.FillWeight = 60
+		*this.clmChangeID.HeaderText = ""
+		*this.clmChangeID.Image = (resources.GetObject("clmChangeID.Image") *As System.Drawing.Image)
+		*this.clmChangeID.MinimumWidth = 60
+		*this.clmChangeID.Name = "clmChangeID"
+		*this.clmChangeID.ReadOnly = *True
+		*this.clmChangeID.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.clmChangeID.Width = 60
+		//
+		//clmPadlock
+		//
+		*this.clmPadlock.DataPropertyName = "clmPadlock"
+		*this.clmPadlock.HeaderText = "ClmPadlock"
+		*this.clmPadlock.Name = "clmPadlock"
+		*this.clmPadlock.ReadOnly = *True
+		*this.clmPadlock.Visible = *False
+		//
+		//groupBox1
+		//
+		*this.groupBox1.Controls.Add(*this.btnApplyFilters)
+		*this.groupBox1.Controls.Add(*this.btnResetFilters)
+		*this.groupBox1.Controls.Add(*this.groupBox11)
+		*this.groupBox1.Controls.Add(*this.groupBox10)
+		*this.groupBox1.Controls.Add(*this.groupBox9)
+		*this.groupBox1.Controls.Add(*this.groupBox8)
+		*this.groupBox1.Controls.Add(*this.groupBox7)
+		*this.groupBox1.Controls.Add(*this.groupBox6)
+		*this.groupBox1.Controls.Add(*this.groupBox5)
+		*this.groupBox1.Controls.Add(*this.groupBox4)
+		*this.groupBox1.Controls.Add(*this.groupBox3)
+		*this.groupBox1.Controls.Add(*this.groupBox2)
+		*this.groupBox1.Location = *new System.Drawing.Point(12, 12)
+		*this.groupBox1.Name = "groupBox1"
+		*this.groupBox1.Size = *new System.Drawing.Size(992, 267)
+		*this.groupBox1.TabIndex = 0
+		*this.groupBox1.TabStop = *False
+		*this.groupBox1.Text = "Filters"
+		//
+		//btnApplyFilters
+		//
+		*this.btnApplyFilters.Location = *new System.Drawing.Point(887, 239)
+		*this.btnApplyFilters.Name = "btnApplyFilters"
+		*this.btnApplyFilters.Size = *new System.Drawing.Size(97, 21)
+		*this.btnApplyFilters.TabIndex = 11
+		*this.btnApplyFilters.Text = "&Apply Filters"
+		*this.btnApplyFilters.UseVisualStyleBackColor = *True
+		//
+		//btnResetFilters
+		//
+		*this.btnResetFilters.Location = *new System.Drawing.Point(785, 239)
+		*this.btnResetFilters.Name = "btnResetFilters"
+		*this.btnResetFilters.Size = *new System.Drawing.Size(97, 21)
+		*this.btnResetFilters.TabIndex = 10
+		*this.btnResetFilters.Text = "&Reset Filters"
+		*this.btnResetFilters.UseVisualStyleBackColor = *True
+		//
+		//groupBox11
+		//
+		*this.groupBox11.Controls.Add(*this.chkShowMyPO)
+		*this.groupBox11.Location = *new System.Drawing.Point(785, 191)
+		*this.groupBox11.Name = "groupBox11"
+		*this.groupBox11.Size = *new System.Drawing.Size(200, 42)
+		*this.groupBox11.TabIndex = 9
+		*this.groupBox11.TabStop = *False
+		*this.groupBox11.Text = "Owner"
+		//
+		//chkShowMyPO
+		//
+		*this.chkShowMyPO.AutoSize = *True
+		*this.chkShowMyPO.Location = *new System.Drawing.Point(22, 20)
+		*this.chkShowMyPO.Name = "chkShowMyPO"
+		*this.chkShowMyPO.Size = *new System.Drawing.Size(109, 17)
+		*this.chkShowMyPO.TabIndex = 0
+		*this.chkShowMyPO.Text = "Show only my PO"
+		*this.chkShowMyPO.UseVisualStyleBackColor = *True
+		//
+		//groupBox10
+		//
+		*this.groupBox10.Controls.Add(*this.dtpToOrderdate)
+		*this.groupBox10.Controls.Add(*this.dtpFromOrderDate)
+		*this.groupBox10.Controls.Add(*this.label4)
+		*this.groupBox10.Controls.Add(*this.label2)
+		*this.groupBox10.Location = *new System.Drawing.Point(785, 109)
+		*this.groupBox10.Name = "groupBox10"
+		*this.groupBox10.Size = *new System.Drawing.Size(200, 80)
+		*this.groupBox10.TabIndex = 8
+		*this.groupBox10.TabStop = *False
+		*this.groupBox10.Text = "Order Date"
+		//
+		//dtpToOrderdate
+		//
+		*this.dtpToOrderdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+		*this.dtpToOrderdate.Location = *new System.Drawing.Point(54, 51)
+		*this.dtpToOrderdate.Name = "dtpToOrderdate"
+		*this.dtpToOrderdate.Size = *new System.Drawing.Size(128, 20)
+		*this.dtpToOrderdate.TabIndex = 9
+		//
+		//dtpFromOrderDate
+		//
+		*this.dtpFromOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+		*this.dtpFromOrderDate.Location = *new System.Drawing.Point(54, 23)
+		*this.dtpFromOrderDate.Name = "dtpFromOrderDate"
+		*this.dtpFromOrderDate.Size = *new System.Drawing.Size(128, 20)
+		*this.dtpFromOrderDate.TabIndex = 8
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Location = *new System.Drawing.Point(25, 54)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(20, 13)
+		*this.label4.TabIndex = 7
+		*this.label4.Text = "To"
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(15, 28)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(30, 13)
+		*this.label2.TabIndex = 6
+		*this.label2.Text = "From"
+		//
+		//groupBox9
+		//
+		*this.groupBox9.Controls.Add(*this.dtpToShipDate)
+		*this.groupBox9.Controls.Add(*this.dtpFromShipDate)
+		*this.groupBox9.Controls.Add(*this.label3)
+		*this.groupBox9.Controls.Add(*this.label1)
+		*this.groupBox9.Location = *new System.Drawing.Point(785, 20)
+		*this.groupBox9.Name = "groupBox9"
+		*this.groupBox9.Size = *new System.Drawing.Size(200, 80)
+		*this.groupBox9.TabIndex = 7
+		*this.groupBox9.TabStop = *False
+		*this.groupBox9.Text = "Ship Date"
+		//
+		//dtpToShipDate
+		//
+		*this.dtpToShipDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+		*this.dtpToShipDate.Location = *new System.Drawing.Point(54, 50)
+		*this.dtpToShipDate.Name = "dtpToShipDate"
+		*this.dtpToShipDate.Size = *new System.Drawing.Size(128, 20)
+		*this.dtpToShipDate.TabIndex = 8
+		//
+		//dtpFromShipDate
+		//
+		*this.dtpFromShipDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+		*this.dtpFromShipDate.Location = *new System.Drawing.Point(54, 22)
+		*this.dtpFromShipDate.Name = "dtpFromShipDate"
+		*this.dtpFromShipDate.Size = *new System.Drawing.Size(128, 20)
+		*this.dtpFromShipDate.TabIndex = 7
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(25, 54)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(20, 13)
+		*this.label3.TabIndex = 6
+		*this.label3.Text = "To"
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(15, 25)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(30, 13)
+		*this.label1.TabIndex = 5
+		*this.label1.Text = "From"
+		//
+		//groupBox8
+		//
+		*this.groupBox8.Controls.Add(*this.chkLstPOStatus)
+		*this.groupBox8.Location = *new System.Drawing.Point(578, 20)
+		*this.groupBox8.Name = "groupBox8"
+		*this.groupBox8.Size = *new System.Drawing.Size(200, 241)
+		*this.groupBox8.TabIndex = 6
+		*this.groupBox8.TabStop = *False
+		*this.groupBox8.Text = "PO Status"
+		//
+		//chkLstPOStatus
+		//
+		*this.chkLstPOStatus.CheckOnClick = *True
+		*this.chkLstPOStatus.FormattingEnabled = *True
+		*this.chkLstPOStatus.Location = *new System.Drawing.Point(6, 19)
+		*this.chkLstPOStatus.Name = "chkLstPOStatus"
+		*this.chkLstPOStatus.Size = *new System.Drawing.Size(188, 214)
+		*this.chkLstPOStatus.Sorted = *True
+		*this.chkLstPOStatus.TabIndex = 6
+		//
+		//groupBox7
+		//
+		*this.groupBox7.Controls.Add(*this.chkLstClass)
+		*this.groupBox7.Location = *new System.Drawing.Point(355, 20)
+		*this.groupBox7.Name = "groupBox7"
+		*this.groupBox7.Size = *new System.Drawing.Size(216, 241)
+		*this.groupBox7.TabIndex = 5
+		*this.groupBox7.TabStop = *False
+		*this.groupBox7.Text = "Class"
+		//
+		//chkLstClass
+		//
+		*this.chkLstClass.CheckOnClick = *True
+		*this.chkLstClass.FormattingEnabled = *True
+		*this.chkLstClass.Location = *new System.Drawing.Point(7, 19)
+		*this.chkLstClass.Name = "chkLstClass"
+		*this.chkLstClass.Size = *new System.Drawing.Size(201, 214)
+		*this.chkLstClass.TabIndex = 5
+		//
+		//groupBox6
+		//
+		*this.groupBox6.Controls.Add(*this.cmbSSD)
+		*this.groupBox6.Location = *new System.Drawing.Point(164, 216)
+		*this.groupBox6.Name = "groupBox6"
+		*this.groupBox6.Size = *new System.Drawing.Size(183, 45)
+		*this.groupBox6.TabIndex = 4
+		*this.groupBox6.TabStop = *False
+		*this.groupBox6.Text = "Stage Set date"
+		//
+		//cmbSSD
+		//
+		*this.cmbSSD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cmbSSD.FormattingEnabled = *True
+		*this.cmbSSD.Location = *new System.Drawing.Point(8, 17)
+		*this.cmbSSD.Name = "cmbSSD"
+		*this.cmbSSD.Size = *new System.Drawing.Size(167, 21)
+		*this.cmbSSD.TabIndex = 0
+		//
+		//groupBox5
+		//
+		*this.groupBox5.Controls.Add(*this.cmbFamily)
+		*this.groupBox5.Controls.Add(*this.chkLstCharacter)
+		*this.groupBox5.Location = *new System.Drawing.Point(164, 20)
+		*this.groupBox5.Name = "groupBox5"
+		*this.groupBox5.Size = *new System.Drawing.Size(183, 190)
+		*this.groupBox5.TabIndex = 3
+		*this.groupBox5.TabStop = *False
+		*this.groupBox5.Text = "Family / Character"
+		//
+		//cmbFamily
+		//
+		*this.cmbFamily.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cmbFamily.FormattingEnabled = *True
+		*this.cmbFamily.Location = *new System.Drawing.Point(7, 16)
+		*this.cmbFamily.MaxDropDownItems = 15
+		*this.cmbFamily.Name = "cmbFamily"
+		*this.cmbFamily.Size = *new System.Drawing.Size(168, 21)
+		*this.cmbFamily.TabIndex = 5
+		//
+		//chkLstCharacter
+		//
+		*this.chkLstCharacter.CheckOnClick = *True
+		*this.chkLstCharacter.FormattingEnabled = *True
+		*this.chkLstCharacter.Location = *new System.Drawing.Point(7, 43)
+		*this.chkLstCharacter.Name = "chkLstCharacter"
+		*this.chkLstCharacter.Size = *new System.Drawing.Size(168, 139)
+		*this.chkLstCharacter.TabIndex = 4
+		//
+		//groupBox4
+		//
+		*this.groupBox4.Controls.Add(*this.cmbStores)
+		*this.groupBox4.Controls.Add(*this.cmbMarkets)
+		*this.groupBox4.Location = *new System.Drawing.Point(7, 179)
+		*this.groupBox4.Name = "groupBox4"
+		*this.groupBox4.Size = *new System.Drawing.Size(151, 82)
+		*this.groupBox4.TabIndex = 2
+		*this.groupBox4.TabStop = *False
+		*this.groupBox4.Text = "Market / Store"
+		//
+		//cmbStores
+		//
+		*this.cmbStores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cmbStores.FormattingEnabled = *True
+		*this.cmbStores.Items.AddRange(*new System.Object[] {"All Stores"})
+		*this.cmbStores.Location = *new System.Drawing.Point(7, 54)
+		*this.cmbStores.MaxDropDownItems = 15
+		*this.cmbStores.Name = "cmbStores"
+		*this.cmbStores.Size = *new System.Drawing.Size(137, 21)
+		*this.cmbStores.TabIndex = 3
+		//
+		//cmbMarkets
+		//
+		*this.cmbMarkets.AllowDrop = *True
+		*this.cmbMarkets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cmbMarkets.FormattingEnabled = *True
+		*this.cmbMarkets.Items.AddRange(*new System.Object[] {"All Markets"})
+		*this.cmbMarkets.Location = *new System.Drawing.Point(7, 20)
+		*this.cmbMarkets.Name = "cmbMarkets"
+		*this.cmbMarkets.Size = *new System.Drawing.Size(137, 21)
+		*this.cmbMarkets.Sorted = *True
+		*this.cmbMarkets.TabIndex = 2
+		//
+		//groupBox3
+		//
+		*this.groupBox3.Controls.Add(*this.txtToPORange)
+		*this.groupBox3.Controls.Add(*this.txtFromPORange)
+		*this.groupBox3.Controls.Add(*this.rdoIP)
+		*this.groupBox3.Controls.Add(*this.rdoSpice)
+		*this.groupBox3.Location = *new System.Drawing.Point(7, 85)
+		*this.groupBox3.Name = "groupBox3"
+		*this.groupBox3.Size = *new System.Drawing.Size(151, 86)
+		*this.groupBox3.TabIndex = 1
+		*this.groupBox3.TabStop = *False
+		*this.groupBox3.Text = "PO Range"
+		//
+		//txtToPORange
+		//
+		*this.txtToPORange.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtToPORange.Location = *new System.Drawing.Point(79, 52)
+		*this.txtToPORange.MaxLength = 5
+		*this.txtToPORange.Name = "txtToPORange"
+		*this.txtToPORange.Size = *new System.Drawing.Size(65, 20)
+		*this.txtToPORange.TabIndex = 3
+		//
+		//txtFromPORange
+		//
+		*this.txtFromPORange.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtFromPORange.Location = *new System.Drawing.Point(6, 52)
+		*this.txtFromPORange.MaxLength = 5
+		*this.txtFromPORange.Name = "txtFromPORange"
+		*this.txtFromPORange.Size = *new System.Drawing.Size(65, 20)
+		*this.txtFromPORange.TabIndex = 2
+		//
+		//rdoIP
+		//
+		*this.rdoIP.AutoSize = *True
+		*this.rdoIP.Location = *new System.Drawing.Point(81, 24)
+		*this.rdoIP.Name = "rdoIP"
+		*this.rdoIP.Size = *new System.Drawing.Size(35, 17)
+		*this.rdoIP.TabIndex = 1
+		*this.rdoIP.TabStop = *True
+		*this.rdoIP.Text = "IP"
+		*this.rdoIP.UseVisualStyleBackColor = *True
+		//
+		//rdoSpice
+		//
+		*this.rdoSpice.AutoSize = *True
+		*this.rdoSpice.Location = *new System.Drawing.Point(7, 24)
+		*this.rdoSpice.Name = "rdoSpice"
+		*this.rdoSpice.Size = *new System.Drawing.Size(52, 17)
+		*this.rdoSpice.TabIndex = 0
+		*this.rdoSpice.TabStop = *True
+		*this.rdoSpice.Text = "Spice"
+		*this.rdoSpice.UseVisualStyleBackColor = *True
+		//
+		//groupBox2
+		//
+		*this.groupBox2.Controls.Add(*this.txtVendorName)
+		*this.groupBox2.Location = *new System.Drawing.Point(7, 20)
+		*this.groupBox2.Name = "groupBox2"
+		*this.groupBox2.Size = *new System.Drawing.Size(151, 59)
+		*this.groupBox2.TabIndex = 0
+		*this.groupBox2.TabStop = *False
+		*this.groupBox2.Text = "Vendor name"
+		//
+		//txtVendorName
+		//
+		*this.txtVendorName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtVendorName.Location = *new System.Drawing.Point(6, 25)
+		*this.txtVendorName.Name = "txtVendorName"
+		*this.txtVendorName.Size = *new System.Drawing.Size(130, 20)
+		*this.txtVendorName.TabIndex = 0
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Location = *new System.Drawing.Point(12, 597)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 2
+		*this.btnHelp.Text = "&Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//btnSelectAll
+		//
+		*this.btnSelectAll.Location = *new System.Drawing.Point(135, 597)
+		*this.btnSelectAll.Name = "btnSelectAll"
+		*this.btnSelectAll.Size = *new System.Drawing.Size(75, 23)
+		*this.btnSelectAll.TabIndex = 3
+		*this.btnSelectAll.Text = "Select All"
+		*this.btnSelectAll.UseVisualStyleBackColor = *True
+		//
+		//btnDeSelectAll
+		//
+		*this.btnDeSelectAll.Location = *new System.Drawing.Point(217, 597)
+		*this.btnDeSelectAll.Name = "btnDeSelectAll"
+		*this.btnDeSelectAll.Size = *new System.Drawing.Size(75, 23)
+		*this.btnDeSelectAll.TabIndex = 4
+		*this.btnDeSelectAll.Text = "Deselect All"
+		*this.btnDeSelectAll.UseVisualStyleBackColor = *True
+		//
+		//btnSubmitToEAS
+		//
+		*this.btnSubmitToEAS.Location = *new System.Drawing.Point(405, 597)
+		*this.btnSubmitToEAS.Name = "btnSubmitToEAS"
+		*this.btnSubmitToEAS.Size = *new System.Drawing.Size(87, 23)
+		*this.btnSubmitToEAS.TabIndex = 5
+		*this.btnSubmitToEAS.Text = "Submit to EAS"
+		*this.btnSubmitToEAS.UseVisualStyleBackColor = *True
+		//
+		//btnPrintEDI
+		//
+		*this.btnPrintEDI.Location = *new System.Drawing.Point(497, 597)
+		*this.btnPrintEDI.Name = "btnPrintEDI"
+		*this.btnPrintEDI.Size = *new System.Drawing.Size(75, 23)
+		*this.btnPrintEDI.TabIndex = 6
+		*this.btnPrintEDI.Text = "Print / EDI"
+		*this.btnPrintEDI.UseVisualStyleBackColor = *True
+		//
+		//btnCancelPO
+		//
+		*this.btnCancelPO.Location = *new System.Drawing.Point(577, 597)
+		*this.btnCancelPO.Name = "btnCancelPO"
+		*this.btnCancelPO.Size = *new System.Drawing.Size(75, 23)
+		*this.btnCancelPO.TabIndex = 7
+		*this.btnCancelPO.Text = "Cancel PO"
+		*this.btnCancelPO.UseVisualStyleBackColor = *True
+		//
+		//btnChangeSSD
+		//
+		*this.btnChangeSSD.Location = *new System.Drawing.Point(657, 597)
+		*this.btnChangeSSD.Name = "btnChangeSSD"
+		*this.btnChangeSSD.Size = *new System.Drawing.Size(80, 23)
+		*this.btnChangeSSD.TabIndex = 8
+		*this.btnChangeSSD.Text = "Change SSD"
+		*this.btnChangeSSD.UseVisualStyleBackColor = *True
+		//
+		//btnNewPO
+		//
+		*this.btnNewPO.Location = *new System.Drawing.Point(847, 597)
+		*this.btnNewPO.Name = "btnNewPO"
+		*this.btnNewPO.Size = *new System.Drawing.Size(75, 23)
+		*this.btnNewPO.TabIndex = 9
+		*this.btnNewPO.Text = "New PO"
+		*this.btnNewPO.UseVisualStyleBackColor = *True
+		//
+		//btnExit
+		//
+		*this.btnExit.Location = *new System.Drawing.Point(929, 597)
+		*this.btnExit.Name = "btnExit"
+		*this.btnExit.Size = *new System.Drawing.Size(75, 23)
+		*this.btnExit.TabIndex = 10
+		*this.btnExit.Text = "&Exit"
+		*this.btnExit.UseVisualStyleBackColor = *True
+		//
+		//ErrorMsg
+		//
+		*this.ErrorMsg.ContainerControl = *this
+		//
+		//ImageList
+		//
+		*this.ImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
+		*this.ImageList.ImageSize = *new System.Drawing.Size(16, 16)
+		*this.ImageList.TransparentColor = System.Drawing.Color.Transparent
+		//
+		//POMain
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(1014, 626)
+		*this.Controls.Add(*this.btnExit)
+		*this.Controls.Add(*this.btnNewPO)
+		*this.Controls.Add(*this.btnChangeSSD)
+		*this.Controls.Add(*this.btnCancelPO)
+		*this.Controls.Add(*this.btnPrintEDI)
+		*this.Controls.Add(*this.btnSubmitToEAS)
+		*this.Controls.Add(*this.btnDeSelectAll)
+		*this.Controls.Add(*this.btnSelectAll)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.dgvPOMain)
+		*this.Controls.Add(*this.groupBox1)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.Name = "POMain"
+		*this.ShowIcon = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "SPICE - PO Management - Main"
+		(*this.dgvPOMain *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.groupBox1.ResumeLayout(*False)
+		*this.groupBox11.ResumeLayout(*False)
+		*this.groupBox11.PerformLayout()
+		*this.groupBox10.ResumeLayout(*False)
+		*this.groupBox10.PerformLayout()
+		*this.groupBox9.ResumeLayout(*False)
+		*this.groupBox9.PerformLayout()
+		*this.groupBox8.ResumeLayout(*False)
+		*this.groupBox7.ResumeLayout(*False)
+		*this.groupBox6.ResumeLayout(*False)
+		*this.groupBox5.ResumeLayout(*False)
+		*this.groupBox4.ResumeLayout(*False)
+		*this.groupBox3.ResumeLayout(*False)
+		*this.groupBox3.PerformLayout()
+		*this.groupBox2.ResumeLayout(*False)
+		*this.groupBox2.PerformLayout()
+		(*this.ErrorMsg *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+	EndSr
+		
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	/EndRegion
+	
+/Region Form events
+	BegSr POmain_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+       	
+       	DclFld ImagePath Type(String)
+       	
+		//Create Image List
+        ImagePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).Substring(6)
+        try
+			ImageList.Images.Add(Image.FromFile(Path.Combine(ImagePath, "PadLock.png")))
+        catch Ex Type(System.Exception)
+            MsgBox "Traffic light images are missing"
+        EndTry
+        					
+		//Set controls
+		btnSubmitToEas.Enabled = *False
+		btnPrintEDI.Enabled    = *False
+		btnCancelPO.Enabled    = *False
+		btnChangeSSD.Enabled   = *False
+		cmbStores.SelectedText = 'All Stores'
+		chkShowMyPO.Checked    = *True
+		rdoSpice.Checked       = *True
+		RdoChoice              = 'Spice'
+		CheckBoxCount          = 0
+		
+		//Stage set Date not used in Europe		
+		//If Environments.Domain = 'EMEA'
+		If (DataCache.AreStageSetDatesChangeable = *False)
+			cmbSSD.Enabled       = *False
+			btnChangeSSD.Enabled = *False
+		Endif
+		
+		//Set DatePicker Date Format
+		If Environments.DateFormat = "DMY"
+			dtpFromShipDate.CustomFormat  = "dd MMMM yyyy"
+			dtpToShipDate.CustomFormat    = "dd MMMM yyyy"
+			dtpFromOrderDate.CustomFormat = "dd MMMM yyyy"
+			dtpToOrderDate.CustomFormat   = "dd MMMM yyyy"
+		Else
+			dtpFromShipDate.CustomFormat  = "MMMM dd yyyy"
+			dtpToShipDate.CustomFormat    = "MMMM dd yyyy"
+			dtpFromOrderDate.CustomFormat = "MMMM dd yyyy"
+			dtpToOrderDate.CustomFormat   = "MMMM dd yyyy"
+		Endif
+				
+		// Call methods in ItemsBO to build dataset
+		ItemsBO.GetAllFamilyTbl()
+		ItemsBO.GetAllFamilyCharTbl("All Families")
+		ItemsBO.GetClassTbl()
+		ItemsBO.GetAuthorisedMarketsTbl()
+		SpiceDS = ItemsBO.SpiceDataSet
+		
+		//Get Authorised Departments
+		dvDepartments = *New DataView(SpiceDS.Tables["AuthorisedDepts"])
+										
+		//Stage Set dates only built when needed DropDownList
+		dtStageSetDates                  = PurchaseOrder.StageSetDates()
+		dtStageSetDates.DefaultView.Sort = "clmSSDDATNum DESC"	
+		cmbSSD.DataSource                = dtStageSetDates
+		
+		If Environments.DateFormat = "DMY"
+			cmbSSD.DisplayMember = "clmSSDDATDMY" 
+		Else
+			cmbSSD.DisplayMember = "clmSSDDATMDY" 
+		Endif
+		
+		AddHandler SourceObject(cmbSSD) SourceEvent(SelectedValueChanged) HandlerSR(cmbSSD_SelectedValueChanged)	
+		
+		//Markets DropDownList
+		dtMarkets = SpiceDS.Tables("AuthorisedMarkets").Copy()
+		drMarkets = dtMarkets.NewRow()
+		drMarkets.Item["IPMarket"]     = 'All Markets'
+		drMarkets.Item["IPMarketDesc"] = ' '
+		dtMarkets.Rows.Add( drMarkets )
+		cmbMarkets.DataSource = dtMarkets
+		cmbMarkets.DisplayMember = "IPMarket" 
+		
+		//Stores DropDownList
+		dvStores = PurchaseOrder.StoresAll(Environments.Domain)
+		Market_Select = cmbMarkets.Text.ToUpper().Trim().ToString()
+		cmbStores.DataSource = dvStores
+		cmbStores.DisplayMember = "StoreDescription"
+		
+		AddHandler SourceObject(cmbMarkets) SourceEvent(SelectedValueChanged) HandlerSR(cmbMarkets_SelectedValueChanged)
+		
+		//PO Status ChkListBox
+		dtStatus = PurchaseOrder.POStatus()
+		dvStatus = *New DataView(dtStatus)
+		chkLstPOStatus.DataSource = dvStatus
+		chkLstPOStatus.DisplayMember = "clmStatusDesc"
+												
+		// Family
+		cmbFamily.DataSource = SpiceDS.Tables("AllFamily")
+		cmbFamily.DisplayMember = "FamilyCodeDescription"
+		cmbFamily.ValueMember   = "FamilyCode"
+		AddHandler SourceObject(cmbFamily) SourceEvent(SelectedValueChanged) HandlerSR(cmbFamily_SelectedValueChanged)		
+		
+		// Character
+		chkLstCharacter.DataSource = SpiceDS.Tables("FamilyChars")
+		chkLstCharacter.DisplayMember = "CharCodeDescription"
+		chkLstCharacter.ValueMember   = "CharCode"
+
+		// Class
+		chkLstClass.DataSource = SpiceDS.Tables("FilteredClasses")
+		chkLstClass.DisplayMember = "ClassCodeName" 		
+	EndSr
+	/EndRegion
+	
+/Region Methods
+	//Vendor build DataView from entered text......Builds a DV of Vendor numbers, Vendor Names and Depts based on user departments
+	BegSr txtVendorName_Leave Access(*Private) Event(*this.txtVendorName.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorMsg.SetError(txtVendorName, string.empty)
+		btnApplyFilters.Enabled = *True
+				
+		If txtVendorName.Text.Length >= 3 or txtVendorName.Text = string.Empty
+		
+			//Build Vendor department specific DataView
+			If txtVendorName.Text <> string.Empty
+				SpiceDS = ItemsBO.GetVendorTbl()
+				
+				dvVendor = *New DataView(SpiceDS.Tables["FilteredVendors"])
+				VendorString = *New StringBuilder()
+				VendorString.Append("VendorName ") 
+				VendorString.Append(" Like '")
+				VendorString.Append(txtVendorname.Text.ToString())
+				VendorString.Append("%'")
+				
+				dvVendor.RowFilter = VendorString.ToString()
+				
+				//copy DataView for send 
+				VendorDV = dvVendor
+			Else
+				VendorDV = *Nothing	
+			Endif
+		Else
+			ErrorMsg.SetError(txtVendorName, "Vendor Name Search must contain at least 3 Characters")
+			btnApplyFilters.Enabled = *False
+			LeaveSR	
+		Endif	
+	EndSr
+		
+	//Build Stores list. DropDownList
+	BegSr cmbMarkets_SelectedValueChanged Access(*Private) 
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *HourGlass
+		
+		If cmbMarkets.Text.Trim() = 'All Markets'
+			dvStores = PurchaseOrder.StoresAll(Environments.Domain)
+			Market_Select = cmbMarkets.Text.ToUpper().Trim().ToString()
+		Else
+			Market   = cmbMarkets.Text.ToUpper().Trim().ToString()
+			dvStores = PurchaseOrder.StoresMarket(Environments.Domain, Market)
+			
+			Market_Select = cmbMarkets.Text.ToUpper().Trim().ToString()
+		Endif
+		
+		//Attach Datasource to DropDownList	
+		cmbStores.DataSource = dvStores
+		cmbStores.DisplayMember = "StoreDescription"	
+	EndSr
+	
+	//Build Character List. CheckListBox
+	BegSr cmbFamily_SelectedValueChanged Access(*Private) 
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Selected Type(String)
+								
+		Selected  = cmbFamily.SelectedValue.ToString()
+		ItemsBO.GetAllFamilyCharTbl(Selected)
+		With chkLstCharacter
+			.DataSource    = SpiceDS.Tables("FamilyChars")
+			.DisplayMember = "CharCodeDescription"
+			.ValueMember   = "CharCode"
+		EndWith
+	EndSr
+			
+	//Validate PO Range
+	BegSr txtToPORange_Leave Access(*Private) Event(*this.txtToPORange.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Length     Type(*Packed) Len(5,0) Inz(0)
+				
+		ErrorMsg.SetError(txtFromPOrange, string.empty)
+		btnApplyFilters.Enabled = *True
+		
+		POFrom = String.Empty
+		POTo   = String.Empty
+		
+		If txtFromPORange.Text <> "" and txtToPORange.Text <> ""
+			POFrom = txtFromPORange.Text.ToString()     
+			POTo = txtToPORange.Text.ToString()
+				
+			Length = POFrom.Length
+			If Length <> 5
+				Move POFrom HoldChar
+				AddZeros(HoldChar)
+				POFrom = HoldChar2
+			Endif
+				
+			Length = POTo.Length
+			If Length <> 5
+				Move POTo HoldChar
+				AddZeros(HoldChar)
+				POTo = HoldChar2
+			Endif
+											
+			If POFrom > POTo
+				ErrorMsg.SetError(txtFromPOrange, "PO Range not valid")
+				btnApplyFilters.Enabled = *False
+				LeaveSr
+			Endif   	
+		Endif
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		If POFrom <> "" and POTo <> ""
+			PORangeFrom = POFrom
+			PORangeTo   = POTo
+		Else
+			POrangeFrom = String.Empty
+			POrangeTo   = String.Empty
+		Endif
+	EndSr
+	
+	BegSr dtpFromShipDate_Leave Access(*Private) Event(*this.dtpFromShipDate.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorMsg.SetError(dtpFromShipDate, String.Empty)
+		ErrorMsg.SetError(dtpToShipDate, String.Empty)
+		btnApplyFilters.Enabled = *True
+						
+		If dtpFromShipDate.Value.Date() > dtpToShipDate.Value.Date()
+			ErrorMsg.SetError(dtpFromShipDate, "Ship Date Range not valid")
+			btnApplyFilters.Enabled = *False
+			LeaveSR
+		Endif
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		If dtpFromShipDate	<> *Nothing
+			ShipDateFrom = dtpFromShipDate.Value.Date()
+			ShipDateTo   = dtpToShipDate.Value.Date()
+		Endif
+				
+	EndSr
+	
+	BegSr dtpToShipDate_Leave Access(*Private) Event(*this.dtpToShipDate.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorMsg.SetError(dtpToShipDate, String.Empty)
+		ErrorMsg.SetError(dtpFromShipdate, String.Empty)
+		btnApplyFilters.Enabled = *True
+						
+		If dtpFromShipDate.Value.Date() > dtpToShipDate.Value.Date()
+			ErrorMsg.SetError(dtpToShipDate, "Ship Date Range not valid")
+			btnApplyFilters.Enabled = *False
+			LeaveSR
+		Endif
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		If dtpFromShipDate <> *Nothing
+			ShipDateFrom = dtpFromShipDate.Value.Date()
+			ShipDateTo   = dtpToShipDate.Value.Date()
+		Endif
+				
+	EndSr	
+		
+	BegSr dtpFromOrderDate_Leave Access(*Private) Event(*this.dtpFromOrderDate.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorMsg.SetError(dtpFromOrderDate, String.Empty)
+		ErrorMsg.SetError(dtpToOrderDate, String.Empty)
+		btnApplyFilters.Enabled = *True
+				
+		If dtpFromOrderDate.Value.Date() > dtpToOrderDate.Value.Date()
+			ErrorMsg.SetError(dtpFromOrderDate, "Order Date Range not valid")
+			btnApplyFilters.Enabled = *False
+			LeaveSR
+		Endif
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		If dtpFromOrderDate <> *Nothing
+			OrderDateFrom = dtpFromOrderDate.Value.Date()
+			OrderDateTo   = dtpToOrderDate.Value.Date()
+		Endif	
+					
+	EndSr
+	
+	BegSr dtpToOrderdate_Leave Access(*Private) Event(*this.dtpToOrderdate.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorMsg.SetError(dtpToOrderDate, string.empty)
+		btnApplyFilters.Enabled = *True
+				
+		If dtpFromOrderDate.Value.Date() > dtpToOrderDate.Value.Date()
+			ErrorMsg.SetError(dtpToOrderDate, "Order Date Range not valid")
+			btnApplyFilters.Enabled = *False
+			LeaveSR
+		Else
+			ErrorMsg.SetError(dtpFromOrderDate, string.empty)
+			ErrorMsg.SetError(dtpToOrderDate, string.empty)
+		Endif
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		If dtpFromOrderDate <> *Nothing
+			OrderDateFrom = dtpFromOrderDate.Value.Date()
+			OrderDateTo   = dtpToOrderDate.Value.Date()
+		Endif
+				
+	EndSr	
+			
+	BegSr rdoSpice_Click Access(*Private) Event(*this.rdoSpice.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		RdoChoice = 'Spice'		
+	EndSr
+	
+	BegSr rdoIP_Click Access(*Private) Event(*this.rdoIP.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		RdoChoice = 'IP'		
+	EndSr	
+	
+	BegSr cmbStores_SelectedValueChanged Access(*Private) Event(*this.cmbStores.SelectedValueChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//Vars sent to DSSPOHCLS for Order filters
+		Store_Select = cmbStores.Text.ToUpper().Trim().ToString()	
+	EndSr
+	
+	//StageSetdates
+	BegSr cmbSSD_SelectedValueChanged Access(*Private) 
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		StageSetdate = cmbSSD.Text
+	EndSr
+	
+	BegSr PadlockSR
+		
+		DclFld Count      Type(Int32)
+		DclFld NewStatus  Type(String)
+		
+		//Set Padlock details on the grid
+		PurchaseOrder.PadlockSR()
+						
+		For Index(Count = 0) To(dgvPOMain.RowCount -1)
+			If dgvPOmain['clmPadlock', Count].Value *As *String = '0'
+				dgvPOMain['clmChangeID', Count].Value = ImageList.Images(0)
+				dgvPOMain['clmSelect', Count].Value = *False
+				dgvPOMain['clmSelect', Count].ReadOnly = *True 
+				NewStatus = PurchaseOrder.GetPOStatus(dgvPOMain['clmSpicePO', Count].Value *As *String)
+				dgvPOMain['clmStatus', Count].Value = NewStatus
+			EndIf
+		EndFor
+	EndSr
+	
+	BegFunc AddZeros Type(*Char) Len(5) Access(*Private)
+		DclSrparm HoldChar Type(*Char) Len(5)
+		
+		DclFld Do_Index   Type(Int16)
+		DclFld Blank      Type(*Char) Len(1)
+				
+		HoldChar2 = HoldChar
+		Do 1 5 Do_Index
+			Blank = %SubST(HoldChar2, Do_Index, 1)
+			If Blank = ' '
+				HoldChar2 = %Replace('0', HoldChar2, Do_Index, 1)
+			Endif
+		Enddo
+		
+		LeaveSr HoldChar2
+	EndFunc
+	/EndRegion
+	
+/Region Buttons
+	BegSr btnExit_Click Access(*Private) Event(*this.btnExit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		Unload *This
+	EndSr
+	
+	//Apply Filters and build Grid	
+	BegSr btnApplyFilters_Click Access(*Private) Event(*this.btnApplyFilters.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		//Character CheckedListBox. This CheckedListBox gets sent to DSSPOHCLS for Order filters
+		Char_Select = chkLstCharacter
+			
+		//Class Array. This CheckedListBox gets sent to DSSPOHCLS for Order filters
+		Class_Select = chkLstClass
+		
+		//PO Status CheckListBox. This CheckListBox gets sent to DSSPOHCLS for Order filters
+		POStatus_Select = chkLstPOStatus
+								
+		//Validate Store Selection
+		Try
+			xStore_Select = %Subst(Store_Select, 1, 3)
+		Catch Name(exc) Type(Exception )
+			Store_Select = String.Empty
+		EndTry
+				
+		//This dv Contains Auothorised Markets
+		dvMarkets = *New DataView(SpiceDS.Tables["AuthorisedMarkets"])
+				
+		//Send selections to Order header class. DSSPOHCLS 
+		SetMousePtr *HourGlass
+		dtOrderH = PurchaseOrder.Filtered_Orders(dvMarkets,       +
+												 dvDepartments,   +
+												 VendorDV,        +
+                                                 RDOChoice,       + 
+                                                 PORangeFrom,     +
+                                                 PORangeTo,       +
+                                                 Market_Select,   +
+                                                 Store_Select,    + 
+                                                 Char_Select,     + 
+                                                 Class_Select,    +
+                                                 StageSetDate,    +
+                                                 POStatus_Select, +
+                                                 ShipDateFrom,    +
+                                                 ShipDateTo,      +
+                                                 OrderDateFrom,   +
+                                                 OrderDateTo,     +
+                                                 chkShowMyPO)
+                                                
+	    dgvPOMain.DataSource = dtOrderH
+		
+		//Insert Padlock Images. This could be done with a trigger event on the grid. But for some unknown .NET reason
+		//the event only reads the first two rows. Oh well...Yet another Bermuda Triangle size mystery.
+		Exsr PadlockSR
+		
+		btnSubmitToEas.Enabled = *False
+		btnPrintEDI.Enabled    = *False
+		btnCancelPO.Enabled    = *False
+		btnChangeSSD.Enabled   = *False
+	EndSr
+		
+	//Reset Form Controls and clear Grid
+	BegSr btnResetFilters_Click Access(*Private) Event(*this.btnResetFilters.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld arrIndex	Type(Int16)
+
+		txtVendorName.Text	    = String.Empty
+		VendorDV                = *Nothing
+		dvVendor				= *Nothing
+		VendorString			= *Nothing
+		RDOSpice.Checked        = *True
+		RDOIP.Checked           = *False
+		txtFromPOrange.Text     = String.Empty
+		PORangeFrom             = *Nothing 
+		txtToPORange.Text       = String.Empty
+		PORangeTo               = *Nothing
+		chkShowMyPO.Checked     = *True
+		btnApplyFilters.Enabled = *True
+				
+		//Market/Store
+		cmbMarkets.ResetText()
+		cmbMarkets.SelectedText = 'All Markets'
+		cmbStores.ResetText()
+		cmbStores.DataSource    = *Nothing
+		cmbStores.SelectedText  = 'All Stores'
+		Market_Select           = *Nothing
+		Store_Select            = *Nothing
+						
+		//StageSetDate
+		If StageSetDate <> *Nothing
+			cmbSSD.ResetText()
+			cmbSSD.SelectedIndex = 0
+			StageSetdate = *Nothing
+		Endif
+		
+		//Family/Character
+        Char_Select  = *Nothing
+        cmbFamily.ResetText()
+		cmbFamily.SelectedText = 'All Families'
+		ItemsBO.GetAllFamilyCharTbl("All Families")
+			
+		cmbFamily.DataSource = SpiceDS.Tables("AllFamily")
+		cmbFamily.DisplayMember = "FamilyCodeDescription"
+		cmbFamily.ValueMember   = "FamilyCode"
+		AddHandler SourceObject(cmbFamily) SourceEvent(SelectedValueChanged) HandlerSR(cmbFamily_SelectedValueChanged)		
+		
+		chkLstCharacter.DataSource = SpiceDS.Tables("FamilyChars")
+		chkLstCharacter.DisplayMember = "CharCodeDescription"
+		chkLstCharacter.ValueMember   = "CharCode"
+		chkLstCharacter.ClearSelected()
+		
+		For Index(arrIndex = 0) to(chkLstCharacter.Items.Count -1)
+			chkLstCharacter.SetItemChecked(arrIndex, *False)
+		EndFor
+		
+		Char_Select = *Nothing
+
+		//Class
+		chkLstClass.ClearSelected()
+		For Index(arrIndex = 0) to(chkLstClass.Items.Count -1)
+			chkLstClass.SetItemChecked(arrIndex, *False)
+		EndFor
+		
+		Class_Select = *Nothing
+		
+		//PO Status
+		chkLstPOStatus.ClearSelected()
+		For Index(arrIndex = 0) to(chkLstPOStatus.Items.Count -1)
+			chkLstPOStatus.SetItemChecked(arrIndex, *False)						
+		EndFor
+		
+		POStatus_Select = *Nothing
+		
+		//Ship Dates
+		If ShipDateFrom <> *Nothing and ShipDateTo <> *Nothing 
+		   dtpFromShipDate.ResetText()
+		   dtpToShipDate.ResetText()
+		   ShipDateFrom = *Nothing
+		   ShipDateTo   = *Nothing
+		Endif
+		
+		//Order Dates
+		If OrderDateFrom <> *Nothing and OrderDateTo <> *Nothing 
+		   dtpFromOrderDate.ResetText()
+		   dtpToOrderDate.ResetText()
+		   OrderDateFrom = *Nothing
+		   OrderDateTo   = *Nothing
+		Endif
+				
+		DoWhile dgvPOMain.RowCount > 0
+			dgvPOMain.Rows.RemoveAt(0)
+		Enddo
+
+		dtOrderH = *Nothing
+	EndSr
+	
+	BegSr btnNewPO_Click Access(*Private) Event(*this.btnNewPO.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *HourGlass
+				
+		//Instance Class MarketSelectionForm PO Entry
+		If  MarketSelectionForm = *Nothing Or (MarketSelectionForm.IsDisposed)
+			MarketSelectionForm = *New MarketSelectionForm(PgmDB, User, Environments, MDIForm) 
+		Endif
+						
+		MarketSelectionForm.Show()
+	EndSr
+	
+	BegSr btnSelectAll_Click Access(*Private) Event(*this.btnSelectAll.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If dgvPOMain.RowCount > 0
+		
+			dvOrderH = *New DataView(dtOrderH)
+			
+			ForEach GridRow Collection(dvOrderH) Type(DataRowView)
+				If GridRow.Item["clmPadlock"] *As *String = '1'
+					GridRow.Item["clmSelect"] = *True
+					CheckBoxCount             +=1
+				Endif
+			EndFor
+			
+			btnSubmitToEas.Enabled = *True
+			btnPrintEDI.Enabled    = *True
+			btnCancelPO.Enabled    = *True  
+			
+			// If Environments.Domain <> 'EMEA'
+			If (DataCache.AreStageSetDatesChangeable = *True)
+				btnChangeSSD.Enabled   = *True
+			Endif
+		Endif
+	EndSr
+	
+	BegSr btnDeSelectAll_Click Access(*Private) Event(*this.btnDeSelectAll.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If dgvPOMain.RowCount > 0
+		
+			dvOrderH = *New DataView(dtOrderH)
+			
+			ForEach GridRow Collection(dvOrderH) Type(DataRowView)
+				GridRow.Item["clmSelect"] = *False
+			EndFor
+			
+			btnSubmitToEas.Enabled = *False
+			btnPrintEDI.Enabled    = *False
+			btnCancelPO.Enabled    = *False
+			btnChangeSSD.Enabled   = *False
+			CheckBoxCount          = 0
+		Endif
+	EndSr
+	
+	BegSr btnSubmitToEAS_Click Access(*Private) Event(*this.btnSubmitToEAS.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *HourGlass
+		
+		dtOrderH.AcceptChanges()
+		dtSend = dtOrderH.Copy()
+		
+		//Instance Class frmSubmitToEAS PO Entry
+		frmSubmitToEAS = *New frmSubmitToEAS(PgmDB, User, Environments, MDIForm, dtSend) 
+						
+		frmSubmitToEAS.ShowDialog()
+		
+		//Insert Padlock Images. This could be done with a trigger event on the grid. But for some unknown .NET reason
+		//the event only reads the first two rows. Oh well...Yet another Bermuda Triangle size mystery.
+		Exsr PadlockSR
+		
+	EndSr
+	
+	BegSr btnPrintEDI_Click Access(*Private) Event(*this.btnPrintEDI.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *HourGlass
+		
+		dtOrderH.AcceptChanges()
+		dtSend = dtOrderH.Copy()
+		
+		//Instance Class frmPrintPO PO Entry
+		frmPrintPO = *New frmPrintPO(PgmDB, User, Environments, MDIForm, dtSend) 
+						
+		frmPrintPO.ShowDialog()
+		
+		//Insert Padlock Images. This could be done with a trigger event on the grid. But for some unknown .NET reason
+		//the event only reads the first two rows. Oh well...Yet another Bermuda Triangle size mystery.
+		Exsr PadlockSR
+		
+	EndSr
+	
+	BegSr btnCancelPO_Click Access(*Private) Event(*this.btnCancelPO.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *HourGlass
+		
+		dtOrderH.AcceptChanges()
+		dtSend = dtOrderH.Copy()
+		
+		//Instance Class frmCancelPO PO Entry
+		frmCancelPO = *New frmCancelPO(PgmDB, User, Environments, MDIForm, dtSend) 
+						
+		frmCancelPO.ShowDialog()
+		
+		//Insert Padlock Images. This could be done with a trigger event on the grid. But for some unknown .NET reason
+		//the event only reads the first two rows. Oh well...Yet another Bermuda Triangle size mystery.
+		Exsr PadlockSR
+	EndSr
+	
+	BegSr btnChangeSSD_Click Access(*Private) Event(*this.btnChangeSSD.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *HourGlass
+		
+		dtOrderH.AcceptChanges()
+		dtSend = dtOrderH.Copy()
+		
+		//Instance Class frmChangeSSD PO Entry
+		frmChangeSSD = *New frmChangeSSD(PgmDB, User, Environments, MDIForm, dtSend) 
+						
+		frmChangeSSD.ShowDialog()
+		
+		//Insert Padlock Images. This could be done with a trigger event on the grid. But for some unknown .NET reason
+		//the event only reads the first two rows. Oh well...Yet another Bermuda Triangle size mystery.
+		Exsr PadlockSR
+	EndSr
+		
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+	EndSr
+	/EndRegion
+
+/Region Grid Events
+	BegSr dgvPOMain_CellDoubleClick Access(*Private) Event(*this.dgvPOMain.CellDoubleClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+								
+		DclFld StatusOfPO Type(String)
+		
+		If e.ColumnIndex < 0 Or e.RowIndex < 0
+		   LeaveSR
+		Endif
+		
+		dgvr = dgvPOMain.Rows[e.RowIndex]				
+		If dgvPOMain.Item['clmSelect', e.RowIndex].ReadOnly = *True 
+			LeaveSr
+		Endif
+		
+		dgvPOMain['clmStatus', e.RowIndex].Value  = PurchaseOrder.GetPOStatus(dgvPOMain['clmSpicePO', e.RowIndex].Value *As *String)
+				
+		StatusChk = PurchaseOrder.CheckStatus(dgvr.cells["clmSpicePO"].Value.ToString(), dgvr.cells["clmIPPO"].Value.ToString())
+		If StatusChk = *True
+			dgvPOMain.Item['clmChangeID', e.RowIndex].Value = ImageList.Images(0)
+			LeaveSr
+		Endif
+		
+		StatusOfPO = PurchaseOrder.GetPOStatus(dgvr.cells["clmSpicePO"].Value.ToString())
+		If StatusOfPO = 'OA' Or StatusOfPO = 'RA'
+			MsgBox  Msg('The status of this PO prevents it from being modified at this stage')
+			LeaveSr
+		Endif
+						
+		GridPO = dgvr.cells["clmSpicePO"].Value.ToString()
+		
+		SetMousePtr *HourGlass
+			
+		//Instance the Class
+		POmodification = *New POmodification(PgmDB, User, Environments, GridPO)	
+		POmodification.ShowDialog()
+		
+		POmodification = *Nothing	
+	EndSr
+	
+	BegSr dgvPOMain_CellContentClick Access(*Private) Event(*this.dgvPOMain.CellContentClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+				
+		If e.RowIndex < 0 Or e.ColumnIndex < 0
+		   LeaveSR
+		Endif
+		
+		//Only do the EndEdit if the user has clicked on the select cell and a valid row.
+		If dgvPOMain.Columns[e.ColumnIndex].Name.Equals("clmSelect") and +
+			dgvPOMain.Item["clmPadlock", e.RowIndex].value.ToString() = '1'
+			dgvPOMain.EndEdit()
+		Endif
+		
+		//User has clicked on the grid checkbox. Enable buttons		
+		If dgvPOMain.Item["clmSelect", e.RowIndex].Value *As Boolean = *True
+			btnSubmitToEas.Enabled = *True
+			btnPrintEDI.Enabled    = *True
+			btnCancelPO.Enabled    = *True  
+			
+			//Only activate the change stage set dates button if not Europe
+			// If Environments.Domain <> 'EMEA'
+			If (DataCache.AreStageSetDatesChangeable = *True)
+				btnChangeSSD.Enabled   = *True
+			Endif
+			
+			CheckBoxCount += 1
+		Endif
+		
+		//If the user has unchecked the checkbox decrement the count
+		If dgvPOMain.Item["clmSelect", e.RowINdex].Value *As Boolean = *False and CheckBoxCount > 0
+			CheckBoxCount -= 1
+		Endif
+		
+		//If the count is back down to 0 switch off the buttons
+		If CheckBoxCount           = 0
+			btnSubmitToEas.Enabled = *False
+			btnPrintEDI.Enabled    = *False
+			btnCancelPO.Enabled    = *False
+			btnChangeSSD.Enabled   = *False
+		Endif
+	EndSr
+	
+	BegSr dgvPOMain_ColumnHeaderMouseClick Access(*Private) Event(*this.dgvPOMain.ColumnHeaderMouseClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellMouseEventArgs
+		
+		Exsr PadlockSR
+	EndSr
+	/EndRegion
+	
+EndClass

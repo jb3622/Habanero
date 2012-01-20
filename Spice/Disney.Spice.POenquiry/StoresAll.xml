@@ -1,0 +1,363 @@
+<?xml version="1.0" standalone="yes"?>
+<Spice>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>990</clmSSTR>
+    <clmSNAM>LISBON                   </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>741</clmSSTR>
+    <clmSNAM>INTERNET LOGISTICS       </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>742</clmSSTR>
+    <clmSNAM>CRIBBS CAUSEWAY          </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>743</clmSSTR>
+    <clmSNAM>DUNDEE                   </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>744</clmSSTR>
+    <clmSNAM>CAMBRIDGE                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>745</clmSSTR>
+    <clmSNAM>HAMMERSMITH              </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>746</clmSSTR>
+    <clmSNAM>NOTTINGHAM               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>747</clmSSTR>
+    <clmSNAM>HANLEY                   </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>748</clmSSTR>
+    <clmSNAM>DUDLEY                   </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>749</clmSSTR>
+    <clmSNAM>ABERDEEN                 </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>750</clmSSTR>
+    <clmSNAM>EAST KILBRIDE            </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>752</clmSSTR>
+    <clmSNAM>BRIGHTON                 </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>753</clmSSTR>
+    <clmSNAM>BLUEWATER PARK           </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>754</clmSSTR>
+    <clmSNAM>THE ORACLE               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>755</clmSSTR>
+    <clmSNAM>OXFORD STREET            </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>756</clmSSTR>
+    <clmSNAM>HULL STORE               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>757</clmSSTR>
+    <clmSNAM>TRAFFORD CENTRE          </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>758</clmSSTR>
+    <clmSNAM>COMMERCIAL STREET        </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>785</clmSSTR>
+    <clmSNAM>GLASGOW TRU              </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>789</clmSSTR>
+    <clmSNAM>MANCHESTER ARNDALE       </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>790</clmSSTR>
+    <clmSNAM>LIVERPOOL 2              </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>791</clmSSTR>
+    <clmSNAM>CHAPELFIELD SHOPPING CENT</clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>794</clmSSTR>
+    <clmSNAM>BULLRING UNIT SU 301     </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>799</clmSSTR>
+    <clmSNAM>SWINDON                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>800</clmSSTR>
+    <clmSNAM>COVENT GARDEN            </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>802</clmSSTR>
+    <clmSNAM>SHEFFIELD                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>803</clmSSTR>
+    <clmSNAM>EAST LONDON              </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>804</clmSSTR>
+    <clmSNAM>GLASGOW                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>805</clmSSTR>
+    <clmSNAM>BROMLEY                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>807</clmSSTR>
+    <clmSNAM>EDINBURGH                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>809</clmSSTR>
+    <clmSNAM>WATFORD                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>811</clmSSTR>
+    <clmSNAM>LIVERPOOL                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>812</clmSSTR>
+    <clmSNAM>CRAWLEY                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>813</clmSSTR>
+    <clmSNAM>BIRMINGHAM               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>814</clmSSTR>
+    <clmSNAM>KINGSTON                 </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>816</clmSSTR>
+    <clmSNAM>CROYDON                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>817</clmSSTR>
+    <clmSNAM>NORWICH                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>818</clmSSTR>
+    <clmSNAM>BATH                     </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>820</clmSSTR>
+    <clmSNAM>CARDIFF                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>821</clmSSTR>
+    <clmSNAM>TUNBRIDGE WELLS          </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>822</clmSSTR>
+    <clmSNAM>CHESTER                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>823</clmSSTR>
+    <clmSNAM>BELFAST                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>825</clmSSTR>
+    <clmSNAM>CHELTENHAM               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>826</clmSSTR>
+    <clmSNAM>YORK                     </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>827</clmSSTR>
+    <clmSNAM>THE SHIRES               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>828</clmSSTR>
+    <clmSNAM>EDINBURGH                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>829</clmSSTR>
+    <clmSNAM>GATESHEAD                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>831</clmSSTR>
+    <clmSNAM>PETERBOROUGH             </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>832</clmSSTR>
+    <clmSNAM>DERBY                    </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>833</clmSSTR>
+    <clmSNAM>MILTON KEYNES            </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>834</clmSSTR>
+    <clmSNAM>OLDHAM                   </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>836</clmSSTR>
+    <clmSNAM>LEEDS                    </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>838</clmSSTR>
+    <clmSNAM>THE MARYLANDS CENTRE     </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>840</clmSSTR>
+    <clmSNAM>FRIARY CENTRE            </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>841</clmSSTR>
+    <clmSNAM>ROMFORD                  </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>842</clmSSTR>
+    <clmSNAM>HARROW                   </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>843</clmSSTR>
+    <clmSNAM>UXBRIDGE                 </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>844</clmSSTR>
+    <clmSNAM>BLACKPOOL                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>845</clmSSTR>
+    <clmSNAM>STOCKPORT                </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>846</clmSSTR>
+    <clmSNAM>NORTHAMPTON              </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>847</clmSSTR>
+    <clmSNAM>PLYMOUTH                 </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>848</clmSSTR>
+    <clmSNAM>LUTON                    </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>926</clmSSTR>
+    <clmSNAM>CABOT CIRCUS             </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>927</clmSSTR>
+    <clmSNAM>LIVINGSTON               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>928</clmSSTR>
+    <clmSNAM>EXETER TRU               </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>929</clmSSTR>
+    <clmSNAM>SOLIHULL TRU             </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>931</clmSSTR>
+    <clmSNAM>CARLISLE TRU             </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>956</clmSSTR>
+    <clmSNAM>MEADOWHALL TEMP TRADN UN </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>957</clmSSTR>
+    <clmSNAM>METRO CENTRE TRU         </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>958</clmSSTR>
+    <clmSNAM>TRAFFORD TRU             </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>959</clmSSTR>
+    <clmSNAM>BLUEWATER TEMP TRAD UNIT </clmSNAM>
+  </StoresAll>
+  <StoresAll>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>960</clmSSTR>
+    <clmSNAM>960 WESTFIELD            </clmSNAM>
+  </StoresAll>
+</Spice>

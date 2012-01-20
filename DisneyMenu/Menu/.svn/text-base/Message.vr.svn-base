@@ -1,0 +1,184 @@
+Using System
+Using System.Text
+Using System.Xml
+
+DclNameSpace Disney.Menu
+
+BegClass Message Access(*Internal)
+
+	DclFld User Type(Disney.Menu.Users)
+
+	BegConstructor Access(*Public)
+		DclSrParm User Type(Disney.Menu.Users)
+
+		*this.User = User
+	EndConstructor
+
+	BegFunc SndUserMsg Type(Boolean) Access(*Public)
+
+		DclFld XmlUser    Type(String)
+		DclFld XmlApp     Type(String)
+		DclFld XmlEnabled Type(Boolean)
+		DclFld XmlMsgText Type(String)
+		DclFld Count      Type(Int16)
+		DclFld TimeOutValue Type(Int32)
+		DclFld XmlTerminate Type(Boolean)
+		DclFld XmltriggerTime Type(String)
+		DclFld TriggerTime    Type(DateTime)
+		
+		DclFld XmlReader  Type(System.Xml.XmlTextReader)
+		DclFld MessageBox Type(Disney.Menu.MessageBox)
+		
+		XmlReader = *New System.Xml.XmlTextReader(System.Environment.CurrentDirectory.Trim() + "\" + Environments.menuXmlFolderName + "\Message.xml")
+				
+		DoUntil XmlReader.EOF = *True
+			Try
+				XmlReader.Read()
+			Catch Name(Ex) Type(System.IO.FileNotFoundException)
+				LeaveSR *Off
+			EndTry
+		
+			If XmlReader.EOF = *True
+				Leave
+			EndIf
+			
+			If XmlReader.Name = "Message"
+				If XmlReader.GetAttribute("ToUser") <> *Nothing
+					XmlUser = XmlReader.GetAttribute("ToUser")
+				Else
+					XmlUser = "*ALL"
+				EndIf
+				
+				If XmlReader.GetAttribute("Application") <> *Nothing
+					XmlApp = XmlReader.GetAttribute("Application")
+				Else
+					XmlApp = "*ALL"
+				EndIf
+					
+				If XmlReader.GetAttribute("Enabled") <> *Nothing
+					XmlEnabled = XmlReader.GetAttribute("Enabled")
+				Else
+					XmlEnabled = *False
+				EndIf
+				
+				If XmlReader.GetAttribute("Text") <> *Nothing
+					XmlMsgText = XmlReader.GetAttribute("Text")
+				Else
+					XmlMsgText = 'Please sign off'
+				EndIf
+				
+				If XmlReader.GetAttribute("TimeOut") <> *Nothing
+					If Not Int32.TryParse(XmlReader.GetAttribute("TimeOut"),*ByRef TimeOutValue)
+						TimeOutValue = 60
+					EndIf
+				Else
+					TimeOutValue = 60
+				EndIf
+				
+				If XmlReader.GetAttribute("Terminate") <> *Nothing
+					XmlTerminate = XmlReader.GetAttribute("Terminate")
+				Else
+					XmlTerminate = *False
+				EndIf
+				
+				If XmlReader.GetAttribute("TriggerTime") <> *Nothing
+					XMLtriggerTime = XmlReader.GetAttribute("TriggerTime")
+					TriggerTime = CvtToDateTime(XmlTriggerTime)
+					//If DateTime.Now > TriggerTime
+					//	MsgBox 'Past Time'
+					//EndIf
+				EndIf
+				
+				
+				If XmlEnabled = *On
+					If XmlUser.ToUpper() = "*ALL" And XmlApp.ToUpper() = "*ALL"       // All Users
+					
+						XmlReader.Close()
+						If TimeOutValue = 0 And XmlTerminate = *True
+							LeaveSR *On
+						EndIf
+						
+						If MessageBox = *Nothing
+							MessageBox = *New Disney.Menu.MessageBox()
+							Messagebox.Message = XmlMsgText
+							Messagebox.Timeout = TimeOutValue
+						EndIf
+						
+						Messagebox.ShowDialog()
+						If XmlTerminate = *True
+							LeaveSR *On
+						EndIf
+
+						LeaveSR *Off
+													
+					ElseIf XmlUser.ToUpper() = "*ALL" And XmlApp <> String.Empty  // All Users in a group
+						For Index(Count = 0) To(User.AuthorisedApplications.Length - 1)
+							If  User.AuthorisedApplications[Count] <> String.Empty +
+							And User.AuthorisedApplications[Count] =  XmlApp.ToUpper()
+							
+								XmlReader.Close()
+								
+								If TimeOutValue = 0 And XmlTerminate = *True
+									LeaveSR *On
+								EndIf
+								
+								If MessageBox = *Nothing
+									MessageBox = *New Disney.Menu.MessageBox()
+									MessageBox.Message = XmlMsgText
+									MessageBox.Timeout = TimeOutValue
+								EndIf
+								
+								Messagebox.ShowDialog()
+								If XmlTerminate = *True
+									LeaveSR *On
+								EndIf
+								
+								LeaveSR *Off
+							EndIf
+						EndFor
+						
+					ElseIf XmlUser.ToUpper() = User.UserID.ToUpper() // A specific User irrespective of Group
+					
+						XmlReader.Close()
+						
+						If TimeOutValue = 0 And XmlTerminate = *True
+							LeaveSR *On
+						EndIf
+						
+						If MessageBox = *Nothing
+							MessageBox = *New Disney.Menu.MessageBox()
+							Messagebox.Message = XmlMsgText
+							Messagebox.Timeout = TimeOutValue
+						EndIf
+						
+						Messagebox.ShowDialog()
+						If XmlTerminate = *True
+							LeaveSR *On
+						EndIf
+						
+						LeaveSR *Off
+					EndIf
+				EndIf
+			EndIf
+		EndDo
+		
+		XmlReader.Close()
+		LeaveSR *Off
+	EndFunc
+	
+	BegFunc CvtToDateTime Type(DateTime) Access(*Private)
+		DclSrParm Time Type(String)
+		
+		DclFld DTstring   Type(String)
+		DclFld ConvertedDateTime Type(DateTime)
+		DclFld dtfi Type(System.Globalization.DateTimeFormatInfo)
+		
+		DTstring = DateTime.Now.Date.ToString("yyyy/MM/dd")
+		DTstring += ' ' + Time
+		
+		dtfi = *New System.Globalization.DateTimeFormatInfo()
+		ConvertedDateTime = DateTime.ParseExact(DTstring,"yyyy/MM/dd HH:mm:ss",dtfi)
+		
+		LeaveSR ConvertedDateTime
+	EndFunc
+EndClass

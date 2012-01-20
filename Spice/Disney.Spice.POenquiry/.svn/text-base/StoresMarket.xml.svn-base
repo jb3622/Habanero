@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+<Spice>
+  <StoresMarket>
+    <clmSelect>false</clmSelect>
+    <clmSSTR>990</clmSSTR>
+    <clmSNAM>LISBON                   </clmSNAM>
+  </StoresMarket>
+</Spice>

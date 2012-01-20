@@ -1,0 +1,238 @@
+Using System
+Using System.Reflection
+Using System.Text
+Using System.Xml
+
+DclNameSpace Disney.Menu
+
+BegClass DynamicMenuStrip Access(*Internal)
+
+	DclFld objXML  Type(Xml.XmlDocument)	
+	DclFld objForm Type(*Object)
+
+	BegConstructor Access(*Public)
+		DclSrParm XMLmenuFile Type(*String)
+		DclSrParm objForm     Type(*Object)
+		
+		objXML = *New Xml.XmlDocument()
+		Try
+			objXML.Load(XMLMenuFile)
+		Catch Err Exception
+			MsgBox "MenuBar XML error"
+			LeaveSR
+		EndTry
+		
+		*this.objForm = objForm
+	EndConstructor
+	
+	BegFunc LoadDynamicMenu Type(System.Windows.Forms.MenuStrip) Access(*Public)
+		DclSrParm Strip       Type(System.Windows.Forms.MenuStrip)
+
+		DclFld Node      Type(System.Xml.XmlNode)
+		DclFld stripItem Type(System.Windows.Forms.ToolStripMenuItem)
+		DclFld Option_Disabled Type(*Boolean) Inz(*Off)
+		
+		If objXML.HasChildNodes = *True
+            Node = objXML.SelectSingleNode("MenuItemList")
+            Node = Node.FirstChild
+            
+            DoWhile (Node <> *Nothing)
+				stripItem = *New System.Windows.Forms.ToolStripMenuItem()
+				stripItem.Name = Node.Attributes("Name").Value
+				
+				If Node.Attributes("Text") <> *Nothing
+					stripItem.Text = Node.Attributes("Text").Value
+				Else
+					stripItem.Text = Node.Attributes("Name").Value
+				EndIf
+				
+				If Node.Attributes("Enabled") <> *Nothing
+					If Node.Attributes("Enabled").Value = *Off
+						stripItem.Enabled = *Off
+						Option_Disabled = *On
+					EndIf
+				EndIf
+				
+				If Node.Attributes("Authority") <> *Nothing
+					If Node.Attributes("Authority").Value = "*Restricted"
+						stripItem.Enabled = *Off
+						Option_Disabled = *On
+					EndIf
+				EndIf
+				
+				stripItem.BackColor = System.Drawing.SystemColors.Info
+				
+				// Mark Menu Item as Window List Menu Item
+				If Node.Attributes("WindowListItem") <> *Nothing
+					If Node.Attributes("WindowListItem").Value = "Y"
+						strip.MdiWindowListItem = stripItem
+					EndIf
+				EndIf
+				
+				If Node.Attributes("Visible") <> *Nothing
+					If Node.Attributes("Visible").Value = "0"
+						stripItem.Visible = *Off
+					EndIf
+				EndIf
+				
+				strip.Items.Add(stripItem)
+				
+				GenerateMenusFromXML(Node,stripItem,Strip,Option_Disabled)
+				Node = Node.NextSibling
+				Option_Disabled = *Off
+            EndDo
+		EndIf
+	
+		LeaveSR Strip
+	EndFunc
+	
+	BegSr GenerateMenusFromXML
+		DclSrParm objNode   Type(System.Xml.XmlNode)
+		DclSrParm StripItem Type(System.Windows.Forms.ToolStripMenuItem)
+		DclSrParm Strip     Type(System.Windows.Forms.MenuStrip)
+		DclSrParm Option_Disabled Type(*Boolean)
+		
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(DynamicMenuStrip))
+		DclFld NewNode       Type(System.Xml.XmlNode)
+		DclFld NewStripItem  Type(System.Windows.Forms.ToolStripMenuItem)
+		DclFld SeparatorLine Type(System.Windows.Forms.ToolStripSeparator)
+		DclFld xmlKeyString  Type(*String)
+		DclFld SKkey         Type(System.Windows.Forms.Keys)
+		DclFld ConvertKeys   Type(System.Windows.Forms.KeysConverter)
+		DclFld ItemText      Type(*String)
+		
+		ForEach Name(NewNode) Collection(objNode.ChildNodes)
+		
+			ItemText = NewNode.Attributes("Name").Value
+			If ItemText <> "*SeparatorLine"
+		
+				NewStripItem = *New System.Windows.Forms.ToolStripMenuItem()
+				NewStripItem.Name = ItemText
+				
+				If NewNode.Attributes("Text") <> *Nothing
+					NewStripItem.Text = NewNode.Attributes("Text").Value
+				Else
+					NewStripItem.Text = ItemText
+				EndIf
+
+				Select
+				When Option_Disabled = *On
+					NewStripItem.Enabled = *Off
+					
+				When NewNode.Attributes("Enabled") <> *Nothing
+					If NewNode.Attributes("Enabled").Value = *Off
+						NewStripItem.Enabled = *Off
+						Option_Disabled = *On
+					EndIf
+					
+				When NewNode.Attributes("Authority") <> *Nothing
+					If NewNode.Attributes("Authority").Value = "*Restricted"
+						NewStripItem.Enabled = *Off
+						Option_Disabled = *On
+					EndIf
+				EndSL
+			
+				If NewNode.Attributes("Key") <> *Nothing
+					xmlKeyString = NewNode.Attributes("Key").Value
+					
+					ConvertKeys = *New System.Windows.Forms.KeysConverter()
+					SKkey = ConvertKeys.ConvertFromString(xmlKeyString) *As System.Windows.Forms.Keys
+					
+					NewStripItem.ShortcutKeys = ((System.Windows.Forms.Keys.Control *BitOr SKkey) *As System.Windows.Forms.Keys)
+				EndIf
+
+				NewStripItem.ShowShortcutKeys = *On
+					
+	//			If NewNode.Attributes("Image") <> *Nothing
+	//				NewStripItem.Image = (resources.GetObject(NewNode.Attributes("Image").Value) *As System.Drawing.Image)
+	//			EndIf
+				
+				If NewNode.Attributes("Option") <> *Nothing
+					NewStripItem.Tag = NewNode.Attributes("Option").Value
+				EndIf
+				
+				StripItem.DropDownItems.Add(NewStripItem)
+				
+				If NewNode.Attributes("OnClick") <> *Nothing
+					FindEventsByName(NewStripItem,Strip.Name,NewNode.Attributes("OnClick").Value)
+				EndIf	
+				
+				GenerateMenusFromXML(NewNode,NewStripItem,Strip,Option_Disabled)
+				
+				If (Option_Disabled = *On And NewNode.Attributes("Enabled") <> *Nothing)
+					If NewNode.Attributes("Enabled").Value = *Off
+						Option_Disabled = *Off
+					EndIf
+				EndIf 
+			Else
+				SeparatorLine = *New System.Windows.Forms.ToolStripSeparator()
+				StripItem.DropDownItems.Add(SeparatorLine)
+			EndIf
+		EndFor
+	EndSr
+		
+	BegSr FindEventsByName Access(*Private)
+		DclSrParm StripItem       Type(System.Windows.Forms.ToolStripMenuItem)
+		DclSrParm NameOfToolStrip Type(*String)
+		DclSrParm HandlerSufix    Type(*String)
+		
+		DclArray StripItemEvents Type(System.Reflection.EventInfo) Rank(1)
+		DclFld   ReceiverType    Type(System.Type)
+		DclFld   Evnt            Type(System.Reflection.EventInfo)
+		DclFld   Method          Type(System.Reflection.MethodInfo)
+		DclFld   D               Type(System.Delegate)
+		DclFld   MethodName      Type(*String)
+		
+		StripItemEvents = StripItem.GetType().GetEvents()
+		ReceiverType = objForm.GetType()
+
+		ForEach Name(Evnt) Collection(StripItemEvents)
+			MethodName = NameOfToolStrip + Evnt.Name + HandlerSufix
+		
+			Method = ReceiverType.GetMethod(MethodName, +
+						(System.Reflection.BindingFlags.IgnoreCase *BitOr +
+						 System.Reflection.BindingFlags.Instance *BitOr   +
+						 System.Reflection.BindingFlags.NonPublic))
+		
+			If Method <> *Nothing
+				D = System.Delegate.CreateDelegate(Evnt.EventHandlerType, objForm, Method.Name)
+				Evnt.AddEventHandler(StripItem, D)
+				LeaveSR
+			EndIf
+		EndFor
+	EndSr
+	
+	// Call to this Method has been crippled in this version
+	BegSr AddToWindowMenu Access(*Public)
+		DclSrParm MenuStrip   Type(System.Windows.Forms.MenuStrip)
+		DclSrParm MdiForm Type(System.Windows.Forms.Form)
+	
+		DclFld MenuItem Type(System.Windows.Forms.ToolStripMenuItem)
+		DclFld i Type(*Integer2) Inz(*Zero)
+		DclFld NewDropDownItem Type(System.Windows.Forms.ToolStripMenuItem)
+		
+		If MenuStrip.Items.Count > *Zero
+			For Index(i) To(MenuStrip.Items.Count - 1) By(1)
+				MenuItem = MenuStrip.Items[i] *as System.Windows.Forms.ToolStripMenuItem
+				If MenuItem.Name = 'Window'
+					NewDropDownItem = *New System.Windows.Forms.ToolStripMenuItem()
+					NewDropDownItem.Text = MdiForm.Text
+					
+					MenuItem.DropDownItems.Add(NewDropDownItem)
+					
+					// We have a reference to the Class held in "MdiForm"
+					// Try to link the object reference to a menu option
+ 
+				EndIf
+			EndFor
+		endIf
+	EndSr
+	
+	BegSr RemoveFromWindowItem Access(*Public)
+	
+	// We need to monitor Child forms and when they are destroyed we need to
+	// remove the corresponding Window sub option
+		
+	
+	EndSr
+EndClass

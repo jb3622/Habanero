@@ -1,0 +1,804 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text 
+Using System.Windows.Forms
+Using Disney.Menu
+
+BegClass ChangeMarketSizes Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Define things    
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblDescription System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblVendor System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblClass System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblVendorName System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblClassName System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld dgvMarketPrices System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld btnBack System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld btnFinish System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld errorProvider System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld Status System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Market System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Size System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Cost System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingCost System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Retail System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingRetail System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld ListPrice System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld VAT System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld VendorUPC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	//DclFld m_cellEdit Type(Boolean) Inz(*False)
+	/Endregion
+	
+	Dclfld PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+	DclFld Environment Type(Disney.Menu.Environments)
+	DclFld ItemsBO     Type(Disney.Spice.ItemsBO.Items)
+	DclFld ItemStyle   Type(Disney.DA.IP400.ItemStyle)
+	
+	/Region Constructor and designer bits
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		DclSrParm ItemsBO     Type(Disney.Spice.ItemsBO.Items)
+		DclSrParm ItemStyle   Type(Disney.DA.IP400.ItemStyle)
+		
+		InitializeComponent()
+
+		*this.PgmDB       = PgmDB
+		*this.Environment = Environment
+		*this.ItemsBO     = ItemsBO
+		*this.ItemStyle   = ItemStyle
+	EndConstructor
+
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle3 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle4 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle5 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle6 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.lblDescription = *new System.Windows.Forms.Label()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.lblVendor = *new System.Windows.Forms.Label()
+		*this.lblClass = *new System.Windows.Forms.Label()
+		*this.lblVendorName = *new System.Windows.Forms.Label()
+		*this.lblClassName = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.btnBack = *new System.Windows.Forms.Button()
+		*this.btnFinish = *new System.Windows.Forms.Button()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.dgvMarketPrices = *new System.Windows.Forms.DataGridView()
+		*this.Status = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Market = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Size = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Cost = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingCost = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Retail = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingRetail = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.ListPrice = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.VAT = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.VendorUPC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.errorProvider = *new System.Windows.Forms.ErrorProvider(*this.components)
+		(*this.dgvMarketPrices *As System.ComponentModel.ISupportInitialize).BeginInit()
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//lblDescription
+		//
+		*this.lblDescription.AutoSize = *True
+		*this.lblDescription.Location = *new System.Drawing.Point(106, 45)
+		*this.lblDescription.Name = "lblDescription"
+		*this.lblDescription.Size = *new System.Drawing.Size(182, 13)
+		*this.lblDescription.TabIndex = 395
+		*this.lblDescription.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(13, 46)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(87, 13)
+		*this.label8.TabIndex = 394
+		*this.label8.Text = "Long Description"
+		//
+		//lblVendor
+		//
+		*this.lblVendor.AutoSize = *True
+		*this.lblVendor.Location = *new System.Drawing.Point(57, 25)
+		*this.lblVendor.Name = "lblVendor"
+		*this.lblVendor.Size = *new System.Drawing.Size(42, 13)
+		*this.lblVendor.TabIndex = 393
+		*this.lblVendor.Text = "XXXXX"
+		//
+		//lblClass
+		//
+		*this.lblClass.AutoSize = *True
+		*this.lblClass.Location = *new System.Drawing.Point(57, 7)
+		*this.lblClass.Name = "lblClass"
+		*this.lblClass.Size = *new System.Drawing.Size(35, 13)
+		*this.lblClass.TabIndex = 392
+		*this.lblClass.Text = "XXXX"
+		//
+		//lblVendorName
+		//
+		*this.lblVendorName.AutoSize = *True
+		*this.lblVendorName.Location = *new System.Drawing.Point(106, 26)
+		*this.lblVendorName.Name = "lblVendorName"
+		*this.lblVendorName.Size = *new System.Drawing.Size(182, 13)
+		*this.lblVendorName.TabIndex = 391
+		*this.lblVendorName.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//lblClassName
+		//
+		*this.lblClassName.AutoSize = *True
+		*this.lblClassName.Location = *new System.Drawing.Point(106, 7)
+		*this.lblClassName.Name = "lblClassName"
+		*this.lblClassName.Size = *new System.Drawing.Size(182, 13)
+		*this.lblClassName.TabIndex = 390
+		*this.lblClassName.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Location = *new System.Drawing.Point(13, 25)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(41, 13)
+		*this.label4.TabIndex = 389
+		*this.label4.Text = "Vendor"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(13, 7)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(32, 13)
+		*this.label3.TabIndex = 388
+		*this.label3.Text = "Class"
+		//
+		//btnBack
+		//
+		*this.btnBack.Location = *new System.Drawing.Point(98, 406)
+		*this.btnBack.Name = "btnBack"
+		*this.btnBack.Size = *new System.Drawing.Size(75, 23)
+		*this.btnBack.TabIndex = 2
+		*this.btnBack.Text = "Back"
+		*this.btnBack.UseVisualStyleBackColor = *True
+		//
+		//btnFinish
+		//
+		*this.btnFinish.Location = *new System.Drawing.Point(663, 406)
+		*this.btnFinish.Name = "btnFinish"
+		*this.btnFinish.Size = *new System.Drawing.Size(75, 23)
+		*this.btnFinish.TabIndex = 3
+		*this.btnFinish.Text = "Finish"
+		*this.btnFinish.UseVisualStyleBackColor = *True
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Location = *new System.Drawing.Point(14, 406)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 1
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//dgvMarketPrices
+		//
+		*this.dgvMarketPrices.AllowUserToAddRows = *False
+		*this.dgvMarketPrices.AllowUserToDeleteRows = *False
+		*this.dgvMarketPrices.AllowUserToResizeRows = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((192 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		*this.dgvMarketPrices.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.dgvMarketPrices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+		*this.dgvMarketPrices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dgvMarketPrices.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Status, *this.Market, *this.Size, *this.Cost, *this.PendingCost, *this.Retail, *this.PendingRetail, *this.ListPrice, *this.VAT, *this.VendorUPC})
+		*this.dgvMarketPrices.Location = *new System.Drawing.Point(14, 70)
+		*this.dgvMarketPrices.Name = "dgvMarketPrices"
+		*this.dgvMarketPrices.Size = *new System.Drawing.Size(724, 327)
+		*this.dgvMarketPrices.TabIndex = 0
+		//
+		//Status
+		//
+		*this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.Status.DataPropertyName = "Status"
+		*this.Status.HeaderText = ""
+		*this.Status.Name = "Status"
+		*this.Status.ReadOnly = *True
+		*this.Status.Width = 70
+		//
+		//Market
+		//
+		*this.Market.DataPropertyName = "Market"
+		dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.Market.DefaultCellStyle = dataGridViewCellStyle2
+		*this.Market.HeaderText = "Market"
+		*this.Market.Name = "Market"
+		*this.Market.ReadOnly = *True
+		*this.Market.Resizable = System.Windows.Forms.DataGridViewTriState.True
+		//
+		//Size
+		//
+		*this.Size.DataPropertyName = "Size"
+		*this.Size.HeaderText = "Size"
+		*this.Size.Name = "Size"
+		*this.Size.ReadOnly = *True
+		//
+		//Cost
+		//
+		*this.Cost.DataPropertyName = "Cost"
+		dataGridViewCellStyle3.Format = "N2"
+		dataGridViewCellStyle3.NullValue = *Nothing
+		*this.Cost.DefaultCellStyle = dataGridViewCellStyle3
+		*this.Cost.HeaderText = "Cost"
+		*this.Cost.Name = "Cost"
+		*this.Cost.ReadOnly = *True
+		*this.Cost.Resizable = System.Windows.Forms.DataGridViewTriState.True
+		//
+		//PendingCost
+		//
+		*this.PendingCost.DataPropertyName = "PendingCost"
+		*this.PendingCost.HeaderText = "New Cost"
+		*this.PendingCost.Name = "PendingCost"
+		//
+		//Retail
+		//
+		*this.Retail.DataPropertyName = "Retail"
+		dataGridViewCellStyle4.Format = "N2"
+		*this.Retail.DefaultCellStyle = dataGridViewCellStyle4
+		*this.Retail.HeaderText = "Retail"
+		*this.Retail.Name = "Retail"
+		*this.Retail.ReadOnly = *True
+		//
+		//PendingRetail
+		//
+		*this.PendingRetail.DataPropertyName = "PendingRetail"
+		*this.PendingRetail.HeaderText = "New Retail"
+		*this.PendingRetail.Name = "PendingRetail"
+		//
+		//ListPrice
+		//
+		*this.ListPrice.DataPropertyName = "ListPrice"
+		dataGridViewCellStyle5.NullValue = "0.00"
+		*this.ListPrice.DefaultCellStyle = dataGridViewCellStyle5
+		*this.ListPrice.HeaderText = "List Price"
+		*this.ListPrice.Name = "ListPrice"
+		//
+		//VAT
+		//
+		*this.VAT.DataPropertyName = "VAT"
+		dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.VAT.DefaultCellStyle = dataGridViewCellStyle6
+		*this.VAT.HeaderText = "VAT"
+		*this.VAT.Name = "VAT"
+		*this.VAT.ReadOnly = *True
+		//
+		//VendorUPC
+		//
+		*this.VendorUPC.DataPropertyName = "VendorUPC"
+		*this.VendorUPC.HeaderText = "Market UPC"
+		*this.VendorUPC.Name = "VendorUPC"
+		*this.VendorUPC.ReadOnly = *True
+		*this.VendorUPC.Visible = *False
+		//
+		//errorProvider
+		//
+		*this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.errorProvider.ContainerControl = *this
+		//
+		//ChangeMarketSizes
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(755, 438)
+		*this.Controls.Add(*this.lblDescription)
+		*this.Controls.Add(*this.label8)
+		*this.Controls.Add(*this.lblVendor)
+		*this.Controls.Add(*this.lblClass)
+		*this.Controls.Add(*this.lblVendorName)
+		*this.Controls.Add(*this.lblClassName)
+		*this.Controls.Add(*this.label4)
+		*this.Controls.Add(*this.label3)
+		*this.Controls.Add(*this.btnBack)
+		*this.Controls.Add(*this.btnFinish)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.dgvMarketPrices)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.MinimizeBox = *False
+		*this.Name = "ChangeMarketSizes"
+		*this.ShowIcon = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "SPICE - Change Item"
+		(*this.dgvMarketPrices *As System.ComponentModel.ISupportInitialize).EndInit()
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	/EndRegion
+	
+	/Region Form events
+	BegSr FormEvents_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+
+		*this.lblClass.Text       = ItemStyle.Class.ToString()
+		*this.lblClassName.Text   = ItemStyle.ClassName
+		*this.lblVendor.Text      = ItemStyle.Vendor.ToString('00000')
+		*this.lblVendorName.Text  = ItemStyle.VendorName
+		*this.lblDescription.Text = ItemStyle.LongDescription
+		
+		// If Environment.Domain = "SWNA"
+		If (DataCache.IsVATRequired = *False)
+			dgvMarketPrices.Columns["VAT"].Visible = *False
+			dgvMarketPrices.Columns["VendorUPC"].Visible = *True
+		EndIf
+		
+		// Only show the list price for "Online ECOM" items		
+		If (ItemForOnlineEcom() = *True)			
+			dgvMarketPrices.Columns["ListPrice"].Visible = *True			
+		Else
+			dgvMarketPrices.Columns["ListPrice"].Visible = *False
+		EndIf
+		
+		dgvMarketPrices.AutoGenerateColumns = *False
+		dgvMarketPrices.DataSource = ItemsBO.SpiceDataSet.Tables["MarketPrices"]		
+		
+		DclFld listPrice   Type(Decimal)
+		DclFld retailPrice Type(Decimal)
+							
+		ForEach GridRow Collection(dgvMarketPrices.Rows) Type(DataGridViewRow)
+			retailPrice = SafeDecimalValue(GridRow.Cells["Retail"].Value)
+			listPrice = SafeDecimalValue(GridRow.Cells["ListPrice"].Value)
+
+			If(listPrice <= 0)
+				listPrice = retailPrice
+			EndIf
+			GridRow.Cells["ListPrice"].Value = listPrice
+		EndFor
+		
+
+	EndSr
+	
+	BegFunc ItemForOnlineEcom Type(Boolean) Access(*Private) 		
+		DclFld result Type(Boolean) Inz(*False)		
+		DclFld dataRow Type(DataRow)
+		DclFld forOnlineEcom Type(String)
+		
+		Try
+			dataRow = ItemsBO.SpiceDataSet.Tables["SellingChannelTable"].Rows.Find(ItemsBO.SellingChannel.ToString())
+			If (dataRow <> *Nothing)
+				forOnlineEcom = dataRow["OnlineECOM"] *AS String
+				If (forOnlineEcom <> *Nothing)
+					If (forOnlineEcom.Trim() = "Y")
+						result = *True
+					Else
+						result = *False
+					EndIf
+				EndIf
+			EndIf
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry
+		LeaveSR result
+	EndFunc
+
+	BegSr FormEvents_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+        
+		DclFld ReturnCode Type(Int16)
+		
+		If *this.DialogResult = DialogResult.Cancel
+			MsgBox 'Are you sure you want to Cancel?' RtnCode(ReturnCode) Buttons(*YesNo) Title("Cancel ?") Icon(*Question)
+			If ReturnCode.Equals(6)
+				*this.DialogResult = DialogResult.Abort
+			Else
+				e.Cancel = *true
+			EndIf
+		EndIf
+	EndSr
+	/EndRegion
+			
+	BegSr btnBack_Click Access(*Private) Event(*this.btnBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+
+		*this.DialogResult = DialogResult.Retry
+		*this.Close()
+	EndSr
+	
+	BegFunc SafeDecimalValue Type(Decimal) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR Decimal.Parse(controlValue.ToString())
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+	BegSr btnFinish_Click Access(*Private) Event(*this.btnFinish.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld ReturnValue Type(Int16)
+		DclFld listPrice   Type(Decimal)
+		DclFld retailPrice Type(Decimal)
+					
+		// Loop thru Grid rows and check for errors
+		ErrorProvider.SetError(btnFinish,String.Empty)
+		ForEach GridRow Collection(dgvMarketPrices.Rows) Type(DataGridViewRow)
+			
+			retailPrice = SafeDecimalValue(GridRow.Cells["Retail"].Value)
+			If (retailPrice <= 0)
+				retailPrice = SafeDecimalValue(GridRow.Cells["PendingRetail"].Value)
+				If (retailPrice <= 0)
+					GridRow.ErrorText = "Retail Price cannot be zero."
+				EndIf
+			EndIf
+		
+			If (ItemForOnlineEcom() = *True)	
+				//If(Environment.Domain = "SWNA")	
+				If (DataCache.ShowListPrice = *True)							
+					If(GridRow.Cells["ListPrice"].Visible = *True)
+						listPrice = SafeDecimalValue(GridRow.Cells["ListPrice"].Value)
+						If(listPrice < retailPrice)
+							GridRow.ErrorText = "The List Price cannot be less than the Retail Price."
+						EndIf
+					EndIf			
+				EndIf	
+			EndIf
+			
+			If GridRow.ErrorText <> String.Empty
+				ErrorProvider.SetError(btnFinish,"There are errors on the Grid")
+				LeaveSR
+			EndIf
+		EndFor
+
+		MsgBox "Are you sure you want to update this Item" Icon(*Question) Buttons(*OkCancel) DftButton(2) Title("Update Item ?") RtnCode(ReturnValue)
+		If ReturnValue = 1
+			SetMousePtr *HourGlass
+			*this.DialogResult = DialogResult.OK
+		EndIf
+	EndSr
+	
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+	EndSr
+	
+	BegSr dgvMarketPrices_CellValidating Access(*Private) Event(*this.dgvMarketPrices.CellValidating)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellValidatingEventArgs
+		
+		DclFld PendingCost   Type(Decimal)
+		DclFld PendingRetail Type(Decimal)
+		DclFld Size          Type(Int16)
+		DclFld listPrice   Type(Decimal)
+		DclFld retailPrice   Type(Decimal)
+		
+		Try
+			//If(m_cellEdit = *True)
+				Select
+				When dgvMarketPrices.Columns[e.ColumnIndex].Name = "PendingCost"
+					dgvMarketPrices["PendingCost",e.RowIndex].ErrorText = String.Empty
+				
+					If String.IsNullOrEmpty(e.FormattedValue.ToString())
+						LeaveSR
+					EndIf
+					
+					If Not Decimal.TryParse(e.FormattedValue.ToString(), *ByRef PendingCost)
+						e.Cancel = *True
+						MsgBox "You have entered an invalid number in New Cost price"
+						LeaveSR
+					EndIf
+					
+					If PendingCost = *Zero
+						LeaveSR
+					EndIf
+							
+					If PendingCost < 0.01
+						e.Cancel = *True
+						MsgBox "New Cost price value cannot be less than 0.01"
+						LeaveSR
+					EndIf
+				When dgvMarketPrices.Columns[e.ColumnIndex].Name = "Retail"
+					If (ItemForOnlineEcom() = *True)
+						//If(Environment.Domain = "SWNA")
+						If (DataCache.ShowListPrice = *True)
+							Decimal.TryParse(e.FormattedValue.ToString(), *ByRef retailPrice)
+							Decimal.TryParse(dgvMarketPrices.Item("ListPrice",e.RowIndex).Value.ToString(),*ByRef listPrice)
+							If (listPrice < retailPrice)				
+								e.Cancel = *True
+								MsgBox TITLE('List Price') Msg('Retail Price can not be greater than the List Price.') ICON(*Exclamation)						
+								LeaveSR
+							EndIf	
+						EndIf	
+					EndIf			
+				When dgvMarketPrices.Columns[e.ColumnIndex].Name = "ListPrice"
+					If (ItemForOnlineEcom() = *True)
+						//If(Environment.Domain = "SWNA")
+						If (DataCache.ShowListPrice = *True)
+							Decimal.TryParse(e.FormattedValue.ToString(),*ByRef listPrice)
+							Decimal.TryParse(dgvMarketPrices.Item("Retail",e.RowIndex).Value.ToString(),*ByRef retailPrice)
+							If (listPrice < retailPrice)
+								e.Cancel = *True
+								MsgBox TITLE('List Price') Msg('New List Price can not be less than the Retail Price.') ICON(*Exclamation)						
+								LeaveSR
+							EndIf					
+						EndIf
+					EndIf
+				When dgvMarketPrices.Columns[e.ColumnIndex].Name = "PendingRetail"
+					dgvMarketPrices["PendingRetail",e.RowIndex].ErrorText = String.Empty
+
+					If (ItemForOnlineEcom() = *True)
+						//If(Environment.Domain = "SWNA")
+						If (DataCache.ShowListPrice = *True)
+							Decimal.TryParse(e.FormattedValue.ToString(), *ByRef retailPrice)
+							Decimal.TryParse(dgvMarketPrices.Item("ListPrice",e.RowIndex).Value.ToString(),*ByRef listPrice)
+							If (listPrice < retailPrice)
+								e.Cancel = *True
+								MsgBox TITLE('List Price') Msg('Retail Price can not be greater than the List Price.') ICON(*Exclamation)						
+								LeaveSR
+							EndIf
+						EndIf
+					EndIf
+
+					If String.IsNullOrEmpty(e.FormattedValue.ToString())
+						LeaveSR
+					EndIf
+					
+					If Not Decimal.TryParse(e.FormattedValue *As String, *ByRef PendingRetail)
+						e.Cancel = *True
+						MsgBox 'You have entered an invalid number in New Retail price'
+						LeaveSR
+					EndIf
+					
+					If PendingRetail = *Zero
+						LeaveSR
+					EndIf
+					
+					If PendingRetail < 0.01
+						e.Cancel = *True
+						MsgBox "New Retail price value cannot be less than 0.01"
+						LeaveSR
+					EndIf
+					
+					// Check if has been Shipped or If there are outstanding PO's
+					Size = dgvMarketPrices["Size",e.RowIndex].Value *As Int16
+					If ItemsBO.ChkItemShipped(ItemStyle.Class,ItemStyle.Vendor,ItemStyle.Style,ItemStyle.Colour,Size)
+						MsgBox "Retail Price cannot be changed : Item has shipped"
+						e.Cancel = *True
+						LeaveSR
+					EndIf
+					
+					If Not ItemsBO.ChkLineOrderStatus(ItemStyle.Class,ItemStyle.Vendor,ItemStyle.Style,ItemStyle.Colour,Size)
+						MsgBox "Retail Price cannot be changed : Orders are outstanding"
+						e.Cancel = *True
+						LeaveSR
+					EndIf
+				EndSL
+			//EndIf
+		Catch Name(ex) Type(Exception)
+			// 
+		EndTry
+	EndSr
+	
+	BegSr dgvMarketPrices_CellFormatting Access(*Private) Event(*this.dgvMarketPrices.CellFormatting)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellFormattingEventArgs
+		
+		DclFld PendingCost   Type(Decimal)
+		DclFld PendingRetail Type(Decimal)
+
+		Try
+			If String.IsNullOrEmpty(dgvMarketPrices["PendingCost",e.RowIndex].Value.ToString())
+				PendingCost = *Zero
+			Else
+				PendingCost = Convert.ToDecimal(dgvMarketPrices["PendingCost",e.RowIndex].Value)
+			EndIf
+			
+			If String.IsNullOrEmpty(dgvMarketPrices["PendingRetail",e.RowIndex].Value.ToString())
+				PendingRetail = *Zero
+			Else
+				PendingRetail = Convert.ToDecimal(dgvMarketPrices["PendingRetail",e.RowIndex].Value)
+			EndIf
+			
+			If PendingCost < PendingRetail
+				If dgvMarketPrices.Columns[e.ColumnIndex].Name = "PendingCost"
+					If e.Value <> *Nothing 
+						If Decimal.TryParse(e.Value.ToString(), *ByRef PendingCost)
+							If PendingCost = 0
+								e.Value = String.Empty
+								e.FormattingApplied = *True
+							EndIf
+						EndIf
+					EndIf
+				EndIf
+				
+				If dgvMarketPrices.Columns[e.ColumnIndex].Name = "PendingRetail"
+					If e.Value <> *Nothing
+						If Decimal.TryParse(e.Value.ToString(), *ByRef PendingRetail)
+							If PendingRetail = 0
+								e.Value = String.Empty
+								e.FormattingApplied = *True
+							EndIf
+						EndIf
+					EndIf
+				EndIf				
+			Endif	
+			
+
+		Catch Name(ex) Type(Exception)
+			// 
+		EndTry
+	EndSr
+	
+	BegSr dgvMarketPrices_RowValidating Access(*Private) Event(*this.dgvMarketPrices.RowValidating)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellCancelEventArgs
+		
+		DclFld PendingCost   Type(Decimal)
+		DclFld PendingRetail Type(Decimal)
+		Dclfld Cost          Type(Decimal)
+		Dclfld Retail        Type(Decimal)
+		
+		Try			
+			dgvMarketPrices.Rows[e.RowIndex].ErrorText = String.Empty					
+			
+			If String.IsNullOrEmpty(dgvMarketPrices["PendingCost",e.RowIndex].Value.ToString())
+				PendingCost = *Zero
+			Else
+				PendingCost = Convert.ToDecimal(dgvMarketPrices["PendingCost",e.RowIndex].Value)
+			EndIf
+			
+			If String.IsNullOrEmpty(dgvMarketPrices["PendingRetail",e.RowIndex].Value.ToString())
+				PendingRetail = *Zero
+			Else
+				PendingRetail = Convert.ToDecimal(dgvMarketPrices["PendingRetail",e.RowIndex].Value)
+			EndIf
+			
+			Cost   = dgvMarketPrices["Cost",  e.RowIndex].Value *As Decimal
+			Retail = dgvMarketPrices["Retail",e.RowIndex].Value *As Decimal
+			
+			If (Retail <= 0 *AND PendingRetail <= 0)
+				e.Cancel = *True
+				dgvMarketPrices.Rows[e.RowIndex].ErrorText = "Please enter a Retail price > 0 in PendingRetail"
+				LeaveSR
+			EndIf
+			
+			// If both Pending Cost and Pending Retail have not been entered then return
+			If PendingCost = *Zero +
+			And PendingRetail = *Zero
+				dgvMarketPrices["Status",e.RowIndex].Value = String.Empty
+				LeaveSR
+			EndIf
+			
+			// Cross validation of Retail and Cost prices
+			If PendingRetail > *Zero
+				If PendingCost <> *Zero And PendingRetail < PendingCost
+					e.Cancel = *True
+					dgvMarketPrices.Rows[e.RowIndex].ErrorText = "New Retail price cannot be less than Pending Cost"
+					LeaveSR
+				EndIf
+				
+				If PendingCost = *Zero And PendingRetail < Cost
+					e.Cancel = *True
+					dgvMarketPrices.Rows[e.RowIndex].ErrorText = "New Retail price cannot be less than Cost"
+					LeaveSR
+				EndIf
+			EndIf
+
+			If PendingCost > *Zero
+				If PendingRetail <> *Zero And PendingCost > PendingRetail
+					e.Cancel = *True
+					dgvMarketPrices.Rows[e.RowIndex].ErrorText = "New Cost price cannot be greater than Pending Retail"
+					LeaveSR
+				EndIf
+				
+				If PendingRetail = *Zero And PendingCost > Retail
+					e.Cancel = *True
+					dgvMarketPrices.Rows[e.RowIndex].ErrorText = "New Cost price cannot be greater than Retail"
+					LeaveSR
+				EndIf
+			EndIf			
+			dgvMarketPrices["Status",e.RowIndex].Value = "Changed"
+		Catch Name(ex) Type(Exception)
+			//
+		EndTry
+	EndSr
+	
+	
+	//Enter UPC.............Only available for SWNA...	
+	BegSr dgvMarketPrices_CellMouseDoubleClick Access(*Private) Event(*this.dgvMarketPrices.CellMouseDoubleClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellMouseEventArgs
+		
+		DclFld ChangeItemAddMarketUPC Type(ChangeItemAddMarketUPC)
+		
+		If ChangeItemAddMarketUPC = *Nothing
+			ChangeItemAddMarketUPC = *New ChangeItemAddMarketUPC(PgmDB,ItemsBO,Environment)
+		EndIf
+		
+		Try
+			//If Environment.Domain = "SWNA"   
+			If (DataCache.AllowUPCInput = *True)                                                 
+				If dgvMarketPrices["Market",  e.RowIndex].Value *As String <> ItemsBO.BaseMarket 
+					If dgvMarketPrices["VendorUPC",  e.RowIndex].Value *As Int64 = *Zero
+					
+						ChangeItemAddMarketUPC.Market          = dgvMarketPrices["Market",  e.RowIndex].Value *As String
+						ChangeItemAddMarketUPC.Class           = lblClass.Text
+						ChangeItemAddMarketUPC.ClassDesc       = lblClassName.Text
+						ChangeItemAddMarketUPC.Vendor          = lblVendor.Text
+						ChangeItemAddMarketUPC.VendorDesc      = lblVendorName.Text
+						ChangeItemAddMarketUPC.Size            = dgvMarketPrices["Size",     e.RowIndex].Value *As Int16
+						
+						ItemsBO.GetSize(dgvMarketPrices["Size",     e.RowIndex].Value *As Int16)
+						ChangeItemAddMarketUPC.SizeDesc        = ItemsBO.SizeName
+						ChangeItemAddMarketUPC.LongDescription = lblDescription.Text
+						
+						ChangeItemAddMarketUPC.ShowDialog()
+						
+						If ChangeItemAddMarketUPC.DialogResult = DialogResult.OK
+							dgvMarketPrices["VendorUPC",  e.RowIndex].Value = ChangeItemAddMarketUPC.VendorUPC
+						EndIf
+					Else
+						MsgBox Msg("This Vendor UPC has already been Entered")	
+					Endif
+				Else
+					MsgBox Msg("This function is not available for this Market")	
+				Endif		
+			Endif
+		Catch Name(ex) Type(Exception)
+			// 
+		EndTry
+	EndSr
+	
+	BegSr dgvMarketPrices_DataError Access(*Private) Event(*this.dgvMarketPrices.DataError)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewDataErrorEventArgs
+	EndSr
+	
+	BegSr dgvMarketPrices_RowEnter Access(*Private) Event(*this.dgvMarketPrices.RowEnter)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+	
+		
+	EndSr
+	
+	BegSr dgvMarketPrices_CellBeginEdit Access(*Private) Event(*this.dgvMarketPrices.CellBeginEdit)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellCancelEventArgs
+		
+		//m_cellEdit = *True
+	EndSr
+	
+	BegSr dgvMarketPrices_CellEndEdit Access(*Private) Event(*this.dgvMarketPrices.CellEndEdit)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		//m_cellEdit = *False
+	EndSr
+	
+EndClass

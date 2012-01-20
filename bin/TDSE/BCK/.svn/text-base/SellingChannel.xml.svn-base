@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <SellingChannel>
+    <SellingChannelCode>1</SellingChannelCode>
+    <Description>Selling Channel 1</Description>
+  </SellingChannel>
+  <SellingChannel>
+    <SellingChannelCode>2</SellingChannelCode>
+    <Description>Selling Channel 2</Description>
+  </SellingChannel>
+  <SellingChannel>
+    <SellingChannelCode>3</SellingChannelCode>
+    <Description>Selling Channel 3</Description>
+  </SellingChannel>
+</DocumentElement>
+

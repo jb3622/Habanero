@@ -1,0 +1,100 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{46e73692-ebc8-46de-8cce-4b61c14c6d9e}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Disney.Spice.ItemsBO</RootNamespace>
+    <AssemblyName>Disney.Spice.ItemsBO</AssemblyName>
+    <Name>Disney.Spice.ItemsBO</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DefineDebug>True</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>False</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
+      <Name>ASNA.DataGate.Client</Name>
+      <AssemblyName>ASNA.DataGate.Client.dll</AssemblyName>
+    </Reference>
+    <Reference Include="ASNA.VisualRPG.Runtime, Version=8.1.432.0, Culture=neutral, PublicKeyToken=d7106be54d30c861">
+      <Name>ASNA.VisualRPG.Runtime</Name>
+      <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
+    </Reference>
+    <Reference Include="Disney.DA.IP400, Version=8.3.5.19707, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.DA.IP400</Name>
+      <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.DAL, Version=8.3.4272.31586, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <Name>Disney.Spice.DAL</Name>
+      <AssemblyName>Disney.Spice.DAL.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.DAL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DisneyMenu, Version=8.3.3.9999, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <Name>DisneyMenu</Name>
+      <AssemblyName>DisneyMenu.exe</AssemblyName>
+      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IBM.Data.DB2.iSeries, Version=10.0.0.0, Culture=neutral, PublicKeyToken=9cdb2ebfb1f93a26">
+      <Name>IBM.Data.DB2.iSeries</Name>
+      <AssemblyName>IBM.Data.DB2.iSeries.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\IBM.Data.DB2.iSeries.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <Name>System.Windows.Forms</Name>
+      <AssemblyName>System.Windows.Forms.dll</AssemblyName>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="CasePack.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Constants.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Items.vr" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\ASNA\VisualRPG\8.1\ASNA.VisualRPG.targets" />
+</Project>

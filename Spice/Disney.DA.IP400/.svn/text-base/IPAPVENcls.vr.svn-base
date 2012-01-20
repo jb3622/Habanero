@@ -1,0 +1,278 @@
+// ===============================================
+// Tarnjit Bhambra
+// 07 May 2009
+// IPAPVENcls	
+// Data Access Layer - Vendor Code Master File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+
+BegClass IPAPVENcls Access(*Public)
+	
+	DclFld memRecords Type(*Integer4)  Access(*Public)	
+	
+	DclDB Name(DB) DbName("TDST")
+	
+	DclDiskFile Name(IPAPVEN) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*Yes) RnmFmt(Apven:R_Apven)
+	DclDiskFile Name(IPAPVENB) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No) RnmFmt(Apven:R_ApvenB) +
+	netBlockFactor(400)
+	
+	DclMemoryFile Name(mIPAPVEN) DBdesc(DB) Filedesc('*Libl/IPAPVENB') RnmFmt(ApvenR, mApvenR) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB    Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm VendorCode Type(*Zoned) Len(5,0)
+		
+		*this.DB = DB
+		
+		GetVendorCode(VendorCode)
+	EndConstructor
+	
+	//Properties
+	BegProp Vendor_Code Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR VAVN
+		EndGet
+	EndProp
+	
+	BegProp Vendor_Name Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR VNAM
+		EndGet
+		
+		BegSet
+			VNAM = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_Address1 Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR VAD1
+		EndGet
+		
+		BegSet
+			VAD1 = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_Address2 Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR VAD2
+		EndGet
+		
+		BegSet
+			VAD2 = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_City Type(*Char) Len(20) Access(*Public)
+		BegGet
+			LeaveSR VCTY
+		EndGet
+		
+		BegSet
+			VCTY = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_State Type(*Char) Len(3) Access(*Public)
+		BegGet
+			LeaveSR VSTA
+		EndGet
+		
+		BegSet
+			VSTA = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_ZipCode Type(*Char) Len(10) Access(*Public)
+		BegGet
+			LeaveSR VZIP
+		EndGet
+		
+		BegSet
+			VZIP = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_Country Type(*Char) Len(20) Access(*Public)
+		BegGet
+			LeaveSR VCNT
+		EndGet
+		
+		BegSet
+			VCNT = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_Phone_Number Type(*Char) Len(22) Access(*Public)
+		BegGet
+			LeaveSR VPHN
+		EndGet
+		
+		BegSet
+			VPHN = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_Status Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR VSTS
+		EndGet
+		
+		BegSet
+			VSTS = *PropVal
+		EndSet
+	EndProp
+	
+	
+	BegProp DataSet_Record_Count Type(*Integer4) Access(*Public)
+		BegGet
+			LeaveSR memRecords
+		EndGet
+	EndProp
+	
+	
+	// Methods
+	BegFunc GetVendorCode Type(*Boolean) Access(*Public)
+		DclSrParm VendorCode Type(*Zoned) len(5,0)
+		
+		If Not IPAPVEN.IsOpen
+			Open IPAPVEN
+		EndIf
+		
+		Chain From(IPAPVEN) Key(VendorCode) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+	EndFunc
+	
+	BegFunc GetVendorCodeForUpdate Type(*Boolean) Access(*Public)
+		DclSrParm VendorCode Type(*Zoned) len(5,0)
+		
+		If Not IPAPVEN.IsOpen
+			Open IPAPVEN
+		EndIf
+		
+		Chain From(IPAPVEN) Key(VendorCode) Access(*DFT) Err(*Extended)
+		If not %Found
+			LeaveSR *On
+		EndIf
+		
+		If %Error = *On
+			Throw *New System.Exception('Failed to get record for update (IPAPVEN)')
+			LeaveSR *On
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegSR WriteVendorCode Access(*Public)
+		DclSrParm VendorCode Type(*Zoned) Len(5,0)
+	
+		If Not IPAPVEN.IsOpen
+			Open IPAPVEN
+		EndIf
+		
+		VAVN = VendorCode
+		
+		Write R_Apven Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (IPAPVEN)')
+		EndIf
+		
+		LeaveSR
+	EndSR
+	
+	BegFunc UpdateVendorCode Type(*Boolean) Access(*Public) 
+		DclSrParm VendorCode Type(*Zoned) len(5,0)
+		
+		Update R_Apven Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to update record (IPAPVEN)')
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegFunc DeleteVendorCode Type(*Boolean) Access(*Public)
+		DclSrParm VendorCode Type(*Zoned) len(5,0)
+		
+		If Not IPAPVEN.IsOpen
+		   Open IPAPVEN
+		EndIf
+		
+		Delete From(R_Apven) Key(VendorCode) Err(*Extended)
+		If %Error = *On
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *False
+	EndFunc
+
+	
+	/region Memory files
+	
+	BegFunc setMemIPAPVEN Type(*Boolean) Access(*Public)
+	
+		If Not IPAPVENB.IsOpen
+			Open IPAPVENB
+		EndIf
+	
+	 	If Not mIPAPVEN.IsOpen
+	 		Open mIPAPVEN
+		Endif	
+		
+		mIPAPVEN.DataSet.Clear()
+		memRecords = *Zero
+	
+		SetLL IPAPVENB key(*Start)
+		DoUntil IPAPVENB.IsEof
+			Read IPAPVENB
+			If (Not IPAPVENB.IsEof)
+			   Write mIPAPVEN
+			   memRecords += 1
+		    Endif
+		Enddo
+	    
+	    Close IPAPVENB
+	
+		LeaveSR *True
+	
+	EndFunc	
+	
+	BegFunc ReadIPAPVEN Type(*Boolean) Access(*Public)
+		DclSrParm wIdx Type(*Integer2)
+		
+		If wIdx > memRecords 
+		   LeaveSR *True
+		Endif   
+		
+		Chain mIPAPVEN key(wIdx)
+		If mIPAPVEN.IsEof
+		   Unlock mIPAPVEN
+		   LeaveSR *True
+		Endif
+		
+		LeaveSR *false   
+	
+	EndFunc
+	
+	/endregion
+
+
+EndClass
+
+

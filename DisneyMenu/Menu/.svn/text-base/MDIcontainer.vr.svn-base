@@ -1,0 +1,642 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using System.Diagnostics
+Using IBM.Data.DB2.iSeries
+
+DclNameSpace Disney.Menu
+
+BegClass MDIcontainer Extends(System.Windows.Forms.Form) Access(*Internal)
+	DclFld InActivityTimer Type(System.Windows.Forms.Timer) Access(*Private) WithEvents(*Yes)
+	DclFld MessageTimer    Type(System.Windows.Forms.Timer) Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld StatusLabelUser System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld StatusLabelEnvironment System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld StatusLabelDomain System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld StatusLabelID System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld StatusLabelGUID System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld UserKIllTimer System.Windows.Forms.Timer Access(*Private) WithEvents(*Yes)
+	DclFld menuStrip       Type(System.Windows.Forms.MenuStrip) Access(*Private) WithEvents(*Yes)
+
+	DclFld Message          Type(Disney.Menu.Message)
+	DclFld LastInputMonitor Type(Disney.Menu.LastInputMonitor) WithEvents(*Yes)
+	DclFld DynamicMenuStrip Type(Disney.Menu.DynamicMenuStrip)
+	DclFld User             Type(Disney.Menu.Users)
+	DclFld About            Type(Disney.Menu.About)
+	DclFld Options          Type(Disney.Menu.Options)
+	DclFld Environment      Type(Disney.Menu.Environments)
+		
+	DclFld GUID             Type(GUID)
+	DclFld SessionGUID      Type(GUID)
+		
+	DclFld PgmDB            Type(ASNA.VisualRPG.Runtime.Database)
+	DclFld DB2Connection    Type(IBM.Data.DB2.iSeries.iDB2Connection) Access(*Private)
+	
+	DclFld   components  Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	//DclArray ListOfForms Type(System.Windows.Forms.Form) Rank(1)
+	//DclFld   FormsCount  Type(*integer2) Inz(-1)
+		
+	BegConstructor Access(*Public)
+		DclSrParm User          Type(Disney.Menu.Users)
+		DclSrParm PgmDB         Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm DB2Connection Type(IBM.Data.DB2.iSeries.iDB2Connection)
+		DclSrParm Environment   Type(Disney.Menu.Environments)
+			
+		InitializeComponent()
+		
+		LastInputMonitor = *New LastInputMonitor()
+		LastInputMonitor.Interval = Convert.ToInt32(User.UserTimeOut) * 59000
+		LastInputMonitor.MonitorKeyboardEvents = *True
+		LastInputMonitor.MonitorMouseEvents    = *True
+		LastInputMonitor.Enabled               = *True
+		AddHandler SourceObject(LastInputMonitor) SourceEvent(Elapsed) HandlerSR(UserInActive)
+		
+		*this.MessageTimer.Interval = 30000
+		*this.MessageTimer.Start()
+		
+		*this.User  = User
+		*this.PgmDB = PgmDB
+		*this.DB2Connection = DB2Connection
+		*this.Environment   = Environment
+		
+		// Background Image
+//		ForEach Ctrl Collection(Controls) Type(System.Windows.Forms.Control)
+//			If Ctrl.GetType() = *TypeOf(MdiClient)
+//				MdiClientController.Image = Environment.Image
+//				Leave
+//			EndIf
+//		EndFor
+		
+		*this.Controls(*this.Controls.Count - 1).BackColor = Color.FromName(Environment.BackGroundColor)
+		*this.Controls(*this.Controls.Count - 1).BackGroundImage = Environment.Image
+		
+		// Generate a GUID to be passed to called programs as a session number
+		SessionGUID = Guid.NewGuid()
+	EndConstructor
+
+	/Region Designer code
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(MDIcontainer))
+		*this.menuStrip = *new System.Windows.Forms.MenuStrip()
+		*this.InActivityTimer = *new System.Windows.Forms.Timer(*this.components)
+		*this.MessageTimer = *new System.Windows.Forms.Timer(*this.components)
+		*this.statusStrip = *new System.Windows.Forms.StatusStrip()
+		*this.StatusLabelUser = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.StatusLabelID = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.StatusLabelEnvironment = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.StatusLabelDomain = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.StatusLabelGUID = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.UserKIllTimer = *new System.Windows.Forms.Timer(*this.components)
+		*this.statusStrip.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//menuStrip
+		//
+		*this.menuStrip.AutoSize = *False
+		*this.menuStrip.BackColor = System.Drawing.SystemColors.Info
+		*this.menuStrip.Location = *new System.Drawing.Point(0, 0)
+		*this.menuStrip.Name = "menuStrip"
+		*this.menuStrip.Size = *new System.Drawing.Size(1021, 24)
+		*this.menuStrip.TabIndex = 5
+		*this.menuStrip.Text = "menuStrip"
+		//
+		//InActivityTimer
+		//
+		*this.InActivityTimer.Interval = 60000
+		//
+		//MessageTimer
+		//
+		*this.MessageTimer.Interval = 30000
+		//
+		//statusStrip
+		//
+		*this.statusStrip.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.StatusLabelUser, *this.StatusLabelID, *this.StatusLabelEnvironment, *this.StatusLabelDomain, *this.StatusLabelGUID})
+		*this.statusStrip.Location = *new System.Drawing.Point(0, 577)
+		*this.statusStrip.Name = "statusStrip"
+		*this.statusStrip.Size = *new System.Drawing.Size(1021, 24)
+		*this.statusStrip.TabIndex = 7
+		*this.statusStrip.Text = "statusStrip1"
+		//
+		//StatusLabelUser
+		//
+		*this.StatusLabelUser.AutoSize = *False
+		*this.StatusLabelUser.BackColor = System.Drawing.SystemColors.ControlLight
+		*this.StatusLabelUser.BorderSides = ((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom) *As System.Windows.Forms.ToolStripStatusLabelBorderSides)
+		*this.StatusLabelUser.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+		*this.StatusLabelUser.Margin = *new System.Windows.Forms.Padding(0, 2, 0, 2)
+		*this.StatusLabelUser.Name = "StatusLabelUser"
+		*this.StatusLabelUser.Size = *new System.Drawing.Size(100, 20)
+		//
+		//StatusLabelID
+		//
+		*this.StatusLabelID.AutoSize = *False
+		*this.StatusLabelID.BackColor = System.Drawing.SystemColors.ControlLight
+		*this.StatusLabelID.BorderSides = ((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom) *As System.Windows.Forms.ToolStripStatusLabelBorderSides)
+		*this.StatusLabelID.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+		*this.StatusLabelID.Margin = *new System.Windows.Forms.Padding(0, 2, 0, 2)
+		*this.StatusLabelID.Name = "StatusLabelID"
+		*this.StatusLabelID.Size = *new System.Drawing.Size(60, 20)
+		//
+		//StatusLabelEnvironment
+		//
+		*this.StatusLabelEnvironment.AutoSize = *False
+		*this.StatusLabelEnvironment.BackColor = System.Drawing.SystemColors.ControlLight
+		*this.StatusLabelEnvironment.BorderSides = ((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom) *As System.Windows.Forms.ToolStripStatusLabelBorderSides)
+		*this.StatusLabelEnvironment.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+		*this.StatusLabelEnvironment.Margin = *new System.Windows.Forms.Padding(0, 2, 0, 2)
+		*this.StatusLabelEnvironment.Name = "StatusLabelEnvironment"
+		*this.StatusLabelEnvironment.Size = *new System.Drawing.Size(150, 20)
+		//
+		//StatusLabelDomain
+		//
+		*this.StatusLabelDomain.AutoSize = *False
+		*this.StatusLabelDomain.BackColor = System.Drawing.SystemColors.ControlLight
+		*this.StatusLabelDomain.BorderSides = ((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom) *As System.Windows.Forms.ToolStripStatusLabelBorderSides)
+		*this.StatusLabelDomain.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+		*this.StatusLabelDomain.Margin = *new System.Windows.Forms.Padding(0, 2, 0, 2)
+		*this.StatusLabelDomain.Name = "StatusLabelDomain"
+		*this.StatusLabelDomain.Size = *new System.Drawing.Size(70, 20)
+		//
+		//StatusLabelGUID
+		//
+		*this.StatusLabelGUID.AutoSize = *False
+		*this.StatusLabelGUID.BackColor = System.Drawing.SystemColors.ControlLight
+		*this.StatusLabelGUID.BorderSides = ((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) *BitOr System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom) *As System.Windows.Forms.ToolStripStatusLabelBorderSides)
+		*this.StatusLabelGUID.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+		*this.StatusLabelGUID.Name = "StatusLabelGUID"
+		*this.StatusLabelGUID.Size = *new System.Drawing.Size(250, 19)
+		//
+		//UserKIllTimer
+		//
+		//
+		//MDIcontainer
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.BackColor = Color.White
+		*this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+		*this.ClientSize = *new System.Drawing.Size(1021, 601)
+		*this.Controls.Add(*this.statusStrip)
+		*this.Controls.Add(*this.menuStrip)
+		*this.Icon = (resources.GetObject("$this.Icon") *As System.Drawing.Icon)
+		*this.IsMdiContainer = *True
+		*this.MainMenuStrip = *this.menuStrip
+		*this.Name = "MDIcontainer"
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Disney Applications"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		*this.statusStrip.ResumeLayout(*False)
+		*this.statusStrip.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	/EndRegion
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	
+	/Region Form Load and Unload
+	BegSr DisplayMenu Access(*Public)
+	
+		Try
+			*this.ShowDialog()
+		Catch Ex Type(System.Exception)
+			MsgBox TITLE('SPICE error occurred') MSG(Ex.Message()) Icon(*STOP) Buttons(*OkCancel)
+		EndTry
+	EndSr
+	
+	BegSr FormLoad Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		*this.MenuStrip.Items.Clear()
+		
+		DynamicMenuStrip = *New Disney.Menu.DynamicMenuStrip(System.Environment.CurrentDirectory.Trim() + "\" + Environments.menuXmlFolderName + "\MenuBar.xml",*this)
+        DynamicMenuStrip.LoadDynamicMenu(menuStrip)
+        
+        StatusLabelUser.Text        = User.UserID.ToUpper()
+        StatusLabelID.Text          = User.IPinitials
+        StatusLabelEnvironment.Text = Environment.Name
+        StatusLabelDomain.Text      = Environment.Domain
+        StatusLabelGUID.Text        = SessionGUID.ToString()
+	EndSr
+
+	BegSr FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+                	
+		MessageTimer.Stop()
+		InActivityTimer.Stop()
+	EndSr
+	/EndRegion
+	
+	/Region Menu Options
+	BegSR menuStripClick_About Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If About = *Nothing Or About.IsDisposed
+			About = *New Disney.Menu.About()
+			About.MdiParent = *this
+		EndIf
+		
+		About.Show()
+	EndSR
+	
+	BegSR menuStripClick_LogOff Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		*this.DialogResult = DialogResult.Cancel
+	EndSR
+		
+	BegSr menuStripClick_OptionSelected Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld   stripItem           Type(System.Windows.Forms.ToolStripMenuItem)
+		DclFld   MenuItemAssembly    Type(System.Reflection.Assembly)
+		DclFld   MenuOption          Type(Disney.Menu.MenuOption)
+		DclFld   Application         Type(Disney.Menu.Application)
+		DclFld   MenuItemClass       Type(System.Type)
+		DclArray MenuItemConstructor Type(System.Reflection.ConstructorInfo) Rank(1)
+
+		DclFld   AssemblyFound Type(Boolean)
+		DclFld   DialogRtn     Type(Object)
+		DclFld   ClassForm     Type(*Form)
+		DclArray AssemblyTypes Type(System.Type) Rank(1)
+		
+		DclFld OptionName      Type(String)
+		DclFld ReturnString    Type(String)
+		DclFld OptionAuthority Type(Boolean)
+		DclFld Authorised      Type(Boolean)
+		
+		// Temporary measures
+		//DclFld DA   Type(iDB2DataAdapter)
+		//DclFld DS   Type(DataSet)
+
+		//DA = *New iDB2DataAdapter("Select ICLS,IVEN,ISTY,ICLR,ISIZ,IDPT,IDES,IUPD from ipithdr where ICLS=1108",DB2Connection)
+		
+		//ds = *New DataSet("DB2")
+		//da.Fill(ds)
+		
+		//ds.Tables("TABLE").WriteXml("C:\ItemsDB2.xml")
+		
+		//DataGridView1.DataSource = ds
+		//DataGridView1.DataMember = "TABLE"
+		
+		
+		// Get Selected option
+		stripItem = Sender *As System.Windows.Forms.ToolStripMenuItem
+		OptionName = stripItem.Tag *as *String
+		
+		MenuOption = *New Disney.Menu.MenuOption()
+		Try
+			ReturnString = MenuOption.GetMenuOption(OptionName)
+		Catch Name(Err) System.Exception
+			MsgBox Err.Message
+			LeaveSR
+		EndTry
+		
+		If ReturnString = 'D'
+			MenuOption = *Nothing
+			MsgBox 'Option XML document is invalid'
+			LeaveSR
+		EndIf
+		
+		If ReturnString = 'O'
+			MenuOption = *Nothing
+			MsgBox 'Option ' + OptionName + ' does not exist'
+			LeaveSR
+		EndIf
+		
+		// Is Option Enabled
+		If MenuOption.Enabled = *Off
+			MsgBox 'Menu Option is currently disabled'
+			LeaveSR
+		EndIf
+		
+		If MenuOption.Authority <> '*Public'
+			OptionAuthority = User.GetOptionAuthority(OptionName)
+			If OptionAuthority = *False
+				MsgBox 'You are not Authorised to this Option'
+				LeaveSR
+			EndIf
+		EndIf
+		
+		// Retrieve Application details and check enabled
+		Application = *New Disney.Menu.Application()
+		Application.GetApplication(MenuOption.Application)
+		
+		If Not Application.Enabled
+			If Application.Message <> String.Empty
+				MsgBox Application.Message
+			Else
+				MsgBox 'Application ' + Application.Name + ' is currently closed, please try later.' Icon(*Exclamation)
+			EndIf
+			
+			LeaveSR
+		EndIf
+		
+		// Cross check User authority to Application
+		Authorised = *Off
+		ForEach UserApp Collection(User.AuthorisedApplications) Type(String)
+			If UserApp.ToUpper() = Application.Name.ToUpper()
+				Authorised = *On
+				Leave
+			EndIf
+		EndFor
+		
+		// Check authority flag
+		If Not Authorised
+			MsgBox "You are not authorised to the " + Application.Name + " Application" Icon(*Exclamation) Title("Not Authorised")
+			LeaveSR
+		EndIf
+		
+		
+		//--------------------//
+		// Load Assembly      //
+		//--------------------//
+		Try
+			MenuItemAssembly = System.Reflection.Assembly.LoadFrom(MenuOption.AssemblyName)
+		Catch Name(Err) Type(System.Exception)
+			MsgBox 'Assembly ' + MenuOption.AssemblyName + ' not found'
+			LeaveSR
+		EndTry
+		
+		// Get Types (just for reference or debugging)
+		// AssemblyTypes = MenuItemAssembly.GetTypes()
+		
+		// Get specific Type named in Menu Option configuration
+ 		MenuItemClass = MenuItemAssembly.GetType( MenuOption.ClassName )
+		If MenuItemClass = *Nothing
+			MsgBox 'Type ' + MenuOption.ClassName + ' Not Found'
+			LeaveSR
+		EndIf
+		
+//		DclFld   MemberInfo System.Reflection.MemberInfo
+//		MemberInfo = memberinfo.MemberType.All
+
+		// Get Constructor(s) info
+		DclFld  Constructor Type(System.Reflection.ConstructorInfo)
+		MenuItemConstructor = MenuItemClass.GetConstructors()
+		If MenuItemConstructor.length = 1
+			Constructor = MenuItemConstructor[0]
+		Else // Decide which constructor to use
+			Constructor = SelectConstructor(MenuItemConstructor)
+		EndIf
+		
+		// Try Garbage collection here
+		//System.GC.Collect(GC.MaxGeneration,GCCollectionMode.Forced)
+		
+		
+		//--------------------//
+		// Construct object   //
+		//--------------------//
+		DclFld Obj Type(System.Object)
+
+		Try
+			Obj = Constructor.Invoke( BuildConstructorParms(Constructor.GetParameters()) )
+		Catch Err Type(System.Exception)
+			MsgBox Msg('Could not Construct Object, ' + +
+				Err.Message.ToString() + Err.InnerException.ToString())
+			LeaveSR
+		EndTry		
+		
+		// Cast ClassForm as *Form and all of the Base class members are known
+		ClassForm = Obj *AsFld ClassForm
+		ClassForm.MDIparent = *This
+		
+		Try
+			ClassForm.Show()	// Only Show valid for MDI
+		Catch Err Type(System.Exception)
+			MsgBox Err.Message
+			LeaveSR
+		EndTry
+		
+		//ListOfForms = *this.MdiChildren
+		//DynamicMenuStrip.AddToWindowMenu(MenuStrip,ClassForm)
+	EndSr
+	
+	BegSR menuStripClick_Options Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Options = *Nothing Or Options.IsDisposed
+			Options = *New Disney.Menu.Options()
+			Options.MdiParent = *this
+		EndIf
+		
+		Options.Show()
+	EndSR
+	
+	BegFunc BuildConstructorParms Type(*Object) Rank(1)
+		DclSrParm Parms Type(System.Reflection.ParameterInfo) Rank(1)
+	
+		DclArray CPA            Type(*Object) Rank(1)
+		DclFld Position         Type(Int16)
+		
+		CPA = *New *Object[Parms.Length]
+		
+				
+		For Index(Position = *Zero) To(Parms.Length - 1)
+			Select
+			When Parms[Position].ParameterType = *TypeOf(ASNA.VisualRPG.Runtime.Database)
+				CPA[Position] = PgmDB
+			When Parms[Position].ParameterType = *TypeOf(IBM.Data.DB2.iSeries.iDB2Connection)
+				CPA[Position] = DB2Connection		
+			When Parms[Position].ParameterType = *TypeOf(Disney.Menu.Users)
+				CPA[Position] = User
+			When Parms[Position].ParameterType = *TypeOf(Disney.Menu.Environments)
+				CPA[Position] = Environment
+			When Parms[Position].ParameterType = *TypeOf(System.GUID)
+				CPA[Position] = SessionGUID
+			When Parms[Position].ParameterType = *TypeOf(System.Windows.Forms.Form)
+				CPA[Position] = *this
+			Other
+				MsgBox 'Unknown Constructor Parameter ' + Parms[Position].ParameterType.ToString()
+			EndSL
+		EndFor
+		
+		LeaveSR CPA
+	EndFunc
+	
+	BegFunc SelectConstructor Type(System.Reflection.ConstructorInfo)
+		DclSrParm Constructors Type(System.Reflection.ConstructorInfo) Rank(1)
+		
+		DclFld MatchedConstructor Type(System.Reflection.ConstructorInfo)
+		DclFld ConstructorTable   Type(System.Collections.Hashtable)
+		DclArray Parms            Type(System.Reflection.ParameterInfo) Rank(1)
+		
+		DclFld MatchedWithKnownTypes   Type(Int16)
+		DclFld MatchedWithUnknownTypes Type(Int16)
+		DclFld ConstructorParmsCount   Type(Int16)
+		
+		// Loop thru each constructor
+		ForEach Constructor Collection(Constructors) Type(System.Reflection.ConstructorInfo)
+		
+			// Get Construction parameters for each constructor
+			Parms = Constructor.GetParameters()
+			
+			//Loop thru Parms and check we can match with known parms
+			MatchedWithKnownTypes   = *Zero
+			MatchedWithUnknownTypes = *Zero
+			ForEach Parm Collection(Parms) Type(System.Reflection.ParameterInfo)
+				Select
+				When Parm.ParameterType = *TypeOf(ASNA.VisualRPG.Runtime.Database)     +
+				Or   Parm.ParameterType = *TypeOf(IBM.Data.DB2.iSeries.iDB2Connection) +
+				Or   Parm.ParameterType = *TypeOf(Disney.Menu.Users)                   +
+				Or   Parm.ParameterType = *TypeOf(Disney.Menu.Environments)            +
+				Or   Parm.ParameterType = *TypeOf(System.GUID)                         +
+				Or   Parm.ParameterType = *TypeOf(System.Windows.Forms.Form)           +
+				Or   Parm.ParameterType = *TypeOf(System.Boolean)                      +
+				Or   Parm.ParameterType = *TypeOf(System.String)                       
+					MatchedWithKnownTypes += 1
+				Other
+					MatchedWithUnknownTypes += 1
+				EndSL
+			EndFor
+			
+			// If all parms are known then record details of constructor and number of parm matches
+			If MatchedWithUnknownTypes = *Zero
+				If ConstructorTable = *Nothing
+					ConstructorTable = *New System.Collections.Hashtable()
+				EndIf
+			
+				ConstructorTable.Add(Constructor,MatchedWithKnownTypes)
+			Else
+			EndIf
+		EndFor
+		
+		// Loop thru results and chose constructor with most matches
+		Try
+			DclFld FirstEntry Type(Boolean) Inz(*True)
+			ForEach TableEntry Collection(ConstructorTable) Type(System.Collections.DictionaryEntry)
+			If FirstEntry = *True
+				MatchedConstructor    = (TableEntry.Key *As System.Reflection.ConstructorInfo)
+				ConstructorParmsCount = (TableEntry.Value *As Int16)
+				FirstEntry = *False
+			Else
+				If (TableEntry.Value *As Int16) > ConstructorParmsCount
+					MatchedConstructor    = (TableEntry.Key *As System.Reflection.ConstructorInfo)
+					ConstructorParmsCount = (TableEntry.Value *As Int16)
+				EndIf
+			EndIf
+		EndFor
+		Catch Name(Err) Type(System.Exception)		
+			
+		EndTry
+		
+		LeaveSR MatchedConstructor
+	EndFunc
+	/EndRegion
+	
+	/Region TimeOut processing
+	BegSr MouseMoved Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e MouseEventArgs
+
+		InActivityTimer.Stop()
+		InActivityTimer.Start()
+	EndSr
+	
+	BegSr KeyUpDown Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e KeyEventArgs
+		
+		InActivityTimer.Stop()
+		InActivityTimer.Start()
+	EndSr
+	
+	BegSr KeyPressed Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e KeyPressEventArgs
+		
+		InActivityTimer.Stop()
+		InActivityTimer.Start()
+	EndSr
+	
+	BegSr UserActive Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.Timers.ElapsedEventArgs
+	
+		InActivityTimer.Stop()
+		InActivityTimer.Start()
+	EndSr
+
+	BegSr UserInActive Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.Timers.ElapsedEventArgs
+				
+		*this.DialogResult = DialogResult.Cancel
+	EndSr
+
+	BegSr MessageTimer_Tick Access(*Private)  Event(*this.MessageTimer.Tick)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		MessageTimer.Stop()
+		//-----------------------------
+		
+		If Message = *Nothing
+			Message = *New Disney.Menu.Message(User)
+		EndIf
+		
+		If Message.SndUserMsg() = *True
+		
+			//This kills the MDI			
+			*this.DialogResult = DialogResult.Cancel
+			
+			//This kills the menu process and the Datagate job
+			foreach p System.Diagnostics.Process.GetProcessesByName("DisneyMenu") Type(Process)
+			
+				try 
+					p.Kill()
+					p.WaitForExit() 
+				catch winException  Type(Win32Exception)
+					//process was terminating or can't be terminated 
+			    catch invalidException Type(InvalidOperationException)
+			         // process has already exited
+			    EndTry
+			    
+			 EndFor 
+		
+		EndIf
+						
+		//-------------------------------
+		MessageTimer.Start()
+	EndSr
+
+	BegSr UserKillTimer_Tick Access(*Private) Event(*this.UserKIllTimer.Tick)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		// Submit AS/400 job to carry out any clean-up processing required
+		
+		
+		ExitApp()
+	EndSr
+	/EndRegion	
+	BegSr MDIcontainer_Resize Access(*Private) Event(*this.Resize)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//*this.BackgroundImage = Environment.Image
+		*this.Refresh()
+	EndSr
+	
+EndClass

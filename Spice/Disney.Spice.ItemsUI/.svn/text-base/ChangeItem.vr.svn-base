@@ -1,0 +1,444 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+
+BegClass ChangeItem Access(*Public)
+	
+	/Region Define things
+	DclFld PgmDB       Type(ASNA.VisualRPG.Runtime.Database) Access(*Private)
+	DclFld ItemsBO     Type(Disney.Spice.ItemsBO.Items)      Access(*Private)
+	DclFld User        Type(Disney.Menu.Users)               Access(*Private)
+	DclFld Environment Type(Disney.Menu.Environments)        Access(*Private)
+	DclFld pNextForm   Type(System.Collections.Stack)        Access(*Private)
+	
+	DclFld SelectMarket       Type(SelectMarket)       Access(*Private)
+	DclFld SizeStyleSelect    Type(SizeStyleSelect)    Access(*Private)
+	DclFld ChangeStyleDetails Type(ChangeStyleDetails) Access(*Private)
+	DclFld ChangeItemSizes    Type(ChangeItemSizes)    Access(*Private)
+	DclFld ChangeItemSizesBandM    Type(ChangeItemSizesBandM)    Access(*Private)
+	DclFld ChangeOnlineEcomDetails    Type(ChangeOnlineEcomDetails)    Access(*Private)
+	DclFld ChangeMarketSizes  Type(ChangeMarketSizes)  Access(*Private)
+	DclFld ItemStyle          Type(Disney.DA.IP400.ItemStyle) Access(*Private)
+	DclFld m_ItemSizeOverride Type(Disney.DA.IP400.ItemSizeOverride) Access(*Private)
+	
+	DclFld Markets  Type(ArrayList)
+	/EndRegion
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User  Type(Disney.Menu.Users)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		*this.User  = User
+		*this.Environment = Environment
+		
+		m_ItemSizeOverride = *New Disney.DA.IP400.ItemSizeOverride()
+				
+	EndConstructor
+	
+	BegSR Change Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		DclFld NextForm Type(String)
+		DclFld dv       Type(DataView)
+
+		Try
+			ItemsBO = *New Disney.Spice.ItemsBO.Items(PgmDB,User,Environment)
+			ItemStyle = ItemsBO.GetItemStyle(Class,Vendor,Style,Colour)
+			ItemsBO.SaveStyleDetails(ItemStyle)
+			ItemsBO.Size = Size
+			ItemsBO.SellingChannel = ItemStyle.SellingChannel
+			
+			Markets = ItemsBO.GetItemMarkets(Class,Vendor,Style,Colour,Size)
+			ItemsBO.GetAuthorisedMarketsTbl()
+			
+			dv = *New DataView(ItemsBO.SpiceDataSet.Tables("DomainMarkets"))
+			ForEach MarketRow Collection(dv) Type(DataRowView)
+				If Markets.Contains(MarketRow["IPMarket"])
+					MarketRow.Item("Protect") = *True
+					MarketRow.Item("Select")  = *True
+				Else
+					MarketRow.Item("Protect") = *False
+					MarketRow.Item("Select")  = *False
+				EndIf
+			EndFor
+			
+			pNextForm = *New System.Collections.Stack()
+			pNextForm.Push('SelectMarkets')
+			
+			DoUntil NextForm = 'End'
+				NextForm = pNextForm.Peek() *As String
+				
+				Select
+				When NextForm = 'SelectMarkets'
+					SelectMarkets(Class,Vendor,Style,Colour,Size)
+					
+					dv = *New DataView(ItemsBO.SpiceDataSet.Tables("DomainMarkets"))
+					dv.RowFilter = "Select = true"
+					ForEach SelectedMkt Collection(dv) Type(DataRowView)
+						Try 
+							SelectedMkt["VATcode"] = ItemsBO.GetVATcode(SelectedMkt["IPMarket"] *As String,Class)
+						Catch e Type(Exception)
+						
+						EndTry						
+						SelectedMkt["Exchange"] = ItemsBO.GetExchangeRate(SelectedMkt["IPCurrencyCode"] *As String)
+					EndFor
+					
+				When NextForm = 'SizeOrStyle'
+					SizeOrStyle()
+					
+				When NextForm = 'StyleDetails'
+					StyleDetails(Class,Vendor,Style,Colour)
+
+				When NextForm = 'ChangeDetailsEcomItem'
+					ChangeStyleDetailsEcomItem(Class,Vendor,Style,Colour)
+					
+				When NextForm = 'ChangeSizes'
+					ChangeSizes()
+					
+				When NextForm = 'ChangeSizesBandM'
+					ChangeSizesBandM()
+					
+				When NextForm = 'MarketSizes'
+					MarketSizes()
+					
+				When NextForm = 'UpdateItem'
+					UpdateItem()
+					
+				EndSL
+
+			EndDo
+		Catch e Exception
+			LeaveSR
+		EndTry
+				
+	EndSR
+	
+	BegSr SelectMarkets Access(*Private)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		DclFld dv      Type(DataView)
+		DclFld MktList Type(StringBuilder)
+		
+		SelectMarket = *Nothing
+		SelectMarket = *New SelectMarket(User,Environment,ItemsBO)
+		SelectMarket.Opacity = 1.00
+		
+		Try
+			SelectMarket.SelectNewMarkets(Class,Vendor,Style,Colour,Size,Markets)
+			If SelectMarket.DialogResult = System.Windows.Forms.DialogResult.Abort
+				pNextForm.Push('End')
+				LeaveSR
+			EndIf
+
+			// Generate list of selected countries
+			MktList = *New StringBuilder()
+			dv = *New DataView(ItemsBO.SpiceDataSet.Tables["DomainMarkets"])
+			dv.RowFilter = "Select = true"
+			ForEach dvr Collection(dv) Type(DataRowView)
+				MktList.Append(dvr.Item("IPMarket"))
+				MktList.Append(",")
+			EndFor
+			
+			If MktList.Length > *Zero
+				MktList.Remove(MktList.Length-1,1)
+				ItemsBO.SelectedMarkets = MktList.ToString()
+			EndIf
+
+			// Decide where to go next
+			dv = *New DataView(ItemsBO.SpiceDataSet.Tables["DomainMarkets"])
+			dv.RowFilter = "Select = true and Protect = false"
+			If dv.Count > *Zero
+				ItemsBO.GetChgMarketPricesTbl(Class,Vendor,Style,Colour)
+				pNextForm.Push('MarketSizes')
+			Else
+				pNextForm.Push('SizeOrStyle')
+			EndIf
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSr
+	
+	BegSr SizeOrStyle Access(*Private)
+		
+		If SizeStyleSelect = *Nothing
+			SizeStyleSelect = *New SizeStyleSelect(ItemsBO,ItemStyle)
+		EndIf
+
+		Try
+			SizeStyleSelect.ShowDialog()
+			If SizeStyleSelect.DialogResult = System.Windows.Forms.DialogResult.Abort
+				pNextForm.Push('End')
+				LeaveSR
+			EndIf
+			
+			If SizeStyleSelect.Selection = 'Size'
+				If (ItemContainsECOMSizes() = *False *AND ItemForOnlineEcom() = *False)
+					pNextForm.Push('ChangeSizesBandM')
+				Else
+					pNextForm.Push('ChangeSizes')   // Item sizes changes
+				EndIf
+				
+//				If (ItemContainsECOMSizes() = *True)
+//					pNextForm.Push('ChangeSizes')   // Item sizes changes
+//				Else
+//					pNextForm.Push('ChangeSizesBandM')
+//				EndIf
+			Else
+				pNextForm.Push('StyleDetails')  // Change style details selection
+			EndIf
+			
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSr
+	
+	BegSr StyleDetails Access(*Private)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+
+		If ChangeStyleDetails = *Nothing
+			ChangeStyleDetails = *New ChangeStyleDetails(PgmDB,User,Environment,ItemsBO,m_ItemSizeOverride)
+		EndIf
+
+		Try
+			ChangeStyleDetails.ItemStyle = *this.ItemStyle
+			ChangeStyleDetails.Change()
+			
+			If ChangeStyleDetails.DialogResult = System.Windows.Forms.DialogResult.Abort
+				pNextForm.Push('End')
+				LeaveSR
+			EndIf
+			
+			If ChangeStyleDetails.DialogResult = System.Windows.Forms.DialogResult.Retry
+				pNextForm.Pop()
+				LeaveSR
+			EndIf
+			
+			If (m_ItemSizeOverride.OverrideSellingChannel = *True *AND ItemForOnlineEcom() = *False)
+			    // We should never see the ECOMStyleDetails screen in this case
+				pNextForm.Push('ChangeSizesBandM')
+			Else
+				If (ItemContainsECOMSizes() = *False *AND ItemForOnlineEcom() = *False)
+					pNextForm.Push('ChangeSizesBandM')
+				Else
+					pNextForm.Push('ChangeDetailsEcomItem')
+				EndIf
+			EndIf
+							
+//			If(ItemContainsECOMSizes() = *True)
+//				pNextForm.Push('ChangeDetailsEcomItem')
+//			Else
+//				pNextForm.Push('ChangeSizesBandM')		
+//			EndIf	
+			
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSr
+	
+	BegSr ChangeStyleDetailsEcomItem Access(*Private)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		
+		DclFld ItemSize Type(Disney.DA.IP400.ItemSize)
+
+		Try
+			ItemSize = *this.ItemsBO.GetItemSize(ItemsBO.Class,ItemsBO.VendorCode,ItemsBO.Style,ItemsBO.Colour,ItemsBO.Size)
+			
+			ChangeOnlineEcomDetails = *Nothing
+			ChangeOnlineEcomDetails = *New ChangeOnlineEcomDetails(PgmDB,User,Environment,ItemsBO,ItemStyle,ItemSize,m_ItemSizeOverride)
+			
+			ChangeOnlineEcomDetails.ItemStyle = *this.ItemStyle
+			ChangeOnlineEcomDetails.ShowDialog()
+			
+			If ChangeOnlineEcomDetails.DialogResult = System.Windows.Forms.DialogResult.Abort
+				pNextForm.Push('End')
+				LeaveSR
+			EndIf
+			
+			If ChangeOnlineEcomDetails.DialogResult = System.Windows.Forms.DialogResult.Retry
+				pNextForm.Pop()
+				LeaveSR
+			EndIf
+			
+			pNextForm.Push('ChangeSizes')
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSr
+	
+	BegSr ChangeSizes Access(*Private)		
+		Try
+			ChangeItemSizes = *Nothing
+			ChangeItemSizes = *New ChangeItemSizes(PgmDB, Environment, ItemsBO, ItemStyle, m_ItemSizeOverride)
+			
+			ChangeItemSizes.ShowDialog()
+			
+			If ChangeItemSizes.DialogResult = System.Windows.Forms.DialogResult.Abort
+				pNextForm.Push('End')
+				LeaveSR
+			EndIf
+					
+			If ChangeItemSizes.DialogResult = System.Windows.Forms.DialogResult.Retry	
+				pNextForm.Pop()
+				LeaveSR
+			EndIf
+			
+			pNextForm.Push('MarketSizes')
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSr
+	
+	BegSr ChangeSizesBandM Access(*Private)		
+		Try
+			ChangeItemSizesBandM = *Nothing
+			ChangeItemSizesBandM = *New ChangeItemSizesBandM(PgmDB, Environment, ItemsBO, ItemStyle, m_ItemSizeOverride)
+			
+			ChangeItemSizesBandM.ShowDialog()
+			
+			If ChangeItemSizesBandM.DialogResult = System.Windows.Forms.DialogResult.Abort
+				pNextForm.Push('End')
+				LeaveSR
+			EndIf
+					
+			If ChangeItemSizesBandM.DialogResult = System.Windows.Forms.DialogResult.Retry	
+				pNextForm.Pop()
+				LeaveSR
+			EndIf
+			
+			pNextForm.Push('MarketSizes')
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSr
+	
+	BegSr MarketSizes Access(*Private)
+
+		ChangeMarketSizes = *Nothing		
+		ChangeMarketSizes = *New ChangeMarketSizes(PgmDB,Environment,ItemsBO,ItemStyle)
+		
+		Try
+			ChangeMarketSizes.ShowDialog()
+			
+			If ChangeMarketSizes.DialogResult = System.Windows.Forms.DialogResult.Abort
+				pNextForm.Push('End')
+				LeaveSR
+			EndIf
+			
+			If ChangeMarketSizes.DialogResult = System.Windows.Forms.DialogResult.Retry		
+				// Do not want to override values when Back/Previous button is clicked.				
+				// Reset the override object
+				m_ItemSizeOverride.Reset()
+				pNextForm.Pop()
+				LeaveSR
+			EndIf
+			
+			pNextForm.Push('UpdateItem')
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSr
+	
+	BegSr UpdateItem Access(*Private)
+		
+		DclFld ReturnValue Type(Boolean)
+
+		Try
+			ItemStyle.SellingChannel = ItemsBO.SellingChannel
+			ReturnValue = ItemsBO.UpdateItem(ItemStyle)
+			
+			If ReturnValue = *True
+				MsgBox 'Item has been Updated' Title("Success") Icon(*Information)
+			Else
+				MsgBox 'Item has NOT been Updated' Title("Failure !") Icon(*Exclamation)
+			EndIf
+			
+			pNextForm.Push('End')		
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry	
+	EndSR
+	
+	BegFunc ItemForOnlineEcom Type(Boolean) Access(*Private) 		
+		DclFld result         Type(Boolean) Inz(*False)		
+		DclFld dataRow        Type(DataRow)
+		DclFld forOnlineEcom  Type(String)
+				
+		Try
+			If(ItemsBO.SpiceDataSet.Tables["SellingChannelTable"] = *Nothing)
+				ItemsBO.GetSellingChannelTbl()	
+			EndIf
+			
+			dataRow = ItemsBO.SpiceDataSet.Tables["SellingChannelTable"].Rows.Find(ItemsBO.SellingChannel.ToString())
+			If (dataRow <> *Nothing)		
+				forOnlineEcom = dataRow["OnlineECOM"] *AS String				
+				If (forOnlineEcom <> *Nothing)
+					If (forOnlineEcom.Trim() = "Y")
+						result = *True
+					Else
+						result = *False
+					EndIf
+				EndIf
+			EndIf
+			
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry		
+		LeaveSR result
+	EndFunc
+	
+	BegFunc ItemContainsECOMSizes Type(Boolean) Access(*Private) 		
+		DclFld result         Type(Boolean) Inz(*False)		
+		DclFld Sizes          Type(DataTable)
+		DclFld dataRow        Type(DataRow)
+		DclFld sellingChannel Type(String)
+		DclFld forOnlineEcom  Type(String)
+		
+		Try		
+			Sizes = ItemsBO.GetItemSizes(ItemStyle.Class,ItemStyle.Vendor,ItemStyle.Style,ItemStyle.Colour)
+			
+			If(ItemsBO.SpiceDataSet.Tables["SellingChannelTable"] = *Nothing)
+				ItemsBO.GetSellingChannelTbl()	
+			EndIf
+				
+			ForEach Row Collection(Sizes.Rows) Type(DataRow)
+
+				sellingChannel = Row["SellingChannel"] *AS String
+	
+				dataRow = ItemsBO.SpiceDataSet.Tables["SellingChannelTable"].Rows.Find(sellingChannel)
+				If (dataRow <> *Nothing)		
+					forOnlineEcom = dataRow["OnlineECOM"] *AS String				
+					If (forOnlineEcom <> *Nothing)
+						If (forOnlineEcom.Trim() = "Y")
+							result = *True
+							LeaveSR result
+						Else
+							result = *False
+						EndIf
+					EndIf
+				EndIf	
+			EndFor
+									
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry		
+		LeaveSR result
+	EndFunc
+	
+EndClass

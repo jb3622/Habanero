@@ -1,0 +1,3889 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+Using IBM.Data.DB2.iSeries
+Using Disney.Menu
+Using Disney.Spice.DAL
+
+BegClass SpiceItem Access(*Public) 
+	
+	/Region Define things
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(DSSPIIA)   Type(*Output) Org(*Arrival) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPIIA:ITEMIIA)
+	DclDiskFile Name(DSSPIIAL1) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	DclDiskFile Name(DSSPIIAL2) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPIIA:SPIIA2)
+	DclDiskFile Name(DSSPIIAL3) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPIIA:SPIIA3)
+	DclDiskFile Name(IIAupdate) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPIIA:RIIAUPDATE) File('DSSPIIAL1') AddRec(*Yes)
+
+	DclDiskFile Name(DSSPISAL1) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	DclDiskFile Name(DSSPISAL2) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPISA:SPISR2)
+	DclDiskFile Name(DSSPISA)   Type(*Output) Org(*Arrival) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPISA:ITEMISA)
+	DclDiskFile Name(ISAupdate) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPISA:UpdateISA)  File('DSSPISAL1')
+	
+	DclDiskFile Name(DSSPIMIL1) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	DclDiskFile Name(DSSPIMIL3) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPIMI:ITEMIMIL3)
+	DclDiskFile Name(DSSPIMI)   Type(*Output) Org(*Arrival) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPIMI:ITEMIMI)
+	DclDiskFile Name(IMIupdate) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPIMI:RIMIupdate) File("DSSPIMIL1") AddRec(*Yes)
+
+	DclDiskFile Name(DSCNTAP3)  Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	/EndRegion
+	
+	DclFld User         Type(Disney.Menu.Users)
+	DclFld ItemsTbl     Type(DataTable)
+	Dclfld ItemStyle    Type(ItemStyle)
+	Dclfld ItemSize     Type(ItemSize)
+	DclFld DSSPEHLcls   Type(DSSPEHLcls)
+	DclFld EventType    Type(String) Inz(String.Empty)
+	DclFld EventKey	    Type(String) Inz(String.Empty)
+	DclFld EventDesc    Type(String) Inz(String.Empty)
+		
+	/Region Datastructures
+	DclPlist  Name(DS400PARMS)
+		DclParm DTAQname Type(*Char) Len(10)  DBDirection( *Input )		// Only to iSeries
+		DclParm DTAQlib  Type(*Char) Len(10)  DBDirection( *Input )		// Only to iSeries
+		DclParm DTAQdta  Type(*Char) Len(100) DBDirection( *Input )		// Only to iSeries
+		
+	DclDS Name(DtaQDtaDS)
+		DclDSfld Name(Buffer) Type(*Char) Len(100)
+		DclDSfld Name(DSfunc) Type(*Char) Len(10) Overlay(Buffer,  1)
+		DclDSfld Name(DSipur) Type(*Char) Len( 4) Overlay(Buffer, 11)
+		DclDSfld Name(DSuser) Type(*Char) Len(10) Overlay(Buffer, 15)
+		DclDSfld Name(DSitem) Type(*Char) Len(25) Overlay(Buffer, 25)
+		//DclDSfld Name(DSmkts) Type(*Char) Len(25) Overlay(Buffer, 50)
+		DclDSfld Name(DSstmp) Type(*Char) Len(26) Overlay(Buffer, 75)
+	/EndRegion
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User  Type(Disney.Menu.Users)
+		
+		*this.PgmDB = PgmDB
+		*this.User  = User
+	EndConstructor
+	
+	/Region Properties
+	DclFld pClass Type(Int16) Access(*Private) Inz(0)
+	BegProp Class Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pClass
+		EndGet
+		BegSet
+			pClass = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pVendor Type(Int32) Access(*Private) Inz(0)
+	BegProp VendorCode Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pVendor
+		EndGet
+		BegSet
+			pVendor = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pStyle Type(Int16) Access(*Private) Inz(0)
+	BegProp Style Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pStyle
+		EndGet
+		BegSet
+			pStyle = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pColour Type(Int16) Access(*Private) Inz(0)
+	BegProp Colour Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pColour
+		EndGet
+		BegSet
+			pColour = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSize Type(Int16) Access(*Private) Inz(0)
+	BegProp Size Type(Int16) Access(*Public)
+		//BegGet
+		//	LeaveSR pSize
+		//EndGet
+		BegSet
+			pSize = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSubClass Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SubClass Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSubClass
+		EndGet
+		BegSet
+			pSubClass = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendSubClass Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingSubClass Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPendSubClass
+		EndGet
+		BegSet
+			pPendSubClass = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pLongDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ItemLongDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLongDescription
+		EndGet
+		BegSet
+			pLongDescription = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pItemLocalDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ItemLocalDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pItemLocalDescription
+		EndGet
+		BegSet
+			pItemLocalDescription = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pShortDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ItemShortDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pShortDescription
+		EndGet
+		BegSet
+			pShortDescription = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pAPP Type(String) Access(*Private) Inz(String.Empty)
+	BegProp APP Type(String) Access(*Public)
+		BegGet
+			LeaveSR pAPP
+		EndGet
+		BegSet
+			pAPP = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCharCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CharacterCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCharCode
+		EndGet
+		BegSet
+			pCharCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSeasonCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SeasonCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSeasonCode
+		EndGet
+		BegSet
+			pSeasonCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCasePack Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CasePackCode Type(string) Access(*Public)
+		BegGet
+			LeaveSR pCasePack
+		EndGet
+		BegSet
+			pCasePack = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pUPC Type(Int64) Access(*Private) Inz(0)
+	BegProp UPC Type(Int64) Access(*Public)
+		BegGet
+			LeaveSR pUPC
+		EndGet
+		BegSet
+			pUPC = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCaseQty Type(Int16) Access(*Private) Inz(0)
+	BegProp CaseQuantity Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pCaseQty
+		EndGet
+		BegSet
+			pCaseQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDistroQty Type(Int32) Access(*Private) Inz(0)
+	BegProp DistroQuantity Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pDistroQty
+		EndGet
+		BegSet
+			pDistroQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pVendorStyle Type(String) Access(*Private) Inz(String.Empty)
+	BegProp VendorStyle Type(String) Access(*Public)
+		BegGet
+			LeaveSR pVendorStyle
+		EndGet
+		BegSet
+			pVendorStyle = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pTicketType Type(String) Access(*Private) Inz(String.Empty)
+	BegProp TicketType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pTicketType
+		EndGet
+		BegSet
+			pTicketType = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pVAT Type(String) Access(*Private) Inz(String.Empty)
+	BegProp VatCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pVAT
+		EndGet
+	EndProp
+	
+	DclFld pPendVAT Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingVatCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPendVAT
+		EndGet
+	EndProp
+	
+	DclFld pDivision Type(Int16) Access(*Private) Inz(0)
+	BegProp Division Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDivision
+		EndGet
+		BegSet
+			pDivision = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDepartment Type(Int16) Access(*Private) Inz(0)
+	BegProp Department Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDepartment
+		EndGet
+		BegSet
+			pDepartment = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPackHeight  Type(Decimal) Access(*Private) Inz(0)
+	BegProp PackHeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPackHeight
+		EndGet
+		BegSet
+			pPackHeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPackWidth   Type(Decimal) Access(*Private) Inz(0)
+	BegProp PackWidth Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPackWidth
+		EndGet
+		BegSet
+			pPackWidth = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPackLength  Type(Decimal) Access(*Private) Inz(0)
+	BegProp PackLength Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPackLength
+		EndGet
+		BegSet
+			pPackLength = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPackWeight  Type(Decimal) Access(*Private) Inz(0)
+	BegProp PackWeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPackWeight
+		EndGet
+		BegSet
+			pPackWeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSelectedMarketsTbl Type(DataTable) Access(*Private)
+	BegProp SelectedMarketsTable Type(DataTable) Access(*Public)
+		BegGet
+			LeaveSR pSelectedMarketsTbl
+		EndGet
+		BegSet
+			pSelectedMarketsTbl = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSelectedSizesTable Type(DataTable) Access(*Private)
+	BegProp SelectedSizesTable Type(DataTable) Access(*Public)
+		BegGet
+			LeaveSR pSelectedSizesTable
+		EndGet
+		BegSet
+			pSelectedSizesTable = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCommodityCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CommodityCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCommodityCode
+		EndGet
+		BegSet
+			pCommodityCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCompositionCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CompositionCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCompositionCode
+		EndGet
+		BegSet
+			pCompositionCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCountryCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CountryCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCountryCode
+		EndGet
+		BegSet
+			pCountryCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pGenderCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp GenderCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pGenderCode
+		EndGet
+		BegSet
+			pGenderCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pOnlineInd Type(String) Access(*Private) Inz(String.Empty)
+	BegProp OnlineInd Type(String) Access(*Public)
+		BegGet
+			LeaveSR pOnlineInd
+		EndGet
+		BegSet
+			pOnlineInd = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pLocationInd Type(String) Access(*Private) Inz(String.Empty)
+	BegProp LocationInd Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLocationInd
+		EndGet
+		BegSet
+			pLocationInd = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pImpDomInd Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ImportDomesticInd Type(String) Access(*Public)
+		BegGet
+			LeaveSR pImpDomInd
+		EndGet
+		BegSet
+			pImpDomInd = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pLicenceCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp LicenceCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLicenceCode
+		EndGet
+		BegSet
+			pLicenceCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPromotionCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PromotionCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPromotionCode
+		EndGet
+		BegSet
+			pPromotionCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendPromoCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingPromoCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPendPromoCode
+		EndGet
+		BegSet
+			pPendPromoCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pStyleCost Type(Decimal) Access(*Private) Inz(0)
+	BegProp StyleCost Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pStyleCost
+		EndGet
+		BegSet
+			pStyleCost = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pStyleRetail Type(Decimal) Access(*Private) Inz(0)
+	BegProp StyleRetail Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pStyleRetail
+		EndGet
+		BegSet
+			pStyleRetail = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSellingChannel Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SellingChannel Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSellingChannel
+		EndGet
+		BegSet
+			pSellingChannel = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pForOnlineEcommerce Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ForOnlineEcommerce Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pForOnlineEcommerce
+		EndGet
+		BegSet
+			pForOnlineEcommerce = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pOfferEffectiveDate Type(Int32) Access(*Private) Inz(0)
+	BegProp OfferEffectiveDate Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pOfferEffectiveDate
+		EndGet
+		BegSet
+			pOfferEffectiveDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDropShip Type(String) Access(*Private) Inz(String.Empty)
+	BegProp DropShip Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDropShip
+		EndGet
+		BegSet
+			pDropShip = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pItemShipAlone Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ItemShipAlone Type(String) Access(*Public)
+		BegGet
+			LeaveSR pItemShipAlone
+		EndGet
+		BegSet
+			pItemShipAlone = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSpecialHandling Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SpecialHandling Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSpecialHandling
+		EndGet
+		BegSet
+			pSpecialHandling = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSpecialHandlingCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SpecialHandlingCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSpecialHandlingCode
+		EndGet
+		BegSet
+			pSpecialHandlingCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSellOutControl Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SellOutControl Type(String) Access(*Public) 
+		BegGet
+			LeaveSR pSellOutControl
+		EndGet
+		BegSet
+			pSellOutControl = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pSuppressBackOrderCard Type(Boolean) Access(*Private)
+	BegProp SuppressBackOrderCard Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pSuppressBackOrderCard
+		EndGet
+		BegSet
+			pSuppressBackOrderCard = *PropVal
+		EndSet
+	EndProp
+		
+	DclFld pThirdPartySeller Type(Decimal) Access(*Private) Inz(0)
+	BegProp ThirdPartySeller Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pThirdPartySeller
+		EndGet
+		BegSet
+			pThirdPartySeller = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pUserField1 Type(String) Access(*Private) Inz(String.Empty)
+	BegProp UserField1 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pUserField1
+		EndGet
+		BegSet
+			pUserField1 = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pUserField2 Type(String) Access(*Private) Inz(String.Empty)
+	BegProp UserField2 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pUserField2
+		EndGet
+		BegSet
+			pUserField2 = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDCNotes Type(String) Access(*Private) Inz(String.Empty)
+	BegProp DCNotes Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDCNotes
+		EndGet
+		BegSet
+			pDCNotes = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pItemCost Type(Decimal) Access(*Private) Inz(0)
+	BegProp ItemCost Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pItemCost
+		EndGet
+	EndProp
+	
+	DclFld pLastPOitemCost Type(Decimal) Access(*Private) Inz(0)
+	BegProp LastPOitemCost Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pLastPOitemCost
+		EndGet
+	EndProp
+	
+	DclFld pLastPOitemCostAPP Type(Decimal) Access(*Private) Inz(0)
+	BegProp LastPOitemCostAPP Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pLastPOitemCostAPP
+		EndGet
+	EndProp
+	
+	DclFld pItemRetail Type(Decimal) Access(*Private) Inz(0)
+	BegProp ItemRetail Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pItemRetail
+		EndGet
+	EndProp
+
+	DclFld pListPrice Type(Decimal) Access(*Private) Inz(0)
+	BegProp ListPrice Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pListPrice
+		EndGet
+	EndProp
+	
+	DclFld pAgeGroup Type(String) Access(*Private) Inz(String.Empty)
+	BegProp AgeGroup Type(String) Access(*Public)
+		BegGet
+			LeaveSR pAgeGroup
+		EndGet
+		BegSet
+			pAgeGroup = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSKU Type(Int32) Access(*Private) Inz(0)
+	BegProp SKU Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pSKU
+		EndGet
+	EndProp
+	
+	DclFld pSKUchk Type(Int16) Access(*Private) Inz(0)
+	BegProp SKUcheck Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pSKUchk
+		EndGet
+	EndProp
+	
+	DclFld pStyleCreateDateTime Type(DateTime) Access(*Private)
+	BegProp StyleCreateDateTime Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pStyleCreateDateTime
+		EndGet
+	EndProp
+	
+	DclFld pStyleCreateUser Type(String) Access(*Private) Inz(String.Empty)
+	BegProp StyleCreateUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pStyleCreateUser
+		EndGet
+	EndProp
+	
+	DclFld pStyleChangeDateTime Type(DateTime) Access(*Private)
+	BegProp StyleChangeDateTime Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pStyleChangeDateTime
+		EndGet
+	EndProp
+	
+	DclFld pStyleChangeUser Type(String) Access(*Private) Inz(String.Empty)
+	BegProp StyleChangeUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pStyleChangeUser
+		EndGet
+	EndProp
+	
+	DclFld pPendCharCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingCharCode Type(String) Access(*Public)
+		BegGet
+			LeaveSr pPendCharCode
+		EndGet
+	EndProp
+	
+	DclFld pPendingCasePackType Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingCasePackType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPendingCasePackType
+		EndGet
+		BegSet
+			pPendingCasePackType = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendingCasePackQty Type(Int16) Access(*Private) Inz(0)
+	BegProp PendingCasePackQty Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pPendingCasePackQty
+		EndGet
+		BegSet
+			pPendingCasePackQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendingDistroInnerQty Type(Int32) Access(*Private) Inz(0)
+	BegProp PendingDistroInnerQty Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pPendingDistroInnerQty
+		EndGet
+		BegSet
+			pPendingDistroInnerQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendingWeight Type(Decimal) Access(*Private) Inz(0)
+	BegProp PendingWeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPendingWeight
+		EndGet
+		BegSet
+			pPendingWeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendingHeight Type(Decimal) Access(*Private) Inz(0)
+	BegProp PendingHeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPendingHeight
+		EndGet
+		BegSet
+			pPendingHeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendingLength Type(Decimal) Access(*Private) Inz(0)
+	BegProp PendingLength Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPendingLength
+		EndGet
+		BegSet
+			pPendingLength = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendingWidth Type(Decimal) Access(*Private) Inz(0)
+	BegProp PendingWidth Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pPendingWidth
+		EndGet
+		BegSet
+			pPendingWidth = *PropVal
+		EndSet
+	EndProp
+	/EndRegion
+	
+	BegFunc ChkItemExists Type(Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		DclSrParm Market Type(String)
+					
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		Chain DSSPIMIL1 Key(Class, Vendor, Style, Colour, Size, Market)
+		LeaveSR %Found
+	EndFunc
+	
+	BegFunc ChkItemStyleSubClass Type(Boolean) Access(*Public)
+		DclSrParm Class     Type(Int16)
+		DclSrParm Vendor    Type(Int32)
+		DclSrParm Style     Type(Int16)
+		DclSrParm SubClass  Type(String)
+							
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+		
+		Chain DSSPISAL1 Key(Class, Vendor, Style)
+		If %Found
+			If ISASCL <> SubClass
+				LeaveSr *on
+			Endif
+		Endif
+		
+		LeaveSR *off
+	EndFunc
+	
+	BegFunc GetMarketRetailPrice Type(Decimal) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		DclSrParm Market Type(String)
+		
+		DclFld RetailPrice Type(Decimal)
+					
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		Chain DSSPIMIL1 Key(Class, Vendor, Style, Colour, Size, Market)
+		If %Found
+			RetailPrice = IMIRP
+		Endif
+		
+		LeaveSR RetailPrice
+	EndFunc
+
+	BegFunc GetMarketCostPrice Type(Decimal) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		DclSrParm Market Type(String)
+		
+		DclFld CostPrice Type(Decimal)
+					
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		Chain DSSPIMIL1 Key(Class, Vendor, Style, Colour, Size, Market)
+		If %Found
+			CostPrice = IMIRP
+		Endif
+		
+		LeaveSR CostPrice
+	EndFunc
+					
+	BegFunc GetMarketList Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		DclFld MarketList   Type(DataTable) New()
+		DclFld MarketListDr Type(DataRow)
+		DclFld MarketListCl	Type(DataColumn)
+		
+		MarketListCl = *New DataColumn('Market')
+		MarketListCl.DataType = System.Type.GetType("System.String")
+		MarketListCl.ColumnName = "Market"
+		MarketList.Columns.Add(MarketListCl)
+						
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		SetLL File(DSSPIMIL1) Key(Class, Vendor, Style, Colour, Size)
+		DoUntil DSSPIMIL1.IsEof
+			ReadE From(DSSPIMIL1) Key(Class, Vendor, Style, Colour, Size)
+			If Not DSSPIMIL1.IsEof
+				MarketListDr = MarketList.NewRow()
+				MarketListDr.Item["Market"] = IMIMKT
+				MarketList.Rows.Add(MarketListDr)
+			Endif
+		EndDo
+					
+		LeaveSR MarketList
+	EndFunc
+		
+	BegFunc GetPendingCasePackDetails Type(*Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+				
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		Chain From(DSSPIIAL1) Key(Class,Vendor,Style,Colour,Size) Access(*NoLock)
+		If DSSPIIAL1.IsFound and IIAPCT <> ' ' Or DSSPIIAL1.IsFound and IIAPCQ <> 0
+			PPendingCasePackType    = IIAPCT
+			pPendingCasePackQty     = IIAPCQ
+			pPendingDistroInnerQty  = IIAPDQ
+			pPendingWeight          = IIAPWG
+			pPendingHeight          = IIAPHT
+			pPendingLength			= IIAPLN
+			pPendingWidth           = IIAPWI
+					
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+		
+	BegFunc GetItem Type(*Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		DclSrParm Market Type(String)
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf		
+		
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		Chain From(DSSPIMIL1) Key(Class,Vendor,Style,Colour,Size,Market) Access(*NoLock)
+		If (Not DSSPIMIL1.IsFound) Or (DSSPIMIL1.IsFound And IMISKU = *Zero)
+			LeaveSR *False
+		Else
+			pClass  = IMICLS
+			pVendor = IMIVEN
+			pStyle  = IMISTY
+			pColour = IMICLR
+			pSize   = IMISIZ
+			
+			pItemCost          = IMICP
+			pLastPOitemCost    = IMILCS
+			pLastPOitemCostAPP = IMILCC
+			pItemRetail        = IMIRP
+			pListPrice         = IMILIP
+			pSKU               = IMISKU
+			pSKUchk            = IMISCD
+			
+			pUPC = IMIVUP
+			
+			pVAT     = IMIVAT
+			pPendVAT = IMIPVA
+		
+			Chain From(DSSPIIAL1) Key(Class,Vendor,Style,Colour,Size)
+			If DSSPIIAL1.IsFound
+				pAPP = IIAAPP
+				
+				If pUPC = *Zero
+					If IIAVUP <> *Zero
+						pUPC = IIAVUP
+					Else
+						pUPC = IIADUP
+					EndIf
+				EndIf
+
+				pCaseQty    = IIAMIN
+				pDistroQty  = IIAMLT
+				pCasePack   = IIACPT		// Case pack type
+				pPackHeight = IIACHT
+				pPackWidth  = IIACWI
+				pPackLength = IIACLN
+				pPackWeight = IIACWG
+			EndIf
+			
+			Chain From(DSSPISAL1) Key(Class,Vendor,Style,Colour)
+			If DSSPISAL1.IsFound and ISAREC <> "Y"
+				pSubClass         = ISASCL.Trim()
+				pPendSubClass     = ISAPSC.Trim()
+				
+				pLongDescription  = IIADES.Trim() //ISADES.Trim()
+				pShortDescription = ISASDS.Trim()
+				pCharCode         = ISACHR
+				pSeasonCode       = ISACGP
+				pVendorStyle      = ISAVST
+				pTicketType       = ISAPRE
+				pStyleCost        = ISASCP
+				pStyleRetail      = ISASRP
+			Else
+				pSubClass         = String.Empty
+				pPendSubClass     = String.Empty
+				pShortDescription = String.Empty
+				pCharCode         = String.Empty
+				pSeasonCode       = String.Empty
+				pVendorStyle      = String.Empty
+				pTicketType       = String.Empty
+				pStyleCost        = *Zero
+				pStyleRetail      = *Zero
+				
+				//No Reclassed items should get through
+				If ISAREC = "Y"
+					pLongDescription = '*** This Item has been Reclassed ***'
+					LeaveSR *False
+				Else
+					pLongDescription  = '*** Description Not Found ***'
+				Endif
+			EndIf
+			
+			LeaveSR *True
+		EndIf
+	EndFunc
+	
+	BegFunc GetItemStyle Type(ItemStyle) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+		
+		ItemStyle = *Nothing
+		Chain From(DSSPISAL1) Key(Class,Vendor,Style,Colour)
+		If DSSPISAL1.IsFound
+			ItemStyle = *New ItemStyle()
+			
+			ItemStyle.Division   = ISADIV 
+			ItemStyle.Department = ISADPT 
+			
+			ItemStyle.Class  = ISACLS
+			ItemStyle.Vendor = ISAVEN
+			ItemStyle.Style  = ISASTY
+			ItemStyle.Colour = ISACLR
+
+			ItemStyle.SubClass         = ISASCL
+			ItemStyle.LongDescription  = ISADES.Trim()			
+			// JB: 13/9/11 - Local Description to hold Chinese item description
+			ItemStyle.LocalDescription = GetLocalStyleDescription(Class,Vendor,Style,Colour)			
+			ItemStyle.ShortDescription = ISASDS.Trim()
+			ItemStyle.VendorStyle      = ISAVST.Trim()
+			ItemStyle.UPC              = ISAVUP
+			ItemStyle.ImpDomInd        = ISAIMP  
+			ItemStyle.LicenceCode      = ISALIC  
+			ItemStyle.PromotionCode    = ISAPRO.Trim()
+			ItemStyle.CommodityCode    = ISACMD.Trim()
+			ItemStyle.CompositionCode  = ISACMP   
+			ItemStyle.CountryCode      = ISACTR       
+			ItemStyle.CharacterCode    = ISACHR  		
+			ItemStyle.SeasonCode       = ISACGP
+			ItemStyle.CasePackType     = ISACPT
+			ItemStyle.CaseQuantity     = ISAMIN
+			ItemStyle.DistroQuantity   = ISAMLT
+			ItemStyle.CartonWeight     = ISACWG
+			ItemStyle.CartonHeight     = ISACHT
+			ItemStyle.CartonLength     = ISACLN
+			ItemStyle.CartonWidth      = ISACWI
+			ItemStyle.TicketType       = ISAPRE
+			ItemStyle.Reclassed        = ISAREC			
+			ItemStyle.GenderCode       = ISAGND
+			ItemStyle.OnlineInd        = ISAONL
+			ItemStyle.LocationInd      = ISALOC
+			ItemStyle.AgeGroup         = ISAAGG
+			ItemStyle.PendingSubClass  = ISAPSC
+			ItemStyle.PendingCharCode  = ISAPCH
+			ItemStyle.PendingPromoCode = ISAPPR
+			ItemStyle.Cost             = ISASCP
+			ItemStyle.Retail           = ISASRP
+			
+			// Added JB 22/03/11
+			ItemStyle.SellingChannel      = ISASLC			
+			ItemStyle.OfferEffectiveDate  = ISAOFE
+			ItemStyle.DropShip            = ISADSH
+			ItemStyle.ItemShipAlone       = ISAISA
+			ItemStyle.SpecialHandling     = ISASPH
+			ItemStyle.SpecialHandlingCode = ISAPZT		
+			ItemStyle.SellOutControl	  = ISASOC
+			If (ISASBO = 'Y')
+				ItemStyle.SuppressBackOrderCard = *True
+			Else
+				ItemStyle.SuppressBackOrderCard = *False
+			EndIf
+			ItemStyle.ThirdPartySeller    = ISATPS
+			ItemStyle.UserField1          = ISAUF1
+			ItemStyle.UserField2          = ISAUF2
+			ItemStyle.DCNotes             = ISADCN
+						
+			ItemStyle.CreateDate = CvtToDateTime(ISACRD,ISACRT)
+			ItemStyle.CreateUser = ISACRU.Trim()
+			ItemStyle.ChangeDate = CvtToDateTime(ISALCD,ISALCT)	
+			ItemStyle.ChangeUser = ISALCU.Trim()
+		EndIf
+		
+		LeaveSR ItemStyle
+	EndFunc
+	
+	BegFunc GetItemSize Type(ItemSize) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16) 
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		ItemSize = *Nothing
+		Chain From(DSSPIIAL1) Key(Class,Vendor,Style,Colour,Size)
+		If DSSPIIAL1.IsFound
+			ItemSize = *New ItemSize()
+						
+			ItemSize.CasePackType     = IIACPT
+			ItemSize.CaseQuantity     = IIAMIN
+			ItemSize.DistroQuantity   = IIAMLT
+			ItemSize.CartonWeight     = IIACWG
+			ItemSize.CartonHeight     = IIACHT
+			ItemSize.CartonLength     = IIACLN
+			ItemSize.CartonWidth      = IIACWI
+			ItemSize.LocalDescription = GetLocalSizeDescription(Class,Vendor,Style,Colour,Size)
+		EndIf
+				
+		LeaveSR ItemSize
+	EndFunc
+
+	BegFunc GetItemSizesAPP Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+	
+		DclFld Sizes Type(DataTable)
+		DclFld dr    Type(DataRow)
+		
+		Sizes = CreateItemSizesTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		SetLL File(DSSPIIAL1) Key(Class,Vendor,Style,Colour)
+		DoUntil DSSPIIAL1.IsEof
+			ReadE From(DSSPIIAL1) Key(Class,Vendor,Style,Colour)
+			If Not DSSPIIAL1.IsEof and (IIAAPP = 'APP' *OR IIAAPP = 'BND')
+				dr = Sizes.NewRow()
+				
+				dr["Division"]            = IIADIV
+				dr["Department"]          = IIADPT
+				dr["Class"]               = IIACLS
+				dr["Vendor"]              = IIAVEN
+				dr["Style"]               = IIASTY
+				dr["Colour"]              = IIACLR
+				dr["Size"]                = IIASIZ
+				
+				dr["Pending"]             = String.Empty
+				dr["SizeDesc"]            = String.Empty
+				
+				dr["CasePackType"]        = IIACPT
+				dr["CaseQuantity"]        = IIAMIN
+				dr["DistroQuantity"]      = IIAMLT
+				dr["Weight"]              = IIACWG
+				dr["Height"]              = IIACHT
+				dr["Length"]              = IIACLN
+				dr["Width"]               = IIACWI
+				dr["VendorUPC"]           = IIAVUP
+				dr["DisneyUPC"]           = IIADUP
+				dr["SKU"]                 = IIASKU
+				dr["PackLocked"]          = IIACLK
+				
+				// New fields added John Brown 22/03/11
+				dr["Description"]           = IIADES
+				dr["SellingChannel"]        = IIASLC
+				dr["OfferEffectiveDate"]    = IIAOFE
+				dr["SellOutControl"]        = IIASOC
+				If (IIASBO = "Y")
+					dr["SuppressBackOrderCard"] = *True
+				Else
+					dr["SuppressBackOrderCard"] = *False
+				EndIf
+			
+				Sizes.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		LeaveSR Sizes
+	EndFunc
+		
+	BegFunc GetItemSizes Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+	
+		DclFld Sizes Type(DataTable)
+		DclFld dr    Type(DataRow)
+		
+		Sizes = CreateItemSizesTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		SetLL File(DSSPIIAL1) Key(Class,Vendor,Style,Colour)
+		DoUntil DSSPIIAL1.IsEof
+			ReadE From(DSSPIIAL1) Key(Class,Vendor,Style,Colour)
+			If Not DSSPIIAL1.IsEof and IIAAPP <> 'APP' and IIAAPP <> 'BND'
+				dr = Sizes.NewRow()
+				
+				dr["Division"]            = IIADIV
+				dr["Department"]          = IIADPT
+				dr["Class"]               = IIACLS
+				dr["Vendor"]              = IIAVEN
+				dr["Style"]               = IIASTY
+				dr["Colour"]              = IIACLR
+				dr["Size"]                = IIASIZ
+				
+				dr["Pending"]             = String.Empty
+				dr["SizeDesc"]            = String.Empty
+				
+				dr["CasePackType"]        = IIACPT
+				dr["CaseQuantity"]        = IIAMIN
+				dr["DistroQuantity"]      = IIAMLT
+				dr["Weight"]              = IIACWG
+				dr["Height"]              = IIACHT
+				dr["Length"]              = IIACLN
+				dr["Width"]               = IIACWI
+				dr["VendorUPC"]           = IIAVUP
+				dr["DisneyUPC"]           = IIADUP
+				dr["SKU"]                 = IIASKU
+				dr["PackLocked"]          = IIACLK
+				
+				// New fields added John Brown 22/03/11
+				dr["Description"]           = IIADES
+				dr["SellingChannel"]        = IIASLC
+				dr["OfferEffectiveDate"]    = IIAOFE
+				dr["SellOutControl"]        = IIASOC
+				If (IIASBO = "Y")
+					dr["SuppressBackOrderCard"] = *True
+				Else
+					dr["SuppressBackOrderCard"] = *False
+				EndIf
+			
+				Sizes.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		LeaveSR Sizes
+	EndFunc
+			
+	BegFunc GetItemMarkets Type(ArrayList) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+	
+		DclFld ItemMarkets Type(ArrayList)
+		DclFld OrderedMarkets Type(ArrayList)
+		
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		SetLL File(DSSPIMIL1) Key(Class,Vendor,Style,Colour,Size)
+		DoUntil DSSPIMIL1.IsEof
+			ReadE From(DSSPIMIL1) Key(Class,Vendor,Style,Colour,Size) Access(*NoLock)
+			If Not DSSPIMIL1.IsEof
+				If ItemMarkets = *Nothing
+					ItemMarkets = *New ArrayList()
+				EndIf
+				
+				ItemMarkets.Add(IMIMKT)
+			EndIf
+		EndDo
+		
+		// Re-Order the markets
+		
+		If Not DSCNTAP3.IsOpen
+			Open DSCNTAP3
+		EndIf
+		
+		SetLL DSCNTAP3 Key(*Start)
+		DoUntil DSCNTAP3.IsEof 
+			Read DSCNTAP3
+			If Not DSCNTAP3.IsEof
+				If OrderedMarkets = *Nothing
+					OrderedMarkets = *New ArrayList()
+				EndIf
+			
+				If ItemMarkets.Contains(CSCODE)
+					OrderedMarkets.Add(CSCODE)
+				EndIf
+			EndIf
+		EndDo
+		
+		LeaveSR OrderedMarkets
+	EndFunc
+
+	BegFunc GetItemMarketPrices Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		
+		DclFld MarketPrices Type(DataTable)
+		DclFld dr Type(DataRow)
+		
+		MarketPrices = CreateMarketPricesTbl()
+		
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		SetLL File(DSSPIMIL1) Key(Class,Vendor,Style,Colour)
+		DoUntil DSSPIMIL1.IsEof
+			ReadE From(DSSPIMIL1) Key(Class,Vendor,Style,Colour) Access(*NoLock)
+			If Not DSSPIMIL1.IsEof
+				dr = MarketPrices.NewRow()			
+				
+				dr["Class"]         = IMICLS
+				dr["Vendor"]        = IMIVEN
+				dr["Style"]         = IMISTY
+				dr["Colour"]        = IMICLR
+				dr["Size"]          = IMISIZ
+				dr["Market"]        = IMIMKT
+				dr["CurrencyCode"]  = IMICYC
+				dr["Cost"]          = IMICP
+				dr["PendingCost"]   = 0
+				dr["Retail"]        = IMIRP
+				dr["PendingRetail"] = 0
+				dr["ListPrice"]     = IMILIP
+				dr["VAT"]           = IMIVAT
+				dr["PendingVAT"]    = String.Empty
+				dr["VendorUPC"]     = IMIVUP
+				
+			
+				MarketPrices.Rows.Add(dr)
+			EndIf
+		EndDo
+			
+		LeaveSR MarketPrices
+	EndFunc
+	
+	BegFunc SearchByItemNumber Type(DataTable) Access(*Public)
+		DclSrParm Worker Type(System.ComponentModel.BackgroundWorker)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+				
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		SetLL File(DSSPIIAL1) Key(Class,Vendor)
+		DoUntil DSSPIIAL1.IsEof
+			ReadE From(DSSPIIAL1) Key(Class,Vendor)
+			If (Not DSSPIIAL1.IsEof) And IIASKU <> *Zero
+				PopulateDataRow()
+				If Worker.CancellationPending = *true
+					LeaveSR ItemsTbl
+				EndIf
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc SearchByItemNumber Type(DataTable) Access(*Public)
+		DclSrParm Worker Type(System.ComponentModel.BackgroundWorker)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		SetLL File(DSSPIIAL1) Key(Class,Vendor,Style)
+		DoUntil DSSPIIAL1.IsEof
+			ReadE From(DSSPIIAL1) Key(Class,Vendor,Style)
+			If (Not DSSPIIAL1.IsEof) And IIASKU <> *Zero
+				PopulateDataRow()
+				If Worker.CancellationPending = *true
+					LeaveSR ItemsTbl
+				EndIf
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc SearchByItemNumber Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		SetLL File(DSSPIIAL1) Key(Class,Vendor,Style,Colour)
+		DoUntil DSSPIIAL1.IsEof
+			ReadE From(DSSPIIAL1) Key(Class,Vendor,Style,Colour)
+			If (Not DSSPIIAL1.IsEof) And IIASKU <> *Zero
+				PopulateDataRow()
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+
+	BegFunc SearchByItemNumber Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		SetLL File(DSSPIIAL1) Key(Class,Vendor,Style,Colour,Size)
+		DoUntil DSSPIIAL1.IsEof
+			ReadE From(DSSPIIAL1) Key(Class,Vendor,Style,Colour,Size)
+			If (Not DSSPIIAL1.IsEof) And IIASKU <> *Zero
+				PopulateDataRow()
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+
+	BegSr PopulateDataRow Access(*Private)
+	
+		DclFld ItemNumber Type(StringBuilder)
+		DclFld dr         Type(DataRow)
+		
+		ItemNumber = *New StringBuilder()
+		ItemNumber.Append(IIACLS.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIAVEN.ToString('00000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIASTY.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIACLR.ToString('000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIASIZ.ToString('0000'))
+		
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+		
+		If IIACLS <> ISACLS  +
+		Or IIAVEN <> ISAVEN  +
+		Or IIASTY <> ISASTY  +
+		Or IIACLR <> ISACLR
+			Chain From(DSSPISAL1) Key(IIACLS,IIAVEN,IIASTY,IIACLR)
+			If Not DSSPISAL1.IsFound
+				Throw Exception(*New System.Exception('Missing ISA record for ' + ItemNumber.ToString()))
+			EndIf
+		EndIf
+						
+		If ISAREC <> 'Y'
+			dr = ItemsTbl.NewRow()
+		
+			dr["Item"] = ItemNumber.ToString()
+			//dr["Description"] = ISADES //(1)
+			dr["Description"] = IIADES
+			
+			If IIAVUP <> 0
+				dr["UPC"] = IIAVUP
+			Else
+				dr["UPC"] = IIADUP
+			EndIf
+		
+			dr["Class"]          = ISACLS
+			dr["Vendor"]         = ISAVEN
+			dr["Style"]          = ISASTY
+			dr["Colour"]         = ISACLR
+			dr["Size"]           = IIASIZ
+			dr["CharCode"]       = ISACHR
+			dr["Department"]     = ISADPT
+			dr["SeasonCode"]     = ISACGP
+			dr["App"]            = IIAAPP
+			dr["ImportDomestic"] = ISAIMP
+			dr["Origin"]         = ISACTR
+			
+			dr["SellingChannel"]      = ISASLC
+			dr["ItemShipAlone"]       = ISAISA
+			dr["SpecialHandling"]     = ISASPH					
+			dr["SpecialHandlingCode"] = ISAPZT
+			dr["ThirdPartySeller"]    = ISATPS
+			dr["UserField1"]          = ISAUF1
+			dr["UserField2"]          = ISAUF2					
+			dr["DCNotes"]             = ISADCN
+				
+				
+			ItemsTbl.Rows.Add(dr)
+		EndIf
+	EndSr
+	
+	BegSr PopulateDataRowIMI Access(*Private)
+	
+		DclFld ItemNumber Type(StringBuilder)
+		DclFld dr         Type(DataRow)
+		
+		ItemNumber = *New StringBuilder()
+		ItemNumber.Append(IIACLS.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIAVEN.ToString('00000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIASTY.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIACLR.ToString('000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIASIZ.ToString('0000'))
+		
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+						
+		If IMICLS <> ISACLS  +
+		Or IMIVEN <> ISAVEN  +
+		Or IMISTY <> ISASTY  +
+		Or IMICLR <> ISACLR
+			Chain From(DSSPISAL1) Key(IMICLS,IMIVEN,IMISTY,IMICLR)
+			If Not DSSPISAL1.IsFound
+				Throw Exception(*New System.Exception('Missing ISA record for ' + ItemNumber.ToString()))
+			EndIf
+		EndIf
+		
+		If ISAREC <> 'Y'
+			dr = ItemsTbl.NewRow()
+		
+			dr["Item"] = ItemNumber.ToString()
+						
+			dr["Description"] = IIADES			
+			//dr["Description"] = ISADES //(2)
+		
+			If IIAVUP <> 0
+				dr["UPC"] = IIAVUP
+			Else
+				dr["UPC"] = IIADUP
+			EndIf
+		
+			dr["Class"]          = ISACLS
+			dr["Vendor"]         = ISAVEN
+			dr["Style"]          = ISASTY
+			dr["Colour"]         = ISACLR
+			dr["Size"]           = IIASIZ
+			dr["CharCode"]       = ISACHR
+			dr["Department"]     = ISADPT
+			dr["SeasonCode"]     = ISACGP
+			dr["App"]            = IIAAPP
+			dr["ImportDomestic"] = ISAIMP
+			dr["Origin"]         = ISACTR		
+			
+			ItemsTbl.Rows.Add(dr)
+		EndIf
+	EndSr	
+	
+	BegFunc PopulateDataRow Type(DataRow)
+		DclSrParm dr Type(DataRow)
+	
+		DclFld ItemNumber Type(StringBuilder)
+	
+		ItemNumber = *New StringBuilder()
+		ItemNumber.Append(ISACLS.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(ISAVEN.ToString('00000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(ISASTY.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(ISACLR.ToString('000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IIASIZ.ToString('0000'))
+		dr.Item["Item"] = ItemNumber.ToString()
+		
+		//dr.Item("Description") = ISADES //(3)
+		dr.Item("Description") = IIADES
+		
+		If IIAVUP <> 0
+			dr.Item("UPC") = IIAVUP
+		Else
+			dr.Item("UPC") = IIADUP
+		EndIf
+		
+		dr["Class"]          = ISACLS
+		dr["Vendor"]         = ISAVEN
+		dr["Style"]          = ISASTY
+		dr["Colour"]         = ISACLR
+		dr["Size"]           = IIASIZ
+		dr["CharCode"]       = ISACHR
+		dr["Department"]     = ISADPT
+		dr["SeasonCode"]     = ISACGP
+		dr["App"]            = IIAAPP
+		dr["ImportDomestic"] = ISAIMP
+		dr["Origin"]         = ISACTR
+			
+		LeaveSR dr
+	EndFunc
+
+	BegFunc CreateItemsTbl Type(DataTable) Access(*Private)
+							
+		ItemsTbl = *New DataTable("Items")
+
+		ItemsTbl.Columns.Add(*New DataColumn("Select", *TypeOf(Boolean)))
+		ItemsTbl.Columns.Add(*New DataColumn("Department", *TypeOf(Int16)))
+		ItemsTbl.Columns["Department"].ReadOnly = *True
+		ItemsTbl.Columns.Add(*New DataColumn("Item", *TypeOf(String)))
+		ItemsTbl.Columns["Item"].ReadOnly = *True
+		ItemsTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		ItemsTbl.Columns["Description"].ReadOnly = *True
+		ItemsTbl.Columns.Add(*New DataColumn("DescNonEnglish", *TypeOf(String)))
+		ItemsTbl.Columns["DescNonEnglish"].ReadOnly = *True
+		ItemsTbl.Columns.Add(*New DataColumn("UPC", *TypeOf(String)))
+		ItemsTbl.Columns["UPC"].ReadOnly = *True
+		ItemsTbl.Columns.Add(*New DataColumn("Class", *TypeOf(Int16)))
+		ItemsTbl.Columns["Class"].ReadOnly = *True
+		ItemsTbl.Columns.Add(*New DataColumn("Vendor", *TypeOf(Int32)))
+		ItemsTbl.Columns["Vendor"].ReadOnly = *True
+		ItemsTbl.Columns.Add(*New DataColumn("Style", *TypeOf(Int16)))
+		ItemsTbl.Columns["Style"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Colour", *TypeOf(Int16)))
+		ItemsTbl.Columns["Colour"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Size", *TypeOf(Int16)))
+		ItemsTbl.Columns["Size"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("CharCode", *TypeOf(String)))
+		ItemsTbl.Columns["CharCode"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("SeasonCode", *TypeOf(String)))
+		ItemsTbl.Columns["SeasonCode"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("App", *TypeOf(String)))
+		ItemsTbl.Columns["App"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("ImportDomestic", *TypeOf(String)))
+		ItemsTbl.Columns["ImportDomestic"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Origin", *TypeOf(String)))
+		ItemsTbl.Columns["Origin"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("ColourName", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("VendorName", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("SizeDesc", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("SeasonDescription", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("CharDescription", *TypeOf(String)))
+		
+		ItemsTbl.Columns.Add(*New DataColumn("ItemShipAlone", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("SellingChannel", *TypeOf(String))) // JB3622
+		ItemsTbl.Columns.Add(*New DataColumn("SpecialHandling", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("SpecialHandlingCode", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("SellOutControl",  *TypeOf(String))) //S/O Control
+		ItemsTbl.Columns.Add(*New DataColumn("SuppressBackOrderCard",  *TypeOf(Boolean))) //Suppress B/O Card
+		ItemsTbl.Columns.Add(*New DataColumn("ThirdPartySeller", *TypeOf(Decimal)))
+		ItemsTbl.Columns.Add(*New DataColumn("UserField1", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("UserField2", *TypeOf(String)))		
+		ItemsTbl.Columns.Add(*New DataColumn("DCNotes", *TypeOf(String)))
+				
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc CreateItemSizesTbl Type(DataTable) Access(*Private)
+		
+		DclFld ItemSizesTbl Type(DataTable)
+		DclArray Keys Type(DataColumn) Rank(1)
+		
+		ItemSizesTbl = *New DataTable("ItemSizes")
+		ItemSizesTbl.Columns.Add(*New DataColumn("Division", *TypeOf(Int16)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Department", *TypeOf(Int16)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Class", *TypeOf(Int16)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Vendor", *TypeOf(Int32)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Style", *TypeOf(Int16)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Colour", *TypeOf(Int16)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Size", *TypeOf(Int16)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Pending", *TypeOf(String)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("SizeDesc", *TypeOf(String)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("CasePackType", *TypeOf(String)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("CaseQuantity", *TypeOf(Int32)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("DistroQuantity", *TypeOf(Int32)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Weight", *TypeOf(Decimal)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Height", *TypeOf(Decimal)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Length", *TypeOf(Decimal)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("Width", *TypeOf(Decimal)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("VendorUPC", *TypeOf(Int64)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("DisneyUPC", *TypeOf(Int64)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("SKU", *TypeOf(Int32)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("PackLocked", *TypeOf(String)))
+		
+		//new columns 20/04/2010 Joseph Urbina
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingPackQty",     *TypeOf(Int32)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingDistroQty",   *TypeOf(Int32)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingCasePackType",*TypeOf(String)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingPackWeight",  *TypeOf(Decimal)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingPackHeight",  *TypeOf(Decimal)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingPackLength",  *TypeOf(Decimal)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingPackWidth",   *TypeOf(Decimal))) 
+		ItemSizesTbl.Columns.Add(*New DataColumn("PendingFlag",        *TypeOf(String)))
+
+		ItemSizesTbl.Columns.Add(*New DataColumn("Description",         *TypeOf(String)))	
+		ItemSizesTbl.Columns.Add(*New DataColumn("DescNonEnglish",         *TypeOf(String)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("SellingChannel",      *TypeOf(String)))	
+		ItemSizesTbl.Columns.Add(*New DataColumn("OfferEffectiveDate",  *TypeOf(Int64)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("DropShip",            *TypeOf(String)))
+		ItemSizesTbl.Columns.Add(*New DataColumn("SellOutControl",      *TypeOf(String))) //S/O Control 
+		ItemSizesTbl.Columns.Add(*New DataColumn("SOControlDesc",       *TypeOf(String))) //S/O Control Description 
+		ItemSizesTbl.Columns.Add(*New DataColumn("SuppressBackOrderCard", *TypeOf(Boolean))) //Suppress B/O Card
+		
+		Keys = *New DataColumn[] {ItemSizesTbl.Columns("Size")}
+		ItemSizesTbl.PrimaryKey = Keys
+		
+		LeaveSR ItemSizesTbl
+	EndFunc
+	
+	BegFunc CreateMarketPricesTbl Type(DataTable)
+	
+		DclFld MktPriceTbl Type(DataTable)
+		
+		MktPriceTbl = *New DataTable("MarketPrices")
+		
+		MktPriceTbl.Columns.Add(*New DataColumn("Class",  *TypeOf(Int16)))
+		MktPriceTbl.Columns.Add(*New DataColumn("Vendor", *TypeOf(Int32)))
+		MktPriceTbl.Columns.Add(*New DataColumn("Style",  *TypeOf(Int16)))
+		MktPriceTbl.Columns.Add(*New DataColumn("Colour", *TypeOf(Int16)))
+		MktPriceTbl.Columns.Add(*New DataColumn("Size",   *TypeOf(Int16)))
+		MktPriceTbl.Columns.Add(*New DataColumn("Market", *TypeOf(String)))
+		MktPriceTbl.Columns.Add(*New DataColumn("CurrencyCode",*TypeOf(String)))
+		MktPriceTbl.Columns.Add(*New DataColumn("Cost",   *TypeOf(Decimal)))
+		MktPriceTbl.Columns.Add(*New DataColumn("PendingCost",*TypeOf(Decimal)))
+		MktPriceTbl.Columns.Add(*New DataColumn("Retail", *TypeOf(Decimal)))
+		MktPriceTbl.Columns.Add(*New DataColumn("PendingRetail", *TypeOf(Decimal)))
+		MktPriceTbl.Columns.Add(*New DataColumn("ListPrice", *TypeOf(Decimal)))
+		MktPriceTbl.Columns.Add(*New DataColumn("VAT",    *TypeOf(String)))
+		MktPriceTbl.Columns.Add(*New DataColumn("PendingVAT",*TypeOf(String)))
+		MktPriceTbl.Columns.Add(*New DataColumn("VendorUPC", *TypeOf(Int64)))
+		MktPriceTbl.PrimaryKey = *New DataColumn[] {MktPriceTbl.Columns["Market"],MktPriceTbl.Columns["Size"]}
+
+		LeaveSR MktPriceTbl
+	EndFunc
+	
+	BegFunc SearchByQueryString Type(DataTable) Access(*Public)
+		DclSrParm Worker    Type(System.ComponentModel.BackgroundWorker)
+		DclSrParm QryString Type(String)
+	
+		DclFld dr Type(DataRow)
+		
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		If DSSPISAL1.IsOpen
+			Close DSSPISAL1
+		EndIf
+		
+		DSSPISAL1.QrySelect = QryString
+		Open DSSPISAL1
+		DSSPISAL1.QrySelect = String.Empty
+
+		DoUntil DSSPISAL1.IsEof
+			Read DSSPISAL1
+			If not DSSPISAL1.IsEof And ISAREC <> 'Y'
+			
+				// Find all of the sizes
+				SetLL DSSPIIAL1 Key(ISACLS,ISAVEN,ISASTY,ISACLR)
+				DoUntil DSSPIIAL1.IsEof
+					ReadE DSSPIIAL1 Key(ISACLS,ISAVEN,ISASTY,ISACLR)
+					If (Not DSSPIIAL1.IsEof) And IIASKU <> *Zero
+						dr = ItemsTbl.NewRow()
+						ItemsTbl.Rows.Add(PopulateDataRow(dr))
+					EndIf
+				EndDo
+			EndIf
+			
+			If Worker.CancellationPending = *True
+				Close DSSPISAL1
+				LeaveSR ItemsTbl
+			EndIf
+		EndDo
+		
+		Close DSSPISAL1
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc SearchByQueryString Type(DataTable) Access(*Public)
+		DclSrParm Worker       Type(System.ComponentModel.BackgroundWorker)
+		DclSrParm QryString    Type(String)
+		DclSrParm APPselection Type(String)
+	
+		DclFld dr       Type(DataRow)
+		
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		If DSSPISAL1.IsOpen
+			Close DSSPISAL1
+		EndIf
+		
+		DSSPISAL1.QrySelect = QryString
+		Open DSSPISAL1
+		DSSPISAL1.QrySelect = String.Empty
+
+		DoUntil DSSPISAL1.IsEof
+			Read DSSPISAL1
+			If not DSSPISAL1.IsEof
+			
+				// Find all of the sizes
+				SetLL DSSPIIAL1 Key(ISACLS,ISAVEN,ISASTY,ISACLR)
+				DoUntil DSSPIIAL1.IsEof
+					ReadE DSSPIIAL1 Key(ISACLS,ISAVEN,ISASTY,ISACLR)
+					If (Not DSSPIIAL1.IsEof) And IIASKU <> *Zero
+						If APPselection = 'YES' and (IIAAPP = 'APP' Or IIAAPP = 'BND') +
+						Or APPselection = 'NO' and (IIAAPP = *Blank Or IIAAPP = 'COM')						
+							dr = ItemsTbl.NewRow()
+							ItemsTbl.Rows.Add(PopulateDataRow(dr))
+						EndIf
+						
+					EndIf
+				EndDo
+			EndIf
+			
+			If Worker.CancellationPending = *True
+				Close DSSPISAL1
+				LeaveSR ItemsTbl
+			EndIf
+		EndDo
+		
+		Close DSSPISAL1
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc SearchByVendorStyle Type(DataTable) Access(*Public)
+		DclSrParm VendorStyle Type(String)
+		
+		DclFld dr Type(DataRow)
+		
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPISAL2.IsOpen
+			Open DSSPISAL2
+		EndIf
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf		
+		
+		SetLL File(DSSPISAL2) Key(VendorStyle)
+		DoUntil DSSPISAL2.IsEof
+			ReadE From(DSSPISAL2) Key(VendorStyle)
+			If Not DSSPISAL2.IsEof And ISAREC <> 'Y'
+			
+				// Find all of the sizes
+				SetLL DSSPIIAL1 Key(ISACLS,ISAVEN,ISASTY,ISACLR)
+				DoUntil DSSPIIAL1.IsEof
+					ReadE DSSPIIAL1 Key(ISACLS,ISAVEN,ISASTY,ISACLR)
+					If Not DSSPIIAL1.IsEof And IIASKU <> *Zero
+						dr = ItemsTbl.NewRow()
+						ItemsTbl.Rows.Add(PopulateDataRow(dr))
+					EndIf
+				EndDo
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc SearchByUPC Type(DataTable) Access(*Public)
+		DclSrParm UPC    Type(Int64)
+				
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSSPIIAL2.IsOpen
+			Open DSSPIIAL2
+		EndIf
+		
+		SetLL DSSPIIAL2 Key(UPC)
+		DoUntil DSSPIIAL2.IsEof
+			ReadE From(DSSPIIAL2) Key(UPC)
+			If (Not DSSPIIAL2.IsEof) And IIASKU <> *Zero
+				PopulateDataRow()
+			EndIf
+		EndDo
+		
+		If ItemsTbl.Rows.Count > *Zero
+			LeaveSR ItemsTbl
+		EndIf
+		
+		If Not DSSPIIAL3.IsOpen
+			Open DSSPIIAL3
+		EndIf
+		
+		SetLL DSSPIIAL3 Key(UPC)
+		DoUntil DSSPIIAL3.IsEof
+			ReadE From(DSSPIIAL3) Key(UPC)
+			If (Not DSSPIIAL3.IsEof) And IIASKU <> *Zero
+				PopulateDataRow()
+			EndIf
+		EndDo
+		
+		If ItemsTbl.Rows.Count > *Zero
+			LeaveSR ItemsTbl
+		EndIf
+		
+		If Not DSSPIMIL3.IsOpen
+			Open DSSPIMIL3
+		EndIf
+		
+		SetLL DSSPIMIL3 Key(UPC)
+		DoUntil DSSPIMIL3.IsEof
+			ReadE From(DSSPIMIL3) Key(UPC)
+			If (Not DSSPIMIL3.IsEof) And IMISKU <> *Zero
+				PopulateDataRowIMI()
+			EndIf
+		EndDo
+				
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc WriteItem Type(Boolean) Access(*Public)
+				
+		WriteStyle()
+		WriteMarkets()
+		WriteSizeTbl()
+				
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc WriteAPPItem Type(Boolean) Access(*Public)
+				
+		WriteMarkets()
+		WriteSizeTbl()
+				
+		LeaveSR *True
+	EndFunc
+	
+	BegSR WriteStyle Access(*Private)
+						
+		If Not DSSPISA.IsOpen
+			Open DSSPISA
+		EndIf
+		
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+				
+		If(pStyle < 0)
+			pStyle = *Zero
+		EndIf
+				
+		// Determine if Style code needs generating
+		If(DataCache.IsStyleNumberInputRequired = *False)
+			If pStyle = *Zero							
+				Setgt  File(DSSPISAL1) Key(pClass,pVendor)          
+				ReadPE From(DSSPISAL1) Key(pCLass,pVendor) 
+				pStyle = ISASTY                              
+				DoUntil Not DSSPISAL1.IsEqual                                 
+					If pStyle < 9998                          
+						pStyle += 1                            
+					Else                                        
+						pStyle = 1                             
+					EndIf                                       
+					SetLL  File(DSSPISAL1) Key(pClass,pVendor,pStyle)          
+				EndDo                                          			
+			EndIf
+		EndIf
+		
+		// Write Item Style
+		ISADIV = pDivision
+		ISADPT = pDepartment
+		ISACLS = pCLass
+		ISAVEN = pVendor
+		ISASTY = pStyle
+		ISACLR = pColour
+		
+		ISASCL = pSubClass
+		ISADES = pLongDescription
+		ISASDS = pShortDescription
+		ISAVST = pVendorStyle
+		ISAVUP = pUPC
+		ISAISB = String.Empty
+		ISAIMP = pImpDomInd
+		ISALIC = pLicenceCode
+		ISAPRO = pPromotionCode
+		ISACMD = pCommodityCode
+		ISACMP = pCompositionCode
+		ISACTR = pCountryCode
+		ISACHR = pCharCode
+		ISACGP = pSeasonCode
+		ISACPT = pCasePack
+		
+		ISAMIN = pCaseQty
+		ISAMLT = pDistroQty
+		ISACWG = pPackWeight
+		ISACHT = pPackHeight
+		ISACLN = pPackLength
+		ISACWI = pPackWidth
+		
+		ISAPRE = pTicketType
+		ISAREC = 'N'
+		ISAGND = pGenderCode
+		ISAONL = pOnlineInd
+		ISALOC = pLocationInd
+		ISAAGG = pAgeGroup
+		ISAPRI = 'N'
+		
+		ISAPSC = String.Empty
+		ISAPCH = String.Empty
+		ISAPPR = String.Empty
+		
+		ISASCP = pStyleCost
+		ISASRP = pStyleRetail
+		ISASRC = *Blank
+		ISA#SZ = *Zero
+		ISAMSZ = 'N'
+		ISAIMG = String.Empty
+		
+		// Added JB 22/03/11
+		ISASLC = SellingChannel //ItemStyle.SellingChannel 
+		/* If(ItemStyle.ForOnlineEcommerce = *True)
+			ISAOLE = "Y"
+		Else
+			ISAOLE = "N"
+		EndIf */
+	    ISAOFE = OfferEffectiveDate //ItemStyle.OfferEffectiveDate
+		ISADSH = DropShip //ItemStyle.DropShip
+	    ISAISA = ItemShipAlone //ItemStyle.ItemShipAlone 
+		ISASPH = SpecialHandling //ItemStyle.SpecialHandling
+	    ISAPZT = SpecialHandlingCode //ItemStyle.SpecialHandlingCode
+	    ISASOC = SellOutControl // ItemStyle.SellOutControl
+	    If(SuppressBackOrderCard = *true)
+			ISASBO = "Y"
+	    Else
+			ISASBO = "N"
+	    EndIf
+		ISATPS = ThirdPartySeller //ItemStyle.ThirdPartySeller
+		ISAUF1 = UserField1 //ItemStyle.UserField1
+		ISAUF2 = UserField2 //ItemStyle.UserField2
+		ISADCN = DCNotes  //ItemStyle.DCNotes
+				
+		ISAEID = String.Empty		
+		ISACRD = CvtFromDateTime(DateTime.Now.Date)
+		ISACRT = CvtToIPtime(DateTime.Now)
+		ISACRU = PgmDB.User.ToUpper()
+		ISALCD = 0
+		ISALCT = 0
+		ISALCU = String.Empty
+		
+		DoUntil (Not %Error)
+			Write ITEMISA Err(*Extended)
+			If %Error
+				ISASTY += 1
+				If ISASTY = 10000
+					ISASTY = 1
+				EndIf
+				
+				pStyle = ISASTY
+			EndIf
+		EndDo
+		
+		Feod DSSPISA
+		
+		SaveLocalStyleDescription(pClass,pVendor,pStyle,pColour,ItemLocalDescription)
+	EndSR
+	
+	BegSR SaveLocalStyleDescription Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Description Type(String)
+		
+		DclFld localLang Type(LocalLanguage)
+		DclFld DB2Connection Type(iDB2Connection)
+		
+		If(DataCache.LocalLanguage <> 'English')
+			Try
+				DB2Connection = *New iDB2Connection(DataCache.DBConnectionString)
+				DB2Connection.Open()
+				localLang = *New LocalLanguage(DB2Connection)
+
+				localLang.SaveItemStyleDescription(Class,Vendor,Style,Colour,DataCache.LocalLanguage,Description)
+			Catch Name(exc) Type(Exception)
+				Throw exc
+			Finally
+				DB2Connection.Close()
+				DB2Connection = *Nothing
+			EndTry	
+		EndIf
+
+	EndSR
+	
+	BegFunc GetLocalStyleDescription Type(*String) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+
+		DclFld localLang Type(LocalLanguage)
+		DclFld localLangDesc Type(String)
+		DclFld DB2Connection Type(iDB2Connection)
+		DclFld recordFound Type(Boolean) Inz(*False)
+		DclFld result Type(*String) Inz(String.Empty)
+		
+		Try
+			DB2Connection = *New iDB2Connection(DataCache.DBConnectionString)
+			DB2Connection.Open()
+			localLang = *New LocalLanguage(DB2Connection)
+			
+			localLangDesc = localLang.GetItemStyleDescription(Class,Vendor,Style,Colour,DataCache.LocalLanguage,*ByRef recordFound) //e.g. 'Chinese'
+			If (recordFound = *True)
+				result = localLangDesc
+			EndIf				
+		Catch Name(exc) Type(Exception)
+			Throw exc
+		Finally
+			DB2Connection.Close()
+			DB2Connection = *Nothing
+		EndTry
+			
+		LeaveSR result
+	EndFunc
+	
+	BegSR SaveLocalSizeDescription Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		DclSrParm Description Type(String)
+		
+		DclFld localLang Type(LocalLanguage)
+		DclFld DB2Connection Type(iDB2Connection)
+		
+		If (Description = *Nothing)
+			If (ItemLocalDescription = *Nothing)
+				Description = String.Empty
+			Else
+				Description = ItemLocalDescription
+			EndIf
+		EndIf
+			
+		If(DataCache.LocalLanguage <> 'English')
+			Try
+				DB2Connection = *New iDB2Connection(DataCache.DBConnectionString)
+				DB2Connection.Open()
+				localLang = *New LocalLanguage(DB2Connection)
+
+				localLang.SaveItemSizeDescription(Class,Vendor,Style,Colour,Size,DataCache.LocalLanguage,Description)	
+			Catch Name(exc) Type(Exception)
+				Throw exc
+			Finally	
+				DB2Connection.Close()
+				DB2Connection = *Nothing
+			EndTry			
+		EndIf
+
+	EndSR
+	
+	BegFunc GetLocalSizeDescription Type(*String) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		DclFld localLang Type(LocalLanguage)
+		DclFld localLangDesc Type(String)
+		DclFld DB2Connection Type(iDB2Connection)
+		DclFld recordFound Type(Boolean) Inz(*False)
+		DclFld result Type(*String) Inz(String.Empty)
+		
+		DB2Connection = *New iDB2Connection(DataCache.DBConnectionString)
+		Try
+			DB2Connection.Open()
+			localLang = *New LocalLanguage(DB2Connection)		
+			localLangDesc = localLang.GetItemSizeDescription(Class,Vendor,Style,Colour,Size,DataCache.LocalLanguage,*ByRef recordFound) //e.g. 'Chinese'
+			If (recordFound = *True)
+				result = localLangDesc
+			EndIf
+		Catch Name(exc) Type(Exception)	
+		Finally
+			DB2Connection.Close()
+			DB2Connection = *Nothing
+		EndTry
+			
+		LeaveSR result
+	EndFunc
+	
+	BegSR WriteSizeTbl Access(*Private)
+	
+		DclFld ItemString Type(StringBuilder)
+		DclFld DateFormat Type(String)
+		DclFld dv         Type(DataView)
+				
+		If Not DSSPIIA.IsOpen
+			Open DSSPIIA
+		EndIf
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		dv = *New DataView(pSelectedSizesTable)
+		dv.RowFilter = "Select = true"
+		ForEach dvr Collection(dv) Type(DataRowView)
+			
+			IIACLS = pClass
+			IIAVEN = pVendor
+			IIASTY = pStyle
+			IIACLR = pColour
+			IIASIZ = dvr["SizeCode"] *As Int16
+							
+			Chain From(DSSPIIAL1) Key(IIACLS,IIAVEN,IIASTY,IIACLR,IIASIZ) Access(*NoLock)
+			If Not DSSPIIAL1.IsFound
+								
+				IIADIV = pDivision			
+				IIADPT = pDepartment
+
+				IIAVUP = dvr["UPC"]          *As Int64
+				IIACPT = dvr["CasePackType"] *As String
+				IIAMIN = dvr["PackQty"]      *As Int32
+				IIAMLT = dvr["DistroQty"]    *As Int32
+				IIACWG = dvr["PackWeight"]   *As Decimal
+				IIACHT = dvr["PackHeight"]   *As Decimal
+				IIACLN = dvr["PackLength"]   *As Decimal
+				IIACWI = dvr["PackWidth"]    *As Decimal
+				IIADUP = *Zero
+						
+				IIASKU =  *Zero //3622
+				IIASCD = *Zero
+				IIAAPP = pAPP
+				IIACLK = 'N'
+
+				IIAPCT = String.Empty
+				IIAPCQ = *Zero
+				IIAPDQ = *Zero
+				IIAPWG = *Zero
+				IIAPHT = *Zero
+				IIAPLN = *Zero
+				IIAPWI = *Zero
+				
+				// Added JB 22/03/11
+				IIADES = dvr["Description"] *As String
+				IIASLC = dvr["SellingChannel"] *As String
+				IIAOFE = dvr["OfferEffectiveDate"] *As Int64
+				IIASOC = dvr["SellOutControl"] *As String
+				If((dvr["SuppressBackOrderCard"] *AS Boolean) = *True)				
+					IIASBO = 'Y'
+				Else
+					IIASBO = 'N'
+				EndIf
+
+				IIAEID = String.Empty
+			
+				IIACRD = CvtFromDateTime(DateTime.Now.Date)
+				IIACRT = CvtToIPtime(DateTime.Now)
+				IIACRU = PgmDB.User.ToUpper()
+				IIALCD = 0
+				IIALCT = 0
+				IIALCU = String.Empty
+				
+				Write ITEMIIA
+				Feod  DSSPIIA
+				SaveLocalSizeDescription(pClass,pVendor,pStyle,pColour,pSize,dvr["DescNonEnglish"] *As String)
+						
+				// Write to DTAQ on iSeries
+				If pAPP <> 'APP' *AND pAPP <> 'BND'
+					DTAQname = *Blank
+					DTAQlib  = *Blank
+					
+					Buffer = *Blank
+					DSfunc = 'REQCRTITM'
+					DSipur = User.IPinitials.ToUpper()
+					DSuser = PgmDB.User.ToUpper()
+					
+					ItemString = *New StringBuilder()
+					ItemString.Append(IIADIV.ToString('00'))
+					ItemString.Append(IIADPT.ToString('000'))
+					ItemString.Append(IIACLS.ToString('0000'))
+					ItemString.Append(IIAVEN.ToString('00000'))
+					ItemString.Append(IIASTY.ToString('0000'))
+					ItemString.Append(IIACLR.ToString('000'))
+					ItemString.Append(IIASIZ.ToString('0000'))
+
+					DSitem = ItemString.ToString()
+					
+					DateFormat = "yyyy-MM-dd-HH.mm.ss.000000"
+					DSstmp     = DateTime.Now.ToString(DateFormat)
+					DTAQdta    = DtaQDtaDS
+				
+					Call Pgm('DS400HC') DB(PgmDB) ParmList(DS400PARMS)
+				EndIf
+			EndIf
+		EndFor
+	EndSR
+	
+	BegSR WriteMarkets Access(*Private)
+	
+		DclFld ItemString Type(StringBuilder)
+	
+		If Not DSSPIMI.IsOpen
+			Open DSSPIMI
+		EndIf
+		
+		Try 			
+			// Write Market Item Records
+			ForEach dvr Collection(pSelectedMarketsTbl.Rows) Type(DataRow)
+			
+				IMIDIV = pDivision
+				IMIDPT = pDepartment
+				IMICLS = pCLass
+				IMIVEN = pVendor
+				IMISTY = pStyle
+				IMICLR = pColour
+				
+				IMISIZ = dvr["SizeCode"]     *As Int16
+				IMIMKT = dvr["Market"]       *As String
+				IMICYC = dvr["CurrencyCode"] *As String
+										
+				IMICP  = dvr["Cost"]         *As Decimal
+				IMILCS = *Zero  // Late addition, Cost from last PO Standard Item
+				IMILCC = *Zero  //                Cost from last PO APP component
+				IMIRP  = dvr["Retail"]       *As Decimal
+				IMILIP = dvr["ListPrice"]    *As Decimal
+				IMIVAT = dvr["VAT"]          *As String
+				
+				IMIPVA = String.Empty
+				
+				IMIVUP = pUPC
+				IMISKU = *Zero //3622
+				IMISCD = *Zero
+				
+				IMIEID = String.Empty
+				
+				IMICRD = CvtFromDateTime(DateTime.Now.Date)
+				IMICRT = CvtToIPtime(DateTime.Now)
+				IMICRU = PgmDB.User.ToUpper()
+				IMILCD = 0
+				IMILCT = 0
+				IMILCU = String.Empty
+				
+				Write ITEMIMI
+				
+				// Write a log record
+				If pAPP <> 'APP' *AND pAPP <> 'BND'
+							
+					If DSSPEHLcls  = *Nothing
+						DSSPEHLcls = *New DSSPEHLcls(Pgmdb) 
+					Endif
+					
+					EventType  = 'ITEM'
+					
+					ItemString = *New StringBuilder()
+					ItemString.Append(IMICLS.ToString('0000'))
+					ItemString.Append(IMIVEN.ToString('00000'))
+					ItemString.Append(IMISTY.ToString('0000'))
+					ItemString.Append(IMICLR.ToString('000'))
+					ItemString.Append(IMISIZ.ToString('0000'))
+					
+					EventKey  = ItemString.ToString()
+									
+					EventDesc  = 'Created in SPICE Market ' + IMIMKT
+									
+					DSSPEHLcls.WriteHistoryEvent(EventType, EventKey, EventDesc)	
+				EndIf
+				
+				Feod DSSPIMI
+			EndFor
+		Catch Name(exc) Type(Exception)
+			Throw exc
+		EndTry
+	EndSR
+	
+	BegFunc UpdateItemStyle Type(Boolean) Access(*Public)
+		DclSrParm ItemStyle Type(ItemStyle)
+	
+		If Not ISAupdate.IsOpen
+			Open ISAupdate
+		EndIf
+	
+		Chain ISAupdate Key(ItemStyle.Class,ItemStyle.Vendor,ItemStyle.Style,ItemStyle.Colour)
+		If ISAupdate.IsFound
+		
+			ISADES = ItemStyle.LongDescription
+			ISASDS = ItemStyle.ShortDescription
+			SaveLocalStyleDescription(ItemStyle.Class,ItemStyle.Vendor,ItemStyle.Style,ItemStyle.Colour,ItemStyle.LocalDescription)
+			ISAVST = ItemStyle.VendorStyle
+			ISAVUP = ItemStyle.UPC
+						
+			ISAIMP = ItemStyle.ImpDomInd
+			ISAONL = ItemStyle.OnlineInd
+			ISALOC = ItemStyle.LocationInd
+			ISAGND = ItemStyle.GenderCode
+				
+			ISALIC = ItemStyle.LicenceCode
+			ISAPPR = ItemStyle.PendingPromoCode
+			ISAPSC = ItemStyle.PendingSubClass
+			ISAPCH = ItemStyle.PendingCharCode
+			ISACMD = ItemStyle.CommodityCode
+			ISACMP = ItemStyle.CompositionCode
+			ISACTR = ItemStyle.CountryCode
+			ISACGP = ItemStyle.SeasonCode
+			ISAPRE = ItemStyle.TicketType
+			ISAAGG = ItemStyle.AgeGroup
+		
+			// Added JB 22/03/11
+			ISASLC = ItemStyle.SellingChannel 
+			/* If(ItemStyle.ForOnlineEcommerce = *True)
+				ISAOLE = "Y"
+			Else
+				ISAOLE = "N"
+			EndIf */
+			ISAOFE = ItemStyle.OfferEffectiveDate
+			ISADSH = ItemStyle.DropShip
+			ISAISA = ItemStyle.ItemShipAlone 
+			ISASPH = ItemStyle.SpecialHandling
+			ISAPZT = ItemStyle.SpecialHandlingCode
+			ISASOC = ItemStyle.SellOutControl
+			If(ItemStyle.SuppressBackOrderCard = *True)
+				ISASBO = 'Y'
+			Else
+				ISASBO = 'N'	
+			EndIf
+			ISATPS = ItemStyle.ThirdPartySeller
+			ISAUF1 = ItemStyle.UserField1
+			ISAUF2 = ItemStyle.UserField2
+			ISADCN = ItemStyle.DCNotes
+		
+			// Update audit fields
+			ISALCD = CvtFromDateTime(DateTime.Now.Date)
+			ISALCT = CvtToIPtime(DateTime.Now)
+			ISALCU = PgmDB.User.ToUpper()
+		
+			Update UpdateISA
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc UpdateItemSizes Type(Boolean) Access(*Public)
+		DclSrParm ItemStyle Type(Disney.DA.IP400.ItemStyle)
+		DclSrParm Sizes     Type(Datatable)
+						
+		If Not IIAupdate.IsOpen
+			Open IIAupdate
+		EndIf
+		
+		ForEach Row Collection(Sizes.Rows) Type(DataRow)
+			
+			Chain IIAupdate Key(Row["Class"]  *As Int16, +
+						        Row["Vendor"] *As Int32, +
+			                    Row["Style"]  *As Int16, +
+			                    Row["Colour"] *As Int16, +
+			                    Row["Size"]   *As Int16)
+			If IIAupdate.IsFound
+			
+				IIAVUP = Row["VendorUPC"] *As Int64
+				IIADUP = Row["DisneyUPC"] *As Int64
+				
+				//Update Pending changes...Revamped Joseph Urbina 19/04/2010
+				If (Row["Pending"] *As String) = "P" And (Row["PendingFlag"] *As String) <> 'Y'
+															
+					If Row["PendingCasePackType"] *As String <> String.Empty
+						IIAPCT = Row["PendingCasePackType"] *As String
+					Endif
+					
+					If Row["PendingPackQty"] *As String <> '0'	
+						IIAPCQ = Row["PendingPackQty"]  *As Int32
+					Endif
+					
+					If Row["PendingDistroQty"] *As String <> '0'	
+						IIAPDQ = Row["PendingDistroQty"] *As Int32
+					Endif
+										
+					If Row["PendingPackWeight"] *As String <> '0'	
+						IIAPWG = Row["PendingPackWeight"] *As Decimal
+					Endif
+					
+					If Row["PendingPackHeight"] *As String <> '0'
+						IIAPHT = Row["PendingPackHeight"] *As Decimal
+					Endif
+					
+					If Row["PendingPackLength"] *As String <> '0'
+						IIAPLN = Row["PendingPackLength"] *As Decimal
+					Endif
+					
+					If Row["PendingPackWidth"] *As String <> '0'	
+						IIAPWI = Row["PendingPackWidth"]  *As Decimal
+					Endif
+				EndIf
+				
+				// Added JB 22/03/11
+				IIADES = Row["Description"] *As String
+				IIASLC = Row["SellingChannel"] *As String
+				IIAOFE = Row["OfferEffectiveDate"] *As Int64
+				IIASOC = Row["SellOutControl"] *As String
+				
+				SaveLocalSizeDescription(Row["Class"] *As Int16,Row["Vendor"] *As Int32,Row["Style"] *As Int16,Row["Colour"] *As Int16,Row["Size"] *As Int16, Row["DescNonEnglish"] *As String)
+				
+				If((Row["SuppressBackOrderCard"] *AS Boolean) = *True)
+					IIASBO = 'Y'
+				Else
+					IIASBO = 'N'
+				EndIf
+				
+				IIAEID = *Zero
+
+				IIALCD = CvtFromDateTime(DateTime.Now.Date)
+				IIALCT = CvtToIPtime(DateTime.Now)
+				IIALCU = PgmDB.User.ToUpper()
+			
+				Update RIIAUPDATE
+			Else
+				IIADIV = ItemStyle.Division
+				IIADPT = ItemStyle.Department
+				IIACLS = Row["Class"]  *As Int16
+				IIAVEN = Row["Vendor"] *As Int32
+				IIASTY = Row["Style"]  *As Int16
+				IIACLR = Row["Colour"] *As Int16
+				IIASIZ = Row["Size"]   *As Int16
+				
+				IIAVUP = Row["VendorUPC"] *As Int64
+				IIACPT = Row["CasePackType"]   *As String
+				IIAMIN = Row["CaseQuantity"]   *As Int32
+				IIAMLT = Row["DistroQuantity"] *As Int32
+				IIACWG = Row["Weight"] *As Decimal
+				IIACHT = Row["Height"] *As Decimal
+				IIACLN = Row["Length"] *As Decimal
+				IIACWI = Row["Width"]  *As Decimal
+				IIADUP = Row["DisneyUPC"] *As Int64
+				IIASKU = *Zero
+				IIASCD = *Zero
+				IIAAPP = String.Empty
+				IIACLK = String.Empty
+				IIAPCT = String.Empty
+				IIAPCQ = *Zero
+				IIAPDQ = *Zero
+				IIAPWG = *Zero
+				IIAPHT = *Zero
+				IIAPLN = *Zero
+				IIAPWI = *Zero
+				
+				// Added JB 22/03/11
+				IIADES = Row["Description"] *As String
+				IIASLC = Row["SellingChannel"] *As String
+				IIAOFE = Row["OfferEffectiveDate"] *As Int64
+				IIASOC = Row["SellOutControl"] *As String
+				IIASBO = 'N'
+				SaveLocalSizeDescription(Row["Class"] *As Int16,Row["Vendor"] *As Int32,Row["Style"] *As Int16,Row["Colour"] *As Int16,Row["Size"] *As Int16, Row["DescNonEnglish"] *As String)
+				
+				IIAEID = *Zero
+				
+				IIACRD = CvtFromDateTime(DateTime.Now.Date)
+				IIACRT = CvtToIPtime(DateTime.Now)
+				IIACRU = PgmDB.User.ToUpper()
+				IIALCD = 0
+				IIALCT = 0
+				IIALCU = *Blank
+			
+				Write RIIAupdate
+			EndIf
+		EndFor
+		
+		LeaveSR *True
+	EndFunc
+		
+	BegFunc UpdateMarketPrices Type(Boolean) Access(*Public)
+		DclSrParm ItemStyle   Type(Disney.DA.IP400.ItemStyle)
+		DclSrParm MarketSizes Type(DataTable)
+		
+		DclFld ItemString    Type(StringBuilder)
+		DclFld PendingRetail Type(Decimal)
+		DclFld ListPrice Type(Decimal)
+		DclFld PendingCost   Type(Decimal)
+		DclFld UpdateFlag    Type(Boolean)
+		DclFld RetailADJ	 Type(Decimal)
+		DclFld CostADJ		 Type(Decimal)
+		DclFld MinusOne		 Type(Int16) Inz(-1)
+				
+		If Not IMIupdate.IsOpen
+			Open IMIupdate
+		EndIf
+		
+		If DSSPEHLcls  = *Nothing
+			DSSPEHLcls = *New DSSPEHLcls(Pgmdb) 
+		Endif
+				
+		ForEach Row Collection(MarketSizes.Rows) Type(DataRow)
+			
+			Chain IMIupdate Key(Row["Class"]  *As Int16, +
+			                    Row["Vendor"] *As Int32, +
+			                    Row["Style"]  *As Int16, +
+			                    Row["Colour"] *As Int16, +
+			                    Row["Size"]   *As Int16, +
+			                    Row["Market"] *As String)
+			If IMIupdate.IsFound
+				
+				UpdateFlag = *False
+				
+				If Not String.IsNullOrEmpty(Row["PendingRetail"].ToString())
+					If (Row["PendingRetail"] *As Decimal) <> *Zero
+						IMIRP = Row["PendingRetail"] *As Decimal
+						UpdateFlag = *True
+					EndIf
+				EndIf
+
+				If Not String.IsNullOrEmpty(Row["ListPrice"].ToString())
+					If (Row["ListPrice"] *As Decimal) <> *Zero
+						IMILIP = Row["ListPrice"] *As Decimal
+						UpdateFlag = *True
+					EndIf
+				EndIf
+				
+				If Not String.IsNullOrEmpty(Row["PendingCost"].ToString())
+					If (Row["PendingCost"] *As Decimal) <> *Zero
+						IMICP = Row["PendingCost"] *As Decimal
+						UpdateFlag = *True
+					EndIf
+				EndIf
+				
+				If Not String.IsNullOrEmpty(Row["VendorUPC"].ToString())
+					If (Row["VendorUPC"] *As Int64) <> *Zero
+						IMIVUP = Row["VendorUPC"] *As Int64
+						UpdateFlag = *True
+					EndIf
+				EndIf
+
+				IMIVAT = Row["VAT"]        *As String
+				IMIPVA = Row["PendingVAT"] *As String
+
+				If UpdateFlag = *True
+					IMILCD = CvtFromDateTime(DateTime.Now.Date)
+					IMILCT = CvtToIPtime(DateTime.Now)
+					IMILCU = PgmDB.User.ToUpper()
+			
+					Update RIMIupdate
+					
+					// Write a log record
+					EventType  = 'ITEM'
+				
+					ItemString = *New StringBuilder()
+					ItemString.Append(IMICLS.ToString('0000'))
+					ItemString.Append(IMIVEN.ToString('00000'))
+					ItemString.Append(IMISTY.ToString('0000'))
+					ItemString.Append(IMICLR.ToString('000'))
+					ItemString.Append(IMISIZ.ToString('0000'))
+				
+					EventKey  = ItemString.ToString()
+				
+					EventDesc  = 'Changed in SPICE Market ' + IMIMKT
+				
+					DSSPEHLcls.WriteHistoryEvent(EventType, EventKey, EventDesc)
+				Else
+					// Unlock record lock
+					Unlock RIMIupdate
+				EndIf
+			Else
+				// Write record
+				IMIDIV = ItemStyle.Division
+				IMIDPT = ItemStyle.Department
+				IMICLS = Row["Class"]        *As Int16
+				IMIVEN = Row["Vendor"]       *As Int32
+				IMISTY = Row["Style"]        *As Int16
+				IMICLR = Row["Colour"]       *As Int16
+				IMISIZ = Row["Size"]         *As Int16
+				IMIMKT = Row["Market"]       *As String
+				IMICYC = Row["CurrencyCode"] *As String
+				
+				// Pending retail
+				If Not String.IsNullOrEmpty(Row["PendingRetail"].ToString())
+					PendingRetail = Convert.ToDecimal(Row["PendingRetail"])
+					If PendingRetail <> *Zero
+						IMIRP = PendingRetail
+					Else
+						//A bit of a hassle but needs rounding up....
+						RetailADJ = Row["Retail"] *As Decimal
+						Mult RetailADJ MinusOne RetailADJ
+						Mult RetailADJ MinusOne IMIRP *rndup 
+					EndIf
+				Else
+					//A bit of a hassle but needs rounding up....
+						RetailADJ = Row["Retail"] *As Decimal
+						Mult RetailADJ MinusOne RetailADJ
+						Mult RetailADJ MinusOne IMIRP *rndup 
+				EndIf
+				
+				// List Price
+				If Not String.IsNullOrEmpty(Row["ListPrice"].ToString())
+					ListPrice = Convert.ToDecimal(Row["ListPrice"])
+					If ListPrice <> *Zero
+						IMILIP = ListPrice
+					EndIf
+				EndIf
+				
+				// Pending cost
+				If Not String.IsNullOrEmpty(Row["PendingCost"].ToString())
+					PendingCost = Convert.ToDecimal(Row["PendingCost"])
+					If PendingCost <> *Zero
+						IMICP = PendingCost
+					Else
+						//A bit of a hassle but needs rounding up....
+						CostADJ = Row["Cost"] *As Decimal
+						Mult CostADJ MinusOne CostADJ
+						Mult CostADJ MinusOne IMICP *rndup 
+					EndIf
+				Else
+					//A bit of a hassle but needs rounding up....
+						CostADJ = Row["Cost"] *As Decimal
+						Mult CostADJ MinusOne CostADJ
+						Mult CostADJ MinusOne IMICP *rndup 
+				EndIf
+				
+				IMILCS = *Zero
+				IMILCC = *Zero
+				IMIVAT = Row["VAT"]        *As String
+				IMIPVA = Row["PendingVAT"] *As String
+				IMIVUP = Row["VendorUPC"]  *As Int64
+				IMISKU = *Zero // 3622
+				IMISCD = *Zero
+				IMIEID = String.Empty
+
+				IMICRD = CvtFromDateTime(DateTime.Now.Date)
+				IMICRT = CvtToIPtime(DateTime.Now)
+				IMICRU = PgmDB.User.ToUpper()
+				IMILCD = *Zero
+				IMILCT = *Zero
+				IMILCU = String.Empty
+				
+				Write RIMIupdate
+				
+				// Write a log record
+				EventType  = 'ITEM'
+				
+				ItemString = *New StringBuilder()
+				ItemString.Append(IMICLS.ToString('0000'))
+				ItemString.Append(IMIVEN.ToString('00000'))
+				ItemString.Append(IMISTY.ToString('0000'))
+				ItemString.Append(IMICLR.ToString('000'))
+				ItemString.Append(IMISIZ.ToString('0000'))
+				
+				EventKey  = ItemString.ToString()
+				
+				EventDesc  = 'Created in SPICE Market ' + IMIMKT
+				
+				DSSPEHLcls.WriteHistoryEvent(EventType, EventKey, EventDesc)
+			EndIf
+		EndFor
+				
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc WriteChgSizeToDtaQ Type(Boolean) Access(*Public)
+		DclSrParm Sizes Type(DataTable)
+			
+			DclFld ItemCode   Type(StringBuilder)
+			DclFld DateFormat Type(String)
+			
+			DTAQname = *Blank
+			DTAQlib  = *Blank
+			
+			Buffer = *Blank
+			DSfunc = 'REQCHGITM'
+			DSipur = User.IPinitials.ToUpper()
+			DSuser = PgmDB.User.ToUpper()
+			
+			DateFormat = "yyyy-MM-dd-HH.mm.ss.000000"
+			DSstmp     = DateTime.Now.ToString(DateFormat)
+			
+			ForEach Size Collection(Sizes.Rows) Type(DataRow)
+				
+				ItemCode = *New StringBuilder()
+				ItemCode.Append((Size["Division"]   *As Int16).ToString('00'))
+				ItemCode.Append((Size["Department"] *As Int16).ToString('000'))
+				ItemCode.Append((Size["Class"]      *As Int16).ToString('0000'))
+				ItemCode.Append((Size["Vendor"]     *As Int32).ToString('00000'))
+				ItemCode.Append((Size["Style"]      *As Int16).ToString('0000'))
+				ItemCode.Append((Size["Colour"]     *As Int16).ToString('000'))
+				ItemCode.Append((Size["Size"]       *As Int16).ToString('0000'))
+				
+				DSitem  = ItemCode.ToString()
+				DTAQdta = DtaQDtaDS
+				
+				Call Pgm('DS400HC') DB(PgmDB) ParmList(DS400PARMS)
+			EndFor
+			
+		LeaveSR *True
+	EndFunc
+		
+	/Region Date & Time conversion
+	BegFunc CvtFromDateTime Type(Int32) Access(*Private)
+		DclSrParm DateValue Type(DateTime)
+		
+		DclFld StrDate Type(Stringbuilder)
+		
+		If  DateValue = DateTime.MinValue
+			LeaveSR 00010101
+		Else
+			StrDate = *New StringBuilder()
+			StrDate.Append(DateValue.Year.ToString('0000'))
+			StrDate.Append(DateValue.Month.ToString('00'))
+			StrDate.Append(DateValue.Day.ToString('00'))
+			
+			LeaveSR (Convert.ToInt32(StrDate.ToString()))
+		EndIf
+	EndFunc
+	
+	BegFunc CvtToIPtime Type(Int32) Access(*Private)
+		DclSrParm Time Type(DateTime)
+		
+		DclFld StrTime Type(Stringbuilder)
+		
+		StrTime = *New StringBuilder()
+		StrTime.Append(Time.Hour.ToString('00'))
+		StrTime.Append(Time.Minute.ToString('00'))
+		StrTime.Append(Time.Second.ToString('00'))
+		
+		LeaveSR (Convert.ToInt32(StrTime.ToString()))
+	EndFunc
+	
+	BegFunc CvtToDateTime Type(DateTime) Access(*Private)
+		DclSrParm IPDate Type(Int32)
+		DclSrParm IPTime Type(Int32)
+		
+		DclFld DTstring   Type(String)
+		DclFld ConvertedDateTime Type(DateTime)
+		DclFld dtfi Type(System.Globalization.DateTimeFormatInfo)
+		
+		If IPDate = *Zero
+			IPdate = 00010101
+		EndIf
+		
+		DTstring = IPDate.ToString("0000/00/00") + ' ' + IPTime.ToString("00:00:00")
+		
+		dtfi = *New System.Globalization.DateTimeFormatInfo()
+		ConvertedDateTime = DateTime.ParseExact(DTstring,"yyyy/MM/dd HH:mm:ss",dtfi)
+		
+		LeaveSR ConvertedDateTime
+	EndFunc
+	/EndRegion
+	
+	
+	BegFunc GetItemStyleColour Type(Int16) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		
+		DclFld StyleColour Type(Int16)
+				
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+		
+		Chain From(DSSPISAL1) Key(Class,Vendor,Style)
+		If DSSPISAL1.IsFound
+			StyleColour = ISACLR
+		Else
+			StyleColour = 0
+		EndIf
+		
+		LeaveSr StyleColour
+	EndFunc
+	
+	BegFunc ChkItemStyleColourUnique Type(Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+		
+		Chain From(DSSPISAL1) Key(Class,Vendor,Style,Colour)
+		If DSSPISAL1.IsFound
+			LeaveSR *False
+		Else
+			LeaveSR *True
+		EndIf
+	EndFunc
+	
+	BegFunc IIARecordExists Type(Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		If Not DSSPIIAL1.IsOpen
+			Open DSSPIIAL1
+		EndIf
+		
+		Chain From(DSSPIIAL1) Key(Class,Vendor,Style,Colour,Size)
+		If DSSPIIAL1.IsFound
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+
+	BegFunc IMIRecordExists Type(Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		DclSrParm Market Type(String)
+		
+		If Not DSSPIMIL1.IsOpen
+			Open DSSPIMIL1
+		EndIf
+		
+		Chain From(DSSPIMIL1) Key(Class,Vendor,Style,Colour,Size,Market)
+		If DSSPIMIL1.IsFound
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+		
+	BegFunc ChkItemStyleUnique Type(Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		
+		If Not DSSPISAL1.IsOpen
+			Open DSSPISAL1
+		EndIf
+		
+		Chain From(DSSPISAL1) Key(Class,Vendor,Style)
+		If DSSPISAL1.IsFound
+			LeaveSR *False
+		Else
+			LeaveSR *True
+		EndIf
+	EndFunc
+	
+	BegFunc ChkVendorUPCUnique Type(Boolean) Access(*Public)
+		DclSrParm UPC  Type(Int64)
+				
+		If Not DSSPIIAL2.IsOpen
+			Open DSSPIIAL2
+		EndIf
+		
+		Chain From(DSSPIIAL2) Key(UPC)
+		If DSSPIIAL2.IsFound
+			LeaveSR *False
+		Else
+			LeaveSR *True
+		EndIf
+	EndFunc
+	
+	BegFunc ChkVendorUPCUnique Type(Boolean) Access(*Public)
+		DclSrParm UPC            Type(Int64)
+		DclSrParm LongItemNumber Type(LongItemNumber)
+				
+		If Not DSSPIIAL2.IsOpen
+			Open DSSPIIAL2
+		EndIf
+		
+		Chain From(DSSPIIAL2) Key(UPC)
+		If DSSPIIAL2.IsFound
+			If  IIACLS = LongItemNumber.Class     +
+			And IIAVEN = LongItemNumber.Vendor    +
+			And IIASTY = LongItemNumber.Style     +
+			And IIACLR = LongItemNumber.Colour    +
+			And IIASIZ = LongItemNumber.Size
+				LeaveSR *True
+			Else
+				LeaveSR *False
+			EndIf
+		Else
+			LeaveSR *True     // Unique
+		EndIf
+	EndFunc
+		
+	BegFunc ChkVendorUPCunique Type(Boolean) Access(*Public)
+		DclSrParm UPC            Type(Int64)
+		DclSrParm LongItemNumber Type(LongItemNumber)
+		DclSrParm Market         Type(String)
+				
+		If Not DSSPIMIL3.IsOpen
+			Open DSSPIMIL3
+		EndIf
+		
+		Chain From(DSSPIMIL3) Key(UPC, Market)
+		If DSSPIMIL3.IsFound
+			If  IMICLS = LongItemNumber.Class     +
+			And IMIVEN = LongItemNumber.Vendor    +
+			And IMISTY = LongItemNumber.Style     +
+			And IMICLR = LongItemNumber.Colour    +
+			And IMISIZ = LongItemNumber.Size
+				LeaveSR *True
+			Else
+				LeaveSR *False
+			EndIf
+		Else
+			LeaveSR *True     // Unique
+		EndIf
+	EndFunc
+	
+	BegFunc ChkDisneyUPCUnique Type(Boolean) Access(*Public)
+		DclSrParm UPC  Type(Int64)
+				
+		If Not DSSPIIAL3.IsOpen
+			Open DSSPIIAL3
+		EndIf
+		
+		Chain From(DSSPIIAL3) Key(UPC)
+		If DSSPIIAL3.IsFound
+			LeaveSR *False
+		Else
+			LeaveSR *True
+		EndIf
+	EndFunc
+
+	BegFunc ChkDisneyUPCUnique Type(Boolean) Access(*Public)
+		DclSrParm UPC            Type(Int64)
+		DclSrParm LongItemNumber Type(LongItemNumber)
+				
+		If Not DSSPIIAL3.IsOpen
+			Open DSSPIIAL3
+		EndIf
+		
+		Chain From(DSSPIIAL3) Key(UPC)
+		If DSSPIIAL3.IsFound
+			If  IIACLS = LongItemNumber.Class     +
+			And IIAVEN = LongItemNumber.Vendor    +
+			And IIASTY = LongItemNumber.Style     +
+			And IIACLR = LongItemNumber.Colour    +
+			And IIASIZ = LongItemNumber.Size
+				LeaveSR *True
+			Else
+				LeaveSR *False
+			EndIf
+		Else
+			LeaveSR *True
+		EndIf
+	EndFunc
+	
+	BegFunc ChkUPCuniqueIMI Type(Boolean) Access(*Public)
+		DclSrParm UPC            Type(Int64)
+		DclSrParm Market         Type(String)
+				
+		If Not DSSPIMIL3.IsOpen
+			Open DSSPIMIL3
+		EndIf
+		
+		Chain From(DSSPIMIL3) Key(UPC, Market)
+		If DSSPIMIL3.IsFound
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+		
+		
+	EndFunc
+		
+	BegFunc UpdateItemSKU Type(Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+	
+		If Not IIAUPDATE.IsOpen
+			Open IIAUPDATE
+		EndIf
+		
+		If Not IMIUPDATE.IsOpen
+			Open IMIUPDATE
+		EndIf
+		
+		//Initialise the SKU number for this Item
+		Chain From(IIAUPDATE) Key(Class, Vendor, Style, Colour, Size)
+		If IIAUPDATE.IsFound
+			IIASKU = 0 //3622
+			IIASCD = 0	
+			Update RIIAUPDATE Err(*Extended)
+			If %Error = *On
+				Throw *New System.Exception('Failed to Update record for (IIAUPDATE)')
+			EndIf
+		Endif
+		
+		//Initialise the SKU number for this Item
+		Setll IMIUPDATE Key(Class, Vendor, Style, Colour, Size)
+		DoUntil IMIUPDATE.IsEof
+			ReadE IMIUPDATE Key(Class, Vendor, Style, Colour, Size) 
+			If not IMIUPDATE.IsEof
+				IMISKU = 0 //3622
+				IMISCD = 0
+				Update RIMIUPDATE Err(*Extended)
+				If %Error = *On
+					Throw *New System.Exception('Failed to Update record for (IMIUPDATE)')
+				EndIf
+			Endif 
+		Enddo
+		
+		LeaveSr *True		
+	EndFunc
+EndClass
+
+BegClass ItemStyle Access(*Public)
+
+	BegConstructor Access(*Public)
+	EndConstructor
+	
+	/Region Properties
+	DclFld pDivision Type(Int16) Access(*Private) Inz(0)
+	BegProp Division Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDivision
+		EndGet
+		BegSet
+			pDivision = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDepartment Type(Int16) Access(*Private) Inz(0)
+	BegProp Department Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDepartment
+		EndGet
+		BegSet
+			pDepartment = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pClass Type(Int16) Access(*Protected) Inz(0)
+	BegProp Class Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pClass
+		EndGet
+		BegSet
+			pClass = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pClassName Type(String) Access(*Protected) Inz(String.Empty)
+	BegProp ClassName Type(String) Access(*Public)
+		BegGet
+			LeaveSR pClassName
+		EndGet
+		BegSet
+			pClassName = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pVendor Type(Int32) Access(*Private) Inz(0)
+	BegProp Vendor Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pVendor
+		EndGet
+		BegSet
+			pVendor = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pVendorName Type(String) Access(*Private) Inz(String.Empty)
+	BegProp VendorName Type(String) Access(*Public)
+		BegGet
+			LeaveSR pVendorName
+		EndGet
+		BegSet
+			pVendorName = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pStyle Type(Int16) Access(*Private) Inz(0)
+	BegProp Style Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pStyle
+		EndGet
+		BegSet
+			pStyle = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pColour Type(Int16) Access(*Private) Inz(0)
+	BegProp Colour Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pColour
+		EndGet
+		BegSet
+			pColour = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pColourDesc Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ColourDesc Type(String) Access(*Public)
+		BegGet
+			LeaveSR pColourDesc
+		EndGet
+		BegSet
+			pColourDesc = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSubClass Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SubClass Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSubClass
+		EndGet
+		BegSet
+			pSubClass = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendSubClass Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingSubClass Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPendSubClass
+		EndGet
+		BegSet
+			pPendSubClass = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pLongDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp LongDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLongDescription
+		EndGet
+		BegSet
+			pLongDescription = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pLocalDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp LocalDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLocalDescription
+		EndGet
+		BegSet
+			pLocalDescription = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pShortDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ShortDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pShortDescription
+		EndGet
+		BegSet
+			pShortDescription = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pVendorStyle Type(String) Access(*Private) Inz(String.Empty)
+	BegProp VendorStyle Type(String) Access(*Public)
+		BegGet
+			LeaveSR pVendorStyle
+		EndGet
+		BegSet
+			pVendorStyle = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pUPC Type(Int64) Access(*Private) Inz(0)
+	BegProp UPC Type(Int64) Access(*Public)
+		BegGet
+			LeaveSR pUPC
+		EndGet
+		BegSet
+			pUPC = *PropVal
+		EndSet
+	EndProp
+	
+	DclFLd pImpDomInd Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ImpDomInd Type(String) Access(*Public)
+		BegGet
+			LeaveSR pImpDomInd
+		EndGet
+		BegSet
+			pImpDomInd = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pLicenceCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp LicenceCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLicenceCode
+		EndGet
+		BegSet
+			pLicenceCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPromoCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PromotionCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPromoCode
+		EndGet
+		BegSet
+			pPromoCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCommodityCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CommodityCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCommodityCode
+		EndGet
+		BegSet
+			pCommodityCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCompositionCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CompositionCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCompositionCode
+		EndGet
+		BegSet
+			pCompositionCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCountryCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CountryCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCountryCode
+		EndGet
+		BegSet
+			pCountryCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCharCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CharacterCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCharCode
+		EndGet
+		BegSet
+			pCharCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSeasonCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SeasonCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSeasonCode
+		EndGet
+		BegSet
+			pSeasonCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCasePackType Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CasePackType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCasePackType
+		EndGet
+		BegSet
+			pCasePackType = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCaseQty Type(Int32) Access(*Private) Inz(0)
+	BegProp CaseQuantity Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pCaseQty
+		EndGet
+		BegSet
+			pCaseQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDistroQty Type(Int32) Access(*Private) Inz(0)
+	BegProp DistroQuantity Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pDistroQty
+		EndGet
+		BegSet
+			pDistroQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pWeight Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonWeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pWeight
+		EndGet
+		BegSet
+			pWeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pHeight Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonHeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pHeight
+		EndGet
+		BegSet
+			pHeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pLength Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonLength Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pLength
+		EndGet
+		BegSet
+			pLength = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pWidth Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonWidth Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pWidth
+		EndGet
+		BegSet
+			pWidth = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pTicketType Type(String) Access(*Private) Inz(String.Empty)
+	BegProp TicketType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pTicketType
+		EndGet
+		BegSet
+			pTicketType = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pReclassed Type(String) Access(*Private) Inz(String.Empty)
+	BegProp Reclassed Type(String) Access(*Public)
+		BegGet
+			LeaveSR pReclassed
+		EndGet
+		BegSet
+			pReclassed = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendPromo Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingPromoCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPendPromo
+		EndGet
+		BegSet
+			pPendPromo = *PropVal
+		EndSet
+	EndProp
+	
+	DclFLd pGenderCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp GenderCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pGenderCode
+		EndGet
+		BegSet
+			pGenderCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFLd pOnlineInd Type(String) Access(*Private) Inz(String.Empty)
+	BegProp OnlineInd Type(String) Access(*Public)
+		BegGet
+			LeaveSR pOnlineInd
+		EndGet
+		BegSet
+			pOnlineInd = *PropVal
+		EndSet
+	EndProp
+
+	DclFLd pLocationInd Type(String) Access(*Private) Inz(String.Empty)
+	BegProp LocationInd Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLocationInd
+		EndGet
+		BegSet
+			pLocationInd = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pAgeGroup Type(String) Access(*Private) Inz(String.Empty)
+	BegProp AgeGroup Type(String) Access(*Public)
+		BegGet
+			LeaveSR pAgeGroup
+		EndGet
+		BegSet
+			pAgeGroup = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPendCharCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp PendingCharCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPendCharCode
+		EndGet
+		BegSet
+			pPendCharCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCost Type(Decimal) Access(*Private) Inz(0)
+	BegProp Cost Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pCost
+		EndGet
+		BegSet
+			pCost = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pRetail Type(Decimal) Access(*Private) Inz(0)
+	BegProp Retail Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pRetail
+		EndGet
+		BegSet
+			pRetail = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSellingChannel Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SellingChannel Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSellingChannel
+		EndGet
+		BegSet
+			pSellingChannel = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pForOnlineEcommerce Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ForOnlineEcommerce Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pForOnlineEcommerce
+		EndGet
+		BegSet
+			pForOnlineEcommerce = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pOfferEffectiveDate Type(Int32) Access(*Private) Inz(0)
+	BegProp OfferEffectiveDate Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pOfferEffectiveDate
+		EndGet
+		BegSet
+			pOfferEffectiveDate = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pDropShip Type(String) Access(*Private) Inz(String.Empty)
+	BegProp DropShip Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDropShip
+		EndGet
+		BegSet
+			pDropShip = *PropVal
+		EndSet
+	EndProp
+				
+	DclFld pItemShipAlone Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ItemShipAlone Type(String) Access(*Public)
+		BegGet
+			LeaveSR pItemShipAlone
+		EndGet
+		BegSet
+			pItemShipAlone = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pSpecialHandling Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SpecialHandling Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSpecialHandling
+		EndGet
+		BegSet
+			pSpecialHandling = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSpecialHandlingCode Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SpecialHandlingCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSpecialHandlingCode
+		EndGet
+		BegSet
+			pSpecialHandlingCode = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSellOutControl Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SellOutControl Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSellOutControl
+		EndGet
+		BegSet
+			pSellOutControl = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pSuppressBackOrderCard Type(Boolean) Access(*Private)
+	BegProp SuppressBackOrderCard Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pSuppressBackOrderCard
+		EndGet
+		BegSet
+			pSuppressBackOrderCard = *PropVal
+		EndSet
+	EndProp
+		
+	DclFld pThirdPartySeller Type(Decimal) Access(*Private) Inz(0)
+	BegProp ThirdPartySeller Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pThirdPartySeller
+		EndGet
+		BegSet
+			pThirdPartySeller = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pUserField1 Type(String) Access(*Private) Inz(String.Empty)
+	BegProp UserField1 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pUserField1
+		EndGet
+		BegSet
+			pUserField1 = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pUserField2 Type(String) Access(*Private) Inz(String.Empty)
+	BegProp UserField2 Type(String) Access(*Public)
+		BegGet
+			LeaveSR pUserField2
+		EndGet
+		BegSet
+			pUserField2 = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDCNotes Type(String) Access(*Private) Inz(String.Empty)
+	BegProp DCNotes Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDCNotes
+		EndGet
+		BegSet
+			pDCNotes = *PropVal
+		EndSet
+	EndProp
+		
+	DclFld pCreateDate Type(DateTime) Access(*Private) 
+	BegProp CreateDate Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pCreateDate
+		EndGet
+		BegSet
+			pCreateDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCreateUser Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CreateUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCreateUser
+		EndGet
+		BegSet
+			pCreateUser = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pChangeDate Type(DateTime) Access(*Private)
+	BegProp ChangeDate Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pChangeDate
+		EndGet
+		BegSet
+			pChangeDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pChangeUser Type(String) Access(*Private) Inz(String.Empty)
+	BegProp ChangeUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pChangeUser
+		EndGet
+		BegSet
+			pChangeUser = *PropVal
+		EndSet
+	EndProp
+	/EndRegion
+EndClass
+
+BegClass ItemSize Access(*Public)
+
+	BegConstructor Access(*Public)
+	EndConstructor
+	
+	/Region Properties
+		
+	DclFld pCasePackType Type(String) Access(*Private) Inz(String.Empty)
+	BegProp CasePackType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCasePackType
+		EndGet
+		BegSet
+			pCasePackType = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCaseQty Type(Int32) Access(*Private) Inz(0)
+	BegProp CaseQuantity Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pCaseQty
+		EndGet
+		BegSet
+			pCaseQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDistroQty Type(Int32) Access(*Private) Inz(0)
+	BegProp DistroQuantity Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pDistroQty
+		EndGet
+		BegSet
+			pDistroQty = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pWeight Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonWeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pWeight
+		EndGet
+		BegSet
+			pWeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pHeight Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonHeight Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pHeight
+		EndGet
+		BegSet
+			pHeight = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pLength Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonLength Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pLength
+		EndGet
+		BegSet
+			pLength = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp Description Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDescription
+		EndGet
+		BegSet
+			pDescription = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pLocalDescription Type(String) Access(*Private) Inz(String.Empty)
+	BegProp LocalDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pLocalDescription
+		EndGet
+		BegSet
+			pLocalDescription = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pSellingChannel Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SellingChannel Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSellingChannel
+		EndGet
+		BegSet
+			pSellingChannel = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pOfferEffectiveDate Type(Int32) Access(*Private) Inz(0)
+	BegProp OfferEffectiveDate Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pOfferEffectiveDate
+		EndGet
+		BegSet
+			pOfferEffectiveDate = *PropVal
+		EndSet
+	EndProp
+	
+//	DclFld pDropShip Type(String) Access(*Private)
+//	BegProp DropShip Type(String) Access(*Public)
+//		BegGet
+//			LeaveSR pDropShip
+//		EndGet
+//		BegSet
+//			pDropShip = *PropVal
+//		EndSet
+//	EndProp
+	
+	DclFld pSellOutControl Type(String) Access(*Private) Inz(String.Empty)
+	BegProp SellOutControl Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSellOutControl
+		EndGet
+		BegSet
+			pSellOutControl = *PropVal
+		EndSet
+	EndProp	
+	
+	DclFld pSuppressBackOrderCard Type(Boolean) Access(*Private)
+	BegProp SuppressBackOrderCard Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pSuppressBackOrderCard
+		EndGet
+		BegSet
+			pSuppressBackOrderCard = *PropVal
+		EndSet
+	EndProp	
+	
+	DclFld pKitType Type(String) Access(*Private) Inz(String.Empty)
+	BegProp	KitType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pKitType
+		EndGet
+		BegSet
+			pKitType = *PropVal
+		EndSet
+	EndProp	
+		
+	DclFld pWidth Type(Decimal) Access(*Private) Inz(0)
+	BegProp CartonWidth Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pWidth
+		EndGet
+		BegSet
+			pWidth = *PropVal
+		EndSet
+	EndProp
+	
+	
+	/EndRegion
+EndClass
+
+
+BegClass ItemSizeOverride Extends(ItemSize) Access(*Public)
+	DclFld OverrideDescription Type(Boolean) Access(*Public)
+	DclFld OverrideNonEnglishDescription Type(Boolean) Access(*Public)
+	DclFld OverrideOfferEffectiveDate Type(Boolean) Access(*Public)
+	DclFld OverrideSellingChannel Type(Boolean) Access(*Public)
+	DclFld OverrideSelloutControl Type(Boolean) Access(*Public)
+	DclFld OverrideSuppressBackOrderCard Type(Boolean) Access(*Public)
+	
+	BegConstructor Access(*Public)
+		OverrideDescription = *False
+		OverrideNonEnglishDescription = *True
+		OverrideOfferEffectiveDate = *False
+		OverrideSellingChannel = *False
+		OverrideSelloutControl = *False
+		OverrideSuppressBackOrderCard = *False
+	EndConstructor
+	
+	BegSR Reset Access(*Public)
+		OverrideDescription = *False
+		OverrideNonEnglishDescription = *True
+		OverrideOfferEffectiveDate = *False
+		OverrideSellingChannel = *False
+		OverrideSelloutControl = *False
+		OverrideSuppressBackOrderCard = *False
+	EndSR
+		
+EndClass

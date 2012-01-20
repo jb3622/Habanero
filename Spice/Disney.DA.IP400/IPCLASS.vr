@@ -1,0 +1,257 @@
+// ===============================================
+// Tarnjit Bhambra
+// 07 May 2009
+// IPCLASScls	
+// Data Access Layer - Class Code Master File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+
+BegClass IPCLASScls Access(*Public)
+	
+	DclFld memRecords Type(*Integer4)  Access(*Public)	
+	
+	DclDB Name(DB) DbName("TDST")
+	
+	DclDiskFile Name(IPCLASS) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*Yes) RnmFmt(Class:R_Class)
+	DclDiskFile Name(IPCLASSB) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No) RnmFmt(Class:R_ClassB) +
+	netBlockFactor(400)
+	
+	DclMemoryFile Name(mIPCLASS) DBdesc(DB) Filedesc('*Libl/IPCLASS') RnmFmt(ClassR, mClassR) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB    Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm ClassCode Type(*Zoned) Len(4,0)
+		
+		*this.DB = DB
+		
+		GetClassCode(ClassCode)
+	EndConstructor
+	
+	//Properties
+	BegProp Class_Code Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR CCLS
+		EndGet
+	EndProp
+	
+	BegProp Class_Name Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR CLNM
+		EndGet
+		
+		BegSet
+			CLNM = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Division_Code Type(*Zoned) Len(2,0) Access(*Public)
+		BegGet
+			LeaveSR CDIV
+		EndGet
+		
+		BegSet
+			CDIV = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Department_Code Type(*Zoned) Len(3,0) Access(*Public)
+		BegGet
+			LeaveSR CDPT
+		EndGet
+		
+		BegSet
+			CDPT = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Last_Season_Reset_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR CSRD
+		EndGet
+		
+		BegSet
+			CSRD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Shrinkage_Factor Type(*Packed) Len(3,3) Access(*Public)
+		BegGet
+			LeaveSR CSRK
+		EndGet
+		
+		BegSet
+			CSRK = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Desired_Markup Type(*Packed) Len(3,3) Access(*Public)
+		BegGet
+			LeaveSR CMKP
+		EndGet
+		
+		BegSet
+			CMKP = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Season_Code Type(*Char) Len(2) Access(*Public)
+		BegGet
+			LeaveSR CSSN
+		EndGet
+		
+		BegSet
+			CSSN = *PropVal
+		EndSet
+	EndProp
+	
+	
+	BegProp DataSet_Record_Count Type(*Integer4) Access(*Public)
+		BegGet
+			LeaveSR memRecords
+		EndGet
+	EndProp
+	
+	
+	// Methods
+	BegFunc GetClassCode Type(*Boolean) Access(*Public)
+		DclSrParm ClassCode Type(*Zoned) len(4,0)
+		
+		If Not IPCLASS.IsOpen
+			Open IPCLASS
+		EndIf
+		
+		Chain From(IPCLASS) Key(ClassCode) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+	EndFunc
+	
+	BegFunc GetClassCodeForUpdate Type(*Boolean) Access(*Public)
+		DclSrParm ClassCode Type(*Zoned) len(4,0)
+		
+		If Not IPCLASS.IsOpen
+			Open IPCLASS
+		EndIf
+		
+		Chain From(IPCLASS) Key(ClassCode) Access(*DFT) Err(*Extended)
+		If not %Found
+			LeaveSR *On
+		EndIf
+		
+		If %Error = *On
+			Throw *New System.Exception('Failed to get record for update (IPCLASS)')
+			LeaveSR *On
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegSR WriteClassCode Access(*Public)
+		DclSrParm ClassCode Type(*Zoned) Len(4,0)
+	
+		If Not IPCLASS.IsOpen
+			Open IPCLASS
+		EndIf
+		
+		CCLS = ClassCode
+		
+		Write R_Class Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (IPCLASS)')
+		EndIf
+		
+		LeaveSR
+	EndSR
+	
+	BegFunc UpdateClassCode Type(*Boolean) Access(*Public) 
+		DclSrParm ClassCode Type(*Zoned) len(4,0)
+		
+		Update R_Class Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to update record (IPCLASS)')
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegFunc DeleteClassCode Type(*Boolean) Access(*Public)
+		DclSrParm ClassCode Type(*Zoned) len(4,0)
+		
+		If Not IPCLASS.IsOpen
+		   Open IPCLASS
+		EndIf
+		
+		Delete From(R_Class) Key(ClassCode) Err(*Extended)
+		If %Error = *On
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *False
+	EndFunc
+
+	
+	/region Memory files
+	
+	BegFunc setMemIPCLASS Type(*Boolean) Access(*Public)
+	
+		If Not IPCLASSB.IsOpen
+			Open IPCLASSB
+		EndIf
+	
+	 	If Not mIPCLASS.IsOpen
+	 		Open mIPCLASS
+		Endif	
+		
+		mIPCLASS.DataSet.Clear()
+		memRecords = *Zero
+	
+		SetLL IPCLASSB key(*Start)
+		DoUntil IPCLASSB.IsEof
+			Read IPCLASSB
+			If (Not IPCLASSB.IsEof)
+			   Write mIPCLASS
+			   memRecords += 1
+		    Endif
+		Enddo
+	    
+	    Close IPCLASSB
+	
+		LeaveSR *True
+	
+	EndFunc	
+	
+	BegFunc ReadIPCLASS Type(*Boolean) Access(*Public)
+		DclSrParm wIdx Type(*Integer2)
+		
+		If wIdx > memRecords 
+		   LeaveSR *True
+		Endif   
+		
+		Chain mIPCLASS key(wIdx)
+		If mIPCLASS.IsEof
+		   Unlock mIPCLASS
+		   LeaveSR *True
+		Endif
+		
+		LeaveSR *false   
+	
+	EndFunc
+	
+	/endregion
+
+
+EndClass
+

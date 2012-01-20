@@ -1,0 +1,179 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{f422efc7-a595-4548-9496-637c0a75e879}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Disney.Spice.Maintenance</RootNamespace>
+    <AssemblyName>Disney.Spice.Maintenance</AssemblyName>
+    <StartupObject>Disney.Spice.Maintenance.frmSizGMain</StartupObject>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DefineDebug>True</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>False</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <OutputPath>..\..\..\Documents and Settings\jurbina\My Documents\iDash</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
+      <Name>ASNA.DataGate.Client</Name>
+      <AssemblyName>ASNA.DataGate.Client.dll</AssemblyName>
+    </Reference>
+    <Reference Include="ASNA.System.Condition, Version=8.1.432.0, Culture=neutral, PublicKeyToken=cc5be03abdd0c649">
+      <Name>ASNA.System.Condition</Name>
+      <AssemblyName>ASNA.System.Condition.dll</AssemblyName>
+      <HintPath>..\..\bin\ASNA.System.Condition.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.DA.IP400, Version=8.3.1.19768, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.DA.IP400</Name>
+      <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.1.19458, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.ItemsBO</Name>
+      <AssemblyName>Disney.Spice.ItemsBO.dll</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.LookUp, Version=8.3.1.20023, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.LookUp</Name>
+      <AssemblyName>Disney.Spice.LookUp.dll</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.LookUp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DisneyMenu, Version=8.3.1.19133, Culture=neutral, PublicKeyToken=null">
+      <Name>DisneyMenu</Name>
+      <AssemblyName>DisneyMenu.exe</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+      <HintPath>C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+      <HintPath>C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+      <HintPath>C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+      <HintPath>C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+      <HintPath>C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Compile Include="frmPriceMatrix.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPriceMatrixAdd.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPriceMatrixUpd.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSizeUpd.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSizGMain.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSizGUpd.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStageDate.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStgSetDateAdd.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStgSetDateUpd.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmXMLFiles.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Settings.settings</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmPriceMatrix.resx">
+      <DependentUpon>frmPriceMatrix.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPriceMatrixAdd.resx">
+      <DependentUpon>frmPriceMatrixAdd.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPriceMatrixUpd.resx">
+      <DependentUpon>frmPriceMatrixUpd.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSizeUpd.resx">
+      <DependentUpon>frmSizeUpd.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSizGMain.resx">
+      <DependentUpon>frmSizGMain.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSizGUpd.resx">
+      <DependentUpon>frmSizGUpd.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStageDate.resx">
+      <DependentUpon>frmStageDate.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStgSetDateAdd.resx">
+      <DependentUpon>frmStgSetDateAdd.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStgSetDateUpd.resx">
+      <DependentUpon>frmStgSetDateUpd.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmXMLFiles.resx">
+      <DependentUpon>frmXMLFiles.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\ASNA\VisualRPG\8.1\ASNA.VisualRPG.targets" />
+</Project>

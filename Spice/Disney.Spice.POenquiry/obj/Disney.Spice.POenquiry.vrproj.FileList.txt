@@ -1,0 +1,12 @@
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Disney.Spice.POenquiry.POMain.resources
+obj\Debug\Disney.Spice.POenquiry.Resources.resources
+obj\Debug\Disney.Spice.POenquiry.vrproj.GenerateResource.Cache
+obj\Debug\Disney.Spice.POenquiry.dll
+obj\Debug\Disney.Spice.POenquiry.pdb
+..\..\..\iDash\Disney.Spice.POenquiry.dll
+..\..\..\iDash\Disney.Spice.POenquiry.pdb
+..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.Spice.POenquiry.dll
+..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.Spice.POenquiry.pdb
+..\..\bin\SPICE\Disney.Spice.POenquiry.dll
+..\..\bin\SPICE\Disney.Spice.POenquiry.pdb

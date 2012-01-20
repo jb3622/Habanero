@@ -1,0 +1,135 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.IO
+Using System.Xml
+
+BegClass IPDEPTS Access(*Public)
+
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(IPDEPTS)  Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	
+	DclFld   dr      Type(DataRow)   Access(*Private)
+	DclFld   DeptTbl Type(DataTable) Access(*Private)
+	DclArray Keys    Type(DataColumn) Rank(1) Access(*Private)
+	
+	DclFld pDivision       Type(Int16)  Access(*Private)
+	DclFld pDepartmentCode Type(Int16)  Access(*Private)
+	DclFld pDepartmentName Type(String) Access(*Private)
+	DclFld pXMLpath        Type(String) Access(*Private)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Department.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	/Region Properties
+	BegProp Division Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDivision
+		EndGet
+	EndProp
+	
+	BegProp Department Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDepartmentCode
+		EndGet
+	EndProp
+	
+	BegProp DepartmentName Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDepartmentName
+		EndGet
+	EndProp
+	/EndRegion
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If DeptTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				CreateDepartmentXML()
+			Else
+				DeptTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclFld dc Type(DataColumn)
+	
+		DeptTbl = *New DataTable("AllDepartments")
+
+		DeptTbl.Columns.Add(*New DataColumn("Division", *TypeOf(Int16)))
+		DeptTbl.Columns["Division"].ReadOnly = *True
+
+		DeptTbl.Columns.Add(*New DataColumn("DepartmentCode", *TypeOf(Int16)))
+		DeptTbl.Columns["DepartmentCode"].ReadOnly = *True
+		
+		DeptTbl.Columns.Add(*New DataColumn("DepartmentName", *TypeOf(String)))
+		DeptTbl.Columns["DepartmentName"].ReadOnly = *True
+		
+		dc = *New DataColumn("DepartmentCodeName")
+		dc.Expression = "DepartmentCode + ' - ' + DepartmentName"
+		dc.ReadOnly = *True
+		DeptTbl.Columns.Add(dc)
+		
+		Keys = *New DataColumn[] {DeptTbl.Columns("DepartmentCode")}
+		DeptTbl.PrimaryKey = Keys
+	EndSr
+
+	BegSr CreateDepartmentXML Access(*Private)
+			
+		If Not IPDEPTS.IsOpen
+			Open IPDEPTS
+		EndIf
+		
+		DoUntil IPDEPTS.IsEof
+			Read IPDEPTS
+			If Not IPDEPTS.IsEof
+				dr = DeptTbl.NewRow()
+				
+				dr.Item["Division"]       = DDIV
+				dr.Item["DepartmentCode"] = DDPT
+				dr.Item["DepartmentName"] = DNAM.Trim()
+				
+				DeptTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		DeptTbl.WriteXml(pXMLpath)
+		
+		Close IPDEPTS
+	EndSr
+	
+	BegFunc GetDepartment Type(*Boolean) Access(*Public)
+		DclSrParm Department Type(System.Int16)
+
+		DclFld dr Type(DataRow)
+		
+		If DeptTbl = *Nothing
+			LoadDataTableFromXML()
+		EndIf
+		
+		dr = DeptTbl.Rows.Find(Department)
+		If dr <> *Nothing
+			pDivision           = dr.Item("Division")           *As Int16
+			pDepartmentCode     = dr.Item["DepartmentCode"]     *As Int16
+			pDepartmentName     = dr.Item["DepartmentName"]     *As String
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetDepartmentTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR DeptTbl
+	EndFunc
+EndClass

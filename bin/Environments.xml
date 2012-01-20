@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- List of Servers and the Environments held there -->
+<Environments>
+
+
+<!-- EMEA -->
+ <Environment HostName="TDST.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDST (Integration EU)" Image="BackgroundUK.jpg" DateFormat="DMY" 
+ PathToEnvironmentXML="TDSEXML" PathToApplicationXML="\iDashXML_ITG\TDSE" EnvironmentType = "*Production" 
+ MenuSettingsFolder="menuxml_emea_itg" BackColor="White"/>
+
+
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDST (QA EU)" Image="BackgroundUK.jpg" DateFormat="DMY" 
+	PathToEnvironmentXML="TDSEXML" PathToApplicationXML="\iDashXML_QA\TDSE" EnvironmentType = "" 
+	MenuSettingsFolder="menuxml_emea_qa" BackColor="CornflowerBlue"/>
+
+<!-- Disable Production
+   
+  <Environment HostName="TDS2.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDS2 (Production EU)"  Image="BackgroundUK.jpg" DateFormat="DMY" 
+  PathToEnvironmentXML="TDSEXML" PathToApplicationXML="\iDashXML\TDSE" EnvironmentType = "*Production" 
+  MenuSettingsFolder="menuxml_emea" BackColor="White"/>
+
+-->
+
+<!-- SWNA -->
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="SWNA" EnvironmentName="TDST (Integration NA)"  Image="BackgroundUS.jpg" DateFormat="MDY" 
+  PathToEnvironmentXML="TDSNAXML" PathToApplicationXML="\iDashXML_ITG\TDSNA" EnvironmentType = "*Production" 
+  MenuSettingsFolder="menuxml_swna_itg" BackColor="White"/>
+
+
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="SWNA" EnvironmentName="TDST (QA NA)"  Image="BackgroundUS.jpg" DateFormat="MDY" 
+PathToEnvironmentXML="TDSNAXML" PathToApplicationXML="\iDashXML_QA\TDSNA" EnvironmentType = "*Production" 
+MenuSettingsFolder="menuxml_swna_qa" BackColor="White"/>
+
+
+<!-- Disable Production
+   
+  <Environment HostName="TDS1.TDS.DISNEY.COM" Domain="SWNA" EnvironmentName="TDS1 (Production NA)"  Image="BackgroundUS.jpg" DateFormat="MDY" 
+  PathToEnvironmentXML="TDSNAXML" PathToApplicationXML="\iDashXML\TDSNA" EnvironmentType = "*Production" 
+  MenuSettingsFolder="menuxml_swna" BackColor="White"/>
+
+-->
+
+<!-- APAC -->
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="APAC" EnvironmentName="TDST (Integration CHINA)" Image="BackgroundAP.png" DateFormat="MDY" 
+  PathToEnvironmentXML="TDSCNXML" PathToApplicationXML="\iDashXML_ITG\TDSCN" EnvironmentType = "*Production" 
+  MenuSettingsFolder="menuxml_apac_itg" BackColor="Salmon"/>
+
+
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="APAC" EnvironmentName="TDST (QA CHINA)" Image="BackgroundAP.png" DateFormat="MDY" 
+PathToEnvironmentXML="TDSCNXML" PathToApplicationXML="\iDashXML_QA\TDSCN" EnvironmentType = "*Production" 
+MenuSettingsFolder="menuxml_apac_qa" BackColor="CornflowerBlue"/>
+
+<!-- Disable Production
+
+  <Environment HostName="TDS1.TDS.DISNEY.COM" Domain="APAC" EnvironmentName="TDS3 (Production CHINA)" Image="BackgroundAP.png" DateFormat="MDY" 
+  PathToEnvironmentXML="TDSCNXML" PathToApplicationXML="\iDashXML\TDSCN" EnvironmentType = "*Production" 
+  MenuSettingsFolder="menuxml_apac" BackColor="LemonChiffon"/>
+
+-->
+
+
+<!--
+OPTIONS for background color
+AliceBlue
+AntiqueWhite
+BlanchedAlmond
+BurlyWood
+CadetBlue
+CornflowerBlue
+Gold
+LightSalmon
+LightGreen
+LightCyan
+LightSkyBlue
+LightSteelBlue
+LawnGreen
+LemonChiffon 
+LightCoral 
+LightSeaGreen 
+MediumSpringGreen  
+PaleGreen 
+Wheat
+-->
+
+
+</Environments>
