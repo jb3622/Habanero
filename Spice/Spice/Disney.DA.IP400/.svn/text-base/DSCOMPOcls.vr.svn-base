@@ -1,0 +1,250 @@
+// ===============================================
+// Joseph Urbina
+// 27th May 2009
+// DSCOMPOcls	
+// Data Access Layer - Composition File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+Using System.Data
+Using System.IO
+
+BegClass DSCOMPOcls Access(*Public)
+	
+	/Region Declare Files and DB
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(DSCOMPO) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*No)  RnmFmt(COMPO:R_COMPO2) NetBlockFactor(*Calc)
+	
+	DclFld CompoTbl Type(DataTable) Access(*Private)
+	
+	DclFld pCompoCode     Type(String)  Access(*Private)
+	DclFld pCompoCodeDesc Type(String)  Access(*Private)
+	DclFld pStatus        Type(Boolean) Access(*Private)
+	DclFld pXMLpath       Type(String)  Access(*Private)
+	
+	/EndRegion
+	
+	/Region Contructors
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Composition.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	/EndRegion
+	
+	/Region DSCOMPO Properties
+	BegProp ComCode Type(*Char) Len(3) Access(*Public)
+		BegGet
+			LeaveSR pCompoCode
+		EndGet
+	EndProp
+	
+	BegProp ComDesc Type(*Char) Len(40) Access(*Public)
+		BegGet
+			LeaveSR pCompoCodeDesc
+		EndGet
+		
+		BegSet
+			pCompoCodeDesc = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Status Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pStatus
+		EndGet
+		
+		BegSet
+			pStatus = *PropVal
+		EndSet
+	EndProp
+	/EndRegion
+		
+	/Region Methods
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If CompoTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				CreateCompoXML()
+			Else
+				CompoTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys Type(DataColumn) Rank(1)
+		
+		CompoTbl = *New DataTable("Composition")
+
+		CompoTbl.Columns.Add(*New DataColumn("Code", *TypeOf(String)))
+		CompoTbl.Columns["Code"].ReadOnly = *True
+
+		CompoTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		CompoTbl.Columns["Description"].ReadOnly = *True
+		
+		CompoTbl.Columns.Add(*New DataColumn("Status", *TypeOf(Boolean)))
+		CompoTbl.Columns["Status"].ReadOnly = *True
+				
+		Keys = *New DataColumn[] {CompoTbl.Columns("Code")}
+		CompoTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr CreateCompoXML Access(*Private)
+		
+		DclFld dr Type(DataRow)
+		
+		If Not DSCOMPO.IsOpen
+			Open DSCOMPO
+		EndIf
+				
+		DoUntil DSCOMPO.IsEof
+			Read DSCOMPO
+			If Not DSCOMPO.IsEof
+			
+				dr = CompoTbl.NewRow()
+				dr.Item["Code"]        = CPCODE
+				dr.Item["Description"] = CPDESC.Trim()
+				
+				If CPSTS = "Y"
+					dr.Item["Status"] = *True
+				Else
+					dr.Item["Status"] = *False
+				EndIf
+				
+				CompoTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		CompoTbl.WriteXml(pXMLpath)
+		
+		Close DSCOMPO
+	EndSr
+	
+	BegFunc GetComposition Type(*Boolean) Access(*Public)
+		DclSrParm CompoCode Type(System.Int16)
+
+		DclFld dr Type(DataRow)
+		
+		If CompoTbl = *Nothing
+			LoadDataTableFromXML()
+		EndIf
+		
+		dr = CompoTbl.Rows.Find(CompoCode)
+		If dr <> *Nothing
+			pCompoCode     = dr.Item("Code")        *As String
+			pCompoCodeDesc = dr.Item("Description") *As String
+			pStatus        = dr.Item["Status"]      *As Boolean
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetCompositionTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR CompoTbl
+	EndFunc
+	/EndRegion
+	
+	// Creates a DataSet/DataTable for the whole Composition File
+	BegFunc GetCompoCodeDataSet Type(DataTable) Access(*Public)
+			
+		DclFld dt Type( DataTable ) New()
+		DclFld dc Type( DataColumn ) 
+		DclFld dr Type( DataRow )
+		
+										
+		If Not DSCOMPO.IsOpen
+			Open DSCOMPO
+		EndIf
+		
+		// Create Composition Code Column
+		dc = *New DataColumn( 'clmCPCODE' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmCPCODE"
+		dc.Caption = "Composition Code"
+		dt.Columns.Add(dc)
+		
+		// Create Composition Description Column
+		dc = *New DataColumn( 'clmCPDESC' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmCPDESC"
+		dc.Caption = "Composition Description"
+		dt.Columns.Add(dc)
+		
+		// Read file and create rows in DataTable				
+		Setll DSCOMPO Key(*Start)
+		DoUntil DSCOMPO.IsEof
+			Read DSCOMPO
+			If not DSCOMPO.IsEof 
+				dr = dt.NewRow()
+				dr.Item[0] = CPCODE
+				dr.Item[1] = CPDESC.Trim()
+								
+				dt.Rows.Add( dr )
+			Endif
+		Enddo
+		
+		LeaveSR dt
+	EndFunc
+	
+	//Creates a DataSet/DataTable as above but accessed by Description Search
+	BegFunc GetCompoCodeDataSetSearch Type(DataTable) Access(*Public)
+		DclSrParm ComDesc Type(*Char) len(40)
+			
+		DclFld dt		 Type( DataTable ) New()
+		DclFld dc		 Type( DataColumn ) 
+		DclFld dr		 Type( DataRow )
+		DclFld Name(Pos) Type(*ZONED) Len(5,0)
+										
+		If Not DSCOMPO.IsOpen
+			Open DSCOMPO
+		EndIf
+		
+		//Create Composition Code Column
+		dc = *New DataColumn( 'clmCPCODE' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmCPCODE"
+		dc.Caption = "Composition Code"
+		dt.Columns.Add(dc)
+		
+		//Create Composition Description Column
+		dc = *New DataColumn( 'clmCPDESC' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmCPDESC"
+		dc.Caption = "Composition Description"
+		dt.Columns.Add(dc)
+		
+		//Read file and create rows in DataTable				
+		Setll DSCOMPO Key(*Start)
+		DoUntil DSCOMPO.IsEof
+			Read DSCOMPO
+			Pos = %Scan (ComDesc.Trim(), CPDESC.Trim(), 1)
+			If Pos <> 0
+				If not DSCOMPO.IsEof 
+					dr = dt.NewRow()
+					dr.Item[0] = CPCODE
+					dr.Item[1] = CPDESC
+							
+					dt.Rows.Add( dr )
+				Endif
+			Endif
+		Enddo
+		
+		LeaveSR dt
+	EndFunc
+	/EndRegion
+EndClass

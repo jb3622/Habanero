@@ -1,0 +1,542 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.DA.IP400
+Using Disney.Spice
+
+
+BegClass frmSizeUpd Extends(System.Windows.Forms.Form) Access(*Public)
+	
+/Region Declares
+	DclFld PgmDB Type(ASNA.VisualRPG.Runtime.Database)	
+	DclFld DSSPSGDcls     Type(DSSPSGDcls)
+	DclFld IPSIZEScls     Type(IPSIZEScls)
+	DclFld FormData	      Type(FormData)
+	DclFld ClassCode      Type(String)
+	DclFld ClassDesc      Type(String)	
+	DclFld SizeGroupDesc  Type(String)	
+	DclFld SizeGroupIDNum Type(Int16)    		   
+	DclFld dtSizeDetails  Type(DataTable)	   
+	DclFld dtSizes		  Type(DataTable)	   
+	DclFld dvSizes		  Type(DataView)		   
+	DclFld wOKbtn		  Type(Boolean)		   
+	DclFld wmode		  Type(String)		   
+	DclFld Counter		  Type(Int16) 
+	DclFld User			  Type(Disney.Menu.Users)
+	DclFld Environment    Type(Disney.Menu.Environments)
+/EndRegion
+	 
+/Region Contructors
+	BegConstructor Access(*Public)
+		DclSrParm Pgmdb       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User        Type(Disney.Menu.Users)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+				
+		InitializeComponent()
+	
+		*This.Pgmdb = Pgmdb
+		*this.User  = User	
+		*this.Environment = Environment
+	EndConstructor
+/EndRegion
+	
+/Region Default Windows Form Designer generated code
+	DclFld dgvSizes System.Windows.Forms.DataGridView				   Access(*Private) WithEvents(*Yes)
+	DclFld btnDeSelectAll System.Windows.Forms.Button				   Access(*Private) WithEvents(*Yes)
+	DclFld lblSizeGroupDesc System.Windows.Forms.Label				   Access(*Public) WithEvents(*Yes)
+	DclFld lblClassDesc System.Windows.Forms.Label					   Access(*Private) WithEvents(*Yes)
+	DclFld lblClassCode System.Windows.Forms.Label					   Access(*Private) WithEvents(*Yes)
+	DclFld groupBox1 System.Windows.Forms.GroupBox					   Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label						   Access(*Private) WithEvents(*Yes)
+	DclFld label10 System.Windows.Forms.Label						   Access(*Private) WithEvents(*Yes)
+	DclFld btnCancel System.Windows.Forms.Button					   Access(*Private) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button						   Access(*Private) WithEvents(*Yes)
+	DclFld btnSelectAll System.Windows.Forms.Button					   Access(*Private) WithEvents(*Yes)
+	DclFld btnOK System.Windows.Forms.Button						   Access(*Private) WithEvents(*Yes)
+	DclFld clmSelect System.Windows.Forms.DataGridViewCheckBoxColumn   Access(*Private) WithEvents(*Yes)
+	DclFld clmSSIZ System.Windows.Forms.DataGridViewTextBoxColumn      Access(*Private) WithEvents(*Yes)
+	DclFld clmSNAM System.Windows.Forms.DataGridViewTextBoxColumn      Access(*Private) WithEvents(*Yes)
+	DclFld clmDefault System.Windows.Forms.DataGridViewCheckBoxColumn  Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+		
+	BegSr InitializeComponent
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.groupBox1 = *new System.Windows.Forms.GroupBox()
+		*this.lblSizeGroupDesc = *new System.Windows.Forms.Label()
+		*this.lblClassCode = *new System.Windows.Forms.Label()
+		*this.lblClassDesc = *new System.Windows.Forms.Label()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label10 = *new System.Windows.Forms.Label()
+		*this.btnCancel = *new System.Windows.Forms.Button()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.btnSelectAll = *new System.Windows.Forms.Button()
+		*this.btnDeSelectAll = *new System.Windows.Forms.Button()
+		*this.btnOK = *new System.Windows.Forms.Button()
+		*this.dgvSizes = *new System.Windows.Forms.DataGridView()
+		*this.clmSelect = *new System.Windows.Forms.DataGridViewCheckBoxColumn()
+		*this.clmSSIZ = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmSNAM = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmDefault = *new System.Windows.Forms.DataGridViewCheckBoxColumn()
+		*this.groupBox1.SuspendLayout()
+		(*this.dgvSizes *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//groupBox1
+		//
+		*this.groupBox1.Controls.Add(*this.lblSizeGroupDesc)
+		*this.groupBox1.Controls.Add(*this.lblClassCode)
+		*this.groupBox1.Controls.Add(*this.lblClassDesc)
+		*this.groupBox1.Controls.Add(*this.label1)
+		*this.groupBox1.Controls.Add(*this.label10)
+		*this.groupBox1.Location = *new System.Drawing.Point(12, 12)
+		*this.groupBox1.Name = "groupBox1"
+		*this.groupBox1.Size = *new System.Drawing.Size(503, 89)
+		*this.groupBox1.TabIndex = 10
+		*this.groupBox1.TabStop = *False
+		//
+		//lblSizeGroupDesc
+		//
+		*this.lblSizeGroupDesc.AutoSize = *True
+		*this.lblSizeGroupDesc.Location = *new System.Drawing.Point(91, 57)
+		*this.lblSizeGroupDesc.Name = "lblSizeGroupDesc"
+		*this.lblSizeGroupDesc.Size = *new System.Drawing.Size(59, 13)
+		*this.lblSizeGroupDesc.TabIndex = 14
+		*this.lblSizeGroupDesc.Text = "Size Group"
+		//
+		//lblClassCode
+		//
+		*this.lblClassCode.AutoSize = *True
+		*this.lblClassCode.Location = *new System.Drawing.Point(88, 22)
+		*this.lblClassCode.Name = "lblClassCode"
+		*this.lblClassCode.Size = *new System.Drawing.Size(60, 13)
+		*this.lblClassCode.TabIndex = 13
+		*this.lblClassCode.Text = "Class Code"
+		//
+		//lblClassDesc
+		//
+		*this.lblClassDesc.AutoSize = *True
+		*this.lblClassDesc.Location = *new System.Drawing.Point(154, 22)
+		*this.lblClassDesc.Name = "lblClassDesc"
+		*this.lblClassDesc.Size = *new System.Drawing.Size(60, 13)
+		*this.lblClassDesc.TabIndex = 12
+		*this.lblClassDesc.Text = "Class Desc"
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+		*this.label1.Location = *new System.Drawing.Point(14, 22)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(32, 13)
+		*this.label1.TabIndex = 10
+		*this.label1.Text = "Class"
+		//
+		//label10
+		//
+		*this.label10.AutoSize = *True
+		*this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+		*this.label10.Location = *new System.Drawing.Point(14, 57)
+		*this.label10.Name = "label10"
+		*this.label10.Size = *new System.Drawing.Size(59, 13)
+		*this.label10.TabIndex = 6
+		*this.label10.Text = "Size Group"
+		//
+		//btnCancel
+		//
+		*this.btnCancel.Location = *new System.Drawing.Point(440, 490)
+		*this.btnCancel.Name = "btnCancel"
+		*this.btnCancel.Size = *new System.Drawing.Size(75, 23)
+		*this.btnCancel.TabIndex = 12
+		*this.btnCancel.Text = "&Cancel"
+		*this.btnCancel.UseVisualStyleBackColor = *True
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Location = *new System.Drawing.Point(12, 490)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 13
+		*this.btnHelp.Text = "&Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//btnSelectAll
+		//
+		*this.btnSelectAll.Location = *new System.Drawing.Point(145, 490)
+		*this.btnSelectAll.Name = "btnSelectAll"
+		*this.btnSelectAll.Size = *new System.Drawing.Size(75, 23)
+		*this.btnSelectAll.TabIndex = 14
+		*this.btnSelectAll.Text = "&Select All"
+		*this.btnSelectAll.UseVisualStyleBackColor = *True
+		//
+		//btnDeSelectAll
+		//
+		*this.btnDeSelectAll.Location = *new System.Drawing.Point(226, 490)
+		*this.btnDeSelectAll.Name = "btnDeSelectAll"
+		*this.btnDeSelectAll.Size = *new System.Drawing.Size(75, 23)
+		*this.btnDeSelectAll.TabIndex = 15
+		*this.btnDeSelectAll.Text = "&Deselect All"
+		*this.btnDeSelectAll.UseVisualStyleBackColor = *True
+		//
+		//btnOK
+		//
+		*this.btnOK.Location = *new System.Drawing.Point(356, 490)
+		*this.btnOK.Name = "btnOK"
+		*this.btnOK.Size = *new System.Drawing.Size(75, 23)
+		*this.btnOK.TabIndex = 16
+		*this.btnOK.Text = "&OK"
+		*this.btnOK.UseVisualStyleBackColor = *True
+		//
+		//dgvSizes
+		//
+		*this.dgvSizes.AllowUserToAddRows = *False
+		*this.dgvSizes.AllowUserToDeleteRows = *False
+		*this.dgvSizes.AllowUserToResizeRows = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.AntiqueWhite
+		*this.dgvSizes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.dgvSizes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dgvSizes.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.clmSelect, *this.clmSSIZ, *this.clmSNAM, *this.clmDefault})
+		*this.dgvSizes.GridColor = System.Drawing.SystemColors.ControlLight
+		*this.dgvSizes.Location = *new System.Drawing.Point(17, 107)
+		*this.dgvSizes.Name = "dgvSizes"
+		*this.dgvSizes.RowHeadersVisible = *False
+		*this.dgvSizes.Size = *new System.Drawing.Size(498, 377)
+		*this.dgvSizes.TabIndex = 17
+		//
+		//clmSelect
+		//
+		*this.clmSelect.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmSelect.DataPropertyName = "clmSelect"
+		*this.clmSelect.HeaderText = "Select"
+		*this.clmSelect.Name = "clmSelect"
+		//
+		//clmSSIZ
+		//
+		*this.clmSSIZ.DataPropertyName = "clmSSIZ"
+		*this.clmSSIZ.HeaderText = "Size"
+		*this.clmSSIZ.Name = "clmSSIZ"
+		*this.clmSSIZ.ReadOnly = *True
+		//
+		//clmSNAM
+		//
+		*this.clmSNAM.DataPropertyName = "clmSNAM"
+		*this.clmSNAM.HeaderText = "Size Name"
+		*this.clmSNAM.Name = "clmSNAM"
+		*this.clmSNAM.ReadOnly = *True
+		*this.clmSNAM.Width = 229
+		//
+		//clmDefault
+		//
+		*this.clmDefault.DataPropertyName = "clmDefault"
+		*this.clmDefault.HeaderText = "Default"
+		*this.clmDefault.Name = "clmDefault"
+		*this.clmDefault.Width = 50
+		//
+		//frmSizeUpd
+		//
+		*this.AcceptButton = *this.btnOK
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(533, 525)
+		*this.Controls.Add(*this.dgvSizes)
+		*this.Controls.Add(*this.btnOK)
+		*this.Controls.Add(*this.btnDeSelectAll)
+		*this.Controls.Add(*this.btnSelectAll)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.btnCancel)
+		*this.Controls.Add(*this.groupBox1)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.MinimizeBox = *False
+		*this.Name = "frmSizeUpd"
+		*this.ShowIcon = *False
+		*this.ShowInTaskbar = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Spice - Size Group"
+		*this.groupBox1.ResumeLayout(*False)
+		*this.groupBox1.PerformLayout()
+		(*this.dgvSizes *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+	EndSr
+	
+		BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+/Endregion
+	
+/Region Methods
+	BegFunc form_Load			 Type(FormData) Access(*Public)
+		DclSrParm ClassCode		 Type(String)
+		DclSrParm ClassDesc		 Type(String)
+		DclSrParm SizeGroupDesc  Type(String)	
+		DclSrParm wMode			 Type(String)
+		DclSrParm SizeGroupIDNum Type(Int16)
+        				
+		//Make variables available to the Class
+		*This.ClassCode		 = ClassCode
+		*This.ClassDesc		 = ClassDesc
+		*This.SizeGroupDesc  = SizeGroupDesc
+		*This.wmode			 = wMode
+		*This.SizeGroupIDNum = SizeGroupIDNum
+				
+		Counter = 0
+		btnOK.Enabled = *Off	
+		
+		If wMode = 'A'	
+			Build_Grid_Add_Mode()
+		Else
+			Build_Grid_Update_Mode()
+		Endif
+			
+		*this.ShowDialog()
+				 		
+		LeaveSR FormData
+	EndFunc
+	
+	BegSr Build_Grid_Add_Mode
+	
+	//Instance Class IPSIZEScls Size File
+		If  IPSIZEScls = *Nothing
+			IPSIZEScls = *New IPSIZEScls(Pgmdb, Environment) 
+		Endif
+				
+		//Get the DataTable from file IPSIZES		
+		dtSizes = IPSIZEScls.GetSizesDataSetClass()
+		btnOK.Enabled= *True
+				
+		//Link the DataTable as a datasource to the Grid		
+        dgvSizes.DataSource = dtSizes	
+                         
+        //Load label Data
+        lblClassCode.	 Text = ClassCode
+        lblClassDesc.	 Text = ClassDesc
+        lblSizeGroupDesc.Text = SizeGroupDesc
+                        
+	EndSr
+
+	BegSr Build_Grid_Update_Mode
+	
+	//Instance Class IPSIZEScls Size File
+		If  IPSIZEScls = *Nothing
+			IPSIZEScls = *New IPSIZEScls(Pgmdb, Environment) 
+		Endif
+		
+		If  DSSPSGDcls = *Nothing
+			DSSPSGDcls = *New DSSPSGDcls(Pgmdb) 
+		Endif
+			
+		//Get the DataTable from file DSSPSGD		
+		dtSizeDetails = DSSPSGDcls.GetSizeGroupIDDataSet(SizeGroupIDNum)
+		
+		//Get the Dataset Table from file IPSIZES		
+		dtSizes = IPSIZEScls.GetSizesDataSetClassSelect(dtSizeDetails)
+		btnOK.Enabled = *True
+				
+		//Link the DataTable as a datasource to the Grid
+		dgvSizes.DataSource = dtSizes
+       	         
+        //Load label Data
+        lblClassCode.	 Text = ClassCode
+        lblClassDesc.	 Text = ClassDesc
+        lblSizeGroupDesc.Text = SizeGroupDesc
+             
+	EndSr
+				
+	BegSr dgvSizes_CellClick Access(*Private) Event(*this.dgvSizes.CellClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld Column				Type(*Integer4)
+		DclFld Row					Type(*Integer4)
+						
+		//Column Row
+		Column	= e.ColumnIndex
+		Row     = e.RowIndex
+		
+		//User clicked on headings Ignore
+		If Row < 0
+		   LeaveSR
+		Endif
+										
+		//Commit changes
+		dgvSizes.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts.Commit)
+		
+		// only action anything if either of the checkbox columns have been clicked.
+		If dgvSizes.Columns[Column].Name = "clmSelect" or dgvSizes.Columns[Column].Name = "clmDefault"
+			
+									
+			//Create the dataview			
+			dvSizes	  = *New DataView(dtSizes)
+			dvSizes.RowFilter = "clmSelect = true" //DataView sent back only with selected records
+																	
+			Select
+			//If the Select checkbox is turned off, then turn off the default checkbox.
+			When dgvSizes.Item['clmSelect', Row].Value <> *Nothing And dgvSizes.Item['clmSelect', Row].Value *as Boolean = *True
+				dgvSizes.Item['clmDefault', Row].Value = *False
+			
+			//If the default checkbox is turned on then the select box has to be on.		
+			When dgvSizes.Item['clmDefault', Row].Value = *Nothing Or dgvSizes.Item['clmDefault', Row].Value *as Boolean = *False
+				dgvSizes.Item['clmSelect', Row].Value = *True
+			EndSL
+							
+			//If a checkbox has been checked, enable the delete button and keep a count of checkboxes checked.
+			If dgvSizes.Item["clmSelect", Row].value  *As Boolean = *True  
+				wOKbtn											   = *True
+				btnOK.Enabled									   = *True
+				Counter += 1
+			Else
+				Counter -= 1
+			EndIf	
+			
+			//If the checked count = 0 disable the OK button.
+			If Counter = 0
+				wOKbtn         = *False
+				btnOK.Enabled  = *False
+			EndIf
+										
+		Endif
+		
+		If FormData  = *Nothing
+		   FormData  = *new FormData()
+		Endif
+						
+		FormData.SizesDV   = dvSizes
+						
+	EndSr
+	
+	
+/EndRegion
+		
+/Region Buttons
+	//Cancel
+	BegSr btnCancel_Click Access(*Private) Event(*this.btnCancel.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If FormData  = *Nothing
+		   FormData  = *new FormData()
+		Endif
+			
+		FormData.Cancel_Button = *True
+		FormData.OK_Button	   = *False
+		dtSizes                = *Nothing
+		
+		Unload *This
+
+	EndSr
+	
+	//Select all Checboxes in Grid
+	BegSr btnSelectAll_Click Access(*Private) Event(*this.btnSelectAll.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		dvSizes	 = *New DataView(dtSizes)
+				
+        ForEach drv Collection(dvSizes) Type(DataRowView) 
+            drv.Item["clmSelect"] = *True 
+        EndFor
+                
+        btnOK.Enabled = *True
+        
+        If FormData  = *Nothing
+		   FormData  = *new FormData()
+		Endif
+		
+		FormData.SizesDV   = dvSizes
+		dtSizes.DefaultView.Sort = "clmSSIZ"	
+         		
+	EndSr
+	
+	//DeSelect all Checboxes in Grid
+	BegSr btnUnSelectAll_Click Access(*Private) Event(*this.btnDeSelectAll.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		dvSizes	= *New DataView(dtSizes)
+		dgvSizes.Rows[0].selected = *True		
+        ForEach drv Collection(dvSizes) Type(DataRowView) 
+            drv.Item["clmSelect"]  = *False 
+            drv.Item["clmDefault"] = *False 
+        EndFor
+        
+        btnOK.Enabled = *False
+        dtSizes.DefaultView.Sort = "clmSSIZ"	 
+		       
+	EndSr
+	
+	BegSr btnOK_Click Access(*Private) Event(*this.btnOK.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If FormData  = *Nothing
+		   FormData  = *new FormData()
+		Endif
+		
+		FormData.Cancel_Button = *False
+		FormData.OK_Button	   = *True
+		dtSizes                = *Nothing
+						
+		Unload *This
+		
+	EndSr	
+	
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+
+	EndSr
+	
+/EndRegion
+	
+EndClass
+
+/Region FormData Class
+BegClass FormData Access(*Public)
+
+	DclFld wCancel  Type(Boolean) Access(*Private)
+	DclFld wOKbtn   Type(Boolean) Access(*Private)
+	DclFld dvSizes	Type(DataView) Access(*Private)
+			
+	//wCancel Property
+	BegProp Cancel_Button Type(Boolean) Access(*Public)
+		BegSet
+			wCancel = *PropVal
+		EndSet
+		BegGet
+			LeaveSR wCancel
+		EndGet
+	EndProp
+	
+	//wOKbtn Property
+	BegProp OK_Button Type(Boolean) Access(*Public)
+		BegSet
+			wOKbtn = *PropVal
+		EndSet
+		BegGet
+			LeaveSR wOKbtn
+		EndGet
+	EndProp
+	
+	//DataView Property
+	BegProp SizesDV Type(DataView) Access(*Public)
+		BegSet
+			dvSizes  = *PropVal
+		EndSet
+		BegGet
+			LeaveSR dvSizes
+		EndGet
+	EndProp
+	
+EndClass	
+/EndRegion	

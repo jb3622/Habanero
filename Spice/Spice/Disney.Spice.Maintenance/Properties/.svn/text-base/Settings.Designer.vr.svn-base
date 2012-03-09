@@ -1,0 +1,12 @@
+﻿DclNamespace Disney.Spice.Maintenance
+
+BegClass Settings Access(*Internal) Modifier(*NotExtensible) Partial(*Yes) Extends(*Global.System.Configuration.ApplicationSettingsBase) Attributes(System.Runtime.CompilerServices.CompilerGeneratedAttribute(), System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "8.0.0.0"))
+    
+    DclFld defaultInstance Type(Settings) Access(*Private) Shared(*Yes) Inz((*Global.System.Configuration.ApplicationSettingsBase.Synchronized(*new Settings()) *As Settings))
+    
+    BegProp Default Type(Settings) Access(*Public) Shared(*Yes)
+        BegGet
+            LeaveSr defaultInstance
+        EndGet
+    EndProp
+EndClass

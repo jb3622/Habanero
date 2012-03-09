@@ -1,0 +1,323 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.DA.IP400
+
+BegClass frmXMLFiles Extends(System.Windows.Forms.Form) Access(*Public)
+
+/Region Declares
+	Dcldb Name(PgmDB) dbname('TDST') 
+		
+	DclFld User		  Type(Disney.Menu.Users)
+	DclFld XMLFiles   Type(XMLFiles)
+	DclFld XMLFileTbl Type(DataTable)
+	DclFld XMLFileDV  Type(DataView)
+	DclFld Column     Type(Int16)
+	DclFld Row		  Type(Int16) 
+	DclFld RowCount   Type(Int32)
+	DclFld Count      Type(Int32)
+	
+/EndRegion
+
+/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm Pgmdb        Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User         Type(Disney.Menu.Users)
+						
+		InitializeComponent()
+	
+		*This.Pgmdb = Pgmdb
+		*This.User  = User	
+		
+	EndConstructor
+/EndRegion
+
+/Region Default Windows Form Designer generated code
+	DclFld groupBox1 System.Windows.Forms.GroupBox                  Access(*Private) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button                      Access(*Private) WithEvents(*Yes)
+	DclFld btnRegenerate System.Windows.Forms.Button                Access(*Private) WithEvents(*Yes)
+	DclFld btnExit System.Windows.Forms.Button                      Access(*Private) WithEvents(*Yes)
+	DclFld dgvXML System.Windows.Forms.DataGridView                 Access(*Private) WithEvents(*Yes)
+	DclFld Select System.Windows.Forms.DataGridViewCheckBoxColumn   Access(*Private) WithEvents(*Yes)
+	DclFld XMLFile System.Windows.Forms.DataGridViewTextBoxColumn   Access(*Private) WithEvents(*Yes)
+	DclFld ClassName System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Generated System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Manual System.Windows.Forms.DataGridViewTextBoxColumn    Access(*Private) WithEvents(*Yes)
+	DclFld btnSelectAll System.Windows.Forms.Button                 Access(*Private) WithEvents(*Yes)
+	DclFld btnDeSelectAll System.Windows.Forms.Button               Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+		
+	BegSr InitializeComponent
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle3 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle4 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.groupBox1 = *new System.Windows.Forms.GroupBox()
+		*this.dgvXML = *new System.Windows.Forms.DataGridView()
+		*this.Select = *new System.Windows.Forms.DataGridViewCheckBoxColumn()
+		*this.XMLFile = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.ClassName = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Generated = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Manual = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.btnRegenerate = *new System.Windows.Forms.Button()
+		*this.btnExit = *new System.Windows.Forms.Button()
+		*this.btnSelectAll = *new System.Windows.Forms.Button()
+		*this.btnDeSelectAll = *new System.Windows.Forms.Button()
+		*this.groupBox1.SuspendLayout()
+		(*this.dgvXML *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//groupBox1
+		//
+		*this.groupBox1.Controls.Add(*this.dgvXML)
+		*this.groupBox1.Location = *new System.Drawing.Point(13, 12)
+		*this.groupBox1.Name = "groupBox1"
+		*this.groupBox1.Size = *new System.Drawing.Size(690, 391)
+		*this.groupBox1.TabIndex = 0
+		*this.groupBox1.TabStop = *False
+		//
+		//dgvXML
+		//
+		*this.dgvXML.AllowUserToAddRows = *False
+		*this.dgvXML.AllowUserToDeleteRows = *False
+		*this.dgvXML.AllowUserToOrderColumns = *True
+		*this.dgvXML.AllowUserToResizeColumns = *False
+		*this.dgvXML.AllowUserToResizeRows = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.Bisque
+		*this.dgvXML.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+		dataGridViewCellStyle2.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+		dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True
+		*this.dgvXML.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2
+		*this.dgvXML.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dgvXML.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Select, *this.XMLFile, *this.ClassName, *this.Generated, *this.Manual})
+		*this.dgvXML.Location = *new System.Drawing.Point(6, 11)
+		*this.dgvXML.Name = "dgvXML"
+		*this.dgvXML.RowHeadersVisible = *False
+		*this.dgvXML.Size = *new System.Drawing.Size(677, 374)
+		*this.dgvXML.TabIndex = 0
+		//
+		//Select
+		//
+		*this.Select.DataPropertyName = "Select"
+		*this.Select.HeaderText = "   Select"
+		*this.Select.MinimumWidth = 58
+		*this.Select.Name = "Select"
+		*this.Select.Resizable = System.Windows.Forms.DataGridViewTriState.True
+		*this.Select.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+		*this.Select.Width = 58
+		//
+		//XMLFile
+		//
+		*this.XMLFile.DataPropertyName = "XMLFile"
+		*this.XMLFile.HeaderText = "XML File"
+		*this.XMLFile.MinimumWidth = 200
+		*this.XMLFile.Name = "XMLFile"
+		*this.XMLFile.Width = 200
+		//
+		//ClassName
+		//
+		*this.ClassName.DataPropertyName = "ClassName"
+		*this.ClassName.HeaderText = "Class Name"
+		*this.ClassName.MinimumWidth = 200
+		*this.ClassName.Name = "ClassName"
+		*this.ClassName.Width = 200
+		//
+		//Generated
+		//
+		*this.Generated.DataPropertyName = "Generated"
+		dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.Generated.DefaultCellStyle = dataGridViewCellStyle3
+		*this.Generated.HeaderText = "      Generated"
+		*this.Generated.MinimumWidth = 100
+		*this.Generated.Name = "Generated"
+		//
+		//Manual
+		//
+		*this.Manual.DataPropertyName = "Manual"
+		dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.Manual.DefaultCellStyle = dataGridViewCellStyle4
+		*this.Manual.HeaderText = "       Manually        Generated"
+		*this.Manual.MinimumWidth = 100
+		*this.Manual.Name = "Manual"
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Location = *new System.Drawing.Point(13, 415)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 1
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//btnRegenerate
+		//
+		*this.btnRegenerate.Location = *new System.Drawing.Point(535, 415)
+		*this.btnRegenerate.Name = "btnRegenerate"
+		*this.btnRegenerate.Size = *new System.Drawing.Size(75, 23)
+		*this.btnRegenerate.TabIndex = 2
+		*this.btnRegenerate.Text = "Regenerate"
+		*this.btnRegenerate.UseVisualStyleBackColor = *True
+		//
+		//btnExit
+		//
+		*this.btnExit.Location = *new System.Drawing.Point(627, 415)
+		*this.btnExit.Name = "btnExit"
+		*this.btnExit.Size = *new System.Drawing.Size(75, 23)
+		*this.btnExit.TabIndex = 3
+		*this.btnExit.Text = "Exit"
+		*this.btnExit.UseVisualStyleBackColor = *True
+		//
+		//btnSelectAll
+		//
+		*this.btnSelectAll.Location = *new System.Drawing.Point(134, 415)
+		*this.btnSelectAll.Name = "btnSelectAll"
+		*this.btnSelectAll.Size = *new System.Drawing.Size(75, 23)
+		*this.btnSelectAll.TabIndex = 4
+		*this.btnSelectAll.Text = "Select All"
+		*this.btnSelectAll.UseVisualStyleBackColor = *True
+		//
+		//btnDeSelectAll
+		//
+		*this.btnDeSelectAll.Location = *new System.Drawing.Point(225, 415)
+		*this.btnDeSelectAll.Name = "btnDeSelectAll"
+		*this.btnDeSelectAll.Size = *new System.Drawing.Size(75, 23)
+		*this.btnDeSelectAll.TabIndex = 5
+		*this.btnDeSelectAll.Text = "Deselect All"
+		*this.btnDeSelectAll.UseVisualStyleBackColor = *True
+		//
+		//frmXMLFiles
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(715, 448)
+		*this.Controls.Add(*this.btnDeSelectAll)
+		*this.Controls.Add(*this.btnSelectAll)
+		*this.Controls.Add(*this.btnExit)
+		*this.Controls.Add(*this.btnRegenerate)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.groupBox1)
+		*this.MaximizeBox = *False
+		*this.Name = "frmXMLFiles"
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "XML File Regeneration"
+		*this.groupBox1.ResumeLayout(*False)
+		(*this.dgvXML *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+	EndSr
+		
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+/EndRegion
+
+/Region Methods
+	BegSr frmXMLFiles_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		dclfld x type(string)
+		//Instance the Class 
+		If XMLFiles = *Nothing
+			XMLFiles = *New XMLFiles(Pgmdb) 
+		Endif 
+        
+        XMLFileTbl = XMLFiles.GetXMLFileTable()
+                       
+        dgvXML.DataSource = XMLFileTbl	
+                                      
+	EndSr
+/EndRegion	
+
+/Region Buttons	
+	BegSr btnExit_Click Access(*Private) Event(*this.btnExit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		Unload *This
+		
+	EndSr
+	
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+		
+	EndSr
+	
+	BegSr btnSelectAll_Click Access(*Private) Event(*this.btnSelectAll.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If dgvXML.RowCount > 0
+		
+			XMLFileDV = *New DataView(XMLFileTbl)
+			
+			ForEach GridRow Collection(XMLFileDV) Type(DataRowView)
+				If  GridRow.Item["Generated"] *As *String = 'Y'
+					GridRow.Item["Select"] = *True
+				Endif
+			EndFor
+				
+		Endif
+	EndSr
+	
+	BegSr btnDeSelectAll_Click Access(*Private) Event(*this.btnDeSelectAll.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If dgvXML.RowCount > 0
+		
+			XMLFileDV = *New DataView(XMLFileTbl)
+			
+			ForEach GridRow Collection(XMLFileDV) Type(DataRowView)
+					GridRow.Item["Select"] = *False
+			EndFor
+			
+		Endif
+	EndSr
+	
+/EndRegion
+
+/Region Grid Events	
+	BegSr dgvXML_CellContentClick Access(*Private) Event(*this.dgvXML.CellContentClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		Column = e.ColumnIndex
+		Row    = e.RowIndex
+				
+		If Row < 0
+		   LeaveSR
+		Endif
+				
+		If dgvXML.Columns[Column].Name.Equals("Select") and dgvXML.Item['Manual',Row].Value *As String <> 'Y'
+			msgbox msg('sdfsdfs')
+			
+		Endif
+		
+	EndSr
+/EndRegion 
+	
+EndClass
+
+
+
+	
+

@@ -1,0 +1,752 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+
+BegClass Frm_UserMaint Extends(System.Windows.Forms.Form) Access(*Public)
+	
+	//Declare the Database
+	Dcldb			Name(joedb) dbname('TDST') 
+	
+	//Declare the File
+	Dcldiskfile		Name(pgmref) +
+					type(*Update) +
+					org(*indexed)+
+					File('*libl/DSSRUSR') +
+					db(joedb) +
+					AddRec( *Yes ) 
+	
+		
+	//System Declares
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld toolStripStatusLabel1 System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld DGV_User System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld Btn_Apply System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld Btn_Add System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld UserP System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld UsrFNme System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld UsrLNme System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld UsrEmail System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld DelUsr System.Windows.Forms.DataGridViewButtonColumn Access(*Private) WithEvents(*Yes)
+	DclFld DelFlag System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld ChgFlag System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld AddFlag System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld ErrRowCount System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	
+	//Work Declares
+	DclFld Counter *Integer2
+	DclFld  Name(Frm_UserAdd) Type(Frm_UserAdd)
+	DclFld ErrorCount *Integer2
+	DclFld x *Integer2
+	
+	
+	
+	
+	/region Default Constructor and Windows Form Designer generated code
+	
+	DclFld Btn_Exit System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	
+	BegConstructor Access(*Public)
+		//DclSrParm DGV_User Type(DataGridView)
+		//DclSrParm Cancel Type(Boolean)
+		//DclSrParm AddButton Type(Boolean)
+		//DclSrParm UserProfile Type(String)	
+		//DclSrParm FirstName Type(String)		
+		//DclSrParm LastName Type(String)		
+		//DclSrParm EmailAddr Type(String)
+		InitializeComponent()
+	EndConstructor
+
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle4 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle3 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.DGV_User = *new System.Windows.Forms.DataGridView()
+		*this.UserP = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.UsrFNme = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.UsrLNme = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.UsrEmail = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.DelUsr = *new System.Windows.Forms.DataGridViewButtonColumn()
+		*this.DelFlag = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.ChgFlag = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.AddFlag = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.ErrRowCount = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Btn_Exit = *new System.Windows.Forms.Button()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.toolStripStatusLabel1 = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.Btn_Apply = *new System.Windows.Forms.Button()
+		*this.Btn_Add = *new System.Windows.Forms.Button()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		(*this.DGV_User *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.statusStrip1.SuspendLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//DGV_User
+		//
+		*this.DGV_User.AllowUserToAddRows = *False
+		*this.DGV_User.AllowUserToDeleteRows = *False
+		*this.DGV_User.AllowUserToOrderColumns = *True
+		*this.DGV_User.AllowUserToResizeColumns = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((255 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption
+		dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+		*this.DGV_User.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.DGV_User.Anchor = ((((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Bottom) *BitOr System.Windows.Forms.AnchorStyles.Left) *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.DGV_User.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+		*this.DGV_User.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+		*this.DGV_User.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+		dataGridViewCellStyle2.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Bold)
+		dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+		dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False
+		*this.DGV_User.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2
+		*this.DGV_User.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.DGV_User.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.UserP, *this.UsrFNme, *this.UsrLNme, *this.UsrEmail, *this.DelUsr, *this.DelFlag, *this.ChgFlag, *this.AddFlag, *this.ErrRowCount})
+		dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		dataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+		dataGridViewCellStyle4.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75)
+		dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+		dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption
+		dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False
+		*this.DGV_User.DefaultCellStyle = dataGridViewCellStyle4
+		*this.DGV_User.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+		*this.DGV_User.GridColor = System.Drawing.SystemColors.ControlLight
+		*this.DGV_User.Location = *new System.Drawing.Point(12, 7)
+		*this.DGV_User.Name = "DGV_User"
+		*this.DGV_User.RowHeadersVisible = *False
+		*this.DGV_User.Size = *new System.Drawing.Size(1151, 650)
+		*this.DGV_User.TabIndex = 0
+		//
+		//UserP
+		//
+		*this.UserP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		*this.UserP.HeaderText = "User Profile"
+		*this.UserP.Name = "UserP"
+		*this.UserP.ReadOnly = *True
+		//
+		//UsrFNme
+		//
+		*this.UsrFNme.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		*this.UsrFNme.HeaderText = "First Name"
+		*this.UsrFNme.Name = "UsrFNme"
+		//
+		//UsrLNme
+		//
+		*this.UsrLNme.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		*this.UsrLNme.HeaderText = "Last Name"
+		*this.UsrLNme.Name = "UsrLNme"
+		//
+		//UsrEmail
+		//
+		*this.UsrEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		*this.UsrEmail.HeaderText = "Email Address"
+		*this.UsrEmail.Name = "UsrEmail"
+		//
+		//DelUsr
+		//
+		dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		dataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+		dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.DelUsr.DefaultCellStyle = dataGridViewCellStyle3
+		*this.DelUsr.HeaderText = "Delete User"
+		*this.DelUsr.Name = "DelUsr"
+		*this.DelUsr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+		*this.DelUsr.Text = "Delete"
+		*this.DelUsr.UseColumnTextForButtonValue = *True
+		*this.DelUsr.Width = 116
+		//
+		//DelFlag
+		//
+		*this.DelFlag.HeaderText = "Delete Flag"
+		*this.DelFlag.Name = "DelFlag"
+		*this.DelFlag.Visible = *False
+		*this.DelFlag.Width = 114
+		//
+		//ChgFlag
+		//
+		*this.ChgFlag.HeaderText = "Change Flag"
+		*this.ChgFlag.Name = "ChgFlag"
+		*this.ChgFlag.Visible = *False
+		*this.ChgFlag.Width = 121
+		//
+		//AddFlag
+		//
+		*this.AddFlag.HeaderText = "Add Flag"
+		*this.AddFlag.Name = "AddFlag"
+		*this.AddFlag.Visible = *False
+		*this.AddFlag.Width = 96
+		//
+		//ErrRowCount
+		//
+		*this.ErrRowCount.HeaderText = "ErrRowCount"
+		*this.ErrRowCount.Name = "ErrRowCount"
+		*this.ErrRowCount.ReadOnly = *True
+		*this.ErrRowCount.Visible = *False
+		*this.ErrRowCount.Width = 122
+		//
+		//Btn_Exit
+		//
+		*this.Btn_Exit.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.Btn_Exit.Location = *new System.Drawing.Point(1075, 663)
+		*this.Btn_Exit.Name = "Btn_Exit"
+		*this.Btn_Exit.Size = *new System.Drawing.Size(88, 23)
+		*this.Btn_Exit.TabIndex = 1
+		*this.Btn_Exit.Text = "Exit"
+		*this.Btn_Exit.UseVisualStyleBackColor = *True
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.toolStripStatusLabel1})
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 696)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Size = *new System.Drawing.Size(1174, 22)
+		*this.statusStrip1.TabIndex = 5
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//toolStripStatusLabel1
+		//
+		*this.toolStripStatusLabel1.Name = "toolStripStatusLabel1"
+		*this.toolStripStatusLabel1.Size = *new System.Drawing.Size(79, 17)
+		*this.toolStripStatusLabel1.Text = "Frm_UserMaint"
+		//
+		//Btn_Apply
+		//
+		*this.Btn_Apply.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.Btn_Apply.Location = *new System.Drawing.Point(968, 663)
+		*this.Btn_Apply.Name = "Btn_Apply"
+		*this.Btn_Apply.Size = *new System.Drawing.Size(88, 23)
+		*this.Btn_Apply.TabIndex = 6
+		*this.Btn_Apply.Text = "Apply Changes"
+		*this.Btn_Apply.UseVisualStyleBackColor = *True
+		//
+		//Btn_Add
+		//
+		*this.Btn_Add.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.Btn_Add.Location = *new System.Drawing.Point(861, 663)
+		*this.Btn_Add.Name = "Btn_Add"
+		*this.Btn_Add.Size = *new System.Drawing.Size(88, 23)
+		*this.Btn_Add.TabIndex = 7
+		*this.Btn_Add.Text = "Add User"
+		*this.Btn_Add.UseVisualStyleBackColor = *True
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//label1
+		//
+		*this.label1.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.label1.AutoSize = *True
+		*this.label1.BackColor = System.Drawing.Color.Crimson
+		*this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		*this.label1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label1.ForeColor = System.Drawing.Color.White
+		*this.label1.Location = *new System.Drawing.Point(12, 663)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(100, 15)
+		*this.label1.TabIndex = 8
+		*this.label1.Text = "Marked for Delete  "
+		//
+		//label2
+		//
+		*this.label2.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.label2.AutoSize = *True
+		*this.label2.BackColor = System.Drawing.Color.Blue
+		*this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		*this.label2.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label2.ForeColor = System.Drawing.Color.White
+		*this.label2.Location = *new System.Drawing.Point(118, 663)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(100, 15)
+		*this.label2.TabIndex = 9
+		*this.label2.Text = "Marked for Change"
+		//
+		//label3
+		//
+		*this.label3.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.label3.AutoSize = *True
+		*this.label3.BackColor = System.Drawing.Color.OliveDrab
+		*this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		*this.label3.ForeColor = System.Drawing.Color.White
+		*this.label3.Location = *new System.Drawing.Point(224, 663)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(94, 15)
+		*this.label3.TabIndex = 10
+		*this.label3.Text = "Marked for Add    "
+		//
+		//Frm_UserMaint
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.AutoSize = *True
+		*this.ClientSize = *new System.Drawing.Size(1174, 718)
+		*this.Controls.Add(*this.label3)
+		*this.Controls.Add(*this.label2)
+		*this.Controls.Add(*this.label1)
+		*this.Controls.Add(*this.Btn_Add)
+		*this.Controls.Add(*this.Btn_Apply)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.Btn_Exit)
+		*this.Controls.Add(*this.DGV_User)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+		*this.Name = "Frm_UserMaint"
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "User Maintenance"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		(*this.DGV_User *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.statusStrip1.ResumeLayout(*False)
+		*this.statusStrip1.PerformLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+			If (disposing *And (components *NE *Nothing))
+				components.Dispose()
+			EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+	/endregion
+	
+	//Load the Grid
+	BegSr Form1_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld DGV_Row         Type(DataGridViewRow)
+		DclFld DGV_ButtonCell  Type(DataGridViewButtonCell)
+		DclFld DGV_TextBoxCell Type(DataGridViewTextBoxCell)
+		
+		//Read through the File		
+		SetLL PGMREF *LoVal
+		DoUntil pgmref.IsEof 
+			Read PGMREF
+			
+			//Instance a DataGridView Row
+			If not PGMREF.IsEof
+				DGV_Row = *New DataGridViewRow()
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.				
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = %Trim(USRPRF)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = %Trim(USRFNA)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = %Trim(USRLNA)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = %Trim(USREML)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_ButtonCell = *New DataGridViewButtonCell()
+				DGV_ButtonCell.Value = 'Delete'
+				DGV_Row.Cells.Add(DGV_ButtonCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = ' '
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = ' '
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = ' '
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = 0
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Add the Row to the Grid
+				DGV_User.Rows.Add(DGV_Row)
+			EndIf
+		EndDo
+		
+		//Check sto see if any cell within the grid has changed and executes subroutine 		
+		AddHandler SourceObject(DGV_User) SourceEvent(CellValueChanged) HandlerSR(DGV_User_CellValueChanged)
+					
+	EndSr
+
+		
+	//Exit button clicked Unload form and head back to calling pgm.
+	BegSr Btn_Exit_Click Access(*Private) Event(*this.Btn_Exit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		unload *this	
+	EndSr
+	
+	//Delete Button Process	
+	BegSr DGV_User_CellContentClick Access(*Private) Event(*this.DGV_User.CellContentClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		DclFld Remainder Type(*Zoned) Len(5,0)		
+		    	
+		//Delete Button pressed
+		If DGV_User.Columns[e.ColumnIndex].Name = 'DelUsr'
+			If DGV_User.Item[e.ColumnIndex, e.RowIndex].Value.ToString() = 'Delete'
+			
+				//User Flagged for deletion
+				DGV_User['DelFlag' , e.RowIndex].Value = 'Y'
+				//Change button text to Undelete, in case user changes their mind.
+				DGV_User.Item[e.ColumnIndex, e.RowIndex].Value = 'UnDelete'
+				//Highlight the row
+				For Index(x  = 0) to(3)
+					DGV_User.Item[x, e.RowIndex].Style.Forecolor = Color.White
+					DGV_User.Item[x, e.RowIndex].Style.Backcolor = Color.Crimson
+				EndFor	
+			// User has changed their mind and decided to undelete this User	
+			Else
+				//Change row attributes back to original form
+				For Index(x  = 0) to(4)
+				DGV_User.Item[x, e.RowIndex].Style.Forecolor = Color.Black
+				//Determine alternate colour sequence
+				Remainder = %Rem(e.RowIndex, 2)
+					If Remainder > 0
+						DGV_User.Item[x, e.RowIndex].Style.BackColor = Color.FromArgb(255, 255, 192)
+					Else
+						DGV_User.Item[x, e.RowIndex].Style.BackColor = Color.White
+					EndIf
+				EndFor
+				
+				// Change back to Added color attributes if previously Added before delete.
+				If DGV_User['AddFlag' , e.RowIndex].Value.ToString() = 'Y'
+					For Index(x  = 0) to(3)
+						DGV_User.Item[x, e.RowIndex].Style.Forecolor = Color.White
+						DGV_User.Item[x, e.RowIndex].Style.Backcolor = Color.OliveDrab
+					EndFor	
+				EndIf
+					
+				// Change back to changed color attributes if previously changed before delete.
+				If DGV_User['ChgFlag' , e.RowIndex].Value.ToString() = 'Y'
+					For Index(x  = 0) to(3)
+						DGV_User.Item[x, e.RowIndex].Style.Forecolor = Color.White
+						DGV_User.Item[x, e.RowIndex].Style.Backcolor = Color.Blue
+					EndFor	
+				EndIf
+				
+				//Change Button text back to Delete and reset delete flag
+				DGV_User.Item[e.ColumnIndex, e.RowIndex].Value = 'Delete'
+				DGV_User['DelFlag' , e.RowIndex].Value = ' '
+			EndIf
+		Endif
+	EndSr
+	
+	
+	// Cell values changed process
+	BegSr DGV_User_CellValueChanged Access(*Private) 
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		//Declare local work variables
+		DclFld ScanEmail *String
+		DclFld Found1 *Integer2
+		DclFld Found2 *Integer2
+		DclFld Conv *Integer2
+		
+		// if 'Delete button pressed no change proccessing required	
+		If DGV_User.Columns[e.ColumnIndex].Name = 'DelUsr' +
+		Or DGV_User.Columns[e.ColumnIndex].Name = 'DelFlag'
+			LeaveSR
+		EndIf
+		
+		// Reset errorText string and ErrorCount 
+		If DGV_User.Item[e.ColumnIndex, e.RowIndex].ErrorText <> String.Empty
+			ErrorCount -= 1
+			DGV_User.Item[e.ColumnIndex, e.RowIndex].ErrorText = String.Empty
+			
+			Conv = System.Convert.ToInt32(DGV_User['ErrRowCount' , e.RowIndex].Value) 
+			Conv -=1
+			DGV_User['ErrRowCount' , e.RowIndex].Value = Conv
+		EndIf
+		
+		//Validate First Name
+		If DGV_User.Columns[e.ColumnIndex].Name = 'UsrFNme'
+			If DGV_User.Item[e.ColumnIndex, e.RowIndex].Value = *Nothing Or  +
+				DGV_User.Item[e.ColumnIndex, e.RowIndex].Value.ToString() = String.Empty
+				DGV_User.Item[e.ColumnIndex, e.RowIndex].ErrorText =  "First Name has to be entered" 
+				DGV_User['ChgFlag' , e.RowIndex].Value = ' '
+				ErrorCount += 1
+				Conv = System.Convert.ToInt32(DGV_User['ErrRowCount' , e.RowIndex].Value) 
+				Conv +=1
+				DGV_User['ErrRowCount' , e.RowIndex].Value = Conv
+			EndIf
+		EndIf
+		   
+		// Validate Last Name
+		If DGV_User.Columns(e.ColumnIndex).Name = 'UsrLNme' 
+			If DGV_User.Item(e.ColumnIndex, e.RowIndex).Value = *Nothing Or +
+				DGV_User.Item(e.ColumnIndex, e.RowIndex).Value.ToString() = String.Empty 
+				DGV_User.Item(e.ColumnIndex, e.RowIndex).ErrorText =  "Last Name has to be entered" 
+				DGV_User['ChgFlag' , e.RowIndex].Value = ' '
+				ErrorCount += 1
+				Conv = System.Convert.ToInt32(DGV_User['ErrRowCount' , e.RowIndex].Value) 
+				Conv +=1
+				DGV_User['ErrRowCount' , e.RowIndex].Value = Conv
+			EndIf
+		EndIf
+		   
+		// Validate Email Address
+		If DGV_User.Columns(e.ColumnIndex).Name = 'UsrEmail' 
+			If DGV_User.Item(e.ColumnIndex, e.RowIndex).Value = *Nothing Or + 
+				DGV_User.Item(e.ColumnIndex, e.RowIndex).Value.ToString() = String.Empty
+				DGV_User.Item(e.ColumnIndex, e.RowIndex).ErrorText =  "Email Address has to be entered" 
+				DGV_User['ChgFlag' , e.RowIndex].Value = ' '
+				ErrorCount += 1
+				Conv = System.Convert.ToInt32(DGV_User['ErrRowCount' , e.RowIndex].Value) 
+				Conv +=1
+				DGV_User['ErrRowCount' , e.RowIndex].Value = Conv
+			Else
+				ScanEmail = DGV_User.Item(e.ColumnIndex, e.RowIndex).Value.ToString()
+				Found1 = %Scan('.', ScanEmail)
+				Found2 = %Scan('@', ScanEmail)
+				If Found1 = 0 or Found2 = 0
+					DGV_User.Item(e.ColumnIndex, e.RowIndex).ErrorText = "Email Address is not valid" 
+					DGV_User['ChgFlag' , e.RowIndex].Value = ' '
+					ErrorCount += 1
+					Conv = System.Convert.ToInt32(DGV_User['ErrRowCount' , e.RowIndex].Value) 
+					Conv +=1
+					DGV_User['ErrRowCount' , e.RowIndex].Value = Conv
+				EndIf
+			EndIf
+		EndIf
+			
+		//If no errors highlight columns and mark for update
+		Conv = System.Convert.ToInt32(DGV_User['ErrRowCount' , e.RowIndex].Value)
+		If Conv = 0
+			For Index(x  = 0) to(3)
+				DGV_User.Item[x, e.RowIndex].Style.Forecolor = Color.White
+				DGV_User.Item[x, e.RowIndex].Style.Backcolor = Color.Blue
+				DGV_User['UserP' , e.RowIndex].Selected = *True
+			EndFor
+			DGV_User['ChgFlag' , e.RowIndex].Value = 'Y'
+		Endif
+			
+		// Errors encountered, disable add and apply buttons
+		If ErrorCount > 0 
+			*this.Btn_Add.Enabled = *False
+			*this.Btn_Apply.Enabled = *False
+				
+		// All ok, enable buttons		
+		Else
+			*this.Btn_Add.Enabled = *True
+			*this.Btn_Apply.Enabled = *True
+		Endif   
+	EndSr
+	
+	
+	
+	// Add button clicked Process	
+	BegSr Btn_Add_Click Access(*Private) Event(*this.Btn_Add.Click) 
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//Dclare local vars
+		DclFld DGV_Row         Type(DataGridViewRow)
+		DclFld DGV_ButtonCell  Type(DataGridViewButtonCell)
+		DclFld DGV_TextBoxCell Type(DataGridViewTextBoxCell)
+		DclFld Cancel *Boolean
+		
+		//Instance Add form		
+		Frm_UserAdd = *New Frm_UserAdd(DGV_User)
+		
+		//Disable buttons
+		*this.Btn_Add.Enabled = *False
+		*this.Btn_Apply.Enabled = *False
+		*this.Btn_Exit.Enabled = *False
+		
+		//Show Add Form
+		Frm_UserAdd.ShowDialog()
+		
+		//Enable Buttons				
+		*this.Btn_Add.Enabled = *True
+		*this.Btn_Apply.Enabled = *True
+		*this.Btn_Exit.Enabled = *True
+		
+		//If user clicked on cancel from Add form don't process
+		If Frm_UserAdd.AddButton = *True 
+		
+			//Instnce a DataGridView Row
+			DGV_Row = *New DataGridViewRow()
+			
+			//Get rowcount of Grid
+			Counter = DGV_User.RowCount
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()		
+			DGV_TextBoxCell.Value = %Trim(Frm_UserAdd.UserProfile)
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+					
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+			DGV_TextBoxCell.Value = %Trim(Frm_UserAdd.FirstName)
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+			DGV_TextBoxCell.Value = %Trim(Frm_UserAdd.LastName)
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+			DGV_TextBoxCell.Value = %Trim(Frm_UserAdd.EmailAddr)
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_ButtonCell = *New DataGridViewButtonCell()
+			DGV_ButtonCell.Value = 'Delete'
+			DGV_Row.Cells.Add(DGV_ButtonCell)
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+			DGV_TextBoxCell.Value = ' '
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+			DGV_TextBoxCell.Value = ' '
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+			DGV_TextBoxCell.Value = 'Y'
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+			
+			//Instance a DataGridViewCell. Add a value and add the cell to the Row.			
+			DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+			DGV_TextBoxCell.Value = 0
+			DGV_Row.Cells.Add(DGV_TextBoxCell)
+			
+			//Add the Row to the Grid		
+			DGV_User.Rows.Add(DGV_Row)
+			
+			//Hightlight row added
+			For Index(x  = 0) to(3)
+				DGV_User.Item[x, Counter].Style.Forecolor = Color.White
+				DGV_User.Item[x, Counter].Style.Backcolor = Color.OliveDrab
+			EndFor
+			
+			//Sort Grid
+			DGV_User.Sort(UserP, ListSortDirection.Ascending)
+		Endif
+	EndSr	
+	
+	
+	//Apply button clicked
+	BegSr Btn_Apply_Click Access(*Private) Event(*this.Btn_Apply.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//Execute add, delete and update sub routines
+		Exsr	AddRecord
+		Exsr	DeleteRecord
+		Exsr	UpdateRecord
+		
+		//Exit back to calling pgm 
+		unload *this
+		
+	EndSr
+	
+	//Add reocrd to DB from grid
+	BegSr	AddRecord Access(*Private)
+		
+		//Read through Grid and add records marked to DB File
+		Counter = DGV_User.RowCount - 1
+		For Index(x = 1) to(Counter)
+		
+			If DGV_User['AddFlag' , x].Value.ToString() = 'Y'
+				USRPRF	=	DGV_User['UserP' , x].Value.ToString()
+				USRFNA	=	DGV_User['UsrFNme' , x].Value.ToString()
+				USRLNA	=	DGV_User['UsrLNme' , x].Value.ToString()
+				USREML	=	DGV_User['UsrEmail' , x].Value.ToString()
+				Write PGMREF
+			Endif
+		
+		EndFor
+	
+	EndSR
+	
+	BegSr	DeleteRecord Access(*Private)
+		
+		//Read through Grid and Delete records marked to DB File	
+		Counter = DGV_User.RowCount - 1
+		For Index(x = 1) to(Counter)
+		
+			If DGV_User['DelFlag' , x].Value.ToString() = 'Y'
+				
+				Chain PGMREF Key(DGV_User['UserP' , x].Value.ToString())
+					If PGMREF.IsFound
+						Delete PGMREF
+					Endif
+			Endif
+		
+		EndFor
+	
+	EndSR
+	
+	BegSr	UpdateRecord Access(*Private)
+	
+	//Read through Grid and Update records marked to DB File
+	Counter = DGV_User.RowCount - 1
+		For Index(x = 1) to(Counter)
+		
+			If	DGV_User['ChgFlag' , x].Value.ToString() = 'Y' and +
+				DGV_User['DelFlag' , x].Value.ToString() <> 'Y' and +
+				DGV_User['AddFlag' , x].Value.ToString() <> 'Y' 
+								
+				Chain PGMREF Key(DGV_User['UserP' , x].Value.ToString())
+					If	PGMREF.IsFound
+						USRFNA	=	DGV_User['UsrFNme' , x].Value.ToString()
+						USRLNA	=	DGV_User['UsrLNme' , x].Value.ToString()
+						USREML	=	DGV_User['UsrEmail' , x].Value.ToString()
+						Update PGMREF
+					Endif
+			Endif
+		
+		EndFor
+	
+	EndSR
+	
+	
+	
+EndClass

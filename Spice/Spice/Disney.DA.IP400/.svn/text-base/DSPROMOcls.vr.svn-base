@@ -1,0 +1,134 @@
+// ===============================================
+// Tarnjit Bhambra
+// 01 April 2009
+// DSPROMOcls	
+// Data Access Layer - Promotion Code File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+USing System.IO
+Using System.Data
+Using System.Xml
+
+BegClass DSPROMOcls Access(*Public)
+		
+	DclDB Name(PgmDB) DbName("TDST") Access(*Private)
+	DclDiskFile Name(DSPROMO1) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+			    
+	DclFld PromotionTbl Type(DataTable) Access(*Private)
+	DclFld pXMLpath     Type(String)    Access(*Private)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Promotion.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	DclFld pPromotionCode Type(String) Access(*Private)
+	BegProp PromotionCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPromotionCode
+		EndGet
+	EndProp
+	
+	DclFld pPromotionDesc Type(String) Access(*Private)
+	BegProp PromoCode_Description Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPromotionDesc
+		EndGet
+	EndProp
+
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If PromotionTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				CreatePromotionXML()
+			Else
+				PromotionTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+		
+		DclArray Keys Type(DataColumn) Rank(1)
+
+		PromotionTbl = *New DataTable("Promotion")
+
+		PromotionTbl.Columns.Add(*New DataColumn("Code", *TypeOf(String)))
+		PromotionTbl.Columns["Code"].ReadOnly = *True
+
+		PromotionTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		PromotionTbl.Columns["Description"].ReadOnly = *True
+		
+		PromotionTbl.Columns.Add(*New DataColumn("Status", *TypeOf(Boolean)))
+		PromotionTbl.Columns["Status"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {PromotionTbl.Columns("Code")}
+		PromotionTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr CreatePromotionXML Access(*Private)
+		
+		DclFld dr Type(DataRow)
+		
+		If Not DSPROMO1.IsOpen
+			Open DSPROMO1
+		EndIf
+		
+		DoUntil DSPROMO1.IsEof
+			Read DSPROMO1
+			If Not DSPROMO1.IsEof
+				dr = PromotionTbl.NewRow()
+				
+				dr.Item["Code"]        = PRCODE
+				dr.Item["Description"] = PRDESC.Trim()
+				
+				If PRSTS = 'Y'
+					dr.Item["Status"] = *True
+				Else
+					dr.Item["Status"] = *False
+				EndIf
+
+				PromotionTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		PromotionTbl.WriteXml(pXMLpath)
+		
+		Close DSPROMO1
+	EndSr
+	
+	BegFunc GetPromotion Type(*Boolean) Access(*Public)
+		DclSrParm PromotionCode Type(String)
+
+		DclFld dr Type(DataRow)
+		
+		If PromotionTbl = *Nothing
+			LoadDataTableFromXML()
+		EndIf
+		
+		dr = PromotionTbl.Rows.Find(PromotionCode)
+		If dr <> *Nothing
+			pPromotionCode = dr.Item("Code")        *As String
+			pPromotionDesc = dr.Item["Description"] *As String
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetPromotionTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR PromotionTbl
+	EndFunc
+EndClass

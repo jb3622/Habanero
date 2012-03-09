@@ -1,0 +1,26 @@
+Using System
+Using System.Text
+
+BegClass DataCache Access(*Public)
+
+
+DclFld IsVATRequired Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld AreStageSetDatesChangeable Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsLandingFactorRequiredForRoadDelivery Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsStyleNumberInputRequired Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsPromoCodeMandatory Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsCompositionCodeEditable Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsCommodityCodeEditable Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld PreSelectAllMarkets Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld ShowListPrice Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld AllowUPCInput Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld DisplayFreightCharges Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld LocalLanguage Type( String ) Access( *Public ) Inz( "English" ) Shared(*Yes) 
+DclFld DBConnectionString Type( String ) Access( *Public ) Inz( "" ) Shared(*Yes) 
+DclFld DisplayPOHitsCancelDateWithDayFormat Type( Boolean ) Access( *Public ) Inz( *True ) Shared(*Yes) 
+DclFld DaysBetweenShipDateAndCancelDate Type(Int32) Access( *Public ) Inz(0) Shared(*Yes) 
+
+
+DclFld DefaultVATCode Type( String ) Access( *Public ) Inz( "" ) Shared(*Yes) 
+
+EndClass

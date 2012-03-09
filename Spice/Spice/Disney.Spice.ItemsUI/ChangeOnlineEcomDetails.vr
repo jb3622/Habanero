@@ -1,0 +1,1132 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.Spice.ItemsBO
+Using Disney.Menu
+
+BegClass ChangeOnlineEcomDetails Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Declarations
+	DclFld PgmDB       Type(ASNA.VisualRPG.Runtime.Database) Access(*Private)
+	DclFld User        Type(Disney.Menu.Users) Access(*Private)
+	DclFld Environment Type(Disney.Menu.Environments)
+	DclFld ItemsBO     Type(Disney.Spice.ItemsBO.Items) Access(*Private)
+	DclFld Class       Type(Int16)
+	DclFld Vendor      Type(Int32)
+	DclFld Style       Type(Int16)
+	DclFld Colour      Type(Int16)	
+	DclFld pItemStyle  Type(Disney.DA.IP400.ItemStyle) Access(*Private)
+	DclFld pItemSize   Type(Disney.DA.IP400.ItemSize) Access(*Private)		
+	DclFld convertedString Type(String) Access(*Private)
+    DclFld dcNotes Type(String)		 Access(*Private)
+	DclFld m_OfferEffectiveDateChanged Type(Boolean) Access(*Private)
+	DclFld m_SelloutControlChanged Type(Boolean) Access(*Private)
+	DclFld cboSOControl System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld lblSOControl System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld chkDropShip System.Windows.Forms.CheckBox Access(*Private) WithEvents(*Yes)
+	DclFld chkSuppressBOCard System.Windows.Forms.CheckBox Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld m_OEDateChanged Type(Boolean) Inz(*False)
+	DclFld m_OEDateOnLoad Type(DateTime)
+	DclFld m_formLoaded Type(Boolean) Access(*Private)
+	
+	DclFld m_ItemSizeOverride Type(Disney.DA.IP400.ItemSizeOverride) Access(*Private)
+	
+	/EndRegion
+
+	/Region Windows Form Designer generated code
+	DclFld btnNext System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld btnBack System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld groupBox3 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld cboItemShipAlone System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld lblItemShipAlone System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblSHCode System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld cboSHCode System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld chkSpecialHandling System.Windows.Forms.CheckBox Access(*Private) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld txtDCNotes System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblUpsellText System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld groupBox2 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld dtOfferEffectiveDate System.Windows.Forms.DateTimePicker Access(*Private) WithEvents(*Yes)
+	DclFld lblOfferEffectiveDate System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld cboThirdPartySeller System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld lblLThirdPartySeller System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld groupBox1 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld txtUserField2 System.Windows.Forms.TextBox Access(*Internal) WithEvents(*Yes)
+	DclFld lblUserField2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtUserField1 System.Windows.Forms.TextBox Access(*Internal) WithEvents(*Yes)
+	DclFld lblUserField1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+		
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		*this.btnNext = *new System.Windows.Forms.Button()
+		*this.btnBack = *new System.Windows.Forms.Button()
+		*this.groupBox3 = *new System.Windows.Forms.GroupBox()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.lblSHCode = *new System.Windows.Forms.Label()
+		*this.cboSHCode = *new System.Windows.Forms.ComboBox()
+		*this.chkSpecialHandling = *new System.Windows.Forms.CheckBox()
+		*this.cboItemShipAlone = *new System.Windows.Forms.ComboBox()
+		*this.lblItemShipAlone = *new System.Windows.Forms.Label()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.txtDCNotes = *new System.Windows.Forms.TextBox()
+		*this.lblUpsellText = *new System.Windows.Forms.Label()
+		*this.groupBox2 = *new System.Windows.Forms.GroupBox()
+		*this.dtOfferEffectiveDate = *new System.Windows.Forms.DateTimePicker()
+		*this.lblOfferEffectiveDate = *new System.Windows.Forms.Label()
+		*this.cboThirdPartySeller = *new System.Windows.Forms.ComboBox()
+		*this.lblLThirdPartySeller = *new System.Windows.Forms.Label()
+		*this.groupBox1 = *new System.Windows.Forms.GroupBox()
+		*this.txtUserField2 = *new System.Windows.Forms.TextBox()
+		*this.lblUserField2 = *new System.Windows.Forms.Label()
+		*this.txtUserField1 = *new System.Windows.Forms.TextBox()
+		*this.lblUserField1 = *new System.Windows.Forms.Label()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.cboSOControl = *new System.Windows.Forms.ComboBox()
+		*this.lblSOControl = *new System.Windows.Forms.Label()
+		*this.chkDropShip = *new System.Windows.Forms.CheckBox()
+		*this.chkSuppressBOCard = *new System.Windows.Forms.CheckBox()
+		*this.groupBox3.SuspendLayout()
+		*this.groupBox2.SuspendLayout()
+		*this.groupBox1.SuspendLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//btnNext
+		//
+		*this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.btnNext.Location = *new System.Drawing.Point(694, 498)
+		*this.btnNext.Name = "btnNext"
+		*this.btnNext.Size = *new System.Drawing.Size(75, 23)
+		*this.btnNext.TabIndex = 17
+		*this.btnNext.Text = "Next"
+		*this.btnNext.UseVisualStyleBackColor = *True
+		//
+		//btnBack
+		//
+		*this.btnBack.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.btnBack.Location = *new System.Drawing.Point(108, 498)
+		*this.btnBack.Name = "btnBack"
+		*this.btnBack.Size = *new System.Drawing.Size(75, 23)
+		*this.btnBack.TabIndex = 16
+		*this.btnBack.Text = "Back"
+		*this.btnBack.UseVisualStyleBackColor = *True
+		//
+		//groupBox3
+		//
+		*this.groupBox3.Controls.Add(*this.label1)
+		*this.groupBox3.Controls.Add(*this.lblSHCode)
+		*this.groupBox3.Controls.Add(*this.cboSHCode)
+		*this.groupBox3.Controls.Add(*this.chkSpecialHandling)
+		*this.groupBox3.Location = *new System.Drawing.Point(337, 15)
+		*this.groupBox3.Name = "groupBox3"
+		*this.groupBox3.Size = *new System.Drawing.Size(432, 58)
+		*this.groupBox3.TabIndex = 5
+		*this.groupBox3.TabStop = *False
+		//
+		//label1
+		//
+		*this.label1.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(189, 25)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(52, 13)
+		*this.label1.TabIndex = 971
+		*this.label1.Text = "PZ Code:"
+		//
+		//lblSHCode
+		//
+		*this.lblSHCode.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblSHCode.AutoSize = *True
+		*this.lblSHCode.Location = *new System.Drawing.Point(204, -13)
+		*this.lblSHCode.Name = "lblSHCode"
+		*this.lblSHCode.Size = *new System.Drawing.Size(58, 13)
+		*this.lblSHCode.TabIndex = 893
+		*this.lblSHCode.Text = "S/H Code:"
+		//
+		//cboSHCode
+		//
+		*this.cboSHCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboSHCode.DropDownWidth = 200
+		*this.cboSHCode.FormattingEnabled = *True
+		*this.cboSHCode.Location = *new System.Drawing.Point(278, 20)
+		*this.cboSHCode.Name = "cboSHCode"
+		*this.cboSHCode.Size = *new System.Drawing.Size(133, 21)
+		*this.cboSHCode.TabIndex = 7
+		//
+		//chkSpecialHandling
+		//
+		*this.chkSpecialHandling.AutoSize = *True
+		*this.chkSpecialHandling.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+		*this.chkSpecialHandling.Location = *new System.Drawing.Point(96, 24)
+		*this.chkSpecialHandling.Name = "chkSpecialHandling"
+		*this.chkSpecialHandling.Size = *new System.Drawing.Size(40, 17)
+		*this.chkSpecialHandling.TabIndex = 6
+		*this.chkSpecialHandling.Text = "PZ"
+		*this.chkSpecialHandling.UseVisualStyleBackColor = *True
+		//
+		//cboItemShipAlone
+		//
+		*this.cboItemShipAlone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboItemShipAlone.DropDownWidth = 200
+		*this.cboItemShipAlone.FormattingEnabled = *True
+		*this.cboItemShipAlone.Location = *new System.Drawing.Point(138, 55)
+		*this.cboItemShipAlone.Name = "cboItemShipAlone"
+		*this.cboItemShipAlone.Size = *new System.Drawing.Size(135, 21)
+		*this.cboItemShipAlone.TabIndex = 3
+		//
+		//lblItemShipAlone
+		//
+		*this.lblItemShipAlone.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblItemShipAlone.AutoSize = *True
+		*this.lblItemShipAlone.Location = *new System.Drawing.Point(21, 59)
+		*this.lblItemShipAlone.Name = "lblItemShipAlone"
+		*this.lblItemShipAlone.Size = *new System.Drawing.Size(84, 13)
+		*this.lblItemShipAlone.TabIndex = 0
+		*this.lblItemShipAlone.Text = "Item Ship Alone:"
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.btnHelp.Location = *new System.Drawing.Point(22, 498)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 15
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//txtDCNotes
+		//
+		*this.txtDCNotes.Location = *new System.Drawing.Point(22, 286)
+		*this.txtDCNotes.Multiline = *True
+		*this.txtDCNotes.Name = "txtDCNotes"
+		*this.txtDCNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+		*this.txtDCNotes.Size = *new System.Drawing.Size(396, 190)
+		*this.txtDCNotes.TabIndex = 14
+		//
+		//lblUpsellText
+		//
+		*this.lblUpsellText.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblUpsellText.AutoSize = *True
+		*this.lblUpsellText.Location = *new System.Drawing.Point(19, 260)
+		*this.lblUpsellText.Name = "lblUpsellText"
+		*this.lblUpsellText.Size = *new System.Drawing.Size(68, 13)
+		*this.lblUpsellText.TabIndex = 0
+		*this.lblUpsellText.Text = "UPSELL text"
+		//
+		//groupBox2
+		//
+		*this.groupBox2.Controls.Add(*this.cboItemShipAlone)
+		*this.groupBox2.Controls.Add(*this.lblItemShipAlone)
+		*this.groupBox2.Controls.Add(*this.dtOfferEffectiveDate)
+		*this.groupBox2.Controls.Add(*this.lblOfferEffectiveDate)
+		*this.groupBox2.Controls.Add(*this.cboThirdPartySeller)
+		*this.groupBox2.Controls.Add(*this.lblLThirdPartySeller)
+		*this.groupBox2.Location = *new System.Drawing.Point(22, 15)
+		*this.groupBox2.Name = "groupBox2"
+		*this.groupBox2.Size = *new System.Drawing.Size(295, 129)
+		*this.groupBox2.TabIndex = 1
+		*this.groupBox2.TabStop = *False
+		//
+		//dtOfferEffectiveDate
+		//
+		*this.dtOfferEffectiveDate.Format = System.Windows.Forms.DateTimePickerFormat.Short
+		*this.dtOfferEffectiveDate.Location = *new System.Drawing.Point(138, 17)
+		*this.dtOfferEffectiveDate.Name = "dtOfferEffectiveDate"
+		*this.dtOfferEffectiveDate.Size = *new System.Drawing.Size(135, 20)
+		*this.dtOfferEffectiveDate.TabIndex = 2
+		//
+		//lblOfferEffectiveDate
+		//
+		*this.lblOfferEffectiveDate.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblOfferEffectiveDate.AutoSize = *True
+		*this.lblOfferEffectiveDate.Location = *new System.Drawing.Point(21, 21)
+		*this.lblOfferEffectiveDate.Name = "lblOfferEffectiveDate"
+		*this.lblOfferEffectiveDate.Size = *new System.Drawing.Size(103, 13)
+		*this.lblOfferEffectiveDate.TabIndex = 0
+		*this.lblOfferEffectiveDate.Text = "Offer effective Date:"
+		//
+		//cboThirdPartySeller
+		//
+		*this.cboThirdPartySeller.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboThirdPartySeller.DropDownWidth = 135
+		*this.cboThirdPartySeller.FormattingEnabled = *True
+		*this.cboThirdPartySeller.Location = *new System.Drawing.Point(138, 94)
+		*this.cboThirdPartySeller.Name = "cboThirdPartySeller"
+		*this.cboThirdPartySeller.Size = *new System.Drawing.Size(135, 21)
+		*this.cboThirdPartySeller.TabIndex = 4
+		//
+		//lblLThirdPartySeller
+		//
+		*this.lblLThirdPartySeller.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblLThirdPartySeller.AutoSize = *True
+		*this.lblLThirdPartySeller.Location = *new System.Drawing.Point(21, 97)
+		*this.lblLThirdPartySeller.Name = "lblLThirdPartySeller"
+		*this.lblLThirdPartySeller.Size = *new System.Drawing.Size(56, 13)
+		*this.lblLThirdPartySeller.TabIndex = 0
+		*this.lblLThirdPartySeller.Text = "L/S Class:"
+		//
+		//groupBox1
+		//
+		*this.groupBox1.Controls.Add(*this.txtUserField2)
+		*this.groupBox1.Controls.Add(*this.lblUserField2)
+		*this.groupBox1.Controls.Add(*this.txtUserField1)
+		*this.groupBox1.Controls.Add(*this.lblUserField1)
+		*this.groupBox1.Location = *new System.Drawing.Point(22, 168)
+		*this.groupBox1.Name = "groupBox1"
+		*this.groupBox1.Size = *new System.Drawing.Size(747, 66)
+		*this.groupBox1.TabIndex = 11
+		*this.groupBox1.TabStop = *False
+		//
+		//txtUserField2
+		//
+		*this.txtUserField2.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.txtUserField2.Location = *new System.Drawing.Point(438, 25)
+		*this.txtUserField2.MaxLength = 10
+		*this.txtUserField2.Multiline = *True
+		*this.txtUserField2.Name = "txtUserField2"
+		*this.txtUserField2.Size = *new System.Drawing.Size(135, 21)
+		*this.txtUserField2.TabIndex = 13
+		//
+		//lblUserField2
+		//
+		*this.lblUserField2.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblUserField2.AutoSize = *True
+		*this.lblUserField2.Location = *new System.Drawing.Point(321, 28)
+		*this.lblUserField2.Name = "lblUserField2"
+		*this.lblUserField2.Size = *new System.Drawing.Size(66, 13)
+		*this.lblUserField2.TabIndex = 883
+		*this.lblUserField2.Text = "User Field 2:"
+		//
+		//txtUserField1
+		//
+		*this.txtUserField1.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.txtUserField1.Location = *new System.Drawing.Point(138, 25)
+		*this.txtUserField1.MaxLength = 10
+		*this.txtUserField1.Multiline = *True
+		*this.txtUserField1.Name = "txtUserField1"
+		*this.txtUserField1.Size = *new System.Drawing.Size(135, 21)
+		*this.txtUserField1.TabIndex = 12
+		//
+		//lblUserField1
+		//
+		*this.lblUserField1.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblUserField1.AutoSize = *True
+		*this.lblUserField1.Location = *new System.Drawing.Point(21, 28)
+		*this.lblUserField1.Name = "lblUserField1"
+		*this.lblUserField1.Size = *new System.Drawing.Size(66, 13)
+		*this.lblUserField1.TabIndex = 879
+		*this.lblUserField1.Text = "User Field 1:"
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//cboSOControl
+		//
+		*this.cboSOControl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboSOControl.DropDownWidth = 200
+		*this.cboSOControl.FormattingEnabled = *True
+		*this.cboSOControl.Location = *new System.Drawing.Point(615, 88)
+		*this.cboSOControl.MaxLength = 300
+		*this.cboSOControl.Name = "cboSOControl"
+		*this.cboSOControl.Size = *new System.Drawing.Size(135, 21)
+		*this.cboSOControl.TabIndex = 9
+		//
+		//lblSOControl
+		//
+		*this.lblSOControl.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.lblSOControl.AutoSize = *True
+		*this.lblSOControl.Location = *new System.Drawing.Point(526, 92)
+		*this.lblSOControl.Name = "lblSOControl"
+		*this.lblSOControl.Size = *new System.Drawing.Size(83, 13)
+		*this.lblSOControl.TabIndex = 903
+		*this.lblSOControl.Text = "Sell Out Control:"
+		//
+		//chkDropShip
+		//
+		*this.chkDropShip.AutoSize = *True
+		*this.chkDropShip.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+		*this.chkDropShip.Location = *new System.Drawing.Point(400, 120)
+		*this.chkDropShip.Name = "chkDropShip"
+		*this.chkDropShip.Size = *new System.Drawing.Size(73, 17)
+		*this.chkDropShip.TabIndex = 10
+		*this.chkDropShip.Text = "Drop Ship"
+		*this.chkDropShip.UseVisualStyleBackColor = *True
+		//
+		//chkSuppressBOCard
+		//
+		*this.chkSuppressBOCard.AutoSize = *True
+		*this.chkSuppressBOCard.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+		*this.chkSuppressBOCard.Location = *new System.Drawing.Point(349, 88)
+		*this.chkSuppressBOCard.Name = "chkSuppressBOCard"
+		*this.chkSuppressBOCard.Size = *new System.Drawing.Size(124, 17)
+		*this.chkSuppressBOCard.TabIndex = 8
+		*this.chkSuppressBOCard.Text = "Suppress B/O Card?"
+		*this.chkSuppressBOCard.UseVisualStyleBackColor = *True
+		//
+		//ChangeOnlineEcomDetails
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(790, 538)
+		*this.Controls.Add(*this.cboSOControl)
+		*this.Controls.Add(*this.btnNext)
+		*this.Controls.Add(*this.lblSOControl)
+		*this.Controls.Add(*this.btnBack)
+		*this.Controls.Add(*this.chkDropShip)
+		*this.Controls.Add(*this.groupBox3)
+		*this.Controls.Add(*this.chkSuppressBOCard)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.txtDCNotes)
+		*this.Controls.Add(*this.lblUpsellText)
+		*this.Controls.Add(*this.groupBox2)
+		*this.Controls.Add(*this.groupBox1)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.MinimizeBox = *False
+		*this.Name = "ChangeOnlineEcomDetails"
+		*this.ShowIcon = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "SPICE - ECOM Item Setup (Style - Color)"
+		*this.groupBox3.ResumeLayout(*False)
+		*this.groupBox3.PerformLayout()
+		*this.groupBox2.ResumeLayout(*False)
+		*this.groupBox2.PerformLayout()
+		*this.groupBox1.ResumeLayout(*False)
+		*this.groupBox1.PerformLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+
+	/EndRegion
+
+	/Region Constructors
+	BegConstructor Access(*Public)
+		//
+		// Required for Windows Form Designer support
+		//
+		m_ItemSizeOverride = *New Disney.DA.IP400.ItemSizeOverride()
+		m_formLoaded = *False
+		
+		InitializeComponent()
+		
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	EndConstructor
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User        Type(Disney.Menu.Users)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		DclSrParm ItemsBO     Type(Disney.Spice.ItemsBO.Items)
+		DclSrParm ItmStyle    Type(Disney.DA.IP400.ItemStyle)
+		DclSrParm ItmSize     Type(Disney.DA.IP400.ItemSize)
+		DclSrParm ItemSizeOverride Type(Disney.DA.IP400.ItemSizeOverride)
+				
+		InitializeComponent()
+				
+		*this.m_formLoaded = *False
+		*this.PgmDB       = PgmDB
+		*this.User        = User
+		*this.Environment = Environment
+		*this.ItemsBO     = ItemsBO
+		*this.ItemStyle   = ItmStyle
+		*this.ItemSize    = ItmSize
+		*this.m_ItemSizeOverride = ItemSizeOverride
+		
+		PopulateForm()
+		
+	EndConstructor	
+	
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+	/EndRegion
+
+	/Region Properties
+	BegProp ItemStyle Type(Disney.DA.IP400.ItemStyle) Access(*Public)
+		BegGet
+			LeaveSR pItemStyle
+		EndGet
+		BegSet
+			pItemStyle = *PropVal
+		EndSet
+	EndProp
+
+	BegProp ItemSize Type(Disney.DA.IP400.ItemSize) Access(*Public)
+		BegGet
+			LeaveSR pItemSize
+		EndGet
+		BegSet
+			pItemSize = *PropVal
+		EndSet
+	EndProp
+		
+	/EndRegion
+	
+	/Region Methods
+	
+	BegFunc FormatDCNotesDBString  Type(String) Access(*Private)
+		DclSrParm dcNotesDBString Type(String)		
+		DclFld formattedString Type(String)
+		
+		formattedString = String.Empty
+		
+		DoWhile (dcNotesDBString.Length > 50)
+			If (dcNotesDBString.Length > 50)
+				formattedString = formattedString + dcNotesDBString.Substring(0,50)
+				dcNotesDBString = dcNotesDBString.Remove(0,50)
+			Else
+				formattedString = formattedString + dcNotesDBString.Substring(0,dcNotesDBString.Length)
+				dcNotesDBString = dcNotesDBString.Remove(0,dcNotesDBString.Length)
+			EndIf
+			formattedString = formattedString + System.Environment.NewLine			
+			
+		EndDo
+		
+		LeaveSR formattedString
+	EndFunc
+	
+	BegSr PopulateForm Access(*Public)
+		
+		DclFld dt Type(DataTable)
+		
+		Try				
+			If(ItemStyle.OfferEffectiveDate = 0)
+				dtOfferEffectiveDate.Value = DateTime.Now
+			Else
+				dtOfferEffectiveDate.Value = StringDateValueToDateTime(ItemStyle.OfferEffectiveDate.ToString())
+			EndIf	
+			m_OEDateOnLoad = dtOfferEffectiveDate.Value
+			
+			If ItemStyle.SpecialHandling = "Y"
+				chkSpecialHandling.Checked = *True
+			Else
+				chkSpecialHandling.Checked = *False
+				cboSHCode.SelectedValue = "-1"
+				cboSHCode.Enabled = *False
+			EndIf
+			
+			If ItemStyle.DropShip = "Y"
+				chkDropShip.Checked = *True
+			Else
+				chkDropShip.Checked = *False
+			EndIf	
+		
+			chkSuppressBOCard.Checked = ItemStyle.SuppressBackOrderCard
+
+			If ItemStyle.DropShip = "Y"
+				chkDropShip.Checked = *True
+			Else
+				chkDropShip.Checked = *False
+			EndIf	
+
+			If(ItemStyle.UserField1 = *Nothing)
+				txtUserField1.Text = ""
+			Else
+				txtUserField1.Text = ItemStyle.UserField1
+			EndIf
+			
+			If(ItemStyle.UserField2 = *Nothing)
+				txtUserField2.Text = ""
+			Else
+				txtUserField2.Text = ItemStyle.UserField2
+			EndIf
+			
+			If(ItemStyle.DCNotes = *Nothing)
+				txtDCNotes.Text = ""
+			Else
+				txtDCNotes.Text = FormatDCNotesDBString(ItemStyle.DCNotes)
+			EndIf
+				
+			// Item Shipping - defaults to BLANK
+			ItemsBO.GetItemShippingOptions()
+			cboItemShipAlone.DataSource = ItemsBO.SpiceDataSet.Tables("ItemShippingTable")
+			cboItemShipAlone.DisplayMember = "CodeAndDescription"
+			cboItemShipAlone.ValueMember   = "ItemShippingCode"
+			If (ItemStyle.ItemShipAlone = *Nothing)
+				cboItemShipAlone.SelectedIndex = -1
+			Else
+				cboItemShipAlone.SelectedValue = ItemStyle.ItemShipAlone
+			EndIf
+								
+			// Third Party Seller - defaults to BLANK
+			ItemsBO.GetThirdPartySellerTbl()
+			cboThirdPartySeller.DataSource = ItemsBO.SpiceDataSet.Tables("ThirdPartySellerTable")
+			cboThirdPartySeller.DisplayMember = "CodeAndDescription"
+			cboThirdPartySeller.ValueMember   = "ThirdPartySellerCode"
+			If (ItemStyle.ThirdPartySeller = 0)
+				cboThirdPartySeller.SelectedIndex = -1
+				dt = cboThirdPartySeller.DataSource *AS DataTable			
+				DclFld x *Integer2
+				For Index(x = 0) to(dt.Rows.Count - 1)
+					If (dt.Rows[x]["Default"].ToString() = "Y")
+						cboThirdPartySeller.SelectedValue = dt.Rows[x]["ThirdPartySellerCode"]
+					EndIf
+				EndFor	
+			Else
+				cboThirdPartySeller.SelectedValue = ItemStyle.ThirdPartySeller.ToString()
+			EndIf
+
+			// Sell Out Control - defaults to 3
+			ItemsBO.GetSellOutControlTbl()
+			cboSOControl.DataSource = ItemsBO.SpiceDataSet.Tables("SellOutControlTable")
+			cboSOControl.DisplayMember = "CodeAndDescription"
+			cboSOControl.ValueMember   = "SellOutControlCode"
+			If (ItemStyle.SellOutControl = *Nothing *OR ItemStyle.SellOutControl = String.Empty)
+				dt = cboSOControl.DataSource *AS DataTable			
+				DclFld x *Integer2
+				For Index(x = 0) to(dt.Rows.Count - 1)
+					If (dt.Rows[x]["Default"].ToString() = "Y")
+						cboSOControl.SelectedValue = dt.Rows[x]["SellOutControlCode"]
+					EndIf
+				EndFor	
+			Else
+				cboSOControl.SelectedValue = ItemStyle.SellOutControl
+			EndIf
+			
+			If ((ItemStyle <> *Nothing *AND ItemStyle.SellingChannel = "Z") *OR (ItemsBO <> *Nothing *AND ItemsBO.SellingChannel = "Z"))
+				cboSOControl.SelectedValue = "1" // Sell Out Immediately 
+			EndIf
+			
+			// Special Handling Codes
+			ItemsBO.GetSpecialHandlingCodesTbl()
+			cboSHCode.DataSource = ItemsBO.SpiceDataSet.Tables("SpecialHandlingCodesTable")			
+			cboSHCode.DisplayMember = "CodeAndDescription"
+			cboSHCode.ValueMember   = "SpecialHandlingCode"
+			If (ItemStyle.SpecialHandlingCode = *Nothing)
+				cboSHCode.SelectedIndex = -1
+			Else
+				cboSHCode.SelectedValue = ItemStyle.SpecialHandlingCode
+			EndIf
+			
+			// Reset the override object
+			m_ItemSizeOverride.OverrideOfferEffectiveDate = *False		
+			m_ItemSizeOverride.OverrideSelloutControl = *False
+			m_ItemSizeOverride.OverrideSuppressBackOrderCard = *False
+//			If(m_ItemSizeOverride.OverrideSellingChannel = *True)
+//				m_ItemSizeOverride.Reset()
+//				m_ItemSizeOverride.OverrideSellingChannel = *True
+//			Else
+//				m_ItemSizeOverride.Reset()
+//			EndIf
+							
+			*this.m_formLoaded = *True
+		Catch e Exception
+			Throw e
+		EndTry								
+	EndSr
+	
+	BegFunc StringDateValueToDateTime Type(DateTime) Access(*Public)
+		DclSrParm strDate   Type(String) 				
+		/*  JB: This function converts a string date value (format YYYYMMDD), as stored in the AS400,
+			to a datetime type and returns the datetime.
+		 */		 		
+		DclFld strYear      Type(String)
+		DclFld strMonth     Type(String)
+		DclFld strDay       Type(String)
+		DclFld dtmDate      Type(DateTime)		
+		
+		dtmDate = DateTime.Now
+		Try
+			If(strDate.Length >= 6)
+				strYear = strDate.Substring(0,4)
+				strMonth = strDate.Substring(4,2)
+				strDay = strDate.Substring(6,2)
+				dtmDate = *New DateTime(Int16.Parse(strYear),Int16.Parse(strMonth),Int16.Parse(strDay))
+			Else
+				dtmDate = DateTime.Now
+			EndIf			
+		Catch Name(exc) Type(System.Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)			
+		EndTry	
+				
+		LeaveSR dtmDate 
+	EndFunc
+	
+	BegFunc DateTimeToStringDateValue Type(String) Access(*Public)
+		DclSrParm dateToConvert Type(DateTime)				
+		/*  JB: This function converts a datetime to a string date value (format YYYYMMDD), as stored in the AS400
+			and returns the string value.
+		 */
+		DclFld strDate      Type(String)	
+								
+		strDate = String.Empty		
+		
+		Try
+			strDate = dateToConvert.Year.ToString() + dateToConvert.Month.ToString().PadLeft(2, O'0') + dateToConvert.Day.ToString().PadLeft(2,O'0')
+		Catch e Exception
+			Throw e
+		EndTry
+		
+		LeaveSR strDate		
+	EndFunc
+
+	BegFunc ConvertUpsellTextToDCNotes Type(String) Access(*Public)
+		DclSrParm upsellText Type(String)
+	
+		Dclarray separator type(*string) rank(1)
+		Dclarray strSplitArr type(*string) rank(1)
+		DclFld sb Type(StringBuilder)
+		DclFld Position         Type(Int16)
+		
+		errorProvider1.Clear()
+		
+		Try
+			separator = *new *string[] {"\r\n"}		
+			strSplitArr = upsellText.Split(separator,StringSplitOptions.None)
+			sb = *new StringBuilder() 
+	        
+			For Index(Position = *Zero) To(strSplitArr.Length - 1)
+				strSplitArr[Position] = strSplitArr[Position].PadRight(50,O' ')
+				sb.Append(strSplitArr[Position])
+			EndFor
+		Catch e Exception
+			Throw e
+		EndTry	
+        LeaveSR sb.ToString()           
+	EndFunc	
+	
+	BegFunc DoUpdate Type(Boolean) Access(*Public)
+		DclFld sb Type(StringBuilder)
+		DclFld result Type(Boolean)
+		DclFld pad Type(System.Char)
+		DclFld dcNotes Type(String)
+		result = *false
+		errorProvider1.Clear()
+		
+		sb = *New StringBuilder()
+		pad = System.Convert.ToChar(" ")
+								
+		Try		
+			
+			ForEach line Collection(txtDCNotes.Lines) Type(String)
+				sb.Append(line.Trim().PadRight(50,pad))
+			EndFor
+			ItemStyle.DCNotes = sb.ToString().Replace(System.Environment.NewLine, "")
+			ItemsBO.DCNotes = sb.ToString().Replace(System.Environment.NewLine, "")
+			
+			ItemSize.OfferEffectiveDate = DateTimeToStringDateValue(dtOfferEffectiveDate.Value)
+			ItemSize.SellOutControl = SafeStringValue(cboSOControl.SelectedValue)
+		
+			If chkSpecialHandling.Checked = *True
+				ItemStyle.SpecialHandling = "Y"
+				ItemsBO.SpecialHandling  = "Y"				
+			Else
+				ItemStyle.SpecialHandling = "N"
+				ItemsBO.SpecialHandling = "N"
+			EndIf
+			
+			If chkSuppressBOCard.Checked = *True			
+				ItemStyle.SuppressBackOrderCard = *True
+				ItemSize.SuppressBackOrderCard = *True
+				ItemsBO.SuppressBackOrderCard = *True
+			Else
+				ItemStyle.SuppressBackOrderCard = *False
+				ItemSize.SuppressBackOrderCard = *False
+				ItemsBO.SuppressBackOrderCard = *False
+			EndIf
+	
+			If chkDropShip.Checked = *True
+				ItemStyle.DropShip = "Y"
+				ItemsBO.DropShip = "Y"
+			Else
+				ItemStyle.DropShip = "N"
+				ItemsBO.DropShip = "N"
+			EndIf
+			
+			ItemStyle.UserField1 = txtUserField1.Text
+			ItemsBO.UserField1 = txtUserField1.Text
+			ItemStyle.UserField2 = txtUserField2.Text
+			ItemsBO.UserField2 = txtUserField2.Text
+			
+			ItemStyle.SellOutControl = SafeStringValue(cboSOControl.SelectedValue)
+			ItemStyle.ThirdPartySeller = SafeStringValue(cboThirdPartySeller.SelectedValue)
+			ItemStyle.SpecialHandlingCode = SafeStringValue(cboSHCode.SelectedValue)
+			ItemStyle.ItemShipAlone = SafeStringValue(cboItemShipAlone.SelectedValue)
+			ItemStyle.OfferEffectiveDate = DateTimeToStringDateValue(dtOfferEffectiveDate.Value)
+			
+			ItemsBO.SellOutControl = SafeStringValue(cboSOControl.SelectedValue)
+			ItemsBO.ThirdPartySeller = SafeStringValue(cboThirdPartySeller.SelectedValue)
+			ItemsBO.SpecialHandlingCode = SafeStringValue(cboSHCode.SelectedValue)
+			ItemsBO.ItemShipAlone = SafeStringValue(cboItemShipAlone.SelectedValue)
+			ItemsBO.OfferEffectiveDate = DateTimeToStringDateValue(dtOfferEffectiveDate.Value)
+							
+			result = *true
+		Catch e Exception
+		EndTry	
+		
+		LeaveSR result	
+    EndFunc
+	
+	BegFunc SafeStringValue Type(String) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR controlValue.ToString()
+		Catch Name(e) Type(Exception)
+			LeaveSR String.Empty
+		EndTry
+	EndFunc
+	
+	/EndRegion
+
+	BegFunc ValidateControls Type(Boolean) Access(*Public)
+		DclFld result Type(Boolean)
+		
+		result = *False
+				
+		If (cboSOControl.SelectedIndex = -1)
+			*this.errorProvider1.SetError(cboSOControl,"Select a Sellout Control")			
+			LeaveSR result
+		EndIf
+
+		If(chkSpecialHandling.Checked)
+			If (cboSHCode.SelectedIndex = -1)
+				*this.errorProvider1.SetError(cboSHCode,"Select a Special Handling code")			
+				LeaveSR result
+			EndIf
+		EndIf
+		
+		result = *True
+		LeaveSR result
+	EndFunc
+
+
+	BegSr btnHelp_Click Access(*Private)  Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()		
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+	EndSr
+	
+	BegSr btnNext_Click Access(*Private)  Event(*this.btnNext.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		DclFld valid Type(Boolean)
+		DclFld sb Type(StringBuilder)
+		
+		sb = *New StringBuilder()
+		
+		sb.Append("The UPSELL text, which is stored in Mozart, is required to include")
+		sb.Append(" lines of text to a maximum of 50 characters and to a maximum of 20 lines")
+		
+		If(CheckDCNotes() = *False)	
+			errorProvider1.SetError(*this.txtDCNotes, sb.ToString())
+			LeaveSR
+		EndIf
+		
+		valid = ValidateControls()
+		if (valid = *True)
+			DoUpdate()
+			
+			DialogResult = DialogResult.OK
+			*this.Hide()
+		EndIf
+	EndSr
+	
+	BegFunc CheckDCNotes Type(Boolean) Access(*Private)
+		DclFld result Type(Boolean)
+		DclFld lineCount Type(*Integer4)
+		
+		result = *True
+		lineCount = 0
+		
+		ForEach line Collection(txtDCNotes.Lines) Type(String)
+			lineCount = lineCount + 1
+			If(line.Trim().Length > 50)
+				result = *False
+			EndIf
+		EndFor
+		
+		If(lineCount > 20)
+			result = *False	
+		EndIf
+		
+		LeaveSR result
+	EndFunc
+	
+	BegSr btnBack_Click Access(*Private)  Event(*this.btnBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DialogResult = DialogResult.Retry
+		
+		DoUpdate()
+		
+		*this.Hide()
+	EndSr
+	
+	BegSr ChangeOnlineEcomDetails_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+        
+        errorProvider1.Clear()
+	    
+	    dtOfferEffectiveDate.Format = DateTimePickerFormat.Custom
+	    *this.dtOfferEffectiveDate.CustomFormat = DateFormats.DatePickerFormat
+	    
+		// Occurs when form is first loaded.
+		// Put form "startup" code here (ie open files).
+		dtOfferEffectiveDate.Focus()
+		
+	EndSr
+		
+	BegSr ChangeOnlineEcomDetails_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+        
+        errorProvider1.Clear()
+        
+		// Occurs when form is closing.    
+		// Put form "housecleaning" code here (ie close files).
+	EndSr
+		
+	BegSr ChangeOnlineEcomDetails_Shown Access(*Private) Event(*this.Shown)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()
+		
+		dtOfferEffectiveDate.Focus()
+	EndSr	
+	
+	BegSr chkSpecialHandling_CheckedChanged Access(*Private) Event(*this.chkSpecialHandling.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()
+		
+		If (chkSpecialHandling.Checked)
+			cboSHCode.Enabled = *True
+		Else
+			cboSHCode.SelectedValue = "-1"
+			cboSHCode.Enabled = *False
+		EndIf
+	EndSr
+	
+	BegSr cboSOControl_SelectedIndexChanged Access(*Private)  Event(*this.cboSOControl.SelectedIndexChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()
+		
+		If (m_formLoaded = *True)
+			m_SelloutControlChanged = *True
+			DclFld retCode Type(*Integer4)
+			DclFld sb Type(StringBuilder)
+			sb = *New StringBuilder() 
+			sb.Append("Do you want to set this attribute for all sizes?")
+			MSGBOX MSG (sb.ToString()) TITLE ('Update Item Sizes - Sellout Control') BUTTONS (*YesNo) ICON (*Exclamation) DFTBUTTON (2) TOPMOST (*YES) RTNCODE(retCode) 
+			If (RetCode = 6) 
+				//MSGBOX MSG ('Yes pressed') 
+				m_ItemSizeOverride.OverrideSelloutControl = *True
+				m_ItemSizeOverride.SellOutControl = cboSOControl.SelectedValue.ToString()						
+			EndIf 
+			If (RetCode = 2) 
+				//MSGBOX MSG ('Cancel pressed') 
+				m_ItemSizeOverride.OverrideSelloutControl = *False
+				m_ItemSizeOverride.SellOutControl = ""
+			EndIf 
+			If (RetCode = 7) 
+				//MSGBOX MSG ('No pressed') 
+				m_ItemSizeOverride.OverrideSelloutControl = *False
+				m_ItemSizeOverride.SellOutControl = ""
+			EndIf 
+		EndIf
+	EndSr
+	
+	BegSr dtOfferEffectiveDate_ValueChanged Access(*Private) Event(*this.dtOfferEffectiveDate.ValueChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+	EndSr
+	
+	BegSr chkSuppressBOCard_CheckedChanged Access(*Private)  Event(*this.chkSuppressBOCard.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()
+		
+		If (m_formLoaded = *True)
+			DclFld retCode Type(*Integer4)
+			DclFld sb Type(StringBuilder)
+			sb = *New StringBuilder() 
+			sb.Append("Do you want to set this attribute for all sizes?")
+			MSGBOX MSG (sb.ToString()) TITLE ('Update Item Sizes - Suppress B/O Card') BUTTONS (*YesNo) ICON (*Exclamation) DFTBUTTON (2) TOPMOST (*YES) RTNCODE(retCode) 
+			If (RetCode = 6) 
+				//MSGBOX MSG ('Yes pressed') 
+				m_ItemSizeOverride.OverrideSuppressBackOrderCard = *True
+				m_ItemSizeOverride.SuppressBackOrderCard = chkSuppressBOCard.Checked
+			EndIf 
+			If (RetCode = 2) 
+				//MSGBOX MSG ('Cancel pressed') 
+				m_ItemSizeOverride.OverrideSuppressBackOrderCard = *False
+				m_ItemSizeOverride.SuppressBackOrderCard = *False
+			EndIf 
+			If (RetCode = 7) 
+				//MSGBOX MSG ('No pressed') 
+				m_ItemSizeOverride.OverrideSuppressBackOrderCard = *False
+				m_ItemSizeOverride.SuppressBackOrderCard = *False
+			EndIf 
+		EndIf	
+	EndSr	
+	
+	BegSr lblLThirdPartySeller_Click Access(*Private) Event(*this.lblLThirdPartySeller.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		errorProvider1.Clear()		
+	EndSr
+	
+	BegSr txtDCNotes_MultilineChanged Access(*Private) Event(*this.txtDCNotes.MultilineChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()				
+	EndSr
+	
+	BegSr txtDCNotes_KeyDown Access(*Private) Event(*this.txtDCNotes.KeyDown)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.KeyEventArgs
+		
+		errorProvider1.Clear()
+	EndSr
+	
+	BegSr txtDCNotes_Enter Access(*Private) Event(*this.txtDCNotes.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()
+	EndSr
+	
+	BegSr txtDCNotes_KeyPress Access(*Private) Event(*this.txtDCNotes.KeyPress)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.KeyPressEventArgs
+		
+		DclFld currentColumn Type(Int32)
+		DclFld currentLine Type(Int32)
+				
+		currentColumn = *this.txtDCNotes.SelectionStart - *this.txtDCNotes.GetFirstCharIndexOfCurrentLine() + 1
+		currentLine = *this.txtDCNotes.GetLineFromCharIndex(*this.txtDCNotes.SelectionStart) + 1
+		
+		If (currentColumn > 50)
+			e.Handled = *True
+			errorProvider1.SetError(txtDCNotes, "A line of text cannot exceed 50 characters per line")
+		EndIf
+		
+	EndSr
+	
+	BegSr txtDCNotes_TextChanged Access(*Private) Event(*this.txtDCNotes.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld currentColumn Type(Int32)
+		DclFld currentLine Type(Int32)
+				
+		currentColumn = *this.txtDCNotes.SelectionStart - *this.txtDCNotes.GetFirstCharIndexOfCurrentLine() + 1
+		currentLine = *this.txtDCNotes.GetLineFromCharIndex(*this.txtDCNotes.SelectionStart) + 1
+		
+		If(currentColumn > 50)
+			errorProvider1.SetError(txtDCNotes, "A line of text cannot exceed 50 characters per line")
+		EndIf
+	EndSr	
+	
+	BegSr chkSuppressBOCard_CheckedChanged_1 Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+	EndSr
+	
+	BegSr Form_Closing Access(*Private) Event(*this.Closing)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+		DclFld ReturnCode Type(Int16)
+		
+		If *this.DialogResult = DialogResult.Cancel
+			MsgBox 'Are you sure you want to Cancel?' RtnCode(ReturnCode) Buttons(*YesNo) Title("Cancel ?") Icon(*Question)
+			If ReturnCode.Equals(6)
+				*this.DialogResult = DialogResult.Abort
+			Else
+				e.Cancel = *true
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr dtOfferEffectiveDate_Validating Access(*Private) Event(*this.dtOfferEffectiveDate.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs				
+	EndSr
+	
+	BegSr dtOfferEffectiveDate_Validated Access(*Private) Event(*this.dtOfferEffectiveDate.Validated)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider1.Clear()
+				
+		Try 
+			If (m_formLoaded = *True *AND m_OEDateChanged = *True)
+				m_OfferEffectiveDateChanged = *True
+				DclFld retCode Type(*Integer4)
+				DclFld sb Type(StringBuilder)
+				sb = *New StringBuilder() 
+				sb.Append("Do you want to set this attribute for all sizes?")
+				MSGBOX MSG (sb.ToString()) TITLE ('Update Item Sizes - Offer Effective Date') BUTTONS (*YesNo) ICON (*Exclamation) DFTBUTTON (2) TOPMOST (*YES) RTNCODE(retCode) 
+				If (RetCode = 6) 
+					//MSGBOX MSG ('Yes pressed') 
+					m_ItemSizeOverride.OverrideOfferEffectiveDate = *True
+					m_ItemSizeOverride.OfferEffectiveDate = DateTimeToStringDateValue(dtOfferEffectiveDate.Value)
+				EndIf 
+				If (RetCode = 2) 
+					//MSGBOX MSG ('Cancel pressed')  
+					m_ItemSizeOverride.OverrideOfferEffectiveDate = *False
+					m_ItemSizeOverride.OfferEffectiveDate = -1
+				EndIf 
+				If (RetCode = 7) 
+					//MSGBOX MSG ('No pressed') 
+					m_ItemSizeOverride.OverrideOfferEffectiveDate = *False
+					m_ItemSizeOverride.OfferEffectiveDate = -1
+				EndIf 
+				m_OEDateChanged = *False
+			EndIf
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry
+	EndSr
+	
+	BegSr dtOfferEffectiveDate_TextChanged Access(*Private) Event(*this.dtOfferEffectiveDate.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If (dtOfferEffectiveDate.Value <> m_OEDateOnLoad)
+			m_OEDateChanged = *True
+		EndIf		
+	EndSr
+	BegSr dtOfferEffectiveDate_FontChanged Access(*Private) Event(*this.dtOfferEffectiveDate.FontChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+	EndSr
+EndClass

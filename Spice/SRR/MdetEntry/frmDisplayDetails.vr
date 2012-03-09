@@ -1,0 +1,1304 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using TheDisneyStore.Dash
+
+
+BegClass Form1 Extends(System.Windows.Forms.Form) Access(*Public)
+	/Region AVR Generated Definitions
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtSRCLS System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSRVEN System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSRSTR System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSRSTY System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSRCLR System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSRSIZ System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld btnAdd System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnExit System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld lblStore System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld dgview System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld ProgressBar System.Windows.Forms.ToolStripProgressBar Access(*Private) WithEvents(*Yes)
+	DclFld btnBack System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnMore System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnContinue System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	DclFld G1Item System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G1Desc System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G1store System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G1StoreName System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G1OROS System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld GIFORWARD System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld GICOVER System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld GIALLOC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld GISMOOTH System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld G1Update System.Windows.Forms.DataGridViewButtonColumn Access(*Private) WithEvents(*Yes)
+	DclFld G1Delete System.Windows.Forms.DataGridViewButtonColumn Access(*Private) WithEvents(*Yes)
+	DclFld G1DEPT System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	//DclFld userCheck  Type(TheDisneyStore.Dash.General_Functions.UserFunctions) new()
+	/EndRegion
+		
+	DclFld frmMaintainDetails Type(frmMaintainDetails) 
+	//DclConst MemoryFileNoOfRecords Value(50)
+	DclConst Digits Value('0123456789')
+	DclFld @Pos Type(*Packed) Len(3,0)
+	Dclfld StoreKey Type(*Zoned) Len(3,0)
+	DclFld Level Type(*Packed) Len(2,0)
+	DclFld ErrorCount Type(*Packed) Len(3,0)
+	DclFld wRebuild Type(*Boolean) 
+	DclFld x			Type( *Integer4 )
+	
+	/Region Database definition
+	DclDB Name(SRR) DBName("TDST") 
+	
+	DclDiskFile Name(StoreMaster) Type(*Input) Org(*Indexed) +
+		 ImpOpen(*No) DB(SRR) File('*Libl/DSSTORE')
+	
+	DclDiskFile Name(ItemDetails) Type(*Input) Org(*Indexed) +
+		 ImpOpen(*No) DB(SRR) File('*Libl/DSSRDTLJ') NetBlockFactor(50)
+	
+	DclDiskFile Name(ItemDetails2) Type(*Input) Org(*Indexed) +
+		 ImpOpen(*No) DB(SRR) File('*Libl/DSSRDTLJ2') NetBlockFactor(50) RnmFmt(DTLJ2)
+	
+	DclDiskFile Name(ItemHeader) Type(*Input) Org(*Indexed) +
+		DB(SRR) File('*Libl/DSITHDR') ImpOpen(*No)
+	
+	DclMemoryFile	Name(MemFile)				+
+					DBDesc(SRR)		            +
+					FileDesc("*Libl/SRRITEMS")	+
+					ImpOpen(*No)
+	/EndRegion
+	
+	/Region Key Lists
+	// Key list used to read The Item Description file (IPITHDR)			
+//	DclKList Name(ItemDescKey)
+//	DclKFld  Name( SRCLS )
+//	DclKFld  Name( SRVEN )
+//	DclKFld  Name( SRSTY )
+//	DclKFld  Name( SRCLR )
+//	DclKFLD  Name( SRSIZ )
+	
+	DclFld K_SRCLS Like(SRCLS)
+	DclFld K_SRVEN Like(SRVEN)
+	DclFld K_SRSTY Like(SRSTY)
+	DclFld K_SRCLR Like(SRCLR)
+	DclFld K_SRSIZ Like(SRSIZ)
+	DclFld K_SRSTR Like(SRSTR)
+	
+	// Key list used to read The Item Description file (IPITHDR)			
+//	DclKList Name(ItemMasterKey)
+//	DclKFld  Name( K_SRCLS )
+//	DclKFld  Name( K_SRVEN )
+//	DclKFld  Name( K_SRSTY )
+//	DclKFld  Name( K_SRCLR )
+//	DclKFLD  Name( K_SRSIZ )
+	
+	/EndRegion
+
+	BegConstructor Access(*Public)
+		//
+ 	dclsrparm	externalpgmdb	type(asna.VisualRPG.Runtime.Database)
+		//
+		InitializeComponent()
+		
+		// Set Connection  
+	*this.SRR = externalpgmdb
+	    
+	EndConstructor
+	
+	BegConstructor Access(*Public)
+		//
+		//
+		InitializeComponent()
+		
+		// Set Connection  
+	    
+	EndConstructor
+	
+
+	/region Windows Form Designer generated code
+    
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(Form1))
+		*this.txtSRCLS = *new System.Windows.Forms.TextBox()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.txtSRVEN = *new System.Windows.Forms.TextBox()
+		*this.txtSRSTR = *new System.Windows.Forms.TextBox()
+		*this.txtSRSTY = *new System.Windows.Forms.TextBox()
+		*this.txtSRCLR = *new System.Windows.Forms.TextBox()
+		*this.txtSRSIZ = *new System.Windows.Forms.TextBox()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.ProgressBar = *new System.Windows.Forms.ToolStripProgressBar()
+		*this.btnAdd = *new System.Windows.Forms.Button()
+		*this.btnExit = *new System.Windows.Forms.Button()
+		*this.lblStore = *new System.Windows.Forms.Label()
+		*this.dgview = *new System.Windows.Forms.DataGridView()
+		*this.G1Item = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G1Desc = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G1store = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G1StoreName = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G1OROS = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.GIFORWARD = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.GICOVER = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.GIALLOC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.GISMOOTH = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.G1Update = *new System.Windows.Forms.DataGridViewButtonColumn()
+		*this.G1Delete = *new System.Windows.Forms.DataGridViewButtonColumn()
+		*this.G1DEPT = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.btnContinue = *new System.Windows.Forms.Button()
+		*this.btnMore = *new System.Windows.Forms.Button()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.btnBack = *new System.Windows.Forms.Button()
+		*this.statusStrip1.SuspendLayout()
+		(*this.dgview *As System.ComponentModel.ISupportInitialize).BeginInit()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//txtSRCLS
+		//
+		*this.txtSRCLS.Location = *new System.Drawing.Point(48, 7)
+		*this.txtSRCLS.MaxLength = 4
+		*this.txtSRCLS.Name = "txtSRCLS"
+		*this.txtSRCLS.Size = *new System.Drawing.Size(47, 20)
+		*this.txtSRCLS.TabIndex = 0
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(4, 10)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(27, 13)
+		*this.label1.TabIndex = 1
+		*this.label1.Text = "Item"
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(4, 43)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(32, 13)
+		*this.label2.TabIndex = 2
+		*this.label2.Text = "Store"
+		//
+		//txtSRVEN
+		//
+		*this.txtSRVEN.Location = *new System.Drawing.Point(104, 7)
+		*this.txtSRVEN.MaxLength = 5
+		*this.txtSRVEN.Name = "txtSRVEN"
+		*this.txtSRVEN.Size = *new System.Drawing.Size(56, 20)
+		*this.txtSRVEN.TabIndex = 1
+		//
+		//txtSRSTR
+		//
+		*this.txtSRSTR.Location = *new System.Drawing.Point(48, 40)
+		*this.txtSRSTR.MaxLength = 3
+		*this.txtSRSTR.Name = "txtSRSTR"
+		*this.txtSRSTR.Size = *new System.Drawing.Size(32, 20)
+		*this.txtSRSTR.TabIndex = 5
+		//
+		//txtSRSTY
+		//
+		*this.txtSRSTY.Location = *new System.Drawing.Point(169, 7)
+		*this.txtSRSTY.MaxLength = 4
+		*this.txtSRSTY.Name = "txtSRSTY"
+		*this.txtSRSTY.Size = *new System.Drawing.Size(47, 20)
+		*this.txtSRSTY.TabIndex = 2
+		//
+		//txtSRCLR
+		//
+		*this.txtSRCLR.Location = *new System.Drawing.Point(225, 7)
+		*this.txtSRCLR.MaxLength = 3
+		*this.txtSRCLR.Name = "txtSRCLR"
+		*this.txtSRCLR.Size = *new System.Drawing.Size(32, 20)
+		*this.txtSRCLR.TabIndex = 3
+		//
+		//txtSRSIZ
+		//
+		*this.txtSRSIZ.Location = *new System.Drawing.Point(266, 7)
+		*this.txtSRSIZ.MaxLength = 4
+		*this.txtSRSIZ.Name = "txtSRSIZ"
+		*this.txtSRSIZ.Size = *new System.Drawing.Size(47, 20)
+		*this.txtSRSIZ.TabIndex = 4
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.ProgressBar})
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 611)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Size = *new System.Drawing.Size(992, 22)
+		*this.statusStrip1.TabIndex = 6
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//ProgressBar
+		//
+		*this.ProgressBar.Maximum = 200
+		*this.ProgressBar.Name = "ProgressBar"
+		*this.ProgressBar.Size = *new System.Drawing.Size(100, 16)
+		*this.ProgressBar.Step = 1
+		*this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+		//
+		//btnAdd
+		//
+		*this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnAdd.Location = *new System.Drawing.Point(719, 570)
+		*this.btnAdd.Name = "btnAdd"
+		*this.btnAdd.Size = *new System.Drawing.Size(75, 23)
+		*this.btnAdd.TabIndex = 8
+		*this.btnAdd.Text = "&Add"
+		*this.btnAdd.UseVisualStyleBackColor = *True
+		//
+		//btnExit
+		//
+		*this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnExit.Location = *new System.Drawing.Point(905, 570)
+		*this.btnExit.Name = "btnExit"
+		*this.btnExit.Size = *new System.Drawing.Size(75, 23)
+		*this.btnExit.TabIndex = 9
+		*this.btnExit.Text = "E&xit"
+		*this.btnExit.UseVisualStyleBackColor = *True
+		//
+		//lblStore
+		//
+		*this.lblStore.AutoSize = *True
+		*this.lblStore.Location = *new System.Drawing.Point(115, 46)
+		*this.lblStore.Name = "lblStore"
+		*this.lblStore.Size = *new System.Drawing.Size(63, 13)
+		*this.lblStore.TabIndex = 10
+		*this.lblStore.Text = "Store Name"
+		//
+		//dgview
+		//
+		*this.dgview.AllowUserToAddRows = *False
+		*this.dgview.AllowUserToDeleteRows = *False
+		*this.dgview.AllowUserToResizeRows = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((255 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		*this.dgview.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.dgview.Anchor = ((((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Bottom) *BitOr System.Windows.Forms.AnchorStyles.Left) *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.dgview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dgview.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.G1Item, *this.G1Desc, *this.G1store, *this.G1StoreName, *this.G1OROS, *this.GIFORWARD, *this.GICOVER, *this.GIALLOC, *this.GISMOOTH, *this.G1Update, *this.G1Delete, *this.G1DEPT})
+		*this.dgview.GridColor = System.Drawing.SystemColors.Info
+		*this.dgview.Location = *new System.Drawing.Point(9, 73)
+		*this.dgview.Name = "dgview"
+		*this.dgview.ReadOnly = *True
+		*this.dgview.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+		*this.dgview.Size = *new System.Drawing.Size(971, 445)
+		*this.dgview.TabIndex = 7
+		//
+		//G1Item
+		//
+		*this.G1Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.G1Item.DataPropertyName = "M_Item"
+		*this.G1Item.FillWeight = 95
+		*this.G1Item.HeaderText = "Item"
+		*this.G1Item.MaxInputLength = 24
+		*this.G1Item.Name = "G1Item"
+		*this.G1Item.ReadOnly = *True
+		*this.G1Item.Width = 155
+		//
+		//G1Desc
+		//
+		*this.G1Desc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.G1Desc.DataPropertyName = "M_Desc"
+		*this.G1Desc.FillWeight = 99.50125
+		*this.G1Desc.HeaderText = "Description"
+		*this.G1Desc.MaxInputLength = 25
+		*this.G1Desc.Name = "G1Desc"
+		*this.G1Desc.ReadOnly = *True
+		*this.G1Desc.Width = 150
+		//
+		//G1store
+		//
+		*this.G1store.DataPropertyName = "M_Store"
+		*this.G1store.FillWeight = 35
+		*this.G1store.HeaderText = "Store"
+		*this.G1store.MaxInputLength = 3
+		*this.G1store.Name = "G1store"
+		*this.G1store.ReadOnly = *True
+		*this.G1store.Width = 60
+		//
+		//G1StoreName
+		//
+		*this.G1StoreName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.G1StoreName.DataPropertyName = "M_StrName"
+		*this.G1StoreName.FillWeight = 55.50125
+		*this.G1StoreName.HeaderText = "Store Name"
+		*this.G1StoreName.MaxInputLength = 16
+		*this.G1StoreName.Name = "G1StoreName"
+		*this.G1StoreName.ReadOnly = *True
+		*this.G1StoreName.Width = 90
+		//
+		//G1OROS
+		//
+		*this.G1OROS.DataPropertyName = "M_Oros"
+		*this.G1OROS.FillWeight = 35
+		*this.G1OROS.HeaderText = "Op. ROS"
+		*this.G1OROS.MaxInputLength = 6
+		*this.G1OROS.Name = "G1OROS"
+		*this.G1OROS.ReadOnly = *True
+		*this.G1OROS.Width = 70
+		//
+		//GIFORWARD
+		//
+		*this.GIFORWARD.DataPropertyName = "M_FORWARD"
+		*this.GIFORWARD.HeaderText = "Uplift Factor"
+		*this.GIFORWARD.Name = "GIFORWARD"
+		*this.GIFORWARD.ReadOnly = *True
+		*this.GIFORWARD.Width = 70
+		//
+		//GICOVER
+		//
+		*this.GICOVER.DataPropertyName = "M_COVER"
+		*this.GICOVER.HeaderText = "Cover Cut off"
+		*this.GICOVER.Name = "GICOVER"
+		*this.GICOVER.ReadOnly = *True
+		*this.GICOVER.Width = 70
+		//
+		//GIALLOC
+		//
+		*this.GIALLOC.DataPropertyName = "M_ALLOC"
+		*this.GIALLOC.HeaderText = "Allocation Flag"
+		*this.GIALLOC.Name = "GIALLOC"
+		*this.GIALLOC.ReadOnly = *True
+		*this.GIALLOC.Width = 50
+		//
+		//GISMOOTH
+		//
+		*this.GISMOOTH.DataPropertyName = "M_SMOOTH"
+		*this.GISMOOTH.HeaderText = "Smoothing Factor"
+		*this.GISMOOTH.Name = "GISMOOTH"
+		*this.GISMOOTH.ReadOnly = *True
+		*this.GISMOOTH.Width = 70
+		//
+		//G1Update
+		//
+		*this.G1Update.DividerWidth = 2
+		*this.G1Update.FillWeight = 35.40066
+		*this.G1Update.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+		*this.G1Update.HeaderText = "Update"
+		*this.G1Update.Name = "G1Update"
+		*this.G1Update.ReadOnly = *True
+		*this.G1Update.Text = "Update"
+		*this.G1Update.ToolTipText = "Click here to update this record"
+		*this.G1Update.UseColumnTextForButtonValue = *True
+		*this.G1Update.Width = 70
+		//
+		//G1Delete
+		//
+		*this.G1Delete.DividerWidth = 2
+		*this.G1Delete.FillWeight = 35.40066
+		*this.G1Delete.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+		*this.G1Delete.HeaderText = "Delete"
+		*this.G1Delete.Name = "G1Delete"
+		*this.G1Delete.ReadOnly = *True
+		*this.G1Delete.Text = "Delete"
+		*this.G1Delete.ToolTipText = "Click here to delete this record"
+		*this.G1Delete.UseColumnTextForButtonValue = *True
+		*this.G1Delete.Width = 70
+		//
+		//G1DEPT
+		//
+		*this.G1DEPT.DataPropertyName = "M_Dept"
+		*this.G1DEPT.HeaderText = "Department"
+		*this.G1DEPT.Name = "G1DEPT"
+		*this.G1DEPT.ReadOnly = *True
+		*this.G1DEPT.Visible = *False
+		//
+		//btnContinue
+		//
+		*this.btnContinue.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnContinue.Location = *new System.Drawing.Point(626, 570)
+		*this.btnContinue.Name = "btnContinue"
+		*this.btnContinue.Size = *new System.Drawing.Size(75, 23)
+		*this.btnContinue.TabIndex = 6
+		*this.btnContinue.Text = "&Continue"
+		*this.btnContinue.UseVisualStyleBackColor = *True
+		//
+		//btnMore
+		//
+		*this.btnMore.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnMore.Location = *new System.Drawing.Point(905, 533)
+		*this.btnMore.Name = "btnMore"
+		*this.btnMore.Size = *new System.Drawing.Size(75, 22)
+		*this.btnMore.TabIndex = 6
+		*this.btnMore.Text = "&More"
+		*this.btnMore.UseVisualStyleBackColor = *True
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//btnBack
+		//
+		*this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnBack.Location = *new System.Drawing.Point(814, 570)
+		*this.btnBack.Name = "btnBack"
+		*this.btnBack.Size = *new System.Drawing.Size(75, 23)
+		*this.btnBack.TabIndex = 11
+		*this.btnBack.Text = "&Back"
+		*this.btnBack.UseVisualStyleBackColor = *True
+		//
+		//Form1
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(992, 633)
+		*this.Controls.Add(*this.btnBack)
+		*this.Controls.Add(*this.btnMore)
+		*this.Controls.Add(*this.btnContinue)
+		*this.Controls.Add(*this.dgview)
+		*this.Controls.Add(*this.lblStore)
+		*this.Controls.Add(*this.btnExit)
+		*this.Controls.Add(*this.btnAdd)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.txtSRSIZ)
+		*this.Controls.Add(*this.txtSRCLR)
+		*this.Controls.Add(*this.txtSRSTY)
+		*this.Controls.Add(*this.txtSRSTR)
+		*this.Controls.Add(*this.txtSRVEN)
+		*this.Controls.Add(*this.label2)
+		*this.Controls.Add(*this.label1)
+		*this.Controls.Add(*this.txtSRCLS)
+		*this.Icon = (resources.GetObject("$this.Icon") *As System.Drawing.Icon)
+		*this.Name = "Form1"
+		*this.ShowInTaskbar = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "SRR Maintain Item Details"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		*this.statusStrip1.ResumeLayout(*False)
+		*this.statusStrip1.PerformLayout()
+		(*this.dgview *As System.ComponentModel.ISupportInitialize).EndInit()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+
+	/endregion
+
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+	/region Enter Item code	and Store code
+	BegSr moveToSRVEN Access(*Private) Event(*this.txtSRCLS.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorProvider1.SetError(txtSRCLS, String.Empty)
+		
+		If txtSRCLS.Text = "ALL"
+		   LeaveSR
+		Endif
+		   
+		@Pos = %Check(Digits, txtSRCLS.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRCLS, "Only numbers are allowed")
+		EndIf
+				
+		If txtSRCLS.TextLength = 4
+			txtSRVEN.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToSRSTY Access(*Private) Event(*this.txtSRVEN.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorProvider1.SetError(txtSRVEN, String.Empty)
+		
+		If txtSRVEN.Text = "ALL"
+		   LeaveSR
+		Endif
+		
+		@Pos = %Check(Digits, txtSRVEN.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRVEN, "Only numbers are allowed")
+		EndIf
+		
+		If txtSRVEN.TextLength = 5
+			txtSRSTY.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToSRCLR Access(*Private) Event(*this.txtSRSTY.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorProvider1.SetError(txtSRSTY, String.Empty)
+		
+		If txtSRSTY.Text = "ALL"
+		   LeaveSR
+		Endif
+		
+		@Pos = %Check(Digits, txtSRSTY.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRSTY, "Only numbers are allowed")
+		EndIf
+		
+		If txtSRSTY.TextLength = 4
+			txtSRCLR.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToSRSIZ Access(*Private) Event(*this.txtSRCLR.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorProvider1.SetError(txtSRCLR, String.Empty)
+		
+		If txtSRCLR.Text = "ALL"
+		   LeaveSR
+		Endif
+		
+		@Pos = %Check(Digits, txtSRCLR.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRCLR, "Only numbers are allowed")
+		EndIf
+		
+		If txtSRCLR.TextLength = 3
+			txtSRSIZ.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToSRSTR Access(*Private) Event(*this.txtSRSIZ.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrorProvider1.SetError(txtSRSIZ, String.Empty)
+		
+		If txtSRSIZ.Text = "ALL"
+		   LeaveSR
+		Endif
+		
+		@Pos = %Check(Digits, txtSRSIZ.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRSIZ, "Only numbers are allowed")
+		EndIf
+		
+		If txtSRSIZ.TextLength = 4
+			txtSRSTR.Select()
+		EndIf
+	EndSr
+	
+	BegSr StoreCodeChanged Access(*Private) Event(*this.txtSRSTR.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtSRSTR.Text = "ALL"
+		   LeaveSR
+		Endif
+		
+		@Pos = %Check(Digits, txtSRSTR.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRSTR, "Only numbers are allowed")
+			LeaveSR
+		EndIf
+		
+		
+		If txtSRSTR.TextLength = 3
+			errorProvider1.SetError(txtSRSTR, String.Empty)
+			Storekey = txtSRSTR.text
+			Chain StoreMaster Key(StoreKey)
+			If StoreMaster.IsFound
+				lblStore.Text = DABNAM
+			Else
+				errorProvider1.SetError(txtSRSTR, "Store not found")
+			EndIf
+		EndIf
+		
+		
+	EndSr
+	/EndRegion
+
+	BegSr btnExit_Click Access(*Private) Event(*this.btnExit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		CloseDataBase()
+		
+		Unload *this
+	EndSr
+	
+	BegSr btnAdd_Click Access(*Private) Event(*this.btnAdd.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		
+		wRebuild = *False
+		
+		If (frmMaintainDetails = *Nothing) Or (frmMaintainDetails.isDisposed)
+			frmMaintainDetails = *New frmMaintainDetails(	'ADD', +
+															SRCLS, +
+															SRVEN, +
+															SRSTY, +
+															SRCLR, +
+															SRSIZ, +
+															SRSTR, +
+															0,     +
+															SRR )
+		EndIf
+
+		frmMaintainDetails.ShowDialog()
+		wRebuild = frmMaintainDetails.Rebuild = *True
+		frmMaintainDetails = *Nothing
+		
+		// Rebuild the Grid
+        If wRebuild *And dgView.Visible	= *True
+           Memfile.DataSet.Clear()
+           BuildGrid()
+         ElseIf dgview.Visible = *false
+          // Reset Screen one
+		   ResetScreen1()  
+        Endif
+		
+	EndSr
+	
+	BegSr btnContinue_Click Access(*Private) Event(*this.btnContinue.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		// Clear all errors.
+		ErrorCount = 0
+		ErrorProvider1.Clear()
+		
+		// Check that correct fields are entered to position file cursor
+		If txtSRSIZ.Text <> String.Empty And txtSRCLR.Text = String.Empty
+			ErrorProvider1.SetError(txtSRCLR, "This field must be entered")
+			ErrorCount += 1
+		EndIf
+		
+		If txtSRCLR.Text <> String.Empty And txtSRSTY.Text = String.Empty
+			ErrorProvider1.SetError(txtSRSTY, "This field must be entered")
+			ErrorCount += 1
+		EndIf
+		
+		If txtSRSTY.Text <> String.Empty And txtSRVEN.Text = String.Empty
+			ErrorProvider1.SetError(txtSRVEN, "This field must be entered")
+			ErrorCount += 1
+		EndIf
+		
+		If txtSRCLS.Text <> String.Empty
+		@Pos = %Check(Digits, txtSRCLS.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRCLS, "Only numbers are allowed")
+			ErrorCount += 1
+		EndIf
+		Endif
+		
+		If txtSRVEN.Text <> String.Empty
+		@Pos = %Check(Digits, txtSRVEN.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRVEN, "Only numbers are allowed")
+			ErrorCount += 1
+		EndIf
+		Endif
+		
+		@Pos = %Check(Digits, txtSRSTY.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRSTY, "Only numbers are allowed")
+			ErrorCount += 1
+		EndIf
+		
+		If txtSRCLR.Text <> String.Empty
+		@Pos = %Check(Digits, txtSRCLR.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRCLR, "Only numbers are allowed")
+			ErrorCount += 1
+		EndIf
+		Endif
+		
+		If txtSRSIZ.Text <> String.Empty
+		@Pos = %Check(Digits, txtSRSIZ.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRSIZ, "Only numbers are allowed")
+			ErrorCount += 1
+		EndIf
+		Endif
+		
+		If txtSRSTR.Text <> String.Empty
+		@Pos = %Check(Digits, txtSRSTR.Text)
+		If @Pos <> *Zero
+			ErrorProvider1.SetError(txtSRSTR, "Only numbers are allowed")
+			ErrorCount += 1
+		EndIf
+		Endif
+		
+		If ErrorCount > 0
+		   LeaveSR
+		Endif   
+		
+		If txtSRSTR.Text <> String.Empty
+			Storekey = txtSRSTR.text
+			Chain StoreMaster Key(StoreKey)
+			If StoreMaster.IsFound
+				lblStore.Text = DABNAM
+			Else
+				errorProvider1.SetError(txtSRSTR, "Store not found")
+				ErrorCount += 1
+			EndIf
+		EndIf
+		
+		// Validate Item #
+		If  txtSRCLS.Text <> String.Empty *And txtSRVEN.Text <> String.Empty *And +
+		    txtSRSTY.Text <> String.Empty *And txtSRCLR.Text <> String.Empty *And +
+		    txtSRSIZ.Text <> String.Empty 
+		    
+		    // Find IPITHDR record 
+		     
+			SRCLS  = Convert.ToInt32( txtSRCLS.Text )
+			SRVEN  = Convert.ToInt32( txtSRVEN.Text )
+			SRSTY  = Convert.ToInt32( txtSRSTY.Text )
+			SRCLR  = Convert.ToInt32( txtSRCLR.Text )
+			SRSIZ  = Convert.ToInt32( txtSRSIZ.Text )
+				
+			Chain ItemHeader Key(SRCLS, SRVEN, SRSTY, SRCLR, SRSIZ)
+		    If Not ItemHeader.IsFound   
+		       ErrorProvider1.SetError(txtSRSIZ, "Item Not Found")
+			   ErrorCount += 1
+		    Endif
+		    
+		Endif
+		
+		If ErrorCount <> *Zero
+			LeaveSR
+		EndIf
+
+		// What level has key been entered at
+		Select
+		 When txtSRSTR.Text = String.Empty
+		
+			Level = *Zero
+			Select
+			When txtSRSIZ.Text <> String.Empty
+				Level = 5
+			When txtSRCLR.Text <> String.Empty
+				Level = 4
+			When txtSRSTY.Text <> String.Empty
+				Level = 3
+			When txtSRVen.Text <> String.Empty
+				Level = 2
+			When txtSRCLS.Text <> String.Empty
+				Level = 1
+			EndSL
+		
+		// Build the grid according to users selection
+			BuildGrid()	
+	  
+	    When  txtSRSTR.Text <> String.Empty
+		    Level = 11
+			Select
+			When txtSRSIZ.Text <> String.Empty
+				Level = 10
+			When txtSRCLR.Text <> String.Empty
+				Level = 9
+			When txtSRSTY.Text <> String.Empty
+				Level = 8
+			When txtSRVen.Text <> String.Empty
+				Level = 7
+			When txtSRCLS.Text <> String.Empty
+				Level = 6
+			EndSL
+		
+		// Build the grid according to users selection
+			BuildGrid()	
+		EndSL
+		
+	EndSR
+	
+		
+	// Build the grid
+	BegSr BuildGrid  Access(*Private)	
+		
+		// Open File
+		If Level <=5
+			If Not ItemDetails.IsOpen
+			   Open ItemDetails
+			Endif
+		  Else
+			If Not ItemDetails2.IsOpen
+			  Open ItemDetails2
+			Endif
+		EndIf
+		
+		// Set range ready for reading file
+		// ITEM Level
+		Select
+		When Level = *Zero
+			Setll ItemDetails Key(*Start)
+			
+		When level = 1
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			SetRange ItemDetails Firstkey(K_SRCLS)
+			
+		When level = 2
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			SetRange ItemDetails Firstkey(K_SRCLS, K_SRVEN)
+			
+		When level = 3
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			K_SRSTY = Convert.ToInt32( txtSRSTY.Text )
+			SetRange ItemDetails Firstkey(K_SRCLS, K_SRVEN, K_SRSTY)
+			
+		When level = 4
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			K_SRSTY = Convert.ToInt32( txtSRSTY.Text )
+			K_SRCLR = Convert.ToInt32( txtSRCLR.Text )
+			SetRange ItemDetails Firstkey(K_SRCLS, K_SRVEN, K_SRSTY, K_SRCLR)
+			
+		When level = 5
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			K_SRSTY = Convert.ToInt32( txtSRSTY.Text )
+			K_SRCLR = Convert.ToInt32( txtSRCLR.Text )
+			K_SRSIZ = Convert.ToInt32( txtSRSIZ.Text )
+			SetRange ItemDetails Firstkey(K_SRCLS, K_SRVEN, K_SRSTY, K_SRCLR, K_SRSIZ)
+			
+			
+		// STORE	
+		When level = 6
+			K_SRSTR = Convert.ToInt32( txtSRSTR.Text )
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			SetRange ItemDetails2 Firstkey(K_SRSTR, K_SRCLS)
+			
+		When level = 7
+			K_SRSTR = Convert.ToInt32( txtSRSTR.Text )
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			SetRange ItemDetails2 Firstkey(K_SRSTR, K_SRCLS, K_SRVEN)
+			
+		When level = 8
+			K_SRSTR = Convert.ToInt32( txtSRSTR.Text )
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			K_SRSTY = Convert.ToInt32( txtSRSTY.Text )
+			SetRange ItemDetails2 Firstkey(K_SRSTR, K_SRCLS, K_SRVEN, K_SRSTY)
+			
+		When level = 9
+			K_SRSTR = Convert.ToInt32( txtSRSTR.Text )
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			K_SRSTY = Convert.ToInt32( txtSRSTY.Text )
+			K_SRCLR = Convert.ToInt32( txtSRCLR.Text )
+			SetRange ItemDetails2 Firstkey(K_SRSTR, K_SRCLS, K_SRVEN, K_SRSTY, K_SRCLR)
+			
+		When level = 10
+			K_SRSTR = Convert.ToInt32( txtSRSTR.Text )
+			K_SRCLS = Convert.ToInt32( txtSRCLS.Text )
+			K_SRVEN = Convert.ToInt32( txtSRVEN.Text )
+			K_SRSTY = Convert.ToInt32( txtSRSTY.Text )
+			K_SRCLR = Convert.ToInt32( txtSRCLR.Text )
+			K_SRSIZ = Convert.ToInt32( txtSRSIZ.Text )
+			SetRange ItemDetails2 Firstkey(K_SRSTR, K_SRCLS, K_SRVEN, K_SRSTY, K_SRCLR, K_SRSIZ)
+			
+		When Level = 11
+		    K_SRSTR = Convert.ToInt32( txtSRSTR.Text )
+			Setll ItemDetails2 Key(K_SRSTR)
+				
+		EndSL
+
+        // Set Descriptions in Text Boxes
+        
+		If txtSRSIZ.Text = String.Empty
+			txtSRSIZ.Text = "ALL"
+		Endif 	
+		If txtSRCLR.Text = String.Empty
+			txtSRCLR.Text = "ALL"
+		Endif 	
+		If txtSRSTY.Text = String.Empty
+			txtSRSTY.Text = "ALL"
+		Endif 	
+		If txtSRVen.Text = String.Empty
+			txtSRVen.Text = "ALL"
+		Endif 	
+		If txtSRCLS.Text = String.Empty
+			txtSRCLS.Text = "ALL"
+		Endif 
+		If txtSRSTR.Text = String.Empty
+			txtSRSTR.Text = "ALL"
+		Endif 
+
+     
+     	// Clear grid and load records
+		If MemFile.IsOpen
+			Memfile.DataSet.Clear()
+		Else
+			Open MemFile
+		EndIf
+		If Level <=5
+		   PopulateGrid()
+		 Else
+		   PopulateGrid2()
+		Endif   
+		
+		// Display grid
+		// Enable Text Boxes
+		*this.txtSrcls.Enabled = *False
+		*this.txtSrven.Enabled = *False
+		*this.txtSrsty.Enabled = *False
+		*this.txtSrclr.Enabled = *False
+		*this.txtSrsiz.Enabled = *False
+		*this.txtSRSTR.Enabled = *False
+		
+		btnBack.Enabled = *True
+		btnContinue.Hide()
+		dgview.DataSource = MemFile.DataSet 
+   		dgview.DataMember = "ItemList"
+		dgView.Visible	= *True
+	
+	EndSr
+	
+	BegSr PopulateGrid
+		ProgressBar.Value   = *Zero
+		ProgressBar.Visible = *True
+		btnMore.Visible = *True
+		btnMore.Enabled = *True
+		
+		// Open File
+		If Not ItemDetails.IsOpen
+		   Open ItemDetails
+		EndIf
+		
+		Do FromVal(1) ToVal( 200 ) Index( x )
+			Read ItemDetails
+			If ItemDetails.IsEof
+				ProgressBar.Value = 200
+				btnMore.Enabled = *False
+				Leave
+			EndIf
+			
+			ProgressBar.Increment(1)
+			
+			M_Item = SRCLS.toString('0000')  + '-' +  +
+			         SRVEN.toString('00000') + '-' +  +
+			         SRSTY.toString('0000')  + '-' +  +
+			         SRCLR.toString('000')   + '-' +  +
+			         SRSIZ.toString('0000')
+			        
+			M_Desc    = IDES
+			M_Store   = SRSTR
+			M_StrName = SNAM
+			M_ORos    = SROROS
+			M_DEPT    = SRDEPT
+			M_FORWARD = SRFFCT
+			M_COVER   =	SRCCO
+			M_ALLOC   =	SRAFLG
+			M_SMOOTH  = SRSFCT
+				
+			Write MemFile
+			
+		EndDo
+		
+		Close ItemDetails
+		
+		ProgressBar.Visible = *False
+		
+	EndSr
+	
+	BegSr PopulateGrid2
+		ProgressBar.Value   = *Zero
+		ProgressBar.Visible = *True
+		btnMore.Visible = *True
+		btnMore.Enabled = *True
+			
+		// Open File
+		If Not ItemDetails2.IsOpen
+		   Open ItemDetails2
+		EndIf
+		
+		Do FromVal(1) ToVal( 200 ) Index( x )
+			Read ItemDetails2
+			If ItemDetails2.IsEof
+				ProgressBar.Value = 200
+				btnMore.Enabled = *False
+				Leave
+			EndIf
+			
+			ProgressBar.Increment(1)
+			
+			M_Item = SRCLS.toString('0000')  + '-' +  +
+			         SRVEN.toString('00000') + '-' +  +
+			         SRSTY.toString('0000')  + '-' +  +
+			         SRCLR.toString('000')   + '-' +  +
+			         SRSIZ.toString('0000')
+			        
+			M_Desc    = IDES
+			M_Store   = SRSTR
+			M_StrName = SNAM
+			M_ORos    = SROROS
+			M_DEPT    = SRDEPT
+			M_FORWARD = SRFFCT
+			M_COVER   =	SRCCO
+			M_ALLOC   =	SRAFLG
+			M_SMOOTH  = SRSFCT
+				
+			Write MemFile
+			
+		EndDo
+		
+		Close ItemDetails2
+		
+		ProgressBar.Visible = *False
+		
+	EndSr
+		
+	
+	BegSr btnMore_Click Access(*Private) Event(*this.btnMore.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		If Level <=5
+		   PopulateGrid()
+		 Else
+		   PopulateGrid2()
+		Endif  
+	EndSr
+	
+	BegSr RowSelected Access(*Private) Event(*this.dgview.CellClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		Dclfld ItemNbr    Type(*Char) Len(24)
+		DclFld ColumnName Type(*Char)  len(8)
+				
+		Dclfld cls      Type(*Zoned) Len(4,0)
+		Dclfld ven      Type(*Zoned) Len(5,0)
+		Dclfld sty      Type(*Zoned) Len(4,0)
+		Dclfld clr      Type(*Zoned) Len(3,0)
+		Dclfld siz      Type(*Zoned) Len(4,0)
+		Dclfld StoreNbr Type(*Zoned) Len(3,0)
+		DclFld DeptNbr  Type(*Zoned) Len(3,0)
+		
+		SetMousePtr *Hourglass
+		
+//		Msgbox e.RowIndex.ToString()
+//		Msgbox e.ColumnIndex.ToString()
+	  
+	    Try
+		  ColumnName   = Convert.ToString( dgview.Columns[e.ColumnIndex].Name )
+	     Catch Err Exception
+	      LeaveSR
+	    EndTry
+		
+		Try
+			ItemNbr  = Convert.ToString( Dgview.Rows[e.RowIndex].Cells["G1ITEM"].Value )
+		Catch Err Exception
+			LeaveSR
+		EndTry
+		
+		cls = Convert.ToInt32( %SubSt(ItemNbr,1,4) )
+		ven = Convert.ToInt32( %SubSt(ItemNbr,6,5) )
+		sty = Convert.ToInt32( %SubSt(ItemNbr,12,4) )
+		clr = Convert.ToInt32( %SubSt(ItemNbr,17,3) )
+		siz = Convert.ToInt32( %subst(ItemNbr,21,4) )
+
+		StoreNbr = Convert.ToInt32( Dgview.Rows[e.RowIndex].Cells["G1STORE"].Value )
+		DeptNbr  = Convert.ToInt32( Dgview.Rows[e.RowIndex].Cells["G1DEPT"].Value )
+        wRebuild = *False
+
+		If ColumnName.ToUpper() = 'G1UPDATE'
+			If (frmMaintainDetails = *Nothing) Or (frmMaintainDetails.isDisposed)
+				frmMaintainDetails = *New frmMaintainDetails(	'UPDATE', +
+																CLS,      +
+																VEN,      +
+																STY,      +
+																CLR,      +
+																SIZ,      +
+																StoreNbr, +
+																DeptNbr, SRR)
+			EndIf
+            
+			frmMaintainDetails.ShowDialog()
+			wRebuild = frmMaintainDetails.Rebuild = *True
+			frmMaintainDetails = *Nothing
+			
+		ElseIf ColumnName.ToUpper() = 'G1DELETE'
+			If (frmMaintainDetails = *Nothing) Or (frmMaintainDetails.isDisposed)
+				frmMaintainDetails = *New frmMaintainDetails(	'DELETE', +
+																CLS,      +
+																VEN,      +
+																STY,      +
+																CLR,      +
+																SIZ,      +
+																StoreNbr, +
+																DeptNbr, SRR )
+																
+			EndIf
+			
+			frmMaintainDetails.ShowDialog()
+			wRebuild = frmMaintainDetails.Rebuild = *True
+			frmMaintainDetails = *Nothing
+		
+// Remove Deleted Item from Grid
+//			dgview.Rows.Remove(e.RowIndex)
+         
+		EndIf
+          
+         // Rebuild the Grid
+        If wRebuild
+           Memfile.DataSet.Clear()
+           BuildGrid()
+        Endif
+
+	EndSr
+	
+	BegSr Form1_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		dgView.AutoGenerateColumns = *False
+		lblStore.Text = *Blank
+		btnBack.Enabled = *False
+		btnMore.Hide()
+		dgView.Visible  = *False
+		
+		// open files
+		OpenDataBase()
+
+		// Is user authorized
+//		VldUser()
+		
+	EndSr
+	
+	BegSr Form_Closed Access(*Private) Event(*this.Closed)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.EventArgs)
+		
+		CloseDataBase()
+
+	EndSr
+	
+	/Region Open and Close Database
+	BegSr OpenDataBase
+	
+	If Not SRR.IsOpen
+		Connect SRR
+	EndIf
+	
+	If Not StoreMaster.IsOpen
+		Open StoreMaster
+	EndIf
+	
+	If Not ItemHeader.IsOpen
+		Open ItemHeader
+	EndIf
+	
+	EndSr
+	
+	Begsr CloseDataBase
+	
+	Close *All
+	
+	If SRR.IsOpen
+	//	Disconnect SRR
+	EndIf
+	
+	EndSR
+	
+	/EndRegion
+
+	BegSr uxBack_Click Access(*Private) Event(*this.btnBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		// Reset Screen one
+		ResetScreen1()
+		
+	EndSr
+	
+    Begsr ResetScreen1  Access(*Private)
+
+      // Enable Text Boxes
+		*this.txtSrcls.Enabled = *True
+		*this.txtSrven.Enabled = *True
+		*this.txtSrsty.Enabled = *True
+		*this.txtSrclr.Enabled = *True
+		*this.txtSrsiz.Enabled = *True
+		*this.txtSRSTR.Enabled = *True
+		
+		
+		// Clear Fields
+		txtSrcls.text = String.Empty
+		txtSrven.text = String.Empty
+		txtSrsty.text = String.Empty
+		txtSrclr.text = String.Empty
+		txtSrsiz.text = String.Empty
+		txtSRSTR.text = String.Empty
+		
+		
+		// Clear Errors
+		ErrorProvider1.SetError(txtSRCLS, String.Empty)
+		ErrorProvider1.SetError(txtSRVEN, String.Empty)
+		ErrorProvider1.SetError(txtSRSTY, String.Empty)
+		ErrorProvider1.SetError(txtSRCLR, String.Empty)
+		ErrorProvider1.SetError(txtSRSIZ, String.Empty)
+        ErrorProvider1.SetError(txtSRSTR, String.Empty)
+		
+		
+		// Disable DataGrid
+		btnMore.Hide()
+		btnBack.Enabled = *False
+		dgView.Visible  = *False
+		btnContinue.Visible = *True
+		lblStore.Text = *Blanks
+		
+    EndSR	
+	
+//------------------------------------------------------------
+// Check if User is authorized to this screen
+//------------------------------------------------------------  
+    
+//    BegSr VldUser
+//    
+//    DclFld user_Valid   Type(*Boolean)
+//        
+//    user_Valid = userCheck.getUserAuth( SRR )
+//      
+//      If  user_Valid.Equals(*False)
+//		
+//		   MsgBox Msg( "You are not authorised to this screen.") +
+//					   Icon(*Information) Title()
+//					   
+//		   Dispose()
+//		
+//		EndiF
+//    
+//    Endsr    
+    
+    
+//------------------------------------------------------------
+// Form Closing Events 
+//------------------------------------------------------------	
+	
+	BegSr Form_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+		
+		Close *All
+	EndSr
+	
+	
+	
+EndClass

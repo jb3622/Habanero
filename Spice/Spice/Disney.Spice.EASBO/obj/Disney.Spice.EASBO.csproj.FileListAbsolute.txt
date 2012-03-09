@@ -1,0 +1,50 @@
+C:\Dev\iDash2.Integration\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\iDash2.Integration\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Dev\iDash2.Integration\bin\Disney.Spice.EASBO.dll
+C:\Dev\iDash2.Integration\bin\Disney.Spice.EASBO.pdb
+C:\Dev\iDash2.Integration\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\bin\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\bin\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.EASBO\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\APP-Changes\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\post8_3_0fixes\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\post8_3_0fixes\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.EASBO\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb

@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <SellOutControl>
+    <SellOutControlCode xml:space="preserve">  </SellOutControlCode>
+    <Description>Blank                         </Description>
+    <CodeAndDescription>   - Blank                         </CodeAndDescription>
+  </SellOutControl>
+  <SellOutControl>
+    <SellOutControlCode>1 </SellOutControlCode>
+    <Description>Sell Out Immediately          </Description>
+    <CodeAndDescription>1  - Sell Out Immediately          </CodeAndDescription>
+  </SellOutControl>
+  <SellOutControl>
+    <SellOutControlCode>2 </SellOutControlCode>
+    <Description>Sell Out if none on hand/order</Description>
+    <CodeAndDescription>2  - Sell Out if none on hand/order</CodeAndDescription>
+  </SellOutControl>
+  <SellOutControl>
+    <SellOutControlCode>3 </SellOutControlCode>
+    <Description>Sell out when none on hand    </Description>
+    <CodeAndDescription>3  - Sell out when none on hand    </CodeAndDescription>
+  </SellOutControl>
+</DocumentElement>

@@ -1,0 +1,82 @@
+Using System
+Using System.Text
+Using System.Xml
+Using System.IO
+Using System.Data
+
+BegClass DSdelterms Access(*Public)
+
+	DclDB Name(PgmDB) DBName("TDST")
+	DclDiskFile Name(DSDLTRM) Type(*Input) Org(*Arrival) DB(PgmDB) ImpOpen(*No)
+
+	DclFld DelTermsTbl Type(DataTable)
+	DclFld pXMLpath    Type(String)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"DelTerms.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If DelTermsTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				DelTermsTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+
+		DelTermsTbl = *New DataTable("DelTerms")
+
+		DelTermsTbl.Columns.Add(*New DataColumn("DelTermsCode", *TypeOf(String)))
+		DelTermsTbl.Columns["DelTermsCode"].ReadOnly = *True
+		
+		DelTermsTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		DelTermsTbl.Columns["Description"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {DelTermsTbl.Columns("DelTermsCode")}
+		DelTermsTbl.PrimaryKey = Keys
+	EndSr
+
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSdltrm.IsOpen
+			Open DSdltrm
+		EndIf
+		
+		DoUntil DSdltrm.IsEof
+			Read DSdltrm
+			If Not DSdltrm.IsEof
+				dr = DelTermsTbl.NewRow()
+				
+				dr.Item["DelTermsCode"] = DTDLVR
+				dr.Item["Description"]  = DTDESC
+				
+				DelTermsTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		DelTermsTbl.WriteXml(pXMLpath)
+		
+		Close DSdltrm
+	EndSr
+
+	BegFunc GetDelTermsTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR DelTermsTbl
+	EndFunc
+EndClass

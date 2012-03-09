@@ -1,0 +1,53 @@
+// ===============================================
+// Joseph Urbina
+// 27 May 2009
+// DS911APDcls	
+// Data Access Layer - Company Personalization File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+
+BegClass DS911APcls Access(*Public)
+	
+	/Region Declare Files and DB
+	DclDB Name(DB) DbName("TDST")
+	DclDiskFile Name(DS911AP) Type(*Input) Org(*Arrival) ImpOpen(*No) DB(DB) AddRec(*No) RnmFmt(D911A:R_DS911A) NetBlockFactor(*Calc)	
+	DclDiskFile Name(DSCNTAP4)Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No) RnmFmt(DSCS01:R_DSCS04) NetBlockFactor(*Calc)
+	/EndRegion
+	
+	/Region Constructors
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+	/EndRegion
+	
+	/Region Methods
+	//Get Country code and Default Currency Code
+	BegFunc GetCurrencyCode Type(*Char) Len(2) Access(*Public)
+				
+		If Not DS911AP.IsOpen
+			Open DS911AP
+		EndIf
+		
+		If Not DSCNTAP4.IsOpen
+			Open DSCNTAP4
+		EndIf
+		
+		Setll DS911AP Key(*Start)
+		Read  DS911AP
+		If not DS911AP.IsEof
+			Chain From(DSCNTAP4) Key(DCOD) Access(*DFT) Err(*Extended)
+			LeaveSR CSCUR#		
+		EndIf
+		LeaveSR CSCUR#
+	EndFunc
+	/EndRegion
+EndClass
+

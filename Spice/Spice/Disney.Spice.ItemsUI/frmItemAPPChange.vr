@@ -1,0 +1,3838 @@
+Using System				
+Using System.Collections	
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.Spice.ItemsBO
+Using Disney.DA.IP400
+Using Disney.Menu
+
+BegClass frmItemAPPChange Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Declarations
+	DclFld PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+	DclFld ErrPro               Type(Disney.Spice.ErrorProvider.ErrorProviderWithCount) 
+	DclFld ItemsBO				Type(Disney.Spice.ItemsBO.Items)
+	DclFld MDIform              Type(System.Windows.Forms.Form)
+	DclFld Environment   		Type(Disney.Menu.Environments)
+	DclFld ItemStyle   		    Type(Disney.DA.IP400.ItemStyle)	
+	DclFld User					Type(Disney.Menu.Users)
+	DclFld SelectMarket         Type(SelectMarket)    Access(*Private)
+	DclFld SpiceAPPItem			Type(SpiceAPPItem)
+	DclFld SpiceItem			Type(SpiceItem)
+	DclFld DSSPEHLcls			Type(DSSPEHLcls)
+	DclFld SelectItem			Type(SelectItem)
+	DclFld CasePack             Type(CasePack)
+	DclFld m_ChangeAPPEcomDetails Type(ChangeAPPEcomDetails)
+	DclFld m_MarketPricesFormVisited Type(Boolean) Inz(*True)
+	DclFld m_BundleRetailPriceForm Type(frmBundleRetailPrice)
+	DclFld dv                   Type(DataView)
+	DclFld Domain				Type(String)
+	DclFld DateFormat			Type(String)
+	DclFld Column				Type(Int16)
+	DclFld Row					Type(Int16)
+	DclFld APPType				Type(String)
+	DclFld Prefix				Type(*Char) Len(5)
+	DclFld DevelopedBy			Type(String)
+	DclFld APPMasterItem		Type(String)
+	DclFld MaxComponents		Type(Int16)
+	DclFld MarketTbl			Type(DataTable)
+	DclFld PriceMatrixTbl			Type(DataTable)
+	DclFld MarketTblDV			Type(DataView)
+	DclFld MasterMarket			Type(String)
+	DclFld Market				Type(String)
+	DclFld CasePackCode         Type(String)
+	DclFld PackQty				Type(Int16)
+	DclFld PackWeight           Type(Decimal)
+	DclFld PackHeight           Type(Decimal)
+	DclFld PackLength           Type(Decimal)
+	DclFld PackWidth            Type(Decimal)
+	DclFld ClassDivision	    Type(Decimal)
+	DclFld ClassDepartment		Type(Int16)
+	DclFld Class                Type(Int16)
+	DclFld Vendor               Type(Int32)
+	DclFld Style                Type(Int16)
+	DclFld Colour               Type(Int16)
+	DclFld Size					Type(int16)
+	DclFld GridClass	        Type(Int16)
+	DclFld GridVendor			Type(int32)
+	DclFld GridStyle            Type(Int16)
+	DclFld GridColour           Type(Int16)
+	DclFld GridSize				Type(Int16)
+	DclFld GridQty				Type(Int16)
+	DclFld ClassDataSet			Type(DataSet)
+	DclFld DepartMentClasses	Type(DataTable)
+	DclFld DepartmentClassesDV	Type(DataView)
+	DclFld ItemCheck			Type(Boolean)
+	DclFld ColourCheck			Type(Boolean)
+	DclFld SizeCheck			Type(Boolean)
+	DclFld GridCount			Type(Int16)
+	DclFld GridCostSum			Type(Decimal)
+	DclFld GridRetailSum		Type(Decimal)
+	DclFld AllOk				Type(Boolean)
+	DclFld SelectItemsTbl		Type(DataTable)
+	DclFld SelectItemsDV		Type(DataView)
+	DclFld ClassLck				Type(String)
+	DclFld DeptLck				Type(String)
+	DclFld VendorLck			Type(String) 
+	DclFld GridErrors			Type(Boolean)
+	DclFld EventType			Type(String)
+	DclFld EventKey				Type(String)
+	DclFld EventDescription		Type(String)
+	DclFld LongItemString		Type(StringBuilder)
+	DclFld CheckPending			Type(Boolean)
+	DclFld CheckAPPOnOrder		Type(Boolean)
+	DclFld ChkSpiceAPPOnOrder	Type(Boolean)
+	DclFld APPComponentsDT		Type(DataTable)
+	DclFld APPComponentsDV		Type(DataView)
+	DclFld ItemNo				Type(StringBuilder)
+	DclFld FirstTime            Type(*Boolean)
+	DclFld LockDown				Type(*Boolean)
+	DclFld ReturnText           Type(String)
+	DclFld lblAPPTypeDsp System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblAppType System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld cboSellingChannel System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld lblSellingChannel System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld dgvItemAPAdd System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld groupBox13 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld cmbCasePack System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld txtWidth System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtLength System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtHeight System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtWeight System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblWidth System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblLength System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblHeight System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblWeight System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblCasePackType System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblCasePackQty System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtCasePackQty System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld bttnMarketPrices System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld txtBundleRetailPrice System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblBundlePrice System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblMktPricesPrompt System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblVATRate System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld cboVATRate System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld bttnViewPOs System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn1 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn2 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn3 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn4 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn5 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn6 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn7 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn8 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn9 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn10 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn11 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn12 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn13 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmSelect System.Windows.Forms.DataGridViewCheckBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmClass System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmVendor System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmStyle System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmColour System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmSize System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmDescription System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmColourName System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmSizeName System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmUPC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmQty System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmCost System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmRetail System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld clmSequence System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld lblLocalLangDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtLocalDescription System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblDescriptionOther System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld CasePackTbl          Type(DataTable)
+	
+	//Save Fields
+	DclFld sLongDesc	    Type(String)
+	DclFld sShortDesc	    Type(String)
+	DclFld sVendorStyle	    Type(String)
+	DclFld sCommodityCode   Type(String)
+	DclFld sCompositionCode Type(String)
+	DclFld sCountryOfOrigin Type(String)
+	DclFld sPendingChar		Type(String)
+	DclFld sSeasonCode		Type(String) 
+	DclFld sCasePack		Type(String)
+	DclFld sCasePackQty		Type(String)
+	DclFld sWeight			Type(String)
+	DclFld sHeight			Type(String)
+	DclFld sLength			Type(String)
+	DclFld sWidth			Type(String)
+	
+	DclFld btnHelp System.Windows.Forms.Button                           Access(*Private) WithEvents(*Yes)	
+	DclFld btnRemoveComponent System.Windows.Forms.Button                Access(*Private) WithEvents(*Yes)
+	DclFld btnAddComponent System.Windows.Forms.Button                   Access(*Private) WithEvents(*Yes)
+	DclFld btnNext System.Windows.Forms.Button                           Access(*Private) WithEvents(*Yes)
+	DclFld btnOK System.Windows.Forms.Button                             Access(*Private) WithEvents(*Yes)
+	DclFld btnCancel System.Windows.Forms.Button                         Access(*Private) WithEvents(*Yes)	
+	DclFld btnSeasonCode System.Windows.Forms.Button                     Access(*Private) WithEvents(*Yes)
+	DclFld btnCountryOfOrigin System.Windows.Forms.Button                Access(*Private) WithEvents(*Yes)
+	DclFld btnCompositionCode System.Windows.Forms.Button                Access(*Private) WithEvents(*Yes)
+	DclFld btnCommodityCode System.Windows.Forms.Button                  Access(*Private) WithEvents(*Yes)
+	DclFld btnDeleteAPP System.Windows.Forms.Button                      Access(*Private) WithEvents(*Yes)
+	DclFld btnViewHistory System.Windows.Forms.Button                    Access(*Private) WithEvents(*Yes)
+	DclFld btnCharCode System.Windows.Forms.Button                       Access(*Private) WithEvents(*Yes)
+	DclFld txtLongDescPrefix System.Windows.Forms.TextBox                Access(*Private) WithEvents(*Yes)
+	DclFld txtShortDescription System.Windows.Forms.TextBox              Access(*Private) WithEvents(*Yes)
+	DclFld txtLongDescription System.Windows.Forms.TextBox               Access(*Private) WithEvents(*Yes)
+	DclFld txtSeasonCode System.Windows.Forms.TextBox			         Access(*Private) WithEvents(*Yes)
+	DclFld txtCommodityCode System.Windows.Forms.TextBox		         Access(*Private) WithEvents(*Yes)
+	DclFld txtVendorStyle System.Windows.Forms.TextBox			         Access(*Private) WithEvents(*Yes)
+	DclFld txtCountryOfOrigin System.Windows.Forms.TextBox		         Access(*Private) WithEvents(*Yes)
+	DclFld txtCompositionCode System.Windows.Forms.TextBox		         Access(*Private) WithEvents(*Yes)
+	DclFld txtCharacterCode System.Windows.Forms.TextBox		         Access(*Private) WithEvents(*Yes)
+	DclFld lblLongDescription System.Windows.Forms.Label                 Access(*Private) WithEvents(*Yes)
+	DclFld lblClassDescription System.Windows.Forms.Label                Access(*Private) WithEvents(*Yes)
+	DclFld lblVendor System.Windows.Forms.Label                          Access(*Private) WithEvents(*Yes)
+	DclFld lblClass System.Windows.Forms.Label                           Access(*Private) WithEvents(*Yes)
+	DclFld lblStyle System.Windows.Forms.Label                           Access(*Private) WithEvents(*Yes)
+	DclFld lblColour System.Windows.Forms.Label                          Access(*Private) WithEvents(*Yes)
+	DclFld lblShortDescription System.Windows.Forms.Label                Access(*Private) WithEvents(*Yes)
+	DclFld lblSeasonCodeDesc System.Windows.Forms.Label                  Access(*Private) WithEvents(*Yes)
+	DclFld lblSeasonCode System.Windows.Forms.Label                      Access(*Private) WithEvents(*Yes)
+	DclFld lblCommodityCodeDesc System.Windows.Forms.Label               Access(*Private) WithEvents(*Yes)
+	DclFld lblCommodityCode System.Windows.Forms.Label                   Access(*Private) WithEvents(*Yes)
+	DclFld lblVendorStyle System.Windows.Forms.Label                     Access(*Private) WithEvents(*Yes)
+	DclFld lblVendorDescription System.Windows.Forms.Label               Access(*Private) WithEvents(*Yes)
+	DclFld lblColourDescription System.Windows.Forms.Label               Access(*Private) WithEvents(*Yes)
+	DclFld lblDevelopedBy System.Windows.Forms.Label                     Access(*Private) WithEvents(*Yes)
+	DclFld lblCountryOfOriginDesc System.Windows.Forms.Label             Access(*Private) WithEvents(*Yes)
+	DclFld lblCountryOfOrigin System.Windows.Forms.Label                 Access(*Private) WithEvents(*Yes)
+	DclFld lblCompostionCode System.Windows.Forms.Label                  Access(*Private) WithEvents(*Yes)
+	DclFld lblCharacterCodeDesc System.Windows.Forms.Label               Access(*Private) WithEvents(*Yes)
+	DclFld lblCharacterCode System.Windows.Forms.Label                   Access(*Private) WithEvents(*Yes)
+	DclFld lblCompositionCodeDesc System.Windows.Forms.Label             Access(*Private) WithEvents(*Yes)
+	DclFld imageList1 System.Windows.Forms.ImageList                     Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider System.Windows.Forms.ErrorProvider              Access(*Private) WithEvents(*Yes)
+	DclFld lblColourDsp System.Windows.Forms.Label                       Access(*Private) WithEvents(*Yes)
+	DclFld lblStyleDsp System.Windows.Forms.Label                        Access(*Private) WithEvents(*Yes)
+	DclFld lblVendorDsp System.Windows.Forms.Label                       Access(*Private) WithEvents(*Yes)
+	DclFld lblClassDsp System.Windows.Forms.Label                        Access(*Private) WithEvents(*Yes)
+	DclFld lblUPCDsp System.Windows.Forms.Label                          Access(*Private) WithEvents(*Yes)
+	DclFld lblUPC System.Windows.Forms.Label                             Access(*Private) WithEvents(*Yes)
+	DclFld lblCharCodePending System.Windows.Forms.Label                 Access(*Private) WithEvents(*Yes)
+	DclFld lblDevelopedByDsp System.Windows.Forms.Label                  Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	
+	/EndRegion
+
+	/Region Default Windows Form Designer generated code  			
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(frmItemAPPChange))
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.lblSeasonCodeDesc = *new System.Windows.Forms.Label()
+		*this.txtSeasonCode = *new System.Windows.Forms.TextBox()
+		*this.lblSeasonCode = *new System.Windows.Forms.Label()
+		*this.lblCommodityCodeDesc = *new System.Windows.Forms.Label()
+		*this.txtCommodityCode = *new System.Windows.Forms.TextBox()
+		*this.lblCommodityCode = *new System.Windows.Forms.Label()
+		*this.txtVendorStyle = *new System.Windows.Forms.TextBox()
+		*this.lblVendorStyle = *new System.Windows.Forms.Label()
+		*this.txtShortDescription = *new System.Windows.Forms.TextBox()
+		*this.txtLongDescription = *new System.Windows.Forms.TextBox()
+		*this.lblLongDescription = *new System.Windows.Forms.Label()
+		*this.lblVendorDescription = *new System.Windows.Forms.Label()
+		*this.lblClassDescription = *new System.Windows.Forms.Label()
+		*this.lblVendor = *new System.Windows.Forms.Label()
+		*this.lblClass = *new System.Windows.Forms.Label()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.btnRemoveComponent = *new System.Windows.Forms.Button()
+		*this.btnAddComponent = *new System.Windows.Forms.Button()
+		*this.btnNext = *new System.Windows.Forms.Button()
+		*this.btnOK = *new System.Windows.Forms.Button()
+		*this.btnCancel = *new System.Windows.Forms.Button()
+		*this.lblStyle = *new System.Windows.Forms.Label()
+		*this.lblColourDescription = *new System.Windows.Forms.Label()
+		*this.lblColour = *new System.Windows.Forms.Label()
+		*this.lblShortDescription = *new System.Windows.Forms.Label()
+		*this.lblDevelopedBy = *new System.Windows.Forms.Label()
+		*this.lblCountryOfOriginDesc = *new System.Windows.Forms.Label()
+		*this.txtCountryOfOrigin = *new System.Windows.Forms.TextBox()
+		*this.lblCountryOfOrigin = *new System.Windows.Forms.Label()
+		*this.lblCompositionCodeDesc = *new System.Windows.Forms.Label()
+		*this.txtCompositionCode = *new System.Windows.Forms.TextBox()
+		*this.lblCompostionCode = *new System.Windows.Forms.Label()
+		*this.lblCharacterCodeDesc = *new System.Windows.Forms.Label()
+		*this.txtCharacterCode = *new System.Windows.Forms.TextBox()
+		*this.lblCharacterCode = *new System.Windows.Forms.Label()
+		*this.imageList1 = *new System.Windows.Forms.ImageList(*this.components)
+		*this.btnSeasonCode = *new System.Windows.Forms.Button()
+		*this.btnCountryOfOrigin = *new System.Windows.Forms.Button()
+		*this.btnCompositionCode = *new System.Windows.Forms.Button()
+		*this.btnCommodityCode = *new System.Windows.Forms.Button()
+		*this.txtLongDescPrefix = *new System.Windows.Forms.TextBox()
+		*this.errorProvider = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.lblCharCodePending = *new System.Windows.Forms.Label()
+		*this.btnCharCode = *new System.Windows.Forms.Button()
+		*this.lblUPC = *new System.Windows.Forms.Label()
+		*this.lblUPCDsp = *new System.Windows.Forms.Label()
+		*this.btnViewHistory = *new System.Windows.Forms.Button()
+		*this.btnDeleteAPP = *new System.Windows.Forms.Button()
+		*this.lblClassDsp = *new System.Windows.Forms.Label()
+		*this.lblVendorDsp = *new System.Windows.Forms.Label()
+		*this.lblStyleDsp = *new System.Windows.Forms.Label()
+		*this.lblColourDsp = *new System.Windows.Forms.Label()
+		*this.lblDevelopedByDsp = *new System.Windows.Forms.Label()
+		*this.cboSellingChannel = *new System.Windows.Forms.ComboBox()
+		*this.lblSellingChannel = *new System.Windows.Forms.Label()
+		*this.lblAPPTypeDsp = *new System.Windows.Forms.Label()
+		*this.lblAppType = *new System.Windows.Forms.Label()
+		*this.groupBox13 = *new System.Windows.Forms.GroupBox()
+		*this.cmbCasePack = *new System.Windows.Forms.ComboBox()
+		*this.txtWidth = *new System.Windows.Forms.TextBox()
+		*this.txtLength = *new System.Windows.Forms.TextBox()
+		*this.txtHeight = *new System.Windows.Forms.TextBox()
+		*this.txtWeight = *new System.Windows.Forms.TextBox()
+		*this.lblWidth = *new System.Windows.Forms.Label()
+		*this.lblLength = *new System.Windows.Forms.Label()
+		*this.lblHeight = *new System.Windows.Forms.Label()
+		*this.lblWeight = *new System.Windows.Forms.Label()
+		*this.lblCasePackType = *new System.Windows.Forms.Label()
+		*this.lblCasePackQty = *new System.Windows.Forms.Label()
+		*this.txtCasePackQty = *new System.Windows.Forms.TextBox()
+		*this.dgvItemAPAdd = *new System.Windows.Forms.DataGridView()
+		*this.clmSelect = *new System.Windows.Forms.DataGridViewCheckBoxColumn()
+		*this.clmClass = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmVendor = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmStyle = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmColour = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmSize = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmDescription = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmColourName = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmSizeName = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmUPC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmQty = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmCost = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmRetail = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.clmSequence = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.txtBundleRetailPrice = *new System.Windows.Forms.TextBox()
+		*this.lblBundlePrice = *new System.Windows.Forms.Label()
+		*this.bttnMarketPrices = *new System.Windows.Forms.Button()
+		*this.lblMktPricesPrompt = *new System.Windows.Forms.Label()
+		*this.lblVATRate = *new System.Windows.Forms.Label()
+		*this.cboVATRate = *new System.Windows.Forms.ComboBox()
+		*this.bttnViewPOs = *new System.Windows.Forms.Button()
+		*this.dataGridViewTextBoxColumn1 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn2 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn3 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn4 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn5 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn6 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn7 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn8 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn9 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn10 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn11 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn12 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn13 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.txtLocalDescription = *new System.Windows.Forms.TextBox()
+		*this.lblDescriptionOther = *new System.Windows.Forms.Label()
+		*this.lblLocalLangDesc = *new System.Windows.Forms.Label()
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.groupBox13.SuspendLayout()
+		(*this.dgvItemAPAdd *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//lblSeasonCodeDesc
+		//
+		*this.lblSeasonCodeDesc.AutoSize = *True
+		*this.lblSeasonCodeDesc.Location = *new System.Drawing.Point(606, 162)
+		*this.lblSeasonCodeDesc.Name = "lblSeasonCodeDesc"
+		*this.lblSeasonCodeDesc.Size = *new System.Drawing.Size(0, 13)
+		*this.lblSeasonCodeDesc.TabIndex = 438
+		//
+		//txtSeasonCode
+		//
+		*this.txtSeasonCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtSeasonCode.Location = *new System.Drawing.Point(516, 158)
+		*this.txtSeasonCode.MaxLength = 4
+		*this.txtSeasonCode.Name = "txtSeasonCode"
+		*this.txtSeasonCode.Size = *new System.Drawing.Size(55, 20)
+		*this.txtSeasonCode.TabIndex = 15
+		//
+		//lblSeasonCode
+		//
+		*this.lblSeasonCode.AutoSize = *True
+		*this.lblSeasonCode.Location = *new System.Drawing.Point(419, 162)
+		*this.lblSeasonCode.Name = "lblSeasonCode"
+		*this.lblSeasonCode.Size = *new System.Drawing.Size(71, 13)
+		*this.lblSeasonCode.TabIndex = 435
+		*this.lblSeasonCode.Text = "Season Code"
+		//
+		//lblCommodityCodeDesc
+		//
+		*this.lblCommodityCodeDesc.AutoSize = *True
+		*this.lblCommodityCodeDesc.Location = *new System.Drawing.Point(606, 62)
+		*this.lblCommodityCodeDesc.Name = "lblCommodityCodeDesc"
+		*this.lblCommodityCodeDesc.Size = *new System.Drawing.Size(0, 13)
+		*this.lblCommodityCodeDesc.TabIndex = 434
+		//
+		//txtCommodityCode
+		//
+		*this.txtCommodityCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtCommodityCode.Location = *new System.Drawing.Point(516, 58)
+		*this.txtCommodityCode.MaxLength = 2
+		*this.txtCommodityCode.Name = "txtCommodityCode"
+		*this.txtCommodityCode.Size = *new System.Drawing.Size(55, 20)
+		*this.txtCommodityCode.TabIndex = 7
+		//
+		//lblCommodityCode
+		//
+		*this.lblCommodityCode.AutoSize = *True
+		*this.lblCommodityCode.Location = *new System.Drawing.Point(419, 62)
+		*this.lblCommodityCode.Name = "lblCommodityCode"
+		*this.lblCommodityCode.Size = *new System.Drawing.Size(86, 13)
+		*this.lblCommodityCode.TabIndex = 431
+		*this.lblCommodityCode.Text = "Commodity Code"
+		//
+		//txtVendorStyle
+		//
+		*this.txtVendorStyle.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtVendorStyle.Location = *new System.Drawing.Point(516, 8)
+		*this.txtVendorStyle.MaxLength = 15
+		*this.txtVendorStyle.Name = "txtVendorStyle"
+		*this.txtVendorStyle.Size = *new System.Drawing.Size(114, 20)
+		*this.txtVendorStyle.TabIndex = 6
+		//
+		//lblVendorStyle
+		//
+		*this.lblVendorStyle.AutoSize = *True
+		*this.lblVendorStyle.Location = *new System.Drawing.Point(419, 12)
+		*this.lblVendorStyle.Name = "lblVendorStyle"
+		*this.lblVendorStyle.Size = *new System.Drawing.Size(67, 13)
+		*this.lblVendorStyle.TabIndex = 429
+		*this.lblVendorStyle.Text = "Vendor Style"
+		//
+		//txtShortDescription
+		//
+		*this.txtShortDescription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtShortDescription.Location = *new System.Drawing.Point(124, 159)
+		*this.txtShortDescription.MaxLength = 9
+		*this.txtShortDescription.Name = "txtShortDescription"
+		*this.txtShortDescription.Size = *new System.Drawing.Size(59, 20)
+		*this.txtShortDescription.TabIndex = 3
+		//
+		//txtLongDescription
+		//
+		*this.txtLongDescription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtLongDescription.Location = *new System.Drawing.Point(186, 133)
+		*this.txtLongDescription.MaxLength = 20
+		*this.txtLongDescription.Name = "txtLongDescription"
+		*this.txtLongDescription.Size = *new System.Drawing.Size(177, 20)
+		*this.txtLongDescription.TabIndex = 2
+		//
+		//lblLongDescription
+		//
+		*this.lblLongDescription.AutoSize = *True
+		*this.lblLongDescription.Location = *new System.Drawing.Point(24, 137)
+		*this.lblLongDescription.Name = "lblLongDescription"
+		*this.lblLongDescription.Size = *new System.Drawing.Size(87, 13)
+		*this.lblLongDescription.TabIndex = 426
+		*this.lblLongDescription.Text = "Long Description"
+		//
+		//lblVendorDescription
+		//
+		*this.lblVendorDescription.AutoSize = *True
+		*this.lblVendorDescription.Location = *new System.Drawing.Point(166, 60)
+		*this.lblVendorDescription.Name = "lblVendorDescription"
+		*this.lblVendorDescription.Size = *new System.Drawing.Size(0, 13)
+		*this.lblVendorDescription.TabIndex = 425
+		//
+		//lblClassDescription
+		//
+		*this.lblClassDescription.AutoSize = *True
+		*this.lblClassDescription.Location = *new System.Drawing.Point(166, 34)
+		*this.lblClassDescription.Name = "lblClassDescription"
+		*this.lblClassDescription.Size = *new System.Drawing.Size(0, 13)
+		*this.lblClassDescription.TabIndex = 424
+		//
+		//lblVendor
+		//
+		*this.lblVendor.AutoSize = *True
+		*this.lblVendor.Location = *new System.Drawing.Point(24, 62)
+		*this.lblVendor.Name = "lblVendor"
+		*this.lblVendor.Size = *new System.Drawing.Size(41, 13)
+		*this.lblVendor.TabIndex = 419
+		*this.lblVendor.Text = "Vendor"
+		//
+		//lblClass
+		//
+		*this.lblClass.AutoSize = *True
+		*this.lblClass.Location = *new System.Drawing.Point(24, 37)
+		*this.lblClass.Name = "lblClass"
+		*this.lblClass.Size = *new System.Drawing.Size(32, 13)
+		*this.lblClass.TabIndex = 418
+		*this.lblClass.Text = "Class"
+		//
+		//btnHelp
+		//
+		*this.btnHelp.CausesValidation = *False
+		*this.btnHelp.Location = *new System.Drawing.Point(15, 545)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 28
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//btnRemoveComponent
+		//
+		*this.btnRemoveComponent.Location = *new System.Drawing.Point(212, 545)
+		*this.btnRemoveComponent.Name = "btnRemoveComponent"
+		*this.btnRemoveComponent.Size = *new System.Drawing.Size(118, 23)
+		*this.btnRemoveComponent.TabIndex = 30
+		*this.btnRemoveComponent.Text = "Remove Component"
+		*this.btnRemoveComponent.UseVisualStyleBackColor = *True
+		//
+		//btnAddComponent
+		//
+		*this.btnAddComponent.Location = *new System.Drawing.Point(110, 545)
+		*this.btnAddComponent.Name = "btnAddComponent"
+		*this.btnAddComponent.Size = *new System.Drawing.Size(98, 23)
+		*this.btnAddComponent.TabIndex = 29
+		*this.btnAddComponent.Text = "Add Component"
+		*this.btnAddComponent.UseVisualStyleBackColor = *True
+		//
+		//btnNext
+		//
+		*this.btnNext.Enabled = *False
+		*this.btnNext.Location = *new System.Drawing.Point(606, 545)
+		*this.btnNext.Name = "btnNext"
+		*this.btnNext.Size = *new System.Drawing.Size(75, 23)
+		*this.btnNext.TabIndex = 34
+		*this.btnNext.Text = "Next"
+		*this.btnNext.UseVisualStyleBackColor = *True
+		//
+		//btnOK
+		//
+		*this.btnOK.Enabled = *False
+		*this.btnOK.Location = *new System.Drawing.Point(685, 545)
+		*this.btnOK.Name = "btnOK"
+		*this.btnOK.Size = *new System.Drawing.Size(75, 23)
+		*this.btnOK.TabIndex = 35
+		*this.btnOK.Text = "OK"
+		*this.btnOK.UseVisualStyleBackColor = *True
+		//
+		//btnCancel
+		//
+		*this.btnCancel.Location = *new System.Drawing.Point(768, 545)
+		*this.btnCancel.Name = "btnCancel"
+		*this.btnCancel.Size = *new System.Drawing.Size(75, 23)
+		*this.btnCancel.TabIndex = 36
+		*this.btnCancel.Text = "Cancel"
+		*this.btnCancel.UseVisualStyleBackColor = *True
+		//
+		//lblStyle
+		//
+		*this.lblStyle.AutoSize = *True
+		*this.lblStyle.Location = *new System.Drawing.Point(24, 87)
+		*this.lblStyle.Name = "lblStyle"
+		*this.lblStyle.Size = *new System.Drawing.Size(30, 13)
+		*this.lblStyle.TabIndex = 513
+		*this.lblStyle.Text = "Style"
+		//
+		//lblColourDescription
+		//
+		*this.lblColourDescription.AutoSize = *True
+		*this.lblColourDescription.Location = *new System.Drawing.Point(166, 109)
+		*this.lblColourDescription.Name = "lblColourDescription"
+		*this.lblColourDescription.Size = *new System.Drawing.Size(0, 13)
+		*this.lblColourDescription.TabIndex = 512
+		//
+		//lblColour
+		//
+		*this.lblColour.AutoSize = *True
+		*this.lblColour.Location = *new System.Drawing.Point(24, 112)
+		*this.lblColour.Name = "lblColour"
+		*this.lblColour.Size = *new System.Drawing.Size(37, 13)
+		*this.lblColour.TabIndex = 509
+		*this.lblColour.Text = "Colour"
+		//
+		//lblShortDescription
+		//
+		*this.lblShortDescription.AutoSize = *True
+		*this.lblShortDescription.Location = *new System.Drawing.Point(24, 162)
+		*this.lblShortDescription.Name = "lblShortDescription"
+		*this.lblShortDescription.Size = *new System.Drawing.Size(88, 13)
+		*this.lblShortDescription.TabIndex = 516
+		*this.lblShortDescription.Text = "Short Description"
+		//
+		//lblDevelopedBy
+		//
+		*this.lblDevelopedBy.AutoSize = *True
+		*this.lblDevelopedBy.Location = *new System.Drawing.Point(419, 37)
+		*this.lblDevelopedBy.Name = "lblDevelopedBy"
+		*this.lblDevelopedBy.Size = *new System.Drawing.Size(74, 13)
+		*this.lblDevelopedBy.TabIndex = 589
+		*this.lblDevelopedBy.Text = "Developed By"
+		//
+		//lblCountryOfOriginDesc
+		//
+		*this.lblCountryOfOriginDesc.AutoSize = *True
+		*this.lblCountryOfOriginDesc.Location = *new System.Drawing.Point(606, 112)
+		*this.lblCountryOfOriginDesc.Name = "lblCountryOfOriginDesc"
+		*this.lblCountryOfOriginDesc.Size = *new System.Drawing.Size(0, 13)
+		*this.lblCountryOfOriginDesc.TabIndex = 622
+		//
+		//txtCountryOfOrigin
+		//
+		*this.txtCountryOfOrigin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtCountryOfOrigin.Location = *new System.Drawing.Point(516, 108)
+		*this.txtCountryOfOrigin.MaxLength = 2
+		*this.txtCountryOfOrigin.Name = "txtCountryOfOrigin"
+		*this.txtCountryOfOrigin.Size = *new System.Drawing.Size(55, 20)
+		*this.txtCountryOfOrigin.TabIndex = 11
+		//
+		//lblCountryOfOrigin
+		//
+		*this.lblCountryOfOrigin.AutoSize = *True
+		*this.lblCountryOfOrigin.Location = *new System.Drawing.Point(419, 112)
+		*this.lblCountryOfOrigin.Name = "lblCountryOfOrigin"
+		*this.lblCountryOfOrigin.Size = *new System.Drawing.Size(85, 13)
+		*this.lblCountryOfOrigin.TabIndex = 619
+		*this.lblCountryOfOrigin.Text = "Country of Origin"
+		//
+		//lblCompositionCodeDesc
+		//
+		*this.lblCompositionCodeDesc.AutoSize = *True
+		*this.lblCompositionCodeDesc.Location = *new System.Drawing.Point(606, 87)
+		*this.lblCompositionCodeDesc.Name = "lblCompositionCodeDesc"
+		*this.lblCompositionCodeDesc.Size = *new System.Drawing.Size(0, 13)
+		*this.lblCompositionCodeDesc.TabIndex = 626
+		//
+		//txtCompositionCode
+		//
+		*this.txtCompositionCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtCompositionCode.Location = *new System.Drawing.Point(516, 83)
+		*this.txtCompositionCode.MaxLength = 3
+		*this.txtCompositionCode.Name = "txtCompositionCode"
+		*this.txtCompositionCode.Size = *new System.Drawing.Size(55, 20)
+		*this.txtCompositionCode.TabIndex = 9
+		//
+		//lblCompostionCode
+		//
+		*this.lblCompostionCode.AutoSize = *True
+		*this.lblCompostionCode.Location = *new System.Drawing.Point(419, 87)
+		*this.lblCompostionCode.Name = "lblCompostionCode"
+		*this.lblCompostionCode.Size = *new System.Drawing.Size(92, 13)
+		*this.lblCompostionCode.TabIndex = 623
+		*this.lblCompostionCode.Text = "Composition Code"
+		//
+		//lblCharacterCodeDesc
+		//
+		*this.lblCharacterCodeDesc.AutoSize = *True
+		*this.lblCharacterCodeDesc.Location = *new System.Drawing.Point(606, 137)
+		*this.lblCharacterCodeDesc.Name = "lblCharacterCodeDesc"
+		*this.lblCharacterCodeDesc.Size = *new System.Drawing.Size(0, 13)
+		*this.lblCharacterCodeDesc.TabIndex = 637
+		//
+		//txtCharacterCode
+		//
+		*this.txtCharacterCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtCharacterCode.Enabled = *False
+		*this.txtCharacterCode.Location = *new System.Drawing.Point(516, 133)
+		*this.txtCharacterCode.MaxLength = 3
+		*this.txtCharacterCode.Name = "txtCharacterCode"
+		*this.txtCharacterCode.Size = *new System.Drawing.Size(55, 20)
+		*this.txtCharacterCode.TabIndex = 13
+		//
+		//lblCharacterCode
+		//
+		*this.lblCharacterCode.AutoSize = *True
+		*this.lblCharacterCode.Location = *new System.Drawing.Point(419, 137)
+		*this.lblCharacterCode.Name = "lblCharacterCode"
+		*this.lblCharacterCode.Size = *new System.Drawing.Size(81, 13)
+		*this.lblCharacterCode.TabIndex = 634
+		*this.lblCharacterCode.Text = "Character Code"
+		//
+		//imageList1
+		//
+		*this.imageList1.ImageStream = (resources.GetObject("imageList1.ImageStream") *As System.Windows.Forms.ImageListStreamer)
+		*this.imageList1.TransparentColor = System.Drawing.Color.Transparent
+		*this.imageList1.Images.SetKeyName(0, "Magnifying-Glass-256x256.png")
+		*this.imageList1.Images.SetKeyName(1, "Arrow.png")
+		//
+		//btnSeasonCode
+		//
+		*this.btnSeasonCode.ImageIndex = 0
+		*this.btnSeasonCode.ImageList = *this.imageList1
+		*this.btnSeasonCode.Location = *new System.Drawing.Point(575, 156)
+		*this.btnSeasonCode.Name = "btnSeasonCode"
+		*this.btnSeasonCode.Size = *new System.Drawing.Size(24, 22)
+		*this.btnSeasonCode.TabIndex = 16
+		*this.btnSeasonCode.TabStop = *False
+		*this.btnSeasonCode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+		*this.btnSeasonCode.UseVisualStyleBackColor = *True
+		//
+		//btnCountryOfOrigin
+		//
+		*this.btnCountryOfOrigin.ImageIndex = 0
+		*this.btnCountryOfOrigin.ImageList = *this.imageList1
+		*this.btnCountryOfOrigin.Location = *new System.Drawing.Point(575, 106)
+		*this.btnCountryOfOrigin.Name = "btnCountryOfOrigin"
+		*this.btnCountryOfOrigin.Size = *new System.Drawing.Size(24, 22)
+		*this.btnCountryOfOrigin.TabIndex = 12
+		*this.btnCountryOfOrigin.TabStop = *False
+		*this.btnCountryOfOrigin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+		*this.btnCountryOfOrigin.UseVisualStyleBackColor = *True
+		//
+		//btnCompositionCode
+		//
+		*this.btnCompositionCode.ImageIndex = 0
+		*this.btnCompositionCode.ImageList = *this.imageList1
+		*this.btnCompositionCode.Location = *new System.Drawing.Point(575, 81)
+		*this.btnCompositionCode.Name = "btnCompositionCode"
+		*this.btnCompositionCode.Size = *new System.Drawing.Size(24, 22)
+		*this.btnCompositionCode.TabIndex = 10
+		*this.btnCompositionCode.TabStop = *False
+		*this.btnCompositionCode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+		*this.btnCompositionCode.UseVisualStyleBackColor = *True
+		//
+		//btnCommodityCode
+		//
+		*this.btnCommodityCode.ImageIndex = 0
+		*this.btnCommodityCode.ImageList = *this.imageList1
+		*this.btnCommodityCode.Location = *new System.Drawing.Point(575, 56)
+		*this.btnCommodityCode.Name = "btnCommodityCode"
+		*this.btnCommodityCode.Size = *new System.Drawing.Size(24, 22)
+		*this.btnCommodityCode.TabIndex = 8
+		*this.btnCommodityCode.TabStop = *False
+		*this.btnCommodityCode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+		*this.btnCommodityCode.UseVisualStyleBackColor = *True
+		//
+		//txtLongDescPrefix
+		//
+		*this.txtLongDescPrefix.Enabled = *False
+		*this.txtLongDescPrefix.Location = *new System.Drawing.Point(124, 133)
+		*this.txtLongDescPrefix.MaxLength = 5
+		*this.txtLongDescPrefix.Name = "txtLongDescPrefix"
+		*this.txtLongDescPrefix.Size = *new System.Drawing.Size(59, 20)
+		*this.txtLongDescPrefix.TabIndex = 1
+		*this.txtLongDescPrefix.TabStop = *False
+		//
+		//errorProvider
+		//
+		*this.errorProvider.ContainerControl = *this
+		//
+		//lblCharCodePending
+		//
+		*this.lblCharCodePending.AutoSize = *True
+		*this.lblCharCodePending.Location = *new System.Drawing.Point(783, 264)
+		*this.lblCharCodePending.Name = "lblCharCodePending"
+		*this.lblCharCodePending.Size = *new System.Drawing.Size(0, 13)
+		*this.lblCharCodePending.TabIndex = 650
+		//
+		//btnCharCode
+		//
+		*this.btnCharCode.ImageIndex = 1
+		*this.btnCharCode.ImageList = *this.imageList1
+		*this.btnCharCode.Location = *new System.Drawing.Point(575, 131)
+		*this.btnCharCode.Name = "btnCharCode"
+		*this.btnCharCode.Size = *new System.Drawing.Size(24, 22)
+		*this.btnCharCode.TabIndex = 14
+		*this.btnCharCode.TabStop = *False
+		*this.btnCharCode.UseVisualStyleBackColor = *True
+		//
+		//lblUPC
+		//
+		*this.lblUPC.AutoSize = *True
+		*this.lblUPC.Location = *new System.Drawing.Point(645, 12)
+		*this.lblUPC.Name = "lblUPC"
+		*this.lblUPC.Size = *new System.Drawing.Size(29, 13)
+		*this.lblUPC.TabIndex = 652
+		*this.lblUPC.Text = "UPC"
+		//
+		//lblUPCDsp
+		//
+		*this.lblUPCDsp.AutoSize = *True
+		*this.lblUPCDsp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblUPCDsp.Location = *new System.Drawing.Point(677, 12)
+		*this.lblUPCDsp.Name = "lblUPCDsp"
+		*this.lblUPCDsp.Size = *new System.Drawing.Size(0, 13)
+		*this.lblUPCDsp.TabIndex = 653
+		//
+		//btnViewHistory
+		//
+		*this.btnViewHistory.Location = *new System.Drawing.Point(334, 545)
+		*this.btnViewHistory.Name = "btnViewHistory"
+		*this.btnViewHistory.Size = *new System.Drawing.Size(84, 23)
+		*this.btnViewHistory.TabIndex = 31
+		*this.btnViewHistory.Text = "View History"
+		*this.btnViewHistory.UseVisualStyleBackColor = *True
+		//
+		//btnDeleteAPP
+		//
+		*this.btnDeleteAPP.Location = *new System.Drawing.Point(525, 545)
+		*this.btnDeleteAPP.Name = "btnDeleteAPP"
+		*this.btnDeleteAPP.Size = *new System.Drawing.Size(75, 23)
+		*this.btnDeleteAPP.TabIndex = 33
+		*this.btnDeleteAPP.Text = "Delete"
+		*this.btnDeleteAPP.UseVisualStyleBackColor = *True
+		//
+		//lblClassDsp
+		//
+		*this.lblClassDsp.AutoSize = *True
+		*this.lblClassDsp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblClassDsp.Location = *new System.Drawing.Point(118, 34)
+		*this.lblClassDsp.Name = "lblClassDsp"
+		*this.lblClassDsp.Size = *new System.Drawing.Size(0, 13)
+		*this.lblClassDsp.TabIndex = 656
+		//
+		//lblVendorDsp
+		//
+		*this.lblVendorDsp.AutoSize = *True
+		*this.lblVendorDsp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblVendorDsp.Location = *new System.Drawing.Point(118, 60)
+		*this.lblVendorDsp.Name = "lblVendorDsp"
+		*this.lblVendorDsp.Size = *new System.Drawing.Size(0, 13)
+		*this.lblVendorDsp.TabIndex = 657
+		//
+		//lblStyleDsp
+		//
+		*this.lblStyleDsp.AutoSize = *True
+		*this.lblStyleDsp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblStyleDsp.Location = *new System.Drawing.Point(118, 84)
+		*this.lblStyleDsp.Name = "lblStyleDsp"
+		*this.lblStyleDsp.Size = *new System.Drawing.Size(0, 13)
+		*this.lblStyleDsp.TabIndex = 658
+		//
+		//lblColourDsp
+		//
+		*this.lblColourDsp.AutoSize = *True
+		*this.lblColourDsp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblColourDsp.Location = *new System.Drawing.Point(118, 109)
+		*this.lblColourDsp.Name = "lblColourDsp"
+		*this.lblColourDsp.Size = *new System.Drawing.Size(0, 13)
+		*this.lblColourDsp.TabIndex = 659
+		//
+		//lblDevelopedByDsp
+		//
+		*this.lblDevelopedByDsp.AutoSize = *True
+		*this.lblDevelopedByDsp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblDevelopedByDsp.Location = *new System.Drawing.Point(516, 37)
+		*this.lblDevelopedByDsp.Name = "lblDevelopedByDsp"
+		*this.lblDevelopedByDsp.Size = *new System.Drawing.Size(0, 13)
+		*this.lblDevelopedByDsp.TabIndex = 661
+		//
+		//cboSellingChannel
+		//
+		*this.cboSellingChannel.DropDownWidth = 250
+		*this.cboSellingChannel.FormattingEnabled = *True
+		*this.cboSellingChannel.Location = *new System.Drawing.Point(124, 211)
+		*this.cboSellingChannel.Name = "cboSellingChannel"
+		*this.cboSellingChannel.Size = *new System.Drawing.Size(120, 21)
+		*this.cboSellingChannel.TabIndex = 5
+		//
+		//lblSellingChannel
+		//
+		*this.lblSellingChannel.AutoSize = *True
+		*this.lblSellingChannel.Location = *new System.Drawing.Point(24, 213)
+		*this.lblSellingChannel.Name = "lblSellingChannel"
+		*this.lblSellingChannel.Size = *new System.Drawing.Size(91, 13)
+		*this.lblSellingChannel.TabIndex = 679
+		*this.lblSellingChannel.Text = "Selling Channel(s)"
+		//
+		//lblAPPTypeDsp
+		//
+		*this.lblAPPTypeDsp.AutoSize = *True
+		*this.lblAPPTypeDsp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblAPPTypeDsp.Location = *new System.Drawing.Point(114, 12)
+		*this.lblAPPTypeDsp.Name = "lblAPPTypeDsp"
+		*this.lblAPPTypeDsp.Size = *new System.Drawing.Size(0, 13)
+		*this.lblAPPTypeDsp.TabIndex = 682
+		//
+		//lblAppType
+		//
+		*this.lblAppType.AutoSize = *True
+		*this.lblAppType.Location = *new System.Drawing.Point(24, 12)
+		*this.lblAppType.Name = "lblAppType"
+		*this.lblAppType.Size = *new System.Drawing.Size(55, 13)
+		*this.lblAppType.TabIndex = 681
+		*this.lblAppType.Text = "APP Type"
+		//
+		//groupBox13
+		//
+		*this.groupBox13.Controls.Add(*this.cmbCasePack)
+		*this.groupBox13.Controls.Add(*this.txtWidth)
+		*this.groupBox13.Controls.Add(*this.txtLength)
+		*this.groupBox13.Controls.Add(*this.txtHeight)
+		*this.groupBox13.Controls.Add(*this.txtWeight)
+		*this.groupBox13.Controls.Add(*this.lblWidth)
+		*this.groupBox13.Controls.Add(*this.lblLength)
+		*this.groupBox13.Controls.Add(*this.lblHeight)
+		*this.groupBox13.Controls.Add(*this.lblWeight)
+		*this.groupBox13.Controls.Add(*this.lblCasePackType)
+		*this.groupBox13.Controls.Add(*this.lblCasePackQty)
+		*this.groupBox13.Controls.Add(*this.txtCasePackQty)
+		*this.groupBox13.Location = *new System.Drawing.Point(15, 248)
+		*this.groupBox13.Name = "groupBox13"
+		*this.groupBox13.Size = *new System.Drawing.Size(828, 46)
+		*this.groupBox13.TabIndex = 20
+		*this.groupBox13.TabStop = *False
+		*this.groupBox13.Text = "Pack/Carton Details"
+		//
+		//cmbCasePack
+		//
+		*this.cmbCasePack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cmbCasePack.FormattingEnabled = *True
+		*this.cmbCasePack.Items.AddRange(*new System.Object[] {" Please Select....."})
+		*this.cmbCasePack.Location = *new System.Drawing.Point(95, 16)
+		*this.cmbCasePack.Name = "cmbCasePack"
+		*this.cmbCasePack.Size = *new System.Drawing.Size(187, 21)
+		*this.cmbCasePack.Sorted = *True
+		*this.cmbCasePack.TabIndex = 21
+		//
+		//txtWidth
+		//
+		*this.txtWidth.Location = *new System.Drawing.Point(719, 16)
+		*this.txtWidth.Name = "txtWidth"
+		*this.txtWidth.Size = *new System.Drawing.Size(56, 20)
+		*this.txtWidth.TabIndex = 26
+		*this.txtWidth.Text = "9999.999"
+		//
+		//txtLength
+		//
+		*this.txtLength.Location = *new System.Drawing.Point(633, 16)
+		*this.txtLength.Name = "txtLength"
+		*this.txtLength.Size = *new System.Drawing.Size(56, 20)
+		*this.txtLength.TabIndex = 25
+		*this.txtLength.Text = "9999.999"
+		//
+		//txtHeight
+		//
+		*this.txtHeight.Location = *new System.Drawing.Point(553, 16)
+		*this.txtHeight.Name = "txtHeight"
+		*this.txtHeight.Size = *new System.Drawing.Size(52, 20)
+		*this.txtHeight.TabIndex = 24
+		*this.txtHeight.Text = "9999.999"
+		//
+		//txtWeight
+		//
+		*this.txtWeight.Location = *new System.Drawing.Point(464, 16)
+		*this.txtWeight.Name = "txtWeight"
+		*this.txtWeight.Size = *new System.Drawing.Size(57, 20)
+		*this.txtWeight.TabIndex = 23
+		*this.txtWeight.Text = "9999.999"
+		//
+		//lblWidth
+		//
+		*this.lblWidth.AutoSize = *True
+		*this.lblWidth.Location = *new System.Drawing.Point(695, 20)
+		*this.lblWidth.Name = "lblWidth"
+		*this.lblWidth.Size = *new System.Drawing.Size(18, 13)
+		*this.lblWidth.TabIndex = 388
+		*this.lblWidth.Text = "W"
+		//
+		//lblLength
+		//
+		*this.lblLength.AutoSize = *True
+		*this.lblLength.Location = *new System.Drawing.Point(613, 20)
+		*this.lblLength.Name = "lblLength"
+		*this.lblLength.Size = *new System.Drawing.Size(13, 13)
+		*this.lblLength.TabIndex = 387
+		*this.lblLength.Text = "L"
+		//
+		//lblHeight
+		//
+		*this.lblHeight.AutoSize = *True
+		*this.lblHeight.Location = *new System.Drawing.Point(530, 20)
+		*this.lblHeight.Name = "lblHeight"
+		*this.lblHeight.Size = *new System.Drawing.Size(15, 13)
+		*this.lblHeight.TabIndex = 386
+		*this.lblHeight.Text = "H"
+		//
+		//lblWeight
+		//
+		*this.lblWeight.AutoSize = *True
+		*this.lblWeight.Location = *new System.Drawing.Point(418, 20)
+		*this.lblWeight.Name = "lblWeight"
+		*this.lblWeight.Size = *new System.Drawing.Size(41, 13)
+		*this.lblWeight.TabIndex = 385
+		*this.lblWeight.Text = "Weight"
+		//
+		//lblCasePackType
+		//
+		*this.lblCasePackType.AutoSize = *True
+		*this.lblCasePackType.Location = *new System.Drawing.Point(7, 20)
+		*this.lblCasePackType.Name = "lblCasePackType"
+		*this.lblCasePackType.Size = *new System.Drawing.Size(86, 13)
+		*this.lblCasePackType.TabIndex = 379
+		*this.lblCasePackType.Text = "Case Pack Type"
+		//
+		//lblCasePackQty
+		//
+		*this.lblCasePackQty.AutoSize = *True
+		*this.lblCasePackQty.Location = *new System.Drawing.Point(288, 20)
+		*this.lblCasePackQty.Name = "lblCasePackQty"
+		*this.lblCasePackQty.Size = *new System.Drawing.Size(78, 13)
+		*this.lblCasePackQty.TabIndex = 1
+		*this.lblCasePackQty.Text = "Case Pack Qty"
+		//
+		//txtCasePackQty
+		//
+		*this.txtCasePackQty.Location = *new System.Drawing.Point(372, 16)
+		*this.txtCasePackQty.Name = "txtCasePackQty"
+		*this.txtCasePackQty.ReadOnly = *True
+		*this.txtCasePackQty.Size = *new System.Drawing.Size(41, 20)
+		*this.txtCasePackQty.TabIndex = 22
+		*this.txtCasePackQty.Text = "1"
+		//
+		//dgvItemAPAdd
+		//
+		*this.dgvItemAPAdd.AllowUserToOrderColumns = *True
+		dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((192 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		*this.dgvItemAPAdd.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2
+		*this.dgvItemAPAdd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+		*this.dgvItemAPAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dgvItemAPAdd.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.clmSelect, *this.clmClass, *this.clmVendor, *this.clmStyle, *this.clmColour, *this.clmSize, *this.clmDescription, *this.clmColourName, *this.clmSizeName, *this.clmUPC, *this.clmQty, *this.clmCost, *this.clmRetail, *this.clmSequence})
+		*this.dgvItemAPAdd.Location = *new System.Drawing.Point(15, 307)
+		*this.dgvItemAPAdd.Name = "dgvItemAPAdd"
+		*this.dgvItemAPAdd.Size = *new System.Drawing.Size(828, 224)
+		*this.dgvItemAPAdd.TabIndex = 27
+		//
+		//clmSelect
+		//
+		*this.clmSelect.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmSelect.Frozen = *True
+		*this.clmSelect.HeaderText = "Select"
+		*this.clmSelect.MinimumWidth = 40
+		*this.clmSelect.Name = "clmSelect"
+		*this.clmSelect.Width = 40
+		//
+		//clmClass
+		//
+		*this.clmClass.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmClass.Frozen = *True
+		*this.clmClass.HeaderText = "Class"
+		*this.clmClass.MaxInputLength = 4
+		*this.clmClass.MinimumWidth = 50
+		*this.clmClass.Name = "clmClass"
+		*this.clmClass.Width = 50
+		//
+		//clmVendor
+		//
+		*this.clmVendor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmVendor.Frozen = *True
+		*this.clmVendor.HeaderText = "Vendor"
+		*this.clmVendor.MaxInputLength = 5
+		*this.clmVendor.MinimumWidth = 50
+		*this.clmVendor.Name = "clmVendor"
+		*this.clmVendor.ReadOnly = *True
+		*this.clmVendor.Width = 50
+		//
+		//clmStyle
+		//
+		*this.clmStyle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmStyle.FillWeight = 308.772
+		*this.clmStyle.HeaderText = "Style"
+		*this.clmStyle.MaxInputLength = 4
+		*this.clmStyle.MinimumWidth = 50
+		*this.clmStyle.Name = "clmStyle"
+		*this.clmStyle.Width = 50
+		//
+		//clmColour
+		//
+		*this.clmColour.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmColour.FillWeight = 12.07919
+		*this.clmColour.HeaderText = "Colour"
+		*this.clmColour.MaxInputLength = 3
+		*this.clmColour.MinimumWidth = 50
+		*this.clmColour.Name = "clmColour"
+		*this.clmColour.Width = 50
+		//
+		//clmSize
+		//
+		*this.clmSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmSize.FillWeight = 18.51036
+		*this.clmSize.HeaderText = "Size"
+		*this.clmSize.MaxInputLength = 4
+		*this.clmSize.MinimumWidth = 50
+		*this.clmSize.Name = "clmSize"
+		*this.clmSize.Width = 50
+		//
+		//clmDescription
+		//
+		*this.clmDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmDescription.FillWeight = 28.98399
+		*this.clmDescription.HeaderText = "Description"
+		*this.clmDescription.MinimumWidth = 133
+		*this.clmDescription.Name = "clmDescription"
+		*this.clmDescription.ReadOnly = *True
+		*this.clmDescription.Width = 133
+		//
+		//clmColourName
+		//
+		*this.clmColourName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmColourName.FillWeight = 46.04103
+		*this.clmColourName.HeaderText = "Color Name"
+		*this.clmColourName.MinimumWidth = 100
+		*this.clmColourName.Name = "clmColourName"
+		*this.clmColourName.ReadOnly = *True
+		//
+		//clmSizeName
+		//
+		*this.clmSizeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmSizeName.FillWeight = 73.81965
+		*this.clmSizeName.HeaderText = "Size Name"
+		*this.clmSizeName.MinimumWidth = 100
+		*this.clmSizeName.Name = "clmSizeName"
+		*this.clmSizeName.ReadOnly = *True
+		//
+		//clmUPC
+		//
+		*this.clmUPC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmUPC.FillWeight = 119.0591
+		*this.clmUPC.HeaderText = "UPC"
+		*this.clmUPC.MinimumWidth = 100
+		*this.clmUPC.Name = "clmUPC"
+		*this.clmUPC.ReadOnly = *True
+		//
+		//clmQty
+		//
+		*this.clmQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmQty.FillWeight = 192.7348
+		*this.clmQty.HeaderText = "Quantity"
+		*this.clmQty.MinimumWidth = 60
+		*this.clmQty.Name = "clmQty"
+		*this.clmQty.Width = 60
+		//
+		//clmCost
+		//
+		*this.clmCost.HeaderText = "Cost"
+		*this.clmCost.MinimumWidth = 60
+		*this.clmCost.Name = "clmCost"
+		*this.clmCost.ReadOnly = *True
+		*this.clmCost.Visible = *False
+		//
+		//clmRetail
+		//
+		*this.clmRetail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.clmRetail.HeaderText = "Retail"
+		*this.clmRetail.MinimumWidth = 60
+		*this.clmRetail.Name = "clmRetail"
+		*this.clmRetail.ReadOnly = *True
+		*this.clmRetail.Visible = *False
+		*this.clmRetail.Width = 60
+		//
+		//clmSequence
+		//
+		*this.clmSequence.HeaderText = "Sequence"
+		*this.clmSequence.Name = "clmSequence"
+		*this.clmSequence.ReadOnly = *True
+		*this.clmSequence.Visible = *False
+		//
+		//txtBundleRetailPrice
+		//
+		*this.txtBundleRetailPrice.Location = *new System.Drawing.Point(516, 185)
+		*this.txtBundleRetailPrice.Name = "txtBundleRetailPrice"
+		*this.txtBundleRetailPrice.Size = *new System.Drawing.Size(55, 20)
+		*this.txtBundleRetailPrice.TabIndex = 17
+		//
+		//lblBundlePrice
+		//
+		*this.lblBundlePrice.AutoSize = *True
+		*this.lblBundlePrice.Location = *new System.Drawing.Point(419, 187)
+		*this.lblBundlePrice.Name = "lblBundlePrice"
+		*this.lblBundlePrice.Size = *new System.Drawing.Size(61, 13)
+		*this.lblBundlePrice.TabIndex = 685
+		*this.lblBundlePrice.Text = "Retail Price"
+		//
+		//bttnMarketPrices
+		//
+		*this.bttnMarketPrices.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.bttnMarketPrices.Location = *new System.Drawing.Point(575, 183)
+		*this.bttnMarketPrices.Name = "bttnMarketPrices"
+		*this.bttnMarketPrices.Size = *new System.Drawing.Size(24, 22)
+		*this.bttnMarketPrices.TabIndex = 18
+		*this.bttnMarketPrices.Text = "..."
+		*this.bttnMarketPrices.UseVisualStyleBackColor = *True
+		//
+		//lblMktPricesPrompt
+		//
+		*this.lblMktPricesPrompt.AutoSize = *True
+		*this.lblMktPricesPrompt.ForeColor = System.Drawing.Color.Red
+		*this.lblMktPricesPrompt.Location = *new System.Drawing.Point(599, 188)
+		*this.lblMktPricesPrompt.Name = "lblMktPricesPrompt"
+		*this.lblMktPricesPrompt.Size = *new System.Drawing.Size(248, 13)
+		*this.lblMktPricesPrompt.TabIndex = 0
+		*this.lblMktPricesPrompt.Text = "Please check the market prices before proceeding."
+		*this.lblMktPricesPrompt.Visible = *False
+		//
+		//lblVATRate
+		//
+		*this.lblVATRate.AutoSize = *True
+		*this.lblVATRate.Location = *new System.Drawing.Point(419, 215)
+		*this.lblVATRate.Name = "lblVATRate"
+		*this.lblVATRate.Size = *new System.Drawing.Size(54, 13)
+		*this.lblVATRate.TabIndex = 695
+		*this.lblVATRate.Text = "VAT Rate"
+		*this.lblVATRate.Visible = *False
+		//
+		//cboVATRate
+		//
+		*this.cboVATRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboVATRate.DropDownWidth = 250
+		*this.cboVATRate.FormattingEnabled = *True
+		*this.cboVATRate.Location = *new System.Drawing.Point(516, 211)
+		*this.cboVATRate.Name = "cboVATRate"
+		*this.cboVATRate.Size = *new System.Drawing.Size(55, 21)
+		*this.cboVATRate.TabIndex = 19
+		*this.cboVATRate.Visible = *False
+		//
+		//bttnViewPOs
+		//
+		*this.bttnViewPOs.Location = *new System.Drawing.Point(422, 545)
+		*this.bttnViewPOs.Name = "bttnViewPOs"
+		*this.bttnViewPOs.Size = *new System.Drawing.Size(77, 23)
+		*this.bttnViewPOs.TabIndex = 32
+		*this.bttnViewPOs.Text = "View POs"
+		*this.bttnViewPOs.UseVisualStyleBackColor = *True
+		//
+		//dataGridViewTextBoxColumn1
+		//
+		*this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn1.Frozen = *True
+		*this.dataGridViewTextBoxColumn1.HeaderText = "Class"
+		*this.dataGridViewTextBoxColumn1.MaxInputLength = 4
+		*this.dataGridViewTextBoxColumn1.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1"
+		*this.dataGridViewTextBoxColumn1.Width = 50
+		//
+		//dataGridViewTextBoxColumn2
+		//
+		*this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn2.Frozen = *True
+		*this.dataGridViewTextBoxColumn2.HeaderText = "Vendor"
+		*this.dataGridViewTextBoxColumn2.MaxInputLength = 5
+		*this.dataGridViewTextBoxColumn2.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2"
+		*this.dataGridViewTextBoxColumn2.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn2.Width = 50
+		//
+		//dataGridViewTextBoxColumn3
+		//
+		*this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn3.FillWeight = 308.772
+		*this.dataGridViewTextBoxColumn3.HeaderText = "Style"
+		*this.dataGridViewTextBoxColumn3.MaxInputLength = 4
+		*this.dataGridViewTextBoxColumn3.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3"
+		*this.dataGridViewTextBoxColumn3.Width = 50
+		//
+		//dataGridViewTextBoxColumn4
+		//
+		*this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn4.FillWeight = 12.07919
+		*this.dataGridViewTextBoxColumn4.HeaderText = "Colour"
+		*this.dataGridViewTextBoxColumn4.MaxInputLength = 3
+		*this.dataGridViewTextBoxColumn4.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4"
+		*this.dataGridViewTextBoxColumn4.Width = 50
+		//
+		//dataGridViewTextBoxColumn5
+		//
+		*this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn5.FillWeight = 18.51036
+		*this.dataGridViewTextBoxColumn5.HeaderText = "Size"
+		*this.dataGridViewTextBoxColumn5.MaxInputLength = 4
+		*this.dataGridViewTextBoxColumn5.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5"
+		*this.dataGridViewTextBoxColumn5.Width = 50
+		//
+		//dataGridViewTextBoxColumn6
+		//
+		*this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn6.FillWeight = 28.98399
+		*this.dataGridViewTextBoxColumn6.HeaderText = "Description"
+		*this.dataGridViewTextBoxColumn6.MinimumWidth = 133
+		*this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6"
+		*this.dataGridViewTextBoxColumn6.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn6.Width = 133
+		//
+		//dataGridViewTextBoxColumn7
+		//
+		*this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn7.FillWeight = 46.04103
+		*this.dataGridViewTextBoxColumn7.HeaderText = "Color Name"
+		*this.dataGridViewTextBoxColumn7.MinimumWidth = 100
+		*this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7"
+		*this.dataGridViewTextBoxColumn7.ReadOnly = *True
+		//
+		//dataGridViewTextBoxColumn8
+		//
+		*this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn8.FillWeight = 73.81965
+		*this.dataGridViewTextBoxColumn8.HeaderText = "Size Name"
+		*this.dataGridViewTextBoxColumn8.MinimumWidth = 100
+		*this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8"
+		*this.dataGridViewTextBoxColumn8.ReadOnly = *True
+		//
+		//dataGridViewTextBoxColumn9
+		//
+		*this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn9.FillWeight = 119.0591
+		*this.dataGridViewTextBoxColumn9.HeaderText = "UPC"
+		*this.dataGridViewTextBoxColumn9.MinimumWidth = 100
+		*this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9"
+		*this.dataGridViewTextBoxColumn9.ReadOnly = *True
+		//
+		//dataGridViewTextBoxColumn10
+		//
+		*this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn10.FillWeight = 192.7348
+		*this.dataGridViewTextBoxColumn10.HeaderText = "Quantity"
+		*this.dataGridViewTextBoxColumn10.MinimumWidth = 60
+		*this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10"
+		*this.dataGridViewTextBoxColumn10.Width = 60
+		//
+		//dataGridViewTextBoxColumn11
+		//
+		*this.dataGridViewTextBoxColumn11.HeaderText = "Cost"
+		*this.dataGridViewTextBoxColumn11.MinimumWidth = 60
+		*this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11"
+		*this.dataGridViewTextBoxColumn11.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn11.Width = 60
+		//
+		//dataGridViewTextBoxColumn12
+		//
+		*this.dataGridViewTextBoxColumn12.HeaderText = "Retail"
+		*this.dataGridViewTextBoxColumn12.MinimumWidth = 60
+		*this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12"
+		*this.dataGridViewTextBoxColumn12.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn12.Width = 60
+		//
+		//dataGridViewTextBoxColumn13
+		//
+		*this.dataGridViewTextBoxColumn13.HeaderText = "Sequence"
+		*this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13"
+		*this.dataGridViewTextBoxColumn13.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn13.Visible = *False
+		//
+		//txtLocalDescription
+		//
+		*this.txtLocalDescription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtLocalDescription.Location = *new System.Drawing.Point(124, 185)
+		*this.txtLocalDescription.MaxLength = 20
+		*this.txtLocalDescription.Name = "txtLocalDescription"
+		*this.txtLocalDescription.Size = *new System.Drawing.Size(202, 20)
+		*this.txtLocalDescription.TabIndex = 4
+		//
+		//lblDescriptionOther
+		//
+		*this.lblDescriptionOther.AutoSize = *True
+		*this.lblDescriptionOther.Location = *new System.Drawing.Point(24, 188)
+		*this.lblDescriptionOther.Name = "lblDescriptionOther"
+		*this.lblDescriptionOther.Size = *new System.Drawing.Size(93, 13)
+		*this.lblDescriptionOther.TabIndex = 699
+		*this.lblDescriptionOther.Text = "Description (other)"
+		//
+		//lblLocalLangDesc
+		//
+		*this.lblLocalLangDesc.AutoSize = *True
+		*this.lblLocalLangDesc.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.lblLocalLangDesc.Location = *new System.Drawing.Point(326, 189)
+		*this.lblLocalLangDesc.Name = "lblLocalLangDesc"
+		*this.lblLocalLangDesc.Size = *new System.Drawing.Size(45, 13)
+		*this.lblLocalLangDesc.TabIndex = 700
+		*this.lblLocalLangDesc.Text = "Chinese"
+		//
+		//frmItemAPPChange
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(859, 587)
+		*this.Controls.Add(*this.lblLocalLangDesc)
+		*this.Controls.Add(*this.txtLocalDescription)
+		*this.Controls.Add(*this.lblDescriptionOther)
+		*this.Controls.Add(*this.bttnViewPOs)
+		*this.Controls.Add(*this.lblVATRate)
+		*this.Controls.Add(*this.cboVATRate)
+		*this.Controls.Add(*this.lblMktPricesPrompt)
+		*this.Controls.Add(*this.bttnMarketPrices)
+		*this.Controls.Add(*this.txtBundleRetailPrice)
+		*this.Controls.Add(*this.lblBundlePrice)
+		*this.Controls.Add(*this.dgvItemAPAdd)
+		*this.Controls.Add(*this.groupBox13)
+		*this.Controls.Add(*this.lblAPPTypeDsp)
+		*this.Controls.Add(*this.lblAppType)
+		*this.Controls.Add(*this.cboSellingChannel)
+		*this.Controls.Add(*this.lblSellingChannel)
+		*this.Controls.Add(*this.btnNext)
+		*this.Controls.Add(*this.lblDevelopedByDsp)
+		*this.Controls.Add(*this.lblColourDsp)
+		*this.Controls.Add(*this.lblStyleDsp)
+		*this.Controls.Add(*this.lblVendorDsp)
+		*this.Controls.Add(*this.lblClassDsp)
+		*this.Controls.Add(*this.btnDeleteAPP)
+		*this.Controls.Add(*this.btnViewHistory)
+		*this.Controls.Add(*this.lblUPCDsp)
+		*this.Controls.Add(*this.lblUPC)
+		*this.Controls.Add(*this.btnCharCode)
+		*this.Controls.Add(*this.lblCharCodePending)
+		*this.Controls.Add(*this.txtLongDescPrefix)
+		*this.Controls.Add(*this.btnCommodityCode)
+		*this.Controls.Add(*this.btnCompositionCode)
+		*this.Controls.Add(*this.btnCountryOfOrigin)
+		*this.Controls.Add(*this.btnSeasonCode)
+		*this.Controls.Add(*this.lblCharacterCodeDesc)
+		*this.Controls.Add(*this.txtCharacterCode)
+		*this.Controls.Add(*this.lblCharacterCode)
+		*this.Controls.Add(*this.lblCompositionCodeDesc)
+		*this.Controls.Add(*this.txtCompositionCode)
+		*this.Controls.Add(*this.lblCompostionCode)
+		*this.Controls.Add(*this.lblCountryOfOriginDesc)
+		*this.Controls.Add(*this.txtCountryOfOrigin)
+		*this.Controls.Add(*this.lblCountryOfOrigin)
+		*this.Controls.Add(*this.lblDevelopedBy)
+		*this.Controls.Add(*this.lblShortDescription)
+		*this.Controls.Add(*this.lblStyle)
+		*this.Controls.Add(*this.lblColourDescription)
+		*this.Controls.Add(*this.lblColour)
+		*this.Controls.Add(*this.btnCancel)
+		*this.Controls.Add(*this.btnRemoveComponent)
+		*this.Controls.Add(*this.btnAddComponent)
+		*this.Controls.Add(*this.btnOK)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.lblSeasonCodeDesc)
+		*this.Controls.Add(*this.txtSeasonCode)
+		*this.Controls.Add(*this.lblSeasonCode)
+		*this.Controls.Add(*this.lblCommodityCodeDesc)
+		*this.Controls.Add(*this.txtCommodityCode)
+		*this.Controls.Add(*this.lblCommodityCode)
+		*this.Controls.Add(*this.txtVendorStyle)
+		*this.Controls.Add(*this.lblVendorStyle)
+		*this.Controls.Add(*this.txtShortDescription)
+		*this.Controls.Add(*this.txtLongDescription)
+		*this.Controls.Add(*this.lblLongDescription)
+		*this.Controls.Add(*this.lblVendorDescription)
+		*this.Controls.Add(*this.lblClassDescription)
+		*this.Controls.Add(*this.lblVendor)
+		*this.Controls.Add(*this.lblClass)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.Name = "frmItemAPPChange"
+		*this.ShowIcon = *False
+		*this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "SPICE - Item Management - Change Assorted Pre-Pack"
+		(*this.errorProvider *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.groupBox13.ResumeLayout(*False)
+		*this.groupBox13.PerformLayout()
+		(*this.dgvItemAPAdd *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	/Endregion
+
+	/Region Contructors 
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB        Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User         Type(Disney.Menu.Users)
+		DclSrParm Environment  Type(Disney.Menu.Environments)
+		DclSrParm MDIform      Type(System.Windows.Forms.Form)
+		DclSrParm Class        Type(Int16)
+		DclSrParm Vendor	   Type(Int32)
+		DclSrParm Style		   Type(Int16)
+		DclSrParm Colour	   Type(Int16)  	
+		DclSrparm Size  	   Type(Int16)	 
+				
+		InitializeComponent()
+				
+		*This.PgmDB        = PgmDB
+		*This.User         = User
+		*This.Environment  = Environment
+		*This.Domain       = Environment.Domain
+		*This.DateFormat   = Environment.DateFormat
+		*This.MDIform      = MDIform
+		*This.Class        = Class
+		*This.Vendor       = Vendor
+		*This.Style        = Style
+		*This.Colour       = Colour
+		*This.Size         = Size   
+		
+		If (DataCache.LocalLanguage = 'English')
+			lblDescriptionOther.Enabled = *False
+			txtLocalDescription.Enabled = *False
+			lblLocalLangDesc.Text = ""
+		Else
+			lblDescriptionOther.Enabled = *True
+			txtLocalDescription.Enabled = *True
+			lblLocalLangDesc.Text = DataCache.LocalLanguage
+		EndIf
+		
+	EndConstructor
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf			
+		*Base.Dispose(disposing)
+	EndSr
+	/EndRegion
+
+	BegFunc SelectMarkets Type(Boolean) Access(*Private)
+		
+		DclFld MktList Type(StringBuilder)		
+		DclFld result  Type(Boolean) Inz(*False)
+		
+		MktList = *New StringBuilder()
+			
+		Try
+			ItemsBO.GetDomainMarketsTbl()
+			dv = *New DataView(ItemsBO.SpiceDataSet.Tables("DomainMarkets"))
+			ForEach market Collection(dv) Type(DataRowView)
+				MktList.Append(market["IPMarket"] *As String)
+				MktList.Append(",")
+			EndFor
+			
+			If MktList.Length > *Zero
+				MktList.Remove(MktList.Length-1,1)
+				ItemsBO.SelectedMarkets = MktList.ToString()
+				result = *True
+			EndIf
+			LeaveSR result
+		Catch Name(exc) Type(Exception)
+			// 
+		EndTry
+	EndFunc
+
+	/Region Form Load			
+	BegSr frmItemAPAdd_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+        
+        DclFld dt        Type(DataTable)
+        DclFld cBoxCell  Type(DataGridViewComboBoxCell)
+        DclFld itemSizesTbl Type(DataTable)
+        
+        
+        SetMousePtr *HourGlass
+        
+        Try
+			// Instanciate the ErrorProvider
+			ErrPro = *New Disney.Spice.ErrorProvider.ErrorProviderWithCount(*this.components)
+			ErrPro.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+			ErrPro.ContainerControl = *this
+						
+			// Disable the Add Components and OK Buttons until needed
+			btnRemoveComponent.Enabled = *False
+			btnAddComponent.Enabled    = *False
+			LockDown                   = *False
+			
+			// Load Item Details
+						
+			If SpiceAPPItem  = *Nothing
+				SpiceAPPItem = *New SpiceAPPItem(Pgmdb, User) 
+			Endif
+			
+			If ItemsBO  = *Nothing
+				ItemsBO = *New Items(Pgmdb, User, Environment) 
+			Endif
+			
+			If CasePack = *Nothing
+				CasePack = *New CasePack(PgmDB, Environment)
+			EndIf
+			
+			// Get Data Tables
+			CasePackTbl = CasePack.GetCasePackTbl()
+			ItemsBO.GetAPPTypesTbl()						
+			If (SelectMarkets() = *False)
+				MsgBox TITLE('Information needed') Msg('Markets could not be found for this item. Please use the item update.') ICON(*Exclamation)
+			EndIf
+			ItemsBO.GetLicenceTbl()
+			ItemsBO.GetVATRatesTbl()
+			ItemsBO.GenerateRetailPriceTbl(0,*False,*True)
+			ItemsBO.GetChgMarketPricesTbl(Class,Vendor,Style,Colour)			
+			If ItemsBO.SpiceDataSet.Tables.Contains("ItemSizes")
+				ItemsBO.SpiceDataSet.Tables.Remove("ItemSizes")
+			EndIf
+			itemSizesTbl = ItemsBO.GetItemSizesAPP(Class,Vendor,Style,Colour)
+			ItemsBO.SpiceDataSet.Tables.Add(itemSizesTbl)		
+						
+			// Long Item 
+			lblClassDsp.Text   = Class
+			lblVendorDsp.Text  = Vendor
+			lblStyleDsp.Text   = Style
+			lblColourDsp.Text  = Colour		
+			
+			ItemStyle = ItemsBO.GetItemStyle(Class,Vendor,Style,Colour)
+			txtLocalDescription.Text = ItemStyle.LocalDescription
+			
+			// Class		
+			ItemsBO.GetClass(Class)
+			lblClassDescription.Text = ItemsBO.ClassName
+			ClassDivision            = ItemsBO.ClassDivision
+			ClassDepartment          = ItemsBO.ClassDepartment
+			
+			// Get Filtered Classes Table and Filter by Department of selected APP Class
+			ClassDataSet = ItemsBO.GetClassTbl()
+			DepartmentClasses = ClassDataSet.Tables("FilteredClasses")
+			DepartmentClassesDV = *New DataView(DepartmentClasses)
+			DepartmentClassesDV.RowFilter = "Department = " + ClassDepartment
+			
+			// Vendor
+			ItemsBO.GetVendor(Vendor)
+			lblVendorDescription.Text = ItemsBO.VendorName
+
+			// Colour
+			ItemsBO.GetColour(Colour)
+			lblColourDescription.Text = ItemsBO.ColourName
+			
+			// Get APP Master Details
+			SpiceAPPItem.GetAPPMasterRead(Class, Vendor, Style, Colour, Size)
+			
+			// APP Type 
+			APPType =  SpiceAPPItem.APPType
+			ItemsBO.GetAppType(APPType)
+			lblAPPTypeDsp.Text = APPType + ' - ' + ItemsBO.AppDesc
+			Prefix             = ItemsBO.Prefix
+			MaxComponents      = ItemsBO.MaxComponents
+			
+			If(APPType = "B")
+				cboSellingChannel.Visible = *True
+				lblSellingChannel.Visible = *True
+				txtBundleRetailPrice.Visible = *True
+				lblBundlePrice.Visible = *True
+				//If (Domain = 'EMEA')		
+				If (DataCache.IsVATRequired = *True)
+					cboVATRate.Visible = *True
+					lblVATRate.Visible = *True
+				EndIf				
+				bttnMarketPrices.Visible = *True
+			Else
+				cboSellingChannel.Visible = *False
+				lblSellingChannel.Visible = *False
+				txtBundleRetailPrice.Visible = *False
+				lblBundlePrice.Visible = *False
+				// If (Domain = 'EMEA')
+				If (DataCache.IsVATRequired = *False)
+					cboVATRate.Visible = *False
+					lblVATRate.Visible = *False
+				EndIf
+				bttnMarketPrices.Visible = *False
+			EndIf
+			
+			// Long Description
+			txtLongDescPrefix.Text  = Prefix
+			txtLongDescription.Text = %SUBST(SpiceAPPItem.LongDescription, 5)
+			sLongDesc               = %SUBST(SpiceAPPItem.LongDescription, 5)
+			
+			// Short Description
+			txtShortDescription.Text = SpiceAPPItem.ShortDescription
+			sShortDesc				 = SpiceAPPItem.ShortDescription
+						
+			// Vendor Style
+			txtVendorStyle.Text = SpiceAPPItem.VendorStyle
+			sVendorStyle        = SpiceAPPItem.VendorStyle
+			
+			// Developed By
+			DevelopedBy = SpiceAPPItem.DevelopedBy
+			ItemsBO.GetLicence(DevelopedBy)
+			lblDevelopedByDsp.Text = DevelopedBy + ' - ' + ItemsBO.LicenceDescription
+			
+			// Commodity Code
+			txtCommodityCode.Text  = SpiceAPPItem.CommodityCode
+			ItemsBO.GetCommodityCode(txtCommodityCode.Text.ToString())
+			lblCommodityCodeDesc.Text = ItemsBO.CommodityDescription
+			sCommodityCode            = SpiceAPPItem.CommodityCode
+			
+			// Composition Code		
+			txtCompositionCode.Text  = SpiceAPPItem.CompositionCode
+			ItemsBO.GetCompositionCode(txtCompositionCode.Text.ToString())
+			lblCompositionCodeDesc.Text = ItemsBO.CompositionDescription
+			scompositionCode            = SpiceAPPItem.CompositionCode
+			
+			// Country of Origin Code		
+			txtCountryOfOrigin.Text  = SpiceAPPItem.CountryOfOrigin
+			ItemsBO.GetCountry(txtCountryOfOrigin.Text.ToString())
+			lblCountryOfOriginDesc.Text = ItemsBO.CountryName
+			sCountryOfOrigin = SpiceAPPItem.CountryOfOrigin         
+			
+			// Character Code
+			txtCharacterCode.Text  = SpiceAPPItem.CharacterCode
+			ItemsBO.GetChar(txtCharacterCode.Text.ToString())
+			lblCharacterCodeDesc.Text   = ItemsBO.CharacterName
+			
+			If SpiceAPPItem.PendingChar <> String.Empty
+				lblCharCodePending.Text     = "(" + SpiceAPPItem.PendingChar + ")"
+				sPendingChar                = "(" + SpiceAPPItem.PendingChar + ")"
+			Endif
+				
+			// Season Code		
+			txtSeasonCode.Text  = SpiceAPPItem.SeasonCode
+			ItemsBO.GetSeason(txtSeasonCode.Text.ToString())
+			lblSeasonCodeDesc.Text = ItemsBO.SeasonDesc
+			sSeasonCode            = SpiceAPPItem.SeasonCode
+			
+			// UPC
+			lblUPCDsp.Text     = SpiceAPPItem.VendorUPC.ToString()
+			If lblUPCDsp.Text  = String.Empty or lblUPCDsp.Text = '0'
+				lblUPCDsp.Text = SpiceAPPItem.DisneyUPC.ToString()
+			Endif
+										
+			// Limit Commodity Code and Composition Code Entry for TDSNA		
+			//If Domain = 'SWNA' // JB: Change for China - Sep 2011 
+			If (DataCache.IsCommodityCodeEditable = *False)
+				txtCommodityCode.Text    = '*'
+				txtCommodityCode.Enabled = *False
+				btnCommodityCode.Enabled = *False
+			Else
+				txtCommodityCode.Enabled = *True
+				btnCommodityCode.Enabled = *True
+			EndIf
+			
+			If (DataCache.IsCompositionCodeEditable = *False)
+				txtCompositionCode.Text    = '*'
+				txtCompositionCode.Enabled = *False
+				btnCompositionCode.Enabled = *False
+			Else
+				txtCompositionCode.Enabled = *True
+				btnCompositionCode.Enabled = *True
+			Endif			
+								
+			// Get the Master Market
+			MarketTbl   = ItemsBO.SpiceDataSet.Tables("DomainMarkets")
+			MarketTblDV = *New DataView(MarketTbl)
+			
+			ForEach MarketRow Collection(MarketTblDV) Type(DataRowView)
+				If MarketRow.Item["IPMasterMarket"].ToString() = 'Y'
+					MasterMarket  = MarketRow.Item["IPMarket"].ToString().Trim()
+				Endif
+			EndFor
+			
+			FirstTime = *True
+			
+			cmbCasePack.DataSource    = CasePackTbl
+			cmbCasePack.DisplayMember = "PackCodeDescription"
+			
+			CasePack.GetCasePack(SpiceAPPItem.CasePackType)
+			sCasePack           = CasePack.PackCodeDescription
+			
+			sCasePackQty		= SpiceAPPItem.CaseQty
+			sWeight				= SpiceAPPItem.CartonWeight
+			sHeight			    = SpiceAPPItem.CartonHeight
+			sLength		        = SpiceAPPItem.CartonLength
+			sWidth				= SpiceAPPItem.CartonWidth
+							
+			txtCasePackQty.Text = SpiceAPPItem.CaseQty	
+			txtWeight.Text      = SpiceAPPItem.CartonWeight
+			txtHeight.Text      = SpiceAPPItem.CartonHeight
+			txtLength.Text      = SpiceAPPItem.CartonLength
+			txtWidth.Text       = SpiceAPPItem.CartonWidth
+					
+			cmbCasePack.Text    = CasePack.PackCodeDescription	
+			CasePackCode		= CasePack.PackCode
+							
+			// Selling Channel - (only applicable for 'Bundles')
+			If(APPType = "B")
+				ItemsBO.GetSellingChannelTbl()
+				cboSellingChannel.DataSource = ItemsBO.SpiceDataSet.Tables("SellingChannelTable")
+				cboSellingChannel.DisplayMember = "CodeAndDescription"
+				cboSellingChannel.ValueMember   = "SellingChannelCode"		
+				If (SpiceAPPItem.SellingChannel = *Nothing)
+					cboSellingChannel.SelectedIndex = -1
+					dt = cboSellingChannel.DataSource *AS DataTable			
+					DclFld x *Integer2
+					For Index(x = 0) to(dt.Rows.Count - 1)
+						If (dt.Rows[x]["BundlesDefault"].ToString() = "Y")
+							cboSellingChannel.SelectedValue = dt.Rows[x]["SellingChannelCode"]
+						EndIf
+					EndFor	
+				Else
+					cboSellingChannel.SelectedValue = SpiceAPPItem.SellingChannel				
+				EndIf			
+			EndIf
+					
+			// Bundle retail price
+			txtBundleRetailPrice.Text = SpiceAPPItem.RetailPrice.ToString()
+											
+			// Lockdown form if AMICLK = 'Y' or there are Pending distributions or the APP master is on order.
+			If SpiceAPPItem.CaseDtlLck = 'Y'
+				LockDownForm()
+			Else
+				CheckPending = SpiceAPPItem.ChkPendingDist(Class, Vendor, Style, Colour, Size)	
+			Endif
+			
+			If SpiceAPPItem.CaseDtlLck = 'N' and CheckPending = *On
+				LockDownForm()
+			Else
+				CheckAPPOnOrder = SpiceAPPItem.ChkAPPQtyOnOrder(Class, Vendor, Style, Colour, Size)
+			Endif
+			
+			If CheckAPPOnOrder = *On
+				LockDownForm()
+			Endif
+			
+			ChkSpiceAPPOnOrder = SpiceAPPItem.ChkSpiceAPPOnOrder(Class, Vendor, Style, Colour, Size)
+			If ChkSpiceAPPOnOrder = *On
+				LockDownForm()
+			Endif
+					
+			// Load Components
+			APPComponentsDT = SpiceAPPItem.GetComponentsDatable(Class, Vendor, Style, Colour, Size)
+			LoadGrid()
+			
+			If (SpiceAPPItem.APPType.Contains("BUNDLE") *OR ItemsBO.AppDesc.Contains("BUNDLE"))
+				clmRetail.Visible = *True
+				bttnMarketPrices.Enabled = *True
+			Else
+				clmRetail.Visible = *False
+				bttnMarketPrices.Enabled = *False
+			EndIf			
+			
+			//If (Domain = 'EMEA')
+			If (DataCache.IsVATRequired = *True)
+				cboVATRate.DataSource = GetMarketVatCodes(MasterMarket)
+				cboVATRate.DisplayMember = "ItemVATcode"
+				cboVATRate.ValueMember = "ItemVATcode"
+				lblVATRate.Text = lblVATRate.Text + ' - ' + MasterMarket
+			EndIf
+			
+			lblBundlePrice.Text = lblBundlePrice.Text + ' - ' + ItemsBO.BaseCurrency
+			EnableOKNextButton()
+			
+			SetMousePtr *Dft
+			
+        Catch Name(exc) Type(Exception)			
+			SetMousePtr *Dft
+        EndTry
+						
+	EndSr
+
+	BegFunc GetMarketVatCodes Type(DataTable)
+		DclSrParm marketCode Type(String)
+				
+		DclFld dt Type(DataTable)
+		DclFld dv Type(DataView)
+		
+		Try
+			If(dt = *Nothing)
+				dt = ItemsBO.SpiceDataSet.Tables("VATrates")
+			EndIf
+				
+			dv = *New DataView(dt)
+			dv.RowFilter = "Market = '" + marketCode.Trim() + "'"
+		Catch Name(exc) Type(Exception)
+		
+		EndTry
+			
+		LeaveSR dv.ToTable(*True,"ItemVATcode")
+	EndFunc	
+		
+	BegSR EnableOKNextButton Access(*Private)
+	
+		// OnlineEcom only applies to 'Bundles'
+		If(APPType = "B")
+			If(ItemForOnlineEcom() = *True)			
+				btnNext.Enabled = *True
+				btnOK.Enabled = *False
+			Else
+				btnNext.Enabled = *False
+				btnOK.Enabled = *True
+			EndIf
+		Else
+			// If the item is not a bundle, we will never see the ChangeAPPEcomDetails screen.
+			btnNext.Enabled = *False
+			btnOK.Enabled = *True
+		EndIf
+	EndSR
+		
+	/EndRegion
+	
+	/Region Lock Down Form	
+	BegSr LockDownForm Access(*Private)
+			*This.Text = 'Spice - Item Management - Display Assorted Pre-Packs'
+			LockDown                    				 = *True
+			txtLongDEscription.Enabled  				 = *False
+			txtShortDescription.Enabled 				 = *False
+			txtVendorStyle.Enabled      				 = *False
+			txtCommodityCode.Enabled    				 = *False
+			txtCompositionCode.Enabled  				 = *False
+			txtCountryOfOrigin.Enabled  				 = *False
+			txtCharacterCode.Enabled    				 = *False
+			txtSeasonCode.Enabled       				 = *False
+			cmbCasePack.Enabled         				 = *False
+			txtCasePackQty.Enabled      				 = *False
+			txtWeight.Enabled           				 = *False
+			txtHeight.Enabled           				 = *False
+			txtLength.Enabled           				 = *False
+			txtWidth.Enabled            				 = *False
+			btnCommodityCode.Enabled    				 = *False
+			btnCommodityCode.Visible    				 = *False
+			btnCompositionCode.Enabled  				 = *False
+			btnCompositionCode.Visible  				 = *False
+			btnCountryOfOrigin.Enabled  				 = *False
+			btnCountryOfOrigin.Visible  				 = *False
+			btnSeasonCode.Enabled       				 = *False
+			btnSeasonCode.Visible       				 = *False
+			btnOK.Enabled								 = *False
+			btnRemoveComponent.Enabled  				 = *False
+			btnRemoveComponent.Visible  				 = *False
+			btnAddComPonent.Enabled     				 = *False
+			btnAddComPonent.Visible     				 = *False
+			btnDeleteAPP.Enabled        				 = *False
+			btnDeleteAPP.Visible        				 = *False
+			btnCharCode.Enabled							 = *False
+			dgvItemAPAdd.Enabled		                 = *False
+			dgvItemAPAdd.Columns["clmSelect"].Visible    = *False
+			dgvItemAPAdd.Columns["clmDescription"].Width = 220
+			dgvItemAPAdd.AllowUserToAddRows              = *False
+			dgvItemAPAdd.RowHeadersVisible               = *False
+	EndSr
+/EndRegion
+
+	/Region Load Grid from DSSPACM
+	BegSr LoadGrid Access(*Private)
+	
+		DclFld SelectedRowCount Type(Int16)
+	
+		APPComponentsDV = *New DataView(APPComponentsDT)
+		//APPComponentsDV.Sort = "CompClass, CompVendor, CompStyle, CompColour, CompSize"
+		APPComponentsDV.Sort = "CompSequence"
+		
+		// Instanciate the ItemsBO Class 
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+	
+		ForEach ComponentRow Collection(APPComponentsDV) Type(DataRowView)
+			If LockDown = *False
+				SelectedRowCount = dgvItemAPAdd.RowCount -1
+			Else
+				SelectedRowCount = dgvItemAPAdd.RowCount 
+			Endif 
+		
+			GridClass  = Convert.ToInt16(ComponentRow.Item["CompClass"])
+			GridVendor = Convert.ToInt32(ComponentRow.Item["CompVendor"])
+			GridStyle  = Convert.ToInt16(ComponentRow.Item["CompStyle"]) 
+			GridColour = Convert.ToInt16(ComponentRow.Item["CompColour"])
+			GridSize   = Convert.ToInt16(ComponentRow.Item["CompSize"])
+				
+			ItemsBO.GetItem(GridClass, GridVendor, GridStyle, GridColour, GridSize, MasterMarket)
+			ColourCheck = ItemsBO.GetColour(GridColour)
+			SizeCheck   = ItemsBO.GetSize(GridSize)
+		
+			dgvItemAPAdd.Rows.Add()	
+			If LockDown = *False	
+				dgvItemAPAdd.Item['clmSelect', SelectedRowCount].Value    = *False
+			Endif
+		
+			dgvItemAPAdd.Item['clmClass', SelectedRowCount].Value     = ComponentRow.Item["CompClass"].ToString()
+			dgvItemAPAdd.Item['clmVendor', SelectedRowCount].Value    = ComponentRow.Item["CompVendor"].ToString()
+			dgvItemAPAdd.Item['clmStyle', SelectedRowCount].Value     = ComponentRow.Item["CompStyle"].ToString()
+			dgvItemAPAdd.Item['clmColour', SelectedRowCount].Value    = ComponentRow.Item["CompColour"].ToString()
+			dgvItemAPAdd.Item['clmSize', SelectedRowCount].Value      = ComponentRow.Item["CompSize"].ToString()
+			dgvItemAPAdd.Item['clmQty',  SelectedRowCount].Value      = ComponentRow.Item["CompQuantity"].ToString()
+			dgvItemAPAdd.Item['clmSequence',  SelectedRowCount].Value = ComponentRow.Item["CompSequence"].ToString()
+		
+			dgvItemAPAdd.Item['clmQty',  SelectedRowCount].Tag        = ComponentRow.Item["CompQuantity"]
+				
+			If ColourCheck = *True
+				dgvItemAPAdd.Item["clmColourName", SelectedRowCount].Value = ItemsBO.ColourName.ToString().Trim()
+			Else
+				dgvItemAPAdd.Item["clmColourName", SelectedRowCount].Value = 'Colour Name not found'
+			Endif
+			
+			If SizeCheck = *True
+				dgvItemAPAdd.Item["clmSizeName", SelectedRowCount].Value = ItemsBO.SizeName.ToString().Trim()
+			Else
+				dgvItemAPAdd.Item["clmSizeName", SelectedRowCount].Value = 'Size Name not found'
+			Endif
+				
+			dgvItemAPAdd.Item["clmDescription", SelectedRowCount].Value = ItemsBO.ItemLongDescription.ToString().Trim()
+			dgvItemAPAdd.Item["clmUPC", SelectedRowCount].Value         = ItemsBO.UPC.ToString().Trim()
+			dgvItemAPAdd.Item["clmCost", SelectedRowCount].Value        = ItemsBO.ItemCost.ToString().Trim()
+			dgvItemAPAdd.Item["clmRetail", SelectedRowCount].Value	    = ItemsBO.ItemRetail.ToString().Trim()
+			dgvItemAPAdd.Item['clmClass', SelectedRowCount].ReadOnly  = *True
+			dgvItemAPAdd.Item['clmVendor', SelectedRowCount].ReadOnly = *True
+			dgvItemAPAdd.Item['clmStyle', SelectedRowCount].ReadOnly  = *True
+			dgvItemAPAdd.Item['clmColour', SelectedRowCount].ReadOnly = *True
+			dgvItemAPAdd.Item['clmSize', SelectedRowCount].ReadOnly   = *True
+		EndFor
+	EndSr
+	/EndRegion
+		
+	/Region Set APP Properties 	
+	
+	BegFunc SafeInt16Value Type(Int16) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR Int16.Parse(controlValue.ToString())
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+	BegSr CalcPricingSums Access(*Private)
+//		DclFld class        Type(Int16)
+//		DclFld vendor       Type(Int16)
+//		DclFld style        Type(Int16)
+//		DclFld color        Type(Int16)
+//		DclFld size         Type(Int16)	
+//		DclFld market Type(String)
+//		DclFld costPrice Type(Decimal)
+//		DclFld retailPrice Type(Decimal)
+//		DclFld totalCostPrice Type(Decimal)
+//		DclFld totalRetailPrice Type(Decimal)
+//		DclFld qty Type(Int16)
+//		DclFld dataTbl Type(DataTable)
+//		
+//		dataTbl = *this.dgvItemAPAdd.DataSource 
+//		
+//		If ItemsBO.SpiceDataSet.Tables.Contains("MarketPrices")
+//			
+//			//loop thru the grid get the c-v-s-c + qty 
+//			// find the corresponding rec in MarketPrices
+//			
+//			ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+//				class = SafeInt16Value(dgvRow.Cells["clmClass"].Value)
+//				vendor = SafeInt16Value(dgvRow.Cells["clmVendor"].Value)
+//				style = SafeInt16Value(dgvRow.Cells["clmStyle"].Value)
+//				color = SafeInt16Value(dgvRow.Cells["clmColour"].Value)
+//				size = SafeInt16Value(dgvRow.Cells["clmSize"].Value)
+//				qty = SafeInt16Value(dgvRow.Cells["clmQty"].Value)
+//			EndFor
+//		EndIf
+//
+//		ForEach DMrow Collection(ItemsBO.SpiceDataSet.Tables["MarketPrices"].Rows) Type(DataRow)
+//			class = SafeInt16Value(DMrow["Cost"])
+//			vendor = SafeInt16Value(DMrow["vendor"])
+//			style = SafeInt16Value(DMrow["Style"])
+//			color = SafeInt16Value(DMrow["Colour"])
+//			size = SafeInt16Value(DMrow["Size"])
+//			
+//			dataTbl.Select("Class = " + class.ToString() + " and Vendor = " + vendor.ToString() + " and Style = " + style.ToString() + " and Colour = " + color.ToString() + " and Size = " + size.ToString())
+//			
+//		EndFor
+//		
+////		MktPriceTbl.Columns.Add(*New DataColumn("Class",  *TypeOf(Int16)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("Vendor", *TypeOf(Int32)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("Style",  *TypeOf(Int16)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("Colour", *TypeOf(Int16)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("Size",   *TypeOf(Int16)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("Market", *TypeOf(String)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("CurrencyCode",*TypeOf(String)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("Cost",   *TypeOf(Decimal)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("PendingCost",*TypeOf(Decimal)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("Retail", *TypeOf(Decimal)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("PendingRetail", *TypeOf(Decimal)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("ListPrice", *TypeOf(Decimal)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("VAT",    *TypeOf(String)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("PendingVAT",*TypeOf(String)))
+////		MktPriceTbl.Columns.Add(*New DataColumn("VendorUPC", *TypeOf(Int64)))
+////		MktPriceTbl.PrimaryKey = *New DataColumn[] {MktPriceTbl.Columns["Market"],MktPriceTbl.Columns["Size"]}
+//		
+//		
+////		ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+////			class = SafeInt16Value(dgvRow.Cells["clmClass"].Value)
+////			vendor = SafeInt16Value(dgvRow.Cells["clmVendor"].Value)
+////			style = SafeInt16Value(dgvRow.Cells["clmStyle"].Value)
+////			color = SafeInt16Value(dgvRow.Cells["clmColour"].Value)
+////			size = SafeInt16Value(dgvRow.Cells["clmSize"].Value)
+////			qty = SafeInt16Value(dgvRow.Cells["clmQty"].Value)		
+////		EndFor
+	EndSr
+	
+	BegSr SetItemProperties Access(*Private)
+		DclFld proceed      Type(Boolean) Inz(*False) 
+		DclFld dataTbl      Type(DataTable)
+
+		If(APPType = "B")
+			ItemsBO.SellingChannel = cboSellingChannel.SelectedValue.ToString()
+		EndIf
+		
+		//CalcPricingSums()
+		
+		If ItemsBO.SpiceDataSet.Tables.Contains("MarketPrices")
+			DoWhile (proceed = *False)
+				proceed = *True	
+				ForEach row Collection(ItemsBO.SpiceDataSet.Tables["MarketPrices"].Rows) Type(DataRow)
+					If (ItemsBO.SpiceDataSet.Tables["MarketPrices"].Columns.Contains("SizeCode"))
+						If Not (row["SizeCode"].ToString() = '9999' *OR row["SizeCode"].ToString() = '9998')
+							row.Delete()
+							proceed = *False
+							Leave
+						EndIf
+					EndIf	
+					
+					If (ItemsBO.SpiceDataSet.Tables["MarketPrices"].Columns.Contains("Size"))
+						If Not (row["Size"].ToString() = '9999' *OR row["Size"].ToString() = '9998')
+							row.Delete()
+							proceed = *False
+							Leave
+						EndIf
+					EndIf
+				EndFor						
+			EndDo	
+			
+			If (APPType.Trim() = "B")
+				ForEach row Collection(ItemsBO.SpiceDataSet.Tables["MarketPrices"].Rows) Type(DataRow)
+					If (row["CurrencyCode"].ToString() = ItemsBO.BaseCurrency)
+						row["PendingRetail"] = SafeDecimalValue(*this.txtBundleRetailPrice.Text)
+						row["ListPrice"] = row["PendingRetail"] 
+						//If (Domain = 'EMEA')
+						If (DataCache.IsVATRequired = *True)
+							row["VAT"] = cboVATRate.SelectedValue.ToString()
+							row["PendingVAT"] = cboVATRate.SelectedValue.ToString()							
+						EndIf
+					Else
+						row["ListPrice"] = row["Retail"]	
+					EndIf							
+				EndFor	
+			EndIf
+		EndIf
+		
+		proceed = *False
+		If ItemsBO.SpiceDataSet.Tables.Contains("ItemSizes")
+			DoWhile (proceed = *False)
+				proceed = *True	
+				ForEach row Collection(ItemsBO.SpiceDataSet.Tables["ItemSizes"].Rows) Type(DataRow)
+					If (ItemsBO.SpiceDataSet.Tables["ItemSizes"].Columns.Contains("SizeCode"))
+						If(row["SizeCode"].ToString() = '9999' *OR row["SizeCode"].ToString() = '9998')
+							row["Description"] = Prefix + txtLongDescription.Text.ToString().Trim()  
+							ItemsBO.LongDescription = Prefix + txtLongDescription.Text.ToString().Trim()
+						Else
+							row.Delete()
+							proceed = *False
+							Leave
+						EndIf
+					EndIf
+					If (ItemsBO.SpiceDataSet.Tables["ItemSizes"].Columns.Contains("Size"))
+						If(row["Size"].ToString() = '9999' *OR row["Size"].ToString() = '9998')
+							row["Description"] = Prefix + txtLongDescription.Text.ToString().Trim()  
+							ItemsBO.LongDescription = Prefix + txtLongDescription.Text.ToString().Trim()
+						Else
+							row.Delete()
+							proceed = *False
+							Leave
+						EndIf
+					EndIf
+				EndFor	
+				
+				row["DescNonEnglish"] = txtLocalDescription.Text
+			EndDo
+		EndIf
+		
+		ItemsBO.LocalDescription = txtLocalDescription.Text
+		*this.ItemStyle.LocalDescription = txtLocalDescription.Text
+	EndSr
+
+	// Set APP Properties for the Update method
+	BegSr SetAPPProperties Access(*Private)
+	
+		With SpiceAPPItem
+			.Division         = ClassDivision
+			.Department       = ClassDepartment
+			.Class            = Class
+ 			.Vendor           = Vendor
+			.Style            = Style
+			.Colour           = Colour
+			.Size             = Size
+			.LongDescription  = Prefix + txtLongDescription.Text.ToString().Trim()   
+			.ShortDescription = txtShortDescription.Text.ToString().Trim()  
+			.VendorStyle      = txtVendorStyle.Text.ToString().Trim()
+			.CommodityCode    = txtCommodityCode.Text.ToString().Trim()
+			.CompositionCode  = txtCompositionCode.Text.ToString().Trim()
+			.CountryOfOrigin  = txtCountryOfOrigin.Text.ToString().Trim()
+			.SeasonCode       = txtSeasonCode.Text.ToString().Trim()
+			.CasePackType     = CasePackCode
+			.CaseQty          = txtCasePackQty.Text.ToString().Trim()
+			.CartonWeight     = txtWeight.Text.ToString().Trim()
+			.CartonHeight     = txtHeight.Text.ToString().Trim()
+			.CartonLength     = txtLength.Text.ToString().Trim()
+			.CartonWidth      = txtWidth.Text.ToString().Trim()
+			.CostPrice        = GridCostSum			
+			.ComponentCount   = GridCount
+			If(APPType = "B")
+				.SellingChannel   = cboSellingChannel.SelectedValue.ToString().Trim()
+				.RetailPrice      = SafeDecimalValue(*this.txtBundleRetailPrice.Text)	
+			Else
+				.RetailPrice      = GridRetailSum	
+			EndIf
+			
+			If lblCharCodePending.Text.ToString() <> String.Empty
+				.PendingChar  = lblCharCodePending.Text.ToString().Substring(1,3)
+			Else
+				.PendingChar  = String.Empty
+			Endif
+		EndWith
+	EndSr
+	
+	BegFunc SafeDecimalValue Type(Decimal) Access(*PRIVATE)
+		DclSrParm controlValue *Object		
+		Try
+			LeaveSR Decimal.Parse(controlValue.ToString())
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+/EndRegion
+
+	/Region Validate Grid Components		
+	BegSr ValidateGridComponents Access(*Private)		
+		DclFld GridCost       Type(Decimal)
+		DclFld GridRetail     Type(Decimal)
+		DclFld GridQtyCalc    Type(Decimal)
+		DclFld DuplicateChk   Type(Boolean)
+		DclFld GridClassCheck Type(Boolean)
+		
+		AllOk = *True
+		
+		// Check if all Item fields are valid
+		ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+			If dgvRow.IsNewRow = *False 
+				If dgvRow.Cells["clmClass"].Value.ToString()       = "" or +
+				   dgvRow.Cells["clmStyle"].Value.ToString()       = "" or +
+				   dgvRow.Cells["clmColour"].Value.ToString()      = "" or +
+				   dgvRow.Cells["clmSize"].Value.ToString()        = "" or +
+				   dgvRow.Cells["clmDescription"].Value.ToString() = "" 
+			       
+			       dgvRow.Cells["clmSize"].ErrorText = "This is not a valid Item"
+				   AllOK = *False
+				   LeaveSr
+				Else
+					dgvRow.Cells["clmSize"].ErrorText = ""	
+				Endif
+			Endif
+		EndFor
+		
+		// Check if Class entered belongs to the correct Department
+		If Allok = *True
+			If( AppType <> "B")
+				ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+					If dgvRow.IsNewRow = *False 
+						GridClassCheck = *False
+						ForEach DepartmentRow Collection(DepartmentClassesDV) Type(DataRowView)
+							If DepartmentRow.Item["ClassCode"].ToString() =  dgvRow.Cells["clmClass"].Value.ToString()
+								GridClassCheck = *True
+								Leave
+							Endif
+						EndFor
+						
+						If GridClassCheck = *False
+							dgvRow.Cells["clmClass"].ErrorText = "Class entered does not belong to the correct Department"
+							AllOk = *False
+							LeaveSr
+						Else
+							dgvRow.Cells["clmClass"].ErrorText = ""	
+						Endif
+					Endif
+				EndFor
+			EndIf
+		Endif	
+		
+		// Check if Item exists in all Markets
+		If Allok = *True
+			ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+				If dgvRow.IsNewRow = *False 
+					GridClass  = Int16.Parse(dgvRow.Cells["clmClass"].Value.ToString())	
+					GridStyle  = Int16.Parse(dgvRow.Cells["clmStyle"].Value.ToString())
+					GridColour = Int16.Parse(dgvRow.Cells["clmColour"].Value.ToString())
+					GridSize   = Int16.Parse(dgvRow.Cells["clmSize"].Value.ToString()) 
+					GridVendor   = Int16.Parse(dgvRow.Cells["clmVendor"].Value.ToString()) 
+					ForEach MarketRow Collection(MarketTblDV) Type(DataRowView)
+						Market  = MarketRow.Item["IPMarket"].ToString().Trim()
+						ItemCheck = ItemsBO.GetItem(GridClass, GridVendor, GridStyle, GridColour, GridSize, Market)
+					EndFor
+							
+					If ItemCheck  = *False
+						dgvRow.Cells["clmSize"].ErrorText = "This Item does not exist in all Markets. Please create Item before adding"
+						AllOK = *False
+						LeaveSr
+					Else
+						dgvRow.Cells["clmSize"].ErrorText = ""	
+					Endif
+				Endif
+			EndFor
+		Endif
+		
+		// Check if Item is an APP Master Item
+		If Allok = *True
+			ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+				If dgvRow.IsNewRow = *False 
+					GridClass  = Int16.Parse(dgvRow.Cells["clmClass"].Value.ToString())	
+					GridStyle  = Int16.Parse(dgvRow.Cells["clmStyle"].Value.ToString())
+					GridColour = Int16.Parse(dgvRow.Cells["clmColour"].Value.ToString())
+					GridSize   = Int16.Parse(dgvRow.Cells["clmSize"].Value.ToString())
+					GridVendor   = Int16.Parse(dgvRow.Cells["clmVendor"].Value.ToString()) 
+					 
+					ItemsBO.GetItem(GridClass, GridVendor, GridStyle, GridColour, GridSize, MasterMarket)
+					APPMasterItem      = ItemsBO.APP
+	   				If APPMasterItem  = "APP"
+						dgvRow.Cells["clmSize"].ErrorText = "This Item is an APP Master Item and cannot be added"
+						AllOK = *False
+						LeaveSr
+					Else
+						dgvRow.Cells["clmSize"].ErrorText = ""	
+					Endif
+				Endif
+			EndFor
+		Endif			
+		
+		// Validate Quantities
+		If Allok = *True
+			ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+				If dgvRow.IsNewRow = *False 
+					If(dgvRow.Cells["clmQty"].Value = *Nothing)
+						dgvRow.Cells["clmQty"].Value = 0
+					EndIf
+					
+					If Int16.TryParse(dgvRow.Cells["clmQty"].Value.ToString(), *ByRef GridQty) = *False
+						dgvRow.Cells["clmQty"].ErrorText = "Please enter a valid Quantity greater than zero."
+						AllOK = *False
+						LeaveSr
+					Else
+						dgvRow.Cells["clmQty"].ErrorText = ""	
+					Endif
+					
+					If GridQty <= 0
+						dgvRow.Cells["clmQty"].ErrorText = "Please enter a valid Quantity."
+						AllOK = *False
+						LeaveSr
+					Else
+						dgvRow.Cells["clmQty"].ErrorText = ""
+					Endif
+				Endif
+			Endfor	
+		Endif
+		
+		// Validate Maximum Components
+		If Allok = *True
+			ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+				If dgvRow.IsNewRow = *False 
+					If (dgvRow.Index + 1) > MaxComponents
+						MsgBox TITLE('Error notification') Msg('You have Exceeded the maximum components allowed for this APP Type.') ICON(*Exclamation)
+						AllOk = *False
+						LeaveSr
+					Endif
+				Endif
+			Endfor
+		Endif	
+						
+		// Validate APP Type P - Multiple Products OR Bundles
+		If Allok = *True
+			DuplicateChk = *False
+			If MaxComponents > 1 and (APPType = 'P' *Or APPType = 'B')
+				ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+					If dgvRow.IsNewRow = *False
+						ForEach dgvRow2 Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+							If dgvRow2.IsNewRow = *False
+								If	dgvRow.Cells["clmClass"].Value.ToString()  = dgvRow2.Cells["clmClass"].Value.ToString()  And +
+									dgvRow.Cells["clmStyle"].Value.ToString()  = dgvRow2.Cells["clmStyle"].Value.ToString()  And +
+									dgvRow.Cells["clmColour"].Value.ToString() = dgvRow2.Cells["clmColour"].Value.ToString() And +
+									dgvRow.Cells["clmSize"].Value.ToString()   = dgvRow2.Cells["clmSize"].Value.ToString()   And +
+									dgvRow.Index <> dgvRow2.Index
+									DuplicateChk = *True
+								Endif
+							Endif
+						EndFor
+					Endif
+				EndFor
+														
+				If DuplicateChk = *True
+					MsgBox	TITLE('Error notification') Msg('There are duplicate components added to the Grid.') ICON(*Exclamation)
+					AllOk = *False
+					LeaveSr
+				Endif
+			Endif
+		Endif		
+				
+		// Validate APP Type S - Multiple Sizes
+		// Check for Duplicate Sizes
+		If Allok = *True
+			DuplicateChk = *False
+			If MaxComponents > 1 and APPType = 'S'
+				ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+					If dgvRow.IsNewRow = *False
+						ForEach dgvRow2 Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+							If dgvRow2.IsNewRow = *False
+								If	dgvRow.Cells["clmClass"].Value.ToString()  = dgvRow2.Cells["clmClass"].Value.ToString()  And +
+									dgvRow.Cells["clmStyle"].Value.ToString()  = dgvRow2.Cells["clmStyle"].Value.ToString()  And +
+									dgvRow.Cells["clmColour"].Value.ToString() = dgvRow2.Cells["clmColour"].Value.ToString() And +
+									dgvRow.Cells["clmSize"].Value.ToString()   = dgvRow2.Cells["clmSize"].Value.ToString()   And +
+									dgvRow.Index <> dgvRow2.Index
+									DuplicateChk = *True
+								Endif
+							Endif
+						EndFor
+					Endif
+				EndFor
+						
+				If DuplicateChk = *True
+					MsgBox TITLE('Error notification')	Msg('There are duplicated Sizes added to the Grid.') ICON(*Exclamation)
+					AllOk = *False
+					LeaveSr
+				Endif
+			Endif
+		Endif
+		
+		// Calculate Cost and Retail Price
+		If AllOk = *True
+			GridCount     = String.Empty
+			GridCost      = String.Empty
+			GridCostSum   = String.Empty
+			GridRetail    = String.Empty
+			GridRetailSum = String.Empty
+			GridQtyCalc	  = String.Empty
+			ForEach dgvRow Collection(dgvItemAPAdd.Rows) Type(DataGridViewRow)
+				If dgvRow.IsNewRow = *False
+					If dgvRow.Index < MaxComponents
+						GridCount     +=1
+						GridCost      = Decimal.Parse(dgvRow.Cells["clmCost"].Value.ToString())
+						GridQtyCalc   = Decimal.Parse(dgvRow.Cells["clmQty"].value.ToString())
+						GridRetail    = Decimal.Parse(dgvRow.Cells["clmRetail"].Value.ToString())
+						GridCostSum   += (GridCost * GridQtyCalc)
+						GridRetailSum += (GridRetail * GridQtyCalc)  
+					Endif
+				Endif
+			EndFor
+		Endif	
+	EndSr
+		
+/EndRegion	
+
+	/Region Accept Selected Items from Item Search
+	BegSr AcceptSelectedItems Access(*Private)
+		
+		DclFld SelectedRowCount Type(Int16)
+		
+		// Instanciate ItemsBO Class 
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+														
+		SelectItemsDV = *New DataView(SelectItemsTbl) 
+		
+		ForEach SelectedItems Collection(SelectItemsDV) Type(DataRowView)
+			SelectedRowCount = dgvItemAPAdd.RowCount -1 
+			dgvItemAPAdd.Rows.Add()
+			GridClass  = Convert.ToInt16(SelectedItems.Item["Class"])
+			GridStyle  = Convert.ToInt16(SelectedItems.Item["Style"]) 
+			GridColour = Convert.ToInt16(SelectedItems.Item["Colour"])
+			GridSize   = Convert.ToInt16(SelectedItems.Item["Size"])
+			
+			dgvItemAPAdd.Item['clmSelect', SelectedRowCount].Value = *False
+			dgvItemAPAdd.Item['clmClass', SelectedRowCount].Value  = SelectedItems.Item["Class"].ToString()
+			dgvItemAPAdd.Item['clmVendor', SelectedRowCount].Value = SelectedItems.Item["Vendor"].ToString()
+			dgvItemAPAdd.Item['clmStyle', SelectedRowCount].Value  = SelectedItems.Item["Style"].ToString()
+			dgvItemAPAdd.Item['clmColour', SelectedRowCount].Value = SelectedItems.Item["Colour"].ToString()
+			dgvItemAPAdd.Item['clmSize', SelectedRowCount].Value   = SelectedItems.Item["Size"].ToString()
+			dgvItemAPAdd.Item['clmQty',  SelectedRowCount].Value   = String.Empty
+									
+			// Get Item Details......Colour and Size Names
+			ItemsBO.GetItem(GridClass, Vendor, GridStyle, GridColour, GridSize, MasterMarket)
+			ColourCheck = ItemsBO.GetColour(GridColour)
+			SizeCheck   = ItemsBO.GetSize(GridSize)
+			
+			If ColourCheck = *True
+				dgvItemAPAdd.Item["clmColourName",SelectedRowCount].Value  = ItemsBO.ColourName.ToString().Trim()
+			Else
+				dgvItemAPAdd.Item["clmColourName",SelectedRowCount].Value  = 'Colour Name not found'
+			Endif
+			
+			If SizeCheck = *True
+				dgvItemAPAdd.Item["clmSizeName",SelectedRowCount].Value    = ItemsBO.SizeName.ToString().Trim()
+			Else
+				dgvItemAPAdd.Item["clmSizeName",SelectedRowCount].Value    = 'Size Name not found'
+			Endif
+			
+			dgvItemAPAdd.Item["clmDescription",SelectedRowCount].Value = ItemsBO.ItemLongDescription.ToString().Trim()
+			dgvItemAPAdd.Item["clmUPC",SelectedRowCount].Value         = ItemsBO.UPC.ToString().Trim()
+			dgvItemAPAdd.Item["clmCost",SelectedRowCount].Value        = ItemsBO.ItemCost.ToString().Trim()
+			dgvItemAPAdd.Item["clmRetail",SelectedRowCount].Value	   = ItemsBO.ItemRetail.ToString().Trim()
+		EndFor
+						
+	Endsr
+	/EndRegion
+
+	/Region Add Item Details
+	
+	BegSr AddItemDetails Access(*Private)
+		// Instance ItemsBO Class 
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+						
+		// Get Item Details......Colour and Size Names
+		ItemsBO.GetItem(GridClass, Vendor, GridStyle, GridColour, GridSize, MasterMarket)
+		ColourCheck = ItemsBO.GetColour(GridColour)
+		SizeCheck   = ItemsBO.GetSize(GridSize)
+		
+		If ColourCheck = *True
+			dgvItemAPAdd.Item["clmColourName",Row].Value = ItemsBO.ColourName.ToString().Trim()
+		Else
+			dgvItemAPAdd.Item["clmColourName",Row].Value = 'Colour Name not found'
+		Endif
+			
+		If SizeCheck = *True
+			dgvItemAPAdd.Item["clmSizeName",Row].Value = ItemsBO.SizeName.ToString().Trim()
+		Else
+			dgvItemAPAdd.Item["clmSizeName",Row].Value = 'Size Name not found'
+		Endif
+		
+		dgvItemAPAdd.Item["clmDescription",Row].Value = ItemsBO.ItemLongDescription.ToString().Trim()
+		dgvItemAPAdd.Item["clmUPC",Row].Value         = ItemsBO.UPC.ToString().Trim()
+		dgvItemAPAdd.Item["clmCost",Row].Value        = ItemsBO.ItemCost.ToString().Trim()
+		dgvItemAPAdd.Item["clmRetail",Row].Value	  = ItemsBO.ItemRetail.ToString().Trim()
+	Endsr
+	/EndRegion
+
+	/Region Buttons
+	BegSr btnCancel_Click Access(*Private) Event(*this.btnCancel.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DialogResult = DialogResult.Cancel
+		Unload *This		
+	EndSr
+	
+	BegSr btnRemoveComponent_Click Access(*Private) Event(*this.btnRemoveComponent.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		// Delete selected rows...This code counts backwards as the RemoveAt reindexes.
+		dclfld x type(int16)
+		x = dgvItemAPAdd.RowCount -1
+		For Index(x) DownTo(0) 
+			If dgvItemAPAdd.Rows[x].IsNewRow = *False
+				If dgvItemAPAdd.Item["clmSelect", x].Value *As Boolean = *True
+					dgvItemAPAdd.Rows.RemoveAt(x)
+					EnableOKNextButton()
+				Endif
+			Endif
+		EndFor
+	EndSr
+	
+	BegSr btnAddComponent_Click Access(*Private) Event(*this.btnAddComponent.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld sellingChannel Type(String)
+		DclFld dept	       Type(Int16)
+		
+		If MaxComponents = 1
+			ClassLck  = 'Y'
+		Else
+			ClassLck = 'N'
+		Endif
+		
+		// Instance Class Items		
+		If(APPType = "B")
+			DeptLck   = 'N'
+			VendorLck = 'N'
+			dept = ClassDepartment
+			ClassDepartment = *Zero
+			sellingChannel = cboSellingChannel.SelectedValue.ToString()
+			SelectItem = *New SelectItem(Pgmdb, User, Environment, MDIForm, Class, ClassLck, ClassDepartment, DeptLck, Vendor, VendorLck, sellingChannel)
+			ClassDepartment = dept
+		Else
+			DeptLck   = 'Y'
+			VendorLck = 'Y'
+			SelectItem = *New SelectItem(Pgmdb, User, Environment, MDIForm, Class, ClassLck, ClassDepartment, DeptLck, Vendor, VendorLck)
+		EndIf
+					
+		SelectItemsTbl = SelectItem.GetSelectedItems()
+		
+		If SelectItemsTbl.Rows.Count > 0
+			AcceptSelectedItems()
+			EnableOKNextButton()
+		Endif
+	EndSr
+	
+	BegSr btnNext_Click Access(*Private) Event(*this.btnNext.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld bundleRetailPrice Type(Decimal)
+		
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+		
+		If dgvItemAPAdd.RowCount = 1
+			MsgBox TITLE('Information needed') Msg('Please add Components to continue.') ICON(*Exclamation)
+			LeaveSR
+		Endif			
+		
+		If (APPType.Trim() = "B")
+		
+			If(m_MarketPricesFormVisited = *False)
+				lblMktPricesPrompt.Visible = *True
+				bttnMarketPrices.Focus()
+				LeaveSR
+			EndIf
+		
+			Decimal.TryParse(*this.txtBundleRetailPrice.Text, *ByRef bundleRetailPrice)			
+			If(bundleRetailPrice = 0)
+				*this.lblMktPricesPrompt.Visible = *False
+				*this.errorProvider.SetError(*this.bttnMarketPrices, "Please enter a valid bundle retail price greater than zero.")
+				LeaveSR
+			Else
+				If (PriceMatrixTbl = *Nothing)
+					ItemsBO.GenerateRetailPriceTbl(bundleRetailPrice,*False,*True)
+					PriceMatrixTbl = ItemsBO.SpiceDataSet.Tables["RetailPrice"]
+					PriceMatrixTbl.Columns.Add(*New DataColumn("VAT", *TypeOf(String)))			
+					PriceMatrixTbl.Columns.Add(*New DataColumn("Market", *TypeOf(String)))	
+					
+					ForEach marketPrice Collection(ItemsBO.SpiceDataSet.Tables["MarketPrices"].Rows) Type(DataRow)
+						ForEach PriceMatrixRow Collection(PriceMatrixTbl.Rows) Type(DataRow)		
+							If (PriceMatrixRow["Currency"] = marketPrice["CurrencyCode"])
+								PriceMatrixRow["Retail"] = marketPrice["Retail"]
+								PriceMatrixRow["VAT"] = marketPrice["VAT"]
+								PriceMatrixRow["Market"] = marketPrice["Market"]
+							EndIf
+						EndFor
+					EndFor
+				EndIf
+			EndIf				
+			
+			//If(Domain = 'EMEA' *AND cboVATRate.Text = String.Empty)					
+			If ((DataCache.IsVATRequired = *True) *AND (cboVATRate.Text = String.Empty))
+				ErrPro.SetControlError(cboVATRate , "Please select a VAT rate.")
+				LeaveSR
+			EndIf
+				
+			Try
+				// Check for any zero values entered into Retail price grid
+				dv = *New DataView(ItemsBO.SpiceDataSet.Tables["MarketPrices"])
+				dv.RowFilter = "Retail = 0"
+				If dv.Count <> *Zero
+					ErrPro.SetControlError(bttnMarketPrices,"One or more Retail prices are Zero")
+				EndIf
+			Catch Name(exc) Type(Exception)
+			EndTry
+		Endif			
+
+		If GridErrors = *False and ErrPro.ErrorCount = 0
+			
+			//Instance Class SpiceItem
+			If SpiceItem  = *Nothing
+				SpiceItem = *New SpiceItem(Pgmdb, User) 
+			Endif
+			
+			//Instance Class SpiceAPPItem
+			If SpiceAPPItem = *Nothing
+				SpiceAPPItem = *New SpiceAPPItem(Pgmdb, User) 
+			Endif
+			
+			//Instance Class DSSPEHLcls History Events
+			If DSSPEHLcls  = *Nothing
+				DSSPEHLcls = *New DSSPEHLcls(Pgmdb) 
+			Endif
+			
+			SetMousePtr *HourGlass
+						
+			Try		
+				ValidateGridComponents()
+			Catch Name(exc) Type(Exception)
+				Allok = *False
+				*this.dgvItemAPAdd.Refresh()
+			EndTry
+			
+			If Allok = *True
+				
+				LongItemString = *New StringBuilder()
+				
+				LongItemString.Append(Class.ToString('0000'))
+				LongItemString.Append(Vendor.ToString('00000'))
+				LongItemString.Append(SpiceItem.Style.ToString('0000'))
+				LongItemString.Append(Colour.ToString('000'))
+				LongItemString.Append(Size.ToString('0000'))
+				
+				If(APPType = "B")
+					EventType = 'BND'	
+				Else
+					EventType = 'APP'
+				EndIf
+				EventKey         = LongItemString.ToString()
+				EventDescription = 'Changed in SPICE'
+								
+				SpiceAppItem.GetAPPMasterUpdate(Class, Vendor, Style, Colour, Size)
+				SetItemProperties()
+				SetAPPProperties()
+
+				*this.Hide()				
+				//m_MarketPricesFormVisited = *False // reset
+				m_ChangeAPPEcomDetails = *New ChangeAPPEcomDetails(ItemsBO,SpiceItem,SpiceAPPItem,Class,Vendor,Style,Colour,Size,DSSPEHLcls,dgvItemAPAdd)
+				m_ChangeAPPEcomDetails.ShowDialog()
+				
+				If m_ChangeAPPEcomDetails.DialogResult = System.Windows.Forms.DialogResult.Retry
+					*this.Show()
+					m_ChangeAPPEcomDetails.Close()
+					m_ChangeAPPEcomDetails = *Nothing
+				Else
+					m_ChangeAPPEcomDetails.Close()
+					m_ChangeAPPEcomDetails = *Nothing
+					
+					DialogResult = DialogResult.OK
+					Unload *This
+				EndIf					
+
+			Else
+				MsgBox TITLE('Error notification') Msg('Please correct all highlighted errors before proceeding.') ICON(*Exclamation)
+			Endif
+		Else
+			MsgBox TITLE('Error notification') Msg('Please correct all highlighted errors before proceeding.') ICON(*Exclamation)
+		Endif
+	EndSr
+	
+	BegSr btnOK_Click Access(*Private) Event(*this.btnOK.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld bundleRetailPrice Type(Decimal)
+		
+		Try
+			If ItemsBO  = *Nothing
+				ItemsBO = *New Items(Pgmdb, User, Environment) 
+			Endif
+			
+			If dgvItemAPAdd.RowCount = 1
+				MsgBox TITLE('Information needed') Msg('Please add Components to continue.') ICON(*Exclamation)
+				LeaveSR
+			Endif
+			
+			If (APPType.Trim() = "B")
+				If (Decimal.TryParse(*this.txtBundleRetailPrice.Text, *ByRef bundleRetailPrice) = *False)
+					*this.errorProvider.SetError(*this.txtBundleRetailPrice, "Please enter a valid retail price.")
+					LeaveSR
+					
+					If(bundleRetailPrice = 0)
+						*this.errorProvider.SetError(*this.txtBundleRetailPrice, "Please enter a bundle retail price greater than zero.")
+						LeaveSR
+					Else
+						If (PriceMatrixTbl = *Nothing)
+							ItemsBO.GenerateRetailPriceTbl(bundleRetailPrice,*False,*True)
+							PriceMatrixTbl = ItemsBO.SpiceDataSet.Tables["RetailPrice"]
+							PriceMatrixTbl.Columns.Add(*New DataColumn("VAT", *TypeOf(String)))			
+							PriceMatrixTbl.Columns.Add(*New DataColumn("Market", *TypeOf(String)))	
+							
+							ForEach marketPrice Collection(ItemsBO.SpiceDataSet.Tables["MarketPrices"].Rows) Type(DataRow)
+								ForEach PriceMatrixRow Collection(PriceMatrixTbl.Rows) Type(DataRow)		
+									If (PriceMatrixRow["Currency"] = marketPrice["CurrencyCode"])
+										PriceMatrixRow["Retail"] = marketPrice["Retail"]
+										PriceMatrixRow["VAT"] = marketPrice["VAT"]
+										PriceMatrixRow["Market"] = marketPrice["Market"]
+									EndIf
+								EndFor
+							EndFor
+						EndIf
+					EndIf						
+				EndIf
+				
+				If(m_MarketPricesFormVisited = *False)
+					lblMktPricesPrompt.Visible = *True
+					bttnMarketPrices.Focus()
+					LeaveSR
+				EndIf
+				
+				//If(Domain = 'EMEA' *AND cboVATRate.Text = String.Empty)					
+				If ((DataCache.IsVATRequired = *True) *AND cboVATRate.Text = String.Empty)	
+					ErrPro.SetControlError(cboVATRate , "Please select a VAT rate.")
+					LeaveSR
+				EndIf
+				
+				Try
+					// Check for any zero values entered into Retail price grid
+					dv = *New DataView(ItemsBO.SpiceDataSet.Tables["MarketPrices"])
+					dv.RowFilter = "Retail = 0"
+					If dv.Count <> *Zero
+						ErrPro.SetControlError(bttnMarketPrices,"One or more Retail prices are Zero")
+					EndIf
+				Catch Name(exc) Type(Exception)
+				EndTry
+			Endif
+			
+			If GridErrors = *False and ErrPro.ErrorCount = 0			
+				//Instance Class SpiceItem
+				If SpiceItem  = *Nothing
+					SpiceItem = *New SpiceItem(Pgmdb, User) 
+				Endif
+				
+				//Instance Class SpiceAPPItem
+				If SpiceAPPItem = *Nothing 
+					SpiceAPPItem = *New SpiceAPPItem(Pgmdb, User)
+				Endif
+				
+				//Instance Class DSSPEHLcls History Events
+				If DSSPEHLcls  = *Nothing
+					DSSPEHLcls = *New DSSPEHLcls(Pgmdb) 
+				Endif
+				
+				SetMousePtr *HourGlass
+				
+				Try		
+					ValidateGridComponents()
+				Catch Name(exc) Type(Exception)
+					Allok = *False
+					*this.dgvItemAPAdd.Refresh()
+				EndTry
+				
+				If Allok = *True
+					
+					LongItemString = *New StringBuilder()
+					
+					LongItemString.Append(Class.ToString('0000'))
+					LongItemString.Append(Vendor.ToString('00000'))
+					LongItemString.Append(SpiceItem.Style.ToString('0000'))
+					LongItemString.Append(Colour.ToString('000'))
+					LongItemString.Append(Size.ToString('0000'))
+
+					If(APPType = "B")
+						EventType = 'BND'	
+					Else
+						EventType = 'APP'
+					EndIf
+					
+					EventKey         = LongItemString.ToString()
+					EventDescription = 'Changed in SPICE'
+					
+					SpiceAppItem.GetAPPMasterUpdate(Class, Vendor, Style, Colour, Size)
+					SetItemProperties()
+					SetAPPProperties()
+					SpiceAPPItem.UpdateAPPMaster(Class, Vendor, Style, Colour, Size)	
+					SpiceAPPItem.UpdateAPPComponent(dgvItemAPAdd)
+					DSSPEHLcls.WriteHistoryEvent(EventType, EventKey, EventDescription)
+					SpiceItem.UpdateItemSKU(Class, Vendor, Style, Colour, Size)							
+					ItemsBO.UpdateAPPItem(ItemStyle)
+					SpiceAPPItem.UpdateToDtaq()
+													
+					MsgBox TITLE('APP Changed') Msg('APP Master and Components have been Changed.') ICON(*Information)
+					
+					DialogResult = DialogResult.OK
+					Unload *This
+
+				Else
+					MsgBox TITLE('Error notification') Msg('Please correct all highlighted errors before proceeding.') ICON(*Exclamation)
+				Endif
+			Else
+				MsgBox TITLE('Error notification') Msg('Please correct all highlighted errors before proceeding.') ICON(*Exclamation)
+			Endif
+		Catch Name(exc) Type(Exception)		
+			MsgBox TITLE('Error Description') Msg('ErrDesc:' + exc.Message) ICON(*Stop)
+		EndTry
+
+	EndSr
+	
+	BegSr btnCharCode_Click Access(*Private) Event(*this.btnCharCode.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs		
+		DclFld ChangePendCharCode Type(ChangePendCharCode)
+		
+		ErrPro.Clear()
+		
+		SetMousePtr *HourGlass
+		
+		Try
+			If ChangePendCharCode = *Nothing
+				ChangePendCharCode = *New ChangePendCharCode(ItemsBO) 
+			EndIf
+			
+			ChangePendCharCode.ShowDialog()
+			If ChangePendCharCode.DialogResult = DialogResult.OK 
+				If ChangePendCharCode.SelectedPendingCharacterCode <> txtCharacterCode.Text
+					lblCharCodePending.Text = "(" + ChangePendCharCode.SelectedPendingCharacterCode + ")"
+				Else
+					lblCharCodePending.Text = "(" + txtCharacterCode.Text + ")"
+				Endif
+			EndIf
+			
+			If sPendingChar <> lblCharCodePending.Text
+				EnableOKNextButton()
+			Endif	
+		Finally
+			SetMousePtr *Dft
+		EndTry
+
+	EndSr
+		
+	// Delete APP Master & Components
+	BegSr btnDeleteAPP_Click Access(*Private) Event(*this.btnDeleteAPP.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld MsgBoxCode  Type(*integer2)
+		
+		// Instance Class SpiceItem
+		If SpiceItem  = *Nothing
+			SpiceItem = *New SpiceItem(Pgmdb, User) 
+		Endif
+		
+		// Instance Class SpiceAPPItem
+		If SpiceAPPItem  = *Nothing
+			SpiceAPPItem = *New SpiceAPPItem(Pgmdb, User) 
+		Endif
+		
+		MsgBox TITLE('Delete Assorted Pre-Pack') MSG('Are you sure you want to delete this APP?') Buttons(*YesNo) +
+		       Icon(*Stop) DftButton(1) RtnCode(MsgBoxCode)
+		
+		// No Selected then do not delete records
+		If MsgBoxCode = 7
+		   LeaveSR
+		Endif   
+		
+		SpiceItem.UpdateItemSKU(Class, Vendor, Style, Colour, Size)		
+		SpiceAPPItem.DeleteAPP(class, Vendor, Style, Colour, Size)
+		DialogResult = DialogResult.OK
+		Unload *This
+	EndSr
+	
+	BegSr btnViewHistory_Click Access(*Private) Event(*this.btnViewHistory.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld History Type(Disney.Spice.LookUp.History)
+		DclFld eventType Type(String)
+		
+		SetMousePtr *HourGlass
+		
+		ItemNo = *New StringBuilder()
+        ItemNo.Append(Class.ToString('0000'))
+        ItemNo.Append(Vendor.ToString('00000'))
+        ItemNo.Append(Style.ToString('0000'))
+        ItemNo.Append(Colour.ToString('000'))
+        ItemNo.Append(Size.ToString('0000'))
+		
+		If(APPType = "B")
+			eventType = 'BND'	
+		Else
+			eventType = 'APP'
+		EndIf
+					
+		History = *New Disney.Spice.LookUp.History(pgmDB,eventType, ItemNo.ToString())
+		History.ShowDialog()
+	EndSr
+	
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+	EndSr
+	/EndRegion	
+
+	/Region Item descriptions 
+	BegSr txtLongDesc_validating Access(*Private) Event(*this.txtLongDescription.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+										
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If txtLongDescription.Text = String.Empty
+			ErrPro.SetControlError(txtLongDescription,"Please enter a long description")
+			btnRemoveComponent.Enabled = *False
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		// Strip out Invalid Chars
+		ReturnText = ItemsBO.ReplaceInvalidChrs(txtLongDescription.Text.ToString())
+		
+		If ReturnText <> txtLongDescription.Text
+			txtLongDescription.Text = ReturnText
+			MsgBox TITLE('Symbol substitution') Msg('All invalid characters have been replaced with spaces.') ICON(*Information)
+		Endif	
+		
+		If ReturnText = String.Empty	
+			txtLongDescription.Select()
+		Endif		
+		
+		If ErrPro.ErrorCount = 0 and sLongDesc <> txtLongDescription.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+			
+	BegSr txtShortDesc_validating Access(*Private) Event(*this.txtShortDescription.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+						
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If txtShortDescription.Text = String.Empty
+			ErrPro.SetControlError(sender *As Control,"Please enter a short description")
+			btnRemoveComponent.Enabled = *False
+			btnAddComponent.Enabled    = *False
+		EndIf	
+		
+		// Strip out Invalid Chars
+		ReturnText = ItemsBO.ReplaceInvalidChrs(txtShortDescription.Text.ToString())
+		
+		If ReturnText <> txtShortDescription.Text
+			txtShortDescription.Text = ReturnText
+			MsgBox TITLE('Symbol substitution') Msg('All invalid characters have been replaced with spaces.') ICON(*Information)
+		Endif	
+		
+		If ReturnText = String.Empty	
+			txtShortDescription.Select()
+		Endif
+		
+		If ErrPro.ErrorCount = 0 and sShortDesc <> txtShortDescription.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+/EndRegion	
+
+	/Region Vendor Style 
+	BegSr txtVendorStyle_validating Access(*Private) Event(*this.txtVendorStyle.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+		// Instance Class Items
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+		
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If txtVendorStyle.Text = String.Empty
+			ErrPro.SetControlError(sender *As Control,'Please enter a Vendor Style')
+			btnRemoveComponent.Enabled = *False
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		// Strip out Invalid Chars
+		ReturnText = ItemsBO.ReplaceInvalidChrs(txtVendorStyle.Text.ToString())
+		
+		If ReturnText <> txtVendorStyle.Text
+			txtVendorStyle.Text = ReturnText
+			MsgBox TITLE('Symbol substitution') Msg('All invalid characters have been replaced with spaces.') ICON(*Information)
+		Endif	
+		
+		If ReturnText = String.Empty	
+			txtVendorStyle.Select()
+		Endif
+				
+		If ErrPro.ErrorCount = 0 and sVendorStyle <> txtVendorStyle.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+	/EndRegion
+
+	/Region Commodity 
+	BegSr CommodityLookUp_Click Access(*Private) Event(*this.btnCommodityCode.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs		
+		DclFld CommodityEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrPro.Clear()
+		
+		SetMousePtr *HourGlass
+		
+		Try
+			// Instance Class Items
+			If ItemsBO  = *Nothing
+				ItemsBO = *New Items(Pgmdb, User, Environment) 
+			Endif
+			
+			ItemsBO.GetCommodityTbl()
+			
+			If CommodityEnquiry = *Nothing
+				CommodityEnquiry = *New Disney.Spice.LookUp.Enquiry(ItemsBO.SpiceDataSet.Tables("Commodity"),"Commodity")
+			EndIf
+			
+			CommodityEnquiry.ShowGrid()
+			If CommodityEnquiry.DialogResult = DialogResult.OK
+				txtCommodityCode.Text        = CommodityEnquiry.SelectedValue[0]
+				lblCommodityCodeDesc.Text    = CommodityEnquiry.SelectedValue[1]
+				ErrPro.SetControlError(txtCommodityCode,String.Empty)
+			EndIf
+		Finally
+			SetMousePtr *Dft
+		EndTry
+
+	EndSr
+				
+	BegSr txtCommodity_validating Access(*Private) Event(*this.txtCommodityCode.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+		// Instance Class Items
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+		
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtCommodityCode.Text)
+			If not ItemsBO.GetCommodityCode(txtCommodityCode.Text)
+				ErrPro.SetControlError(txtCommodityCode,'Commodity Code is not defined')
+				lblCommodityCodeDesc.Text = String.Empty
+				txtCommodityCode.SelectAll()
+			Else
+				lblCommodityCodeDesc.Text = ItemsBO.CommodityDescription
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Please enter a Commodity Code')
+			lblCommodityCodeDesc.Text = String.Empty
+			btnRemoveComponent.Enabled = *False
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sCommodityCode <> txtCommodityCode.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+	/EndRegion
+	
+	/Region Composition Code 
+	BegSr CompoCodeLookUp_Click Access(*Private) Event(*this.btnCompositionCode.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld CompoCodeEnquiry Type(Disney.Spice.LookUp.Enquiry)
+				
+		ErrPro.Clear()
+		
+		SetMousePtr *HourGlass
+		
+		Try
+			// Instance Class Items
+			If ItemsBO  = *Nothing
+				ItemsBO = *New Items(Pgmdb, User, Environment) 
+			Endif
+			
+			ItemsBO.GetCompositionTbl()
+			
+			If CompoCodeEnquiry = *Nothing
+				CompoCodeEnquiry = *New Disney.Spice.LookUp.Enquiry(ItemsBO.SpiceDataSet.Tables("Composition"),"Composition")
+			EndIf
+			
+			CompoCodeEnquiry.ShowGrid()
+			If CompoCodeEnquiry.DialogResult = DialogResult.OK
+				txtCompositionCode.Text      = CompoCodeEnquiry.SelectedValue[0]
+				lblCompositionCodeDesc.Text  = CompoCodeEnquiry.SelectedValue[1]
+				ErrPro.SetControlError(txtCompositionCode,String.Empty)
+			EndIf
+		Finally
+			SetMousePtr *Dft
+		EndTry
+
+	EndSr
+			
+	BegSr txtCompoCode_validating Access(*Private) Event(*this.txtCompositionCode.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+		// Instance Class Items
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+		
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtCompositionCode.Text)
+			If not ItemsBO.GetCompositionCode(txtCompositionCode.Text)
+				ErrPro.SetControlError(txtCompositionCode,'Composition Code is not defined')
+				lblCompositionCodeDesc.Text = String.Empty
+				txtCompositionCode.SelectAll()
+			Else
+				lblCompositionCodeDesc.Text = ItemsBO.CompositionDescription
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Please enter a Composition Code')
+			lblCompositionCodeDesc.Text = String.Empty
+			btnRemoveComponent.Enabled = *False
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sCompositionCode <> txtCompositionCode.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+	/EndRegion	
+
+	/Region Country code
+	BegSr CountryLookUp_Click Access(*Private) Event(*this.btnCountryOfOrigin.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld CountryEnquiry Type(Disney.Spice.LookUp.Enquiry)
+		
+		ErrPro.Clear()
+		
+		SetMousePtr *HourGlass
+		
+		Try
+			// Instance Class Items
+			If ItemsBO  = *Nothing
+				ItemsBO = *New Items(Pgmdb, User, Environment) 
+			Endif
+			
+			ItemsBO.GetCountryTbl()
+			
+			If CountryEnquiry = *Nothing
+				CountryEnquiry = *New Disney.Spice.LookUp.Enquiry(ItemsBO.SpiceDataSet.Tables("Country"),"Country")
+			EndIf
+			
+			CountryEnquiry.ShowGrid()
+			If CountryEnquiry.DialogResult  = DialogResult.OK
+				txtCountryOfOrigin.Text     = CountryEnquiry.SelectedValue[0]
+				lblCountryOfOriginDesc.Text = CountryEnquiry.SelectedValue[1]
+				ErrPro.SetControlError(txtCountryOfOrigin,String.Empty)
+			EndIf
+		Finally
+			SetMousePtr *Dft
+		EndTry
+
+	EndSr
+				
+	BegSr txtOrigin_Validating Access(*Private) Event(*this.txtCountryOfOrigin.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+		// Instance Class Items
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+		
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtCountryOfOrigin.Text)
+			If Not ItemsBO.GetCountry(txtCountryOfOrigin.Text)
+				ErrPro.SetControlError(sender *As Control,'Country code is not defined')
+				lblCountryOfOriginDesc.Text = String.Empty
+				txtCountryOfOrigin.SelectAll()
+			Else
+				lblCountryOfOriginDesc.Text = ItemsBO.CountryName
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Please enter a Country code')
+			lblCountryOfOriginDesc.Text = String.Empty
+			btnRemoveComponent.Enabled = *False
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sCountryOfOrigin <> txtCountryOfOrigin.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+	/EndRegion
+
+	/Region Season Code 
+	BegSr SeasonLookUp_Click Access(*Private) Event(*this.btnSeasonCode.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld SeasonsEnquiry Type(Disney.Spice.LookUp.Enquiry)
+				
+		ErrPro.Clear()
+		
+		SetMousePtr *HourGlass
+		
+		Try
+			// Instance Class Items
+			If ItemsBO  = *Nothing
+				ItemsBO = *New Items(Pgmdb, User, Environment) 
+			Endif
+			
+			ItemsBO.GetSeasonsTbl()
+			
+			If SeasonsEnquiry = *Nothing
+				SeasonsEnquiry = *New Disney.Spice.LookUp.Enquiry(ItemsBO.SpiceDataSet.Tables("Seasons"),"Seasons")
+			EndIf
+			
+			SeasonsEnquiry.ShowGrid()
+			If SeasonsEnquiry.DialogResult = DialogResult.OK
+				txtSeasonCode.Text = SeasonsEnquiry.SelectedValue[0]
+				lblSeasonCodeDesc.Text = SeasonsEnquiry.SelectedValue[1]
+				ErrPro.SetControlError(txtSeasonCode,String.Empty)
+			EndIf
+		Finally
+			SetMousePtr *Dft
+		EndTry
+
+	EndSr
+					
+	BegSr txtSeason_validating Access(*Private) Event(*this.txtSeasonCode.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+		// Instance Class Items
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+		
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtSeasonCode.Text)
+			If not ItemsBO.GetSeason(txtSeasonCode.Text)
+				ErrPro.SetControlError(txtSeasonCode,'Season code is not defined')
+				lblSeasonCodeDEsc.Text     = String.Empty
+				btnAddComponent.Enabled    = *False
+			Else
+				lblSeasonCodeDesc.Text = ItemsBO.SeasonDesc
+			EndIf
+		Endif
+		
+		If ErrPro.ErrorCount = 0 and sSeasonCode <> txtSeasonCode.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+	/EndRegion
+
+	/Region Case/Pack Details
+	BegSr cmbCasePack_SelectedValueChanged Access(*Private) Event(*this.cmbCasePack.SelectedValueChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		ErrPro.SetControlError(txtWeight, String.Empty)
+		ErrPro.SetControlError(txtHeight, String.Empty)
+		ErrPro.SetControlError(txtLength, String.Empty)
+		ErrPro.SetControlError(txtWidth,  String.Empty)	
+						
+		// Instance Class Items
+		If ItemsBO  = *Nothing
+			ItemsBO = *New Items(Pgmdb, User, Environment) 
+		Endif
+										
+		If sCasePack <> cmbCasePack.Text
+			CasePackCode = cmbCasePack.Text.Substring(0,1)
+						
+			CasePack.GetCasePack(CasePackCode)
+			sCasePack      = CasePack.PackCodeDescription
+			txtWeight.Text = CasePack.PackWeight
+			txtHeight.Text = CasePack.PackHeight
+			txtLength.Text = CasePack.PackLength
+			txtWidth.Text  = CasePack.PackWidth
+			
+			//Only activate the OK button if user has changed case pack
+			If FirstTime   = *False 
+				EnableOKNextButton()
+			Endif
+			
+			FirstTime      = *False
+		Endif
+								
+		If CasePack.PackOverrideable = 'Y'
+			txtWeight.Enabled = *true
+			txtHeight.Enabled = *true
+			txtLength.Enabled = *true
+			txtWidth.Enabled  = *true
+		Else
+			txtWeight.Enabled = *false
+			txtHeight.Enabled = *false
+			txtLength.Enabled = *false
+			txtWidth.Enabled  = *false
+		EndIf
+	EndSr
+	/EndRegion
+	
+	/Region Case Pack Qty 
+	BegSr txtCasePackQty_validating Access(*Private) Event(*this.txtCasePackQty.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+				
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtCasePackQty.Text)
+			Try
+				PackQty = Int16.Parse(txtCasePackQty.Text)
+			Catch Err Type(System.Exception)
+				ErrPro.SetControlError(sender *As Control,'Invalid number')
+				btnAddComponent.Enabled    = *False
+			EndTry
+			
+			If PackQty < 1 Or PackQty > 9999
+				ErrPro.SetControlError(sender *As Control,'Pack Quantity must be between 1 and 9999')
+				btnAddComponent.Enabled    = *False
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Please enter a quantity')
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sCasePackQty <> txtCasePackQty.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+/EndRegion
+
+	/Region Case Pack Weight 
+	BegSr txtPackWeight_validating Access(*Private) Event(*this.txtWeight.Validating) 
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+		ErrPro.SetControlError(sender *As Control,String.Empty)		
+		If Not String.IsNullOrEmpty(txtWeight.Text)
+			Try
+				PackWeight = Decimal.Parse(txtWeight.Text)
+			Catch Err Type(System.Exception)
+				ErrPro.SetControlError(sender *As Control,'Invalid number')
+				btnAddComponent.Enabled    = *False
+			EndTry
+			
+			If PackWeight < .01 Or PackWeight > 9999.99
+				ErrPro.SetControlError(sender *As Control,'Pack Weight must be between .01 and 9999.99')
+				btnAddComponent.Enabled    = *False
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Pack Weight must be Entered')
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sWeight <> txtWeight.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+/EndRegion
+
+	/Region Case Pack Height 
+	BegSr txtPackHeight_validating Access(*Private)  Event(*this.txtHeight.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+						
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtHeight.Text)
+			Try
+				PackHeight = Decimal.Parse(txtHeight.Text)
+			Catch Err Type(System.Exception)
+				ErrPro.SetControlError(sender *As Control,'Invalid number')
+				btnAddComponent.Enabled    = *False
+			EndTry
+			
+			If PackHeight < .01 Or PackHeight > 9999.99
+				ErrPro.SetControlError(sender *As Control,'Pack Height must be between .01 and 9999.99')
+				btnAddComponent.Enabled    = *False
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Pack Height must be Entered')
+			btnAddComponent.Enabled    = *False	
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sHeight <> txtHeight.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+/EndRegion
+
+	/Region Case Pack Length 
+	BegSr txtPackLength_validating Access(*Private) Event(*this.txtLength.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+				
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtLength.Text)
+			Try
+				PackLength = Decimal.Parse(txtLength.Text)
+			Catch Err Type(System.Exception)
+				ErrPro.SetControlError(sender *As Control,'Invalid number')
+				btnAddComponent.Enabled    = *False
+			EndTry
+			
+			If PackLength < .01 Or PackLength > 9999.99
+				ErrPro.SetControlError(sender *As Control,'Pack Length must be between .01 and 9999.99')
+				btnAddComponent.Enabled    = *False
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Pack Length must be Entered')
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sLength <> txtLength.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+/EndRegion
+
+	/Region Case Pack Width 
+	BegSr txtPackWidth_validating Access(*Private) Event(*this.txtWidth.Validating)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+						
+		ErrPro.SetControlError(sender *As Control,String.Empty)
+		If Not String.IsNullOrEmpty(txtWidth.Text)
+			Try
+				PackWidth = Decimal.Parse(txtWidth.Text)
+			Catch Err Type(System.Exception)
+				ErrPro.SetControlError(sender *As Control,'Invalid number')
+				btnAddComponent.Enabled    = *False
+			EndTry
+			
+			If PackWidth < .01 Or PackWidth > 9999.99
+				ErrPro.SetControlError(sender *As Control,'Pack Width must be between .01 and 9999.99')
+				btnAddComponent.Enabled    = *False
+			EndIf
+		Else
+			ErrPro.SetControlError(sender *As Control,'Pack Width must be Entered')
+			btnAddComponent.Enabled    = *False
+		EndIf
+		
+		If ErrPro.ErrorCount = 0 and sWidth <> txtWidth.Text
+			EnableOKNextButton()
+		Endif
+	EndSr
+/EndRegion
+
+	/Region Cell Validating
+	BegSr dgvItemAPAdd_CellValidating Access(*Private) Event(*this.dgvItemAPAdd.CellValidating)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellValidatingEventArgs
+					
+		Column     = e.ColumnIndex
+		Row        = e.RowIndex
+		
+		GridErrors = *False	
+		dgvItemAPAdd.Item["clmQty",Row].ErrorText   = String.Empty
+						
+		Try
+			GridClass  = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmClass"].Value.ToString())	
+			GridStyle  = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmStyle"].Value.ToString())
+			GridColour = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmColour"].Value.ToString())
+			GridSize   = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmSize"].Value.ToString())
+			GridVendor = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmVendor"].Value.ToString())		
+		
+			//Dont validate the following columns
+			If dgvItemAPAdd.Columns[Column].Name  <> "clmSelect"      and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmVendor"      and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmColourName"  and + 
+				dgvItemAPAdd.Columns[Column].Name <> "clmSizeName"    and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmUPC"         and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmQTY"
+					
+				dgvItemAPAdd.Rows[Row].ErrorText            = String.Empty
+				dgvItemAPAdd.Item["clmClass",Row].ErrorText = String.Empty
+				dgvItemAPAdd.Item["clmSize",Row].ErrorText  = String.Empty
+				dgvItemAPAdd.Item["clmQty",Row].ErrorText   = String.Empty
+						
+				//Validate Class
+				If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty and +
+					dgvItemAPAdd.Item["clmClass",Row].Value.ToString() = String.Empty									
+					If (dgvItemAPAdd.Columns[e.ColumnIndex].Name.Equals("clmClass")) 
+						If Int16.TryParse(e.FormattedValue.ToString(), *ByRef GridClass) = *False
+							dgvItemAPAdd.Rows[Row].ErrorText = "Please enter a valid Class"
+							GridErrors = *True
+						Endif
+					Endif
+				Endif
+											
+				//Validate Style 
+				If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty
+					If dgvItemAPAdd.Columns[e.ColumnIndex].Name.Equals("clmStyle")
+						If Int16.TryParse(e.FormattedValue.ToString(), *ByRef GridStyle) = *False
+							dgvItemAPAdd.Rows[Row].ErrorText = "Please enter a valid Style"
+							GridErrors = *True
+						Endif
+					Endif
+				Endif
+							
+				//Validate Colour
+				If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty 
+					If dgvItemAPAdd.Columns[e.ColumnIndex].Name.Equals("clmColour")
+						If Int16.TryParse(e.FormattedValue.ToString(), *ByRef GridColour) = *False
+							dgvItemAPAdd.Rows[Row].ErrorText = "Please enter a valid Colour"
+							GridErrors = *True
+						Endif
+					Endif
+				Endif
+							
+				//Validate Size
+				If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty 
+					If dgvItemAPAdd.Columns[e.ColumnIndex].Name.Equals("clmSize")
+						If Int16.TryParse(e.FormattedValue.ToString(), *ByRef GridSize) = *False
+							dgvItemAPAdd.Rows[Row].ErrorText = "Please enter a valid Size"
+							GridErrors = *True
+						Endif
+					Endif
+				Endif
+				
+				//Check if Item is a valid Item			
+				If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty and +               
+					GridClass   <> String.Empty                    and +         
+					Vendor      <> String.Empty                    and +      
+					GridStyle   <> String.Empty                    and +        
+					GridColour  <> String.Empty                    and +
+					GridSize    <> String.Empty 
+					
+					ItemCheck = ItemsBO.GetItem(GridClass, GridVendor, GridStyle, GridColour, GridSize, MasterMarket)
+
+					If ItemCheck  = *False
+						dgvItemAPAdd.Rows[Row].ErrorText = "Please enter a valid Item"
+						GridErrors = *True
+					Endif
+				Endif
+			Endif	
+		Catch Name(exc) Type(Exception)
+			dgvItemAPAdd.Refresh()
+		EndTry	
+
+	EndSr
+/Endregion
+
+	/Region Cell Validated
+	BegSr dgvItemAPAdd_CellValidated Access(*Private) Event(*this.dgvItemAPAdd.CellValidated)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		Column     = e.ColumnIndex
+		Row        = e.RowIndex
+		
+		Try		
+			GridClass  = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmClass"].Value.ToString())	
+			GridStyle  = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmStyle"].Value.ToString())
+			GridColour = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmColour"].Value.ToString())
+			GridSize   = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmSize"].Value.ToString()) 
+			GridVendor = Int16.Parse(dgvItemAPAdd.Rows[e.RowIndex].Cells["clmVendor"].Value.ToString())
+		
+			//Dont validate the following columns
+			If dgvItemAPAdd.Columns[Column].Name  <> "clmSelect"      and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmVendor"      and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmColourName"  and + 
+				dgvItemAPAdd.Columns[Column].Name <> "clmSizeName"    and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmUPC"         and +
+				dgvItemAPAdd.Columns[Column].Name <> "clmQTY"
+																
+				//Once Size has been entered
+				If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty 
+					If dgvItemAPAdd.Columns[e.ColumnIndex].Name.Equals("clmSize") and +
+						dgvItemAPAdd.Item["clmSize", Row].Value.ToString() <> String.Empty
+																					
+						//Check if Item is a valid Item
+						If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty	                             and +
+							dgvItemAPAdd.Item["clmClass", Row].Value.ToString()  <> String.Empty         and +
+							dgvItemAPAdd.Item["clmStyle", Row].Value.ToString()  <> String.Empty         and +
+							dgvItemAPAdd.Item["clmColour", Row].Value.ToString() <> String.Empty         and +
+							dgvItemAPAdd.Item["clmSize", Row].Value.ToString()   <> String.Empty
+				
+							ItemCheck = ItemsBO.GetItem(GridClass, GridVendor, GridStyle, GridColour, GridSize, MasterMarket)
+
+							If ItemCheck  = *False
+								dgvItemAPAdd.Rows[Row].ErrorText = "Please enter a valid Item"
+								GridErrors = *True
+							Endif
+						Endif
+											
+						If dgvItemAPAdd.Rows[Row].ErrorText = String.Empty	                      and +
+							dgvItemAPAdd.Item["clmClass", Row].Value.ToString()  <> String.Empty  and +
+							dgvItemAPAdd.Item["clmStyle", Row].Value.ToString()  <> String.Empty  and +
+							dgvItemAPAdd.Item["clmColour", Row].Value.ToString() <> String.Empty  and +
+							dgvItemAPAdd.Item["clmSize", Row].Value.ToString()   <> String.Empty  
+							
+							
+							AddItemDetails()
+							
+							If MaxComponents = 1
+								btnAddComponent.Enabled = *False
+							Endif
+						Endif
+					Endif
+									
+					If dgvItemAPAdd.Columns[e.ColumnIndex].Name.Equals("clmQty") and +
+						Convert.ToInt16(dgvItemAPAdd.Item["clmQty", Row].Value) <> Convert.ToInt16(dgvItemAPAdd.Item["clmClass", Row].Tag) 
+						EnableOKNextButton()
+					Endif		
+				Endif
+			Endif	
+		Catch Name(exc) Type(Exception)
+			dgvItemAPAdd.Refresh()
+		EndTry	
+	EndSr
+/EndRegion	
+
+	/Region Cell Enter 
+	BegSr dgvItemAPAdd_CellEnter Access(*Private)  Event(*this.dgvItemAPAdd.CellEnter)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		Column     = e.ColumnIndex
+		Row        = e.RowIndex
+				
+		//Initialise all new rows		
+		If dgvItemAPAdd.Rows[Row].IsNewRow = *True and txtSeasonCode.Text <> ""  
+			GridClass  = String.Empty
+			GridStyle  = String.Empty
+			GridColour = String.Empty
+			GridSize   = String.Empty	
+			dgvItemAPAdd.Item["clmSelect",Row].Value = *False
+			dgvItemAPAdd.Item["clmClass",Row].Value  = String.Empty	
+			dgvItemAPAdd.Item["clmStyle",Row].Value  = String.Empty
+			dgvItemAPAdd.Item["clmColour",Row].Value = String.Empty
+			dgvItemAPAdd.Item["clmSize",Row].Value   = String.Empty
+			dgvItemAPAdd.Item["clmQty",Row].Value    = String.Empty
+						
+			If MaxComponents = 1
+				dgvItemAPAdd.Item["clmClass",Row].Value = lblClassDsp.Text.ToString().Trim()
+				GridClass  = Convert.ToInt16(lblClassDsp.Text)
+				dgvItemAPAdd.Rows[Row].Cells["clmClass"].ReadOnly = *True
+			Endif
+				
+			dgvItemAPAdd.Item["clmVendor",Row].Value = lblVendorDsp.Text.ToString().Trim()	
+		Endif
+		
+		If Lockdown = *False
+			btnRemoveComponent.Enabled = *True
+			btnAddComponent.Enabled    = *True
+		Endif
+				
+	EndSr
+/EndRegion
+
+	BegSr Form_Closing Access(*Private) Event(*this.Closing)
+		DclSrParm sender *Object
+		DclSrParm e System.ComponentModel.CancelEventArgs
+		
+	EndSr
+	
+	BegSr cboSellingChannel_TextChanged Access(*Private)  Event(*this.cboSellingChannel.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		EnableOKNextButton()
+		
+	EndSr
+	
+	BegFunc ItemForOnlineEcom Type(Boolean) Access(*Private) 		
+		DclFld result Type(Boolean) Inz(*False)		
+		DclFld dataRow Type(DataRow)
+		DclFld forOnlineEcom Type(String)
+		
+		Try
+			dataRow = ItemsBO.SpiceDataSet.Tables["SellingChannelTable"].Rows.Find(cboSellingChannel.SelectedValue.ToString())			
+			If (dataRow <> *Nothing)		
+				forOnlineEcom = dataRow["OnlineECOM"] *AS String				
+				If (forOnlineEcom <> *Nothing)
+					If (forOnlineEcom.Trim() = "Y")
+						result = *True
+					Else
+						result = *False
+					EndIf
+				EndIf
+			EndIf
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry
+		
+		LeaveSR result
+	EndFunc
+
+	BegSr txtBundleRetailPrice_KeyDown Access(*Private) Event(*this.txtBundleRetailPrice.KeyDown)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.KeyEventArgs
+				
+		errorProvider.Clear()
+	EndSr
+	
+	BegSr txtBundleRetailPrice_Enter Access(*Private) Event(*this.txtBundleRetailPrice.Enter)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		errorProvider.Clear()
+		ErrPro.ClearAll()
+		
+	EndSr
+	
+	BegSr frmItemAPPChange_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.FormClosingEventArgs
+		DclFld ReturnCode Type(Int16)
+		
+		If *this.DialogResult = DialogResult.Cancel
+			MsgBox TITLE('Change Assorted Pre-Pack') MSG('Are you sure you want to Cancel?') RtnCode(ReturnCode) Icon(*Question)  Buttons(*YesNo)
+			If ReturnCode = 6
+				*this.DialogResult = DialogResult.Abort
+			Else
+				e.Cancel = *true
+			EndIf
+        EndIf        
+	EndSr
+		
+	BegSr bttnMarketPrices_Click Access(*Private) Event(*this.bttnMarketPrices.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld bundleRetailPrice Type(Decimal)
+		DclFld bundleRetailPrice2 Type(Decimal)
+		
+		ErrPro.ClearAll()
+		
+		SetMousePtr *HourGlass
+		
+		Try		
+			Decimal.TryParse(*this.txtBundleRetailPrice.Text, *ByRef bundleRetailPrice)
+			If(bundleRetailPrice = 0)
+				ErrPro.SetControlError(bttnMarketPrices, "Please enter a bundle retail price greater than zero.")
+				LeaveSR
+			Else
+				//If (PriceMatrixTbl = *Nothing)
+					ItemsBO.GenerateRetailPriceTbl(bundleRetailPrice,*False,*True)
+					PriceMatrixTbl = ItemsBO.SpiceDataSet.Tables["RetailPrice"]
+					PriceMatrixTbl.Columns.Add(*New DataColumn("VAT", *TypeOf(String)))			
+					PriceMatrixTbl.Columns.Add(*New DataColumn("Market", *TypeOf(String)))	
+					
+					ForEach marketPrice Collection(ItemsBO.SpiceDataSet.Tables["MarketPrices"].Rows) Type(DataRow)
+						ForEach PriceMatrixRow Collection(PriceMatrixTbl.Rows) Type(DataRow)		
+							If (PriceMatrixRow["Currency"] = marketPrice["CurrencyCode"])
+								//PriceMatrixRow["Retail"] = marketPrice["Retail"]
+								PriceMatrixRow["VAT"] = marketPrice["VAT"]
+								PriceMatrixRow["Market"] = marketPrice["Market"]
+							EndIf
+						EndFor
+					EndFor
+/*				Else	
+					ForEach PriceMatrixRow Collection(PriceMatrixTbl.Rows) Type(DataRow)
+						If (PriceMatrixRow["Currency"].ToString() = ItemsBO.BaseCurrency)					
+							Decimal.TryParse(PriceMatrixRow["Retail"].ToString(), *ByRef bundleRetailPrice2)
+							// Retail price change - regenerate price matrix
+							If(bundleRetailPrice2 <> bundleRetailPrice)
+								ItemsBO.GenerateRetailPriceTbl(bundleRetailPrice,*False,*True)
+								PriceMatrixTbl = ItemsBO.SpiceDataSet.Tables["RetailPrice"]
+								PriceMatrixTbl.Columns.Add(*New DataColumn("VAT", *TypeOf(String)))			
+								PriceMatrixTbl.Columns.Add(*New DataColumn("Market", *TypeOf(String)))							
+							EndIf
+						EndIf
+					EndFor	
+				EndIf*/	
+			EndIf	
+					
+			m_BundleRetailPriceForm = *New frmBundleRetailPrice(ItemsBO, Environment, PriceMatrixTbl)
+			
+			m_BundleRetailPriceForm.ShowDialog()
+			
+			m_MarketPricesFormVisited = *True
+			lblMktPricesPrompt.Visible = *False
+			
+			ForEach marketPrice Collection(ItemsBO.SpiceDataSet.Tables["MarketPrices"].Rows) Type(DataRow)
+				ForEach PriceMatrixRow Collection(PriceMatrixTbl.Rows	) Type(DataRow)
+					If (marketPrice["CurrencyCode"] = PriceMatrixRow["Currency"])
+						marketPrice["Retail"] = PriceMatrixRow["Retail"]
+						marketPrice["VAT"] = PriceMatrixRow["VAT"]
+						marketPrice["PendingRetail"] = PriceMatrixRow["Retail"]
+						marketPrice["PendingVAT"] = PriceMatrixRow["VAT"]
+					EndIf
+				EndFor
+			EndFor
+			
+			Try
+				// Check for any zero values entered into Retail price grid
+				dv = *New DataView(ItemsBO.SpiceDataSet.Tables["MarketPrices"])
+				dv.RowFilter = "Retail = 0"
+				If dv.Count <> *Zero
+					ErrPro.SetControlError(bttnMarketPrices,"One or more Retail prices are Zero")
+				EndIf
+			Catch Name(exc) Type(Exception)
+			EndTry
+			
+			m_BundleRetailPriceForm.Hide()
+		Finally
+			SetMousePtr *Dft
+		EndTry
+
+	EndSr
+	
+	BegSr lblBundlePrice_Click Access(*Private) Event(*this.lblBundlePrice.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+	EndSr
+	
+	BegSr bttnViewPOs_Click Access(*Private) Event(*this.bttnViewPOs.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Enquiry Type(Disney.Spice.ItemsUI.dspItemPOs)
+		
+		Try
+			Enquiry = *New Disney.Spice.ItemsUI.dspItemPOs(pgmDB,ItemsBO,ItemStyle,9999)
+			Enquiry.ShowDialog()		
+		Catch Name(exc) Type(Exception)
+			
+		EndTry
+	EndSr
+EndClass

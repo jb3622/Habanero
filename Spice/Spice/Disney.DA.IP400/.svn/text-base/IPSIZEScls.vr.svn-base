@@ -1,0 +1,269 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+Using System.IO
+
+BegClass IPSIZEScls Access(*Public)
+
+	DclDB Name(PgmDB) DbName("TDST") Access(*Private)
+	DclDiskFile Name(IPSIZES)   Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) 
+	DclDiskFile Name(DSSPSGXL1) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) 
+	
+	DclFld SizesTbl        Type(DataTable)  Access(*Private)
+	DclFld ExcludeSizesTbl Type(DataTable)  Access(*Private)
+	DclFld dtSizes         Type(DataTable)  Access(*Private)
+	DclFld dcSizes         Type(DataColumn) Access(*Private)
+	DclFld drSizes         Type(DataRow)    Access(*Private)
+	DclFld dvSizestbl      Type(DataView)   Access(*Private)
+	DclFld dvExclude       Type(DataView)   Access(*Private)
+	DclArray Keys          Type(DataColumn) Rank(1) Access(*Private)
+	DclFld pXMLpathSizes   Type(String)     Access(*Private)
+	DclFld pXMLpathExclude Type(String)     Access(*Private)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpathSizes   = Path.Combine(Environment.PathToApplicationXML,"IPsizes.xml")
+		pXMLpathExclude = Path.Combine(Environment.PathToEnvironmentXML,"ExcludeSizes.xml")
+		
+		LoadDataFromXML()
+	EndConstructor
+	
+	BegProp Size Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR SSIZ
+		EndGet
+	EndProp
+	
+	BegProp Size_Name Type(*Char) Len(10) Access(*Public)
+		BegGet
+			LeaveSR SNAM
+		EndGet
+		
+		BegSet
+			SNAM = *PropVal
+		EndSet
+	EndProp
+	
+	BegFunc GetSize Type(*Boolean) Access(*Public)
+		DclSrParm Size Type(*Zoned) len(4,0)
+		
+		If Not IPSIZES.IsOpen
+			Open IPSIZES
+		EndIf
+		
+		Chain From(IPSIZES) Key(Size) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+	EndFunc
+	
+	BegSr LoadDataFromXML Access(*Private)
+	
+		If SizesTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpathSizes)
+				CreateXrefXML()
+			Else
+				SizesTbl.ReadXml(pXMLpathSizes)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateXrefXML Access(*Private)
+	
+		DclFld dr Type(DataRow)
+				
+		If Not IPSIZES.IsOpen
+			Open IPSIZES
+		EndIf
+		
+		DoUntil IPSIZES.IsEof
+			Read IPSIZES
+			If Not IPSIZES.IsEof
+				dr = SizesTbl.NewRow()
+				dr.Item["SizeCode"] = SSIZ
+				dr.Item["SizeDesc"] = SNAM.Trim()
+				SizesTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		SizesTbl.WriteXml(pXMLpathSizes)
+		Close IPSIZES
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+		
+		SizesTbl = *New DataTable("IPsizes")
+
+		SizesTbl.Columns.Add(*New DataColumn("SizeCode", *TypeOf(Int16)))
+		SizesTbl.Columns["SizeCode"].ReadOnly = *True
+
+		SizesTbl.Columns.Add(*New DataColumn("SizeDesc", *TypeOf(String)))
+		SizesTbl.Columns["SizeDesc"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {SizesTbl.Columns("SizeCode")}
+		SizesTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegFunc GetSizesTbl Type(DataTable) Access(*Public)
+	
+		LeaveSR SizesTbl
+	EndFunc
+	
+	//Creates a DataSet/DataTable.
+	BegFunc GetSizesDataSetClass Type(DataTable) Access(*Public)
+						
+		If ExcludeSizesTbl = *Nothing
+			CreateExcludeTbl()
+			If Not File.Exists(pXMLpathExclude)
+				CreateExcludeXML()
+			Else
+				ExcludeSizesTbl.ReadXml(pXMLpathExclude)
+			EndIf
+		EndIf
+		
+		dtSizes = *Nothing
+		Create_dtSizesTbl()		
+					
+		dvSizesTbl = *New DataView(SizesTbl)
+		dvExclude  = *New DataView(ExcludeSizesTbl) 
+										
+		//Read SizesTbl and create rows in dtSizes				
+		ForEach SizesRow Collection(dvSizesTbl) Type(DataRowView)
+			dvExclude.RowFilter = "XSizeCode =" + SizesRow.Item["SizeCode"].ToString()
+			If dvExclude.Count = 0
+				drSizes = dtSizes.NewRow()
+				drSizes.Item["clmSelect"]  = *False
+				drSizes.Item["clmSSIZ"]    = SizesRow.Item["SizeCode"].ToString()
+				drSizes.Item["clmSNAM"]    = SizesRow.Item["SizeDesc"].ToString()
+				drSizes.Item["clmDefault"] = *False
+				dtSizes.Rows.Add(drSizes)
+			Endif	
+		EndFor
+		
+		LeaveSR dtSizes
+	EndFunc
+	
+	//Creates a DataSet/DataTable Linked to a Dataset created from DSSPSGD.
+	BegFunc GetSizesDataSetClassSelect Type(DataTable) Access(*Public)
+		DclSrParm DSSPSGD_Table  Type(DataTable) 
+		
+		DclFld dvSGD    Type(DataView) 			
+		DclFld drv      Type(DataRowView)
+				
+		If ExcludeSizesTbl = *Nothing
+			CreateExcludeTbl()
+			If Not File.Exists(pXMLpathExclude)
+				CreateExcludeXML()
+			Else
+				ExcludeSizesTbl.ReadXml(pXMLpathExclude)
+			EndIf
+		EndIf
+				
+		dtSizes = *Nothing
+		Create_dtSizesTbl()		
+				
+		dvSGD = *New DataView(DSSPsgd_Table) 
+		dvSizesTbl = *New DataView(SizesTbl)
+		dvExclude  = *New DataView(ExcludeSizesTbl) 
+       						
+		//Read SizesTbl and create rows in dtSizes				
+		ForEach SizesRow Collection(dvSizesTbl) Type(DataRowView)
+			dvExclude.RowFilter = "XSizeCode =" + SizesRow.Item["SizeCode"].ToString()
+			If dvExclude.Count  = 0
+				dvSGD.RowFilter = "clmSGDSIZ =" + SizesRow.Item["SizeCode"]
+				drSizes = dtSizes.NewRow()
+				If dvSGD.Count > *Zero 
+					drSizes.Item["clmSelect"] = *True
+				Else
+					drSizes.Item["clmSelect"] = *False
+				Endif
+								
+				drSizes.Item["clmSSIZ"]    = SizesRow.Item["SizeCode"].ToString()
+				drSizes.Item["clmSNAM"]    = SizesRow.Item["SizeDesc"].ToString()
+				drSizes.Item["clmDefault"] = *False
+				
+				ForEach drv Collection(dvSGD) Type(DataRowView) 
+					If  dvSGD.Count > *Zero and drv.Item["clmSGDDYN"].ToString() = 'Y'   
+						drSizes.Item["clmDefault"] = *True
+					Endif
+				EndFor
+				
+				dtSizes.Rows.Add(drSizes)
+			Endif	
+		EndFor
+				
+		//dtSizes.DefaultView.Sort = "clmSelect DESC" 
+		
+		LeaveSR dtSizes
+	EndFunc
+	
+	BegSr Create_dtSizesTbl Access(*Private)
+		
+		dtSizes = *New DataTable("dtSizes")
+		
+		//Create Select Column
+		dcSizes = *New DataColumn('clmSelect')
+		dcSizes.DataType = System.Type.GetType("System.Boolean")
+		dcSizes.ColumnName = "clmSelect"
+		dcSizes.Caption = "Select"
+		dtSizes.Columns.Add(dcSizes)
+		
+		//Create Size Column
+		dcSizes = *New DataColumn('clmSSIZ')
+		dcSizes.DataType = System.Type.GetType("System.Int32")
+		dcSizes.ColumnName = "clmSSIZ"
+		dcSizes.Caption = "Size"
+		dtSizes.Columns.Add(dcSizes)
+		
+		//Create Size Name Column
+		dcSizes = *New DataColumn('clmSNAM')
+		dcSizes.DataType = System.Type.GetType("System.String")
+		dcSizes.ColumnName = "clmSNAM"
+		dcSizes.Caption = "Size Name"
+		dtSizes.Columns.Add(dcSizes)
+		
+		//Create Default Column
+		dcSizes = *New DataColumn('clmDefault')
+		dcSizes.DataType = System.Type.GetType("System.Boolean")
+		dcSizes.ColumnName = "clmDefault"
+		dcSizes.Caption = "Default"
+		dtSizes.Columns.Add(dcSizes)
+	EndSr
+	
+	BegSr CreateExcludeTbl Access(*Private)
+		
+		ExcludeSizesTbl = *New DataTable("ExcludeSizesTbl")
+
+		ExcludeSizesTbl.Columns.Add(*New DataColumn("XSizeCode", *TypeOf(Int16)))
+		ExcludeSizesTbl.Columns["XSizeCode"].ReadOnly = *True
+	EndSr
+	
+	BegSr CreateExcludeXML Access(*Private)
+	
+		DclFld drExclude Type(DataRow)
+		
+		If Not DSSPSGXL1.IsOpen
+			Open DSSPSGXL1
+		EndIf
+				
+		DoUntil DSSPSGXL1.IsEof
+			Read DSSPSGXL1
+			If Not DSSPSGXL1.IsEof
+				drExclude = ExcludeSizesTbl.NewRow()
+				drExclude.Item["XSizeCode"] = SGXSIZ
+				ExcludeSizesTbl.Rows.Add(drExclude)
+			EndIf
+		EndDo
+		
+		ExcludeSizesTbl.WriteXml(pXMLpathExclude)
+		Close DSSPSGXL1
+	EndSr
+EndClass

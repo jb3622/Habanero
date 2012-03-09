@@ -1,0 +1,63 @@
+Using System
+Using System.Text
+
+DclNameSpace Disney.SRR
+
+BegClass RunAS400Sql Access(*Public)
+	
+	// Connection
+	Dcldb AS400 dbname("TDST")	
+
+	/Region Declare Parameters 
+		DclPlist  Name( DS883GCParms )
+			DclParm p1OvrFile  Type(*Char)   Len(10)   DBDirection( *Input )		// Only to iSeries
+			DclParm p1OvrMbr   Type(*Char)   Len(10)   DBDirection( *Input )		// Only to iSeries
+			DclParm p2OvrFile  Type(*Char)   Len(10)   DBDirection( *Input )		// Only to iSeries
+			DclParm p2OvrMbr   Type(*Char)   Len(10)   DBDirection( *Input )		// Only to iSeries
+			DclParm pSQLString Type(*Char)   Len(9999) DBDirection( *Input )		// Only to iSeries
+			DclParm pErr       Type(*Char)   Len(1)    DBDirection( *Output )	// Return Code
+	/EndRegion
+
+	/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm p_AS400	  Type(asna.VisualRPG.Runtime.Database)
+		
+        *this.As400 = p_AS400
+		
+	EndConstructor
+	/EndRegion
+
+	// --------------------------------------------------------------------------
+	// Run SQL Statement1
+	// --------------------------------------------------------------------------
+	BegFunc runSQL   Type(*Boolean)  Access(*Public)
+		DclSrParm w1OvrFile    Type(*Char)	Len(10)
+		DclSrParm w1OvrMbr     Type(*Char)	Len(10)
+		DclSrParm w2OvrFile    Type(*Char)	Len(10)
+   		DclSrParm w2OvrMbr     Type(*Char)	Len(10)
+		DclSrParm wSQLString   Type(*Char)	Len(9999)
+		
+		p1Ovrfile = w1OvrFile
+		p1OvrMbr  =	w1OvrMbr
+		p2Ovrfile = w2OvrFile
+		p2OvrMbr  =	w2OvrMbr
+		pSQLString = wSQLString
+		pErr   = *Blanks          
+			
+		DoEvents
+			
+		Try
+			Call Pgm("*Libl/DS883GC") ParmList( DS883GCParms ) DB( AS400 )
+			If pErr = 'Y'
+			   LeaveSR *False
+			Endif   
+		Catch Err Exception
+			LeaveSR *False
+		EndTry
+			
+        LeaveSR *True
+
+    EndFunc
+
+
+EndClass

@@ -1,0 +1,200 @@
+Using System
+Using System.Data
+Using System.IO
+Using System.Text
+
+BegClass IPMRVENcls Access(*Public)
+		
+	DclDB Name(PgmDB) DbName("TDST") Access(*Private)
+	
+	DclDiskFile Name(DSSPVENP) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	DclDiskFile Name(DSMRVENA) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	
+	DclFld VendorXref Type(DataTable) Access(*Private)
+	
+	DclFld pVendorCode Type(Int32)  Access(*Private)
+	DclFld pVendorName Type(String) Access(*Private)
+	DclFld pDepartment Type(Int16)  Access(*Private)
+	DclFld pTerms      Type(String) Access(*Private)
+	DclFld pCurrency   Type(String) Access(*Private)
+	DclFld pShipVia    Type(String) Access(*Private)
+	DclFld pXMLpath    Type(String) Access(*Private)
+		
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"VendorXref.xml")
+		LoadDataFromXML()
+	EndConstructor
+	
+	/Region Properties
+	BegProp VendorCode Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pVendorCode
+		EndGet
+	EndProp
+	
+	BegProp VendorName Type(String) Access(*Public)
+		BegGet
+			LeaveSR pVendorName
+		EndGet
+	EndProp
+	
+	BegProp Department Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDepartment
+		EndGet
+	EndProp
+	
+	BegProp Terms Type(String) Access(*Public)
+		BegGet
+			LeaveSR pTerms
+		EndGet
+	EndProp
+	
+	BegProp Currency Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCurrency
+		EndGet
+	EndProp
+	
+	BegProp ShipVia Type(String) Access(*Public)
+		BegGet
+			LeaveSR pShipVia
+		EndGet
+	EndProp
+	/EndRegion
+			
+	BegSr LoadDataFromXML Access(*Private)
+	
+		If VendorXref = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				CreateXrefXML()
+			Else
+				VendorXref.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclFld dc Type(DataColumn)
+	
+		VendorXref = *New DataTable("VendorXref")
+
+		VendorXref.Columns.Add(*New DataColumn("Department", *TypeOf(Int16)))
+		VendorXref.Columns["Department"].ReadOnly = *True
+		
+		VendorXref.Columns.Add(*New DataColumn("VendorName", *TypeOf(String)))
+		VendorXref.Columns["VendorName"].ReadOnly = *True
+		
+		VendorXref.Columns.Add(*New DataColumn("VendorNumber", *TypeOf(Int32)))
+		VendorXref.Columns["VendorNumber"].ReadOnly = *True
+		
+		dc = *New DataColumn("VendorNumberName", *TypeOf(String))
+		dc.Expression = "VendorName + ' - ' + VendorNumber"
+		dc.ReadOnly = *True
+		VendorXref.Columns.Add(dc)
+		
+		VendorXref.Columns.Add(*New DataColumn("Terms", *TypeOf(String)))
+		VendorXref.Columns["Terms"].ReadOnly = *True
+		
+		VendorXref.Columns.Add(*New DataColumn("TermsDescription", *TypeOf(String)))
+		
+		VendorXref.Columns.Add(*New DataColumn("Currency", *TypeOf(String)))
+		VendorXref.Columns["Currency"].ReadOnly = *True
+		
+		VendorXref.Columns.Add(*New DataColumn("ShipVia", *TypeOf(String)))
+		VendorXref.Columns["ShipVia"].ReadOnly = *True
+		
+		VendorXref.Columns.Add(*New DataColumn("VendorSeq", *TypeOf(Int32)))
+		VendorXref.Columns["VendorSeq"].ReadOnly = *True
+		VendorXref.Columns("VendorSeq").AutoIncrement = *True
+		VendorXref.Columns("VendorSeq").AutoIncrementSeed = 1
+		
+		//DclArray Keys Type(DataColumn) Rank(1)
+		//Keys = *New DataColumn[] {VendorXref.Columns("VendorNumber")}
+		//VendorXref.PrimaryKey = Keys
+	EndSr
+	
+	BegSr CreateXrefXML Access(*Private)
+	
+		DclFld dr Type(DataRow)
+				
+		If Not DSSPVENP.IsOpen
+			Open DSSPVENP
+		EndIf
+		
+		DoUntil DSSPVENP.IsEof
+			Read DSSPVENP
+			If Not DSSPVENP.IsEof
+				dr = VendorXref.NewRow()
+				
+				dr.Item("Department")   = VENDPT
+				dr.Item("VendorName")   = VENNAM.Trim()
+				dr.Item("VendorNumber") = VENID
+				dr.Item("Terms")        = VENTCD.Trim()
+				dr.Item("TermsDescription") = String.Empty
+				dr.Item["Currency"]     = VENCUR.Trim()
+				dr.Item["ShipVia"]      = VENSHP.Trim()
+
+				VendorXref.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		VendorXref.WriteXml(pXMLpath)
+		
+		Close DSSPVENP
+	EndSr
+
+	BegFunc GetVendorTbl Type(DataTable) Access(*Public)
+	
+		LeaveSR VendorXref
+	EndFunc
+
+	BegFunc GetVendor Type(*Boolean) Access(*Public)
+		DclSrParm VendorCode Type(Int32)
+		
+		DclFld dv  Type(DataView)
+				
+		dv = *New DataView(VendorXref)
+		dv.RowFilter = "VendorNumber = " + VendorCode.ToString()
+		
+		If dv.Count = *Zero
+			LeaveSR *False
+		EndIf
+		
+		ForEach drv Collection(dv) Type(DataRowView)
+			pVendorCode = drv.Item("VendorNumber") *As Int32
+			pVendorName = drv.Item("VendorName")   *As String
+			pDepartment = drv.Item("Department")   *As Int16
+			pTerms      = drv.Item("Terms")        *As String
+			pCurrency   = drv.Item("Currency")     *As String
+			pShipVia    = drv.Item("ShipVia")      *As String
+			
+			LeaveSR *True
+		EndFor
+	EndFunc
+		
+	BegFunc GetImportDomestic Type(String) Access(*Public)
+		DclSrParm VendorCode Type(Int32)
+		
+		DclFld ImportDomesticFlag Type(String)
+						
+		If Not DSMRVENA.IsOpen
+			Open DSMRVENA
+		EndIf
+		
+		Chain DSMRVENA Key(VendorCode) Access(*NoLock)
+		If DSMRVENA.IsFound
+			ImportDomesticFlag  = DVCANA
+		Endif
+		
+		LeaveSR ImportDomesticFlag
+	EndFunc
+	
+EndClass

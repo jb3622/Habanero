@@ -1,0 +1,976 @@
+Using System
+Using System.Text
+
+Using Disney.SRR
+
+DclNameSpace Disney.SRR
+
+BegClass SRRuplift Access(*Public)
+
+	/Region Declare DataBase
+	DclDB Name(SRR) DBName("TDST")
+	
+	DclDiskFile Name(DSSRFWF) Type(*Input) Org(*Arrival) +
+		DB(SRR) File('*Libl/DSSRFWF') ImpOpen(*No)
+		
+	DclDiskFile Name(DSSRFWF1) Type(*Update) Org(*Indexed) +
+		DB(SRR) File('*Libl/DSSRFWF1') AddRec(*Yes) ImpOpen(*No) +
+		RnmFmt(RDSSRFWF, UDSSRFWF)
+		
+	DclMemoryFile Name(Mem) DBdesc(SRR) FileDesc('*Libl/DSSRFWF') +
+		RnmFmt(RDSSRFWF, MDSSRFWF) ImpOpen(*No)
+	/EndRegion
+	
+	DclFld MemberName Type(*Char)  Len(10)
+	DclFld Department Type(*Zoned) Len(3,0)
+	DclFld memRecords Type(*Integer4)
+	DclFld UserProfile Type(*Char) Len(10)
+	DclFld TimeStamp   Type(*TimeStamp) TimFmt(*ISO)
+	
+	DclFld _Uplift    Type(*Zoned) Len(3,2)
+	DclFld _Below     Type(*Boolean)
+	DclFld _Found     Type(*Boolean)
+	DclFld _Changed   Type(*Boolean)
+		
+	/Region Constructor & Destructor
+	BegConstructor Access(*Public)
+		DclSrParm SRR        Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm MemberName Type(*Char)  Len(10)
+		DclSrParm Department Type(*Zoned) Len(3,0)
+		DclSrParm UserProfile Type(*Char) Len(10)
+		DclSrParm TimeStamp   Type(*TimeStamp) TimFmt(*ISO)
+
+		*this.SRR = SRR
+		*this.MemberName = MemberName
+		*this.Department = Department
+		*this.UserProfile = UserProfile
+		*this.TimeStamp = TimeStamp
+		
+		If DSSRFWF.IsOpen
+			Close DSSRFWF
+		EndIf
+		
+		DSSRFWF.MemberName = MemberName.Trim()
+		Open DSSRFWF
+		
+		If Not Mem.IsOpen
+			Open Mem
+		EndIf
+		
+		// Create the dataset from the iSeries file
+		memRecords = *Zero
+		SetLL DSSRFWF Key(*Start)
+		DoUntil DSSRFWF.IsEof
+			Read DSSRFWF
+			If (Not DSSRFWF.IsEof) And FFWFLG = ' ' And FFkey > 4 And FFkey < 13
+				memRecords += 1
+				Write MDSSRFWF
+			EndIf
+		EndDo
+		
+		Close DSSRFWF
+	EndConstructor
+	/EndRegion
+
+	/Region Properties
+	BegProp NoOfRecords Type(*Integer4) Access(*Public)
+		BegGet
+			LeaveSR memRecords
+		EndGet
+	EndProp
+	
+	BegProp ExceptionsBelow Type(*Boolean) Access(*Public)
+		BegGet
+			LeaveSR _Below
+		EndGet
+	EndProp
+	
+	BegProp Value Type(*Zoned) Len(3,2) Access(*Public)
+		BegGet
+			LeaveSR _Uplift
+		EndGet
+	EndProp
+	
+	BegProp IsFound Type(*Boolean) Access(*Public)
+		BegGet
+			LeaveSR _Found
+		EndGet
+	EndProp
+	
+	BegProp IsChanged Type(*Boolean) Access(*Public)
+		BegGet
+			LeaveSR _Changed
+		EndGet
+	EndProp
+	/EndRegion
+	
+	/Region Methods
+	// Dept level
+	BegSr GetUplift Access(*Public)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey < 12 And FFkey > 4 And FFWFLG = *Blank
+				_Below = *True
+			EndIf
+				
+			If FFKEY = 12 And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+			EndIf
+			
+			If _Found And _Below
+				Leave
+			EndIf
+		EndDo
+	EndSr
+	
+	// Dept Market level
+	BegSr GetUpLift Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If (FFkey < 11 And FFkey > 4 And FFkey <> 8) +
+					And FFMKT = Market And FFWFLG = *Blank
+				_Below = *True
+			EndIf
+				
+			If FFKEY = 11 And FFMKT = Market And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+			EndIf
+			
+			If _Found And _Below
+				Leave
+			EndIf
+		EndDo
+	EndSr
+	
+	// Dept Market Grade level
+	BegSr GetUpLift Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If (FFkey = 9 or FFkey = 6 Or FFkey = 5) + 
+				And FFMKT = Market And FFGRD = Grade And FFWFLG = *Blank
+				_Below = *True
+			EndIf
+				
+			If FFKEY = 10 And FFMKT = Market And FFGRD = Grade +
+				And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+			EndIf
+			
+			If _Found And _Below
+				Leave
+			EndIf
+		EndDo
+	EndSr
+	
+	// Dept Market Grade and Store level
+	BegSr GetUpLift Access(*Public)
+		DclSrParm Market Type(*Char)  Len(2)
+		DclSrParm Grade  Type(*Char)  Len(3)
+		DclSrParm Store  Type(*Zoned) Len(3,0)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 5 And FFMKT = Market And FFGRD = Grade +
+				And FFSTR = Store And FFWFLG = *Blank
+				_Below = *True
+			EndIf
+				
+			If FFKEY = 9 And FFMKT = Market And FFGRD = Grade +
+				And FFSTR = Store And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+			EndIf
+			
+			If _Found And _Below
+				Leave
+			EndIf
+		EndDo
+	EndSr
+
+	// Class level
+	BegSr GetUplift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey < 8 And FFkey > 4 And FFCLS = Class And FFWFLG = *Blank
+				_Below = *True
+			EndIf
+				
+			If FFKEY = 8 And FFCLS = Class And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+			EndIf
+			
+			If _Found And _Below
+				Leave
+			EndIf
+		EndDo
+	EndSr
+
+	// Class Market level
+	BegSr GetUplift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char) Len(2)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey < 7 And FFkey > 4 And FFCLS = Class And FFMKT = Market And FFWFLG = *Blank
+				_Below = *True
+			EndIf
+				
+			If FFKEY = 7 And FFCLS = Class And FFMKT = Market And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+			EndIf
+			
+			If _Found And _Below
+				Leave
+			EndIf
+		EndDo
+	EndSr
+
+	// Class Market Grade level
+	BegSr GetUplift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 5 And FFCLS = Class And FFMKT = Market And FFGRD = Grade +
+					 And FFWFLG = *Blank
+				_Below = *True
+			EndIf
+				
+			If FFKEY = 6 And FFCLS = Class And FFMKT = Market And FFGRD = Grade And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+			EndIf
+			
+			If _Found And _Below
+				Leave
+			EndIf
+		EndDo
+	EndSr
+
+	//Class Market Grade Store level
+	BegSr GetUplift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+		DclSrParm Store  Type(*Zoned) Len(3,0)
+				
+		_Below  = *False
+		_UpLift = *Zero
+		_Found  = *False
+		_Changed = *False
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+				
+			If FFKEY = 5 And FFCLS = Class And FFMKT = Market And FFGRD = Grade And FFSTR = Store +
+					 And FFWFLG = *Blank
+				_UpLift = FFFFCT
+				_Found  = *True
+				
+				If FFCHGD = TimeStamp
+					_Changed = *On
+				EndIf
+				
+				Leave
+			EndIf
+		EndDo
+	EndSr
+
+
+	//------------------------------------------------------------------------------
+	// Update Dept level
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 12 And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+				
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 12
+		FFDEPT = Department
+		FFFFCT = UpLift
+		FFKYVL = Department.ToString('000')
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+		
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+	
+	// Update Dept Market level
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 11 And FFmkt = Market And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+				
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 11
+		FFDEPT = Department
+		FFMKT  = Market
+		FFFFCT = UpLift
+		FFKYVL = Market
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+		
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+
+	// Update Dept Market Grade level
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Market Type(*Char)  Len(2)
+		DclSrParm Grade  Type(*Char)  Len(3)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 10 And FFmkt = Market And FFGRD = Grade +
+					And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 10
+		FFDEPT = Department
+		FFMKT  = Market
+		FFGRD  = Grade
+		FFFFCT = UpLift
+		FFKYVL = Grade
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+
+	// Update Dept Market Grade and Store
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+		DclSrParm Store  Type(*Zoned) Len(3,0)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 9 And FFmkt = Market And FFGRD = Grade +
+					And FFSTR = Store And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 9
+		FFDEPT = Department
+		FFMKT  = Market
+		FFGRD  = Grade
+		FFSTR  = Store
+		FFFFCT = UpLift
+		FFKYVL = Store.ToString('000')
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+		
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+	
+	// Update Class level
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 8 And FFcls = Class And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 8
+		FFDEPT = Department
+		FFCLS  = Class
+		FFFFCT = UpLift
+		FFKYVL = Class.ToString('0000')
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+				
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+	
+	// Update Class Market level
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 7 And FFcls = Class And FFmkt = Market And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 7
+		FFDEPT = Department
+		FFCLS  = Class
+		FFMKT  = Market
+		FFFFCT = UpLift
+		FFKYVL = Market
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+		
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+	
+	// Update Class Market Grade level
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 6 And FFcls = Class And FFmkt = Market And FFgrd = Grade And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 6
+		FFDEPT = Department
+		FFCLS  = Class
+		FFMKT  = Market
+		FFGRD  = Grade
+		FFFFCT = UpLift
+		FFKYVL = Grade
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+				
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+	
+	// Update Class Market Grade and Store level
+	BegSR UpdateUplift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+		DclSrParm Store  Type(*Zoned) Len(3,0)
+		DclSrParm Uplift Type(*Zoned) Len(3,2)
+				
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFKey = 5 And FFcls = Class And FFmkt = Market And FFgrd = Grade And FFstr = Store +
+					 And FFWFLG = *Blank
+				FFFFCT = Uplift
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+		
+		Clear MDSSRFWF
+		
+		FFKEY  = 5
+		FFDEPT = Department
+		FFCLS  = Class
+		FFMKT  = Market
+		FFGRD  = Grade
+		FFSTR  = Store
+		FFFFCT = UpLift
+		FFKYVL = Store.ToString('000')
+		FFCHGU = UserProfile
+		FFCHGD = TimeStamp
+				
+		memRecords += 1
+		Write MDSSRFWF
+	EndSr
+	
+	
+	//------------------------------------------------------------------------------
+	// Get Default for Dept
+	BegFunc GetDftUplift Type(*Zoned) Len(3,2) Access(*Public)
+				
+		GetUpLift()
+		LeaveSR _UpLift
+		
+	EndFunc
+
+	// Get Default for Dept Market
+	BegFunc GetDftUplift Type(*Zoned) Len(3,2) Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+		
+		GetUplift(Market)
+		If _Found
+			LeaveSR _UpLift
+		Else
+			// Dept level default
+			GetUplift()
+			LeaveSR _UpLift
+		EndIf
+	EndFunc
+
+	// Get Default for Dept Market Grade
+	BegFunc GetDftUplift Type(*Zoned) Len(3,2) Access(*Public)
+		DclSrParm Market    Type(*Char) Len(2)
+		DclSrParm DeptGrade Type(*Char) Len(3)
+		
+		GetUplift(Market, DeptGrade)
+		If _Found
+			LeaveSR _UpLift
+		Else
+			GetUpLift(Market)
+			If _Found
+				LeaveSr _UpLift
+			Else
+				GetUpLift()
+				LeaveSr _UpLift
+			EndIf
+		EndIf
+	EndFunc
+		
+	// Get Default for Class Market
+	BegFunc GetDftUplift Type(*Zoned) Len(3,2) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char)  Len(2)
+		
+		GetUplift(Class)		// Class
+		If _Found
+			LeaveSR _UpLift
+		Else
+			GetUpLift(Market)	// Dept Market
+			If _Found
+				LeaveSR _UpLift
+			Else
+				GetUplift()		// Dept
+				LeaveSR _UpLift
+			EndIf
+		EndIf
+	EndFunc
+
+	// Get Default for Class Market Grade
+	BegFunc GetDftUplift Type(*Zoned) Len(3,2) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char)  Len(2)
+		DclSrParm Grade  Type(*Char)  Len(3)
+		
+		GetUplift(Class, Market)			// Class Market
+		If _Found
+			LeaveSR _UpLift
+		Else
+			GetUplift(Class)				// Class
+			If _Found
+				LeaveSR _UpLift
+			Else
+				GetUpLift(Market, Grade)	// Dept Market Grade
+				If _Found
+					LeaveSR _UpLift
+				Else
+					GetUpLift(Market)		// Dept Market
+					If _Found
+						LeaveSR _UpLift
+					Else
+						GetUplift()			// Dept
+						LeaveSR _UpLift
+					EndIf
+				EndIf
+			EndIf
+		EndIf
+	EndFunc
+	
+	// Get Default for Class Market Grade Store
+	BegFunc GetDftUplift Type(*Zoned) Len(3,2) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char)  Len(2)
+		DclSrParm Grade  Type(*Char)  Len(3)
+		DclSrParm Store  Type(*Zoned) Len(3,0)
+		
+		GetUplift(Class, Market, Grade)				// Class Market Grade
+		If _Found
+			LeaveSR _UpLift
+		Else
+			GetUplift(Class, Market)				// Class Market
+			If _Found
+				LeaveSR _UpLift
+			Else
+				GetUplift(Class)					// Class
+				If _Found
+					LeaveSR _UpLift
+				Else
+					GetUpLift(Market, Grade, Store)	// Dept Market Grade Store
+					If _Found
+						LeaveSR _UpLift
+					Else
+						GetUpLift(Market, Grade)	// Dept Market Grade
+						If _Found
+							LeaveSR _UpLift
+						Else
+							GetUpLift(Market)		// Dept Market
+							If _Found
+								LeaveSR _UpLift
+							Else
+								GetUplift()			// Dept
+								LeaveSR _UpLift
+							EndIf
+						EndIf
+					EndIf
+				EndIf
+			EndIf
+		EndIf
+	EndFunc
+
+
+	//------------------------------------------------------------------------------
+	// Delete Dept Market level
+	BegSr DeleteUpLift Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+	
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFkey = 11 And FFmkt = Market And FFWFLG = *Blank
+				FFWFLG = 'D'
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+	EndSr
+
+	// Delete Dept Market Grade level
+	BegSr DeleteUpLift Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+	
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFkey = 10 And FFmkt = Market And FFGRD = Grade And FFWFLG = *Blank
+				FFWFLG = 'D'
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+	EndSr
+	
+	// Delete Dept Market Grade Store level
+	BegSr DeleteUpLift Access(*Public)
+		DclSrParm Market Type(*Char) Len(2)
+		DclSrParm Grade  Type(*Char) Len(3)
+		DclSrParm Store  Type(*Zoned) Len(3,0)
+	
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFkey = 9 And FFmkt = Market And FFgrd = Grade And FFstr = Store +
+					 And FFWFLG = *Blank
+				FFWFLG = 'D'
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+	EndSr
+
+	// Delete Class level
+	BegSr DeleteUpLift Access(*Public)
+		DclSrParm Class Type(*Zoned) Len(4,0)
+	
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFkey = 8 And FFcls = Class And FFWFLG = *Blank
+				FFWFLG = 'D'
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+	EndSr
+
+	// Delete Class Market level
+	BegSr DeleteUpLift Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char)  Len(2)
+	
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFkey = 7 And FFcls = Class And FFmkt = Market And FFWFLG = *Blank
+				FFWFLG = 'D'
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+	EndSr
+	
+	// Delete Class Market Grade level
+	BegSr DeleteUpLift Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char)  Len(2)
+		DclSrParm Grade  Type(*Char)  Len(3)
+	
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFkey = 6 And FFcls = Class And FFmkt = Market And FFgrd = Grade And FFWFLG = *Blank
+				FFWFLG = 'D'
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+	EndSr
+	
+	// Delete Class Market Grade Store level
+	BegSr DeleteUpLift Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Market Type(*Char)  Len(2)
+		DclSrParm Grade  Type(*Char)  Len(3)
+		DclSrParm Store  Type(*Zoned) Len(3,0)
+	
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			
+			If FFkey = 5 And FFcls = Class And FFmkt = Market And FFgrd = Grade +
+					 And FFstr = Store And FFWFLG = *Blank
+				FFWFLG = 'D'
+				FFCHGU = UserProfile
+				FFCHGD = TimeStamp
+
+				Update MDSSRFWF
+				LeaveSR
+			EndIf
+		EndDo
+	EndSr
+	
+	
+	//------------------------------------------------------------------------------
+	BegSr Save_WorkingModel Access(*Public)
+		DclSrParm SaveToMember Type(*Char) Len(10)
+		
+		If DSSRFWF1.IsOpen
+			Close DSSRFWF1
+		EndIf
+		
+		DSSRFWF1.MemberName = SaveToMember.Trim()
+		Open DSSRFWF1
+		
+		DeleteRange DSSRFWF1 FirstKey(1) LastKey(12)
+		
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			If FFWFLG = *Blank
+				Write UDSSRFWF
+			EndIf
+		EndDo
+		
+		Close DSSRFWF1
+	EndSr
+	
+	BegSr Save_BaseModel Access(*Public)
+		DclSrParm SaveToMember Type(*Char) Len(10)
+		
+		If DSSRFWF1.IsOpen
+			Close DSSRFWF1
+		EndIf
+		
+		DSSRFWF1.MemberName = SaveToMember.Trim()
+		Open DSSRFWF1
+		
+		DeleteRange DSSRFWF1 FirstKey(12, Department)
+		DeleteRange DSSRFWF1 FirstKey(11, Department)
+		DeleteRange DSSRFWF1 FirstKey(10, Department)
+		DeleteRange DSSRFWF1 FirstKey(9,  Department)
+		DeleteRange DSSRFWF1 FirstKey(8,  Department)
+		DeleteRange DSSRFWF1 FirstKey(7,  Department)
+		DeleteRange DSSRFWF1 FirstKey(6,  Department)
+		DeleteRange DSSRFWF1 FirstKey(5,  Department)
+		
+		Do FromVal(1) ToVal(memRecords) Index(RRN) Type(*Integer4)
+			Chain Mem Key(RRN)
+			If FFWFLG = *Blank
+				Write UDSSRFWF
+			EndIf
+		EndDo
+		
+		Close DSSRFWF1
+	EndSr
+
+	BegSr Rmv_Item_Rec Access(*Public)
+		DclSrParm Member Type(*Char) Len(10)
+		
+		If DSSRFWF1.IsOpen
+			Close DSSRFWF1
+		EndIf
+		
+		DSSRFWF1.MemberName = Member.Trim()
+		Open DSSRFWF1
+		
+		Do FromVal(1) ToVal(4) Index(KeyValue) Type(*Zoned) Len(2,0)
+			DeleteRange DSSRFWF1 FirstKey(KeyValue)
+		EndDo
+		
+		Close DSSRFWF1
+	EndSr
+	/EndRegion
+EndClass

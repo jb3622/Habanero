@@ -1,0 +1,63 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <CasePack>
+    <CasePackCode>A</CasePackCode>
+    <Description>STANDARD TOTE CARTON</Description>
+    <PackCodeDescription>A - STANDARD TOTE CARTON</PackCodeDescription>
+    <PackHeight>32.000</PackHeight>
+    <PackWidth>49.000</PackWidth>
+    <PackLength>38.000</PackLength>
+    <PackWeight>20.000</PackWeight>
+    <PackOverrideable>N</PackOverrideable>
+  </CasePack>
+  <CasePack>
+    <CasePackCode>B</CasePackCode>
+    <Description>LARGE TOTE CARTON</Description>
+    <PackCodeDescription>B - LARGE TOTE CARTON</PackCodeDescription>
+    <PackHeight>32.000</PackHeight>
+    <PackWidth>50.000</PackWidth>
+    <PackLength>100.000</PackLength>
+    <PackWeight>30.000</PackWeight>
+    <PackOverrideable>N</PackOverrideable>
+  </CasePack>
+  <CasePack>
+    <CasePackCode>C</CasePackCode>
+    <Description>VENDOR CARTON</Description>
+    <PackCodeDescription>C - VENDOR CARTON</PackCodeDescription>
+    <PackHeight>0.000</PackHeight>
+    <PackWidth>0.000</PackWidth>
+    <PackLength>0.000</PackLength>
+    <PackWeight>25.000</PackWeight>
+    <PackOverrideable>Y</PackOverrideable>
+  </CasePack>
+  <CasePack>
+    <CasePackCode>D</CasePackCode>
+    <Description>SHIPABLE DISTRO</Description>
+    <PackCodeDescription>D - SHIPABLE DISTRO</PackCodeDescription>
+    <PackHeight>0.000</PackHeight>
+    <PackWidth>0.000</PackWidth>
+    <PackLength>0.000</PackLength>
+    <PackWeight>25.000</PackWeight>
+    <PackOverrideable>Y</PackOverrideable>
+  </CasePack>
+  <CasePack>
+    <CasePackCode>E</CasePackCode>
+    <Description>RATIO PACK</Description>
+    <PackCodeDescription>E - RATIO PACK</PackCodeDescription>
+    <PackHeight>0.000</PackHeight>
+    <PackWidth>0.000</PackWidth>
+    <PackLength>0.000</PackLength>
+    <PackWeight>0.000</PackWeight>
+    <PackOverrideable>Y</PackOverrideable>
+  </CasePack>
+  <CasePack>
+    <CasePackCode>F</CasePackCode>
+    <Description>PUNCH CARTON</Description>
+    <PackCodeDescription>F - PUNCH CARTON</PackCodeDescription>
+    <PackHeight>32.000</PackHeight>
+    <PackWidth>49.000</PackWidth>
+    <PackLength>38.000</PackLength>
+    <PackWeight>20.000</PackWeight>
+    <PackOverrideable>Y</PackOverrideable>
+  </CasePack>
+</DocumentElement>

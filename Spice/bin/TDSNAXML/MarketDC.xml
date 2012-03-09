@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--Contains User Details-->
+<Spice>
+  <MarketDC Domain="EMEA" IPMarket="UK" DCCode="723" Default="1"/>
+  <MarketDC Domain="EMEA" IPMarket="FR" DCCode="723" Default="1"/>
+  <MarketDC Domain="EMEA" IPMarket="SP" DCCode="723" Default="1"/>
+  <MarketDC Domain="EMEA" IPMarket="IT" DCCode="723" Default="1"/>
+  <MarketDC Domain="EMEA" IPMarket="AU" DCCode="723" Default="1"/>
+  <MarketDC Domain="SWNA" IPMarket="US" DCCode="899" Default="1"/>
+  <MarketDC Domain="SWNA" IPMarket="US" DCCode="900" Default="0"/>
+  <MarketDC Domain="SWNA" IPMarket="CA" DCCode="899" Default="1"/>
+  <MarketDC Domain="SWNA" IPMarket="CA" DCCode="900" Default="0"/>
+</Spice>

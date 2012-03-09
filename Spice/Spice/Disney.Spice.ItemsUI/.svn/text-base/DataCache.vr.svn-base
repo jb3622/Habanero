@@ -1,0 +1,20 @@
+Using System
+Using System.Text
+
+BegClass DataCache Access(*Public)   
+
+
+DclFld DatePickerFormat Type( String ) Access( *Public ) Inz( "1" ) Shared(*Yes) 
+DclFld IsVATRequired Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld AreStageSetDatesChangeable Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld DisplayLocalLanguageItemDescription Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes)
+DclFld IsLandingFactorRequiredForRoadDelivery Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsStyleNumberInputRequired Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsPromoCodeMandatory Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsCompositionCodeEditable Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld IsCommodityCodeEditable Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+DclFld PreSelectAllMarkets Type( Boolean ) Access( *Public ) Inz( *False ) Shared(*Yes) 
+
+DclFld LocalLanguage Type( String ) Access( *Public ) Inz( "English" ) Shared(*Yes) 
+
+EndClass

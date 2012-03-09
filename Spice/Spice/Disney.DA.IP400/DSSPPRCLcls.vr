@@ -1,0 +1,238 @@
+// ===============================================
+// Joseph Urbina
+// 27th May 2009
+// DSSPPRCLcls	
+// Data Access Layer - Pricing Matrix Log File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+
+BegClass DSSPPRCLcls Access(*Public)
+		
+	/Region Declare Files and DB
+	DclDB Name(DB) DbName("TDST")
+	DclDiskFile Name(DSSPPRCLL1) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*Yes)RnmFmt(Dsspprclr:R_Dsspprclr1)
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+ /EndRegion
+	
+	/Region DSSPPRCL Properties
+	//Master Market Currency Code
+	BegProp Pricing_Matrix_ID Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR PRCLID
+		EndGet
+		
+		BegSet
+			PRCLID = *PropVal
+		EndSet
+	EndProp
+	
+	//Log Date
+	BegProp Log_Date Type(*Zoned ) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR PRCCRD
+		EndGet
+		
+		BegSet
+			PRCCRD = *PropVal
+		EndSet
+	EndProp
+	
+	//Log Time
+	BegProp Log_Time Type(*Zoned ) Len(6,0) Access(*Public)
+		BegGet
+			LeaveSR PRCCRT
+		EndGet
+		
+		BegSet
+			PRCCRT = *PropVal
+		EndSet
+	EndProp
+	
+	//Log User
+	BegProp Log_User Type(*Char ) len(10) Access(*Public)
+		BegGet
+			LeaveSR PRCUSR
+		EndGet
+		
+		BegSet
+			PRCUSR = *PropVal
+		EndSet
+	EndProp
+	
+	//Log Type
+	BegProp Log_Type Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR PRCTYP
+		EndGet
+		
+		BegSet
+			PRCTYP = *PropVal
+		EndSet
+	EndProp
+	
+	//Master Market Currency Code
+	BegProp Master_Currency Type(*Char) Len(2) Access(*Public)
+		BegGet
+			LeaveSR PRCMAS
+		EndGet
+		
+		BegSet
+			PRCMAS = *PropVal
+		EndSet
+	EndProp
+	
+	//Market Currency Code
+	BegProp Market_Currency Type(*Char) Len(2) Access(*Public)
+		BegGet
+			LeaveSR PRCMAR
+		EndGet
+		
+		BegSet
+			PRCMAR = *PropVal
+		EndSet
+	EndProp
+	
+	//Before From Retail Price
+	BegProp Before_From_Price Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR PRBFRP
+		EndGet
+		
+		BegSet
+			PRBFRP = *PropVal
+		EndSet
+	EndProp
+	
+	//Before To Retail Price
+	BegProp Before_To_Price Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR PRBTOP
+		EndGet
+		
+		BegSet
+			PRBTOP = *PropVal
+		EndSet
+	EndProp
+	
+	//Before Default Retail Price
+	BegProp Before_Default_Price Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR PRBDRP
+		EndGet
+		
+		BegSet
+			PRBDRP = *PropVal
+		EndSet
+	EndProp
+	
+	//After From Retail Price
+	BegProp After_From_Price Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR PRAFRP
+		EndGet
+		
+		BegSet
+			PRAFRP = *PropVal
+		EndSet
+	EndProp
+	
+	//After To Retail Price
+	BegProp After_To_Price Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR PRATOP
+		EndGet
+		
+		BegSet
+			PRATOP = *PropVal
+		EndSet
+	EndProp
+	
+	//After Default Retail Price
+	BegProp After_Default_Price Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR PRADRP
+		EndGet
+		
+		BegSet
+			PRADRP = *PropVal
+		EndSet
+	EndProp
+	/EndRegion	
+	
+	/Region Methods
+		
+	//Writes new record to the Price Matrix Log File		
+	BegSR WritePriceMatrixLogRecord  Access(*Public)
+		DclSrParm Pricing_Matrix_ID		Type(*Zoned)	Len(5,0)
+		DclSrParm Log_Type				Type(*Char)		Len(1)
+		DclSrParm Master_Currency		Type(*Char)		Len(2)
+		DclSrParm Market_Currency		Type(*Char)		Len(2)
+		DclSrParm Before_From_Price		Type(*Packed)	Len(7,2)
+		DclSrParm Before_To_Price		Type(*Packed)	Len(7,2)
+		DclSrParm Before_Default_Price	Type(*Packed)	Len(7,2)
+		DclSrParm After_From_Price		Type(*Packed)	Len(7,2)
+		DclSrParm After_To_Price		Type(*Packed)	Len(7,2)
+		DclSrParm After_Default_Price	Type(*Packed)	Len(7,2)
+		
+		//Open the files if not already done so.
+		If Not DSSPPRCLL1.IsOpen
+			Open DSSPPRCLL1
+		EndIf
+				
+		//Set new record data		
+		Log_Date = %Date
+	    Log_Time = %Time
+	    Log_User = db.User().toUpper()
+	    PRCLID	 = Pricing_Matrix_ID
+	    PRCMAS   = Master_Currency
+	    PRCMAR	 = Market_Currency
+	    PRCTYP	 = Log_Type
+	    
+	    Select
+	    When Log_Type = 'C'
+			PRBFRP	 = Before_From_Price
+			PRBTOP	 = Before_To_Price
+			PRBDRP	 = Before_Default_Price
+			PRAFRP	 = After_From_Price
+			PRATOP	 = After_To_Price
+			PRADRP	 = After_Default_Price
+	    
+	    When Log_Type = 'A'
+			PRBFRP	 = *Zeros
+			PRBTOP	 = *Zeros
+			PRBDRP	 = *Zeros
+			PRAFRP	 = After_From_Price
+			PRATOP	 = After_To_Price
+			PRADRP	 = After_Default_Price
+	    
+	    When Log_Type = 'D'
+			PRBFRP	 = Before_From_Price
+			PRBTOP	 = Before_To_Price
+			PRBDRP	 = Before_Default_Price
+			PRAFRP	 = *Zeros
+			PRATOP	 = *Zeros
+			PRADRP	 = *Zeros
+		
+		EndSl
+		
+		//Write the record
+		Write R_Dsspprclr1 Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (DSSPPRCLL1)')
+		EndIf
+		
+		LeaveSR 
+	EndSR
+	/EndRegion	
+EndClass

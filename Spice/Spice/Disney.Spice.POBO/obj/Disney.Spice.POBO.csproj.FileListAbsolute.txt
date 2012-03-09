@@ -1,0 +1,106 @@
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\iDash\Disney.Spice.POBO.dll
+C:\iDash\Disney.Spice.POBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb
+C:\Documents and Settings\cjones\iDash\Disney.Spice.POBO.dll
+C:\Documents and Settings\cjones\iDash\Disney.Spice.POBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.Spice.POBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.Spice.POBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.DA.IP400.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.Spice.ItemsBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\DisneyMenu.exe
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\ASNA.DataGate.Ole.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.MenuServices.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\ASNA.DataGate.Client.Security.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\ASNA.System.Condition.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\DisneyMenu.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.MenuServices.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.Spice.ItemsBO.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\bin\Debug\Disney.DA.IP400.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+G:\IS\Temp SPICE\UAT Build\iDash\Disney.Spice.POBO.dll
+G:\IS\Temp SPICE\UAT Build\iDash\Disney.Spice.POBO.pdb
+C:\Documents and Settings\cjones\My Documents\iDash\Disney.Spice.POBO.dll
+C:\Documents and Settings\cjones\My Documents\iDash\Disney.Spice.POBO.pdb
+C:\iDash\Spice\Disney.Spice.POBO.dll
+C:\iDash\Spice\Disney.Spice.POBO.pdb
+C:\Projects\SPICE\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\SPICE\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Projects\SPICE\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Projects\SPICE\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\Projects\SPICE\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\Projects\SPICE\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb
+C:\Dev\iDash2.Integration\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\iDash2.Integration\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\iDash2.Integration\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\iDash2.Integration\bin\Disney.Spice.POBO.dll
+C:\Dev\iDash2.Integration\bin\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\bin\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\bin\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes-XRECENT\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\IDASH\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\IDASH\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\APP-Changes\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\post8_3_0fixes\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\post8_3_0fixes\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.1\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\Spice\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.2\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.3\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb
+C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\bin\SPICE\Disney.Spice.POBO.dll
+C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\bin\SPICE\Disney.Spice.POBO.pdb
+C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
+C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb

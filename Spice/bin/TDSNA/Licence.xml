@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Licence>
+    <Code>  A</Code>
+    <Description>TAG ON</Description>
+    <CodeDescription>  A - TAG ON</CodeDescription>
+    <Status>Y</Status>
+  </Licence>
+  <Licence>
+    <Code>  D</Code>
+    <Description>DISNEY INTERNAL</Description>
+    <CodeDescription>  D - DISNEY INTERNAL</CodeDescription>
+    <Status>N</Status>
+  </Licence>
+  <Licence>
+    <Code>  G</Code>
+    <Description>GLOBAL</Description>
+    <CodeDescription>  G - GLOBAL</CodeDescription>
+    <Status>Y</Status>
+  </Licence>
+  <Licence>
+    <Code>  L</Code>
+    <Description>LICENSED PRODUCT</Description>
+    <CodeDescription>  L - LICENSED PRODUCT</CodeDescription>
+    <Status>Y</Status>
+  </Licence>
+  <Licence>
+    <Code>  N</Code>
+    <Description>NON-MERCHANDISE</Description>
+    <CodeDescription>  N - NON-MERCHANDISE</CodeDescription>
+    <Status>Y</Status>
+  </Licence>
+  <Licence>
+    <Code>  O</Code>
+    <Description>TDNA ONLY</Description>
+    <CodeDescription>  O - TDNA ONLY</CodeDescription>
+    <Status>Y</Status>
+  </Licence>
+  <Licence>
+    <Code>  T</Code>
+    <Description>TDS DEVELOPED</Description>
+    <CodeDescription>  T - TDS DEVELOPED</CodeDescription>
+    <Status>N</Status>
+  </Licence>
+</DocumentElement>

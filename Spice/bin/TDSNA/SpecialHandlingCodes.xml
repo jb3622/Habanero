@@ -1,0 +1,228 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>AI</SpecialHandlingCode>
+    <Description>ARROWEYE</Description>
+    <CodeAndDescription>AI - ARROWEYE</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>AW</SpecialHandlingCode>
+    <Description>ARROWEYE PRODUCT</Description>
+    <CodeAndDescription>AW - ARROWEYE PRODUCT</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>BC</SpecialHandlingCode>
+    <Description>2 BARCODE 2 LINES 8 TEXT</Description>
+    <CodeAndDescription>BC - 2 BARCODE 2 LINES 8 TEXT</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>B1</SpecialHandlingCode>
+    <Description>DISNEY DIGITAL BOOKS</Description>
+    <CodeAndDescription>B1 - DISNEY DIGITAL BOOKS</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>CA</SpecialHandlingCode>
+    <Description>CYO BBALL HAT W/SIDE PZ</Description>
+    <CodeAndDescription>CA - CYO BBALL HAT W/SIDE PZ</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>CF</SpecialHandlingCode>
+    <Description>CYO EMB 1 LINES 1 CHAR</Description>
+    <CodeAndDescription>CF - CYO EMB 1 LINES 1 CHAR</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>CJ</SpecialHandlingCode>
+    <Description>CYO PRINT 2 LINES 20 CHAR</Description>
+    <CodeAndDescription>CJ - CYO PRINT 2 LINES 20 CHAR</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>CU</SpecialHandlingCode>
+    <Description>CYO VCAM SCREENPRINT (45)</Description>
+    <CodeAndDescription>CU - CYO VCAM SCREENPRINT (45)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>CV</SpecialHandlingCode>
+    <Description>CYO TJET TEXT (45)</Description>
+    <CodeAndDescription>CV - CYO TJET TEXT (45)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>C3</SpecialHandlingCode>
+    <Description>CYO VCAM CHAR ONLY</Description>
+    <CodeAndDescription>C3 - CYO VCAM CHAR ONLY</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>DG</SpecialHandlingCode>
+    <Description>D23 GIFT 3 LINES</Description>
+    <CodeAndDescription>DG - D23 GIFT 3 LINES</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>DR</SpecialHandlingCode>
+    <Description>D23 RENEWAL</Description>
+    <CodeAndDescription>DR - D23 RENEWAL</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>DT</SpecialHandlingCode>
+    <Description>DISNEY 23 4 LINES</Description>
+    <CodeAndDescription>DT - DISNEY 23 4 LINES</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>D2</SpecialHandlingCode>
+    <Description>CYO CERAMIC DS 1 LINE 15 MAX</Description>
+    <CodeAndDescription>D2 - CYO CERAMIC DS 1 LINE 15 MAX</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>FG</SpecialHandlingCode>
+    <Description>ENGRAVE ONE LINE 25 CHARS</Description>
+    <CodeAndDescription>FG - ENGRAVE ONE LINE 25 CHARS</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>F3</SpecialHandlingCode>
+    <Description>F3 REQ ENG ONE LINE 8 CHAR MAX</Description>
+    <CodeAndDescription>F3 - F3 REQ ENG ONE LINE 8 CHAR MAX</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>F4</SpecialHandlingCode>
+    <Description>F4 REQ ENG 2 LINES 15 CHAR MAX</Description>
+    <CodeAndDescription>F4 - F4 REQ ENG 2 LINES 15 CHAR MAX</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>F5</SpecialHandlingCode>
+    <Description>ENG TEXT (12) TEXT (4)</Description>
+    <CodeAndDescription>F5 - ENG TEXT (12) TEXT (4)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>G1</SpecialHandlingCode>
+    <Description>TEXT (9) TEXT (9)</Description>
+    <CodeAndDescription>G1 - TEXT (9) TEXT (9)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>LT</SpecialHandlingCode>
+    <Description>CYO LEATHER BRACELET 45 MAX</Description>
+    <CodeAndDescription>LT - CYO LEATHER BRACELET 45 MAX</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>PP</SpecialHandlingCode>
+    <Description>PARKS PASSHOLDER COLLECTION</Description>
+    <CodeAndDescription>PP - PARKS PASSHOLDER COLLECTION</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>QA</SpecialHandlingCode>
+    <Description>SUB 2 LINES 24 CHAR MAX</Description>
+    <CodeAndDescription>QA - SUB 2 LINES 24 CHAR MAX</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>QB</SpecialHandlingCode>
+    <Description>QB BABY SHOES (VCAM)</Description>
+    <CodeAndDescription>QB - QB BABY SHOES (VCAM)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>QC</SpecialHandlingCode>
+    <Description>QC QUICK PICK VCAM 1LNMAX 12</Description>
+    <CodeAndDescription>QC - QC QUICK PICK VCAM 1LNMAX 12</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>QE</SpecialHandlingCode>
+    <Description>QE QUICK PICK TEXT  8 (CYOP)</Description>
+    <CodeAndDescription>QE - QE QUICK PICK TEXT  8 (CYOP)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>QS</SpecialHandlingCode>
+    <Description>QS QUICK PICK TEXT 15 (SUBM)</Description>
+    <CodeAndDescription>QS - QS QUICK PICK TEXT 15 (SUBM)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>QT</SpecialHandlingCode>
+    <Description>QT QUICK PICK TEXT 20 (TJET)</Description>
+    <CodeAndDescription>QT - QT QUICK PICK TEXT 20 (TJET)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>QV</SpecialHandlingCode>
+    <Description>QV QUICK PICK TEXT 12 (VCAM)</Description>
+    <CodeAndDescription>QV - QV QUICK PICK TEXT 12 (VCAM)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>RA</SpecialHandlingCode>
+    <Description>TEXT (25) TEXT (18)</Description>
+    <CodeAndDescription>RA - TEXT (25) TEXT (18)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>RB</SpecialHandlingCode>
+    <Description>TEXT (10) TEXT (10)</Description>
+    <CodeAndDescription>RB - TEXT (10) TEXT (10)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>RD</SpecialHandlingCode>
+    <Description>D23 RENEWAL</Description>
+    <CodeAndDescription>RD - D23 RENEWAL</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>RF</SpecialHandlingCode>
+    <Description>NAME (20) DATE (20)</Description>
+    <CodeAndDescription>RF - NAME (20) DATE (20)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>RH</SpecialHandlingCode>
+    <Description>NAME (20) NAME (20) DATE (20)</Description>
+    <CodeAndDescription>RH - NAME (20) NAME (20) DATE (20)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>RM</SpecialHandlingCode>
+    <Description>RIDEMAKERZ TEXT (45)</Description>
+    <CodeAndDescription>RM - RIDEMAKERZ TEXT (45)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>SF</SpecialHandlingCode>
+    <Description>STICK FIGURES 11 LINES 45 MAX</Description>
+    <CodeAndDescription>SF - STICK FIGURES 11 LINES 45 MAX</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>S1</SpecialHandlingCode>
+    <Description>CYO SUBM TEXT (45)</Description>
+    <CodeAndDescription>S1 - CYO SUBM TEXT (45)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>VP</SpecialHandlingCode>
+    <Description>CYO VERSA CAM ORD PICK (12)</Description>
+    <CodeAndDescription>VP - CYO VERSA CAM ORD PICK (12)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>VT</SpecialHandlingCode>
+    <Description>VERSA CAM 2 LN 20 MAX NONCYO</Description>
+    <CodeAndDescription>VT - VERSA CAM 2 LN 20 MAX NONCYO</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>V3</SpecialHandlingCode>
+    <Description>VERSA CAMM 10 CHARS MAX</Description>
+    <CodeAndDescription>V3 - VERSA CAMM 10 CHARS MAX</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>V4</SpecialHandlingCode>
+    <Description>VCAMM PZ 12 CHARS</Description>
+    <CodeAndDescription>V4 - VCAMM PZ 12 CHARS</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>W1</SpecialHandlingCode>
+    <Description>E WATCH NEW FORMAT</Description>
+    <CodeAndDescription>W1 - E WATCH NEW FORMAT</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>W2</SpecialHandlingCode>
+    <Description>E WATCH BIRTHSTONE BRACELET</Description>
+    <CodeAndDescription>W2 - E WATCH BIRTHSTONE BRACELET</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>W3</SpecialHandlingCode>
+    <Description>E WATCH 2 LINES PZ</Description>
+    <CodeAndDescription>W3 - E WATCH 2 LINES PZ</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>W4</SpecialHandlingCode>
+    <Description>E WATCH KEYCHAIN</Description>
+    <CodeAndDescription>W4 - E WATCH KEYCHAIN</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+  <SpecialHandlingCodesTable>
+    <SpecialHandlingCode>0S</SpecialHandlingCode>
+    <Description>SPECIAL DELIVERY CARD (SUBM)</Description>
+    <CodeAndDescription>0S - SPECIAL DELIVERY CARD (SUBM)</CodeAndDescription>
+  </SpecialHandlingCodesTable>
+</DocumentElement>

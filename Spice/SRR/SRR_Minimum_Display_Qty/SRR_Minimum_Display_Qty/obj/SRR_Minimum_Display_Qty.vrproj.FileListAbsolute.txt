@@ -1,0 +1,22 @@
+C:\Documents and Settings\cjones\My Documents\iDash\SRR_Minimum_Display_Qty.dll
+C:\Documents and Settings\cjones\My Documents\Project SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\cjones\My Documents\Project SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Release\SRR_Minimum_Display_Qty.Frm_Search.resources
+C:\Documents and Settings\cjones\My Documents\Project SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Release\SRR_Minimum_Display_Qty.Resources.resources
+C:\Documents and Settings\cjones\My Documents\Project SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Release\SRR_Minimum_Display_Qty.vrproj.GenerateResource.Cache
+C:\Documents and Settings\cjones\My Documents\Project SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Release\SRR_Minimum_Display_Qty.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\bin\SRR_Minimum_Display_Qty.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\bin\SRR_Minimum_Display_Qty.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.Frm_Search.resources
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.Resources.resources
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.vrproj.GenerateResource.Cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\bin\SRR_Minimum_Display_Qty.dll
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\bin\SRR_Minimum_Display_Qty.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.Frm_Search.resources
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.Resources.resources
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.vrproj.GenerateResource.Cache
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.dll
+C:\Dev\Visual Studio 2005\APP-Changes\SRR\SRR_Minimum_Display_Qty\SRR_Minimum_Display_Qty\obj\Debug\SRR_Minimum_Display_Qty.pdb

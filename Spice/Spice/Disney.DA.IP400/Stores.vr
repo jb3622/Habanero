@@ -1,0 +1,164 @@
+Using System
+Using System.Text
+Using System.IO
+Using System.Data
+Using System.Xml
+
+BegClass Stores Access(*Public)
+
+	DclFld StoreTbl Type(DataTable)
+	
+	DclDB PgmDB DBname("TDST") Access(*Private)
+	DclDiskfile Name(IPSTORE) Type(*Input) Org(*Arrival) DB(PgmDB) ImpOpen(*No) RnmFmt(Store:RSTORE)
+	DclDiskFile Name(DSSTORE) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+	
+	DclFld pStore       Type(Int16)  Access(*Private)
+	DclFld pDescription Type(String) Access(*Private)
+	DclFld pStatus      Type(String) Access(*Private)
+	DclFld pMarket      Type(String) Access(*Private)
+	DclFld pVatCode     Type(String) Access(*Private)
+	DclFld pXMLpath     Type(String) Access(*Private)
+			
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Stores.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	/Region Properties
+	BegProp Store Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pStore
+		EndGet
+	EndProp
+	
+	BegProp StoreDescription Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDescription
+		EndGet
+	EndProp
+	
+	BegProp StoreStatus Type(String) Access(*Public)
+		BegGet
+			LeaveSR pStatus
+		EndGet
+	EndProp
+	
+	BegProp StoreMarket Type(String) Access(*Public)
+		BegGet
+			LeaveSR pMarket
+		EndGet
+	EndProp
+	
+	BegProp StoreVATcode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pVatCode
+		EndGet
+	EndProp
+	/EndRegion
+
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If StoreTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				StoreTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys Type(DataColumn) Rank(1)
+
+		StoreTbl = *New DataTable("Store")
+		
+		StoreTbl.Columns.Add(*New DataColumn("Store", *TypeOf(Int16)))
+		StoreTbl.Columns("Store").ReadOnly = *True
+		
+		StoreTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		StoreTbl.Columns["Description"].ReadOnly = *True
+
+		StoreTbl.Columns.Add(*New DataColumn("StoreDescription", *TypeOf(String)))
+		StoreTbl.Columns["StoreDescription"].Expression = "Store + ' - ' + Description"
+		StoreTbl.Columns["StoreDescription"].ReadOnly = *True
+				
+		StoreTbl.Columns.Add(*New DataColumn("Status", *TypeOf(String)))
+		StoreTbl.Columns["Status"].ReadOnly = *True
+		
+		StoreTbl.Columns.Add(*New DataColumn("Market", *TypeOf(String)))
+		StoreTbl.Columns["Market"].ReadOnly = *True
+		
+		StoreTbl.Columns.Add(*New DataColumn("VATcode",*TypeOf(String)))
+		StoreTbl.Columns("VATcode").ReadOnly = *True
+
+		Keys = *New DataColumn[] {StoreTbl.Columns("Store")}
+		StoreTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not IPSTORE.IsOpen
+			Open IPSTORE
+		EndIf
+		
+		If Not DSSTORE.IsOpen
+			Open DSSTORE
+		EndIf
+		
+		DoUntil IPSTORE.IsEof
+			Read IPSTORE
+			If Not IPSTORE.IsEof And SSTS <> 'V' And SDPN1 <> *Blanks
+				Chain From(DSSTORE) Key(SSTR)
+				If DSSTORE.IsFound
+					dr = StoreTbl.NewRow()
+					
+					dr.Item["Store"]       = SSTR
+					dr.Item["Description"] = SNAM.Trim()
+					dr.Item("Status")      = SSTS
+					dr.Item("Market")      = DCTR
+					dr.Item("VATcode")     = SVAT
+					
+					StoreTbl.Rows.Add(dr)
+				EndIf
+			EndIf
+		EndDo
+		
+		StoreTbl.WriteXml(pXMLpath)
+		
+		Close DSSTORE
+		Close IPSTORE
+	EndSr
+	
+	BegFunc GetStore Type(*Boolean) Access(*Public)
+		DclSrParm Store Type(Int16)
+
+		DclFld dr Type(DataRow)
+		
+		dr = StoreTbl.Rows.Find(Store)
+		If dr <> *Nothing
+			pStore       = dr.Item("Store")       *As Int16
+			pDescription = dr.Item["Description"] *As String
+			pStatus      = dr.Item["Status"]      *As String
+			pMarket      = dr.Item("Market")      *As String
+			pVatCode     = dr.Item("VATcode")     *As String
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetStoreTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR StoreTbl
+	EndFunc
+EndClass

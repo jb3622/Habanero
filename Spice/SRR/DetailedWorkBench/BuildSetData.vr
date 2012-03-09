@@ -1,0 +1,172 @@
+Using System
+Using System.Text
+Using System.Data
+
+DclNameSpace Disney.SRR
+
+BegClass BuildSetData Access(*Public)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(IPISETS)  Type(*Input) Org(*Indexed) File('IPISETS')  Db(PgmDB) ImpOpen(*No)
+	DclDiskFile Name(IPITHDR)  Type(*Input) Org(*Indexed) File('IPITHDR')  Db(PgmDB) ImpOpen(*No)
+
+	DclFld SetData Type(SetData)
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	BegFunc BuildData Type(SetData) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Colour Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		
+		DclFld ds Type(DataSet)
+		DclFld dt Type(DataTable)
+		DclFld dc Type(DataColumn)
+		DclFld dr Type(DataRow)
+		DclFld ItemStr Type(StringBuilder)
+
+		If Not %Open(IPITHDR)
+			Open IPITHDR
+		EndIf
+		
+		If Not %Open(IPISETS)
+			Open IPISETS
+		EndIf
+				
+		ds = *New DataSet("Set")
+		dt = *New DataTable("Set")
+		ds.Tables.Add(dt)
+		
+		dc = *New DataColumn("Class", *TypeOf(System.Int16))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+		
+		dc = *New DataColumn("Vendor", *TypeOf(System.Int32))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+				
+		dc = *New DataColumn("Style", *TypeOf(System.Int16))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+		
+		dc = *New DataColumn("Colour", *TypeOf(System.Int16))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+				
+		dc = *New DataColumn("Size", *TypeOf(System.Int16))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+		
+		dc = *New DataColumn("SetItem", *TypeOf(System.String))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+				
+		dt.Columns.Add(*New DataColumn("Ratio", *TypeOf(System.Int32)))
+		dt.Columns.Item["Ratio"].ReadOnly = *True
+				
+		dc = *New DataColumn("ItemUPC", *TypeOf(System.String))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+		
+		dc = *New DataColumn("ItemDescription", *TypeOf(System.String))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+		
+		dt.Columns.Add(*New DataColumn("Department", *TypeOf(System.Int16)))
+		dt.Columns.Item["Department"].ReadOnly = *True
+		
+		SetLL IPISETS Key(Class,Vendor,Style,Colour,Size)
+		DoUntil %eof(IPISETS)
+			ReadE IPISETS Key(Class,Vendor,Style,Colour,Size)
+			If not %eof
+				dr = ds.Tables["Set"].NewRow()
+				
+				dr.Item["Class"]  = KCCL
+				dr.Item["Vendor"] = KCVN
+				dr.Item["Style"]  = KCST
+				dr.Item["Colour"] = KCCR
+				dr.Item["Size"]   = KCSZ
+				dr.Item["Ratio"]  = KQTY
+				
+				ItemStr = *New StringBuilder()
+				ItemStr.Append(KCCL.ToString('0000'))
+				ItemStr.Append("-")
+				ItemStr.Append(KCVN.ToString('00000'))
+				ItemStr.Append("-")
+				ItemStr.Append(KCST.ToString('0000'))
+				ItemStr.Append("-")
+				ItemStr.Append(KCCR.ToString('000'))
+				ItemStr.Append("-")
+				ItemStr.Append(KCSZ.ToString('0000'))
+				
+				dr.Item["SetItem"] = ItemStr.ToString()
+
+				Chain IPITHDR Key(KCCL,KCVN,KCST,KCCR,KCSZ)
+				If %found
+					dr.Item["ItemUPC"]         = IUPD
+					dr.Item["ItemDescription"] = IDES
+					dr.Item["Department"] = IDPT
+				EndIf
+				
+				ds.Tables["Set"].Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		SetData = *New SetData()
+		SetData.APSet = ds
+				
+		Chain IPITHDR Key(Class,Vendor,Style,Colour,Size)
+		If IPITHDR.IsFound
+			SetData.APDesc = IDES
+			SetData.APUPC  = IUPD
+		EndIf
+		
+		Close IPITHDR
+		Close IPISETS
+		
+		LeaveSR SetData
+	EndFunc
+EndClass
+
+BegClass SetData Access(*Public)
+	
+	DclFld ItemSet  Type(DataSet) Access(*Private)
+	DclFld ItemDesc Type(*String) Access(*Private)
+	DclFld ItemUPC  Type(*String) Access(*Private)
+	
+	BegConstructor Access(*Public)
+	EndConstructor
+	
+	BegProp APSet Type(DataSet) Access(*Public)
+		BegSet
+			ItemSet = *PropVal
+		EndSet
+		BegGet
+			LeaveSR ItemSet
+		EndGet
+	EndProp
+	
+	BegProp APDesc Type(*String) Access(*Public)
+		BegSet
+			ItemDesc = *PropVal
+		EndSet
+		BegGet
+			LeaveSR ItemDesc
+		EndGet
+	EndProp
+	
+	BegProp APUPC Type(*String) Access(*Public)
+		BegSet
+			ItemUPC = *PropVal
+		EndSet
+		BegGet
+			LeaveSR ItemUPC
+		EndGet
+	EndProp
+EndClass

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="DetailedWorkBench">
+</Property><Property Name="Solution File" Value="C:\Documents and Settings\cjones\My Documents\Project SRR\DetailedWorkBench\DetailedWorkBench.sln">
+</Property><Property Name="User Options File" Value="C:\Documents and Settings\cjones\My Documents\Project SRR\DetailedWorkBench\DetailedWorkBench.suo">
+</Property><Property Name="Date" Value="14 September 2009">
+</Property><Property Name="Time" Value="13:54">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="DetailedWorkBench.sln" Description="File successfully backed up as C:\Documents and Settings\cjones\My Documents\Project SRR\DetailedWorkBench\Backup\DetailedWorkBench.sln">
+</Event><Event ErrorLevel="0" Project="" Source="DetailedWorkBench.suo" Description="File successfully backed up as C:\Documents and Settings\cjones\My Documents\Project SRR\DetailedWorkBench\Backup\DetailedWorkBench.suo">
+</Event><Event ErrorLevel="0" Project="" Source="DetailedWorkBench.sln" Description="The solution file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="" Source="DetailedWorkBench.sln" Description="No Conversion Required">
+</Event></UpgradeLog>

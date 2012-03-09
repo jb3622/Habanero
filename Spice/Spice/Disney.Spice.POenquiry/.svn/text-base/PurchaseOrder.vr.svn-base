@@ -1,0 +1,722 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.IO
+Using System.Windows.Forms
+Using Disney.DA.IP400
+
+BegClass PurchaseOrder Access(*Public)
+
+	/Region Declares 
+	DclFld PgmDB		Type(ASNA.VisualRPG.Runtime.Database) Access(*Private)
+	DclFld User			Type(Disney.Menu.Users)               Access(*Private)
+		
+	DclFld DSSPPOHcls	Type(DSSPPOHcls)
+	DclFld DSSPAPH		Type(DSSPAPH)
+	DclFld IPMRVENcls   Type(IPMRVENcls)
+	DclFld DSSPSSDcls	Type(DSSPSSDcls)
+	DclFld DSSPPOScls   Type(DSSPPOScls)
+	DclFld Stores		Type(Stores)
+	DclFld Environment  Type(Disney.Menu.Environments)
+	
+	DclFld dtOrderH		      Type(DataTable)
+	DclFld dvOrderH			  Type(DataView)
+	DclFld dvDepartments	  Type(DataView)
+	DclFld dvMarkets		  Type(DataView)
+	DclFld VendorDV		      Type(DataView)
+	DclFld RDOChoice	      Type(String)
+	DclFld PORangeFrom	      Type(String)
+	DclFld PORangeTo	      Type(String)
+	DclFld Market_Select      Type(String)
+	DclFld Store_Select       Type(String)
+	DclFld Char_Select        Type(CheckedListBox)
+	DclFld Class_Select       Type(CheckedListBox)
+	DclFld StageSetDate       Type(String)
+	DclFld POStatus_Select    Type(CheckedListBox)
+	DclFld ShipDateFrom       Type(String)	   
+	DclFld ShipDateTo         Type(String)
+	DclFld OrderDateFrom      Type(String)
+	DclFld OrderDateTo        Type(String)
+	DclFld chkShowMyPO        Type(CheckBox)
+		
+	DclFld dtOrderH			  Type(DataTable)
+
+	DclFld ClassItem          Type(DataRowView)
+	DclFld CharItem			  Type(DataRowView)
+	//DclFld ClassCount         Type(*integer4)
+	DclFld CharCount          Type(*integer4)
+	DclFld dtStageSetDates	  Type(DataTable)
+	DclFld dtStatus           Type(DataTable)
+	DclFld FilterString		  Type(String)
+	DclFld dtStoresClone	  Type(DataTable)
+	DclFld dsMarketDC		  Type(DataSet)
+	DclFld dtMarketDC		  Type(DataTable)
+	DclFld dvMarketDC         Type(DataView)
+	DclFld dsAdditional		  Type(DataSet)
+	DclFld dtAdditional		  Type(DataTable)
+	DclFld dvAdditional       Type(DataView)
+	DclFld DCCode			  Type(String)	
+	DclFld DCCodeNum		  Type(Int16)	
+	DclFld AdditionalCode	  Type(String)	
+	DclFld AdditionalCodeNum  Type(Int16)	
+	DclFld dvStoresClone      Type(DataView)
+
+	//QrySelect Fileds
+	DclFld xDepartment		  Type(*Zoned)   Len(5,0)
+	DclFld xVendor		      Type(*Zoned)   Len(5,0)
+	DclFld xRDOChoice	      Type(String)
+	DclFld xPORangeFrom	      Type(String)
+	DclFld xPORangeTo	      Type(String)
+	DclFld xStore_Select      Type(*Zoned)   Len(3,0)
+	DclFld xStageSetDate      Type(*Zoned)   Len(8,0)
+	DclFld xPOStatus_Select   Type(String)  	   
+	DclFld WrkDate1		      Type(*Date)
+	DclFld WrkDate2		      Type(*Integer4)
+	DclFld QryString          Type(StringBuilder)
+	DclFld FilterString		  Type(String)
+	DclFld FirstTime		  Type(Boolean)
+	/EndRegion
+
+	/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB        Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User         Type(Disney.Menu.Users)
+		DclSrParm Environment  Type(Disney.Menu.Environments)
+				
+		*this.PgmDB = PgmDB
+		*this.User  = User
+		*this.Environment = Environment
+	EndConstructor
+	/EndRegion	
+
+	/Region Functions
+	BegFunc	StageSetDates Type(DataTable) Access(*Public)
+		
+		DclFld dr Type( DataRow )
+			  
+		//Instance Class DSSPSSDcls Stage Set Dates File
+		If  DSSPSSDcls = *Nothing
+			DSSPSSDcls = *New DSSPSSDcls(PgmDB) 
+		Endif
+		
+		dtStageSetDates = DSSPSSDcls.GetStageDataSet()
+		
+		dr = dtStageSetDates.NewRow()
+		dr.Item[0] = 0
+		dr.Item[1] = ' All Dates'
+		dr.Item[2] = ' All Dates'
+		dr.Item[3] = 99999999
+		dtStageSetDates.Rows.Add(dr)
+														
+		LeaveSR dtStageSetDates
+	EndFunc
+					
+	BegFunc	POStatus Type(DataTable) Access(*Public)
+			  
+		If  DSSPPOScls = *Nothing
+			DSSPPOScls = *New DSSPPOScls(PgmDB, Environment) 
+		Endif
+		
+		dtStatus = DSSPPOScls.GetStatusDescriptionsDataTable()
+		
+		LeaveSR dtStatus
+	EndFunc	
+				
+	//Stores All
+	BegFunc	StoresAll Type(DataView) Access(*Public)
+		DclSrparm Domain Type(String)
+						
+		DclFld dtStoresAll         Type(DataTable)
+		DclFld dvStoresAll         Type(DataView)
+		DclFld drStoresAll         Type(DataRow)
+										
+		//Instance Class Stores Store File
+		If  Stores        = *Nothing
+			Stores		  = *New Stores(PgmDB, Environment)
+			dtStoresClone = Stores.GetStoreTbl()
+		Endif
+		
+		dvStoresClone = *New DataView(dtStoresClone)
+		dvStoresClone.RowFilter = "Status <> 'D'"
+									
+		dtStoresAll = dvStoresClone.ToTable()
+					
+		dsMarketDC = *New DataSet("dsMarketDC")
+		dsMarketDC.ReadXml(Path.Combine(Environment.PathToEnvironmentXML,"MarketDC.xml"))
+		dtMarketDC = dsMarketDC.Tables[0]
+		dvmarketDC = *New DataView(dtMarketDC)
+		dvMarketDC.RowFilter = "Domain = '" + Domain + "'"
+		
+		dsAdditional = *New DataSet("dsAdditional")
+		dsAdditional.ReadXml(Path.Combine(Environment.PathToEnvironmentXML,"AdditionalStores.xml"))
+		dtAdditional = dsAdditional.Tables[0]
+		dvAdditional = *New DataView(dtAdditional)
+		dvAdditional.RowFilter = "Domain = '" + Domain + "'"
+		
+		dvStoresAll = *New DataView(dtStoresAll)			
+									
+		ForEach DCRow Collection(dvMarketDC) Type(DataRowView)
+			DCCode	  = DCRow.Item["DCCode"].ToString()
+			DCCodeNum = Convert.ToInt16(DCRow.Item["DCCode"])
+			dvStoresAll.RowFilter = "Store = '" + DCCode + "'"
+			If dvStoresAll.Count = 0
+				Stores.GetStore(DCCodeNum)
+				
+				drStoresAll = dtStoresAll.NewRow()
+				drStoresAll.Item["Store"]            = DCCode
+				drStoresAll.Item["Description"]      = Stores.StoreDescription
+				drStoresAll.Item["StoreDescription"] = drStoresAll.Item["Store"] + " " + "-" + " " + drStoresAll.Item["Description"]
+				drStoresAll.Item["Status"]           = "S"
+				drStoresAll.Item["Market"]           = ""
+				dtStoresAll.Rows.Add(drStoresAll)
+			Endif
+		EndFor
+		
+		ForEach AdditionalRow Collection(dvAdditional) Type(DataRowView)
+			AdditionalCode	  = AdditionalRow.Item["StoreCode"].ToString()
+			AdditionalCodeNum = Convert.ToInt16(AdditionalRow.Item["StoreCode"])
+			dvStoresAll.RowFilter = "Store = '" + AdditionalCode + "'"
+			If dvStoresAll.Count = 0
+				Stores.GetStore(AdditionalCodeNum)
+				
+				drStoresAll = dtStoresAll.NewRow()
+				drStoresAll.Item["Store"]            = AdditionalCode
+				drStoresAll.Item["Description"]      = Stores.StoreDescription
+				drStoresAll.Item["StoreDescription"] = drStoresAll.Item["Store"] + " " + "-" + " " + drStoresAll.Item["Description"]
+				drStoresAll.Item["Status"]           = "S"
+				drStoresAll.Item["Market"]           = ""
+				dtStoresAll.Rows.Add(drStoresAll)
+			Endif
+		EndFor
+		
+		drStoresAll = dtStoresAll.NewRow()
+		drStoresAll.Item["Store"]            = 0
+		drStoresAll.Item["Description"]      = "All Stores"
+		drStoresAll.Item["StoreDescription"] = drStoresAll.Item["Description"]
+		drStoresAll.Item["Status"]           = "S"
+		drStoresAll.Item["Market"]           = ""
+		dtStoresAll.Rows.Add(drStoresAll)
+		
+		dvStoresAll = *New DataView(dtStoresAll)
+		dvStoresAll.Sort() = "Store"
+		
+		LeaveSR dvStoresAll
+	EndFunc
+		
+	//Stores Market
+	BegFunc	StoresMarket Type(DataView) Access(*Public)
+		DclSrparm Domain       Type(String)
+		DclSrParm MarketSelect Type(String)
+		
+		DclFld dtStoresMarket         Type(DataTable)
+		DclFld dvStoresMarket         Type(DataView)
+		DclFld drStoresMarket         Type(DataRow)
+		
+		//Instance Class Stores Store File
+		If  Stores = *Nothing
+			Stores = *New Stores(PgmDB, Environment)
+			dtStoresClone = Stores.GetStoreTbl() 
+		Endif
+		
+		dvStoresClone = *New DataView(dtStoresClone)
+		QryString = *New StringBuilder()
+		
+		QryString.Append("Status <> 'D'")
+		QryString.Append(" And ")
+		QryString.Append("Market = '")
+		QryString.Append(MarketSelect)
+		QryString.Append("'")
+		FilterString = QryString.ToString()
+		dvStoresClone.RowFilter = FilterString
+									
+		dtStoresMarket = dvStoresClone.ToTable()
+		
+		dsMarketDC = *New DataSet("dsMarketDC")
+		dsMarketDC.ReadXml(Path.Combine(Environment.PathToEnvironmentXML,"MarketDC.xml"))
+		dtMarketDC = dsMarketDC.Tables[0]
+		dvMarketDC = *New DataView(dtMarketDC)
+		
+		dsAdditional = *New DataSet("dsAdditional")
+		dsAdditional.ReadXml(Path.Combine(Environment.PathToEnvironmentXML,"AdditionalStores.xml"))
+		dtAdditional = dsAdditional.Tables[0]
+		dvAdditional = *New DataView(dtAdditional)
+		
+		QryString = *New StringBuilder()
+		
+		QryString.Append("Domain = '")
+		QryString.Append(Domain)
+		QryString.Append("'")
+		QryString.Append(" And ")
+		QryString.Append("IPMarket = '")
+		QryString.Append(MarketSelect)
+		QryString.Append("'")
+		FilterString = QryString.ToString()
+		dvMarketDC.RowFilter = FilterString
+		dvAdditional.RowFilter = FilterString
+					
+		dvStoresMarket = *New DataView(dtStoresMarket)	
+		
+		ForEach DCRow Collection(dvMarketDC) Type(DataRowView)
+			DCCode	  = DCRow.Item["DCCode"].ToString()
+			DCCodeNum = Convert.ToInt16(DCRow.Item["DCCode"])
+			dvStoresMarket.RowFilter = "Store = '" + DCCode + "'"
+			If dvStoresMarket.Count = 0
+				Stores.GetStore(DCCodeNum)
+				
+				drStoresMarket = dtStoresMarket.NewRow()
+				drStoresMarket.Item["Store"]            = DCCode
+				drStoresMarket.Item["Description"]      = Stores.StoreDescription
+				drStoresMarket.Item["StoreDescription"] = drStoresMarket.Item["Store"] + " " + "-" + " " + drStoresMarket.Item["Description"]
+				drStoresMarket.Item["Status"]           = "S"
+				drStoresMarket.Item["Market"]           = MarketSelect
+				dtStoresMarket.Rows.Add(drStoresMarket)
+			Endif
+		EndFor
+		
+		ForEach AdditionalRow Collection(dvAdditional) Type(DataRowView)
+			AdditionalCode	  = AdditionalRow.Item["StoreCode"].ToString()
+			AdditionalCodeNum = Convert.ToInt16(AdditionalRow.Item["StoreCode"])
+			dvStoresMarket.RowFilter = "Store = '" + AdditionalCode + "'"
+			If dvStoresMarket.Count = 0
+				Stores.GetStore(AdditionalCodeNum)
+				
+				drStoresMarket = dtStoresMarket.NewRow()
+				drStoresMarket.Item["Store"]            = AdditionalCode
+				drStoresMarket.Item["Description"]      = AdditionalRow.Item["StoreDesc"].ToString()
+				drStoresMarket.Item["StoreDescription"] = drStoresMarket.Item["Store"] + " " + "-" + " " + drStoresMarket.Item["Description"]
+				drStoresMarket.Item["Status"]           = "S"
+				drStoresMarket.Item["Market"]           = MarketSelect
+				dtStoresMarket.Rows.Add(drStoresMarket)
+			Endif
+		EndFor
+					
+		drStoresMarket = dtStoresMarket.NewRow()
+		drStoresMarket.Item["Store"]            = 0
+		drStoresMarket.Item["Description"]      = "All Stores"
+		drStoresMarket.Item["StoreDescription"] = drStoresMarket.Item["Description"]
+		drStoresMarket.Item["Status"]           = "S"
+		drStoresMarket.Item["Market"]           = MarketSelect
+		dtStoresMarket.Rows.Add(drStoresMarket)
+		
+		dvStoresMarket = *New DataView(dtStoresMarket)				
+		dvStoresMarket.Sort() = "Store"
+		
+		LeaveSR dvStoresMarket
+	EndFunc	
+	
+	/EndRegion
+
+	/Region Filters 
+	BegFunc Filtered_Orders Type(DataTable) Access(*Public)
+		DclSrparm dvMarkets		  Type(DataView)
+		DclSrparm dvDepartments	  Type(DataView)
+		DclSrParm VendorDV		  Type(DataView)
+		DclSrParm RDOChoice		  Type(String)
+		DclSrParm PORangeFrom	  Type(String)
+		DclSrParm PORangeTo	      Type(String)
+		DclSrParm Market_Select   Type(String)
+		DclSrParm Store_Select    Type(String)
+		DclSrParm Char_Select     Type(CheckedListBox)
+		DclSrParm Class_Select    Type(CheckedListBox)
+		DclSrParm StageSetDate    Type(String)
+		DclSrParm POStatus_Select Type(CheckedListBox)
+		DclSrParm ShipDateFrom    Type(String)
+		DclSrParm ShipDateTo      Type(String)
+		DclSrParm OrderDateFrom   Type(String)
+		DclSrParm OrderDateTo     Type(String)
+		DclSrParm chkShowMyPO     Type(CheckBox)
+		
+		
+		DclFld ClassCount Type(Int32)
+
+		
+		*This.dvMarkets       = dvMarkets
+		*This.dvDepartments   = dvDepartments				
+		*This.VendorDV		  = VendorDV
+		*This.RDOChoice		  = RDOChoice
+		*This.PORangeFrom     = PORangeFrom
+		*This.PORangeTo		  = PORangeTo
+		*This.Market_Select	  = Market_Select
+		*This.Store_Select	  = Store_Select
+		*This.Char_Select     = Char_Select 
+		*This.Class_Select    = Class_Select 	 
+		*This.StageSetDate    = StageSetDate
+		*This.POStatus_Select =	POStatus_Select   
+		*This.ShipDateFrom    =	ShipDateFrom   
+		*This.ShipDateTo      = ShipDateTo	   
+		*This.OrderDateFrom   = OrderDateFrom   
+		*This.OrderDateTo     = OrderDateTo   	   
+		*This.chkShowMyPO     = chkShowMyPO 
+													
+		Exsr Build_Header_QryString
+		
+		ClassCount = *Zero
+		ForEach ClassItem Collection(Class_Select.CheckedItems)
+                ClassCount +=1
+        EndFor
+		
+		If ClassCount   = *Zero
+		   Class_Select	= *Nothing
+		Endif
+		
+		CharCount = *Zero		
+		ForEach CharItem Collection(Char_Select.CheckedItems)
+                CharCount +=1
+        EndFor
+		
+		If CharCount   = *Zero
+		   Char_Select	= *Nothing
+		Endif		
+				
+		//Instance Class DSSPPOHcls 
+		If  DSSPPOHcls = *Nothing
+			DSSPPOHcls = *New DSSPPOHcls(PgmDB,User) 
+		Endif
+		
+		If FilterString <> String.Empty		
+			dtOrderH = DSSPPOHcls.Filtered_OrderHeader(FilterString, Class_Select, Char_Select)
+			*This.dtOrderH = dtOrderH
+		Endif
+		
+		//Convert Dates for TDSNA
+		Exsr ConvertDates
+								
+		//This Subroutine determines whether the order is locked and updates the DataTable accordingly.
+		//This Subroutine also adds in the Vendor name.
+		Exsr PadlockSR
+								
+		LeaveSR dtOrderH
+	EndFunc
+		
+	Begsr Build_Header_QryString
+		QryString = *New StringBuilder()
+		
+		If Market_Select = "ALL MARKETS"
+		   Market_Select = ""
+		Endif
+		
+		If Store_Select = "0 - ALL STORES" 
+		   Store_Select = ""
+		Endif
+				
+		//Spice or IP Order Number
+		xRDOChoice   = RDOChoice
+																	
+		//PO Range Select	
+		If PORangeFrom   <> *Nothing and PORangeFrom <> ""
+		   xPORangeFrom  =  PORangeFrom 
+		   xPORangeTo	 =  PORangeTo
+			
+		   If xRDOChoice =  'Spice'
+			  QryString.Append("(POHSPO >= '")
+			  QryString.Append(xPORangeFrom) 
+			  QryString.Append("'  *And ")
+			  QryString.Append("POHSPO <= '")
+			  QryString.Append(xPORangeTO)
+			  QryString.Append("'")
+		   Else
+			  QryString.Append("(POHIPO >= '")
+			  QryString.Append(xPORangeFrom) 
+			  QryString.Append("'  *And ")
+			  QryString.Append("POHIPO <= '")
+			  QryString.Append(xPORangeTO)
+			  QryString.Append("'")
+		   Endif		
+		Endif
+		
+		//Department Select
+		FirstTime = *True
+		ForEach	Department Collection(dvDepartments) Type(DataRowView)
+			If FirstTime = *True
+				If QryString.Length <> *Zero
+					QryString.Append(") *And ")
+				Endif
+				
+				QryString.Append("(POHDPT = '")
+				xDepartment = Department.Item("Department").tostring()
+				QryString.Append(xDepartment)
+				QryString.Append("'")
+				FirstTime = *False
+			Else
+				QryString.Append(" *Or POHDPT = '")
+				xDepartment = Department.Item("Department").tostring()
+				QryString.Append(xDepartment)
+				QryString.Append("'")
+			Endif
+		EndFor
+			
+		//Vendor Select
+		FirstTime = *True
+		If VendorDV <> *Nothing
+			ForEach dvRow Collection(VendorDV) Type(DataRowView)
+				If FirstTime = *True
+					If QryString.Length <> *Zero
+						QryString.Append(") *And ")
+					EndIf
+
+				    QryString.Append("(POHVEN = ")
+					xVendor = dvRow.Item["VendorNumber"].ToString()
+					QryString.Append(xVendor)
+					FirstTime = *False
+				Else	
+					QryString.Append(" *Or POHVEN = ")
+					xVendor = dvRow.Item["VendorNumber"].ToString()
+					QryString.Append(xVendor)
+				Endif	
+			Endfor
+		Endif
+		
+		//Market Selection
+		If Market_Select   <> *Nothing and Market_Select <> ""
+			If QryString.Length <> *Zero
+				QryString.Append(") *And ")
+			Endif
+			
+			QryString.Append(" (POHMKT = '")
+			QryString.Append(Market_Select)
+			QryString.Append("'")
+		Endif
+						
+		//Select All Authorized Markets
+		If Market_Select = "ALL MARKETS" or Market_Select = *Nothing or Market_Select = ""
+			FirstTime = *True
+			DclFld AuthorisedMarkets Type(DataRowView)
+			ForEach	AuthorisedMarkets Collection(dvMarkets)
+				If FirstTime = *True
+					If QryString.Length <> *Zero
+						QryString.Append(") *And ")
+					Endif
+					
+					QryString.Append("(POHMKT = '")
+					//xDepartment = Department.Item("Department").tostring()
+					QryString.Append(AuthorisedMarkets.Item("IPmarket").tostring())
+					QryString.Append("'")
+					FirstTime = *False
+				Else
+					QryString.Append(" *Or POHMKT = '")
+					//xDepartment = Department.Item("Department").tostring()
+					QryString.Append(AuthorisedMarkets.Item("IPmarket").tostring())
+					QryString.Append("'")
+				Endif
+			EndFor
+		Endif
+					
+		//Store Selection
+		If Store_Select   <> "ALL STORES" and Store_Select <> ""
+			xStore_Select =  %Subst(Store_Select, 1, 3)
+			If QryString.Length <> *Zero
+				QryString.Append(") *And ")
+			Endif
+			
+			QryString.Append(" (POHSTR = ")
+			QryString.Append(xStore_Select)
+		Endif
+					
+		//Stage Set Date
+		If StageSetDate    <> *Nothing and StageSetDate <> ' All Dates'
+			WrkDate1       =  Datetime.ParseExact(StageSetDate,"MMM - dd - yyyy", *Nothing)
+			WrkDate2	   =  WrkDate1	
+			xStageSetDate  =  WrkDate2
+			
+			If QryString.Length <> *Zero
+				QryString.Append(") *And ")
+			EndIf
+
+			QryString.Append("(POHSSD = ")
+			QryString.Append(xStageSetdate)
+		Endif
+		
+		//PO Status
+		FirstTime = *True
+		If POStatus_Select <> *Nothing
+		   DclFld POStatusItem Type(DataRowView)
+		   ForEach	POStatusItem Collection(POStatus_Select.CheckedItems)
+				If FirstTime = *True
+					If QryString.Length <> *Zero
+						QryString.Append(") *And ")
+					Endif
+					QryString.Append("(POHSTS = '")
+					xPOStatus_Select = %SubST(POStatusItem.Item("clmStatusDesc").tostring(), 1, 2)
+					QryString.Append(xPOStatus_Select)
+					QryString.Append("'")
+					FirstTime = *False
+				Else
+					QryString.Append(" *Or POHSTS = '")
+					xPOStatus_Select = %SubST(POStatusItem.Item("clmStatusDesc").tostring(), 1, 2)
+					QryString.Append(xPOStatus_Select)
+					QryString.Append("'")
+				Endif
+			EndFor
+		Endif
+			
+		//Ship Date Range
+		If ShipDateFrom    <> *Nothing
+			WrkDate1       =  ShipDateFrom
+			WrkDate2	   =  WrkDate1	
+						
+			If QryString.Length <> *zero
+				QryString.Append(") *And ")
+			Endif
+			
+			QryString.Append("(POHSDT >= ")
+			QryString.Append(WrkDate2)
+					
+			WrkDate1       =  ShipDateTo
+			WrkDate2	   =  WrkDate1	
+			QryString.Append(" *And POHSDT <= ")
+			QryString.Append(WrkDate2)
+		Endif 
+			
+		//Order Date Range
+		If OrderDateFrom    <> *Nothing
+			WrkDate1        =  OrderDateFrom
+			WrkDate2	    =  WrkDate1	
+						
+			If QryString.Length <> *Zero
+				QryString.Append(") *And ")
+			Endif
+			
+			QryString.Append("(POHODT >= ")
+			QryString.Append(WrkDate2)
+						
+			WrkDate1        =  OrderDateTo
+			WrkDate2	    =  WrkDate1	
+								
+			QryString.Append(" *And POHODT <= ")
+			QryString.Append(WrkDate2)
+		Endif 
+			
+		//User
+		If chkShowMyPO.Checked = *True
+			If QryString.Length <>  *Zero
+				QryString.Append(") *And ")
+			Endif
+				
+			QryString.Append(" (POHOWN = '")
+			QryString.Append(User.UserID.ToUpper())
+			QryString.Append("'")
+		Endif
+		
+		If QryString.Length <>  *Zero
+			QryString.Append(")")	
+		Endif
+				
+		FilterString = QryString.ToString()
+		If VendorDV <> *Nothing and VendorDV.Count = 0
+			FilterString = String.Empty
+		Endif
+		QryString  = *Nothing
+	Endsr
+		
+	Begsr PadlockSR Access(*Public)
+	
+	    DclFld Status Type(String)
+						  		  
+		//Instance Vendor Class IPMRVENcls
+		If IPMRVENcls = *Nothing
+			IPMRVENcls = *New IPMRVENcls(PgmDB, Environment) 
+	    Endif
+	      
+	    dvOrderH = *New DataView(dtOrderH)
+	    
+	    If DSSPAPH = *Nothing
+			DSSPAPH = *New DSSPAPH(PgmDB)
+		EndIf
+		
+	    ForEach drvOrderH Collection(dvOrderH) Type(DataRowView)
+			
+			Status = drvOrderH["clmStatus"].ToString()
+	        If Status = "OS" +
+			 Or Status = "RS" +
+			 Or Status = "CS" +
+			 Or Status = "CE" +
+			 Or Status = "OC" +
+			 Or Status = "RC" +
+			 Or Status = "IC"
+				drvOrderH.Item["clmPadlock"] = "0"
+	        Else
+				If DSSPAPH.ChkPOappointment(drvOrderH["clmIPPO"].ToString()) = *True
+					drvOrderH.Item["clmPadlock"] = "0"
+				EndIf
+			EndIf
+	        
+			If IPMRVENcls.GetVendor(Convert.ToInt32(drvOrderH["clmVendor"].ToString())) = *True	
+				drvOrderH.Item["clmVendorName"] = IPMRVENcls.VendorName
+			Else
+				drvOrderH.Item["clmVendorName"] = String.Empty
+			Endif
+		EndFor
+		
+		//Close DSSPAPH 
+		DSSPAPH.ClosePOappointmentFile()
+		
+	Endsr
+	
+	BegSr ConvertDates
+		
+		DclFld WrkDate Type(*Date) 
+		
+		dvOrderH = *New DataView(dtOrderH)
+	    ForEach Order Collection(dvOrderH) Type(DataRowView)
+			If Environment.Domain <> 'EMEA'
+				WrkDate  =  Datetime.ParseExact(Order.Item["clmShipDate"].ToString(),"dd - MMM - yyyy", *Nothing)
+				Order.Item["clmShipDate"]  = WrkDate.ToString('MMM - dd - yyyy').ToUpper()
+				WrkDate  =  Datetime.ParseExact(Order.Item["clmOrderDate"].ToString(),"dd - MMM - yyyy", *Nothing)
+				Order.Item["clmOrderDate"]  = WrkDate.ToString('MMM - dd - yyyy').ToUpper()
+			Endif
+		EndFor
+	EndSr
+	
+	BegFunc GetPOStatus Type(String) Access(*Public)
+		DclSrparm SpicePO Type(String)
+		
+		DclFld StatusOfPO Type(String)
+		If DSSPPOHcls = *Nothing
+			DSSPPOHcls = *New DSSPPOHcls(PgmDB,User)
+		EndIf
+	    StatusOfPO = DSSPPOHcls.GetPOStatus(SPicePO)
+		
+		LeaveSr StatusOfPO
+	EndFunc
+		
+	BegFunc CheckStatus Type(Boolean) Access(*Public)
+		DclSrparm SpicePO Type(String)
+	    DclSrParm IPPO    Type(String)	
+	    
+	    DclFld POstatus       Type(String)
+	    DclFld CheckStatus    Type(Boolean)
+	    
+	    // Big change here to improve peformance - Don't go to the file unless we
+	    // have to (Check status first) !!!!!  Also different DA and return value
+	    If DSSPPOHcls = *Nothing
+			DSSPPOHcls = *New DSSPPOHcls(PgmDB,User) 
+	    Endif
+	    
+	    POstatus = DSSPPOHcls.GetPOStatus(SpicePO)
+		If POstatus = String.Empty
+			LeaveSR *False
+		Else
+	        If POstatus = "OS" +
+	        Or POstatus = "RS" +
+	        Or POstatus = "CS" +
+	        Or POstatus = "CE" +
+	        Or POstatus = "OC" +
+	        Or POstatus = "RC" +
+	        Or POstatus = "IC"
+				LeaveSR *True
+			Else
+				If DSSPAPH = *Nothing
+					DSSPAPH = *New DSSPAPH(PgmDB)
+				EndIf
+				
+				CheckStatus =  DSSPAPH.ChkPOappointment(IPPO)
+				DSSPAPH.ClosePOappointmentFile()
+								
+				LeaveSR CheckStatus
+			EndIf
+		EndIf
+		
+
+	EndFunc
+/EndRegion
+EndClass

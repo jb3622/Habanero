@@ -1,0 +1,1624 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms  
+Using Disney.DA.IP400
+Using Disney.DA.EAS
+using IBM.Data.DB2.iSeries
+
+BegClass EASApproveReject Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Designer declares
+	DclFld label27 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label17 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label16 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label15 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label14 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label12 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label11 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label7 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label5 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label38 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label39 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label41 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblSubClassDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtVendorStyle System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld label10 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label9 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtShortDesc System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtLongDesc System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSubClass System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label6 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld imageList System.Windows.Forms.ImageList Access(*Private) WithEvents(*Yes)
+	DclFld lblCommodityDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblCharName System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblSeason System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblOrigin System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblCompoCodeDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtStyle System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSeason System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtCommodity System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtCompoCode System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtOrigin System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtColour System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtVendor System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtClass System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtPromo System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblClassDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblColourDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblVendorName System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtChar System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblMarkets System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblPendChar System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld lblPendPromo System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblPromoDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblPendSubClass System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld cboLicence System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld cboTicketType System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld cboAgeGroup System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label13 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label19 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld pnlGender System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld pnlImportDomestic System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld pnlOnline System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld pnlLocation System.Windows.Forms.Panel Access(*Private) WithEvents(*Yes)
+	DclFld rbGenderFemale System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbGenderMale System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbGenderUnisex System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbDomestic System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbImport System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbOnlineYes System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbOnlineNo System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbLocationYes System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbLocationNo System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld btnApprove System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnReject System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld groupBox1 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSize System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld lblSize System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblSizeDescription System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblDistroQty System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblCasePackQty System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtDistroQty System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtCasePackQty System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld btnCancel System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnHistory System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld btnEAS System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld grpBoxC System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld grpBoxD System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld label18 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label20 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label21 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label22 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label25 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtWidth System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtLength System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtHeight System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtWeight System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtCasePackType System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld label23 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtLocalDescription System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	/EndRegion
+
+	/Region Declares 
+	DclFld PgmDB         Type(ASNA.VisualRPG.Runtime.Database)     Access(*Private)
+	DclFld DB2Connection Type(IBM.Data.DB2.iSeries.iDB2Connection) Access(*Private)
+	DclFld User          Type(Disney.Menu.Users)                   Access(*Private)
+	DclFld Environment   Type(Disney.Menu.Environments)            Access(*Private)
+	DclFld MDIparent     Type(System.Windows.Forms.Form)           Access(*Private)
+	DclFld ItemStyle     Type(Disney.DA.IP400.ItemStyle)           Access(*Private)
+	DclFld MarketList    Type(Disney.DA.IP400.SpiceItem)	       Access(*Private)
+	DclFld AllMarkets    Type(Disney.DA.IP400.Markets)             Access(*Private)
+	DclFld ItemsBO       Type(Disney.Spice.ItemsBO.Items)          Access(*Private)
+	DclFld EAS           Type(Disney.DA.EAS.DSSPARE)               Access(*Private)
+	DclFld CasePack      Type(Disney.Spice.ItemsBO.CasePack)       Access(*Private)
+	DclFld Domain	     Type(String)						       Access(*Private)
+	DclFld Class	     Type(Int16)                               Access(*Private)
+	DclFld Vendor        Type(Int32)						       Access(*Private)
+	DclFld Style         Type(Int16)						       Access(*Private)
+	DclFld Colour        Type(Int16)						       Access(*Private)
+	DclFld Size		     Type(Int16)						       Access(*Private)
+	DclFld RequestID     Type(Int64)						       Access(*Private)
+	DclFld ChgDtlFlag    Type(String)						       Access(*Private)
+	DclFld MarketTable   Type(DataTable)					       Access(*Private)
+	DclFld MarketTblDv   Type(DataView)						       Access(*Private)
+	DclFld Markets	     Type(DataTable)                           Access(*Private)
+	DclFld MarketsDv     Type(DataView)	                           Access(*Private)
+	DclFld MarketString  Type(StringBuilder)				       Access(*Private)
+	/EndRegion		
+
+	/Region Construction and destruction
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB         Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm DB2Connection Type(IBM.Data.DB2.iSeries.iDB2Connection)
+		DclSrParm User          Type(Disney.Menu.Users)
+		DclSrParm Environment   Type(Disney.Menu.Environments)
+		DclSrParm RequestID	    Type(Int64)	
+				
+		InitializeComponent()
+		
+		*This.PgmDB          = PgmDB
+		*This.DB2Connection  = DB2Connection
+		*This.User           = User
+		*This.Environment    = Environment
+		*This.Domain         = Environment.Domain
+		*This.RequestID      = RequestID
+		*This.MDIParent      = MDIParent
+	EndConstructor
+	
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(EASApproveReject))
+		*this.lblMarkets = *new System.Windows.Forms.Label()
+		*this.label27 = *new System.Windows.Forms.Label()
+		*this.txtStyle = *new System.Windows.Forms.TextBox()
+		*this.label17 = *new System.Windows.Forms.Label()
+		*this.lblColourDesc = *new System.Windows.Forms.Label()
+		*this.lblVendorName = *new System.Windows.Forms.Label()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.txtSeason = *new System.Windows.Forms.TextBox()
+		*this.txtCommodity = *new System.Windows.Forms.TextBox()
+		*this.lblClassDesc = *new System.Windows.Forms.Label()
+		*this.cboLicence = *new System.Windows.Forms.ComboBox()
+		*this.txtCompoCode = *new System.Windows.Forms.TextBox()
+		*this.txtOrigin = *new System.Windows.Forms.TextBox()
+		*this.txtChar = *new System.Windows.Forms.TextBox()
+		*this.txtColour = *new System.Windows.Forms.TextBox()
+		*this.txtVendor = *new System.Windows.Forms.TextBox()
+		*this.txtClass = *new System.Windows.Forms.TextBox()
+		*this.label16 = *new System.Windows.Forms.Label()
+		*this.label15 = *new System.Windows.Forms.Label()
+		*this.label14 = *new System.Windows.Forms.Label()
+		*this.label12 = *new System.Windows.Forms.Label()
+		*this.label11 = *new System.Windows.Forms.Label()
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.label5 = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.imageList = *new System.Windows.Forms.ImageList(*this.components)
+		*this.lblPendChar = *new System.Windows.Forms.Label()
+		*this.lblPendPromo = *new System.Windows.Forms.Label()
+		*this.cboTicketType = *new System.Windows.Forms.ComboBox()
+		*this.label38 = *new System.Windows.Forms.Label()
+		*this.cboAgeGroup = *new System.Windows.Forms.ComboBox()
+		*this.label39 = *new System.Windows.Forms.Label()
+		*this.lblPromoDesc = *new System.Windows.Forms.Label()
+		*this.txtPromo = *new System.Windows.Forms.TextBox()
+		*this.label41 = *new System.Windows.Forms.Label()
+		*this.lblSubClassDesc = *new System.Windows.Forms.Label()
+		*this.txtVendorStyle = *new System.Windows.Forms.TextBox()
+		*this.label10 = *new System.Windows.Forms.Label()
+		*this.label9 = *new System.Windows.Forms.Label()
+		*this.txtShortDesc = *new System.Windows.Forms.TextBox()
+		*this.txtLongDesc = *new System.Windows.Forms.TextBox()
+		*this.txtSubClass = *new System.Windows.Forms.TextBox()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.label6 = *new System.Windows.Forms.Label()
+		*this.lblCommodityDesc = *new System.Windows.Forms.Label()
+		*this.lblCharName = *new System.Windows.Forms.Label()
+		*this.lblSeason = *new System.Windows.Forms.Label()
+		*this.lblOrigin = *new System.Windows.Forms.Label()
+		*this.lblCompoCodeDesc = *new System.Windows.Forms.Label()
+		*this.lblPendSubClass = *new System.Windows.Forms.Label()
+		*this.pnlGender = *new System.Windows.Forms.Panel()
+		*this.rbGenderFemale = *new System.Windows.Forms.RadioButton()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.rbGenderMale = *new System.Windows.Forms.RadioButton()
+		*this.rbGenderUnisex = *new System.Windows.Forms.RadioButton()
+		*this.pnlImportDomestic = *new System.Windows.Forms.Panel()
+		*this.rbDomestic = *new System.Windows.Forms.RadioButton()
+		*this.rbImport = *new System.Windows.Forms.RadioButton()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.pnlOnline = *new System.Windows.Forms.Panel()
+		*this.rbOnlineYes = *new System.Windows.Forms.RadioButton()
+		*this.label13 = *new System.Windows.Forms.Label()
+		*this.rbOnlineNo = *new System.Windows.Forms.RadioButton()
+		*this.pnlLocation = *new System.Windows.Forms.Panel()
+		*this.rbLocationYes = *new System.Windows.Forms.RadioButton()
+		*this.label19 = *new System.Windows.Forms.Label()
+		*this.rbLocationNo = *new System.Windows.Forms.RadioButton()
+		*this.btnApprove = *new System.Windows.Forms.Button()
+		*this.btnReject = *new System.Windows.Forms.Button()
+		*this.groupBox1 = *new System.Windows.Forms.GroupBox()
+		*this.grpBoxC = *new System.Windows.Forms.GroupBox()
+		*this.txtDistroQty = *new System.Windows.Forms.TextBox()
+		*this.lblDistroQty = *new System.Windows.Forms.Label()
+		*this.txtCasePackQty = *new System.Windows.Forms.TextBox()
+		*this.lblCasePackQty = *new System.Windows.Forms.Label()
+		*this.grpBoxD = *new System.Windows.Forms.GroupBox()
+		*this.txtWidth = *new System.Windows.Forms.TextBox()
+		*this.label18 = *new System.Windows.Forms.Label()
+		*this.txtLength = *new System.Windows.Forms.TextBox()
+		*this.label20 = *new System.Windows.Forms.Label()
+		*this.txtHeight = *new System.Windows.Forms.TextBox()
+		*this.label21 = *new System.Windows.Forms.Label()
+		*this.txtWeight = *new System.Windows.Forms.TextBox()
+		*this.label22 = *new System.Windows.Forms.Label()
+		*this.txtCasePackType = *new System.Windows.Forms.TextBox()
+		*this.label25 = *new System.Windows.Forms.Label()
+		*this.lblSizeDescription = *new System.Windows.Forms.Label()
+		*this.txtSize = *new System.Windows.Forms.TextBox()
+		*this.lblSize = *new System.Windows.Forms.Label()
+		*this.btnCancel = *new System.Windows.Forms.Button()
+		*this.btnHistory = *new System.Windows.Forms.Button()
+		*this.btnEAS = *new System.Windows.Forms.Button()
+		*this.txtLocalDescription = *new System.Windows.Forms.TextBox()
+		*this.label23 = *new System.Windows.Forms.Label()
+		*this.pnlGender.SuspendLayout()
+		*this.pnlImportDomestic.SuspendLayout()
+		*this.pnlOnline.SuspendLayout()
+		*this.pnlLocation.SuspendLayout()
+		*this.groupBox1.SuspendLayout()
+		*this.grpBoxC.SuspendLayout()
+		*this.grpBoxD.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//lblMarkets
+		//
+		*this.lblMarkets.AutoSize = *True
+		*this.lblMarkets.Location = *new System.Drawing.Point(144, 12)
+		*this.lblMarkets.Name = "lblMarkets"
+		*this.lblMarkets.Size = *new System.Drawing.Size(168, 13)
+		*this.lblMarkets.TabIndex = 623
+		*this.lblMarkets.Text = "UK, AU, FR, IT, SP ......................"
+		//
+		//label27
+		//
+		*this.label27.AutoSize = *True
+		*this.label27.Location = *new System.Drawing.Point(7, 12)
+		*this.label27.Name = "label27"
+		*this.label27.Size = *new System.Drawing.Size(45, 13)
+		*this.label27.TabIndex = 622
+		*this.label27.Text = "Markets"
+		//
+		//txtStyle
+		//
+		*this.txtStyle.Location = *new System.Drawing.Point(147, 99)
+		*this.txtStyle.Name = "txtStyle"
+		*this.txtStyle.ReadOnly = *True
+		*this.txtStyle.Size = *new System.Drawing.Size(44, 20)
+		*this.txtStyle.TabIndex = 5
+		*this.txtStyle.TabStop = *False
+		//
+		//label17
+		//
+		*this.label17.AutoSize = *True
+		*this.label17.Location = *new System.Drawing.Point(7, 103)
+		*this.label17.Name = "label17"
+		*this.label17.Size = *new System.Drawing.Size(30, 13)
+		*this.label17.TabIndex = 617
+		*this.label17.Text = "Style"
+		//
+		//lblColourDesc
+		//
+		*this.lblColourDesc.AutoSize = *True
+		*this.lblColourDesc.Location = *new System.Drawing.Point(197, 134)
+		*this.lblColourDesc.Name = "lblColourDesc"
+		*this.lblColourDesc.Size = *new System.Drawing.Size(182, 13)
+		*this.lblColourDesc.TabIndex = 7
+		*this.lblColourDesc.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//lblVendorName
+		//
+		*this.lblVendorName.AutoSize = *True
+		*this.lblVendorName.Location = *new System.Drawing.Point(197, 72)
+		*this.lblVendorName.Name = "lblVendorName"
+		*this.lblVendorName.Size = *new System.Drawing.Size(182, 13)
+		*this.lblVendorName.TabIndex = 4
+		*this.lblVendorName.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//btnHelp
+		//
+		*this.btnHelp.BackColor = System.Drawing.SystemColors.Control
+		*this.btnHelp.Location = *new System.Drawing.Point(7, 500)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 607
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *False
+		//
+		//txtSeason
+		//
+		*this.txtSeason.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtSeason.Location = *new System.Drawing.Point(147, 405)
+		*this.txtSeason.Name = "txtSeason"
+		*this.txtSeason.ReadOnly = *True
+		*this.txtSeason.Size = *new System.Drawing.Size(44, 20)
+		*this.txtSeason.TabIndex = 17
+		*this.txtSeason.TabStop = *False
+		//
+		//txtCommodity
+		//
+		*this.txtCommodity.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtCommodity.Location = *new System.Drawing.Point(547, 68)
+		*this.txtCommodity.Name = "txtCommodity"
+		*this.txtCommodity.ReadOnly = *True
+		*this.txtCommodity.Size = *new System.Drawing.Size(44, 20)
+		*this.txtCommodity.TabIndex = 22
+		*this.txtCommodity.TabStop = *False
+		//
+		//lblClassDesc
+		//
+		*this.lblClassDesc.AutoSize = *True
+		*this.lblClassDesc.Location = *new System.Drawing.Point(197, 41)
+		*this.lblClassDesc.Name = "lblClassDesc"
+		*this.lblClassDesc.Size = *new System.Drawing.Size(182, 13)
+		*this.lblClassDesc.TabIndex = 2
+		*this.lblClassDesc.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//cboLicence
+		//
+		*this.cboLicence.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboLicence.Enabled = *False
+		*this.cboLicence.FormattingEnabled = *True
+		*this.cboLicence.Items.AddRange(*new System.Object[] {" L  - LICENSED PRODUCT        ", " N -  NON-MERCHANDISE         ", " D -  DISNEY INTERNAL         ", " T - TDSE DEVELOPED          "})
+		*this.cboLicence.Location = *new System.Drawing.Point(147, 312)
+		*this.cboLicence.Name = "cboLicence"
+		*this.cboLicence.Size = *new System.Drawing.Size(246, 21)
+		*this.cboLicence.TabIndex = 14
+		*this.cboLicence.TabStop = *False
+		//
+		//txtCompoCode
+		//
+		*this.txtCompoCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtCompoCode.Location = *new System.Drawing.Point(547, 37)
+		*this.txtCompoCode.Name = "txtCompoCode"
+		*this.txtCompoCode.ReadOnly = *True
+		*this.txtCompoCode.Size = *new System.Drawing.Size(44, 20)
+		*this.txtCompoCode.TabIndex = 20
+		*this.txtCompoCode.TabStop = *False
+		//
+		//txtOrigin
+		//
+		*this.txtOrigin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtOrigin.Location = *new System.Drawing.Point(147, 343)
+		*this.txtOrigin.Name = "txtOrigin"
+		*this.txtOrigin.ReadOnly = *True
+		*this.txtOrigin.Size = *new System.Drawing.Size(44, 20)
+		*this.txtOrigin.TabIndex = 15
+		*this.txtOrigin.TabStop = *False
+		//
+		//txtChar
+		//
+		*this.txtChar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtChar.Location = *new System.Drawing.Point(147, 374)
+		*this.txtChar.Name = "txtChar"
+		*this.txtChar.ReadOnly = *True
+		*this.txtChar.Size = *new System.Drawing.Size(44, 20)
+		*this.txtChar.TabIndex = 16
+		*this.txtChar.TabStop = *False
+		//
+		//txtColour
+		//
+		*this.txtColour.Location = *new System.Drawing.Point(147, 130)
+		*this.txtColour.Name = "txtColour"
+		*this.txtColour.ReadOnly = *True
+		*this.txtColour.Size = *new System.Drawing.Size(44, 20)
+		*this.txtColour.TabIndex = 6
+		*this.txtColour.TabStop = *False
+		//
+		//txtVendor
+		//
+		*this.txtVendor.Location = *new System.Drawing.Point(147, 68)
+		*this.txtVendor.Name = "txtVendor"
+		*this.txtVendor.ReadOnly = *True
+		*this.txtVendor.Size = *new System.Drawing.Size(44, 20)
+		*this.txtVendor.TabIndex = 3
+		*this.txtVendor.TabStop = *False
+		//
+		//txtClass
+		//
+		*this.txtClass.Location = *new System.Drawing.Point(147, 37)
+		*this.txtClass.Name = "txtClass"
+		*this.txtClass.ReadOnly = *True
+		*this.txtClass.Size = *new System.Drawing.Size(44, 20)
+		*this.txtClass.TabIndex = 1
+		*this.txtClass.TabStop = *False
+		//
+		//label16
+		//
+		*this.label16.AutoSize = *True
+		*this.label16.Location = *new System.Drawing.Point(440, 72)
+		*this.label16.Name = "label16"
+		*this.label16.Size = *new System.Drawing.Size(86, 13)
+		*this.label16.TabIndex = 579
+		*this.label16.Text = "Commodity Code"
+		//
+		//label15
+		//
+		*this.label15.AutoSize = *True
+		*this.label15.Location = *new System.Drawing.Point(440, 41)
+		*this.label15.Name = "label15"
+		*this.label15.Size = *new System.Drawing.Size(92, 13)
+		*this.label15.TabIndex = 578
+		*this.label15.Text = "Composition Code"
+		//
+		//label14
+		//
+		*this.label14.AutoSize = *True
+		*this.label14.Location = *new System.Drawing.Point(7, 347)
+		*this.label14.Name = "label14"
+		*this.label14.Size = *new System.Drawing.Size(85, 13)
+		*this.label14.TabIndex = 577
+		*this.label14.Text = "Country of Origin"
+		//
+		//label12
+		//
+		*this.label12.AutoSize = *True
+		*this.label12.Location = *new System.Drawing.Point(7, 378)
+		*this.label12.Name = "label12"
+		*this.label12.Size = *new System.Drawing.Size(81, 13)
+		*this.label12.TabIndex = 576
+		*this.label12.Text = "Character Code"
+		//
+		//label11
+		//
+		*this.label11.AutoSize = *True
+		*this.label11.Location = *new System.Drawing.Point(7, 409)
+		*this.label11.Name = "label11"
+		*this.label11.Size = *new System.Drawing.Size(71, 13)
+		*this.label11.TabIndex = 575
+		*this.label11.Text = "Season Code"
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Location = *new System.Drawing.Point(7, 316)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(74, 13)
+		*this.label7.TabIndex = 573
+		*this.label7.Text = "Developed By"
+		//
+		//label5
+		//
+		*this.label5.AutoSize = *True
+		*this.label5.Location = *new System.Drawing.Point(7, 134)
+		*this.label5.Name = "label5"
+		*this.label5.Size = *new System.Drawing.Size(37, 13)
+		*this.label5.TabIndex = 571
+		*this.label5.Text = "Colour"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Location = *new System.Drawing.Point(7, 72)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(41, 13)
+		*this.label4.TabIndex = 570
+		*this.label4.Text = "Vendor"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(7, 41)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(32, 13)
+		*this.label3.TabIndex = 569
+		*this.label3.Text = "Class"
+		//
+		//imageList
+		//
+		*this.imageList.ImageStream = (resources.GetObject("imageList.ImageStream") *As System.Windows.Forms.ImageListStreamer)
+		*this.imageList.TransparentColor = System.Drawing.Color.Transparent
+		*this.imageList.Images.SetKeyName(0, "Magnifying-Glass-256x256.png")
+		*this.imageList.Images.SetKeyName(1, "Arrow.png")
+		//
+		//lblPendChar
+		//
+		*this.lblPendChar.AutoSize = *True
+		*this.lblPendChar.Location = *new System.Drawing.Point(108, 378)
+		*this.lblPendChar.Name = "lblPendChar"
+		*this.lblPendChar.Size = *new System.Drawing.Size(34, 13)
+		*this.lblPendChar.TabIndex = 632
+		*this.lblPendChar.Text = "(CCC)"
+		//
+		//lblPendPromo
+		//
+		*this.lblPendPromo.AutoSize = *True
+		*this.lblPendPromo.Location = *new System.Drawing.Point(510, 103)
+		*this.lblPendPromo.Name = "lblPendPromo"
+		*this.lblPendPromo.Size = *new System.Drawing.Size(34, 13)
+		*this.lblPendPromo.TabIndex = 647
+		*this.lblPendPromo.Text = "(PPP)"
+		//
+		//cboTicketType
+		//
+		*this.cboTicketType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboTicketType.Enabled = *False
+		*this.cboTicketType.FormattingEnabled = *True
+		*this.cboTicketType.Items.AddRange(*new System.Object[] {"B - PRICE STKR W/UPC 1208D  ", "C - CLEAR SIZESTKR          ", "H - P TKT US PT04           ", "K - KEYCHAIN STKR 2310D     ", "L - LG PRICE STKR 1221D     ", "O - ORNAMENT STKR :1224D    ", "P - PLUSH PRICE TAG: PT05D  ", "S - STD PRICE TKT           ", "X - SM PRICE STKR 1220D     ", "T - STD PRICE TKT           ", "E - P TKT CA PT01           ", "G - HANGTAG PRICE TCKT PT02D"})
+		*this.cboTicketType.Location = *new System.Drawing.Point(147, 436)
+		*this.cboTicketType.Name = "cboTicketType"
+		*this.cboTicketType.Size = *new System.Drawing.Size(240, 21)
+		*this.cboTicketType.TabIndex = 18
+		*this.cboTicketType.TabStop = *False
+		//
+		//label38
+		//
+		*this.label38.AutoSize = *True
+		*this.label38.Location = *new System.Drawing.Point(7, 440)
+		*this.label38.Name = "label38"
+		*this.label38.Size = *new System.Drawing.Size(64, 13)
+		*this.label38.TabIndex = 644
+		*this.label38.Text = "Ticket Type"
+		//
+		//cboAgeGroup
+		//
+		*this.cboAgeGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.cboAgeGroup.Enabled = *False
+		*this.cboAgeGroup.FormattingEnabled = *True
+		*this.cboAgeGroup.Location = *new System.Drawing.Point(147, 467)
+		*this.cboAgeGroup.Name = "cboAgeGroup"
+		*this.cboAgeGroup.Size = *new System.Drawing.Size(241, 21)
+		*this.cboAgeGroup.TabIndex = 19
+		*this.cboAgeGroup.TabStop = *False
+		//
+		//label39
+		//
+		*this.label39.AutoSize = *True
+		*this.label39.Location = *new System.Drawing.Point(7, 471)
+		*this.label39.Name = "label39"
+		*this.label39.Size = *new System.Drawing.Size(92, 13)
+		*this.label39.TabIndex = 642
+		*this.label39.Text = "Target Age Group"
+		//
+		//lblPromoDesc
+		//
+		*this.lblPromoDesc.AutoSize = *True
+		*this.lblPromoDesc.Location = *new System.Drawing.Point(597, 103)
+		*this.lblPromoDesc.Name = "lblPromoDesc"
+		*this.lblPromoDesc.Size = *new System.Drawing.Size(182, 13)
+		*this.lblPromoDesc.TabIndex = 24
+		*this.lblPromoDesc.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//txtPromo
+		//
+		*this.txtPromo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtPromo.Location = *new System.Drawing.Point(547, 99)
+		*this.txtPromo.MaxLength = 4
+		*this.txtPromo.Name = "txtPromo"
+		*this.txtPromo.ReadOnly = *True
+		*this.txtPromo.Size = *new System.Drawing.Size(44, 20)
+		*this.txtPromo.TabIndex = 23
+		*this.txtPromo.TabStop = *False
+		//
+		//label41
+		//
+		*this.label41.AutoSize = *True
+		*this.label41.Location = *new System.Drawing.Point(440, 103)
+		*this.label41.Name = "label41"
+		*this.label41.Size = *new System.Drawing.Size(65, 13)
+		*this.label41.TabIndex = 635
+		*this.label41.Text = "Promo Code"
+		//
+		//lblSubClassDesc
+		//
+		*this.lblSubClassDesc.AutoSize = *True
+		*this.lblSubClassDesc.Location = *new System.Drawing.Point(197, 165)
+		*this.lblSubClassDesc.Name = "lblSubClassDesc"
+		*this.lblSubClassDesc.Size = *new System.Drawing.Size(182, 13)
+		*this.lblSubClassDesc.TabIndex = 9
+		*this.lblSubClassDesc.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//txtVendorStyle
+		//
+		*this.txtVendorStyle.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtVendorStyle.Location = *new System.Drawing.Point(147, 281)
+		*this.txtVendorStyle.MaxLength = 15
+		*this.txtVendorStyle.Name = "txtVendorStyle"
+		*this.txtVendorStyle.ReadOnly = *True
+		*this.txtVendorStyle.Size = *new System.Drawing.Size(118, 20)
+		*this.txtVendorStyle.TabIndex = 13
+		*this.txtVendorStyle.TabStop = *False
+		//
+		//label10
+		//
+		*this.label10.AutoSize = *True
+		*this.label10.Location = *new System.Drawing.Point(7, 285)
+		*this.label10.Name = "label10"
+		*this.label10.Size = *new System.Drawing.Size(67, 13)
+		*this.label10.TabIndex = 667
+		*this.label10.Text = "Vendor Style"
+		//
+		//label9
+		//
+		*this.label9.AutoSize = *True
+		*this.label9.Location = *new System.Drawing.Point(7, 227)
+		*this.label9.Name = "label9"
+		*this.label9.Size = *new System.Drawing.Size(88, 13)
+		*this.label9.TabIndex = 666
+		*this.label9.Text = "Short Description"
+		//
+		//txtShortDesc
+		//
+		*this.txtShortDesc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtShortDesc.Location = *new System.Drawing.Point(147, 223)
+		*this.txtShortDesc.MaxLength = 9
+		*this.txtShortDesc.Name = "txtShortDesc"
+		*this.txtShortDesc.ReadOnly = *True
+		*this.txtShortDesc.Size = *new System.Drawing.Size(118, 20)
+		*this.txtShortDesc.TabIndex = 11
+		*this.txtShortDesc.TabStop = *False
+		//
+		//txtLongDesc
+		//
+		*this.txtLongDesc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtLongDesc.Location = *new System.Drawing.Point(147, 192)
+		*this.txtLongDesc.MaxLength = 25
+		*this.txtLongDesc.Name = "txtLongDesc"
+		*this.txtLongDesc.ReadOnly = *True
+		*this.txtLongDesc.Size = *new System.Drawing.Size(246, 20)
+		*this.txtLongDesc.TabIndex = 10
+		*this.txtLongDesc.TabStop = *False
+		//
+		//txtSubClass
+		//
+		*this.txtSubClass.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtSubClass.Location = *new System.Drawing.Point(147, 161)
+		*this.txtSubClass.MaxLength = 4
+		*this.txtSubClass.Name = "txtSubClass"
+		*this.txtSubClass.ReadOnly = *True
+		*this.txtSubClass.Size = *new System.Drawing.Size(44, 20)
+		*this.txtSubClass.TabIndex = 8
+		*this.txtSubClass.TabStop = *False
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(7, 196)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(87, 13)
+		*this.label8.TabIndex = 665
+		*this.label8.Text = "Long Description"
+		//
+		//label6
+		//
+		*this.label6.AutoSize = *True
+		*this.label6.Location = *new System.Drawing.Point(7, 165)
+		*this.label6.Name = "label6"
+		*this.label6.Size = *new System.Drawing.Size(50, 13)
+		*this.label6.TabIndex = 664
+		*this.label6.Text = "Subclass"
+		//
+		//lblCommodityDesc
+		//
+		*this.lblCommodityDesc.AutoSize = *True
+		*this.lblCommodityDesc.Location = *new System.Drawing.Point(597, 72)
+		*this.lblCommodityDesc.Name = "lblCommodityDesc"
+		*this.lblCommodityDesc.Size = *new System.Drawing.Size(93, 13)
+		*this.lblCommodityDesc.TabIndex = 674
+		*this.lblCommodityDesc.Text = "lblCommodityDesc"
+		//
+		//lblCharName
+		//
+		*this.lblCharName.AutoSize = *True
+		*this.lblCharName.Location = *new System.Drawing.Point(197, 378)
+		*this.lblCharName.Name = "lblCharName"
+		*this.lblCharName.Size = *new System.Drawing.Size(67, 13)
+		*this.lblCharName.TabIndex = 673
+		*this.lblCharName.Text = "lblCharName"
+		//
+		//lblSeason
+		//
+		*this.lblSeason.AutoSize = *True
+		*this.lblSeason.Location = *new System.Drawing.Point(197, 409)
+		*this.lblSeason.Name = "lblSeason"
+		*this.lblSeason.Size = *new System.Drawing.Size(53, 13)
+		*this.lblSeason.TabIndex = 672
+		*this.lblSeason.Text = "lblSeason"
+		//
+		//lblOrigin
+		//
+		*this.lblOrigin.AutoSize = *True
+		*this.lblOrigin.Location = *new System.Drawing.Point(197, 347)
+		*this.lblOrigin.Name = "lblOrigin"
+		*this.lblOrigin.Size = *new System.Drawing.Size(44, 13)
+		*this.lblOrigin.TabIndex = 671
+		*this.lblOrigin.Text = "lblOrigin"
+		//
+		//lblCompoCodeDesc
+		//
+		*this.lblCompoCodeDesc.AutoSize = *True
+		*this.lblCompoCodeDesc.Location = *new System.Drawing.Point(597, 41)
+		*this.lblCompoCodeDesc.Name = "lblCompoCodeDesc"
+		*this.lblCompoCodeDesc.Size = *new System.Drawing.Size(287, 13)
+		*this.lblCompoCodeDesc.TabIndex = 21
+		*this.lblCompoCodeDesc.Text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//lblPendSubClass
+		//
+		*this.lblPendSubClass.AutoSize = *True
+		*this.lblPendSubClass.Location = *new System.Drawing.Point(108, 165)
+		*this.lblPendSubClass.Name = "lblPendSubClass"
+		*this.lblPendSubClass.Size = *new System.Drawing.Size(32, 13)
+		*this.lblPendSubClass.TabIndex = 680
+		*this.lblPendSubClass.Text = "(Sub)"
+		//
+		//pnlGender
+		//
+		*this.pnlGender.Controls.Add(*this.rbGenderFemale)
+		*this.pnlGender.Controls.Add(*this.label1)
+		*this.pnlGender.Controls.Add(*this.rbGenderMale)
+		*this.pnlGender.Controls.Add(*this.rbGenderUnisex)
+		*this.pnlGender.Location = *new System.Drawing.Point(554, 153)
+		*this.pnlGender.Name = "pnlGender"
+		*this.pnlGender.Size = *new System.Drawing.Size(105, 99)
+		*this.pnlGender.TabIndex = 683
+		//
+		//rbGenderFemale
+		//
+		*this.rbGenderFemale.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbGenderFemale.AutoSize = *True
+		*this.rbGenderFemale.Enabled = *False
+		*this.rbGenderFemale.Location = *new System.Drawing.Point(9, 74)
+		*this.rbGenderFemale.Name = "rbGenderFemale"
+		*this.rbGenderFemale.Size = *new System.Drawing.Size(59, 17)
+		*this.rbGenderFemale.TabIndex = 15
+		*this.rbGenderFemale.Text = "Female"
+		*this.rbGenderFemale.UseVisualStyleBackColor = *True
+		//
+		//label1
+		//
+		*this.label1.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.label1.AutoSize = *True
+		*this.label1.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label1.Location = *new System.Drawing.Point(6, 6)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(42, 13)
+		*this.label1.TabIndex = 0
+		*this.label1.Text = "Gender"
+		//
+		//rbGenderMale
+		//
+		*this.rbGenderMale.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbGenderMale.AutoSize = *True
+		*this.rbGenderMale.Enabled = *False
+		*this.rbGenderMale.Location = *new System.Drawing.Point(9, 50)
+		*this.rbGenderMale.Name = "rbGenderMale"
+		*this.rbGenderMale.Size = *new System.Drawing.Size(48, 17)
+		*this.rbGenderMale.TabIndex = 14
+		*this.rbGenderMale.Text = "Male"
+		*this.rbGenderMale.UseVisualStyleBackColor = *True
+		//
+		//rbGenderUnisex
+		//
+		*this.rbGenderUnisex.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbGenderUnisex.AutoSize = *True
+		*this.rbGenderUnisex.Checked = *True
+		*this.rbGenderUnisex.Enabled = *False
+		*this.rbGenderUnisex.Location = *new System.Drawing.Point(9, 27)
+		*this.rbGenderUnisex.Name = "rbGenderUnisex"
+		*this.rbGenderUnisex.Size = *new System.Drawing.Size(57, 17)
+		*this.rbGenderUnisex.TabIndex = 26
+		*this.rbGenderUnisex.TabStop = *True
+		*this.rbGenderUnisex.Text = "Unisex"
+		*this.rbGenderUnisex.UseVisualStyleBackColor = *True
+		//
+		//pnlImportDomestic
+		//
+		*this.pnlImportDomestic.Controls.Add(*this.rbDomestic)
+		*this.pnlImportDomestic.Controls.Add(*this.rbImport)
+		*this.pnlImportDomestic.Controls.Add(*this.label2)
+		*this.pnlImportDomestic.Location = *new System.Drawing.Point(443, 153)
+		*this.pnlImportDomestic.Name = "pnlImportDomestic"
+		*this.pnlImportDomestic.Size = *new System.Drawing.Size(105, 99)
+		*this.pnlImportDomestic.TabIndex = 682
+		//
+		//rbDomestic
+		//
+		*this.rbDomestic.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbDomestic.AutoSize = *True
+		*this.rbDomestic.Enabled = *False
+		*this.rbDomestic.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.rbDomestic.Location = *new System.Drawing.Point(12, 49)
+		*this.rbDomestic.Name = "rbDomestic"
+		*this.rbDomestic.Size = *new System.Drawing.Size(69, 17)
+		*this.rbDomestic.TabIndex = 12
+		*this.rbDomestic.Text = "&Domestic"
+		*this.rbDomestic.UseVisualStyleBackColor = *True
+		//
+		//rbImport
+		//
+		*this.rbImport.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbImport.AutoSize = *True
+		*this.rbImport.Checked = *True
+		*this.rbImport.Enabled = *False
+		*this.rbImport.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.rbImport.Location = *new System.Drawing.Point(11, 26)
+		*this.rbImport.Name = "rbImport"
+		*this.rbImport.Size = *new System.Drawing.Size(54, 17)
+		*this.rbImport.TabIndex = 25
+		*this.rbImport.TabStop = *True
+		*this.rbImport.Text = "&Import"
+		*this.rbImport.UseVisualStyleBackColor = *True
+		//
+		//label2
+		//
+		*this.label2.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.label2.AutoSize = *True
+		*this.label2.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label2.Location = *new System.Drawing.Point(8, 8)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(85, 13)
+		*this.label2.TabIndex = 0
+		*this.label2.Text = "Import/Domestic"
+		//
+		//pnlOnline
+		//
+		*this.pnlOnline.Controls.Add(*this.rbOnlineYes)
+		*this.pnlOnline.Controls.Add(*this.label13)
+		*this.pnlOnline.Controls.Add(*this.rbOnlineNo)
+		*this.pnlOnline.Location = *new System.Drawing.Point(665, 153)
+		*this.pnlOnline.Name = "pnlOnline"
+		*this.pnlOnline.Size = *new System.Drawing.Size(105, 99)
+		*this.pnlOnline.TabIndex = 684
+		//
+		//rbOnlineYes
+		//
+		*this.rbOnlineYes.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbOnlineYes.AutoSize = *True
+		*this.rbOnlineYes.Enabled = *False
+		*this.rbOnlineYes.Location = *new System.Drawing.Point(9, 49)
+		*this.rbOnlineYes.Name = "rbOnlineYes"
+		*this.rbOnlineYes.Size = *new System.Drawing.Size(43, 17)
+		*this.rbOnlineYes.TabIndex = 17
+		*this.rbOnlineYes.Text = "Yes"
+		*this.rbOnlineYes.UseVisualStyleBackColor = *True
+		//
+		//label13
+		//
+		*this.label13.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.label13.AutoSize = *True
+		*this.label13.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label13.Location = *new System.Drawing.Point(6, 6)
+		*this.label13.Name = "label13"
+		*this.label13.Size = *new System.Drawing.Size(85, 13)
+		*this.label13.TabIndex = 0
+		*this.label13.Text = "Online Exclusive"
+		//
+		//rbOnlineNo
+		//
+		*this.rbOnlineNo.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbOnlineNo.AutoSize = *True
+		*this.rbOnlineNo.Checked = *True
+		*this.rbOnlineNo.Enabled = *False
+		*this.rbOnlineNo.Location = *new System.Drawing.Point(9, 26)
+		*this.rbOnlineNo.Name = "rbOnlineNo"
+		*this.rbOnlineNo.Size = *new System.Drawing.Size(39, 17)
+		*this.rbOnlineNo.TabIndex = 27
+		*this.rbOnlineNo.TabStop = *True
+		*this.rbOnlineNo.Text = "No"
+		*this.rbOnlineNo.UseVisualStyleBackColor = *True
+		//
+		//pnlLocation
+		//
+		*this.pnlLocation.Controls.Add(*this.rbLocationYes)
+		*this.pnlLocation.Controls.Add(*this.label19)
+		*this.pnlLocation.Controls.Add(*this.rbLocationNo)
+		*this.pnlLocation.Location = *new System.Drawing.Point(779, 152)
+		*this.pnlLocation.Name = "pnlLocation"
+		*this.pnlLocation.Size = *new System.Drawing.Size(105, 99)
+		*this.pnlLocation.TabIndex = 685
+		//
+		//rbLocationYes
+		//
+		*this.rbLocationYes.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbLocationYes.AutoSize = *True
+		*this.rbLocationYes.Enabled = *False
+		*this.rbLocationYes.Location = *new System.Drawing.Point(9, 49)
+		*this.rbLocationYes.Name = "rbLocationYes"
+		*this.rbLocationYes.Size = *new System.Drawing.Size(43, 17)
+		*this.rbLocationYes.TabIndex = 19
+		*this.rbLocationYes.Text = "Yes"
+		*this.rbLocationYes.UseVisualStyleBackColor = *True
+		//
+		//label19
+		//
+		*this.label19.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.label19.AutoSize = *True
+		*this.label19.ForeColor = System.Drawing.SystemColors.Desktop
+		*this.label19.Location = *new System.Drawing.Point(6, 6)
+		*this.label19.Name = "label19"
+		*this.label19.Size = *new System.Drawing.Size(89, 13)
+		*this.label19.TabIndex = 0
+		*this.label19.Text = "Location Specific"
+		//
+		//rbLocationNo
+		//
+		*this.rbLocationNo.Anchor = System.Windows.Forms.AnchorStyles.None
+		*this.rbLocationNo.AutoSize = *True
+		*this.rbLocationNo.Checked = *True
+		*this.rbLocationNo.Enabled = *False
+		*this.rbLocationNo.Location = *new System.Drawing.Point(9, 26)
+		*this.rbLocationNo.Name = "rbLocationNo"
+		*this.rbLocationNo.Size = *new System.Drawing.Size(39, 17)
+		*this.rbLocationNo.TabIndex = 28
+		*this.rbLocationNo.TabStop = *True
+		*this.rbLocationNo.Text = "No"
+		*this.rbLocationNo.UseVisualStyleBackColor = *True
+		//
+		//btnApprove
+		//
+		*this.btnApprove.BackColor = System.Drawing.Color.LightSteelBlue
+		*this.btnApprove.Location = *new System.Drawing.Point(13, 144)
+		*this.btnApprove.Name = "btnApprove"
+		*this.btnApprove.Size = *new System.Drawing.Size(75, 23)
+		*this.btnApprove.TabIndex = 32
+		*this.btnApprove.Text = "Approve"
+		*this.btnApprove.UseVisualStyleBackColor = *False
+		//
+		//btnReject
+		//
+		*this.btnReject.BackColor = System.Drawing.Color.LightSteelBlue
+		*this.btnReject.Location = *new System.Drawing.Point(354, 144)
+		*this.btnReject.Name = "btnReject"
+		*this.btnReject.Size = *new System.Drawing.Size(75, 23)
+		*this.btnReject.TabIndex = 33
+		*this.btnReject.Text = "Reject"
+		*this.btnReject.UseVisualStyleBackColor = *False
+		//
+		//groupBox1
+		//
+		*this.groupBox1.Controls.Add(*this.grpBoxC)
+		*this.groupBox1.Controls.Add(*this.grpBoxD)
+		*this.groupBox1.Controls.Add(*this.lblSizeDescription)
+		*this.groupBox1.Controls.Add(*this.btnReject)
+		*this.groupBox1.Controls.Add(*this.btnApprove)
+		*this.groupBox1.Controls.Add(*this.txtSize)
+		*this.groupBox1.Controls.Add(*this.lblSize)
+		*this.groupBox1.Location = *new System.Drawing.Point(443, 279)
+		*this.groupBox1.Name = "groupBox1"
+		*this.groupBox1.Size = *new System.Drawing.Size(441, 182)
+		*this.groupBox1.TabIndex = 686
+		*this.groupBox1.TabStop = *False
+		//
+		//grpBoxC
+		//
+		*this.grpBoxC.BackColor = System.Drawing.Color.LightSteelBlue
+		*this.grpBoxC.Controls.Add(*this.txtDistroQty)
+		*this.grpBoxC.Controls.Add(*this.lblDistroQty)
+		*this.grpBoxC.Controls.Add(*this.txtCasePackQty)
+		*this.grpBoxC.Controls.Add(*this.lblCasePackQty)
+		*this.grpBoxC.Location = *new System.Drawing.Point(13, 49)
+		*this.grpBoxC.Name = "grpBoxC"
+		*this.grpBoxC.Size = *new System.Drawing.Size(416, 81)
+		*this.grpBoxC.TabIndex = 3
+		*this.grpBoxC.TabStop = *False
+		*this.grpBoxC.Text = "Pending Case Pack Details"
+		//
+		//txtDistroQty
+		//
+		*this.txtDistroQty.Location = *new System.Drawing.Point(302, 27)
+		*this.txtDistroQty.Name = "txtDistroQty"
+		*this.txtDistroQty.ReadOnly = *True
+		*this.txtDistroQty.Size = *new System.Drawing.Size(45, 20)
+		*this.txtDistroQty.TabIndex = 31
+		*this.txtDistroQty.TabStop = *False
+		//
+		//lblDistroQty
+		//
+		*this.lblDistroQty.AutoSize = *True
+		*this.lblDistroQty.Location = *new System.Drawing.Point(218, 29)
+		*this.lblDistroQty.Name = "lblDistroQty"
+		*this.lblDistroQty.Size = *new System.Drawing.Size(80, 13)
+		*this.lblDistroQty.TabIndex = 4
+		*this.lblDistroQty.Text = "Distro Inner Qty"
+		//
+		//txtCasePackQty
+		//
+		*this.txtCasePackQty.Location = *new System.Drawing.Point(95, 27)
+		*this.txtCasePackQty.Name = "txtCasePackQty"
+		*this.txtCasePackQty.ReadOnly = *True
+		*this.txtCasePackQty.Size = *new System.Drawing.Size(45, 20)
+		*this.txtCasePackQty.TabIndex = 30
+		*this.txtCasePackQty.TabStop = *False
+		//
+		//lblCasePackQty
+		//
+		*this.lblCasePackQty.AutoSize = *True
+		*this.lblCasePackQty.Location = *new System.Drawing.Point(7, 29)
+		*this.lblCasePackQty.Name = "lblCasePackQty"
+		*this.lblCasePackQty.Size = *new System.Drawing.Size(78, 13)
+		*this.lblCasePackQty.TabIndex = 2
+		*this.lblCasePackQty.Text = "Case Pack Qty"
+		//
+		//grpBoxD
+		//
+		*this.grpBoxD.BackColor = System.Drawing.Color.LightSteelBlue
+		*this.grpBoxD.Controls.Add(*this.txtWidth)
+		*this.grpBoxD.Controls.Add(*this.label18)
+		*this.grpBoxD.Controls.Add(*this.txtLength)
+		*this.grpBoxD.Controls.Add(*this.label20)
+		*this.grpBoxD.Controls.Add(*this.txtHeight)
+		*this.grpBoxD.Controls.Add(*this.label21)
+		*this.grpBoxD.Controls.Add(*this.txtWeight)
+		*this.grpBoxD.Controls.Add(*this.label22)
+		*this.grpBoxD.Controls.Add(*this.txtCasePackType)
+		*this.grpBoxD.Controls.Add(*this.label25)
+		*this.grpBoxD.Location = *new System.Drawing.Point(13, 49)
+		*this.grpBoxD.Name = "grpBoxD"
+		*this.grpBoxD.Size = *new System.Drawing.Size(416, 81)
+		*this.grpBoxD.TabIndex = 14
+		*this.grpBoxD.TabStop = *False
+		*this.grpBoxD.Text = "Pending Case Pack Details"
+		//
+		//txtWidth
+		//
+		*this.txtWidth.Location = *new System.Drawing.Point(300, 51)
+		*this.txtWidth.Name = "txtWidth"
+		*this.txtWidth.ReadOnly = *True
+		*this.txtWidth.Size = *new System.Drawing.Size(45, 20)
+		*this.txtWidth.TabIndex = 13
+		*this.txtWidth.TabStop = *False
+		//
+		//label18
+		//
+		*this.label18.AutoSize = *True
+		*this.label18.Location = *new System.Drawing.Point(282, 55)
+		*this.label18.Name = "label18"
+		*this.label18.Size = *new System.Drawing.Size(18, 13)
+		*this.label18.TabIndex = 12
+		*this.label18.Text = "W"
+		//
+		//txtLength
+		//
+		*this.txtLength.Location = *new System.Drawing.Point(228, 51)
+		*this.txtLength.Name = "txtLength"
+		*this.txtLength.ReadOnly = *True
+		*this.txtLength.Size = *new System.Drawing.Size(45, 20)
+		*this.txtLength.TabIndex = 11
+		*this.txtLength.TabStop = *False
+		//
+		//label20
+		//
+		*this.label20.AutoSize = *True
+		*this.label20.Location = *new System.Drawing.Point(214, 55)
+		*this.label20.Name = "label20"
+		*this.label20.Size = *new System.Drawing.Size(13, 13)
+		*this.label20.TabIndex = 10
+		*this.label20.Text = "L"
+		//
+		//txtHeight
+		//
+		*this.txtHeight.Location = *new System.Drawing.Point(161, 51)
+		*this.txtHeight.Name = "txtHeight"
+		*this.txtHeight.ReadOnly = *True
+		*this.txtHeight.Size = *new System.Drawing.Size(45, 20)
+		*this.txtHeight.TabIndex = 9
+		*this.txtHeight.TabStop = *False
+		//
+		//label21
+		//
+		*this.label21.AutoSize = *True
+		*this.label21.Location = *new System.Drawing.Point(147, 55)
+		*this.label21.Name = "label21"
+		*this.label21.Size = *new System.Drawing.Size(15, 13)
+		*this.label21.TabIndex = 8
+		*this.label21.Text = "H"
+		//
+		//txtWeight
+		//
+		*this.txtWeight.Location = *new System.Drawing.Point(95, 51)
+		*this.txtWeight.Name = "txtWeight"
+		*this.txtWeight.ReadOnly = *True
+		*this.txtWeight.Size = *new System.Drawing.Size(45, 20)
+		*this.txtWeight.TabIndex = 7
+		*this.txtWeight.TabStop = *False
+		//
+		//label22
+		//
+		*this.label22.AutoSize = *True
+		*this.label22.Location = *new System.Drawing.Point(7, 52)
+		*this.label22.Name = "label22"
+		*this.label22.Size = *new System.Drawing.Size(41, 13)
+		*this.label22.TabIndex = 6
+		*this.label22.Text = "Weight"
+		//
+		//txtCasePackType
+		//
+		*this.txtCasePackType.Location = *new System.Drawing.Point(95, 22)
+		*this.txtCasePackType.Name = "txtCasePackType"
+		*this.txtCasePackType.ReadOnly = *True
+		*this.txtCasePackType.Size = *new System.Drawing.Size(250, 20)
+		*this.txtCasePackType.TabIndex = 1
+		*this.txtCasePackType.TabStop = *False
+		//
+		//label25
+		//
+		*this.label25.AutoSize = *True
+		*this.label25.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label25.Location = *new System.Drawing.Point(7, 23)
+		*this.label25.Name = "label25"
+		*this.label25.Size = *new System.Drawing.Size(86, 13)
+		*this.label25.TabIndex = 0
+		*this.label25.Text = "Case Pack Type"
+		//
+		//lblSizeDescription
+		//
+		*this.lblSizeDescription.AutoSize = *True
+		*this.lblSizeDescription.Location = *new System.Drawing.Point(164, 20)
+		*this.lblSizeDescription.Name = "lblSizeDescription"
+		*this.lblSizeDescription.Size = *new System.Drawing.Size(82, 13)
+		*this.lblSizeDescription.TabIndex = 2
+		*this.lblSizeDescription.Text = "xxxxxxxxxxxxxxx"
+		//
+		//txtSize
+		//
+		*this.txtSize.Location = *new System.Drawing.Point(107, 17)
+		*this.txtSize.Name = "txtSize"
+		*this.txtSize.ReadOnly = *True
+		*this.txtSize.Size = *new System.Drawing.Size(44, 20)
+		*this.txtSize.TabIndex = 29
+		*this.txtSize.TabStop = *False
+		//
+		//lblSize
+		//
+		*this.lblSize.AutoSize = *True
+		*this.lblSize.Location = *new System.Drawing.Point(22, 20)
+		*this.lblSize.Name = "lblSize"
+		*this.lblSize.Size = *new System.Drawing.Size(27, 13)
+		*this.lblSize.TabIndex = 0
+		*this.lblSize.Text = "Size"
+		//
+		//btnCancel
+		//
+		*this.btnCancel.BackColor = System.Drawing.SystemColors.Control
+		*this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		*this.btnCancel.Location = *new System.Drawing.Point(809, 500)
+		*this.btnCancel.Name = "btnCancel"
+		*this.btnCancel.Size = *new System.Drawing.Size(75, 23)
+		*this.btnCancel.TabIndex = 36
+		*this.btnCancel.Text = "Cancel"
+		*this.btnCancel.UseVisualStyleBackColor = *False
+		//
+		//btnHistory
+		//
+		*this.btnHistory.Location = *new System.Drawing.Point(443, 500)
+		*this.btnHistory.Name = "btnHistory"
+		*this.btnHistory.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHistory.TabIndex = 34
+		*this.btnHistory.Text = "Item History"
+		*this.btnHistory.UseVisualStyleBackColor = *True
+		//
+		//btnEAS
+		//
+		*this.btnEAS.Location = *new System.Drawing.Point(525, 500)
+		*this.btnEAS.Name = "btnEAS"
+		*this.btnEAS.Size = *new System.Drawing.Size(75, 23)
+		*this.btnEAS.TabIndex = 35
+		*this.btnEAS.Text = "EAS"
+		*this.btnEAS.UseVisualStyleBackColor = *True
+		//
+		//txtLocalDescription
+		//
+		*this.txtLocalDescription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+		*this.txtLocalDescription.Location = *new System.Drawing.Point(147, 253)
+		*this.txtLocalDescription.MaxLength = 25
+		*this.txtLocalDescription.Name = "txtLocalDescription"
+		*this.txtLocalDescription.ReadOnly = *True
+		*this.txtLocalDescription.Size = *new System.Drawing.Size(246, 20)
+		*this.txtLocalDescription.TabIndex = 12
+		*this.txtLocalDescription.TabStop = *False
+		//
+		//label23
+		//
+		*this.label23.AutoSize = *True
+		*this.label23.Location = *new System.Drawing.Point(7, 257)
+		*this.label23.Name = "label23"
+		*this.label23.Size = *new System.Drawing.Size(93, 13)
+		*this.label23.TabIndex = 691
+		*this.label23.Text = "Description (other)"
+		//
+		//EASApproveReject
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(895, 535)
+		*this.Controls.Add(*this.txtLocalDescription)
+		*this.Controls.Add(*this.label23)
+		*this.Controls.Add(*this.btnCancel)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.btnEAS)
+		*this.Controls.Add(*this.btnHistory)
+		*this.Controls.Add(*this.groupBox1)
+		*this.Controls.Add(*this.pnlGender)
+		*this.Controls.Add(*this.pnlImportDomestic)
+		*this.Controls.Add(*this.pnlOnline)
+		*this.Controls.Add(*this.pnlLocation)
+		*this.Controls.Add(*this.lblPendSubClass)
+		*this.Controls.Add(*this.lblCommodityDesc)
+		*this.Controls.Add(*this.lblCharName)
+		*this.Controls.Add(*this.lblSeason)
+		*this.Controls.Add(*this.lblOrigin)
+		*this.Controls.Add(*this.lblCompoCodeDesc)
+		*this.Controls.Add(*this.lblSubClassDesc)
+		*this.Controls.Add(*this.txtVendorStyle)
+		*this.Controls.Add(*this.label10)
+		*this.Controls.Add(*this.label9)
+		*this.Controls.Add(*this.txtShortDesc)
+		*this.Controls.Add(*this.txtLongDesc)
+		*this.Controls.Add(*this.txtSubClass)
+		*this.Controls.Add(*this.label8)
+		*this.Controls.Add(*this.label6)
+		*this.Controls.Add(*this.lblPendPromo)
+		*this.Controls.Add(*this.cboTicketType)
+		*this.Controls.Add(*this.label38)
+		*this.Controls.Add(*this.cboAgeGroup)
+		*this.Controls.Add(*this.label39)
+		*this.Controls.Add(*this.lblPromoDesc)
+		*this.Controls.Add(*this.txtPromo)
+		*this.Controls.Add(*this.label41)
+		*this.Controls.Add(*this.lblPendChar)
+		*this.Controls.Add(*this.lblMarkets)
+		*this.Controls.Add(*this.label27)
+		*this.Controls.Add(*this.txtStyle)
+		*this.Controls.Add(*this.label17)
+		*this.Controls.Add(*this.lblColourDesc)
+		*this.Controls.Add(*this.lblVendorName)
+		*this.Controls.Add(*this.txtSeason)
+		*this.Controls.Add(*this.txtCommodity)
+		*this.Controls.Add(*this.lblClassDesc)
+		*this.Controls.Add(*this.cboLicence)
+		*this.Controls.Add(*this.txtCompoCode)
+		*this.Controls.Add(*this.txtOrigin)
+		*this.Controls.Add(*this.txtChar)
+		*this.Controls.Add(*this.txtColour)
+		*this.Controls.Add(*this.txtVendor)
+		*this.Controls.Add(*this.txtClass)
+		*this.Controls.Add(*this.label16)
+		*this.Controls.Add(*this.label15)
+		*this.Controls.Add(*this.label14)
+		*this.Controls.Add(*this.label12)
+		*this.Controls.Add(*this.label11)
+		*this.Controls.Add(*this.label7)
+		*this.Controls.Add(*this.label5)
+		*this.Controls.Add(*this.label4)
+		*this.Controls.Add(*this.label3)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.MinimizeBox = *False
+		*this.Name = "EASApproveReject"
+		*this.ShowIcon = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+		*this.Text = "SPICE - EAS - Approve/Reject"
+		*this.pnlGender.ResumeLayout(*False)
+		*this.pnlGender.PerformLayout()
+		*this.pnlImportDomestic.ResumeLayout(*False)
+		*this.pnlImportDomestic.PerformLayout()
+		*this.pnlOnline.ResumeLayout(*False)
+		*this.pnlOnline.PerformLayout()
+		*this.pnlLocation.ResumeLayout(*False)
+		*this.pnlLocation.PerformLayout()
+		*this.groupBox1.ResumeLayout(*False)
+		*this.groupBox1.PerformLayout()
+		*this.grpBoxC.ResumeLayout(*False)
+		*this.grpBoxC.PerformLayout()
+		*this.grpBoxD.ResumeLayout(*False)
+		*this.grpBoxD.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	/EndRegion
+	
+	/Region Methods	
+	BegSr EASApproveReject_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If EAS = *Nothing
+			EAS = *New Disney.DA.EAS.DSSPARE(PgmDB, DB2Connection, User)
+		EndIf
+		
+		EAS.GetApprovalDetails(RequestID)
+		
+		Class      = Convert.ToInt16(%Subst(EAS.RequestDetails, 9, 4))
+		Vendor     = Convert.ToInt32(%Subst(EAS.RequestDetails, 14, 5))
+		Style      = Convert.ToInt16(%Subst(EAS.RequestDetails, 20, 4))
+		Colour     = Convert.ToInt16(%Subst(EAS.RequestDetails, 25, 3))
+		Size       = Convert.ToInt16(%Subst(EAS.RequestDetails, 29, 4))
+		ChgDtlFlag = %Subst(EAS.RequestDetails, 34, 1)
+						
+		If ItemsBO = *Nothing
+			ItemsBO = *New Disney.Spice.ItemsBO.Items(PgmDB,User,Environment)
+		EndIf
+		
+		If MarketList = *Nothing
+			MarketList = *New Disney.DA.IP400.SpiceItem(PgmDB,User)
+		EndIf
+		
+		If AllMarkets = *Nothing
+			AllMarkets = *New Disney.DA.IP400.Markets(Environment)
+		EndIf
+		
+		// Retrieve Item details and populate textboxes etc		
+		ItemStyle  = ItemsBO.GetItemStyle(Class,Vendor,Style,Colour)
+			   
+	   //MarketTable Contains all Markets where this Item exists
+	   MarketTable = MarketList.GetMarketList(Class,Vendor,Style,Colour,Size) 
+	   Markets     = Allmarkets.GetMarketsTbl()
+	   
+	   MarketString = *New StringBuilder()
+	   MarketTblDv = *New DataView(MarketTable)
+	   MarketsDv   = *New DataView(Markets)
+	   MarketsDv.RowFilter = "Domain  = '" + Domain + "' And Status = 1"  
+	   
+	   ForEach ALLMarket Collection(MarketsDv)	Type(DataRowView)
+			MarketTblDv.RowFilter = "Market = '" + AllMarket.Item["IPMarket"].ToString() + "'"
+			If MarketTblDv.Count > 0
+				MarketString.Append(ALLMarket.Item["IPMarket"].ToString())
+				MarketString.Append(",")
+			Endif
+		EndFor
+	  	   
+	   If MarketString.Length > *Zero
+			MarketString.Remove(MarketString.Length-1,1)
+		EndIf
+			      
+       lblMarkets.Text = MarketString.ToString()
+		
+		txtClass.Text  = ItemStyle.Class.ToString('0000')
+		ItemsBO.GetClass(ItemStyle.Class)
+		lblClassDesc.Text = ItemsBO.ClassName
+		
+		txtVendor.Text = ItemStyle.Vendor.ToString('00000')
+		ItemsBO.GetVendor(ItemStyle.Vendor)
+		lblVendorName.Text = ItemsBO.VendorName
+		
+		txtStyle.Text  = ItemStyle.Style.ToString('0000')
+		
+		txtColour.Text = ItemStyle.Colour.ToString('000')
+		ItemsBO.GetColour(ItemStyle.Colour)
+		lblColourDesc.Text = ItemsBO.ColourName
+		
+		txtSize.Text = Size.ToString('0000')
+		ItemsBO.GetSize(Size)
+		lblSizeDescription.Text = ItemsBO.SizeName
+		
+		txtSubClass.Text = ItemStyle.SubClass
+		ItemsBO.GetSubClass(ItemStyle.SubClass,ItemStyle.Class)
+		lblSubClassDesc.Text = ItemsBO.SubClassName
+		If ItemStyle.PendingSubClass <> String.Empty
+			lblPendSubClass.Text = "(" + ItemStyle.PendingSubClass + ")"
+		Else
+			lblPendSubClass.Text = String.Empty
+		EndIf
+		
+		txtLongDesc.Text    = ItemStyle.LongDescription
+		txtLocalDescription.Text = ItemStyle.LocalDescription
+		txtShortDesc.Text   = ItemStyle.ShortDescription
+		txtVendorStyle.Text = ItemStyle.VendorStyle
+						
+		// Licence code
+		ItemsBO.GetLicenceTbl()
+		cboLicence.DataSource = ItemsBO.SpiceDataSet.Tables("FilteredLicence")
+		cboLicence.DisplayMember = "CodeDescription"
+		cboLicence.ValueMember   = "Code"
+		If ItemStyle.LicenceCode <> String.Empty
+			cboLicence.SelectedValue = ItemStyle.LicenceCode
+		EndIf
+		
+		// Composition Code
+		txtCompoCode.Text = ItemStyle.CompositionCode
+		ItemsBO.GetCompositionCode(ItemStyle.CompositionCode)
+		lblCompoCodeDesc.Text = ItemsBO.CompositionDescription
+		
+		// Commodity Code
+		txtCommodity.Text = ItemStyle.CommodityCode
+		ItemsBO.GetCommodityCode(ItemStyle.CommodityCode)
+		lblCommodityDesc.Text = ItemsBO.CommodityDescription
+		
+		// Country of Origin
+		txtOrigin.Text = ItemStyle.CountryCode
+		ItemsBO.GetCountry(ItemStyle.CountryCode)
+		lblOrigin.Text = ItemsBO.CountryName
+		
+		// Character code
+		txtChar.Text = ItemStyle.CharacterCode
+		ItemsBO.GetChar(ItemStyle.CharacterCode)
+		lblCharName.Text = ItemsBO.CharacterName
+		If ItemStyle.PendingCharCode <> String.Empty
+			lblPendChar.Text = "(" + ItemStyle.PendingCharCode + ")"
+		Else
+			lblPendChar.Text = String.Empty
+		EndIf
+		
+		// Season Code
+		txtSeason.Text = ItemStyle.SeasonCode
+		ItemsBO.GetSeason(ItemStyle.SeasonCode)
+		lblSeason.Text = ItemsBO.SeasonDesc
+		
+		// Ticket Type
+		ItemsBO.GetTicketTypeTbl()
+		cboTicketType.DataSource = ItemsBO.SpiceDataSet.Tables("TicketType")
+		cboTicketType.DisplayMember = "CodeDescription"
+		cboTicketType.ValueMember   = "TicketTypeCode"
+		If ItemStyle.TicketType <> String.Empty
+			cboTicketType.SelectedValue = ItemStyle.TicketType
+		EndIf
+		
+		// Target Age Group
+		ItemsBO.GetAgeGroupTbl()
+		cboAgeGroup.DataSource = ItemsBO.SpiceDataSet.Tables("AgeGroups")
+		cboAgeGroup.DisplayMember = "GroupDescription"
+		cboAgeGroup.ValueMember   = "AgeGroupID"
+		If ItemStyle.AgeGroup <> String.Empty
+			cboAgeGroup.SelectedValue = ItemStyle.AgeGroup
+		EndIf
+		
+		// Promo Code
+		txtPromo.Text = ItemStyle.PromotionCode
+		ItemsBO.GetPromotion(ItemStyle.PromotionCode)
+		lblPromoDesc.Text = ItemsBO.PromotionDescription
+		If ItemStyle.PendingPromoCode <> String.Empty
+			lblPendPromo.Text = "(" + ItemStyle.PendingPromoCode + ")"
+		Else
+			lblPendPromo.Text = String.Empty
+		EndIf
+		
+		// Radio buttons
+		If ItemStyle.ImpDomInd.Equals('I')
+			rbImport.Checked = *true
+		Else
+			rbDomestic.Checked = *true
+		EndIf
+		
+		Select
+		When ItemStyle.GenderCode.Equals('U')
+			rbGenderUnisex.Checked = *true
+		When ItemStyle.GenderCode.Equals('M')
+			rbGenderMale.Checked = *true
+		Other
+			rbGenderFemale.Checked = *true
+		EndSL
+		
+		If ItemStyle.LocationInd.Equals('N')
+			rbLocationNo.Checked = *true
+		Else
+			rbLocationYes.Checked = *true
+		EndIf
+		
+		If ItemStyle.OnlineInd.Equals("N")
+			rbOnlineNo.Checked = *true
+		Else
+			rbOnlineYes.Checked = *true
+		EndIf
+				
+		//Pending Case Pack Details
+		DclFld CasePackDescription Type(String)
+		
+		CasePack = *New Disney.Spice.ItemsBO.CasePack(PgmDB, Environment)
+		ItemsBO.GetPendingCasePackDetails(Class, Vendor, Style, Colour, Size)
+		CasePackDescription  = CasePack.GetPackDescription(ItemsBO.PendingCasePackType)
+		txtCasePackType.Text = ItemsBO.PendingCasePackType + ' ' + '-' + ' '+ CasePackDescription
+		txtCasePackQty.Text  = ItemsBO.PendingCasePackQty
+		txtDistroQty.Text    = ItemsBO.PendingDistroInnerQty
+		txtWeight.Text       = ItemsBO.PendingWeight
+		txtHeight.Text       = ItemsBO.PendingHeight
+		txtLength.Text       = ItemsBO.PendingLength
+		txtWidth.Text        = ItemsBO.PendingWidth 
+		
+		If ChgDtlFlag = 'C'
+			grpBoxC.Visible = *True
+			grpBoxD.Visible = *False
+		Else
+			grpBoxD.Visible = *True
+			grpBoxC.Visible = *False
+		Endif
+	EndSr
+	/EndRegion	
+
+	/Region Buttons	
+	BegSr btnHistory_Click Access(*Private) Event(*this.btnHistory.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld History Type(Disney.Spice.LookUp.History)
+		DclFld ItemNo  Type(StringBuilder)
+		
+		ItemNo = *New StringBuilder()
+			ItemNo.Append(Class.ToString('0000'))
+			ItemNo.Append(Vendor.ToString('00000'))
+			ItemNo.Append(Style.ToString('0000'))
+			ItemNo.Append(Colour.ToString('000'))
+			ItemNo.Append(Size.ToString('0000'))
+		
+			History = *New Disney.Spice.LookUp.History(PgmDB,'ITEM',ItemNo.ToString())
+			History.ShowDialog()
+			History = *Nothing
+	EndSr
+	
+	BegSr btnEAS_Click Access(*Private) Event(*this.btnEAS.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld frmEASRequest Type(Disney.Spice.EASUI.frmEASRequest)
+		
+		frmEASRequest = *New frmEASRequest(Pgmdb, DB2Connection, User, Environment, MDIParent, RequestID)
+		frmEASRequest.ShowDialog()
+		frmEASRequest = *Nothing
+	EndSr
+	
+	BegSr btnApprove_Click Access(*Private) Event(*this.btnApprove.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld WriteToiSeriesDTAQ Type(WriteToiSeriesDTAQ)
+		DclFld Title              Type(String)
+		DclFld Msg                Type(String)
+		DclFld Response           Type(Int16)
+			
+		Title    = "Spice - EAS - Confirm Request Approval"
+		Msg      = "Please Confirm you are Approving this Request"
+		
+		 MsgBox(Msg) Buttons(*OKcancel) ICON(*Question) DFTBUTTON(1) RTNCODE(Response)
+		
+		If Response = 1
+			WriteToiSeriesDTAQ = *New WriteToiSeriesDTAQ(PgmDB, User)
+			WriteToiSeriesDTAQ.WritePOtoDtaQ("PRCUPDREQ", RequestID, "A", " ")
+			Unload *This
+		Else
+			MsgBox Msg("You cancelled the Approve request. This request will not be processed.")
+		Endif
+		
+	EndSr
+	
+	BegSr btnReject_Click Access(*Private) Event(*this.btnReject.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		DclFld RejectReasonForm   Type(RejectReasonForm)
+		DclFld WriteToiSeriesDTAQ Type(WriteToiSeriesDTAQ)
+		DclFld ReasonCode         Type(String)
+		
+		RejectReasonForm   = *New RejectReasonForm()
+		WriteToiSeriesDTAQ = *New WriteToiSeriesDTAQ(PgmDB, User)
+				
+		ReasonCode = RejectReasonForm.GetReason()
+		
+		If Not String.IsNullOrEmpty(ReasonCode)
+			WriteToiSeriesDTAQ.WritePOtoDtaQ("PRCUPDREQ", RequestID, "R", ReasonCode)
+			Unload *This
+		Endif
+	EndSr
+		
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+			
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+	EndSr
+	
+	BegSr btnCancel_Click Access(*Private) Event(*this.btnCancel.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld ReturnCode Type(Int16)
+		MsgBox Msg("Are you sure you want to cancel this Approve/Reject Request") Title("Spice - EAS - Approve/Reject Request") +
+		Buttons(*YesNo) RtnCode(ReturnCode) Icon(*Question) DftButton(1) 
+		
+		If ReturnCode = 7
+			*This.DialogResult = DialogResult.None
+		Endif
+	EndSr
+	/EndRegion
+EndClass

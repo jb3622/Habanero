@@ -1,0 +1,17 @@
+Using System
+Using System.Text
+
+BegClass DateFormats Access(*Public)
+
+/* Date formats - Note: Generally defaulted to the SWNA formats */
+
+DclFld DatePickerFormat Type( String ) Access( *Public ) Inz( "MM/dd/yyyy" ) Shared(*Yes) 
+DclFld PO_CancelDate Type( String ) Access( *Public ) Inz( "MMMM d, yyyy" ) Shared(*Yes) 
+DclFld PO_ShipDate Type( String ) Access( *Public ) Inz( "MMMMd,  yyyy" ) Shared(*Yes) 
+DclFld PO_AnticipateDate Type( String ) Access( *Public ) Inz( "MMMMd,  yyyy" ) Shared(*Yes) 
+DclFld PO_OrderDate Type( String ) Access( *Public ) Inz( "MMMM d,  yyyy" ) Shared(*Yes) 
+
+
+  
+
+EndClass

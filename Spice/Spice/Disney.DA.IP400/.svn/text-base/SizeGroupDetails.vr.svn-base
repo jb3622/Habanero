@@ -1,0 +1,80 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.IO
+Using System.Xml
+
+BegClass SizeGroupDetails Access(*Public)
+
+	DclDB PgmDB DBName("TDST") Access(*Private)
+	DclDiskFile Name(DSSPSGDL01) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+	
+	DclFld SizeGroupDetailsTbl Type(DataTable) Access(*Private)
+	DclFld pXMLpath Type(String) Access(*Private)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"SizeGroupDetails.xml")
+		LoadDataTableFromXml()
+	EndConstructor
+	
+	BegSr LoadDataTableFromXml Access(*Private)
+			
+		If SizeGroupDetailsTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				SizeGroupDetailsTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		SizeGroupDetailsTbl = *New DataTable("SizeGroupDetails")
+
+		SizeGroupDetailsTbl.Columns.Add(*New DataColumn("SizeGroup", *TypeOf(Int16)))
+		SizeGroupDetailsTbl.Columns["SizeGroup"].ReadOnly = *True
+
+		SizeGroupDetailsTbl.Columns.Add(*New DataColumn("SizeCode", *TypeOf(Int16)))
+		SizeGroupDetailsTbl.Columns["SizeCode"].ReadOnly = *True
+		
+		SizeGroupDetailsTbl.Columns.Add(*New DataColumn("DefaultInd", *TypeOf(String)))
+		SizeGroupDetailsTbl.Columns["DefaultInd"].ReadOnly = *True
+	EndSr
+	
+	BegSr PopulateDataTable Access(*Private)
+				
+		DclFld dr Type(DataRow)
+			
+		If Not DSSPSGDL01.IsOpen
+			Open DSSPSGDL01
+		EndIf
+		
+		DoUntil DSSPSGDL01.IsEof
+			Read DSSPSGDL01
+			If Not DSSPSGDL01.IsEof
+				dr = SizeGroupDetailsTbl.NewRow()
+				
+				dr.Item("SizeGroup")  = SGDSGC
+				dr.Item("SizeCode")   = SGDSIZ
+				dr.Item("DefaultInd") = SGDDYN
+				
+				SizeGroupDetailsTbl.Rows.Add(dr)
+			EndIf
+		EndDO
+		
+		SizeGroupDetailsTbl.WriteXml(pXMLpath)
+		Close DSSPSGDL01
+	EndSr
+	
+	BegFunc GetSizeGroupTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR SizeGroupDetailsTbl
+	EndFunc
+EndClass

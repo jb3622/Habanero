@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Messages to be displayed to user-->
+<Messages>
+  <Message ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="600" Terminate="0"/>
+
+  <Message  MessageId="SRR 2:50  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="300" Terminate="0"/>
+
+  <Message  MessageId="SRR 2:55  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="150" Terminate="0"/>
+
+  <Message  MessageId="SRR 2:59  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Sign Off Please For 3pm SRR run" TimeOut="60" Terminate="0"/>
+
+  <Message  MessageId="SRR 3:00  " ToUser="*ALL" Application="SRR" Enabled="0" Text="Press OK to Exist iDash" TimeOut="10" Terminate="1"/>
+
+  <Message  MessageId="SRR BACK  " ToUser="*ALL" Application="SRR" Enabled="0" Text="SRR is Now Available Again" TimeOut="900" Terminate="0"/>
+
+</Messages>

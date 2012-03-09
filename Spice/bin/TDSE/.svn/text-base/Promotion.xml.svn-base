@@ -1,0 +1,6288 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Promotion>
+    <Code>  7</Code>
+    <Description>ADULT APPAREL SPRING 1</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ADS</Code>
+    <Description>ADULT SOFTLINES Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ADM</Code>
+    <Description>ADULTS MENS PRODUCT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  B</Code>
+    <Description>ADVENTURES OF MICKY MOUSE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ADV</Code>
+    <Description>ADVENTURES Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ALD</Code>
+    <Description>ALADDIN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  9</Code>
+    <Description>ALADDIN PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AFR</Code>
+    <Description>ARCTIC FREEZE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ARM</Code>
+    <Description>ARCTIC MICKEY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ARI</Code>
+    <Description>ARIEL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ARR</Code>
+    <Description>ARIEL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ARB</Code>
+    <Description>ARIEL BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ABB</Code>
+    <Description>ARIEL BEACH BABE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AEB</Code>
+    <Description>ARIEL BEACH HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AIL</Code>
+    <Description>ARIEL Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AR </Code>
+    <Description>ARIEL Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ASP</Code>
+    <Description>ASPEN                FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AB </Code>
+    <Description>AUTUMN BAKING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BTT</Code>
+    <Description>BABY BRIGHTS Q107</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GFB</Code>
+    <Description>BABY GIFTS Q107</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BNX</Code>
+    <Description>BABY NOVELTY XMAS Q107</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NXM</Code>
+    <Description>BABY POOH NOVELTY XMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBW</Code>
+    <Description>BABY WORLD</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>1ST</Code>
+    <Description>BABY'S FIRST XMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BTC</Code>
+    <Description>BACK TO COLLEGE</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BTN</Code>
+    <Description>BACK TO NURSERY</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BTS</Code>
+    <Description>BACK TO SCHOOL</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>114</Code>
+    <Description>BACK-TO-SCHOOL MALE INSP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  C</Code>
+    <Description>BALLERINA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BPS</Code>
+    <Description>BALLERINA PRINCESS Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  L</Code>
+    <Description>BAMBI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BTL</Code>
+    <Description>BAMBI &amp; THUMPER LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BAM</Code>
+    <Description>BAMBI NURSERY Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBI</Code>
+    <Description>BAMBI Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BB </Code>
+    <Description>BASIC BORGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BF </Code>
+    <Description>BASIC FLEECES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BG </Code>
+    <Description>BASIC GILLETS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BT </Code>
+    <Description>BASIC T-SHIRTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  Z</Code>
+    <Description>BASICS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BP </Code>
+    <Description>BASICS POLOS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BY3</Code>
+    <Description>BAY 3</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BE1</Code>
+    <Description>BBBH GIRLS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBY</Code>
+    <Description>BEACH BABY Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBH</Code>
+    <Description>BEAR IN A BIG BLUE HOUSE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BEB</Code>
+    <Description>BEAR IN BIG BLUE HOUSEUNI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  +</Code>
+    <Description>BEAUTY AND THE BEAST</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 11</Code>
+    <Description>BEAUTY AND THE BEAST</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BL1</Code>
+    <Description>BELLE Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BEE</Code>
+    <Description>BELLE Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBE</Code>
+    <Description>BELLE Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BL </Code>
+    <Description>BELLE Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRL</Code>
+    <Description>BIGHTS LIYETTE APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BDY</Code>
+    <Description>BIRTHDAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBB</Code>
+    <Description>BITBBH Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BUF</Code>
+    <Description>BLUEFROST Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BPT</Code>
+    <Description>BOY POOH LANETTE Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BOS</Code>
+    <Description>BOY SLEEP Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBP</Code>
+    <Description>BOYS BASIC POLOS Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBT</Code>
+    <Description>BOYS BASIC TEES Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  6</Code>
+    <Description>BOYS CREW</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BMC</Code>
+    <Description>BOYS MICKEY COUNTRY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CBS</Code>
+    <Description>BOYS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSE</Code>
+    <Description>BOYS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BEP</Code>
+    <Description>BOYS SLEEP Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSP</Code>
+    <Description>BOYS SLEEP Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BWR</Code>
+    <Description>BOYS SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BS </Code>
+    <Description>BOYS SWEATS Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSW</Code>
+    <Description>BOYS SWIMWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BGH</Code>
+    <Description>BRIGHTS AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BGB</Code>
+    <Description>BRIGHTS BIB AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BDW</Code>
+    <Description>BRIGHTS DAYWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBR</Code>
+    <Description>BRIGHTS LAYETTE TRIAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BIG</Code>
+    <Description>BRIGHTS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRS</Code>
+    <Description>BRIGHTS Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BIB</Code>
+    <Description>BRIGHTS ROMPER AND BIBS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BGR</Code>
+    <Description>BRIGHTS ROMPERS AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSZ</Code>
+    <Description>BRIGHTS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBG</Code>
+    <Description>BRIGHTS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRI</Code>
+    <Description>BRIGHTS SLEEP &amp; ROMPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRO</Code>
+    <Description>BROLLIES Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BHR</Code>
+    <Description>BROTHER BEAR Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRB</Code>
+    <Description>BROTHER BEAR Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  K</Code>
+    <Description>BTS KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  J</Code>
+    <Description>BTS PROMO MERCHANDISE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BLB</Code>
+    <Description>BUGS LIFE BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BZR</Code>
+    <Description>BUZZ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSP</Code>
+    <Description>BUZZ APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ZZZ</Code>
+    <Description>BUZZ Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BUU</Code>
+    <Description>BUZZ Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBZ</Code>
+    <Description>BUZZ Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BZ </Code>
+    <Description>BUZZ Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BQ4</Code>
+    <Description>BUZZ Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BV2</Code>
+    <Description>BV 2 FOR 20 OFFER- DEPT13</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRL</Code>
+    <Description>CARAMEL Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRG</Code>
+    <Description>CARGO BAGS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CAS</Code>
+    <Description>CARS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CHS</Code>
+    <Description>CHARACTER SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CS </Code>
+    <Description>CHARACTER SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  W</Code>
+    <Description>CHRISTMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  D</Code>
+    <Description>CHRISTMAS '94</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRI</Code>
+    <Description>CHRISTMAS SELECTION</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CNB</Code>
+    <Description>CINDERELLA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CIA</Code>
+    <Description>CINDERELLA APPAREL Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CIN</Code>
+    <Description>CINDERELLA BRIDE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRA</Code>
+    <Description>CINDERELLA Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CDR</Code>
+    <Description>CINDERELLA Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CLL</Code>
+    <Description>CINDERELLA Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CI </Code>
+    <Description>CINDERELLA Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL7</Code>
+    <Description>CINDY DREAMSCAPE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CF1</Code>
+    <Description>CINDY FILMSTAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CMG</Code>
+    <Description>CLASSIC MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MUG</Code>
+    <Description>CLASSIC MUGS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 45</Code>
+    <Description>CLASSIC POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CLP</Code>
+    <Description>CLASSIC POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CPL</Code>
+    <Description>CLASSIC POOH LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CLS</Code>
+    <Description>CLASSIC SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CSP</Code>
+    <Description>CLASSIC SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CSE</Code>
+    <Description>CLASSIC SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CSL</Code>
+    <Description>CLASSIC SLEEP AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CMS</Code>
+    <Description>COORDINATED MUGS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CAC</Code>
+    <Description>CORE ACCESSORIES Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CBG</Code>
+    <Description>CORE BAGS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CM </Code>
+    <Description>CORE MICKEY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CP </Code>
+    <Description>CORE POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRP</Code>
+    <Description>COSTUME ROMPER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CCS</Code>
+    <Description>COUNTRY COMFORTS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CGD</Code>
+    <Description>COUNTRY GARDEN Q2, Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CDD</Code>
+    <Description>CUDDLE UP Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CUT</Code>
+    <Description>CUTIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CW </Code>
+    <Description>CW MERMAID</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DOC</Code>
+    <Description>DA/MN OCEAN LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DNR</Code>
+    <Description>DAISY NIGHTWEAR Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DIY</Code>
+    <Description>DAISY Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DAI</Code>
+    <Description>DAISY Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>16 </Code>
+    <Description>DALMATIAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DPP</Code>
+    <Description>DALMATIAN PAW PRINTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 75</Code>
+    <Description>DALMATIANS KIDS NOVELTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>033</Code>
+    <Description>DARK GREY MARL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>036</Code>
+    <Description>DARK GREY MARL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDD</Code>
+    <Description>DD &amp; DAISY BLUES Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDN</Code>
+    <Description>DD &amp; DAISY NAUTICAL Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DCU</Code>
+    <Description>DD CUDDLE UP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDT</Code>
+    <Description>DD MENS DESERT Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DOD</Code>
+    <Description>DD MENS DESERT Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDO</Code>
+    <Description>DD OUTDOORS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DTC</Code>
+    <Description>DD TRADI COOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDU</Code>
+    <Description>DD UNDERWATER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDV</Code>
+    <Description>DD VESPA Q399</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DEV</Code>
+    <Description>DEAUVILLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DEG</Code>
+    <Description>DENIM BAGS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DIN</Code>
+    <Description>DINASAUR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  V</Code>
+    <Description>DINOSAURS PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ATH</Code>
+    <Description>DISNEY ATHLETIC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TDS</Code>
+    <Description>DISNEY STORE PROMOTION</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 25</Code>
+    <Description>DISNEY UNIVERSITY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WIS</Code>
+    <Description>DISNEY WISHES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DMM</Code>
+    <Description>DM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DON</Code>
+    <Description>DONALD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DBL</Code>
+    <Description>DONALD BLUES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DOV</Code>
+    <Description>DONALD CAMPERVAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DFD</Code>
+    <Description>DONALD FATHERS DAY FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DPK</Code>
+    <Description>DONALD PK Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DNS</Code>
+    <Description>DONALD SHARK Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DSH</Code>
+    <Description>DONALD SHIPPING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDS</Code>
+    <Description>DONALD SNOWBOARD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DSB</Code>
+    <Description>DONALD SNOWBOARDING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DSP</Code>
+    <Description>DONALD SPORT AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DSF</Code>
+    <Description>DONALD SURFING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DYC</Code>
+    <Description>DONALD YACHT CLUB</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 66</Code>
+    <Description>DONALDSON'S</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DUG</Code>
+    <Description>DOUG</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DRM</Code>
+    <Description>DREAMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  3</Code>
+    <Description>DSNY BABY ROCKABYE RHYMES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 18</Code>
+    <Description>DUCK TALES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DBD</Code>
+    <Description>DUMBO BIRTHDAY FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DMB</Code>
+    <Description>DUMBO LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DLA</Code>
+    <Description>DUMBO LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DMN</Code>
+    <Description>DUMBO NURSERY FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ETD</Code>
+    <Description>EARTH DAY</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EAS</Code>
+    <Description>EASTER</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EST</Code>
+    <Description>EASTER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>E02</Code>
+    <Description>EASTER Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ESR</Code>
+    <Description>EASTER Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EAR</Code>
+    <Description>EASTER Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL9</Code>
+    <Description>EEYORE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EEA</Code>
+    <Description>EEYORE ANTIQUITY Q401</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EGB</Code>
+    <Description>EEYORE GINGHAM BLUES Q201</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EE1</Code>
+    <Description>EEYORE GIRLS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EOC</Code>
+    <Description>EEYORE OCEAN LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EYP</Code>
+    <Description>EEYORE PATCHWORK Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ERB</Code>
+    <Description>EEYORE RASPBERRY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ETC</Code>
+    <Description>EEYORE TRADI COOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  4</Code>
+    <Description>EURO DISNEY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EVR</Code>
+    <Description>EVERGREEN            FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EXB</Code>
+    <Description>EXOTIC BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EXT</Code>
+    <Description>EXOTIC Q499</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EBS</Code>
+    <Description>EXPRESSO &amp; BEANIES Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ESM</Code>
+    <Description>EYR SPRING MORNING Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FIS</Code>
+    <Description>FACTOIDS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FAR</Code>
+    <Description>FAIRIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FRE</Code>
+    <Description>FAIRIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FAC</Code>
+    <Description>FASHION ACCESSORIES Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DAD</Code>
+    <Description>FATHER'S DAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FTH</Code>
+    <Description>FATHERS DAY</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FAD</Code>
+    <Description>FATHERS DAY Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 14</Code>
+    <Description>FEATURE BIN ART</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FTR</Code>
+    <Description>FIELD TRIP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FNO</Code>
+    <Description>FINDING NEMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FIR</Code>
+    <Description>FIRE TRUCK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FFL</Code>
+    <Description>FLIGHTS &amp; FANCY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FKC</Code>
+    <Description>FOLKLORIC CHARM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  F</Code>
+    <Description>FOX &amp; THE HOUND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>G99</Code>
+    <Description>GERMANY 1999</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GIF</Code>
+    <Description>GIFTS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GFS</Code>
+    <Description>GIFTS SETS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FLK</Code>
+    <Description>GIRL FOLK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GTS</Code>
+    <Description>GIRL LMM TROPICAL SPLASH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GMR</Code>
+    <Description>GIRL MN REGATTA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GMS</Code>
+    <Description>GIRL MN SAFARI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GPT</Code>
+    <Description>GIRL POOH LANETTE Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSE</Code>
+    <Description>GIRL SIMBA EXOTIC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSP</Code>
+    <Description>GIRL SIMBA'S PRIDE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GIS</Code>
+    <Description>GIRL SLEEP Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSR</Code>
+    <Description>GIRLMN SPRING ROMANCE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GBP</Code>
+    <Description>GIRLS BASIC POLOS Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GBT</Code>
+    <Description>GIRLS BASIC TEES Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GFT</Code>
+    <Description>GIRLS FASHION TEE Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GMB</Code>
+    <Description>GIRLS MINNIE BRAMBLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MHG</Code>
+    <Description>GIRLS MINNIE HEARTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GMH</Code>
+    <Description>GIRLS MINNIE HOMESTEAD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSA</Code>
+    <Description>GIRLS MN SAND DD Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GPL</Code>
+    <Description>GIRLS POOH AUTUMN LEAVES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PPG</Code>
+    <Description>GIRLS POOH PARTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GPP</Code>
+    <Description>GIRLS POOH ROBE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GPR</Code>
+    <Description>GIRLS POOH ROBE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CGS</Code>
+    <Description>GIRLS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GLP</Code>
+    <Description>GIRLS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GEP</Code>
+    <Description>GIRLS SLEEP Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSS</Code>
+    <Description>GIRLS SLEEP Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GIR</Code>
+    <Description>GIRLS SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSW</Code>
+    <Description>GIRLS SWIMWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GDP</Code>
+    <Description>GIRLS 101 DALMATIAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSL</Code>
+    <Description>GIRLS-SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 19</Code>
+    <Description>GOOF TROOP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  U</Code>
+    <Description>GOOFY PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  E</Code>
+    <Description>HALLOWEEN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MHL</Code>
+    <Description>HALLOWEEN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HLW</Code>
+    <Description>HALLOWEEN</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HAL</Code>
+    <Description>HALLOWEEN FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HEN</Code>
+    <Description>HALLOWEEN Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HPM</Code>
+    <Description>HANDPAINT M&amp;BOWLS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HAR</Code>
+    <Description>HARDLINES Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HPS</Code>
+    <Description>HELLO POOH SPORTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HER</Code>
+    <Description>HERCULES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  H</Code>
+    <Description>HOMETOWN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HKP</Code>
+    <Description>HOOK / PAN Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HKK</Code>
+    <Description>HOOK Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HK </Code>
+    <Description>HOOK Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HOO</Code>
+    <Description>HOOK Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DLD</Code>
+    <Description>HS05 DONALD SPORT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NBC</Code>
+    <Description>HS05 NEMO BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HMS</Code>
+    <Description>HUMOUR MUGS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 27</Code>
+    <Description>HUNCHBACK OF N.D.</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NCR</Code>
+    <Description>INCREDIBLES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ICD</Code>
+    <Description>INCREDIBLES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSO</Code>
+    <Description>INCREDIBLES APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IN1</Code>
+    <Description>INCREDIBLES GIRLS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IF </Code>
+    <Description>INFANT BASIC FLEECES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IG </Code>
+    <Description>INFANT BASIC GILLETS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IT </Code>
+    <Description>INFANT BASIC TOPS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IBT</Code>
+    <Description>INFANT BASIC TROUSERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KYI</Code>
+    <Description>INFANT KEY ITEMS Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ILS</Code>
+    <Description>INFANT LOCATION SPECIFIC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IMT</Code>
+    <Description>INFANT MINNIE TRUE BLUE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IFS</Code>
+    <Description>INFANT SET Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ITD</Code>
+    <Description>INFANT TRUEBLUE DONALD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IMC</Code>
+    <Description>INFANTS MICKEY COUNTRY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IMH</Code>
+    <Description>INFANTS MN HOMESTEAD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IPL</Code>
+    <Description>INFANTS POOH AUTUMN LVS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JAS</Code>
+    <Description>JASMINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JS1</Code>
+    <Description>JASMINE Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JME</Code>
+    <Description>JASMINE Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JS </Code>
+    <Description>JASMINE Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JG </Code>
+    <Description>JESSIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JSE</Code>
+    <Description>JESSIE Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JWS</Code>
+    <Description>JEWELS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 21</Code>
+    <Description>JOSE CARIOCA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JBK</Code>
+    <Description>JUNGLE BOOK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JNB</Code>
+    <Description>JUNGLE BOOK BOY Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JNG</Code>
+    <Description>JUNGLE BOOK GIRL Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>STE</Code>
+    <Description>JUNIOR STATIONERY ESSENT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KEY</Code>
+    <Description>KEY ITEM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KIA</Code>
+    <Description>KEY ITEM APPAREL Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  1</Code>
+    <Description>KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KI </Code>
+    <Description>KEY ITEMS - Q2 FY03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KIB</Code>
+    <Description>KEY ITEMS BOYSWEAR Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KDS</Code>
+    <Description>KIDS SOFTLINES Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KIM</Code>
+    <Description>KIM POSSIBLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KP1</Code>
+    <Description>KIM POSSIBLE Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LKI</Code>
+    <Description>LADIES KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LIT</Code>
+    <Description>LADIES KEY ITEMS Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LMV</Code>
+    <Description>LADIES MICKEY VINT. Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NTC</Code>
+    <Description>LADIES MN TRADI COOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LPV</Code>
+    <Description>LADIES POOH VINTAGE Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LT </Code>
+    <Description>LADY &amp; THE TRAMP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 17</Code>
+    <Description>LADY AND THE TRAMP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LAY</Code>
+    <Description>LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LBM</Code>
+    <Description>LAYETTE BAMBI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DBK</Code>
+    <Description>LDS DD/DA BUTTERFLY KISS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEL</Code>
+    <Description>LDS MM SIMPLE ESSENT Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PEL</Code>
+    <Description>LDS PH SIMPLE ESSENT Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LEJ</Code>
+    <Description>LE JARDIN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LNS</Code>
+    <Description>LILO &amp; STITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  Q</Code>
+    <Description>LION KING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LK </Code>
+    <Description>LION KING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LBL</Code>
+    <Description>LION KING BOY LAY Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LGL</Code>
+    <Description>LION KING GIRL LAY Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LNK</Code>
+    <Description>LION KING Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LN </Code>
+    <Description>LION KING Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LKG</Code>
+    <Description>LION KING Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LMB</Code>
+    <Description>LMM BUBBLES Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LMM</Code>
+    <Description>LMM RECREATIONAL Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  M</Code>
+    <Description>M-LEAGUE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MGL</Code>
+    <Description>MADRIGAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIR</Code>
+    <Description>MARIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAB</Code>
+    <Description>MARIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL0</Code>
+    <Description>MARIE ANGLOMANIA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MC1</Code>
+    <Description>MARIE CHECK SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLT</Code>
+    <Description>MARIE LAYETTE AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ML </Code>
+    <Description>MARIE LEOPARD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAR</Code>
+    <Description>MARIE NURSERY Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MA1</Code>
+    <Description>MARIE Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIE</Code>
+    <Description>MARIE Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SLM</Code>
+    <Description>MARIE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSS</Code>
+    <Description>MARIE SLEEP Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MA </Code>
+    <Description>MARIE SLEEP Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSL</Code>
+    <Description>MARIE SLEEPWEAR/SLIPPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAE</Code>
+    <Description>MARIE SWIM Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MVT</Code>
+    <Description>MARIE VITAMINS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  O</Code>
+    <Description>MARSUPILAMI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 12</Code>
+    <Description>MARY POPPINS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLY</Code>
+    <Description>MELODY Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTC</Code>
+    <Description>MEN MM TRADI COOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AMU</Code>
+    <Description>MENS AUTHENTIC Q4</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPJ</Code>
+    <Description>MENS JAQUARD POLOSHIRTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKI</Code>
+    <Description>MENS KEY ITEMS Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNW</Code>
+    <Description>MENS NIGHTWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNV</Code>
+    <Description>MENS NOVELTY Q1 02</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPS</Code>
+    <Description>MENS PIQUE POLOSHIRTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEN</Code>
+    <Description>MENS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  2</Code>
+    <Description>MERMAID "SUMMER PARADISE"</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LMA</Code>
+    <Description>MERMAID ATLANTIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSF</Code>
+    <Description>MERMAID SUMMER FUN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ASF</Code>
+    <Description>MERMAID SUMMER FUN FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDM</Code>
+    <Description>MICK&amp;DONALD MOTOR SC-Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ALS</Code>
+    <Description>MICK/DON ALL S  TRUCKER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MD2</Code>
+    <Description>MICKEY &amp; DONALD BIKERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MD1</Code>
+    <Description>MICKEY &amp; DONALD SURF</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDL</Code>
+    <Description>MICKEY / DONALD SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDR</Code>
+    <Description>MICKEY /DONALD RESCUE:</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MK </Code>
+    <Description>MICKEY ADVENTURE Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAV</Code>
+    <Description>MICKEY ADVENTURE TRAIL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAL</Code>
+    <Description>MICKEY ALPINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAP</Code>
+    <Description>MICKEY ALPINE LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>APL</Code>
+    <Description>MICKEY AMERICAN PIE LADY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>APM</Code>
+    <Description>MICKEY AMERICAN PIE MENS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>M&amp;D</Code>
+    <Description>MICKEY AND DONALD SKATE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMZ</Code>
+    <Description>MICKEY AVIATOR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCB</Code>
+    <Description>MICKEY BEACHCOMBER Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBA</Code>
+    <Description>MICKEY BEAR AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 65</Code>
+    <Description>MICKEY BLUES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBU</Code>
+    <Description>MICKEY BUGS HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCC</Code>
+    <Description>MICKEY CAMEL CASUALS LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCF</Code>
+    <Description>MICKEY CAMPFIRE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCG</Code>
+    <Description>MICKEY CAMPING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRM</Code>
+    <Description>MICKEY CAR LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMH</Code>
+    <Description>MICKEY CHILDRENS HPPY BCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCU</Code>
+    <Description>MICKEY CUDDLE UP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDJ</Code>
+    <Description>MICKEY DJ AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>YDD</Code>
+    <Description>MICKEY DONALD DUNE Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKE</Code>
+    <Description>MICKEY EXTREME</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MF </Code>
+    <Description>MICKEY FALL FESTIVAL LADY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKF</Code>
+    <Description>MICKEY FASHION Q107</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFB</Code>
+    <Description>MICKEY FOOTBALL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFO</Code>
+    <Description>MICKEY FOREST</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MGF</Code>
+    <Description>MICKEY GONE FISHING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MGP</Code>
+    <Description>MICKEY GRAND PRIX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MYH</Code>
+    <Description>MICKEY HAWAIIAN Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKJ</Code>
+    <Description>MICKEY JETSKI Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MHM</Code>
+    <Description>MICKEY LADIES HAPPY BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLO</Code>
+    <Description>MICKEY LADIES OASIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKL</Code>
+    <Description>MICKEY LASSO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCL</Code>
+    <Description>MICKEY LAYETTE Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLB</Code>
+    <Description>MICKEY LUMBERJACK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>OMM</Code>
+    <Description>MICKEY MENS OASIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MOL</Code>
+    <Description>MICKEY MOLTEN GLOW</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKN</Code>
+    <Description>MICKEY NORDIC LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTM</Code>
+    <Description>MICKEY ON THE MOVE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MOC</Code>
+    <Description>MICKEY OUTDOORS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPP</Code>
+    <Description>MICKEY PLAYING IN PARK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MQM</Code>
+    <Description>MICKEY QUIET MOMENTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKY</Code>
+    <Description>MICKEY Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCY</Code>
+    <Description>MICKEY Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRL</Code>
+    <Description>MICKEY RECREATIONAL Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRG</Code>
+    <Description>MICKEY REGATTA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRT</Code>
+    <Description>MICKEY ROAD TRIP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKS</Code>
+    <Description>MICKEY SAFARI Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MY </Code>
+    <Description>MICKEY SLEEP Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MWR</Code>
+    <Description>MICKEY SNOW RIDER Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSP</Code>
+    <Description>MICKEY SPORT BTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SFM</Code>
+    <Description>MICKEY SUMMER FUN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSO</Code>
+    <Description>MICKEY SUPERHERO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MUS</Code>
+    <Description>MICKEY USA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>USA</Code>
+    <Description>MICKEY USA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MVA</Code>
+    <Description>MICKEY VARSITY ACCESS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MWT</Code>
+    <Description>MICKEY WINTER WONDERLAND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MWW</Code>
+    <Description>MICKEY WORKWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  X</Code>
+    <Description>MICKEY'S 65TH BDAY PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MYD</Code>
+    <Description>MICKIE DRIVINE Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 10</Code>
+    <Description>MIGHTY DUCKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIL</Code>
+    <Description>MILLENIUM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDS</Code>
+    <Description>MINNIE &amp; DAISY SPA Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAG</Code>
+    <Description>MINNIE ANGLO AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEE</Code>
+    <Description>MINNIE APPAREL Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ME1</Code>
+    <Description>MINNIE AUTUMN LEAVES Q105</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBR</Code>
+    <Description>MINNIE BRAMBLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEB</Code>
+    <Description>MINNIE BUTTERFLY Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCI</Code>
+    <Description>MINNIE CAPRI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCK</Code>
+    <Description>MINNIE CHECK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CHE</Code>
+    <Description>MINNIE CHERRIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRR</Code>
+    <Description>MINNIE CHERRIES LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MI1</Code>
+    <Description>MINNIE CLASSIE Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MC </Code>
+    <Description>MINNIE COLLEGE Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCN</Code>
+    <Description>MINNIE CONTINENTAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEC</Code>
+    <Description>MINNIE CONTINENTAL Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCR</Code>
+    <Description>MINNIE CORSAGE Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCM</Code>
+    <Description>MINNIE CRUISE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCT</Code>
+    <Description>MINNIE CUTIES Q4 04</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDW</Code>
+    <Description>MINNIE DOG WALKING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEK</Code>
+    <Description>MINNIE ESKIMO LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFY</Code>
+    <Description>MINNIE FAIRY Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFS</Code>
+    <Description>MINNIE FAIRY SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FFM</Code>
+    <Description>MINNIE FALL FESTIVAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIF</Code>
+    <Description>MINNIE FASHION Q107</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFF</Code>
+    <Description>MINNIE FLIGHTS OF FANCY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FLO</Code>
+    <Description>MINNIE FLORAL SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFT</Code>
+    <Description>MINNIE FOREST</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFH</Code>
+    <Description>MINNIE FRESH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL4</Code>
+    <Description>MINNIE HANDBAG</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HBM</Code>
+    <Description>MINNIE HAPPY BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNJ</Code>
+    <Description>MINNIE JUNGLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLL</Code>
+    <Description>MINNIE LAYETTE Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL3</Code>
+    <Description>MINNIE LEAVES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLA</Code>
+    <Description>MINNIE LOGO ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAN</Code>
+    <Description>MINNIE MANDARIN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MB </Code>
+    <Description>MINNIE MULBERRY Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MOR</Code>
+    <Description>MINNIE ORIENTAL Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MP </Code>
+    <Description>MINNIE PAISLEY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPY</Code>
+    <Description>MINNIE PAISLEY Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PTY</Code>
+    <Description>MINNIE PARTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPT</Code>
+    <Description>MINNIE PATCHWORK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIP</Code>
+    <Description>MINNIE PICNIC Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL1</Code>
+    <Description>MINNIE PONY CLUB</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSM</Code>
+    <Description>MINNIE POPSTAR AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNY</Code>
+    <Description>MINNIE POSTCARDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MI </Code>
+    <Description>MINNIE PRAIRIE Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPG</Code>
+    <Description>MINNIE PREPPY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBL</Code>
+    <Description>MINNIE PRETTY IN BLUE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MN1</Code>
+    <Description>MINNIE Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIN</Code>
+    <Description>MINNIE Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MII</Code>
+    <Description>MINNIE Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNR</Code>
+    <Description>MINNIE REGATTA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRI</Code>
+    <Description>MINNIE RIBBONS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRV</Code>
+    <Description>MINNIE RIVIERA Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRO</Code>
+    <Description>MINNIE ROSE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MST</Code>
+    <Description>MINNIE SAND DESERT Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSD</Code>
+    <Description>MINNIE SCHOOL DAZE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSA</Code>
+    <Description>MINNIE SEA SHELLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SIE</Code>
+    <Description>MINNIE SIENNA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEP</Code>
+    <Description>MINNIE SLEEP Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSE</Code>
+    <Description>MINNIE SLEEP Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MS </Code>
+    <Description>MINNIE SLEEP Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MS1</Code>
+    <Description>MINNIE SNOW</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFA</Code>
+    <Description>MINNIE SNOW FAIRY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSN</Code>
+    <Description>MINNIE SNOW PRINCESS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SNF</Code>
+    <Description>MINNIE SNOWFLAKE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSG</Code>
+    <Description>MINNIE SPORT - GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTY</Code>
+    <Description>MINNIE SPORTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNI</Code>
+    <Description>MINNIE STRAWBERRIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSB</Code>
+    <Description>MINNIE STRAWBERRY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MN </Code>
+    <Description>MINNIE SUMMER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSH</Code>
+    <Description>MINNIE SUMMER HOLIDAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AAC</Code>
+    <Description>MINNIE SUNSHINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNT</Code>
+    <Description>MINNIE SWEETHEART Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNU</Code>
+    <Description>MINNIE SWEETHEART Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SWI</Code>
+    <Description>MINNIE SWIM Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MWL</Code>
+    <Description>MINNIE WINTER WONDERLAND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDD</Code>
+    <Description>MM / DD DUNE Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAC</Code>
+    <Description>MM ACTIVE Q299</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LMP</Code>
+    <Description>MM AMERICAN PIE LADIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPM</Code>
+    <Description>MM AMERICAN PIE MEN'S</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMA</Code>
+    <Description>MM ATLANTIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSM</Code>
+    <Description>MM BACK TO SCHOOL FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BEA</Code>
+    <Description>MM BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMB</Code>
+    <Description>MM BRITISH STYLE LDS Q4</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>COM</Code>
+    <Description>MM CHILL OUT HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CGM</Code>
+    <Description>MM COUNTRY GARDEN Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CUM</Code>
+    <Description>MM CUDDLE UP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDP</Code>
+    <Description>MM DD SLEEP Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDV</Code>
+    <Description>MM DEAUVILLE FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMT</Code>
+    <Description>MM DESERT Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MME</Code>
+    <Description>MM ENERGY Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEV</Code>
+    <Description>MM EVERGREEN MENS FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LMF</Code>
+    <Description>MM FALL FESTIVAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFL</Code>
+    <Description>MM FROST</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMG</Code>
+    <Description>MM GINGHAM BLUES Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MHN</Code>
+    <Description>MM HANGGLIDING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSN</Code>
+    <Description>MM INDIANA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MJS</Code>
+    <Description>MM JEANS Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMJ</Code>
+    <Description>MM JUNGLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLC</Code>
+    <Description>MM LADIES CORE Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLD</Code>
+    <Description>MM LADIES DESERT Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLJ</Code>
+    <Description>MM LE JARDIN FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MML</Code>
+    <Description>MM LUMBERJACK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMD</Code>
+    <Description>MM MENS DESERT Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEM</Code>
+    <Description>MM MENS ESSENTIALS Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMM</Code>
+    <Description>MM MIAMI Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMN</Code>
+    <Description>MM NAUTICAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMO</Code>
+    <Description>MM OUTDOORS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPO</Code>
+    <Description>MM PRECIOUS ORIGINS Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMP</Code>
+    <Description>MM PROVENCE NGTWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMR</Code>
+    <Description>MM RACING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRE</Code>
+    <Description>MM RECREATIONAL Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSK</Code>
+    <Description>MM SNOWFLAKE Q1 02</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SOC</Code>
+    <Description>MM SOCCER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SOL</Code>
+    <Description>MM SOLOG</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMS</Code>
+    <Description>MM SPORT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSM</Code>
+    <Description>MM SPORT RALLEY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSR</Code>
+    <Description>MM SPRING ROMANCE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TCM</Code>
+    <Description>MM TRADITIONAL CHRISTMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VMM</Code>
+    <Description>MM VINTAGE Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>M10</Code>
+    <Description>MN &amp; 101 COLLEGE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBS</Code>
+    <Description>MN BACK TO SCHOOL FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BER</Code>
+    <Description>MN BERRIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNB</Code>
+    <Description>MN BUTTONS AND BOWS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CML</Code>
+    <Description>MN CUDDLE UP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NEV</Code>
+    <Description>MN EVERGREEN LADIES FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNF</Code>
+    <Description>MN FOLK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GAR</Code>
+    <Description>MN GARDEN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNM</Code>
+    <Description>MN MADRAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MM </Code>
+    <Description>MN MARINA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNN</Code>
+    <Description>MN NATURE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNO</Code>
+    <Description>MN OLDER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNP</Code>
+    <Description>MN PARADISE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PGD</Code>
+    <Description>MN PLAYGROUND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 26</Code>
+    <Description>MN PROVINCIAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SNO</Code>
+    <Description>MN SNOW</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSM</Code>
+    <Description>MN SPRING MORNING Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNS</Code>
+    <Description>MN STARS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSI</Code>
+    <Description>MN STRIPE HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTG</Code>
+    <Description>MN TARTAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTN</Code>
+    <Description>MN TENNIS HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTF</Code>
+    <Description>MN TUTTI FRUTTI HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNX</Code>
+    <Description>MN X STITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDC</Code>
+    <Description>MN/DA COUTURE LDS Q4</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>INC</Code>
+    <Description>MONSTERS INC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MUM</Code>
+    <Description>MOTHER'S DAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MD </Code>
+    <Description>MOTHERSDAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTD</Code>
+    <Description>MOTHERSDAY</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>M&amp;B</Code>
+    <Description>MUG&amp;BEANIES Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MUB</Code>
+    <Description>MUGS &amp; BOWLS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLN</Code>
+    <Description>MULAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MUL</Code>
+    <Description>MULAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRI</Code>
+    <Description>MULTI PRINCESS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MP1</Code>
+    <Description>MULTI PRINCESS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LEE</Code>
+    <Description>MULTI PRINCESS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL8</Code>
+    <Description>MULTI-PRINCESS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MUT</Code>
+    <Description>MUPPETS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MU1</Code>
+    <Description>MUPPETS GIRLS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 20</Code>
+    <Description>MVP ART</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AAD</Code>
+    <Description>NEMO APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NMB</Code>
+    <Description>NEMO BOYS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NE1</Code>
+    <Description>NEMO GIRLS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NMG</Code>
+    <Description>NEMO GIRLS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NEM</Code>
+    <Description>NEMO Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NTG</Code>
+    <Description>NEMO TANK GANG SS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NEP</Code>
+    <Description>NEPHEWS HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NEB</Code>
+    <Description>NEUTRAL BABY Q107</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NEW</Code>
+    <Description>NEW ENGLAND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ENG</Code>
+    <Description>NEW ENGLAND Q200</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNE</Code>
+    <Description>NEWBORN POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDY</Code>
+    <Description>NN DD TACHT CLUB</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code xml:space="preserve">   </Code>
+    <Description>NO ACTIVE PROMOTION</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  !</Code>
+    <Description>NO PROMOTION ACTIVE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NAC</Code>
+    <Description>NOVELTY ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NVA</Code>
+    <Description>NOVELTY ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NOV</Code>
+    <Description>NOVELTY ACCESSORIES Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NOB</Code>
+    <Description>NOVELTY BAGS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NNS</Code>
+    <Description>NOVELTY NGTWEAR/SLIPPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NVN</Code>
+    <Description>NOVELTY NIGHTWEAR Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NSL</Code>
+    <Description>NOVELTY SLEEPWEAR/SLIPPRS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JUN</Code>
+    <Description>N203 JUNGLE BOOK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>OAS</Code>
+    <Description>OASIS Q200</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>OFM</Code>
+    <Description>OASIS Q200 MENS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>OFF</Code>
+    <Description>OASIS Q300 LADIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 29</Code>
+    <Description>OOH LA LA MINNIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  *</Code>
+    <Description>OTHER</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>OSL</Code>
+    <Description>OTHER SLEEP:</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>P&amp;H</Code>
+    <Description>PAN AND HOOK Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PA </Code>
+    <Description>PEPPER ANNE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  A</Code>
+    <Description>PERILS OF MICKEY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  R</Code>
+    <Description>PETER PAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PAN</Code>
+    <Description>PETER PAN Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBG</Code>
+    <Description>PH BUTTERFLY GINGHAM Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLC</Code>
+    <Description>PH LADIES CORE Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PPO</Code>
+    <Description>PH PRECIOUS ORIGINS Q302</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PKI</Code>
+    <Description>PH/EY LDS KEY ITEMS Q4</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PIC</Code>
+    <Description>PICNIC Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  T</Code>
+    <Description>PINOCCHIO PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PIR</Code>
+    <Description>PIRATES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PK </Code>
+    <Description>PK Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  P</Code>
+    <Description>POCHAHONTAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GP </Code>
+    <Description>POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>APP</Code>
+    <Description>POOH AMERICAN PIE LADIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PPA</Code>
+    <Description>POOH APPAREL Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PAL</Code>
+    <Description>POOH AUTUMN LEAVES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBF</Code>
+    <Description>POOH BEST FRIENDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBD</Code>
+    <Description>POOH BIRTHDAY FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BLU</Code>
+    <Description>POOH BLUSTERY DAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PB </Code>
+    <Description>POOH BONFIRE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBL</Code>
+    <Description>POOH BOY LAY Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WTB</Code>
+    <Description>POOH BOY LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBS</Code>
+    <Description>POOH BRITISH STYLE LDS Q4</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PC </Code>
+    <Description>POOH CAMPING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PCP</Code>
+    <Description>POOH CAMPING INFANT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PCG</Code>
+    <Description>POOH CAMPING Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PXM</Code>
+    <Description>POOH CHRISTMAS LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLA</Code>
+    <Description>POOH CORE ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CUL</Code>
+    <Description>POOH CUDDLE UP LADIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CPM</Code>
+    <Description>POOH CUDDLE UP MEN'S</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PDV</Code>
+    <Description>POOH DEAUVILLE FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POT</Code>
+    <Description>POOH DESERT Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ETR</Code>
+    <Description>POOH EASTER Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>113</Code>
+    <Description>POOH ESSENTIALS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FFP</Code>
+    <Description>POOH FALL FESTIVAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPL</Code>
+    <Description>POOH FALL FESTIVAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PF </Code>
+    <Description>POOH FALL FESTIVAL LADIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PFT</Code>
+    <Description>POOH FAMILY TREE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLF</Code>
+    <Description>POOH FLIGHTS OF FANCY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PGL</Code>
+    <Description>POOH GIRL LAY  Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WTG</Code>
+    <Description>POOH GIRL LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PH1</Code>
+    <Description>POOH GIRLS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PGT</Code>
+    <Description>POOH GO KART Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PH </Code>
+    <Description>POOH HALLOWEEN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PIN</Code>
+    <Description>POOH INFANT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 74</Code>
+    <Description>POOH KIDS NOVELTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PDL</Code>
+    <Description>POOH LADIES DESERT Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLO</Code>
+    <Description>POOH LADIES OASIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLJ</Code>
+    <Description>POOH LE JARDIN FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PM </Code>
+    <Description>POOH MADRAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PMI</Code>
+    <Description>POOH MIAMI Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PMG</Code>
+    <Description>POOH MOLTEN GLOW</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NBP</Code>
+    <Description>POOH NEWBORN AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PON</Code>
+    <Description>POOH NEWBORN Q107</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNR</Code>
+    <Description>POOH NIGHTWEAR Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNY</Code>
+    <Description>POOH NURSERY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PPY</Code>
+    <Description>POOH PARTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POG</Code>
+    <Description>POOH PLAYGROUND Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHP</Code>
+    <Description>POOH PROVENCE NGTWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PQM</Code>
+    <Description>POOH QUIET MOMENTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POO</Code>
+    <Description>POOH Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POR</Code>
+    <Description>POOH RAFTING Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRC</Code>
+    <Description>POOH RECREATION Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PR </Code>
+    <Description>POOH REGATTA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRP</Code>
+    <Description>POOH RIVER PATROL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSN</Code>
+    <Description>POOH SATIN Q1 02</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSC</Code>
+    <Description>POOH SILLY CIRCUS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSK</Code>
+    <Description>POOH SKATE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POS</Code>
+    <Description>POOH SKI Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL6</Code>
+    <Description>POOH SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSD</Code>
+    <Description>POOH SNOWY DAYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PS </Code>
+    <Description>POOH SPRING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSP</Code>
+    <Description>POOH SPRING ROMANCE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSR</Code>
+    <Description>POOH SPRING ROMANCE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PST</Code>
+    <Description>POOH STORY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>STR</Code>
+    <Description>POOH STRIPE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSB</Code>
+    <Description>POOH SUMMER BLUES Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>115</Code>
+    <Description>POOH THOUGHTFUL MOMENTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TCP</Code>
+    <Description>POOH TRADITIONAL CHRISTMA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PVA</Code>
+    <Description>POOH VARSITY ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VPH</Code>
+    <Description>POOH VINTAGE Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PWD</Code>
+    <Description>POOH WINTER'S DAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WPL</Code>
+    <Description>POOH WISHES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PWL</Code>
+    <Description>POOH WOODLAND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BAA</Code>
+    <Description>POOH'S FIRST XMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PPD</Code>
+    <Description>POOH'S PLAYGROUND Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 64</Code>
+    <Description>POOH'S SUMMER ADVENTURE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POW</Code>
+    <Description>POWER RANGERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSQ</Code>
+    <Description>POWER RANGERS APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  8</Code>
+    <Description>PRINCESS PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PR1</Code>
+    <Description>PRINCESS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSS</Code>
+    <Description>PRINCESS SWIM Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PP6</Code>
+    <Description>PROMO PJS Q106</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PP </Code>
+    <Description>PUSH &amp; PEDAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>QT </Code>
+    <Description>QUICK TURN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BEI</Code>
+    <Description>Q1 BABY EINSTEIN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPS</Code>
+    <Description>Q1 SIMPLY POOH SNOWFLAKE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TC1</Code>
+    <Description>Q1 TRADITIONAL XMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SNW</Code>
+    <Description>Q1 02 SNOW WHITE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LON</Code>
+    <Description>Q1'04.TDS.LONDON</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PAR</Code>
+    <Description>Q1'04.TDS.PARIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NAR</Code>
+    <Description>Q1'06 NARNIA SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BFC</Code>
+    <Description>Q102 BABYS 1ST XMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBC</Code>
+    <Description>Q102 BOYS BASICS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DND</Code>
+    <Description>Q102 DD &amp; DA LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDA</Code>
+    <Description>Q102 DD ALPINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GBC</Code>
+    <Description>Q102 GIRLS BASICS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMK</Code>
+    <Description>Q102 MENS KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCS</Code>
+    <Description>Q102 MICKEY CAMEL CASUALS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAU</Code>
+    <Description>Q102 MICKEY MENS AUTHNTC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNL</Code>
+    <Description>Q102 MICKEY NORDIC LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDB</Code>
+    <Description>Q102 MM/DD BIKING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MND</Code>
+    <Description>Q102 MN/DA COUTURE LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WPC</Code>
+    <Description>Q102 POOH CAMEL CASUALS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TNK</Code>
+    <Description>Q102 TINX (PINK &amp; NAVY)</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WPN</Code>
+    <Description>Q102 WTP NORDIC LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BFT</Code>
+    <Description>Q103 BABY'S FIRST</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BLE</Code>
+    <Description>Q103 BELLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BST</Code>
+    <Description>Q103 BOY SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BFS</Code>
+    <Description>Q103 BUZZ FASHION</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CHA</Code>
+    <Description>Q103 CHARACTER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>XMM</Code>
+    <Description>Q103 CHRISTMAS MORNING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CDL</Code>
+    <Description>Q103 CINDERELLA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DLS</Code>
+    <Description>Q103 DALMATIANS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GST</Code>
+    <Description>Q103 GIRL SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GPY</Code>
+    <Description>Q103 GIRLS PARTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JMN</Code>
+    <Description>Q103 JASMINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKA</Code>
+    <Description>Q103 MICKEY KAYAK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNA</Code>
+    <Description>Q103 MINNIE ANDORA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRS</Code>
+    <Description>Q103 MINNIE RUSSIAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MSW</Code>
+    <Description>Q103 MINNIE SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MVL</Code>
+    <Description>Q103 MINNIE VALENCIA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MVE</Code>
+    <Description>Q103 MINNIE VELVET</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPI</Code>
+    <Description>Q103 MM POLAR ICE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNN</Code>
+    <Description>Q103 PINNOCHIO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHS</Code>
+    <Description>Q103 POOH SLEDGING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PXS</Code>
+    <Description>Q103 POOH XMAS SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHX</Code>
+    <Description>Q103 POOH 1ST XMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSL</Code>
+    <Description>Q103 PRINCESS (SLEEP)</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SWT</Code>
+    <Description>Q103 SNOW WHITE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TMG</Code>
+    <Description>Q103 TIGGER MEN'S GIFTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TS3</Code>
+    <Description>Q103 TOY STORY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CCW</Code>
+    <Description>Q103 XMAS CARD/WRAPPING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DLL</Code>
+    <Description>Q103 101 LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DSW</Code>
+    <Description>Q103 101 SNOWFLAKE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MGR</Code>
+    <Description>Q104 MINNIE GIPSY RANGE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AL5</Code>
+    <Description>Q105 ALADDIN 5</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BE5</Code>
+    <Description>Q105 BELLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BU5</Code>
+    <Description>Q105 BUZZ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EEW</Code>
+    <Description>Q105 EEYORE WINTER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IN5</Code>
+    <Description>Q105 INCREDIBLES BOY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ING</Code>
+    <Description>Q105 INCREDIBLES GIRL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JA5</Code>
+    <Description>Q105 JASMINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MUP</Code>
+    <Description>Q105 MULTI PRINCESS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POX</Code>
+    <Description>Q105 POOH XMAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PWP</Code>
+    <Description>Q105 POWER RANGERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SB5</Code>
+    <Description>Q105 SLEEPING BEAUTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TI5</Code>
+    <Description>Q105 TINKERBELL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>XMP</Code>
+    <Description>Q105 XMAS PLUSH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NBR</Code>
+    <Description>Q2 BRIGHTS DAYWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SBR</Code>
+    <Description>Q2 BRIGHTS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SCL</Code>
+    <Description>Q2 CLASSIC SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NPN</Code>
+    <Description>Q2 POOH NEWBORN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TGA</Code>
+    <Description>Q2/Q203 TIGGER ACADEMY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSL</Code>
+    <Description>Q2/Q302 BOYS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EEY</Code>
+    <Description>Q2/Q302 EEYORE LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GMN</Code>
+    <Description>Q2/Q302 GIRLS MN SHERBET</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GRS</Code>
+    <Description>Q2/Q302 GIRLS SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDH</Code>
+    <Description>Q2/Q302 MM/DD HOMELAND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HDL</Code>
+    <Description>Q2/Q302 NEPHEWS LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SIM</Code>
+    <Description>Q2/Q302 SIMBA NB LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRA</Code>
+    <Description>Q202 BEAR APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSC</Code>
+    <Description>Q202 BEAR SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BUZ</Code>
+    <Description>Q202 BUZZ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DAC</Code>
+    <Description>Q202 DD ACADEMY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EED</Code>
+    <Description>Q202 EEYORE DENIM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDE</Code>
+    <Description>Q202 MM/DD EXPLORER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MPR</Code>
+    <Description>Q202 MM/MN PREC ORIGINS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BCM</Code>
+    <Description>Q202 MN BREAKFAST CLUB</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WTR</Code>
+    <Description>Q202 MN WESTERN TEEN RNG</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MON</Code>
+    <Description>Q202 MONSTERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PAU</Code>
+    <Description>Q202 POOH AUTHENTIC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRN</Code>
+    <Description>Q202 PRINCESSES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RPA</Code>
+    <Description>Q202 ROMPERS &amp; PADDERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ARL</Code>
+    <Description>Q203 ARIEL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBL</Code>
+    <Description>Q203 BELLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BCS</Code>
+    <Description>Q203 BFAST CLUB EE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BKI</Code>
+    <Description>Q203 BOYS KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BLS</Code>
+    <Description>Q203 BOYS SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BAZ</Code>
+    <Description>Q203 BUZZ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CAN</Code>
+    <Description>Q203 CANDY SERIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CHR</Code>
+    <Description>Q203 CHARACTER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CND</Code>
+    <Description>Q203 CINDY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CUD</Code>
+    <Description>Q203 CUDDLE TOTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CUP</Code>
+    <Description>Q203 CUPCAKE ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DPR</Code>
+    <Description>Q203 DAISY PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DEN</Code>
+    <Description>Q203 DENIMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DWF</Code>
+    <Description>Q203 DWARVES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EYD</Code>
+    <Description>Q203 EEYORE DENIM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BYS</Code>
+    <Description>Q203 INFANT BOYS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GLS</Code>
+    <Description>Q203 INFANT GIRLS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JAN</Code>
+    <Description>Q203 JASMINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KIS</Code>
+    <Description>Q203 KEY ITEM SLIPPER/SLP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LNT</Code>
+    <Description>Q203 LADIES NATURAL TRACE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAS</Code>
+    <Description>Q203 MARIE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTR</Code>
+    <Description>Q203 MENS NATURAL TRACES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MAT</Code>
+    <Description>Q203 MICKEY AUTOMOBILE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MES</Code>
+    <Description>Q203 MICKEY ESSENTIALS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MFR</Code>
+    <Description>Q203 MINNIE PROMO/FRUITS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSE</Code>
+    <Description>Q203 MINNIE ROSE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIS</Code>
+    <Description>Q203 MINNIE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMU</Code>
+    <Description>Q203 MM URBAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCA</Code>
+    <Description>Q203 MN CORE ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCD</Code>
+    <Description>Q203 MN DENIM ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNH</Code>
+    <Description>Q203 MN HEARTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBE</Code>
+    <Description>Q203 PH BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PCA</Code>
+    <Description>Q203 PH CORE ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHL</Code>
+    <Description>Q203 PH LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PVI</Code>
+    <Description>Q203 PH VINTAGE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHE</Code>
+    <Description>Q203 POOH ESSENTIALS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PFG</Code>
+    <Description>Q203 POOH FLOWER GDN - MD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLW</Code>
+    <Description>Q203 PRINCESS LEISUREWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNL</Code>
+    <Description>Q203 PRINCESS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SBY</Code>
+    <Description>Q203 SLEEPING BEAUTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SNT</Code>
+    <Description>Q203 SNOW WHITE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>STT</Code>
+    <Description>Q203 STITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TTS</Code>
+    <Description>Q203 TEEN TEES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TIE</Code>
+    <Description>Q203 TIE DYE ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TKB</Code>
+    <Description>Q203 TINKERBELL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VAS</Code>
+    <Description>Q203 VALENTINES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>D03</Code>
+    <Description>Q203 101 2</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ARE</Code>
+    <Description>Q204 ARIEL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CNA</Code>
+    <Description>Q204 CINDERELLA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BIR</Code>
+    <Description>Q204 INF BRIGHT ROMPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRR</Code>
+    <Description>Q204 INF BROTHER BEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DUY</Code>
+    <Description>Q204 INF DUMBO LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ESS</Code>
+    <Description>Q204 INF ESSENTIALS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LKB</Code>
+    <Description>Q204 INF LKING BEACHWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKM</Code>
+    <Description>Q204 INF MICKEY/MINN LAYE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POY</Code>
+    <Description>Q204 INF POOH LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SLW</Code>
+    <Description>Q204 INF SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LIG</Code>
+    <Description>Q204 INFANTS LION KING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIB</Code>
+    <Description>Q204 INFANTS MINNIE BUTTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MYS</Code>
+    <Description>Q204 MICKEY SAFARI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRG</Code>
+    <Description>Q204 POWER RANGERS PJ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SBT</Code>
+    <Description>Q204 SLEEPING BEAUTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LAS</Code>
+    <Description>Q204 STITCH PJ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TNL</Code>
+    <Description>Q204 TINKERBELL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBR</Code>
+    <Description>Q3 BABY BRIGHTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LBR</Code>
+    <Description>Q3 BSBY BRIGHTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BUM</Code>
+    <Description>Q3 MINNIE BUTTERFLY SAFAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>POB</Code>
+    <Description>Q3 POOH BRIGHTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NPH</Code>
+    <Description>Q3 POOH NEWBORN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SAM</Code>
+    <Description>Q3 SIMBA ANIMAL MAGIC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SRT</Code>
+    <Description>Q3O4 SORBET</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BCB</Code>
+    <Description>Q302 BEACH BABY BOY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BCG</Code>
+    <Description>Q302 BEACH BABY GIRL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRE</Code>
+    <Description>Q302 BEAR REC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DMA</Code>
+    <Description>Q302 DD/DA MARINA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GRB</Code>
+    <Description>Q302 GIRLS BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ISL</Code>
+    <Description>Q302 INFANT SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIT</Code>
+    <Description>Q302 MENS KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NAU</Code>
+    <Description>Q302 MINNIE NAUTICAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBC</Code>
+    <Description>Q302 MM BEACH COMBER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SUR</Code>
+    <Description>Q302 MM MENS SURF</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMF</Code>
+    <Description>Q302 MM WORLD CUP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDA</Code>
+    <Description>Q302 MM/DD AVIATION</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MDN</Code>
+    <Description>Q302 MN NAUTICAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NVB</Code>
+    <Description>Q302 NEVERLAND</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBC</Code>
+    <Description>Q302 POOH BEACH COMBER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHB</Code>
+    <Description>Q302 POOH BEES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PMR</Code>
+    <Description>Q302 POOH MARINA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNA</Code>
+    <Description>Q302 POOH NAUTICAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PSV</Code>
+    <Description>Q302 POOH SUMMER VACATION</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TBH</Code>
+    <Description>Q302 TINKER BELL HEARTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ACY</Code>
+    <Description>Q304 ACRYLIC HANDLE MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AMR</Code>
+    <Description>Q304 ADULTS MMRETRO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ANP</Code>
+    <Description>Q304 ANIMAL PRINT MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BAN</Code>
+    <Description>Q304 BANKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BAP</Code>
+    <Description>Q304 BEACH APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRM</Code>
+    <Description>Q304 BRIGHT ROMPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRT</Code>
+    <Description>Q304 BRIGHTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBX</Code>
+    <Description>Q304 BUZZ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BZP</Code>
+    <Description>Q304 BUZZ SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CSM</Code>
+    <Description>Q304 CLASSIC MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CRB</Code>
+    <Description>Q304 CORE BAGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DUT</Code>
+    <Description>Q304 DUMBO LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>FMB</Code>
+    <Description>Q304 FACTOID MUG &amp; BEANIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LIK</Code>
+    <Description>Q304 LION KING</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMY</Code>
+    <Description>Q304 M&amp;M LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRA</Code>
+    <Description>Q304 MARIE APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EMS</Code>
+    <Description>Q304 MENS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBB</Code>
+    <Description>Q304 MICKEY DONALD BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKC</Code>
+    <Description>Q304 MICKEY DONALD CONTIN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MKH</Code>
+    <Description>Q304 MICKEY DONALD HAWAII</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MHW</Code>
+    <Description>Q304 MICKEY HAWAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MGI</Code>
+    <Description>Q304 MINNIE GINGHAM APPAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MHP</Code>
+    <Description>Q304 MINNIE HAMPTONS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNK</Code>
+    <Description>Q304 MINNIE MARRAKECH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NNA</Code>
+    <Description>Q304 MINNIE NAUT APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIC</Code>
+    <Description>Q304 MN DCHAIN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBE</Code>
+    <Description>Q304 MUG AND BEANIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NMO</Code>
+    <Description>Q304 NEMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NWT</Code>
+    <Description>Q304 NEWPORT BAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NWB</Code>
+    <Description>Q304 NEWPORT BAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PAH</Code>
+    <Description>Q304 PAN AND HOOK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PKS</Code>
+    <Description>Q304 PAN HOOK SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHF</Code>
+    <Description>Q304 PH FLOWERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PCW</Code>
+    <Description>Q304 PICNIC WARE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHN</Code>
+    <Description>Q304 POOH NAUTICAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PWR</Code>
+    <Description>Q304 POWER RANGERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SCP</Code>
+    <Description>Q304 SCULPTED MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SYG</Code>
+    <Description>Q304 SIMPLY POOH GIFTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SEW</Code>
+    <Description>Q304 SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SBE</Code>
+    <Description>Q304 SNOWGLOBES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>S3S</Code>
+    <Description>Q304 SOCKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TNN</Code>
+    <Description>Q304 TARZAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TTE</Code>
+    <Description>Q304 TEEN TEES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TPA</Code>
+    <Description>Q304 TROPICANA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ATC</Code>
+    <Description>Q4 ATLANTIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ATL</Code>
+    <Description>Q4 ATLANTIS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BGT</Code>
+    <Description>Q4 BABY BRIGHTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BGF</Code>
+    <Description>Q4 BABY GIFTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNT</Code>
+    <Description>Q4 BABY NEUTRAL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BEL</Code>
+    <Description>Q4 BELLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CBB</Code>
+    <Description>Q4 CHAR BED &amp; BATH UNISEX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DNB</Code>
+    <Description>Q4 DUMBO NEW BORN UNISEX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HOW</Code>
+    <Description>Q4 HALLOWEEN UNISEX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>INB</Code>
+    <Description>Q4 INFANT BASICS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BOY</Code>
+    <Description>Q4 IT'S A BOY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GIL</Code>
+    <Description>Q4 IT'S A GIRL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JSM</Code>
+    <Description>Q4 JASMINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JBB</Code>
+    <Description>Q4 JUNGLE BOOK BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JNP</Code>
+    <Description>Q4 JUNIOR POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>4KI</Code>
+    <Description>Q4 KEY ITEMS UNISEX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLG</Code>
+    <Description>Q4 MARIE LAYETTE GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MOB</Code>
+    <Description>Q4 MICKEY OUTDOORS BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNC</Code>
+    <Description>Q4 MINNIE CHARM GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MNE</Code>
+    <Description>Q4 MINNIE ELEGANCE GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLM</Code>
+    <Description>Q4 MINNIE PLAYTIME</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MIA</Code>
+    <Description>Q4 MM AVIATION BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MMC</Code>
+    <Description>Q4 MN &amp; MM COLLEGE UNISEX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHA</Code>
+    <Description>Q4 POOH ANTIQUITY LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PCB</Code>
+    <Description>Q4 POOH BED &amp; BATH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PFB</Code>
+    <Description>Q4 POOH FOOTBALL BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNG</Code>
+    <Description>Q4 POOH NEW BORN BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNB</Code>
+    <Description>Q4 POOH NEW BORN GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPO</Code>
+    <Description>Q4 SIMPLY POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SLB</Code>
+    <Description>Q4 SLEEPING BEAUTY GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SLG</Code>
+    <Description>Q4 SLEEPWEAR GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SIU</Code>
+    <Description>Q4 SLEEPWEAR INFANTS UNI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SCC</Code>
+    <Description>Q4 STD CHAR COSMIC UNISEX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TCB</Code>
+    <Description>Q4 TG BED &amp; BATH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TGC</Code>
+    <Description>Q4 TG COSMIC</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TLB</Code>
+    <Description>Q4 THUMPER LAYETTE BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TBG</Code>
+    <Description>Q4 TINKERBELL GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TIG</Code>
+    <Description>Q4 TINKERBELL GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>101</Code>
+    <Description>Q4 101 COSMIC GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BXZ</Code>
+    <Description>Q40Q BUZZ OUT OF SCHOOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MTS</Code>
+    <Description>Q40Q MICKEY TURTLE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BAB</Code>
+    <Description>Q402 BED &amp; BATH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BLL</Code>
+    <Description>Q402 BELLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPB</Code>
+    <Description>Q402 BOYS SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BBS</Code>
+    <Description>Q402 BUZZ BACK TO SCHOOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BZZ</Code>
+    <Description>Q402 BUZZ INFANTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPG</Code>
+    <Description>Q402 GIRLS SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LAT</Code>
+    <Description>Q402 LADY &amp; THE TRAMP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCO</Code>
+    <Description>Q402 MICKEY COUNTRY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MCH</Code>
+    <Description>Q402 MINNIE CHARM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>COL</Code>
+    <Description>Q402 MINNIE COLLEGE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBT</Code>
+    <Description>Q402 MM BACK TO SCHOOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PUN</Code>
+    <Description>Q402 NEWBORN POOH UNISEX</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PNC</Code>
+    <Description>Q402 PINOCCHIO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PBB</Code>
+    <Description>Q402 POOH NEWBORN BOYS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PGG</Code>
+    <Description>Q402 POOH NEWBORN GIRLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PHV</Code>
+    <Description>Q402 POOH VARSITY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRS</Code>
+    <Description>Q402 PRINCESS BACK TO SCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DLM</Code>
+    <Description>Q402 101 LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BDL</Code>
+    <Description>Q402/Q103 BABY DOLL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NIG</Code>
+    <Description>Q403 ADULT NIGHTWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SLI</Code>
+    <Description>Q403 ADULT SLIPPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AUT</Code>
+    <Description>Q403 AUTUMN LEAVES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CLA</Code>
+    <Description>Q403 CLASSIC MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CAR</Code>
+    <Description>Q403 MN/MM CARAMEL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>AUC</Code>
+    <Description>Q404 AUTUMN COUNTRY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BE4</Code>
+    <Description>Q404 BELLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BWL</Code>
+    <Description>Q404 BOWLS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BXO</Code>
+    <Description>Q404 BOYS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BSU</Code>
+    <Description>Q404 BOYS UNDERWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BRG</Code>
+    <Description>Q404 BRIGHT ROMPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BR2</Code>
+    <Description>Q404 BRIGHTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BUB</Code>
+    <Description>Q404 BURSTING EXPRESSO&amp;B</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BU4</Code>
+    <Description>Q404 BUZZ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CMB</Code>
+    <Description>Q404 CARTOON M&amp;B</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CI4</Code>
+    <Description>Q404 CINDERELLA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CMU</Code>
+    <Description>Q404 CLASSIC POOH MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CSR</Code>
+    <Description>Q404 COASTERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CCU</Code>
+    <Description>Q404 CONT CUP &amp; SAUCER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>COB</Code>
+    <Description>Q404 CORE BAGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CU4</Code>
+    <Description>Q404 CUTIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>120</Code>
+    <Description>Q404 CUTIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DYW</Code>
+    <Description>Q404 DISNEY WISHES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DDT</Code>
+    <Description>Q404 DUMBO LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EES</Code>
+    <Description>Q404 EE SPORTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>EYS</Code>
+    <Description>Q404 EEYORE SPARKLE DENIM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GSK</Code>
+    <Description>Q404 GIRLS SOCKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GUN</Code>
+    <Description>Q404 GIRLS UNDERWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GLA</Code>
+    <Description>Q404 GLASSES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HAW</Code>
+    <Description>Q404 HALLOWEEN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HOR</Code>
+    <Description>Q404 HOME ON THE RANGE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HRP</Code>
+    <Description>Q404 HOME RANGE PLUSH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>IBR</Code>
+    <Description>Q404 INFANTS BRIGHTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JA4</Code>
+    <Description>Q404 JASMINE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>JUJ</Code>
+    <Description>Q404 JUNGLE BOOK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KI4</Code>
+    <Description>Q404 KIM POSSIBLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KMP</Code>
+    <Description>Q404 KIM POSSIBLE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LJS</Code>
+    <Description>Q404 LADIES JACQ SOCKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LTS</Code>
+    <Description>Q404 LADIES TRAINER SOCKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LA4</Code>
+    <Description>Q404 LATTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LYM</Code>
+    <Description>Q404 LAYETTE MINNIE ROSE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LYB</Code>
+    <Description>Q404 LAYETTE P BOY INFANT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LM4</Code>
+    <Description>Q404 LMM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRP</Code>
+    <Description>Q404 MARIE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ME4</Code>
+    <Description>Q404 MENS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ENS</Code>
+    <Description>Q404 MENS SOCKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NCG</Code>
+    <Description>Q404 MICKEY CAMUFLAGE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MC4</Code>
+    <Description>Q404 MICKEY CAMUFLAGE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MYC</Code>
+    <Description>Q404 MICKEY CRUSADER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MEX</Code>
+    <Description>Q404 MICKEY EXPLORER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MLV</Code>
+    <Description>Q404 MICKEY VINATGE LAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MBH</Code>
+    <Description>Q404 MINNIE BOHEMIAN</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MID</Code>
+    <Description>Q404 MINNIE DENIM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MD4</Code>
+    <Description>Q404 MINNIE DOG TOOTH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MRR</Code>
+    <Description>Q404 MINNIE ROSES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MN4</Code>
+    <Description>Q404 MINNIE SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MS4</Code>
+    <Description>Q404 MINNIE SPORTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MGY</Code>
+    <Description>Q404 MINNIE VINTAGE LAYET</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>MYM</Code>
+    <Description>Q404 MISSY MARIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NE4</Code>
+    <Description>Q404 NEMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NES</Code>
+    <Description>Q404 NOVELTY EXP &amp; SAUCER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>NVM</Code>
+    <Description>Q404 NOVELTY MUG</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PFL</Code>
+    <Description>Q404 PH FILIGREE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PFR</Code>
+    <Description>Q404 POOH FAMILY RED</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PLY</Code>
+    <Description>Q404 POOH LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PWW</Code>
+    <Description>Q404 POOH WILD WOODS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRO</Code>
+    <Description>Q404 POWER R OUT OF SCHO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PW4</Code>
+    <Description>Q404 POWER RANGERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PAC</Code>
+    <Description>Q404 PRINCESS ACCESSORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PRL</Code>
+    <Description>Q404 PRINCESS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SE4</Code>
+    <Description>Q404 SENTIMENTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SOG</Code>
+    <Description>Q404 SHADES OF GREY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPM</Code>
+    <Description>Q404 SIMPLE POOH MUGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SIG</Code>
+    <Description>Q404 SIMPLY POOH GIFTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SKM</Code>
+    <Description>Q404 SKETCHY FAC MUG</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SWR</Code>
+    <Description>Q404 SLEEP WEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SEB</Code>
+    <Description>Q404 SLEEPING BEAUTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SW4</Code>
+    <Description>Q404 SNOW WHITE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SN4</Code>
+    <Description>Q404 SNOWGLOBES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SRE</Code>
+    <Description>Q404 SPOON RESTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPA</Code>
+    <Description>Q404 SPORTY APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TEP</Code>
+    <Description>Q404 TEAPOTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TE4</Code>
+    <Description>Q404 TEENS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TI4</Code>
+    <Description>Q404 TINKERBELL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>UM4</Code>
+    <Description>Q404 UMBRELLAS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WMW</Code>
+    <Description>Q404 WARMWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WI4</Code>
+    <Description>Q404 WITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WIC</Code>
+    <Description>Q404 WITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WTS</Code>
+    <Description>Q404 WTP SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DA4</Code>
+    <Description>Q404 101 DALMATIANS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>1DL</Code>
+    <Description>Q404 101 DALMATIONS LAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SSP</Code>
+    <Description>Q404 101 SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>REC</Code>
+    <Description>RECESS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>REG</Code>
+    <Description>REGATTA</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 15</Code>
+    <Description>RETURN OF JAFAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>STS</Code>
+    <Description>SATIN SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> SG</Code>
+    <Description>SCHOOL GIRL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SMG</Code>
+    <Description>SCULPTED MUGS &amp; BOWLSQ204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SIP</Code>
+    <Description>SIMBA'S PRIDE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPI</Code>
+    <Description>SIMBA'S PRIDE INFANTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> SP</Code>
+    <Description>SIMPLY POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPH</Code>
+    <Description>SIMPLY POOH Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SB1</Code>
+    <Description>SLEEPING BEAUTY Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SLE</Code>
+    <Description>SLEEPING BEAUTY Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SSB</Code>
+    <Description>SLEEPING BEAUTY Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SB </Code>
+    <Description>SLEEPING BEAUTY Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SLP</Code>
+    <Description>SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SSE</Code>
+    <Description>SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSS</Code>
+    <Description>SLEEPWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SRS</Code>
+    <Description>SLIPPERS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPP</Code>
+    <Description>SLIPPERS AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  Y</Code>
+    <Description>SNOW WHITE PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SWW</Code>
+    <Description>SNOW WHITE Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SW </Code>
+    <Description>SNOW WHITE Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SNG</Code>
+    <Description>SNOWGLOBES Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SWS</Code>
+    <Description>SNOWGLOBES Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SNP</Code>
+    <Description>SNOWY POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SKS</Code>
+    <Description>SOCKS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SSS</Code>
+    <Description>SOCKS Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPL</Code>
+    <Description>SPLASH POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SPR</Code>
+    <Description>SPRING ROMANCE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SRI</Code>
+    <Description>SPRING ROMANCE INFANTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SCD</Code>
+    <Description>STAR COMMAND Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>STD</Code>
+    <Description>STAR COMMAND Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SNS</Code>
+    <Description>STARS AND STRIPES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>STK</Code>
+    <Description>STATIONERY KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SKI</Code>
+    <Description>STD CHAR LDS KEY ITEMS Q4</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>STC</Code>
+    <Description>STITCH Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SY1</Code>
+    <Description>SULLY GIRLS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  S</Code>
+    <Description>SUMMER BEACH PROMO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  G</Code>
+    <Description>SUMMER FUN '93</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>S94</Code>
+    <Description>SUMMER FUN '94</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SFG</Code>
+    <Description>SUMMER FUN GLITTER TEE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>S00</Code>
+    <Description>SUMMER FUN 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>S99</Code>
+    <Description>SUMMER FUN 99</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SGL</Code>
+    <Description>SUNGLASSES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WIM</Code>
+    <Description>SWIM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SSW</Code>
+    <Description>SWIMWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>RSR</Code>
+    <Description>SWIMWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SWM</Code>
+    <Description>SWIMWEAR 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TRZ</Code>
+    <Description>TARZAN Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TZN</Code>
+    <Description>TARZAN Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TAR</Code>
+    <Description>TARZAN 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>F99</Code>
+    <Description>TDS FLORENCE 1999</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>F00</Code>
+    <Description>TDS FLORENCE 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>F01</Code>
+    <Description>TDS FLORENCE 2001</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>F02</Code>
+    <Description>TDS FLORENCE 2002</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TDL</Code>
+    <Description>TDS LOCATION SPECIFIC</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>L99</Code>
+    <Description>TDS LONDON 1999</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>L00</Code>
+    <Description>TDS LONDON 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>L01</Code>
+    <Description>TDS LONDON 2001</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>L02</Code>
+    <Description>TDS LONDON 2002</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>M01</Code>
+    <Description>TDS MILAN 2001</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>M02</Code>
+    <Description>TDS MILAN 2002</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>P99</Code>
+    <Description>TDS PARIS 1999</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>P00</Code>
+    <Description>TDS PARIS 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>P01</Code>
+    <Description>TDS PARIS 2001</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>P02</Code>
+    <Description>TDS PARIS 2002</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>R99</Code>
+    <Description>TDS ROME 1999</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>R00</Code>
+    <Description>TDS ROME 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>R01</Code>
+    <Description>TDS ROME 2001</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>R02</Code>
+    <Description>TDS ROME 2002</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>S01</Code>
+    <Description>TDS SPAIN 2001</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>V99</Code>
+    <Description>TDS VENICE 1999</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>V00</Code>
+    <Description>TDS VENICE 2000</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>V01</Code>
+    <Description>TDS VENICE 2001</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VEN</Code>
+    <Description>TDS VENICE 2002</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TES</Code>
+    <Description>TEEN TEES Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TEE</Code>
+    <Description>TEENS APPAREL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TAS</Code>
+    <Description>TEES &amp; SWIM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WLD</Code>
+    <Description>THE WILD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TMP</Code>
+    <Description>THUMPER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LTH</Code>
+    <Description>THUMPER LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TGE</Code>
+    <Description>TIGGER EVERGRN MENS FY00</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TTG</Code>
+    <Description>TIGGER Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TSP</Code>
+    <Description>TIGGER SPORT AW05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TGS</Code>
+    <Description>TIGGER SPORT HS05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TWW</Code>
+    <Description>TIGGER WORKWEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TBF</Code>
+    <Description>TINKER BELL FROST</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TBL</Code>
+    <Description>TINKER BELL Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TB </Code>
+    <Description>TINKERBELL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TKA</Code>
+    <Description>TINKERBELL APPAREL Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TFL</Code>
+    <Description>TINKERBELL FLOWER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TPL</Code>
+    <Description>TINKERBELL PHOTOREAL Q201</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TK1</Code>
+    <Description>TINKERBELL Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TIN</Code>
+    <Description>TINKERBELL Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TKL</Code>
+    <Description>TINKERBELL Q3 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TK </Code>
+    <Description>TINKERBELL Q4 03</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TKS</Code>
+    <Description>TINKERBELL SLEEP Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TIB</Code>
+    <Description>TINKS BUTTERFLY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TPS</Code>
+    <Description>TINKS PINK SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KLA</Code>
+    <Description>TINKS ROCKS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TSK</Code>
+    <Description>TINKS SKI</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL5</Code>
+    <Description>TINKS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TSL</Code>
+    <Description>TINKS SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TIK</Code>
+    <Description>TINKS SUNSET</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TSW</Code>
+    <Description>TODDLER SWIM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TBS</Code>
+    <Description>TODDLERS BRIGHT SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TCS</Code>
+    <Description>TODDLERS CLASSIC SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TS </Code>
+    <Description>TOY STORY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TS2</Code>
+    <Description>TOY STORY 2</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TS8</Code>
+    <Description>TOY STORY 98</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TCL</Code>
+    <Description>TRADI COOL</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TRC</Code>
+    <Description>TRADI COOL#2 KIDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>CON</Code>
+    <Description>TRIAL STORES PRODUCT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>T98</Code>
+    <Description>TRIAL 98</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TBM</Code>
+    <Description>TRUE BLUE - MEN'S</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>TRB</Code>
+    <Description>TRUE BLUE - MINNIE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 13</Code>
+    <Description>TV BIN ART</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>UMS</Code>
+    <Description>UMBRELLAS Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>UKI</Code>
+    <Description>UNISEX KEY ITEMS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  N</Code>
+    <Description>VALENTINE'S DAY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VAL</Code>
+    <Description>VALENTINE'S DAY</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VQ2</Code>
+    <Description>VALENTINES Q2 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>V02</Code>
+    <Description>VALENTINES Q202</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VLS</Code>
+    <Description>VALENTINES Q204</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VMP</Code>
+    <Description>VELVET MINNIE PARTY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VIL</Code>
+    <Description>VILLAINS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>VRS</Code>
+    <Description>VINTAGE ROSE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WDA</Code>
+    <Description>WALT DISNEY ART CLASSICS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  5</Code>
+    <Description>WALT DISNEY WORLD</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WWR</Code>
+    <Description>WARM WEAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code> 72</Code>
+    <Description>WDW 25TH ANNIVERSARY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WED</Code>
+    <Description>WEDDINGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WFT</Code>
+    <Description>WINNIE &amp; FAMILY TREE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>  I</Code>
+    <Description>WINNIE THE POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WTL</Code>
+    <Description>WINTER TALE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WWP</Code>
+    <Description>WINTER WONDERLAND POOH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WWD</Code>
+    <Description>WINTER WONDERLAND Q104</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WIT</Code>
+    <Description>WITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>KL2</Code>
+    <Description>WITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WCH</Code>
+    <Description>WITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WTC</Code>
+    <Description>WITCH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WAP</Code>
+    <Description>WITCH APPAREL&amp;ACCESORIES</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WI1</Code>
+    <Description>WITCH Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>W06</Code>
+    <Description>WITCH Q106</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WSL</Code>
+    <Description>WITCH SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>WOO</Code>
+    <Description>WOODY Q403</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PCC</Code>
+    <Description>WTP CAMEL CASUALS LDS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>XBY</Code>
+    <Description>X-TRA BUY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>XMS</Code>
+    <Description>XMAS</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>XP6</Code>
+    <Description>XMAS POOH Q106</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>LDS</Code>
+    <Description>01Q2 MICKEY CAMEL CASUALS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>010</Code>
+    <Description>101</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>BUT</Code>
+    <Description>101 BUTTERFLY</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DCH</Code>
+    <Description>101 CHECK</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>1CS</Code>
+    <Description>101 CHECK SLEEP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DAL</Code>
+    <Description>101 DALMATIONS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DA1</Code>
+    <Description>101 DALMATIONS Q1 05</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DLP</Code>
+    <Description>101 DLP</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DFR</Code>
+    <Description>101 FRUIT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>1HB</Code>
+    <Description>101 HAPPY BEACH</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>HEA</Code>
+    <Description>101 HEARTS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DLY</Code>
+    <Description>101 LAYETTE</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>PAW</Code>
+    <Description>101 PAW PRINT</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DPC</Code>
+    <Description>101 PINK &amp; CREAM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>1RZ</Code>
+    <Description>101 RAZZAMATAZZ</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DRC</Code>
+    <Description>101 RED &amp; CREAM</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>SCH</Code>
+    <Description>101 SCHOOL PUPS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>DSU</Code>
+    <Description>101 SUNFLOWER</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>202</Code>
+    <Description>102 Q2 Q1</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>ONE</Code>
+    <Description>102 Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>10R</Code>
+    <Description>102 RECREATIONAL Q3 01</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>102</Code>
+    <Description>102 STAR</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>215</Code>
+    <Description>2 FOR $15 VIDEO</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>2PJ</Code>
+    <Description>2PACK PJ</Description>
+    <Status>true</Status>
+  </Promotion>
+  <Promotion>
+    <Code>3K </Code>
+    <Description>3 KINGS</Description>
+    <Status>false</Status>
+  </Promotion>
+  <Promotion>
+    <Code>GTB</Code>
+    <Description>3IRL MN TRUE BLUE</Description>
+    <Status>false</Status>
+  </Promotion>
+</DocumentElement>

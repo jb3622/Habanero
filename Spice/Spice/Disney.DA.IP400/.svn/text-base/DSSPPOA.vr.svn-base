@@ -1,0 +1,225 @@
+Using System
+Using System.Text
+Using System.Data
+
+BegClass DSSPPOA Access(*Public)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile DSSPPOA   Type(*Output) Org(*Arrival) DB(PgmDB) ImpOpen(*No)
+	DclDiskFile DSSPPOAL1 Type(*Update) Org(*Indexed) DB(PgmDB) ImpOpen(*No) RnmFmt(RDSSPPOA:POAupdate)
+	DclDiskFile POAinput  Type(*Input)  Org(*Indexed) DB(PgmDB) ImpOpen(*No) RnmFmt(RDSSPPOA:RPOAinput) File("DSSPPOAL1")
+	
+	DclDiskFile DSSPACML3 Type(*Input)  Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+		
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	BegFunc GetAPPstructure Type(DataTable) Access(*Public)
+		DclSrParm APPclass  Type(Int16)
+		DclSrParm APPvendor Type(Int32)
+		DclSrParm APPstyle  Type(Int16)
+		DclSrParm APPcolour Type(Int16)
+		DclSrParm APPsize   Type(Int16)
+		
+		DclFld AppStructure Type(DataTable)
+		DclFld dr Type(DataRow)
+		
+		AppStructure = CreateTbl("AppStructure")
+		
+		If Not DSSPACML3.IsOpen
+			Open DSSPACML3
+		EndIf
+		
+		SetLL DSSPACML3 Key(APPclass,APPvendor,APPstyle,APPcolour,APPsize)
+		DoUntil (DSSPACML3.IsEof)
+			ReadE DSSPACML3 Key(APPclass,APPvendor,APPstyle,APPcolour,APPsize)
+			If Not DSSPACML3.IsEof
+				dr = AppStructure.NewRow()
+				
+				dr["ComponentClass"]    = ACMCCL
+				dr["ComponentVendor"]   = ACMCVN
+				dr["ComponentStyle"]    = ACMCST
+				dr["ComponentColour"]   = ACMCCR
+				dr["ComponentSize"]     = ACMCSZ
+				dr["ComponentLongDesc"] = String.Empty
+				dr["ComponentQuantity"] = ACMQTY
+				dr["ComponentCost"]     = Decimal.Zero
+				
+				AppStructure.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		LeaveSR AppStructure
+	EndFunc
+	
+	BegFunc GetAPPcomponents Type(DataTable) Access(*Public)
+		DclSrParm POnumber   Type(String)
+		DclSrParm Version    Type(Int16)
+		DclSrParm POsequence Type(Int16)
+		
+		DclFld ComponentsTbl Type(DataTable)
+		DclFld dr Type(DataRow)
+
+		ComponentsTbl = CreateTbl("Components")
+		
+		If Not POAinput.IsOpen
+			Open POAinput
+		EndIf
+		
+		SetLL File(POAinput) Key(POnumber,Version,POsequence)
+		DoUntil (POAinput.IsEof)
+			ReadE POAinput Key(POnumber,Version,POsequence)
+			If Not POAinput.IsEof
+				dr = ComponentsTbl.NewRow()
+				
+				dr["ComponentClass"]    = POACLS
+				dr["ComponentVendor"]   = POAVEN
+				dr["ComponentStyle"]    = POASTY
+				dr["ComponentColour"]   = POACLR
+				dr["ComponentSize"]     = POASIZ
+				dr["ComponentLongDesc"] = String.Empty
+				dr["ComponentQuantity"] = POAQTY
+				dr["ComponentCost"]     = POAVNC
+				
+				ComponentsTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		LeaveSR ComponentsTbl
+	EndFunc
+	
+	BegFunc UpdateAPPcomponentCost Type(Boolean) Access(*Public)
+		DclSrParm POnumber      Type(String)
+		DclSrParm FromVersion   Type(Int16)
+		DclSrParm NewVersion    Type(Int16)
+		DclSrParm POsequence    Type(Int16)
+		DclSrParm ComponentsTbl Type(DataTable)
+		
+		DclFld SelectString Type(StringBuilder)
+		DclArray ComponentRows Type(DataRow) Rank(1)
+		
+		If Not DSSPPOAL1.IsOpen
+			Open DSSPPOAL1
+		EndIf
+		
+		If Not DSSPPOA.IsOpen
+			Open DSSPPOA
+		EndIf
+		
+		SetLL File(DSSPPOAL1) Key(POnumber,FromVersion,POsequence)
+		DoUntil (DSSPPOAL1.IsEof)
+			ReadE DSSPPOAL1 Key(POnumber,FromVersion,POsequence)
+			If Not DSSPPOAL1.IsEof
+			
+				// Need to find row in Components Table
+				SelectString = *New StringBuilder()
+				SelectString.Append("ComponentClass = ")
+				SelectString.Append(POACLS.ToString('0000'))
+				SelectString.Append(" And ComponentVendor = ")
+				SelectString.Append(POAVEN.ToString('00000'))
+				SelectString.Append(" And ComponentStyle = ")
+				SelectString.Append(POASTY.ToString('0000'))
+				SelectString.Append(" And ComponentColour = ")
+				SelectString.Append(POACLR.ToString('000'))
+				SelectString.Append(" And ComponentSize = ")
+				SelectString.Append(POASIZ.ToString('0000'))
+								
+				ComponentRows = ComponentsTbl.Select(SelectString.ToString())
+				ForEach Component Collection(ComponentRows) Type(DataRow)
+					POAVNC = Component.Item["ComponentCost"] *As Decimal
+					Leave
+				EndFor
+				
+				POAVER = NewVersion
+				Write RDSSPPOA
+			EndIf
+		EndDo
+				
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc WriteAPPcomponents Type(Boolean) Access(*Public)
+		DclSrParm POnumber      Type(String)
+		DclSrParm POversion     Type(Int16)
+		DclSrParm POsequence    Type(Int16)
+		DclSrParm ComponentsTbl Type(DataTable)
+		
+		DclFld dv Type(DataView)
+		
+		If Not DSSPPOA.IsOpen
+			Open DSSPPOA
+		EndIf
+		
+		dv = *New DataView(ComponentsTbl)
+		ForEach Row Collection(dv) Type(DataRowView)
+		
+			POASPO = POnumber
+			POAVER = POversion
+			POASEQ = POsequence  // PO line sequence
+		
+			POACLS = Row.Item("ComponentClass")    *As Int16
+			POAVEN = Row.Item("ComponentVendor")   *As Int32
+			POASTY = Row.Item("ComponentStyle")    *As Int16
+			POACLR = Row.Item("ComponentColour")   *As Int16
+			POASIZ = Row.Item("ComponentSize")     *As Int16
+			
+			POAQTY = Row.Item("ComponentQuantity") *As Int16
+			POAVNC = Row.Item("ComponentCost")     *As Decimal
+
+			Write RDSSPPOA
+		EndFor
+		
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc DeleteAPPcomponents Type(Boolean) Access(*Public)
+		DclSrParm POnumber      Type(String)
+		DclSrParm POversion     Type(Int16)
+		DclSrParm POsequence    type(Int16)
+		
+		If Not DSSPPOAL1.IsOpen
+			Open DSSPPOAL1
+		EndIf
+		
+		DoUntil Not DSSPPOAL1.IsFound
+			Delete From(DSSPPOAL1) Key(POnumber,POversion,POsequence)
+		EndDo
+		
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc CreateTbl Type(DataTable) Access(*Private)
+		DclSrParm TableName Type(String)
+		
+		DclFld AppTbl Type(DataTable)
+
+		AppTbl = *New DataTable(TableName)
+
+		AppTbl.Columns.Add(*New DataColumn("ComponentClass", *TypeOf(Int16)))
+		AppTbl.Columns("ComponentClass").ReadOnly = *True
+
+		AppTbl.Columns.Add(*New DataColumn("ComponentVendor", *TypeOf(Int32)))
+		AppTbl.Columns("ComponentVendor").ReadOnly = *True
+		
+		AppTbl.Columns.Add(*New DataColumn("ComponentStyle", *TypeOf(Int16)))
+		AppTbl.Columns("ComponentStyle").ReadOnly = *True
+		
+		AppTbl.Columns.Add(*New DataColumn("ComponentColour", *TypeOf(Int16)))
+		AppTbl.Columns("ComponentColour").ReadOnly = *True
+
+		AppTbl.Columns.Add(*New DataColumn("ComponentSize", *TypeOf(Int16)))
+		AppTbl.Columns("ComponentSize").ReadOnly = *True
+
+		AppTbl.Columns.Add(*New DataColumn("ComponentLongDesc", *TypeOf(String)))
+		
+		AppTbl.Columns.Add(*New DataColumn("ComponentQuantity", *TypeOf(Int16)))
+		AppTbl.Columns("ComponentQuantity").ReadOnly = *True
+		
+		AppTbl.Columns.Add(*New DataColumn("ComponentCost", *TypeOf(Decimal)))
+		
+		LeaveSR AppTbl
+	EndFunc
+EndClass

@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <SellingChannelTable>
+    <SellingChannelCode>4</SellingChannelCode>
+    <Description>Online Exclusive</Description>
+    <CodeAndDescription>4 - Online Exclusive</CodeAndDescription>
+    <OnlineECOM xml:space="preserve"> </OnlineECOM>
+    <ItemsDefault xml:space="preserve"> </ItemsDefault>
+    <BundlesDefault>Y</BundlesDefault>
+  </SellingChannelTable>
+  <SellingChannelTable>
+    <SellingChannelCode>5</SellingChannelCode>
+    <Description>Shared (Online &amp; Brick&amp;Mortar)</Description>
+    <CodeAndDescription>5 - Shared (Online &amp; Brick&amp;Mortar)</CodeAndDescription>
+    <OnlineECOM xml:space="preserve"> </OnlineECOM>
+    <ItemsDefault>Y</ItemsDefault>
+    <BundlesDefault xml:space="preserve"> </BundlesDefault>
+  </SellingChannelTable>
+</DocumentElement>

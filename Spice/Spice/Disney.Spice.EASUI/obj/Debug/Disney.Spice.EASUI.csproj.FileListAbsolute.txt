@@ -1,0 +1,69 @@
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmApproveRejectItemSizeChangeCaseDetails.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASMain.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASRequest.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASSubmitters.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmPoModificationSummary.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineDetailsPack.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineForm.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.csproj.GenerateResource.Cache
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.pdb
+C:\Documents and Settings\Documents and Settings\HKASAMAL\My Documents\iDash\Disney.Spice.EASUI.dll
+C:\Documents and Settings\Documents and Settings\HKASAMAL\My Documents\iDash\Disney.Spice.EASUI.pdb
+C:\iDash\Spice\Disney.Spice.EASUI.dll
+C:\iDash\Spice\Disney.Spice.EASUI.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POapprove.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASMain.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASRequest.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASSubmitters.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POapprove.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmPoModificationSummary.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineDetailsPack.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineForm.resources
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.dll
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.pdb
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmApproveRejectItemSizeChangeCaseDetails.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASMain.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASRequest.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASSubmitters.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POapprove.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmPoModificationSummary.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineDetailsPack.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineForm.resources
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.4.tlog
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.dll
+C:\Documents and Settings\cjones\My Documents\Visual Studio 2010\Projects\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.pdb
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.4.tlog
+C:\Documents and Settings\cjones\My Documents\Project SPICE\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASMain.resources
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASRequest.resources
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASSubmitters.resources
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POapprove.resources
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmPoModificationSummary.resources
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineDetailsPack.resources
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineForm.resources
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.4.tlog
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.dll
+C:\Projects\SPICE\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.pdb
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASMain.resources
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASRequest.resources
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASSubmitters.resources
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POapprove.resources
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmPoModificationSummary.resources
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineDetailsPack.resources
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineForm.resources
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.read.4.tlog
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.dll
+C:\Projects\SPICE\Spice_New_Menu\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.pdb

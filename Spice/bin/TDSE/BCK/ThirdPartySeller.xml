@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <ThirdPartySeller>
+    <ThirdPartySellerCode>1</ThirdPartySellerCode>
+    <Description>Amazon</Description>
+  </ThirdPartySeller>
+  <ThirdPartySeller>
+    <ThirdPartySellerCode>2</ThirdPartySellerCode>
+    <Description>EBay</Description>
+  </ThirdPartySeller>
+  <ThirdPartySeller>
+    <ThirdPartySellerCode>3</ThirdPartySellerCode>
+    <Description>Amazon and EBay</Description>
+  </ThirdPartySeller>
+</DocumentElement>
+

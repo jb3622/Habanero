@@ -1,0 +1,42 @@
+Using System
+Using System.Text
+Using System.Collections.Generic
+
+BegClass errorProviderWithCount Access(*Public) Extends(System.Windows.Forms.ErrorProvider)
+
+	DclFld controlsWithErrors<List> Type(List(*Of Windows.Forms.Control)) New()
+
+	BegConstructor Access(*Public) Base(components)
+		DclSrParm components Type(System.ComponentModel.IContainer)
+		
+	EndConstructor
+	
+	BegProp Count Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR controlsWithErrors.Count
+		EndGet
+	EndProp
+	
+	BegProp HasErrors Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR controlsWithErrors.Count > 0
+		EndGet
+	EndProp
+
+	BegSR SetError Access(*Public)
+		DclSrParm control Type(System.Windows.Forms.Control)
+		DclSrParm value   Type(String)
+		
+		*Base.SetError(control, value)
+		
+		If String.IsNullOrEmpty(value)
+			If controlsWithErrors.Contains(control)
+				controlsWithErrors.Remove(control)
+			EndIf
+		Else
+			If Not controlsWithErrors.Contains(control)
+				controlsWithErrors.Add(control)
+			EndIf
+		EndIf
+	EndSr
+EndClass

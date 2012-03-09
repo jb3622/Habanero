@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{A99171F4-43ED-48FC-978B-9193EDE4E466}") = "Item_Pattern_IDMaintenance", "Item_Pattern_IDMaintenance\Item_Pattern_IDMaintenance.vrproj", "{23165B95-F7A3-4732-98C7-44FD427B6D33}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23165B95-F7A3-4732-98C7-44FD427B6D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23165B95-F7A3-4732-98C7-44FD427B6D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23165B95-F7A3-4732-98C7-44FD427B6D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23165B95-F7A3-4732-98C7-44FD427B6D33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,87 @@
+// ===============================================
+// Joseph Urbina
+// 28th July 2009
+// DSSPPOScls	
+// Data Access Layer - Spice PO Status table
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+Using System.IO
+
+BegClass DSSPPOScls Access(*Public)
+	
+	DclDB Name(DB) DbName("TDST")
+	DclDiskFile Name(DSSPPOS)  Type(*Input) ImpOpen(*No) DB(DB) RnmFmt(DSSPPOSR:R_DSSPPOSR)   netBlockFactor(*Calc)
+
+	DclFld Name(dsStatus) Type(DataSet)
+	DclFld Name(dtStatus) Type(DataTable)
+	DclFld pXMLpath       Type(String)
+
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		pXMLpath = Path.Combine(Environment.PathToEnvironmentXML,"PO_Status.xml")
+		*this.DB = DB
+	EndConstructor
+	
+	//Properties
+	BegProp Status_ID Type(*Char) Len(2) Access(*Public)
+		BegGet
+			LeaveSR POSSID
+		EndGet
+	EndProp
+	
+	BegProp Status_Description Type(*Char) Len(30) Access(*Public)
+		BegGet
+			LeaveSR POSDES
+		EndGet
+	EndProp
+		
+	// Methods
+		
+	//Creates a DataSet/DataTable for all PO Status Descriptions
+	BegFunc GetStatusDescriptionsDataTable Type(DataTable) Access(*Public)
+		
+		DclFld dcStatus		Type(DataColumn) 
+		DclFld drStatus		Type(DataRow)
+		
+		dsStatus = *New DataSet("Spice")
+		dtStatus = *New DataTable("PO_Status")	
+		dsStatus.Tables.Add(dtStatus)		
+							
+		If Not DSSPPOS.IsOpen
+			Open DSSPPOS
+		EndIf
+								
+		//Create PO Status  + Description Column
+		dcStatus = *New DataColumn( 'clmStatusDesc' )
+		dcStatus.DataType = System.Type.GetType("System.String")
+		dcStatus.ColumnName = "clmStatusDesc"
+		dcStatus.Caption = "Status"
+		dtStatus.Columns.Add(dcStatus)
+				
+		If Not File.Exists(pXMLpath)
+			//Read file and create rows in DataTable				
+			Setll DSSPPOS Key(*Start)
+			DoUntil DSSPPOS.IsEof
+				Read DSSPPOS
+				If not DSSPPOS.IsEof 
+					drStatus = dtStatus.NewRow()
+					drStatus.Item[0] = POSSID + ' ' + POSDES.Trim()
+					dtStatus.Rows.Add( drStatus )
+				Endif	
+			Enddo
+			dtStatus.WriteXml(pXMLpath)
+		Else
+			dtStatus.ReadXml(pXMLpath)	
+		Endif
+		
+		LeaveSR dtStatus
+	EndFunc
+EndClass

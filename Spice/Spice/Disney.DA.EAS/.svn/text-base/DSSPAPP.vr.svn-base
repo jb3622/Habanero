@@ -1,0 +1,172 @@
+// Joseph Urbina
+// 18th December 2009
+// DSSPAPP	Applications
+// Data Access Layer - Spice EAS
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+Using System.IO
+
+BegClass DSSPAPP Access(*Public)
+
+	/Region Declares
+	DclFld  User		          Type(Disney.Menu.Users)
+	DclFld pApplicationID	      Type(Int32)
+	DclFld pApplicationDesc	      Type(String)
+	DclFld pCreateUser            Type(String)
+	DclFld pCreateDate            Type(Int32)
+	DclFld pCreateTime            Type(Int32)
+	DclFld pChangedUser           Type(String)
+	DclFld pChangedDate           Type(Int32)
+	DclFld pChangedTime			  Type(Int32)   	  		
+	/EndRegion
+			
+	/Region Declare Files and DB
+	DclDB Name(Pgmdb) DbName("TDST")
+	DclDiskFile Name(DSSPAPPL1) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(Pgmdb)  
+	/EndRegion
+		
+	/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm Pgmdb    Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User     Type(Disney.Menu.Users)	
+			
+		*This.Pgmdb   = Pgmdb
+		*This.User  = User
+				
+	EndConstructor
+	
+			
+	/EndRegion
+			
+	/Region DSSPAPP Properties
+	//Application ID
+	BegProp ApplicationID Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pApplicationID
+		EndGet
+		
+		BegSet
+			pApplicationID = *PropVal
+		EndSet
+	EndProp
+	
+	//Application Description
+	BegProp ApplicationDesc Type(String) Access(*Public)
+		BegGet
+			LeaveSR pApplicationDesc
+		EndGet
+		
+		BegSet
+			pApplicationDesc = *PropVal
+		EndSet
+	EndProp
+	
+	//Create User
+	BegProp CreateUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCreateUser
+		EndGet
+		
+		BegSet
+			pCreateUser = *PropVal
+		EndSet
+	EndProp
+		
+	//Create Date
+	BegProp CreateDate Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pCreateDate
+		EndGet
+		
+		BegSet
+			pCreateDate = *PropVal
+		EndSet
+	EndProp
+	
+	//Create Time
+	BegProp CreateTime Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pCreateTime
+		EndGet
+		
+		BegSet
+			pCreateTime = *PropVal
+		EndSet
+	EndProp
+	
+	//Changed User
+	BegProp ChangedUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pChangedUser
+		EndGet
+		
+		BegSet
+			pChangedUser = *PropVal
+		EndSet
+	EndProp
+			
+	//Changed Date
+	BegProp ChangedDate Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pChangedDate
+		EndGet
+		
+		BegSet
+			pChangedDate = *PropVal
+		EndSet
+	EndProp
+	
+	//Changed Time
+	BegProp ChangedTime Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pChangedTime
+		EndGet
+		
+		BegSet
+			pChangedTime = *PropVal
+		EndSet
+	EndProp
+					
+	/EndRegion	
+			
+	/Region Methods
+		
+	//Returns Application Details
+	BegFunc GetApplicationDetails     Type(Boolean) Access(*Public)
+		DclSrParm  ApplicationID  Type(Int32) 
+											
+		If Not DSSPAPPL1.IsOpen
+			Open DSSPAPPL1
+		EndIf
+		
+		Chain From(DSSPAPPL1) Key(ApplicationID) Access(*NoLock)
+		If %Found
+			PopulateProperties()
+			LeaveSR *On
+		Else
+			LeaveSR *Off
+		EndIf
+			
+	EndFunc
+	
+	
+	BegSr PopulateProperties Access(*Public)
+		pApplicationID	       = APPID
+		pApplicationDesc       = APPNAM
+		pCreateUser            = APPCRU
+		pCreateDate            = APPCRD
+		pCreateTime            = APPCRT
+		pChangedUser           = APPCHU
+		pChangedDate           = APPCHD
+		pChangedTime		   = APPCHT
+	EndSr
+	
+	/EndRegion
+	
+EndClass

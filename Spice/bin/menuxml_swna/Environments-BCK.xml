@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- List of Servers and the Environments held there -->
+<Environments>
+
+  <Environment HostName="TDS1.TDS.DISNEY.COM" Domain="SWNA" EnvironmentName="TDS1 (Production US)"  Image="BackgroundUK.jpg" DateFormat="MDY" PathToEnvironmentXML="\iDash\TDSNAXML" PathToApplicationXML="\iDashXML\TDSNA" EnvironmentType = "*Production"/>
+
+
+</Environments>

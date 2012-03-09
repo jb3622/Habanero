@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--This XML file contains Menu library lists -->
+<LibraryLists>
+  <LibraryList EnvironmentName="TDST (Development)" Name="*DEFAULT" Library="*IPTS" />
+  
+  <LibraryList EnvironmentName="TDS2 (Production Europe)" Name="*DEFAULT" Library1="TDSFILDSP" Library2="TDSFILUKP" Library3="TDSHSTUKP"
+               Library4="IPTSMODUKP" Library5="IPTSMODEUP" Library6="IPTSMODDSP" Library7="IPTSPCH" Library8="IPTSFILUKP" Library9="IPASFILUKP"
+               Library10="IPWMFILUKP" Library11="IPSAFILUKP" Library12="IPTSPGM" Library13="IPTSUTL" Library14="IPSAPGM" Library15="DSTOOL"
+               Library16="QTEMP" Library17="QGPL" Library18="LASERLIB" Library19="DSTECH"/>    
+</LibraryLists>

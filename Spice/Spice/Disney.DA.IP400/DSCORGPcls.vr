@@ -1,0 +1,137 @@
+Using System
+Using System.Text
+Using System.IO
+Using System.Data
+
+BegClass DSCORGPcls Access(*Public)
+
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(DSCORGPJ) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*No)  RnmFmt(rdscorgpJ:R_rdsCorgpJ)
+	
+	DclFld SeasonsTbl Type(DataTable)
+	DclFld pXMLpath   Type(String) Access(*Private)
+	//DclArray Keys    Type(DataColumn) Rank(1)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Seasons.xml")
+		LoadDataSetfromXML()
+	EndConstructor
+	
+	BegProp Coordinate_Group_Code Type(*Char) Len(4) Access(*Public)
+		BegGet
+			LeaveSR CCDE
+		EndGet
+	EndProp
+	
+	BegProp Coordinate_Group_Desc Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR CDES
+		EndGet
+		
+		BegSet
+			CDES = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Coordinate_Active Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR CSTS
+		EndGet
+		
+		BegSet
+			CSTS = *PropVal
+		EndSet
+	EndProp
+		
+	BegSR LoadDataSetFromXML Access(*Private)
+	
+		//DclFld dv Type(DataView)
+		If SeasonsTbl = *Nothing
+			CreateDS()
+			If Not File.Exists(pXMLpath)
+				CreateSeasonsXML()
+			Else
+				SeasonsTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr CreateDS Access(*Private)
+		
+		DclArray Keys Type(DataColumn) Rank(1)
+		DclFld   dc   Type(DataColumn)
+		
+		SeasonsTbl = *New DataTable("Seasons")
+
+		SeasonsTbl.Columns.Add(*New DataColumn("SeasonCode", *TypeOf(String)))
+		SeasonsTbl.Columns["SeasonCode"].ReadOnly = *True
+
+		SeasonsTbl.Columns.Add(*New DataColumn("SeasonDescription", *TypeOf(String)))
+		SeasonsTbl.Columns["SeasonDescription"].ReadOnly = *True
+		
+		dc = *New DataColumn("SeasonCodeDescription")
+		dc.Expression = "SeasonCode + ' - ' + SeasonDescription"
+		dc.ReadOnly = *True
+		SeasonsTbl.Columns.Add(dc)
+		
+		SeasonsTbl.Columns.Add(*New DataColumn("Status", *TypeOf(Boolean)))
+		SeasonsTbl.Columns["Status"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {SeasonsTbl.Columns("SeasonCode")}
+		SeasonsTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr CreateSeasonsXML Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSCORGPJ.IsOpen
+			Open DSCORGPJ
+		EndIf
+		
+		DoUntil DSCORGPJ.IsEof
+			Read DSCORGPJ
+			If Not DSCORGPJ.IsEof
+				dr = SeasonsTbl.NewRow()
+				dr.Item["SeasonCode"]        = CCDE.Trim()
+				dr.Item["SeasonDescription"] = CDES.Trim()
+				
+				If CSTS = 'Y'
+					dr.Item["Status"] = *True
+				Else
+					dr.Item["Status"] = *False
+				EndIf
+				
+				SeasonsTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		SeasonsTbl.WriteXml(pXMLpath)
+		Close DSCORGPJ
+	EndSr
+	
+	BegFunc GetSeasonsTbl Type(DataTable) Access(*Public)
+	
+		LeaveSR SeasonsTbl
+	EndFunc
+	
+//	BegFunc GetCoordinateGroup Type(*Boolean) Access(*Public)
+//		DclSrParm CoordinateCode Type(*Char) len(4)
+//		
+//		If Not DSCORGP.IsOpen
+//			Open DSCORGP
+//		EndIf
+//		
+//		Chain From(DSCORGP) Key(CoordinateCode) Access(*NoLock)
+//		If %Found
+//			LeaveSR *Off
+//		Else
+//			LeaveSR *On
+//		EndIf
+//	EndFunc
+EndClass

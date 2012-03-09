@@ -1,0 +1,129 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{943ac80d-5a46-4a1c-ba2f-8710b10ad658}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Disney.Spice.POenquiry</RootNamespace>
+    <AssemblyName>Disney.Spice.POenquiry</AssemblyName>
+    <StartupObject>Disney.Spice.POenquiry.POMain</StartupObject>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <Name>Disney.Spice.POenquiry</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DefineDebug>True</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>False</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <OutputPath>..\..\iDash</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
+      <Name>ASNA.DataGate.Client</Name>
+      <AssemblyName>ASNA.DataGate.Client.dll</AssemblyName>
+    </Reference>
+    <Reference Include="ASNA.VisualRPG.Runtime, Version=8.1.432.0, Culture=neutral, PublicKeyToken=d7106be54d30c861">
+      <Name>ASNA.VisualRPG.Runtime</Name>
+      <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
+    </Reference>
+    <Reference Include="Disney.DA.IP400, Version=8.3.1.19236, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.DA.IP400</Name>
+      <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.1.19276, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.ItemsBO</Name>
+      <AssemblyName>Disney.Spice.ItemsBO.dll</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.POUI, Version=8.3.2.20679, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.POUI</Name>
+      <AssemblyName>Disney.Spice.POUI.dll</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.POUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DisneyMenu, Version=8.3.1.22225, Culture=neutral, PublicKeyToken=null">
+      <Name>DisneyMenu</Name>
+      <AssemblyName>DisneyMenu.exe</AssemblyName>
+	  <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Compile Include="POMain.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrder.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <EmbeddedResource Include="POMain.resx">
+      <DependentUpon>POMain.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\ASNA\VisualRPG\8.1\ASNA.VisualRPG.targets" />
+</Project>
