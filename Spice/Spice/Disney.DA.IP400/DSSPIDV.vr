@@ -1,0 +1,50 @@
+Using System
+Using System.Text
+
+BegClass DSSPIDV Access(*Public)
+	
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSSPIDV) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	/Region Properties
+	BegProp Market Type(String) Access(*Public)
+		BegGet
+			LeaveSR IDVMKT
+		EndGet
+	EndProp
+	
+	BegProp Class Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR IDVCLS
+		EndGet
+	EndProp
+	
+	BegProp VATcode Type(String) Access(*Public)
+		BegGet
+			LeaveSR IDVVAT
+		EndGet
+	EndProp
+	/EndRegion
+	
+	BegFunc GetVatCode Type(String) Access(*Public)
+		DclSrParm Market Type(String)
+		DclSrParm Class  Type(Int16)
+		
+		If Not DSSPIDV.IsOpen
+			Open DSSPIDV
+		EndIf
+		
+		Chain From(DSSPIDV) Key(Market,Class)
+		If DSSPIDV.IsFound
+			LeaveSR IDVVAT
+		Else
+			LeaveSR String.Empty
+		EndIf
+	EndFunc
+EndClass

@@ -1,0 +1,487 @@
+// ===============================================
+// Joseph Urbina
+// 17th June 2009
+// IPSTOREcls	
+// Data Access Layer - Stores Master File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+Using System.IO
+
+BegClass IPSTOREcls Access(*Public)
+	
+	DclDB Name(DB) DbName("TDST")
+	
+	DclFld Selection	   Type(*Boolean)
+	DclFld dsStores        Type(DataSet)
+	DclFld dtStores		   Type( DataTable )
+	DclFld dcStores	       Type( DataColumn ) 
+	DclFld drStores		   Type( DataRow )
+	DclFld Store_String    Type(*String)
+	DclFld Store_Zoned	   Type(*Zoned)       Len(3,0)	
+	DclFld DataView		   Type(DataView)
+	DclFld pVATcode        Type(String)
+	
+	DclDiskFile Name(DSSTORE)  Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No)  RnmFmt(DSTORE:R_DSTORE)  NetBlockFactor(*Calc)
+	DclDiskFile Name(DSSTORE4) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No)  RnmFmt(DSTORE:R_DSTORE4) NetBlockFactor(*Calc)
+	DclDiskFile Name(IPSTORE)  Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No)  RnmFmt(STORE:R_STORE)    NetBlockFactor(*Calc)
+				
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+	
+	/Region Properties
+	BegProp Store_Number Type(*Zoned) Len(3,0) Access(*Public)
+		BegGet
+			LeaveSR sstr
+		EndGet
+	EndProp
+	
+	BegProp Store_Name Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR snam
+		EndGet
+	EndProp
+	
+	BegProp StoreVATcode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pVATcode
+		EndGet
+	EndProp
+	/EndRegion
+		
+	//Creates a DataSet/DataTable for all markets
+	BegFunc Store_DataSetClassALL Type(DataTable) Access(*Public)
+								
+		dsStores = *New DataSet("Spice")
+		dtStores = *New DataTable("StoresAll")
+		dsStores.Tables.Add(dtStores)					
+																
+		If Not DSSTORE4.IsOpen
+			Open DSSTORE4
+		EndIf
+		
+		If Not IPSTORE.IsOpen
+			Open IPSTORE
+		EndIf
+		
+		//Create Selection Column
+		dcStores = *New DataColumn( 'clmSelect' )
+		dcStores.DataType = System.Type.GetType("System.Boolean")
+		dcStores.ColumnName = "clmSelect"
+		dcStores.Caption = "Select"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store Number Column
+		dcStores = *New DataColumn( 'clmSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSSTR"
+		dcStores.Caption = "Store"
+		dtStores.Columns.Add(dcStores)
+				
+		//Create Store Name Column
+		dcStores = *New DataColumn( 'clmSNAM' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAM"
+		dcStores.Caption = "Store Name"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store/Name concatination Column
+		dcStores = *New DataColumn( 'clmSNAMSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAMSSTR"
+		dcStores.Caption = "Store_Name"
+		dtStores.Columns.Add(dcStores)
+		
+		dtStores.Columns.Add(*New DataColumn('StoreVATcode',*TypeOf(String)))
+		dtStores.Columns('StoreVATcode').ReadOnly = *True
+		
+		//Create dummy row
+		drStores = dtStores.NewRow()
+        drStores.Item[0] = *False	
+		drStores.Item[1] = String.Empty
+		drStores.Item[2] = String.Empty
+		drStores.Item[3] = 'All Stores'
+		drStores.Item[4] = String.Empty
+		dtStores.Rows.Add(drStores)
+		
+		If Not File.Exists('StoresAll.xml')
+			//Read file by Key and create rows in DataTable	
+			//Only create rows for valid Stores			
+			Setll DSSTORE4 Key(*Start)
+			DoUntil DSSTORE4.IsEof
+				Read DSSTORE4 
+					If not DSSTORE4.IsEof
+						Chain From(IPSTORE) Key(DSTR) Access(*NoLock)
+						If %Found and SDPN1 <> *Blanks
+							If SSTS = 'S' or SSTS = 'F'
+								drStores = dtStores.NewRow()
+								drStores.Item[0] = *False	
+								drStores.Item[1] = SSTR
+								drStores.Item[2] = SNAM
+								drStores.Item[3] = SSTR + '  ' + SNAM.Trim()
+								drStores.Item[4] = SVAT
+								dtStores.Rows.Add(drStores)
+							Endif
+						Endif
+					Endif
+			Enddo
+			dtStores.WriteXml('StoresAll.xml')
+		Else
+			dtStores.ReadXml('StoresAll.xml')
+		Endif
+		
+		LeaveSR dtStores
+	EndFunc
+	
+	//Creates a DataSet/DataTable accessed by Market. builds a dataset for a given market
+	BegFunc Store_DataSetClassMarket Type(DataTable) Access(*Public)
+		DclSrParm Market Type(*Char)	   Len(2)
+						
+		dsStores = *New DataSet("Spice")
+		dtStores = *New DataTable("StoresMarket")	
+		dsStores.Tables.Add(dtStores)					
+														
+		If Not DSSTORE4.IsOpen
+			Open DSSTORE4
+		EndIf
+		
+		If Not IPSTORE.IsOpen
+			Open IPSTORE
+		EndIf
+		
+		//Create Selection Column
+		dcStores = *New DataColumn( 'clmSelect' )
+		dcStores.DataType = System.Type.GetType("System.Boolean")
+		dcStores.ColumnName = "clmSelect"
+		dcStores.Caption = "Select"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store Number Column
+		dcStores = *New DataColumn( 'clmSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSSTR"
+		dcStores.Caption = "Store"
+		dtStores.Columns.Add(dcStores)
+				
+		//Create Store Name Column
+		dcStores = *New DataColumn( 'clmSNAM' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAM"
+		dcStores.Caption = "Store Name"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store/Name concatination Column
+		dcStores = *New DataColumn( 'clmSNAMSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAMSSTR"
+		dcStores.Caption = "Store_Name"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Dummy row
+		drStores = dtStores.NewRow()
+        drStores.Item[0] = *False	
+		drStores.Item[1] = ''
+		drStores.Item[2] = ' '
+		drStores.Item[3] = 'All Stores'
+		dtStores.Rows.Add(drStores)
+		
+			//Read file by Key and create rows in DataTable	
+			//Only create rows for valid Stores			
+			Setll DSSTORE4 Key(Market)
+			DoUntil DSSTORE4.IsEof
+				ReadE DSSTORE4 Key(Market)
+					If not DSSTORE4.IsEof
+						Chain From(IPSTORE) Key(DSTR) Access(*NoLock)
+						If %Found and SDPN1 <> *Blanks
+							If SSTS = 'S' or SSTS = 'F'
+								drStores = dtStores.NewRow()
+								drStores.Item[0] = *False	
+								drStores.Item[1] = SSTR
+								drStores.Item[2] = SNAM
+								drStores.Item[3] = SSTR + '  ' + SNAM.Trim()
+								dtStores.Rows.Add(drStores)
+							Endif
+						Endif
+					Endif
+			Enddo
+					
+		LeaveSR dtStores
+	EndFunc
+	
+	//Creates a DataSet/DataTable accessed by Market. This is for the Store selection forms
+	BegFunc Store_DataSetClass Type(DataTable) Access(*Public)
+		DclSrParm Market	   Type(*Char)	   Len(2)
+		DclSrParm dtSelections Type(DataTable)
+				
+		dsStores = *New DataSet("Spice")
+		dtStores = *New DataTable("Stores")	
+		dsStores.Tables.Add(dtStores)					
+		DataView = *New DataView(dtSelections) 
+												
+		If Not DSSTORE4.IsOpen
+			Open DSSTORE4
+		EndIf
+		
+		If Not IPSTORE.IsOpen
+			Open IPSTORE
+		EndIf
+		
+		//Create Selection Column
+		dcStores = *New DataColumn( 'clmSelect' )
+		dcStores.DataType = System.Type.GetType("System.Boolean")
+		dcStores.ColumnName = "clmSelect"
+		dcStores.Caption = "Select"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store Number Column
+		dcStores = *New DataColumn( 'clmSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSSTR"
+		dcStores.Caption = "Store"
+		dtStores.Columns.Add(dcStores)
+				
+		//Create Store Name Column
+		dcStores = *New DataColumn( 'clmSNAM' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAM"
+		dcStores.Caption = "Store Name"
+		dtStores.Columns.Add(dcStores)
+		
+		If Not File.Exists('Stores.xml')
+			//Read file by Key and create rows in DataTable	
+			//Only create rows for valid Stores			
+			Setll DSSTORE4 Key(Market)
+			DoUntil DSSTORE4.IsEof
+				ReadE DSSTORE4 Key(Market)
+				If not DSSTORE4.IsEof
+					Chain From(IPSTORE) Key(DSTR) Access(*NoLock)
+					If %Found and SDPN1 <> *Blanks
+						If SSTS = 'S' or SSTS = 'F'
+							Store_String =  SSTR 
+							DataSet_Selections(Store_String)
+							If Selection = *False
+								drStores = dtStores.NewRow()
+								drStores.Item[0] = *False	
+								drStores.Item[1] = SSTR
+								drStores.Item[2] = SNAM
+								dtStores.Rows.Add(drStores)
+							Endif
+						Endif
+					Endif
+				Endif
+			Enddo
+			
+			dtStores.WriteXml('Stores.xml')
+		Else
+			dtStores.ReadXml('Stores.xml')
+		Endif
+		
+		LeaveSR dtStores
+	EndFunc
+	
+	//Function checking whether this store has already been selected previously.
+	//This has to be reflected in the DataTable being sent to the Store Selection Class
+	BegFunc DataSet_Selections Type(*Boolean) Access(*Public)
+		DclSrParm Store_String Type(*String)	
+				
+		Selection = *False
+								
+		ForEach Data_Row_View Collection(DataView) Type(DataRowView)
+			If Data_Row_View.Item["clmStore"] *as *String = Store_String
+				Selection = *True
+				Leave
+			Endif
+		Endfor
+						
+		LeaveSr Selection
+	EndFunc	
+	
+	//Creates a DataSet/DataTable Search accessed by Market.
+	BegFunc Store_DataSetClassSearch Type(DataTable) Access(*Public)
+		DclSrParm Market	   Type(*Char)	   Len(2)
+		DclSrParm dtSelections Type(DataTable)
+		DclSrParm Store_Desc   Type(*Char)     Len(25)
+		DclFld Name(Pos)       Type(*ZONED)    Len(5,0)
+									
+		DataView = *New DataView(dtSelections) 
+												
+		If Not DSSTORE4.IsOpen
+			Open DSSTORE4
+		EndIf
+		
+		If Not IPSTORE.IsOpen
+			Open IPSTORE
+		EndIf
+		
+		//Create Selection Column
+		dcStores = *New DataColumn( 'clmSelect' )
+		dcStores.DataType = System.Type.GetType("System.Boolean")
+		dcStores.ColumnName = "clmSelect"
+		dcStores.Caption = "Select"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store Number Column
+		dcStores = *New DataColumn( 'clmSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSSTR"
+		dcStores.Caption = "Store"
+		dtStores.Columns.Add(dcStores)
+				
+		//Create Store Name Column
+		dcStores = *New DataColumn( 'clmSNAM' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAM"
+		dcStores.Caption = "Store Name"
+		dtStores.Columns.Add(dcStores)
+		
+		//Read file by Key and create rows in DataTable	
+		//Only create rows for valid Stores			
+		Setll DSSTORE4 Key(Market)
+		DoUntil DSSTORE4.IsEof
+			ReadE DSSTORE4 Key(Market)
+			If not DSSTORE4.IsEof
+				Chain From(IPSTORE) Key(DSTR) Access(*NoLock)
+				Pos = %Scan (Store_Desc.Trim(), SNAM.Trim(), 1)
+				If Pos <> 0
+					If %Found and SDPN1 <> *Blanks
+						If SSTS = 'S' or SSTS = 'F'
+							Store_String =  SSTR 
+							DataSet_Selections(Store_String)
+							If Selection = *False
+								drStores = dtStores.NewRow()
+								drStores.Item[0] = *False	
+								drStores.Item[1] = SSTR
+								drStores.Item[2] = SNAM
+								dtStores.Rows.Add(drStores)
+							Endif
+						Endif
+					Endif
+				Endif
+			Endif  
+		Enddo
+				
+		LeaveSR dtStores
+	EndFunc
+			
+	//Creates a DataSet/DataTable for Store_Group Search.
+	BegFunc Store_DataSet Type(DataTable) Access(*Public)
+		DclSrParm dtStoreGroup Type(DataTable)
+		
+		DclFld dtStores	 Type( DataTable ) New()
+		
+		DataView = *New DataView(dtStoreGroup) 
+				
+		If Not IPSTORE.IsOpen
+			Open IPSTORE
+		EndIf
+		
+		//Create Selection Column
+		dcStores = *New DataColumn( 'clmSelect' )
+		dcStores.DataType = System.Type.GetType("System.Boolean")
+		dcStores.ColumnName = "clmSelect"
+		dcStores.Caption = "Select"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store Number Column
+		dcStores = *New DataColumn( 'clmSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSSTR"
+		dcStores.Caption = "Store"
+		dtStores.Columns.Add(dcStores)
+				
+		//Create Store Name Column
+		dcStores = *New DataColumn( 'clmSNAM' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAM"
+		dcStores.Caption = "Store Name"
+		dtStores.Columns.Add(dcStores)
+						
+		//Read through the Datatable
+		//Only create rows for valid Stores			
+		ForEach Data_Row_View Collection(DataView) Type(DataRowView)
+			Store_String = Data_Row_View.Item['clmStore'].ToString()
+			Store_Zoned = Store_String			
+			Chain From(IPSTORE) Key(Store_Zoned) Access(*NoLock)
+			If %Found and SDPN1 <> *Blanks
+				If SSTS = 'S' or SSTS = 'F'
+					drStores = dtStores.NewRow()
+					drStores.Item[0] = *False	
+					drStores.Item[1] = SSTR
+					drStores.Item[2] = SNAM
+					dtStores.Rows.Add(drStores)
+				Endif
+			Endif
+		EndFor			
+						
+		LeaveSR dtStores
+	EndFunc
+	
+	//Creates a DataSet/DataTable for Store_Group Search with Market.
+	BegFunc Store_DataSet_Market Type(DataTable) Access(*Public)
+		DclSrParm dtStoreGroup Type(DataTable)
+		DclSrParm Market	   Type(*Char)	   Len(2)
+		
+		DclFld dtStores	 Type( DataTable ) New()
+		
+		DataView = *New DataView(dtStoreGroup) 
+		
+		If Not DSSTORE.IsOpen
+			Open DSSTORE
+		EndIf
+				
+		If Not IPSTORE.IsOpen
+			Open IPSTORE
+		EndIf
+		
+		//Create Selection Column
+		dcStores = *New DataColumn( 'clmSelect' )
+		dcStores.DataType = System.Type.GetType("System.Boolean")
+		dcStores.ColumnName = "clmSelect"
+		dcStores.Caption = "Select"
+		dtStores.Columns.Add(dcStores)
+		
+		//Create Store Number Column
+		dcStores = *New DataColumn( 'clmSSTR' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSSTR"
+		dcStores.Caption = "Store"
+		dtStores.Columns.Add(dcStores)
+				
+		//Create Store Name Column
+		dcStores = *New DataColumn( 'clmSNAM' )
+		dcStores.DataType = System.Type.GetType("System.String")
+		dcStores.ColumnName = "clmSNAM"
+		dcStores.Caption = "Store Name"
+		dtStores.Columns.Add(dcStores)
+						
+		//Read through the Datatable
+		//Only create rows for valid Stores			
+		ForEach Data_Row_View Collection(DataView) Type(DataRowView)
+			Store_String = Data_Row_View.Item['clmStore'].ToString()
+			Store_Zoned = Store_String
+			Chain From(DSSTORE) Key(Store_Zoned) Access(*Nolock)
+			If %Found and DCTR = Market			
+				Chain From(IPSTORE) Key(Store_Zoned) Access(*NoLock)
+				If %Found and SDPN1 <> *Blanks
+					If SSTS = 'S' or SSTS = 'F' 
+						drStores = dtStores.NewRow()
+						drStores.Item[0] = *False	
+						drStores.Item[1] = SSTR
+						drStores.Item[2] = SNAM
+						dtStores.Rows.Add(drStores)
+					Endif
+				Endif
+			Endif  
+		EndFor			
+						
+		LeaveSR dtStores
+	EndFunc
+EndClass

@@ -1,0 +1,214 @@
+/// ===============================================
+// Tarnjit Bhambra
+// 07 May 2009
+// DSSBCLScls	
+// Data Access Layer - SubClass File
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+
+BegClass DSSBCLScls Access(*Public)
+	
+	DclFld memRecords Type(*Integer4)
+	
+	DclDB Name(DB) DbName("TDST")
+	DclDiskFile Name(DSSBCLS) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*Yes) RnmFmt(DSSBCLSF:R_DSSBCLSF) 
+	
+	DclDiskFile Name(DSSBCLSL1) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*No) RnmFmt(DSSBCLSF:R_DSSBCLSF1) +
+		netBlockFactor(400)
+	
+	DclMemoryFile Name(mDSSBCLS) DBdesc(DB) Filedesc('*Libl/DSSBCLS') +
+		RnmFmt(DSSBCLSF, mDSSBCLSF) ImpOpen(*No)
+		
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB    Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm SubclassCode Type(*Char) Len(4)
+		
+		*this.DB = DB
+		
+		GetSubclassCode(SubclassCode)
+	EndConstructor
+	
+	//Properties
+	BegProp Subclass_Code Type(*Char) Len(4) Access(*Public)
+		BegGet
+			LeaveSR SCCODE
+		EndGet
+	EndProp
+	
+	BegProp Subclass_Code_Desc Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR SCDESC
+		EndGet
+		
+		BegSet
+			SCDESC = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Rec_Held_by_Job Type(*Char) Len(10) Access(*Public)
+		BegGet
+			LeaveSR SCHLD@
+		EndGet
+		
+		BegSet
+			SCHLD@ = *PropVal
+		EndSet
+	EndProp
+		
+	BegProp Active_Status Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR SCSTS
+		EndGet
+		
+		BegSet
+			SCSTS = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp DataSet_Record_Count Type(*Integer4) Access(*Public)
+		BegGet
+			LeaveSR memRecords
+		EndGet
+	EndProp
+	
+	
+	// Methods
+	BegFunc GetSubclassCode Type(*Boolean) Access(*Public)
+		DclSrParm SubclassCode Type(*Char) len(4)
+		
+		If Not DSSBCLS.IsOpen
+			Open DSSBCLS
+		EndIf
+		
+		Chain From(DSSBCLS) Key(SubclassCode) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+	EndFunc
+	
+	BegFunc GetSubclassCodeForUpdate Type(*Boolean) Access(*Public)
+		DclSrParm SubclassCode Type(*Char) len(4)
+		
+		If Not DSSBCLS.IsOpen
+			Open DSSBCLS
+		EndIf
+		
+		Chain From(DSSBCLS) Key(SubclassCode) Access(*DFT) Err(*Extended)
+		If not %Found
+			LeaveSR *On
+		EndIf
+		
+		If %Error = *On
+			Throw *New System.Exception('Failed to get record for update (DSSBCLS)')
+			LeaveSR *On
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+			
+	BegSR WriteSubclassCode Access(*Public)
+		DclSrParm SubclassCode Type(*Char) Len(4)
+	
+		If Not DSSBCLS.IsOpen
+			Open DSSBCLS
+		EndIf
+		
+		SCCODE = SubclassCode
+		
+		Write R_DSSBCLSF Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (DSSBCLS)')
+		EndIf
+		
+		LeaveSR
+	EndSR
+	
+	BegFunc UpdateSubclassCode Type(*Boolean) Access(*Public) 
+		DclSrParm SubclassCode Type(*Char) len(4)
+		
+		Update R_DSSBCLSF Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to update record (DSSBCLS)')
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegFunc DeleteSubclassCode Type(*Boolean) Access(*Public)
+		DclSrParm SubclassCode Type(*Char) len(4)
+		
+		If Not DSSBCLS.IsOpen
+			Open DSSBCLS
+		EndIf
+		
+		Delete From(R_DSSBCLSF) Key(SubclassCode) Err(*Extended)
+		If %Error = *On
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *False
+	EndFunc
+	
+	/region Memory files
+	
+	BegFunc setMemDSSBCLS  Type(*Boolean) Access(*Public)
+	
+		If Not DSSBCLSL1.IsOpen
+			Open DSSBCLSL1
+		EndIf
+	
+	 	If Not mDSSBCLS.IsOpen
+	 		Open mDSSBCLS
+		Endif	
+		
+		mDSSBCLS.DataSet.Clear()
+		memRecords = *Zero
+	
+		SetLL DSSBCLSL1 key(*Start)
+		DoUntil DSSBCLSL1.IsEof
+			Read DSSBCLSL1
+			If (Not DSSBCLSL1.IsEof)
+			   Write mDSSBCLS
+			   memRecords += 1
+		    Endif
+		Enddo
+	    
+	    Close DSSBCLSL1 
+	
+		LeaveSR *True
+	
+	EndFunc	
+	
+	BegFunc ReadDSSBCLS Type(*Boolean) Access(*Public)
+		DclSrParm wIdx Type(*Integer2)
+		
+		If wIdx > memRecords 
+		   LeaveSR *True
+		Endif   
+		
+		Chain mDSSBCLS key(wIdx)
+		If mDSSBCLS.IsEof
+		   Unlock mDSSBCLS
+		   LeaveSR *True
+		Endif
+		
+		LeaveSR *false   
+	
+	EndFunc
+	
+	/endregion
+
+EndClass

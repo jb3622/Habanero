@@ -1,0 +1,2057 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.SRR
+
+DclNameSpace Disney.SRR
+
+BegClass frmParameters Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/region Declarations
+	DclFld label7 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label9 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld label10 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label11 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label13 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label14 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label19 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxContinue System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld uxDept System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label5 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxItmCls System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmVen System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmSty System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmClr System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxItmSiz System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxMarket System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxStoreGrp System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxCordinateGrp System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxUser System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxFilegroup System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxExit System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld uxBack System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld rbtItemLevel System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbtStoreLevel System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld uxGrpBoxLocation System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld uxGrpBoxSummary System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld rbtGradeLevel System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbtMarketLevel System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld uxGrpBoxItem System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld uxStoreGrade System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld uxExclEDCStk System.Windows.Forms.CheckBox Access(*Public) WithEvents(*Yes)
+	DclFld uxChanging1 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld rbWeekly1 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbDaily1 System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld uxFamily System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld uxStore System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld uxshowFP System.Windows.Forms.CheckBox Access(*Public) WithEvents(*Yes)
+	DclFld uxShowMD System.Windows.Forms.CheckBox Access(*Public) WithEvents(*Yes)
+	DclFld uxPromoEvent System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld uxPromoCD System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxUPC System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld label17 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	
+	DclFld frmWorkBenchParm  Type(frmWorkBenchParm)
+	
+	DclFld wAS400User  Type(*Char)    Len(10)  Access(*Public) 
+	DclFld wDept       Type(*Zoned)   Len(3,0) Access(*Public) 
+	DclFld wFileGroup  Type(*Zoned)   Len(3,0) Access(*Public) 
+	
+	DclFld Counter	   Type( *Integer4 )
+	DclFld ErrorCount  Type( *Integer4 )
+	DclFld Level       Type( *Char )     Len(2)  Access(*Public)
+	
+	DclFld wExit1      Type(*Boolean)  Access(*public)
+	DclFld wApply1     Type(*Boolean)  Access(*public)
+	DclFld wStoreGrp   Type(*Char)    Len(4)  
+	DclFld wStorelist1 Type(*char)    Len(999) Access(*public)
+	DclFld wToMbr1     Type(*char)    Len(10) Access(*public)
+	DclFld wFrMbr1     Type(*char)    Len(10) Access(*public)
+	DclFld wCountry1   Type(*Char)    Len(2)  Access(*Public)
+	
+	DclFld QryString   Type(System.Text.StringBuilder)
+	DclFld QryKey      Type(*String)
+	Dclfld filesOpen   Type(*Boolean) 
+	
+	DclFld Grade       Type(*Char) Len(3)
+	DclFld wPromoCode  Type(*Char) Len(3)
+	DclFld wPromoEvent Type(*Char) Len(10)
+	
+	DclFld FamilyDS Type(DataSet)
+	DclFld PromoEventsDS Type(DataSet)
+	DclFld PromoDS Type(DataSet)
+	
+	// Declare an 999 array of store characters.
+//    DCLARRAY Name(StoreARR) DIM(999) Type(*CHAR) Len(1) Access(*Public)
+	/endregion   	
+	
+	/region declare data files
+	
+    DclDB AS400 DBName( "TDST" ) 
+    
+	DclDiskFile  DSPROMST +
+		Type( *Input  ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/DSPROMST" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 	+
+		RnmFmt( DSPROMSR )	
+		
+	DclDiskFile  DSPROMO +
+		Type( *Input  ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/DSPROMO" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 	
+		
+	DclDiskFile  DSCNTAP +
+		Type( *Input  ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/DSCNTAP" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 	
+		
+	DclDiskFile  IPCLASS +
+		Type( *Input ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/IPCLASS" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 	
+		
+	DclDiskFile  IPITHDRC +
+		Type( *Input ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/IPITHDRC" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 			
+		
+	DclDiskFile  IPSTORE +
+		Type( *Input ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/IPSTORE" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 		 
+   	
+	DclDiskFile  IPSTRTB +
+		Type( *Input ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/IPSTRTB" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 		 
+   
+   DclDiskFile  DSFAMLY +
+		Type( *Input ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/DSFAMLY" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 	
+   
+   DclDiskFile  DSALSTG +
+		Type( *Input ) + 
+		Org( *Indexed ) + 
+		File( "*LIBL/DSALSTG" ) +
+		DB( AS400 ) +
+		ImpOpen( *No )  	
+			
+    DclDiskFile  DSSRLCKL1 +
+		Type( *Update  ) + 
+		Org( *Indexed ) +
+		File( "*LIBL/DSSRLCKL1" ) +  
+		DB( AS400 ) +
+		ImpOpen( *No )		
+    
+    /endregion
+	
+	BegConstructor Access(*Public)
+		DclSrParm p_AS400	  Type(ASNA.VisualRPG.Runtime.Database)
+		DclsrParm p_AS400User Type(*Char) Len(10)
+		DclsrParm p_Dept      Type(*Zoned) Len(3,0)
+		DclsrParm p_FGP       Type(*Zoned) Len(3,0)
+		
+		InitializeComponent()
+		
+        *this.As400		  = p_AS400
+		*this.wAS400User  = p_AS400User
+		*this.wDept       = p_Dept
+		*this.wFileGroup  = p_FGP
+	EndConstructor
+
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(frmParameters))
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.label9 = *new System.Windows.Forms.Label()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.label10 = *new System.Windows.Forms.Label()
+		*this.label11 = *new System.Windows.Forms.Label()
+		*this.rbtItemLevel = *new System.Windows.Forms.RadioButton()
+		*this.rbtStoreLevel = *new System.Windows.Forms.RadioButton()
+		*this.uxContinue = *new System.Windows.Forms.Button()
+		*this.label13 = *new System.Windows.Forms.Label()
+		*this.label14 = *new System.Windows.Forms.Label()
+		*this.uxUser = *new System.Windows.Forms.TextBox()
+		*this.uxFilegroup = *new System.Windows.Forms.TextBox()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label17 = *new System.Windows.Forms.Label()
+		*this.label19 = *new System.Windows.Forms.Label()
+		*this.uxItmCls = *new System.Windows.Forms.TextBox()
+		*this.uxItmVen = *new System.Windows.Forms.TextBox()
+		*this.uxItmSty = *new System.Windows.Forms.TextBox()
+		*this.uxItmClr = *new System.Windows.Forms.TextBox()
+		*this.uxItmSiz = *new System.Windows.Forms.TextBox()
+		*this.uxDept = *new System.Windows.Forms.TextBox()
+		*this.uxMarket = *new System.Windows.Forms.TextBox()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.uxStoreGrp = *new System.Windows.Forms.TextBox()
+		*this.label5 = *new System.Windows.Forms.Label()
+		*this.uxCordinateGrp = *new System.Windows.Forms.TextBox()
+		*this.uxExit = *new System.Windows.Forms.Button()
+		*this.uxBack = *new System.Windows.Forms.Button()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.uxGrpBoxSummary = *new System.Windows.Forms.GroupBox()
+		*this.rbtGradeLevel = *new System.Windows.Forms.RadioButton()
+		*this.rbtMarketLevel = *new System.Windows.Forms.RadioButton()
+		*this.uxGrpBoxLocation = *new System.Windows.Forms.GroupBox()
+		*this.uxStore = *new System.Windows.Forms.ComboBox()
+		*this.uxStoreGrade = *new System.Windows.Forms.ComboBox()
+		*this.uxGrpBoxItem = *new System.Windows.Forms.GroupBox()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.uxUPC = *new System.Windows.Forms.TextBox()
+		*this.uxPromoCD = *new System.Windows.Forms.ComboBox()
+		*this.uxPromoEvent = *new System.Windows.Forms.ComboBox()
+		*this.uxFamily = *new System.Windows.Forms.ComboBox()
+		*this.uxExclEDCStk = *new System.Windows.Forms.CheckBox()
+		*this.uxChanging1 = *new System.Windows.Forms.GroupBox()
+		*this.rbWeekly1 = *new System.Windows.Forms.RadioButton()
+		*this.rbDaily1 = *new System.Windows.Forms.RadioButton()
+		*this.uxShowMD = *new System.Windows.Forms.CheckBox()
+		*this.uxshowFP = *new System.Windows.Forms.CheckBox()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.uxGrpBoxSummary.SuspendLayout()
+		*this.uxGrpBoxLocation.SuspendLayout()
+		*this.uxGrpBoxItem.SuspendLayout()
+		*this.uxChanging1.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Location = *new System.Drawing.Point(20, 136)
+		*this.label7.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(54, 18)
+		*this.label7.TabIndex = 6
+		*this.label7.Text = "Market"
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(20, 65)
+		*this.label8.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(89, 18)
+		*this.label8.TabIndex = 7
+		*this.label8.Text = "Store Grade"
+		//
+		//label9
+		//
+		*this.label9.AutoSize = *True
+		*this.label9.Location = *new System.Drawing.Point(20, 34)
+		*this.label9.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label9.Name = "label9"
+		*this.label9.Size = *new System.Drawing.Size(44, 18)
+		*this.label9.TabIndex = 8
+		*this.label9.Text = "Store"
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 608)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Padding = *new System.Windows.Forms.Padding(3, 0, 21, 0)
+		*this.statusStrip1.Size = *new System.Drawing.Size(1036, 22)
+		*this.statusStrip1.TabIndex = 9
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//label10
+		//
+		*this.label10.AutoSize = *True
+		*this.label10.Location = *new System.Drawing.Point(10, 78)
+		*this.label10.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label10.Name = "label10"
+		*this.label10.Size = *new System.Drawing.Size(73, 18)
+		*this.label10.TabIndex = 10
+		*this.label10.Text = "Franchise"
+		//
+		//label11
+		//
+		*this.label11.AutoSize = *True
+		*this.label11.Location = *new System.Drawing.Point(11, 160)
+		*this.label11.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label11.Name = "label11"
+		*this.label11.Size = *new System.Drawing.Size(86, 18)
+		*this.label11.TabIndex = 11
+		*this.label11.Text = "Promotions"
+		//
+		//rbtItemLevel
+		//
+		*this.rbtItemLevel.AutoSize = *True
+		*this.rbtItemLevel.Checked = *True
+		*this.rbtItemLevel.Location = *new System.Drawing.Point(14, 34)
+		*this.rbtItemLevel.Margin = *new System.Windows.Forms.Padding(4)
+		*this.rbtItemLevel.Name = "rbtItemLevel"
+		*this.rbtItemLevel.Size = *new System.Drawing.Size(92, 22)
+		*this.rbtItemLevel.TabIndex = 18
+		*this.rbtItemLevel.TabStop = *True
+		*this.rbtItemLevel.Text = "Item Level"
+		*this.rbtItemLevel.UseVisualStyleBackColor = *True
+		//
+		//rbtStoreLevel
+		//
+		*this.rbtStoreLevel.AutoSize = *True
+		*this.rbtStoreLevel.Location = *new System.Drawing.Point(428, 34)
+		*this.rbtStoreLevel.Margin = *new System.Windows.Forms.Padding(4)
+		*this.rbtStoreLevel.Name = "rbtStoreLevel"
+		*this.rbtStoreLevel.Size = *new System.Drawing.Size(132, 22)
+		*this.rbtStoreLevel.TabIndex = 17
+		*this.rbtStoreLevel.Text = "Item Store Level"
+		*this.rbtStoreLevel.UseVisualStyleBackColor = *True
+		//
+		//uxContinue
+		//
+		*this.uxContinue.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxContinue.Location = *new System.Drawing.Point(687, 563)
+		*this.uxContinue.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxContinue.Name = "uxContinue"
+		*this.uxContinue.Size = *new System.Drawing.Size(100, 28)
+		*this.uxContinue.TabIndex = 20
+		*this.uxContinue.Text = "&Continue"
+		*this.uxContinue.UseVisualStyleBackColor = *True
+		//
+		//label13
+		//
+		*this.label13.AutoSize = *True
+		*this.label13.Location = *new System.Drawing.Point(23, 12)
+		*this.label13.Name = "label13"
+		*this.label13.Size = *new System.Drawing.Size(40, 18)
+		*this.label13.TabIndex = 33
+		*this.label13.Text = "User"
+		//
+		//label14
+		//
+		*this.label14.AutoSize = *True
+		*this.label14.Location = *new System.Drawing.Point(238, 12)
+		*this.label14.Name = "label14"
+		*this.label14.Size = *new System.Drawing.Size(111, 18)
+		*this.label14.TabIndex = 34
+		*this.label14.Text = "Using Filegroup"
+		//
+		//uxUser
+		//
+		*this.uxUser.Enabled = *False
+		*this.uxUser.Location = *new System.Drawing.Point(87, 10)
+		*this.uxUser.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxUser.Name = "uxUser"
+		*this.uxUser.Size = *new System.Drawing.Size(130, 24)
+		*this.uxUser.TabIndex = 35
+		//
+		//uxFilegroup
+		//
+		*this.uxFilegroup.Enabled = *False
+		*this.uxFilegroup.Location = *new System.Drawing.Point(366, 10)
+		*this.uxFilegroup.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxFilegroup.Name = "uxFilegroup"
+		*this.uxFilegroup.Size = *new System.Drawing.Size(39, 24)
+		*this.uxFilegroup.TabIndex = 36
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(451, 12)
+		*this.label1.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(39, 18)
+		*this.label1.TabIndex = 0
+		*this.label1.Text = "Dept"
+		//
+		//label17
+		//
+		*this.label17.AutoSize = *True
+		*this.label17.Location = *new System.Drawing.Point(365, 448)
+		*this.label17.Name = "label17"
+		*this.label17.Size = *new System.Drawing.Size(0, 18)
+		*this.label17.TabIndex = 39
+		//
+		//label19
+		//
+		*this.label19.AutoSize = *True
+		*this.label19.Font = *new System.Drawing.Font("Microsoft Sans Serif", 11.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label19.Location = *new System.Drawing.Point(10, 34)
+		*this.label19.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label19.Name = "label19"
+		*this.label19.Size = *new System.Drawing.Size(36, 18)
+		*this.label19.TabIndex = 41
+		*this.label19.Text = "Item"
+		//
+		//uxItmCls
+		//
+		*this.uxItmCls.Location = *new System.Drawing.Point(153, 34)
+		*this.uxItmCls.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmCls.MaxLength = 4
+		*this.uxItmCls.Name = "uxItmCls"
+		*this.uxItmCls.Size = *new System.Drawing.Size(68, 24)
+		*this.uxItmCls.TabIndex = 42
+		*this.uxItmCls.Tag = "Class"
+		//
+		//uxItmVen
+		//
+		*this.uxItmVen.Location = *new System.Drawing.Point(229, 34)
+		*this.uxItmVen.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmVen.MaxLength = 5
+		*this.uxItmVen.Name = "uxItmVen"
+		*this.uxItmVen.Size = *new System.Drawing.Size(70, 24)
+		*this.uxItmVen.TabIndex = 43
+		//
+		//uxItmSty
+		//
+		*this.uxItmSty.Location = *new System.Drawing.Point(307, 34)
+		*this.uxItmSty.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmSty.MaxLength = 4
+		*this.uxItmSty.Name = "uxItmSty"
+		*this.uxItmSty.Size = *new System.Drawing.Size(68, 24)
+		*this.uxItmSty.TabIndex = 44
+		//
+		//uxItmClr
+		//
+		*this.uxItmClr.Location = *new System.Drawing.Point(383, 34)
+		*this.uxItmClr.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmClr.MaxLength = 3
+		*this.uxItmClr.Name = "uxItmClr"
+		*this.uxItmClr.Size = *new System.Drawing.Size(68, 24)
+		*this.uxItmClr.TabIndex = 45
+		//
+		//uxItmSiz
+		//
+		*this.uxItmSiz.Location = *new System.Drawing.Point(459, 34)
+		*this.uxItmSiz.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxItmSiz.MaxLength = 4
+		*this.uxItmSiz.Name = "uxItmSiz"
+		*this.uxItmSiz.Size = *new System.Drawing.Size(68, 24)
+		*this.uxItmSiz.TabIndex = 46
+		//
+		//uxDept
+		//
+		*this.uxDept.Enabled = *False
+		*this.uxDept.Location = *new System.Drawing.Point(498, 9)
+		*this.uxDept.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxDept.MaxLength = 3
+		*this.uxDept.Name = "uxDept"
+		*this.uxDept.Size = *new System.Drawing.Size(68, 24)
+		*this.uxDept.TabIndex = 47
+		//
+		//uxMarket
+		//
+		*this.uxMarket.Location = *new System.Drawing.Point(120, 136)
+		*this.uxMarket.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxMarket.MaxLength = 2
+		*this.uxMarket.Name = "uxMarket"
+		*this.uxMarket.Size = *new System.Drawing.Size(54, 24)
+		*this.uxMarket.TabIndex = 50
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(12, 201)
+		*this.label2.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(85, 18)
+		*this.label2.TabIndex = 52
+		*this.label2.Text = "Event Code"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Location = *new System.Drawing.Point(20, 101)
+		*this.label4.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(90, 18)
+		*this.label4.TabIndex = 54
+		*this.label4.Text = "Store Group"
+		//
+		//uxStoreGrp
+		//
+		*this.uxStoreGrp.Location = *new System.Drawing.Point(120, 101)
+		*this.uxStoreGrp.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxStoreGrp.MaxLength = 4
+		*this.uxStoreGrp.Name = "uxStoreGrp"
+		*this.uxStoreGrp.Size = *new System.Drawing.Size(54, 24)
+		*this.uxStoreGrp.TabIndex = 55
+		//
+		//label5
+		//
+		*this.label5.AutoSize = *True
+		*this.label5.Location = *new System.Drawing.Point(10, 118)
+		*this.label5.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label5.Name = "label5"
+		*this.label5.Size = *new System.Drawing.Size(135, 18)
+		*this.label5.TabIndex = 56
+		*this.label5.Text = "Co-Ordinate Group"
+		//
+		//uxCordinateGrp
+		//
+		*this.uxCordinateGrp.Location = *new System.Drawing.Point(153, 118)
+		*this.uxCordinateGrp.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxCordinateGrp.MaxLength = 4
+		*this.uxCordinateGrp.Name = "uxCordinateGrp"
+		*this.uxCordinateGrp.Size = *new System.Drawing.Size(54, 24)
+		*this.uxCordinateGrp.TabIndex = 57
+		//
+		//uxExit
+		//
+		*this.uxExit.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxExit.Location = *new System.Drawing.Point(924, 563)
+		*this.uxExit.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxExit.Name = "uxExit"
+		*this.uxExit.Size = *new System.Drawing.Size(100, 28)
+		*this.uxExit.TabIndex = 58
+		*this.uxExit.Text = "E&xit"
+		*this.uxExit.UseVisualStyleBackColor = *True
+		//
+		//uxBack
+		//
+		*this.uxBack.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxBack.Location = *new System.Drawing.Point(804, 563)
+		*this.uxBack.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxBack.Name = "uxBack"
+		*this.uxBack.Size = *new System.Drawing.Size(100, 28)
+		*this.uxBack.TabIndex = 59
+		*this.uxBack.Text = "&Back"
+		*this.uxBack.UseVisualStyleBackColor = *True
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//uxGrpBoxSummary
+		//
+		*this.uxGrpBoxSummary.Controls.Add(*this.rbtGradeLevel)
+		*this.uxGrpBoxSummary.Controls.Add(*this.rbtMarketLevel)
+		*this.uxGrpBoxSummary.Controls.Add(*this.rbtItemLevel)
+		*this.uxGrpBoxSummary.Controls.Add(*this.rbtStoreLevel)
+		*this.uxGrpBoxSummary.Location = *new System.Drawing.Point(26, 59)
+		*this.uxGrpBoxSummary.Name = "uxGrpBoxSummary"
+		*this.uxGrpBoxSummary.Size = *new System.Drawing.Size(572, 109)
+		*this.uxGrpBoxSummary.TabIndex = 60
+		*this.uxGrpBoxSummary.TabStop = *False
+		*this.uxGrpBoxSummary.Text = "Summary Level"
+		//
+		//rbtGradeLevel
+		//
+		*this.rbtGradeLevel.AutoSize = *True
+		*this.rbtGradeLevel.Location = *new System.Drawing.Point(277, 34)
+		*this.rbtGradeLevel.Margin = *new System.Windows.Forms.Padding(4)
+		*this.rbtGradeLevel.Name = "rbtGradeLevel"
+		*this.rbtGradeLevel.Size = *new System.Drawing.Size(137, 22)
+		*this.rbtGradeLevel.TabIndex = 20
+		*this.rbtGradeLevel.Text = "Item Grade Level"
+		*this.rbtGradeLevel.UseVisualStyleBackColor = *True
+		//
+		//rbtMarketLevel
+		//
+		*this.rbtMarketLevel.AutoSize = *True
+		*this.rbtMarketLevel.Location = *new System.Drawing.Point(118, 34)
+		*this.rbtMarketLevel.Margin = *new System.Windows.Forms.Padding(4)
+		*this.rbtMarketLevel.Name = "rbtMarketLevel"
+		*this.rbtMarketLevel.Size = *new System.Drawing.Size(142, 22)
+		*this.rbtMarketLevel.TabIndex = 19
+		*this.rbtMarketLevel.Text = "Item Market Level"
+		*this.rbtMarketLevel.UseVisualStyleBackColor = *True
+		//
+		//uxGrpBoxLocation
+		//
+		*this.uxGrpBoxLocation.Controls.Add(*this.uxStore)
+		*this.uxGrpBoxLocation.Controls.Add(*this.uxStoreGrade)
+		*this.uxGrpBoxLocation.Controls.Add(*this.label9)
+		*this.uxGrpBoxLocation.Controls.Add(*this.label8)
+		*this.uxGrpBoxLocation.Controls.Add(*this.label4)
+		*this.uxGrpBoxLocation.Controls.Add(*this.label7)
+		*this.uxGrpBoxLocation.Controls.Add(*this.uxStoreGrp)
+		*this.uxGrpBoxLocation.Controls.Add(*this.uxMarket)
+		*this.uxGrpBoxLocation.Location = *new System.Drawing.Point(625, 186)
+		*this.uxGrpBoxLocation.Name = "uxGrpBoxLocation"
+		*this.uxGrpBoxLocation.Size = *new System.Drawing.Size(399, 181)
+		*this.uxGrpBoxLocation.TabIndex = 61
+		*this.uxGrpBoxLocation.TabStop = *False
+		*this.uxGrpBoxLocation.Text = "Location"
+		//
+		//uxStore
+		//
+		*this.uxStore.DropDownWidth = 260
+		*this.uxStore.FormattingEnabled = *True
+		*this.uxStore.IntegralHeight = *False
+		*this.uxStore.Location = *new System.Drawing.Point(120, 31)
+		*this.uxStore.MaxLength = 3
+		*this.uxStore.Name = "uxStore"
+		*this.uxStore.Size = *new System.Drawing.Size(248, 26)
+		*this.uxStore.TabIndex = 60
+		*this.uxStore.Text = "-------------- Select --------------"
+		//
+		//uxStoreGrade
+		//
+		*this.uxStoreGrade.DropDownWidth = 260
+		*this.uxStoreGrade.FormattingEnabled = *True
+		*this.uxStoreGrade.IntegralHeight = *False
+		*this.uxStoreGrade.Location = *new System.Drawing.Point(120, 65)
+		*this.uxStoreGrade.MaxLength = 5
+		*this.uxStoreGrade.Name = "uxStoreGrade"
+		*this.uxStoreGrade.Size = *new System.Drawing.Size(248, 26)
+		*this.uxStoreGrade.TabIndex = 59
+		*this.uxStoreGrade.Text = "-------------- Select --------------"
+		//
+		//uxGrpBoxItem
+		//
+		*this.uxGrpBoxItem.Controls.Add(*this.label3)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxUPC)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxPromoCD)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxPromoEvent)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxFamily)
+		*this.uxGrpBoxItem.Controls.Add(*this.label19)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxItmCls)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxItmVen)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxItmSty)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxItmClr)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxCordinateGrp)
+		*this.uxGrpBoxItem.Controls.Add(*this.label2)
+		*this.uxGrpBoxItem.Controls.Add(*this.uxItmSiz)
+		*this.uxGrpBoxItem.Controls.Add(*this.label5)
+		*this.uxGrpBoxItem.Controls.Add(*this.label10)
+		*this.uxGrpBoxItem.Controls.Add(*this.label11)
+		*this.uxGrpBoxItem.Location = *new System.Drawing.Point(26, 186)
+		*this.uxGrpBoxItem.Name = "uxGrpBoxItem"
+		*this.uxGrpBoxItem.Size = *new System.Drawing.Size(572, 309)
+		*this.uxGrpBoxItem.TabIndex = 62
+		*this.uxGrpBoxItem.TabStop = *False
+		*this.uxGrpBoxItem.Text = "Item Details"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(11, 243)
+		*this.label3.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(40, 18)
+		*this.label3.TabIndex = 62
+		*this.label3.Text = "UPC"
+		//
+		//uxUPC
+		//
+		*this.uxUPC.Location = *new System.Drawing.Point(153, 240)
+		*this.uxUPC.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxUPC.MaxLength = 12
+		*this.uxUPC.Name = "uxUPC"
+		*this.uxUPC.Size = *new System.Drawing.Size(170, 24)
+		*this.uxUPC.TabIndex = 61
+		//
+		//uxPromoCD
+		//
+		*this.uxPromoCD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.uxPromoCD.FormattingEnabled = *True
+		*this.uxPromoCD.Location = *new System.Drawing.Point(153, 198)
+		*this.uxPromoCD.MaxLength = 10
+		*this.uxPromoCD.Name = "uxPromoCD"
+		*this.uxPromoCD.Size = *new System.Drawing.Size(298, 26)
+		*this.uxPromoCD.TabIndex = 60
+		//
+		//uxPromoEvent
+		//
+		*this.uxPromoEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.uxPromoEvent.FormattingEnabled = *True
+		*this.uxPromoEvent.Location = *new System.Drawing.Point(153, 157)
+		*this.uxPromoEvent.MaxLength = 10
+		*this.uxPromoEvent.Name = "uxPromoEvent"
+		*this.uxPromoEvent.Size = *new System.Drawing.Size(387, 26)
+		*this.uxPromoEvent.TabIndex = 59
+		//
+		//uxFamily
+		//
+		*this.uxFamily.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+		*this.uxFamily.FormattingEnabled = *True
+		*this.uxFamily.Location = *new System.Drawing.Point(153, 75)
+		*this.uxFamily.MaxLength = 3
+		*this.uxFamily.Name = "uxFamily"
+		*this.uxFamily.Size = *new System.Drawing.Size(298, 26)
+		*this.uxFamily.TabIndex = 58
+		//
+		//uxExclEDCStk
+		//
+		*this.uxExclEDCStk.AutoSize = *True
+		*this.uxExclEDCStk.Checked = *True
+		*this.uxExclEDCStk.CheckState = System.Windows.Forms.CheckState.Checked
+		*this.uxExclEDCStk.Location = *new System.Drawing.Point(648, 460)
+		*this.uxExclEDCStk.Name = "uxExclEDCStk"
+		*this.uxExclEDCStk.Size = *new System.Drawing.Size(303, 22)
+		*this.uxExclEDCStk.TabIndex = 63
+		*this.uxExclEDCStk.Text = "Exclude Items with Zero Stock at the EDC"
+		*this.uxExclEDCStk.UseVisualStyleBackColor = *True
+		//
+		//uxChanging1
+		//
+		*this.uxChanging1.Controls.Add(*this.rbWeekly1)
+		*this.uxChanging1.Controls.Add(*this.rbDaily1)
+		*this.uxChanging1.Enabled = *False
+		*this.uxChanging1.Location = *new System.Drawing.Point(625, 59)
+		*this.uxChanging1.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxChanging1.Name = "uxChanging1"
+		*this.uxChanging1.Padding = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxChanging1.Size = *new System.Drawing.Size(219, 109)
+		*this.uxChanging1.TabIndex = 64
+		*this.uxChanging1.TabStop = *False
+		*this.uxChanging1.Text = "Changing"
+		//
+		//rbWeekly1
+		//
+		*this.rbWeekly1.AutoSize = *True
+		*this.rbWeekly1.Enabled = *False
+		*this.rbWeekly1.Location = *new System.Drawing.Point(23, 65)
+		*this.rbWeekly1.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbWeekly1.Name = "rbWeekly1"
+		*this.rbWeekly1.Size = *new System.Drawing.Size(75, 22)
+		*this.rbWeekly1.TabIndex = 1
+		*this.rbWeekly1.Text = "Weekly"
+		*this.rbWeekly1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		*this.rbWeekly1.UseVisualStyleBackColor = *True
+		//
+		//rbDaily1
+		//
+		*this.rbDaily1.AutoSize = *True
+		*this.rbDaily1.Checked = *True
+		*this.rbDaily1.Enabled = *False
+		*this.rbDaily1.Location = *new System.Drawing.Point(23, 34)
+		*this.rbDaily1.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbDaily1.Name = "rbDaily1"
+		*this.rbDaily1.Size = *new System.Drawing.Size(58, 22)
+		*this.rbDaily1.TabIndex = 0
+		*this.rbDaily1.TabStop = *True
+		*this.rbDaily1.Text = "Daily"
+		*this.rbDaily1.UseVisualStyleBackColor = *True
+		//
+		//uxShowMD
+		//
+		*this.uxShowMD.AutoSize = *True
+		*this.uxShowMD.Location = *new System.Drawing.Point(648, 431)
+		*this.uxShowMD.Name = "uxShowMD"
+		*this.uxShowMD.Size = *new System.Drawing.Size(178, 22)
+		*this.uxShowMD.TabIndex = 65
+		*this.uxShowMD.Text = "Show Markdown Lines"
+		*this.uxShowMD.UseVisualStyleBackColor = *True
+		//
+		//uxshowFP
+		//
+		*this.uxshowFP.AutoSize = *True
+		*this.uxshowFP.Checked = *True
+		*this.uxshowFP.CheckState = System.Windows.Forms.CheckState.Checked
+		*this.uxshowFP.Location = *new System.Drawing.Point(648, 403)
+		*this.uxshowFP.Name = "uxshowFP"
+		*this.uxshowFP.Size = *new System.Drawing.Size(169, 22)
+		*this.uxshowFP.TabIndex = 66
+		*this.uxshowFP.Text = "Show Full Price Lines"
+		*this.uxshowFP.UseVisualStyleBackColor = *True
+		//
+		//frmParameters
+		//
+		*this.AcceptButton = *this.uxContinue
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(9, 18)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.BackColor = System.Drawing.SystemColors.Control
+		*this.ClientSize = *new System.Drawing.Size(1036, 630)
+		*this.Controls.Add(*this.uxshowFP)
+		*this.Controls.Add(*this.uxShowMD)
+		*this.Controls.Add(*this.uxChanging1)
+		*this.Controls.Add(*this.uxExclEDCStk)
+		*this.Controls.Add(*this.uxGrpBoxItem)
+		*this.Controls.Add(*this.uxGrpBoxLocation)
+		*this.Controls.Add(*this.uxGrpBoxSummary)
+		*this.Controls.Add(*this.uxBack)
+		*this.Controls.Add(*this.uxExit)
+		*this.Controls.Add(*this.uxDept)
+		*this.Controls.Add(*this.label17)
+		*this.Controls.Add(*this.uxFilegroup)
+		*this.Controls.Add(*this.uxUser)
+		*this.Controls.Add(*this.label14)
+		*this.Controls.Add(*this.label13)
+		*this.Controls.Add(*this.uxContinue)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.label1)
+		*this.Font = *new System.Drawing.Font("Microsoft Sans Serif", 11.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.Icon = (resources.GetObject("$this.Icon") *As System.Drawing.Icon)
+		*this.Margin = *new System.Windows.Forms.Padding(4)
+		*this.Name = "frmParameters"
+		*this.ShowInTaskbar = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Detail Allocators Workbench"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.uxGrpBoxSummary.ResumeLayout(*False)
+		*this.uxGrpBoxSummary.PerformLayout()
+		*this.uxGrpBoxLocation.ResumeLayout(*False)
+		*this.uxGrpBoxLocation.PerformLayout()
+		*this.uxGrpBoxItem.ResumeLayout(*False)
+		*this.uxGrpBoxItem.PerformLayout()
+		*this.uxChanging1.ResumeLayout(*False)
+		*this.uxChanging1.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+
+	BegSr Form_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender Type(*Object)
+		DclSrParm e      Type(System.EventArgs)
+		
+		// Open DB connection.
+		If Not AS400.IsOpen
+			Connect AS400
+		Endif
+		
+		// Populate Header info
+		uxUser.Text      = wAS400User 
+		uxDept.Text      = wDept.toString('000')
+		uxFilegroup.Text = wFileGroup.toString('000')
+		
+		// Clear Form
+		uxStore.text      = String.Empty
+		uxStoreGrade.text = String.Empty
+		uxStoreGrp.text   = String.Empty
+		uxMarket.text     = String.Empty
+		uxFamily.text     = String.Empty
+		uxCordinateGrp.text = String.Empty
+		
+		uxItmCls.text = String.Empty
+		uxItmClr.text = String.Empty
+		uxItmSiz.text = String.Empty
+		uxItmSty.text = String.Empty
+		uxItmVen.text = String.Empty
+		
+		// Query Strings
+		QryKey = *Blanks
+		
+		// Set radio button default
+		rbtItemLevel.Checked = *True
+		
+		// Set Type
+        If %Subst(wToMbr1:1:1) = "F"
+           rbDaily1.Checked = *True
+        Else 
+           rbWeekly1.Checked = *True
+        Endif 
+		
+		filesOpen = *False
+		
+		// Load Family List
+		FamilyDS = LoadFamilyDS()
+		uxFamily.DataSource = FamilyDS.Tables["Family"]
+		uxFamily.DisplayMember = "Family"
+
+		// Load Promotions
+		PromoDS = LoadPromoDS()
+		uxPromoCD.DataSource = PromoDS.Tables["Promo"]
+		uxPromoCD.DisplayMember = "Promo"
+		
+		LeaveSR
+		
+//		Dclfld familyDelegate Type(System.Windows.Forms.MethodInvoker)
+//		familyDelegate = *New MethodInvoker(LoadFamilyList)
+//		familyDelegate.BeginInvoke(*Nothing, *Nothing)
+
+
+	EndSr
+		
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+	//------------------------------------------------------------	
+	// validate the form
+	//------------------------------------------------------------
+    BegFunc ValidateForm Type( *Boolean )
+    
+        // Open Files
+        If Not filesOpen
+		   OpenData()
+        Endif
+         
+        // Clear any previously registered errors.
+		ErrorProvider1.Clear()
+       	ErrorCount = 0
+        Counter = 0
+       	
+        // Class not valid 
+		If (uxItmCls.Text = String.Empty) *And uxItmVen.Text <> String.Empty
+			errorProvider1.SetError( uxitmCls, "Please enter Class")
+			ErrorCount += 1 
+            uxItmCls.Focus()
+        EndIf
+        
+		// Vendor not valid 
+		If (uxItmVen.Text = String.Empty) *And uxItmSty.Text <> String.Empty
+			errorProvider1.SetError( uxitmVen, "Please enter Vendor")
+			ErrorCount += 1 
+            uxItmVen.Focus()
+        EndIf
+         
+        // Style not valid
+        If (uxItmSty.Text = String.Empty) *And uxItmClr.text <> String.Empty
+			errorProvider1.SetError( uxitmSty, "Please enter Style")
+			ErrorCount += 1 
+            uxItmSty.Focus()
+        EndIf
+        
+        // Colour not valid
+        If (uxItmClr.Text = String.Empty) *And uxItmSiz.Text <> String.Empty
+			errorProvider1.SetError( uxitmClr, "Please enter Colour")
+			ErrorCount += 1 
+            uxItmClr.Focus()
+        EndIf
+        
+        // Only allowed to select either UPC ot Item Number 
+        If  uxUPC.text <> String.Empty *And uxItmCls.Text <> String.Empty 
+			errorProvider1.SetError( uxitmCls, "Please enter either UPC or Item#")
+			ErrorCount += 1 
+            uxItmCls.Focus()
+        EndIf
+        
+        // Check Class is Valid
+		If uxItmCls.text <> String.Empty
+			Try 
+				CCLS = Convert.ToInt32(uxItmCls.Text)
+				Chain IPCLASS Key(CCLS)
+				If (IPCLASS.IsFound)
+					If CDPT <> wDept
+						errorProvider1.SetError( uxItmCls, "Class not Found in Department: " + wDept.ToString('000') )
+						ErrorCount += 1 
+						uxItmCls.Focus()
+					Endif   
+                Else         
+					errorProvider1.SetError( uxItmCls, "Class not Found")
+					ErrorCount += 1 
+					uxItmCls.Focus()
+				Endif  
+           
+		    Catch type( System.Exception )
+				errorProvider1.SetError( uxItmCls, "Class is Invalid")
+				ErrorCount += 1 
+				uxItmCls.Focus()
+			Endtry
+		EndIf
+       
+        // Validate UPC Code
+        If uxUPC.text <> String.Empty
+    		// Open Item Header File
+			If NOT IPITHDRC.IsOpen
+				Open IPITHDRC
+			Endif
+			
+			IUPD = uxUPC.text 
+			Chain IPITHDRC Key(IUPD)
+			If Not (IPITHDRC.IsFound)
+				errorProvider1.SetError( uxUPC, "UPC not Valid")
+				ErrorCount += 1 
+				uxUPC.Focus()
+			Endif  
+	    Endif
+        
+        // Location Box Validation
+        Counter = 0
+        
+        If  uxStore.text <> String.Empty 
+            Counter += 1
+        Endif
+        If  uxStoreGrade.text <> String.Empty
+            Counter += 1
+        Endif 
+        If  uxStoreGrp.text <> String.Empty
+			Counter += 1 
+        Endif             
+        If  uxMarket.text <> String.Empty
+			Counter += 1
+        Endif
+        If  Counter > 1 
+            errorProvider1.SetError( uxStore, "Only one selection allowed")   
+            errorProvider1.SetError( uxStoreGrade, "Only one selection allowed")
+            errorProvider1.SetError( uxStoreGrp, "Only one selection allowed")
+            errorProvider1.SetError( uxMarket, "Only one selection allowed")
+            ErrorCount += 1 
+            uxStore.Focus()
+        Endif     
+        
+        // Check Store is Valid
+		If uxStore.text <> String.Empty
+		   		   
+		   Try 
+		      SSTR = Convert.ToInt32(%Subst(uxStore.Text:1:3))
+		      Chain IPSTORE Key(SSTR)
+		      If Not IPSTORE.IsFound
+		         errorProvider1.SetError( uxStore, "Store is Invalid")
+                 ErrorCount += 1 
+                 uxStore.Focus()
+	   	      EndIf	
+		    Catch type( System.Exception )
+		      errorProvider1.SetError( uxStore, "Store is Invalid")
+              ErrorCount += 1 
+              uxStore.Focus()
+           Endtry
+		   	
+        EndIf
+        
+        // Check Market is Valid
+		If  uxMarket.text <> String.Empty
+		   		   
+		   Try 
+		      CSCODE = uxMarket.Text.Trim().ToUpper()
+		      Chain DSCNTAP Key(CSCODE)
+		      If Not DSCNTAP.IsFound
+		         errorProvider1.SetError( uxMarket, "Market is Invalid")
+                 ErrorCount += 1 
+                 uxMarket.Focus()
+	   	      EndIf	
+		    Catch type( System.Exception )
+		      errorProvider1.SetError( uxMarket, "Market is Invalid")
+              ErrorCount += 1 
+              uxMarket.Focus()
+           Endtry  
+		   	
+        EndIf
+        
+         // Check Store grade Valid
+		If  uxStoreGrade.text <> String.Empty
+		     Grade   = %Subst(uxStoreGrade.Text.ToUpper():1)
+		     ALSTGRP = "U" + %Trim(Grade)
+		     Chain DSALSTG Key(ALSTGRP)
+		      If Not DSALSTG.IsFound
+		         errorProvider1.SetError( uxStoreGrade, "Store Grade is Invalid")
+                 ErrorCount += 1 
+                 uxStoreGrade.Focus()
+	   	      EndIf	
+	    EndIf
+	    
+        wPromoEvent = %Subst(uxPromoEvent.Text.ToUpper():1)
+        wPromoCode  = %Subst(uxPromoCD.Text.ToUpper():1)
+        
+        /*
+          // Check Family is Valid
+		If  uxFamily.text <> String.Empty
+		     FMCODE = %Subst(uxFamily.Text.ToUpper():1)
+		      Chain DSFAMLY Key(FMCODE)
+		      If Not DSFAMLY.IsFound
+		         errorProvider1.SetError( uxFamily, "Family is Invalid")
+                 ErrorCount += 1 
+                 uxFamily.Focus()
+	   	      EndIf	
+	    EndIf
+	    
+	    // Check Promo Event is Valid
+		If  uxPromoEvent.text <> String.Empty
+		     wPromoEvent = %Subst(uxPromoEvent.Text.ToUpper():1)
+		      Chain DSPROMST Key(wPromoEvent)
+		      If Not DSPROMST.IsFound
+		         errorProvider1.SetError( uxPromoEvent, "Promo Event is Invalid")
+                 ErrorCount += 1 
+                 uxPromoEvent.Focus()
+	   	      EndIf	
+	    EndIf
+        
+        // Check Promo Code is Valid
+		If  uxPromoCD.text <> String.Empty
+		     wPromoCode = %Subst(uxPromoCD.Text.ToUpper():1)
+		      Chain DSPROMO Key(wPromoCode)
+		      If Not DSPROMO.IsFound
+		         errorProvider1.SetError( uxPromoCD, "Promo Code is Invalid")
+                 ErrorCount += 1 
+                 uxPromoCD.Focus()
+	   	      EndIf	
+	    EndIf
+        */
+        
+        If  uxStoreGrp.Text <> String.Empty
+            wStoreGrp = "U" + uxStoreGrp.Text.ToUpper().Trim()
+            ReadRange IPSTRTB FirstKey(wStoreGrp)
+            If %Found(IPSTRTB)
+               wStorelist1 = SARR
+              Else
+               errorProvider1.SetError( uxStoreGrp, "Store Group No Valid")
+               ErrorCount += 1 
+               uxStoreGrp.Focus() 
+            Endif
+            
+	   Endif
+	   
+	   // Show full price lines and show markdown lines...One must be checked 
+	   If uxshowFP.Checked = *False  *And  uxShowMD.Checked = *False
+	      errorProvider1.SetError( uxShowFP, "One Selection must be made")
+	      errorProvider1.SetError( uxShowMD, "One Selection must be made")
+          ErrorCount += 1 
+          uxShowFP.Focus() 
+	   Endif
+	   
+	   // If Item/Market then Market text box mandatory
+	   
+	   If rbtMarketLevel.Checked = *True  *And  uxMarket.Text = String.Empty
+	   //    errorProvider1.SetError( uxMarket, "Market must be entered")
+       //    ErrorCount += 1 
+       //    uxMarket.Focus() 
+	   Endif
+	   
+	   
+	   // If Item/Grade then Store Grade mandatory
+	   
+	   If rbtGradeLevel.Checked = *True  *And  uxStoreGrade.Text = String.Empty
+	    //   errorProvider1.SetError( uxStoreGrade, "Store Grade must be entered")
+        //   ErrorCount += 1 
+        //   uxStoreGrade.Focus() 
+	   Endif
+	   	
+            
+      	// Leave true if ErrorCount = 0, otherwise false.
+        LeaveSr ( ErrorCount = 0 )
+    EndFunc 	
+ 
+	BegFunc LoadFamilyDS Type(DataSet)
+	
+		DclFld ds Type(DataSet)
+		DclFld dt Type(DataTable)
+		DclFld dc Type(DataColumn)
+		DclFld dr Type(DataRow)
+	
+		// Open Character Code file
+		If Not DSFAMLY.IsOpen
+			Open DSFAMLY
+		Endif	
+		
+		ds = *New DataSet("Family")
+		dt = *New DataTable("Family")
+		ds.Tables.Add(dt)
+		
+		dc = *New DataColumn("Family", *TypeOf(*String))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+
+		// Add one blank line
+		dr = dt.NewRow()
+		dt.Rows.Add(dr)
+
+		SetLL DSFAMLY Key(*Start) Err( *Extended)
+		DoUntil DSFAMLY.IsEof
+			EnterLock
+				Read DSFAMLY
+			ExitLock
+            If Not DSFAMLY.IsEof
+				dr = dt.NewRow()
+				dr.Item[0] = FMCODE  + " - " + %Trim(FMDESC)
+				dt.Rows.Add(dr)
+			EndIf
+		Enddo
+	   
+		Close DSFAMLY
+		
+		LeaveSR ds
+	EndFunc
+	
+    BegFunc LoadPromoEventsDS Type(DataSet)
+       
+		DclFld ds Type(DataSet)
+		DclFld dt Type(DataTable)
+		DclFld dc Type(DataColumn)
+		DclFld dr Type(DataRow)
+       
+		// Open and Load Promotions Events
+		If Not DSPROMST.IsOpen
+			Open DSPROMST
+		Endif
+		
+		ds = *New DataSet("PromoEvent")
+		dt = *New DataTable("PromoEvent")
+		ds.Tables.Add(dt)
+		
+		dc = *New DataColumn("PromoEvent", *TypeOf(*String))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+		
+		// Add one blank line
+		dr = dt.NewRow()
+		dt.Rows.Add(dr)
+						
+		SetLL DSPROMST Key(*Start) Err( *Extended)
+		DoUntil DSPROMST.IsEof
+			EnterLock
+				Read DSPROMST
+			ExitLock
+            If Not DSPROMST.IsEof
+				dr = dt.NewRow()
+				dr.Item[0] = %Subst(PRONAME:1:10) + " - " + PRODESC
+				dt.Rows.Add(dr)
+			EndIf
+		Enddo
+
+		Close DSPROMST
+		
+		LeaveSR ds
+	EndFunc
+	
+	BegFunc LoadPromoDS Type(DataSet)
+	
+		DclFld ds Type(DataSet)
+		DclFld dt Type(DataTable)
+		DclFld dc Type(DataColumn)
+		DclFld dr Type(DataRow)
+		
+		If NOT DSPROMO.IsOpen
+			Open DSPROMO
+		Endif	
+		
+		ds = *New DataSet("Promo")
+		dt = *New DataTable("Promo")
+		ds.Tables.Add(dt)
+		
+		dc = *New DataColumn("Promo", *TypeOf(*String))
+		dc.ReadOnly = *True
+		dt.Columns.Add(dc)
+		
+		// Add one blank line
+		dr = dt.NewRow()
+		dt.Rows.Add(dr)
+		
+		SetLL DSPROMO Key(*Start) Err( *Extended)
+		DoUntil DSPROMO.IsEof
+			EnterLock
+				Read DSPROMO
+			ExitLock
+			If (Not DSPROMO.IsEof) And PRSTS = 'Y'
+				dr = dt.NewRow()
+				dr.Item[0] = PRCODE + " - " + %Trim(PRDESC)
+				dt.Rows.Add(dr)
+			Endif
+		Enddo
+		
+		Close DSPROMO
+		
+		LeaveSR ds
+    EndFunc
+	
+	BegSr button1_Click Access(*Private) Event(*this.uxContinue.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+        
+        // If form data validates clean...
+        If ( Not ValidateForm() )
+           LeaveSR
+        Endif
+                
+        // Instance the UserList form
+        If (frmWorkBenchParm = *Nothing) or (frmWorkBenchParm.Isdisposed)
+			frmWorkBenchParm = *New frmWorkBenchParm(AS400)
+        Endif
+        
+        // Set Level
+        Select
+        When rbtGradeLevel.Checked = *True
+			frmWorkBenchParm.wLevel2 = "IG"
+			Level = "IG"
+			
+        When rbtItemLevel.Checked = *True
+			frmWorkBenchParm.wLevel2 = "IT"
+			Level = "IT"
+              
+        When rbtMarketLevel.Checked = *True
+			frmWorkBenchParm.wLevel2 = "IM"
+			Level = "IM"
+              
+        When rbtStoreLevel.Checked = *True
+			frmWorkBenchParm.wLevel2 = "IS"
+			Level = "IS"
+		      	
+        EndSL
+        
+        // Build Query String
+        QryKey    = *Blanks
+			
+		Select 
+		When Level = "IS"	
+			QryString = BuildIS()
+		       
+		When Level = "IG"	
+			QryString = BuildIG()
+		    
+		When Level = "IM"
+			QryString = BuildIM()
+		    
+		When Level = "IT"
+			QryString = BuildIT()
+	    EndSL        
+        
+        // load Public Fields
+        frmWorkBenchParm.wAS400User2  = wAS400User.Trim() 
+        frmWorkBenchParm.wDept2       = wDept  
+        frmWorkBenchParm.wDepartment2 = wDept.toString().Trim() 
+        frmWorkBenchParm.wFileGroup2  = wFileGroup.toString().Trim()
+        frmWorkBenchParm.wFamily2     = %Subst(uxFamily.Text.ToUpper():1)
+        
+        frmWorkBenchParm.wClass2      = uxItmCls.Text.Trim()
+        frmWorkBenchParm.wVen2        = uxItmVen.Text.Trim()
+        frmWorkBenchParm.wSty2        = uxItmSty.Text.Trim()
+        frmWorkBenchParm.wClr2        = uxItmClr.Text.Trim()
+        frmWorkBenchParm.wSiz2        = uxItmSiz.Text.Trim()
+        frmWorkBenchParm.wUPC2        = uxUPC.Text.Trim()
+        
+        frmWorkBenchParm.wCoGroup2    = uxCordinateGrp.Text.Trim().ToUpper()
+        frmWorkBenchParm.wPromoCode2  = wPromoCode.trim().ToUpper()
+        frmWorkBenchParm.wPromoEvent2 = wPromoEvent.Trim().ToUpper()
+                
+        frmWorkBenchParm.wMarket2     = uxMarket.Text.Trim().ToUpper()
+        frmWorkBenchParm.wGrade2      = grade
+        
+        If uxStore.Text <> ""
+			frmWorkBenchParm.wStore2 = %Subst(uxStore.Text:1:3)
+        Else
+			frmWorkBenchParm.wStore2 = *Blanks
+        EndIf
+        
+        frmWorkBenchParm.wStoreGrp2   = uxStoreGrp.Text.Trim().ToUpper()
+        frmWorkBenchParm.wStorelist2  = wStorelist1
+        frmWorkBenchParm.chkExcludeZeroStock.Checked = uxExclEDCStk.Checked
+        frmWorkBenchParm.uxShowFP2.Checked  = uxshowFP.Checked
+        frmWorkBenchParm.uxShowMD2.Checked  = uxShowMD.Checked
+        frmWorkBenchParm.wQryString2  = QryString.ToString().Trim()
+        frmWorkBenchParm.wQryKey2     = QryKey.Trim()
+        frmWorkBenchParm.wNumberOf2   = 0 
+        
+        frmWorkBenchParm.wMode2       = 'P' 
+        frmWorkBenchParm.wToMbr2      = wToMbr1.Trim()
+        frmWorkBenchParm.wFrmMbr2     = wFrMbr1.Trim()
+                        
+        // Call the Workbench Form
+        frmWorkBenchParm.ShowDialog()	
+        	
+		wExit1  = frmWorkBenchParm.wExit2
+		wApply1 = frmWorkBenchParm.wApply2
+		
+		frmWorkBenchParm = *Nothing
+		
+		If wExit1 = *True *Or wApply1 = *True
+		   Unload *This
+		Endif
+	EndSr
+		
+	/Region Build Query Strings
+	BegFunc BuildIS Type(StringBuilder)
+	
+		QryString = *New StringBuilder()
+		QryString.Append("ISDPT = ")
+		QryString.Append(wDept.toString())
+	       
+		If uxFamily.Text <> *Blanks
+			QryString.Append(" *And ISFAMC = ")
+			QryString.Append("'")
+			QryString.Append(uxFamily.Text.Trim().ToUpper().Substring(0,3))
+			QryString.Append("'")
+		Endif
+		   
+		If uxUPC.Text <> *Blanks
+			QryString.Append(" *And ISUPC = ")
+			QryString.Append(uxUPC.Text.Trim())
+		Endif
+		   
+		If uxItmCls.Text <> *Blanks
+			QryString.Append(" *And ISCLS = ")
+			QryString.Append(uxItmCls.Text.Trim())
+		Endif
+		   
+		If uxItmVen.Text <> *Blanks
+			QryString.Append(" *And ISVEN = ")
+			QryString.Append(uxItmVen.Text.Trim())
+		Endif
+		    
+		If uxItmSty.Text <> *Blanks
+			QryString.Append(" *And ISSTY = ")
+			QryString.Append(uxItmSty.Text.Trim())
+		Endif
+		    
+		If uxItmClr.Text <> *Blanks
+			QryString.Append(" *And ISCLR = ")
+			QryString.Append(uxItmClr.Text.Trim())
+		Endif
+		    
+		If uxItmSiz.Text <> *Blanks
+			QryString.Append(" *And ISSIZ = ")
+			QryString.Append(uxItmSiz.Text.Trim())
+		Endif
+	         
+		If uxCordinateGrp.Text <> *Blanks
+			QryString.Append(" *And ISCOGP = '")
+			QryString.Append(uxCordinateGrp.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+
+		If wPromoCode <> *Blanks
+			QryString.Append(" *And ISPRCD  = '")
+			QryString.Append(wPromoCode.trim().ToUpper())
+			QryString.Append("'")
+		Endif
+		    
+		If wPromoEvent <> *Blanks
+			QryString.Append(" *And ISPREV  = '")
+			QryString.Append(wPromoEvent.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	                
+		If uxMarket.Text <> *Blanks
+			QryString.Append(" *And ISMKT  = '")
+			QryString.Append(uxMarket.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+		   
+		If uxStoreGrade.Text.Trim().ToUpper() <> *Blanks
+			QryString.Append(" *And ISGRD = '")
+			QryString.Append(uxStoreGrade.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	       
+		If uxStore.Text <> *Blanks
+			QryString.Append(" *And ISSTR = ")
+			QryString.Append(uxStore.Text.Substring(0,3))
+		Endif
+		   
+		If uxExclEDCStk.Checked = *True
+			QryString.Append(" *And ISESOH > 0")
+		Endif
+		   
+		   // Show all records if MarkDown and Full Price is Checked
+		If uxShowFP.Checked = *True And uxShowMD.Checked = *True
+			LeaveSR QryString
+		Endif
+		   
+		If uxshowFP.Checked = *True *And uxShowMD.Checked = *False
+			QryString.Append(" *And ISMDEV = ''")           
+		Endif
+           
+		If uxShowMD.Checked = *True *And uxshowFP.Checked = *False
+			QryString.Append(" *And ISMDEV <> ''")
+		Endif
+		
+		LeaveSR QryString
+	EndFunc
+
+	BegFunc BuildIT Type(StringBuilder)
+	
+		QryString = *New StringBuilder()
+		QryString.Append("ITDPT = ")
+		QryString.Append(wDept.toString())
+	       
+		If uxFamily.Text <> *Blanks
+			QryString.Append(" *And ITFAMC = '")
+			QryString.Append(uxFamily.Text.ToUpper().Substring(0,3))
+			QryString.Append("'")
+		Endif
+		   
+		If uxUPC.Text <> *Blanks
+			QryString.Append(" *And ITUPC = ")
+			QryString.Append(uxUPC.Text.Trim())
+		Endif
+		   
+		If uxItmCls.Text <> *Blanks
+			QryString.Append(" *And ITCLS = ")
+			QryString.Append(uxItmCls.Text.Trim())
+		Endif
+		   
+		If uxItmVen.Text <> *Blanks
+			QryString.Append(" *And ITVEN = ")
+			QryString.Append(uxItmVen.Text.Trim())
+		Endif
+		    
+		If uxItmSty.Text <> *Blanks
+			QryString.Append(" *And ITSTY = ")
+			QryString.Append(uxItmSty.Text.Trim())
+		Endif
+		    
+		If uxItmClr.Text <> *Blanks
+			QryString.Append(" *And ITCLR = ")
+			QryString.Append(uxItmClr.Text.Trim())
+		Endif
+		    
+		If uxItmSiz.Text <> *Blanks
+			QryString.Append(" *And ITSIZ = ")
+			QryString.Append(uxItmSiz.Text.Trim())
+		Endif
+	         
+		If uxCordinateGrp.Text <> *Blanks
+			QryString.Append(" *And ITCOGP = '")
+			QryString.Append(uxCordinateGrp.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+
+		If wPromoCode <> *Blanks
+			QryString.Append(" *And ITPRCD = '")
+			QryString.Append(wPromoCode.trim().ToUpper())
+			QryString.Append("'")
+		Endif
+		    
+		If wPromoEvent <> *Blanks
+			QryString.Append(" *And ITPREV = '")
+			QryString.Append(wPromoEvent.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	                
+		If uxMarket.Text <> *Blanks
+			QryString.Append(" *And ITMKT = '")
+			QryString.Append(uxMarket.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+		   
+		If uxStoreGrade.Text <> *Blanks
+			QryString.Append(" *And ITGRD = '")
+			QryString.Append(uxStoreGrade.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	       
+		If uxStore.Text <> *Blanks
+			QryString.Append(" *And ITSTR = ")
+			QryString.Append(uxStore.Text.Substring(0,3))
+		Endif
+		   
+		If uxExclEDCStk.Checked = *True
+			QryString.Append(" *And ITESOH > 0")
+		Endif
+		   
+		// Show all records if MarkDown and Full Price is Checked
+		If uxShowFP.Checked = *True And uxShowMD.Checked = *True
+			LeaveSR QryString
+		Endif
+		   
+		If uxshowFP.Checked = *True *And uxShowMD.Checked = *False
+			QryString.Append(" *And ITMDEV = ''")
+        Endif
+           
+		If uxShowMD.Checked = *True *And uxshowFP.Checked = *False
+			QryString.Append(" *And ITMDEV <> ''")
+		Endif
+		
+		LeaveSR QryString
+	EndFunc
+
+	BegFunc BuildIM Type(StringBuilder)
+	
+		QryString = *New StringBuilder()
+		QryString.Append("IMDPT = ")
+		QryString.Append(wDept.toString())
+	       
+		If uxFamily.Text <> *Blanks
+			QryString.Append(" *And IMFAMC = '")
+			QryString.Append(uxFamily.Text.ToUpper().Substring(0,3))
+			QryString.Append("'")
+		Endif
+		   
+		If uxUPC.Text <> *Blanks
+			QryString.Append(" *And IMUPC = ")
+			QryString.Append(uxUPC.Text.Trim())
+		Endif
+		   
+		If uxItmCls.Text <> *Blanks
+			QryString.Append(" *And IMCLS = ")
+			QryString.Append(uxItmCls.Text.Trim())
+		Endif
+		   
+		If uxItmVen.Text <> *Blanks
+			QryString.Append(" *And IMVEN = ")
+			QryString.Append(uxItmVen.Text.Trim())
+		Endif
+		    
+		If uxItmSty.Text <> *Blanks
+			QryString.Append(" *And IMSTY = ")
+			QryString.Append(uxItmSty.Text.Trim())
+		Endif
+		    
+		If uxItmClr.Text <> *Blanks
+			QryString.Append(" *And IMCLR = ")
+			QryString.Append(uxItmClr.Text.Trim())
+		Endif
+		    
+		If uxItmSiz.Text <> *Blanks
+			QryString.Append(" *And IMSIZ = ")
+			QryString.Append(uxItmSiz.Text.Trim())
+	    Endif
+	         
+		If uxCordinateGrp.Text <> *Blanks
+			QryString.Append(" *And IMCOGP = '")
+			QryString.Append(uxCordinateGrp.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+
+		If wPromoCode <> *Blanks
+			QryString.Append(" *And IMPRCD = '")
+			QryString.Append(wPromoCode.trim().ToUpper())
+			QryString.Append("'")
+		Endif
+		    
+		If wPromoEvent <> *Blanks
+			QryString.Append(" *And IMPREV = '")
+			QryString.Append(wPromoEvent.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	                
+		If uxMarket.Text <> *Blanks
+			QryString.Append(" *And IMMKT = '")
+			QryString.Append(uxMarket.Text.Trim().ToUpper())
+			QrySTring.Append("'")
+		Endif
+		   
+		If uxStoreGrade.Text <> *Blanks
+			QryString.Append(" *And IMGRD = '")
+			QryString.Append(uxStoreGrade.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	       
+		If uxStore.Text <> *Blanks
+			QryString.Append(" *And IMSTR = ")
+			QryString.Append(uxStore.Text.Substring(0,3))
+		Endif
+		   
+		If uxExclEDCStk.Checked = *True
+			QryString.Append(" *And IMESOH > 0")
+		Endif
+		   
+		// Show all records if MarkDown and Full Price is Checked
+		If uxShowFP.Checked = *True And uxShowMD.Checked = *True
+			LeaveSR QryString
+		Endif
+		   
+        If uxshowFP.Checked = *True *And uxShowMD.Checked = *False
+			QryString.Append(" *And IMMDEV = ''")           
+		Endif
+           
+        If uxShowMD.Checked = *True *And uxshowFP.Checked = *False
+			QryString.Append(" *And IMMDEV <> ''")
+		Endif
+		
+		LeaveSR QryString
+	EndFunc
+
+	BegFunc BuildIG Type(StringBuilder)
+	
+		QryString = *New StringBuilder()
+	    QryString.Append("IGDPT = ")
+	    QryString.Append(wDept.toString())
+	       
+		If uxFamily.Text <> *Blanks
+			QryString.Append(" *And IGFAMC = '")
+			QryString.Append(uxFamily.Text.ToUpper().Substring(0,3))
+			QryString.Append("'")
+		Endif
+		   
+		If uxUPC.Text <> *Blanks
+			QryString.Append(" *And IGUPC = ")
+			QryString.Append(uxUPC.Text.Trim())
+		Endif
+		   
+		If uxItmCls.Text <> *Blanks
+			QryString.Append(" *And IGCLS = ")
+			QryString.Append(uxItmCls.Text.Trim())
+		Endif
+		   
+		If uxItmVen.Text <> *Blanks
+			QryString.Append(" *And IGVEN = ")
+			QryString.Append(uxItmVen.Text.Trim())
+		Endif
+		    
+		If uxItmSty.Text <> *Blanks
+			QryString.Append(" *And IGSTY = ")
+			QryString.Append(uxItmSty.Text.Trim())
+		Endif
+		    
+		If uxItmClr.Text <> *Blanks
+			QryString.Append(" *And IGCLR = ")
+			QryString.Append(uxItmClr.Text.Trim())
+		Endif
+		    
+		If uxItmSiz.Text <> *Blanks
+			QryString.Append(" *And IGSIZ = ")
+			QryString.Append(uxItmSiz.Text.Trim())
+	    Endif
+	         
+		If uxCordinateGrp.Text <> *Blanks
+			QryString.Append(" *And IGCOGP = '")
+			QryString.Append(uxCordinateGrp.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+
+		If wPromoCode <> *Blanks
+			QryString.Append(" *And IGPRCD = '")
+			QryString.Append(wPromoCode.trim().ToUpper())
+			QrySTring.Append("'")
+		Endif
+		    
+		If wPromoEvent <> *Blanks
+			QryString.Append(" *And IGPREV = '")
+			QryString.Append(wPromoEvent.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	                
+		If uxMarket.Text <> *Blanks
+			QryString.Append(" *And IGMKT = '")
+			QryString.Append(uxMarket.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+		   
+		If uxStoreGrade.Text <> *Blanks
+			QryString.Append(" *And IGGRD = '")
+			QryString.Append(uxStoreGrade.Text.Trim().ToUpper())
+			QryString.Append("'")
+		Endif
+	       
+		If uxStore.Text <> *Blanks
+			QryString.Append(" *And IGSTR = ")
+			QryString.Append(uxStore.Text.Substring(0,3))
+		Endif
+		   
+		If uxExclEDCStk.Checked = *True
+			QryString.Append(" *And IGESOH > 0")
+		Endif
+		   
+		// Show all records if MarkDown and Full Price is Checked
+		If uxShowFP.Checked = *True And uxShowMD.Checked = *True
+			LeaveSR QryString
+		Endif
+		   
+        If uxshowFP.Checked = *True *And uxShowMD.Checked = *False
+			QryString.Append(" *And IGMDEV = ''")
+        Endif
+           
+        If uxShowMD.Checked = *True *And uxshowFP.Checked = *False
+			QryString.Append(" *And IGMDEV <> ''")
+		Endif
+		
+		LeaveSR QryString
+	EndFunc
+	/EndRegion
+	
+	/Region Closing Routine	
+	BegSr uxBack_Click Access(*Private) Event(*this.uxBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		Unload *This
+	EndSr
+
+    BegSR  EndProgram
+		   
+           Close *All
+    
+    EndSR
+    
+    BegSr uxExit_Click Access(*Private) Event(*this.uxExit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		wExit1 = *True
+		Unload *This
+		
+	EndSr 
+  	
+  	BegSr Form_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+		
+		EndProgram()
+		
+	EndSr
+	
+	/Endregion	
+	
+	/region Long Item Events		
+	// Validate Item Fields		
+	BegSr uxItmCls_TextChanged Access(*Private) Event(*this.uxItmCls.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If uxItmCls.TextLength = 4
+			uxItmVen.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmVen_TextChanged Access(*Private) Event(*this.uxItmVen.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If uxItmVen.TextLength = 5
+			uxItmSty.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmSty_TextChanged Access(*Private) Event(*this.uxItmSty.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If uxItmSty.TextLength = 4
+			uxItmClr.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmClr_TextChanged Access(*Private) Event(*this.uxItmClr.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If uxItmClr.TextLength = 3
+			uxItmSiz.Select()
+		EndIf
+		
+	EndSr
+	
+	BegSr uxItmSiz_TextChanged Access(*Private) Event(*this.uxItmSiz.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If uxItmSiz.TextLength = 4
+			uxFamily.Select()
+		EndIf
+		
+	EndSr
+	
+	/EndRegion	
+
+	/region Open Files
+	//------------------------------------------------------------
+	// Open database & files
+	//------------------------------------------------------------
+	BegSr OpenData 
+	
+	// Open Department file
+        If NOT IPCLASS.IsOpen
+           Open IPCLASS
+		Endif	
+	
+	// Open Class file
+        If NOT IPSTORE.IsOpen
+			Open IPSTORE
+		Endif
+	
+	// Open Class file
+        If NOT DSCNTAP.IsOpen
+			Open DSCNTAP
+		Endif
+	
+	    filesOpen = *true
+	
+	EndSr
+	/Endregion	
+
+	/Region Radio Button
+	BegSr rbtItemLevel_CheckedChanged Access(*Private) Event(*this.rbtItemLevel.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		
+		If rbtItemLevel.Checked = *On
+			uxStore.Enabled      = *False
+       		uxStore.text         = String.Empty
+       		ErrorProvider1.SetError(uxStore,*Nothing)
+       		
+			uxStoreGrp.Enabled   = *False
+			uxStoreGrp.text      = String.Empty
+       		ErrorProvider1.SetError(uxStoreGrp,*Nothing)
+       		
+			uxMarket.Enabled     = *False
+			uxMarket.text        = String.Empty
+       		ErrorProvider1.SetError(uxMarket,*Nothing)
+       		
+			uxStoreGrade.Enabled = *False
+			uxStoreGrade.text    = String.Empty
+			Grade                = *Blanks
+       		ErrorProvider1.SetError(uxStoreGrade,*Nothing)
+       		
+			uxPromoEvent.Enabled = *False
+			uxPromoEvent.text    = String.Empty
+       		wPromoEvent          = *Blanks
+       		ErrorProvider1.SetError(uxStoreGrade,*Nothing)
+		EndIf
+	EndSr
+	
+	BegSr rbtMarketLevel_CheckedChanged Access(*Private) Event(*this.rbtMarketLevel.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		
+		If rbtMarketLevel.Checked = *On
+			uxStore.Enabled = *False
+       		uxStore.text    = String.Empty
+       		ErrorProvider1.SetError(uxStore,*Nothing)
+			
+			uxStoreGrp.Enabled = *False
+			uxStoreGrp.text    = String.Empty
+       		ErrorProvider1.SetError(uxStore,*Nothing)
+       		
+			uxMarket.Enabled     = *True
+			
+			uxStoreGrade.Enabled = *False
+			uxStoreGrade.text    = String.Empty
+			Grade                = *Blanks
+       		ErrorProvider1.SetError(uxStoreGrade,*Nothing)
+						
+			// Load Promotion Events
+			uxPromoEvent.Enabled = *True
+			If 	uxPromoEvent.Items.Count = *Zero
+				PromoEventsDS = LoadPromoEventsDS()
+				uxPromoEvent.DataSource = PromoEventsDS.Tables["PromoEvent"]
+				uxPromoEvent.DisplayMember = "PromoEvent"
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr rbtGradeLevel_CheckedChanged Access(*Private) Event(*this.rbtGradeLevel.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		
+		If rbtGradeLevel.Checked = *On
+			uxStore.Enabled = *False
+       		uxStore.text    = String.Empty
+       		ErrorProvider1.SetError(uxStore,*Nothing)			
+			
+			uxStoreGrp.Enabled = *False
+			uxStoreGrp.text    = String.Empty
+       		ErrorProvider1.SetError(uxStore,*Nothing)			
+			
+			uxMarket.Enabled   = *True
+			
+			// Store Grade
+			uxStoreGrade.Enabled = *True
+			If uxStoreGrade.Items.Count = *Zero
+				ExSr BuildStoreGrade
+			Endif
+			
+			// Load Promotion Events
+			uxPromoEvent.Enabled = *True
+			If 	uxPromoEvent.Items.Count = *Zero
+				PromoEventsDS = LoadPromoEventsDS()
+				uxPromoEvent.DataSource = PromoEventsDS.Tables["PromoEvent"]
+				uxPromoEvent.DisplayMember = "PromoEvent"
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr rbtStoreLevel_CheckedChanged Access(*Private) Event(*this.rbtStoreLevel.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		
+		If rbtStoreLevel.Checked = *On
+			uxStore.Enabled = *True
+			If uxStore.Items.Count = *Zero
+				ExSr BuildStore
+			Endif
+		
+			uxStoreGrp.Enabled = *True
+			
+			uxMarket.Enabled   = *True
+		
+			uxStoreGrade.Enabled = *True
+			If uxStoreGrade.Items.Count = *Zero
+				ExSr BuildStoreGrade
+			Endif
+
+			// Load Promotion Events
+			uxPromoEvent.Enabled = *True
+			If 	uxPromoEvent.Items.Count = *Zero
+				PromoEventsDS = LoadPromoEventsDS()
+				uxPromoEvent.DataSource = PromoEventsDS.Tables["PromoEvent"]
+				uxPromoEvent.DisplayMember = "PromoEvent"
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr BuildStoreGrade
+	
+		// Open Store Groups file
+		If NOT DSALSTG.IsOpen
+			Open DSALSTG
+		Endif
+			
+		// Open Store Table
+		If NOT IPSTRTB.IsOpen
+			Open IPSTRTB
+		Endif
+			
+		uxStoreGrade.Items.Clear()
+		SetLL DSALSTG Key(*Start) Err( *Extended)
+			
+		Do ToVal( *HIVAL )
+			Read DSALSTG 
+			If	DSALSTG.IsEof // End of file
+				Leave
+			EndIf
+	            
+			Chain IPSTRTB Key(ALSTGRP)
+			If Not %Found(IPSTRTB)
+				SNAM = *Blanks 
+			Endif
+	            
+			uxStoreGrade.Items.Add(%Trim(%Subst(ALSTGRP:2)) + "-" + %Trim(SNAM))
+		Enddo
+	EndSr
+	
+	BegSr BuildStore
+	
+		// Open Store Table
+		If NOT IPSTORE.IsOpen
+			Open IPSTORE
+		Endif
+	    
+		uxStore.Items.Clear()
+		SetLL IPSTORE Key(*Start) Err( *Extended)
+			
+		Do Toval( *HIVAL )
+			Read IPSTORE 
+			If	IPSTORE.IsEof // End of file
+				Leave
+			EndIf
+			
+//			Select
+//			When wCountry1 = 'US'
+//				If (SSTS = 'S')
+//					uxStore.Items.Add(SSTR + "-" + %Trim(SNAM))
+//				Endif 
+//			Other
+				If (SSTS = 'S' *Or SSTS = 'F')
+					uxStore.Items.Add(SSTR + "-" + %Trim(SNAM))
+				Endif
+//			EndSL
+		Enddo
+	EndSr
+	/Endregion
+EndClass

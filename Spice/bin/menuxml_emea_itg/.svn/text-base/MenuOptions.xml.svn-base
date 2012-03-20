@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Contains Menu Options along with associated parameters-->
+<MenuOptions>
+
+  <Option Name="SignOff" Enabled="1" AssemblyName="*None" ClassName="*None"/>
+
+  <Option Name="SumWrkBench"
+          Enabled="1" 
+          AssemblyName="SRR/Replenishment_Levers.dll" 
+          ClassName="Replenishment_Levers.LeversForm1"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="ItemDetailEntry" 
+          Enabled="1" 
+          AssemblyName="SRR/MdetEntry.dll" 
+          ClassName="MdetEntry.Form1"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="SRRManualRelease"
+          Enabled="1" 
+          AssemblyName="SRR/DetailedWorkBench.dll"
+          ClassName="Disney.SRR.frmMANrelease" 
+          Authority="*Public"
+          Application="SRR"/>
+  
+<Option Name="DemoDetailWorkbench" 
+          Enabled="1" 
+          AssemblyName="SRR/DetailedWorkBench.dll" 
+          ClassName="Disney.SRR.DummyWorkBench"
+          Authority="*Public" 
+          Application="SRR"/>
+
+
+<Option Name="UserDept" 
+          Enabled="1" 
+          AssemblyName="SRR/User_Dept_Authority_Maintenance.dll" 
+          ClassName="User_Dept_Authority_Maintenance.EnterSearchParameters"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="ItemPattern" 
+          Enabled="1" 
+          AssemblyName="SRR/Item_Pattern_IDMaintenance.dll" 
+          ClassName="Item_Pattern_IDMaintenance.fmItemPtnIDScrn1"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="ItemPriority" 
+          Enabled="1" 
+          AssemblyName="SRR/Item_Priority_Maintenance.dll" 
+          ClassName="Item_Priority_Maintenance.fmItemPrtyScrn1"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="DetailWorkbench" 
+          Enabled="1" 
+          AssemblyName="SRR/DetailedWorkBench.dll" 
+          ClassName="Disney.SRR.frmInitial"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="CentPlanWorkbench" 
+          Enabled="1" 
+          AssemblyName="SRR/Central_Planning_WorkBench.dll" 
+          ClassName="Central_Planning_WorkBench.PW_Extract"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="MinDspQty" 
+          Enabled="1" 
+          AssemblyName="SRR/SRR_Minimum_Display_Qty.dll" 
+          ClassName="SRR_Minimum_Display_Qty.Frm_Search"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="UserMaint" 
+          Enabled="1" 
+          AssemblyName="SRR/SRR_User_maintenance.dll" 
+          ClassName="SRR_User_maintenance.Frm_Usermaint"
+          Authority="*Public" 
+          Application="SRR"/>
+  <Option Name="StoreLeadTime" 
+          Enabled="1" 
+          AssemblyName="SRR/EditLeadTimes.dll" 
+          ClassName="EditLeadTimes.Form1"
+          Authority="*Restricted" 
+          Application="SRR"/>
+
+
+  <Option Name="ItemDefine" 
+          Enabled="0" 
+          AssemblyName="SPICE/ItemDefine.dll" 
+          ClassName="Disney.ItemDefine.ItemDefine"/>
+  <Option Name="POEnquiry" 
+          Enabled="1" AssemblyName="SPICE/Disney.Spice.POenquiry.dll" 
+          ClassName="Disney.Spice.POenquiry.POMain" 
+          Authority="*Public" 
+          Application="Spice"/>
+  <Option Name="POEntry1"
+          Enabled="1"
+          AssemblyName="SPICE/Disney.Spice.POUI.dll"
+          ClassName="Disney.Spice.POUI.MarketSelectionForm"
+          Authority="*Public"
+          Application="Spice"/>
+  <Option Name="PriceMatrix" 
+          Enabled="1" AssemblyName="SPICE/Disney.Spice.Maintenance.dll" 
+          ClassName="Disney.Spice.Maintenance.frmPriceMatrix" 
+          Authority="*Public" 
+          Application="Spice"/>
+  <Option Name="SizeGroupMaintenance" 
+          Enabled="1" AssemblyName="SPICE/Disney.Spice.Maintenance.dll" 
+          ClassName="Disney.Spice.Maintenance.frmSizGMain" 
+          Authority="*Public" 
+          Application="Spice"/>
+  <Option Name="StageSetDates" 
+          Enabled="1" 
+          AssemblyName="SPICE/Disney.Spice.Maintenance.dll" 
+          ClassName="Disney.Spice.Maintenance.frmStageDate" 
+          Authority="*Public" 
+          Application="Spice"/>
+  <Option Name="ItemSelection" 
+          Enabled="1" 
+          AssemblyName="SPICE/Disney.Spice.ItemsUI.dll" 
+          ClassName="Disney.Spice.ItemsUI.SelectItem" 
+          Authority="*Public" 
+          Application="Spice"/>
+  <Option Name="MarketSelection"
+          Enabled="1"
+          AssemblyName="SPICE/Disney.Spice.Items.dll"
+          ClassName="Disney.Spice.Items.SelectMarket"
+          Authority="*Public"
+          Application="Spice"/>
+  <Option Name="ItemAPPAdd" 
+	    Enabled="1" 
+ 	    AssemblyName="SPICE/Disney.Spice.ItemsUI.dll" 
+  	    ClassName="Disney.Spice.ItemsUI.frmItemAPPAdd" 
+          Authority="*Public" 
+    	    Application="Spice"/>
+  <Option Name="EASApproveReject" 
+          Enabled="1" 
+          AssemblyName="SPICE/Disney.Spice.EASUI.dll" 
+          ClassName="Disney.Spice.EASUI.frmEASMain" 
+          Authority="*Public" 
+          Application="EAS" /> 
+  <Option Name="EASRequestEnquiry" 
+          Enabled="1" 
+          AssemblyName="SPICE/Disney.Spice.EASUI.dll" 
+          ClassName="Disney.Spice.EASUI.frmEASSubmitters" 
+          Authority="*Public" 
+          Application="EAS" /> 
+
+</MenuOptions>

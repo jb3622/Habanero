@@ -1,0 +1,702 @@
+// Code for Closing files
+
+Using System
+Using System.Text
+Using System.Data
+Using System.IO
+
+BegClass IPITHDRcls Access(*Public)
+
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(IPITHDR) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*Yes) RnmFmt(ITHDR:R_Ithdr)
+	DclDiskFile Name(IPITHDR_Read)  Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) File("IPITHDR")
+	DclDiskFile Name(IPITHDRC_Read) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) File("IPITHDRC") RnmFmt(ITHDR:RC_ITHDR)
+	DclDiskFile Name(DSITHDRD_Read) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) File("DSITHDRD") RnmFmt(ITHDR:RD_ITHDR)
+		
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB  Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Color  Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		
+		*this.PgmDB = PgmDB
+		
+		GetItemHeader(Class,Vendor,Style,Color,Size)
+	EndConstructor
+
+	/Region Properties
+	BegProp Class Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR ICLS
+		EndGet
+	EndProp
+	
+	BegProp Vendor Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR IVEN
+		EndGet
+	EndProp
+	
+	BegProp Style Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR ISTY
+		EndGet
+	EndProp
+
+	BegProp Color Type(*Zoned) Len(3,0) Access(*Public)
+		BegGet
+			LeaveSR ICLR
+		EndGet
+	EndProp
+	
+	BegProp Size Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR ISIZ
+		EndGet
+	EndProp
+	
+	BegProp Division Type(*Zoned) Len(2,0) Access(*Public)
+		BegGet
+			LeaveSR IDIV
+		EndGet
+		BegSet
+			IDIV = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Department Type(*Zoned) Len(3,0) Access(*Public)
+		BegGet
+			LeaveSR IDPT
+		EndGet
+		BegSet
+			IDPT = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Item_Status Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR ISTS
+		EndGet
+		BegSet
+			ISTS = *PropVal
+		EndSet
+	EndProp
+		
+	BegProp ReClassed Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR IREC
+		EndGet
+		BegSet
+			IREC = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Permanent_Markdown Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR IMKD
+		EndGet
+		BegSet
+			IMKD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Item_Description Type(*Char) Len(25) Access(*Public)
+		BegGet
+			LeaveSR IDES
+		EndGet
+		BegSet
+			IDES = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Reclassed_To_Class Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR IRCL
+		EndGet
+		BegSet
+			IRCL = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Reclassed_To_Vendor Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR IRVN
+		EndGet
+		BegSet
+			IRVN = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Reclassed_To_Style Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR IRST
+		EndGet
+		BegSet
+			IRST = *PropVal
+		EndSet
+	EndProp
+
+	BegProp Reclassed_To_Color Type(*Zoned) Len(3,0) Access(*Public)
+		BegGet
+			LeaveSR IRCR
+		EndGet
+		BegSet
+			IRCR = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Reclassed_To_Size Type(*Zoned) Len(4,0) Access(*Public)
+		BegGet
+			LeaveSR IRSZ
+		EndGet
+		BegSet
+			IRSZ = *PropVal
+		EndSet
+	EndProp
+		
+	BegProp Vendor_Style_Number Type(*Char) Len(15) Access(*Public)
+		BegGet
+			LeaveSR IVST
+		EndGet
+		BegSet
+			IVST = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp UPC_Code Type(*Char) Len(12) Access(*Public)
+		BegGet
+			LeaveSR IUPD
+		EndGet
+		BegSet
+			IUPD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Coordinate_Group Type(*Char) Len(4) Access(*Public)
+		BegGet
+			LeaveSR ICGP
+		EndGet
+		BegSet
+			ICGP = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Item_Is_A_Set Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR ISET
+		EndGet
+		BegSet
+			ISET = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Ticket_Format Type(*Char) Len(1) Access(*Public)
+		BegGet
+			LeaveSR ITKT
+		EndGet
+		BegSet
+			ITKT = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Vendor_Minimum_Pack Type(*Packed) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR IMIN
+		EndGet
+		BegSet
+			IMIN = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Minimum_Distribution_Lot Type(*Packed) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR IMLT
+		EndGet
+		BegSet
+			IMLT = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Landing_Factor Type(*Packed) Len(7,5) Access(*Public)
+		BegGet
+			LeaveSR ILNF
+		EndGet
+		BegSet
+			ILNF = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp First_Received_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR IFRD
+		EndGet
+		BegSet
+			IFRD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Last_Received_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR ILRD
+		EndGet
+		BegSet
+			ILRD = *PropVal
+		EndSet
+	EndProp
+		
+	BegProp First_Activity_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR IFAD
+		EndGet
+	EndProp	
+	
+	BegProp Last_Activity_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR ILAD
+		EndGet
+		BegSet
+			ILAD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp First_Sales_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR IFSD
+		EndGet
+	EndProp
+	
+	BegProp Last_Sales_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR ILSD
+		EndGet
+		BegSet
+			ILSD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Last_Physical_Inventory_Date Type(*Zoned) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR ILPD
+		EndGet
+		BegSet
+			ILPD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Last_Vendor_Cost Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR IVNC
+		EndGet
+		BegSet
+			IVNC = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Next_Vendor_Cost Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR INVC
+		EndGet
+		BegSet
+			INVC = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Actual_Cost Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR IACC
+		EndGet
+		BegSet
+			IACC = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Valued_Cost Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR IVLC
+		EndGet
+		BegSet
+			IVLC = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Lowest_Vendor_Cost Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR ILVC
+		EndGet
+		BegSet
+			ILVC = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp File_Retail_For_Chain Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR IRET
+		EndGet
+		BegSet
+			IRET = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Suggested_Retail Type(*Packed) Len(7,2) Access(*Public)
+		BegGet
+			LeaveSR ISUG
+		EndGet
+		BegSet
+			ISUG = *PropVal
+		EndSet
+	EndProp
+	/EndRegion
+	
+	BegFunc GetItemHeader Type(*Boolean) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Color  Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		
+		If Not IPITHDR.IsOpen
+			Open IPITHDR
+		EndIf
+		
+		Chain From(IPITHDR) Key(Class,Vendor,Style,Color,Size) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+	EndFunc
+		
+	BegFunc GetItemHeaderForUpdate Type(*Boolean) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Color  Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		
+		If Not IPITHDR.IsOpen
+			Open IPITHDR
+		EndIf
+		
+		Chain From(IPITHDR) Key(Class,Vendor,Style,Color,Size) Access(*DFT) Err(*Extended)
+		If not %Found
+			LeaveSR *On
+		EndIf
+		
+		If %Error = *On
+			Throw *New System.Exception('Failed to get record for update (IPITHDR)')
+			LeaveSR *On
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+			
+	BegSR WriteItemHeader Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Color  Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+	
+		If Not IPITHDR.IsOpen
+			Open IPITHDR
+		EndIf
+		
+		ICLS = Class
+		IVEN = Vendor
+		ISTY = Style
+		ICLR = Color
+		ISIZ = Size
+		
+		Write R_Ithdr Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (IPITHDR)')
+		EndIf
+		
+		LeaveSR
+	EndSR
+	
+	BegFunc UpdateItemHeader Type(*Boolean) Access(*Public) 
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Color  Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		
+		Update R_Ithdr Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to update record (IPITHDR)')
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegFunc DeleteItemHeader Type(*Boolean) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Color  Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		
+		If Not IPITHDR.IsOpen
+			Open IPITHDR
+		EndIf
+		
+		Delete From(R_Ithdr) Key(Class,Vendor,Style,Color,Size) Err(*Extended)
+		If %Error = *On
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *False
+	EndFunc
+	
+	BegFunc SearchByItemNumber Type(DataTable) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		
+		DclFld ItemsTbl Type(DataTable)
+		DclFld dr       Type(DataRow)
+		
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not IPITHDR_Read.IsOpen
+			Open IPITHDR_Read
+		EndIf
+		
+		SetLL File(IPITHDR_Read) Key(Class,Vendor)
+		DoUntil IPITHDR_Read.IsEof
+			ReadE From(IPITHDR_Read) Key(Class,Vendor)
+			If Not IPITHDR_Read.IsEof
+			
+				dr = ItemsTbl.NewRow()
+				ItemsTbl.Rows.Add(PopulateDataRow(dr))
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc SearchByUPC Type(DataTable) Access(*Public)
+		DclSrParm UPC Type(String)
+		
+		DclFld ItemsTbl Type(DataTable)
+		DclFld dr      Type(DataRow)
+		DclFld UPCkey  Type(*Char) Len(12)
+		
+		UPCkey = UPC
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not IPITHDRC_Read.IsOpen
+			Open IPITHDRC_Read
+		EndIf
+		
+		SetLL IPITHDRC_Read Key(UPCkey)
+		DoUntil IPITHDRC_Read.IsEof
+			ReadE From(IPITHDRC_Read) Key(UPCkey)
+			If Not IPITHDRC_Read.IsEof
+			
+				dr = ItemsTbl.NewRow()
+				ItemsTbl.Rows.Add(PopulateDataRow(dr))
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc SearchByVendorStyle Type(DataTable) Access(*Public)
+		DclSrParm VendorStyle Type(String)
+		
+		DclFld ItemsTbl Type(DataTable)
+		DclFld dr      Type(DataRow)
+		DclFld VendorStyleKey Type(*Char) Len(15)
+		
+		VendorStyleKey = VendorStyle
+		ItemsTbl = CreateItemsTbl()
+		
+		If Not DSITHDRD_Read.IsOpen
+			Open DSITHDRD_Read
+		EndIf
+		
+		SetLL File(DSITHDRD_Read) Key(VendorStyleKey)
+		DoUntil DSITHDRD_Read.IsEof
+			ReadE From(DSITHDRD_Read) Key(VendorStyleKey)
+			If Not DSITHDRD_Read.IsEof
+			
+				dr = ItemsTbl.NewRow()
+				ItemsTbl.Rows.Add(PopulateDataRow(dr))
+			EndIf
+		EndDo
+		
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc PopulateDataRow Type(DataRow)
+		DclSrParm dr Type(DataRow)
+	
+		DclFld ItemNumber Type(StringBuilder)
+	
+		ItemNumber = *New StringBuilder()
+		
+		ItemNumber.Append(ICLS.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(IVEN.ToString('00000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(ISTY.ToString('0000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(ICLR.ToString('000'))
+		ItemNumber.Append("-")
+		ItemNumber.Append(ISIZ.ToString('0000'))
+		dr.Item["Item"] = ItemNumber.ToString()
+		
+		dr.Item("Description") = IDES
+		dr.Item("UPC")         = IUPD
+		dr.Item("Class")       = ICLS
+		dr.Item("Vendor")      = IVEN
+		dr.Item("Style")       = ISTY
+		dr.Item("Colour")      = ICLR
+		dr.Item("Size")        = ISIZ
+		dr.Item("CharCode")    = "B"
+		dr.Item("Department")  = IDPT
+		
+		LeaveSR dr
+	EndFunc
+	
+	BegFunc CreateItemsTbl Type(DataTable) Access(*Private)
+		
+		DclFld ItemsTbl Type(DataTable)
+					
+		ItemsTbl = *New DataTable("Items")
+
+		ItemsTbl.Columns.Add(*New DataColumn("Selected", *TypeOf(Boolean)))
+
+		ItemsTbl.Columns.Add(*New DataColumn("Department", *TypeOf(Int16)))
+		ItemsTbl.Columns["Department"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Item", *TypeOf(String)))
+		ItemsTbl.Columns["Item"].ReadOnly = *True
+
+		ItemsTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		ItemsTbl.Columns["Description"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("UPC", *TypeOf(String)))
+		ItemsTbl.Columns["UPC"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Class", *TypeOf(Int16)))
+		ItemsTbl.Columns["Class"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Vendor", *TypeOf(Int32)))
+		ItemsTbl.Columns["Vendor"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Style", *TypeOf(Int16)))
+		ItemsTbl.Columns["Style"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Colour", *TypeOf(Int16)))
+		ItemsTbl.Columns["Colour"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("Size", *TypeOf(Int16)))
+		ItemsTbl.Columns["Size"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("CharCode", *TypeOf(String)))
+		ItemsTbl.Columns["CharCode"].ReadOnly = *True
+		
+		ItemsTbl.Columns.Add(*New DataColumn("ColourName", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("VendorName", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("SizeDesc", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("SeasonDescription", *TypeOf(String)))
+		ItemsTbl.Columns.Add(*New DataColumn("CharDescription", *TypeOf(String)))
+		
+		LeaveSR ItemsTbl
+	EndFunc
+	
+	BegFunc chkUPCunique Type(Boolean) Access(*Public)
+		DclSrParm UPC Type(Int64)
+		
+		If Not IPITHDRC_Read.IsOpen
+			Open IPITHDRC_Read
+		EndIf
+		
+		Chain IPITHDRC_Read Key(UPC.ToString('000000000000'))
+		If IPITHDRC_Read.IsFound
+			LeaveSR *False
+		Else
+			LeaveSR *True
+		EndIf
+	EndFunc
+		
+	BegFunc chkUPCunique Type(Boolean) Access(*Public)
+		DclSrParm UPC            Type(Int64)
+		DclSrParm LongItemNumber Type(LongItemNumber)
+		
+		If Not IPITHDRC_Read.IsOpen
+			Open IPITHDRC_Read
+		EndIf
+		
+		Chain IPITHDRC_Read Key(UPC.ToString('000000000000'))
+		If IPITHDRC_Read.IsFound
+			If  ICLS = LongItemNumber.Class     +
+			And IVEN = LongItemNumber.Vendor    +
+			And ISTY = LongItemNumber.Style     +
+			And ICLR = LongItemNumber.Colour    +
+			And ISIZ = LongItemNumber.Size
+				LeaveSR *True
+			Else
+				LeaveSR *False
+			EndIf
+		Else
+			LeaveSR *True    // Unique
+		EndIf
+	EndFunc
+	
+	BegFunc chkUPCuniqueMarket Type(Boolean) Access(*Public)
+		DclSrParm UPC    Type(Int64)
+		DclSrparm Market Type(String)
+		
+		DclFld DSCNTAPcls Type(DSCNTAPcls)
+		DclFld LibName    Type(String)
+		
+		If DSCNTAPcls = *Nothing
+		   DSCNTAPcls = *New DSCNTAPcls(PgmDB) 
+	    Endif
+	    
+		DSCNTAPcls.GetCountryCode(Market)
+		LibName = DSCNTAPcls.MrchLibName + '/' + 'IPITHDRC'
+		
+		If Not IPITHDRC_Read.IsOpen
+			Open IPITHDRC_Read FilePath(LibName)
+		EndIf
+		
+		Chain IPITHDRC_Read Key(UPC.ToString('000000000000'))
+		If IPITHDRC_Read.IsFound
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc ChkItemShipped Type(Boolean) Access(*Public)
+		DclSrParm Class  Type(Int16)
+		DclSrParm Vendor Type(Int32)
+		DclSrParm Style  Type(Int16)
+		DclSrParm Colour Type(Int16)
+		DclSrParm Size   Type(Int16)
+		
+		If Not IPITHDR_Read.IsOpen
+			Open IPITHDR_Read
+		EndIf
+		
+		Chain IPITHDR_Read Key(Class,Vendor,Style,Colour,Size)
+		If IPITHDR_Read.IsFound And IFRD <> *Zero  // First received date
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+EndClass

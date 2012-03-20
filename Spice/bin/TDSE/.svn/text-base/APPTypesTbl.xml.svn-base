@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <APPTypesTbl>
+    <AppType>B</AppType>
+    <Description>BUNDLE</Description>
+    <TypeDescription>B - BUNDLE</TypeDescription>
+    <Prefix>BNDL</Prefix>
+    <MaxComponents>80</MaxComponents>
+    <ProtectColour>Y</ProtectColour>
+    <DefaultColour>999</DefaultColour>
+    <ProtectSize>Y</ProtectSize>
+    <DefaultSize>9998</DefaultSize>
+  </APPTypesTbl>
+  <APPTypesTbl>
+    <AppType>D</AppType>
+    <Description>MULTI DISTRO</Description>
+    <TypeDescription>D - MULTI DISTRO</TypeDescription>
+    <Prefix>APPD</Prefix>
+    <MaxComponents>1</MaxComponents>
+    <ProtectColour>Y</ProtectColour>
+    <DefaultColour>999</DefaultColour>
+    <ProtectSize>Y</ProtectSize>
+    <DefaultSize>9999</DefaultSize>
+  </APPTypesTbl>
+  <APPTypesTbl>
+    <AppType>P</AppType>
+    <Description>MULTIPLE PRODUCTS</Description>
+    <TypeDescription>P - MULTIPLE PRODUCTS</TypeDescription>
+    <Prefix>APPP</Prefix>
+    <MaxComponents>80</MaxComponents>
+    <ProtectColour>Y</ProtectColour>
+    <DefaultColour>999</DefaultColour>
+    <ProtectSize>Y</ProtectSize>
+    <DefaultSize>9999</DefaultSize>
+  </APPTypesTbl>
+  <APPTypesTbl>
+    <AppType>S</AppType>
+    <Description>MULTIPLE SIZES</Description>
+    <TypeDescription>S - MULTIPLE SIZES</TypeDescription>
+    <Prefix>APPS</Prefix>
+    <MaxComponents>80</MaxComponents>
+    <ProtectColour>Y</ProtectColour>
+    <DefaultColour>999</DefaultColour>
+    <ProtectSize>Y</ProtectSize>
+    <DefaultSize>9999</DefaultSize>
+  </APPTypesTbl>
+</DocumentElement>

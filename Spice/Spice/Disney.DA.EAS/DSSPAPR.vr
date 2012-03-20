@@ -1,0 +1,37 @@
+Using System
+Using System.Text
+
+BegClass DSSPAPR Access(*Public)
+	
+	DclDB Name(PgmDB) DBName("TDST")
+	DclDiskFile Name(DSSPAPRL2) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	DclFld pApproverID Type(Int16) Access(*Private)
+	BegProp ApproverID Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pApproverID
+		EndGet
+	EndProp
+	
+	BegFunc GetApproverID Type(Boolean) Access(*Public)
+			
+		If Not DSSPAPRL2.IsOpen
+			Open DSSPAPRL2
+		EndIf
+		
+		Chain DSSPAPRL2 Key(PgmDB.User.ToUpper())
+		If DSSPAPRL2.IsFound
+			pApproverID = APRID
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+EndClass

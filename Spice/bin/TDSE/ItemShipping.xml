@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <ItemShippingTable>
+    <ItemShippingCode> </ItemShippingCode>
+    <Description> </Description>
+    <CodeAndDescription> </CodeAndDescription>
+  </ItemShippingTable>
+  <ItemShippingTable>
+    <ItemShippingCode>L</ItemShippingCode>
+    <Description>PRINT ON THE PICK SLIP.       </Description>
+    <CodeAndDescription>L - PRINT ON THE PICK SLIP.       </CodeAndDescription>
+  </ItemShippingTable>
+  <ItemShippingTable>
+    <ItemShippingCode>M</ItemShippingCode>
+    <Description>CAN SHIP WITH OTHER ITEMS.    </Description>
+    <CodeAndDescription>M - CAN SHIP WITH OTHER ITEMS.    </CodeAndDescription>
+  </ItemShippingTable>
+  <ItemShippingTable>
+    <ItemShippingCode>S</ItemShippingCode>
+    <Description>THIS ITEM MUST SHIP BY ITSELF.</Description>
+    <CodeAndDescription>S - THIS ITEM MUST SHIP BY ITSELF.</CodeAndDescription>
+  </ItemShippingTable>
+  <ItemShippingTable>
+    <ItemShippingCode>U</ItemShippingCode>
+    <Description>USER-DEFINED SHIPPING REQMTS. </Description>
+    <CodeAndDescription>U - USER-DEFINED SHIPPING REQMTS. </CodeAndDescription>
+  </ItemShippingTable>
+</DocumentElement>
+

@@ -1,0 +1,310 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{40f3369f-92b1-4302-ac2d-4414fa1d0bb3}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Disney.DA.IP400</RootNamespace>
+    <AssemblyName>Disney.DA.IP400</AssemblyName>
+    <StartupObject>Disney.Spice.DA.cls_DSCOMOD</StartupObject>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DefineDebug>True</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\SPICE</OutputPath>
+    <NoWarn>
+    </NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>False</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
+      <Name>ASNA.DataGate.Client</Name>
+      <AssemblyName>ASNA.DataGate.Client.dll</AssemblyName>
+    </Reference>
+    <Reference Include="ASNA.VisualRPG.Runtime, Version=8.1.432.0, Culture=neutral, PublicKeyToken=d7106be54d30c861">
+      <Name>ASNA.VisualRPG.Runtime</Name>
+      <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
+    </Reference>
+    <Reference Include="Disney.Spice.DAL, Version=8.3.4272.35391, Culture=neutral, PublicKeyToken=null">
+	  <SpecificVersion>False</SpecificVersion>
+      <Name>Disney.Spice.DAL</Name>
+      <AssemblyName>Disney.Spice.DAL.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.DAL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DisneyMenu, Version=8.3.1.40765, Culture=neutral, PublicKeyToken=null">
+      <Name>DisneyMenu</Name>
+      <AssemblyName>DisneyMenu.exe</AssemblyName>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IBM.Data.DB2.iSeries, Version=10.0.0.0, Culture=neutral, PublicKeyToken=9cdb2ebfb1f93a26">
+      <Name>IBM.Data.DB2.iSeries</Name>
+      <AssemblyName>IBM.Data.DB2.iSeries.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\IBM.Data.DB2.iSeries.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>XmlDiffPatch</Name>
+      <AssemblyName>xmldiffpatch.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\xmldiffpatch.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Content Include="bin\Debug\Disney.Spice.DA.dll" />
+    <Content Include="bin\Debug\Disney.Spice.DA.pdb" />
+    <Content Include="bin\Release\Disney.Spice.DA.dll" />
+    <None Include="bin\Debug\CompilerOptions.rsp" />
+    <None Include="bin\Release\CompilerOptions.rsp" />
+    <None Include="Properties\App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="AgeGroup.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Country.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DS911APcls.vr" />
+    <Compile Include="DScasPk.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSCHARScls.vr" />
+    <Compile Include="DSCNTAPcls.vr" />
+    <Compile Include="DSCNTRYcls.vr" />
+    <Compile Include="DSCOMODcls.vr" />
+    <Compile Include="DSCOMPOcls.vr" />
+    <Compile Include="DSCORGPcls.vr" />
+    <Compile Include="DSFAMLYcls.vr" />
+    <Compile Include="DSLCNSE.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="dspohdr.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSports.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="dsposnd.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSPROMOcls.vr" />
+    <Compile Include="DSSBCLScls.vr" />
+    <Compile Include="DSship.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPAGPcls.vr" />
+    <Compile Include="DSSPAPH.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPAPPcls.vr" />
+    <Compile Include="DSSPAPRcls.vr" />
+    <Compile Include="DSSPATYcls.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPEHLcls.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPFCTcls.vr" />
+    <Compile Include="DSSPIDV.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPIDW.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPIVR.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPMODcls.vr" />
+    <Compile Include="DSSPPOA.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPPOC.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPPOHcls.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPPOIcls.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPPOScls.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="DSSPPRCLcls.vr" />
+    <Compile Include="DSSPPRCMcls.vr" />
+    <Compile Include="DSSPSGDcls.vr" />
+    <Compile Include="DSSPSGHcls.vr" />
+    <Compile Include="DSSPSHRDcls.vr" />
+    <Compile Include="DSSPSSDcls.vr" />
+    <Compile Include="DSdelterms.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="IPCLASScls.vr" />
+    <Compile Include="IPCOLORcls.vr" />
+    <Compile Include="IPCURCY.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="IPDEPTS.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="IPITHDRcls.vr" />
+    <Compile Include="IPMRVENcls.vr" />
+    <Compile Include="IPSIZEScls.vr" />
+    <Compile Include="IPSTRTBcls.vr" />
+    <Compile Include="ItemPos.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="ItemShipping.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="LongItemNumber.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Markets.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="PaymentTerms.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Settings.settings</DependentUpon>
+      <LastGenOutput>Settings.Designer.vr</LastGenOutput>
+    </Compile>
+    <Compile Include="SellingChannel.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="SellOutControl.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="SizeGroupDetails.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="SizeGroups.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="SpecialHandlingCodes.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="SpiceAPPItem.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="SpiceItem.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Stores.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="ThirdPartySeller.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="TicketType.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="WriteToiSeriesDTAQ.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="XMLFiles.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\ASNA\VisualRPG\8.1\ASNA.VisualRPG.targets" />
+</Project>

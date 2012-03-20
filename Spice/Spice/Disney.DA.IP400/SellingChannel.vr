@@ -1,0 +1,129 @@
+Using System
+Using System.Data
+Using System.IO
+Using System.Text
+Using System.Xml
+
+BegClass SellingChannel Access(*Public)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSSPSLC) Type(*Input) Org(*Indexed) DB(PgmDB) ImpOpen(*No)
+
+	DclFld SellingChannelTbl    Type(DataTable) Access(*Private)
+	DclFld pXMLpath  Type(String)    Access(*Private)
+
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"SellingChannel.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If SellingChannelTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				SellingChannelTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+
+		SellingChannelTbl = *New DataTable("SellingChannelTable")
+
+		SellingChannelTbl.Columns.Add(*New DataColumn("SellingChannelCode", *TypeOf(String)))
+		SellingChannelTbl.Columns["SellingChannelCode"].ReadOnly = *True
+
+		SellingChannelTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		SellingChannelTbl.Columns["Description"].ReadOnly = *True
+		
+		SellingChannelTbl.Columns.Add(*New DataColumn("CodeAndDescription", *TypeOf(String)))
+		SellingChannelTbl.Columns["CodeAndDescription"].ReadOnly = *True
+		
+		SellingChannelTbl.Columns.Add(*New DataColumn("OnlineECOM", *TypeOf(String)))
+		SellingChannelTbl.Columns["OnlineECOM"].ReadOnly = *True
+
+		SellingChannelTbl.Columns.Add(*New DataColumn("ItemsDefault", *TypeOf(String)))
+		SellingChannelTbl.Columns["ItemsDefault"].ReadOnly = *True
+		
+		SellingChannelTbl.Columns.Add(*New DataColumn("BundlesDefault", *TypeOf(String)))
+		SellingChannelTbl.Columns["BundlesDefault"].ReadOnly = *True
+				
+		Keys = *New DataColumn[] {SellingChannelTbl.Columns("SellingChannelCode")}
+		SellingChannelTbl.PrimaryKey = Keys
+	EndSr
+
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		DclFld str Type(String)
+		DclFld code Type(String)
+		DclFld desc Type(String)
+		DclFld onlineEcom Type(String)
+		DclFld itemsDefault Type(String)
+		DclFld bundlesDefault Type(String)
+		
+		If Not DSSPSLC.IsOpen
+			Open DSSPSLC
+		EndIf
+		
+		DoUntil DSSPSLC.IsEof
+			Read DSSPSLC
+			If Not DSSPSLC.IsEof
+
+				dr = SellingChannelTbl.NewRow()
+				
+				str = SLCCOD
+				If str.Trim() = "Z"
+					code = SLCCOD
+					desc = SLCDES
+					onlineEcom = SLCECO
+					itemsDefault = SLCDFI
+					bundlesDefault = SLCDFB
+				Else
+					dr.Item["SellingChannelCode"] = SLCCOD
+					dr.Item["SellingChannelCode"] = dr.Item["SellingChannelCode"].ToString().Trim()
+					dr.Item["Description"]        = SLCDES
+					dr.Item["Description"]        = dr.Item["Description"].ToString().Trim()
+					dr.Item["CodeAndDescription"] = dr.Item["SellingChannelCode"].ToString() + " - " + dr.Item["Description"].ToString() 
+					dr.Item["OnlineECOM"]         = SLCECO
+					dr.Item["ItemsDefault"]       = SLCDFI
+					dr.Item["BundlesDefault"]     = SLCDFB
+										
+					SellingChannelTbl.Rows.Add(dr)
+				EndIf
+			EndIf
+		EndDo
+		
+		If (code <> *Nothing) *AND (code.Trim() = "Z")
+			dr = SellingChannelTbl.NewRow()
+			dr.Item["SellingChannelCode"] = code
+			dr.Item["Description"]        = desc
+			dr.Item["CodeAndDescription"] = code + " - " + desc
+			dr.Item["OnlineECOM"]         = onlineEcom
+			dr.Item["ItemsDefault"]       = itemsDefault
+			dr.Item["BundlesDefault"]     = bundlesDefault
+			
+			SellingChannelTbl.Rows.Add(dr)	
+		EndIf
+
+		SellingChannelTbl.WriteXml(pXMLpath)
+		
+		Close DSSPSLC
+
+	EndSr
+
+	BegFunc GetSellingChannelTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR SellingChannelTbl
+	EndFunc
+EndClass

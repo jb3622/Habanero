@@ -1,0 +1,730 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.SRR
+
+DclNameSpace Disney.SRR
+
+BegClass frmInitial Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Declarations
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld rbWeekly System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld rbDaily System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld btnContinue System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld rbFocusGroups System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld StatusLabel System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld uxDept System.Windows.Forms.ComboBox Access(*Private) WithEvents(*Yes)
+	DclFld uxUser System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxFileGroup System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld uxChanging System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld uxMethod System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld btnExit System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld rbParameters System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	Dclfld frmFocusGroups Type(frmFocusGroups)
+	/EndRegion
+	
+	DclFld FrmMbr         Type(*Char)  Len(10)
+	DclFld ToMbr          Type(*Char)  Len(10)
+	DclFld Department     Type(*Zoned) Len(3,0)
+	DclFld FileGroup      Type(*Zoned) Len(3,0)
+	DclFld SelectedDept   Type(*Zoned) Len(3,0)
+	DclFld SelectedDept#  Type(*Char)  Len(3)
+	DclFld AS400Profile   Type(*Char)  Len(10)
+	DclFld IPUSer         Type(*Char)  Len(3) 
+	DclFld Country        Type(*Char)  Len(2)
+	Dclfld wFgpFrom       Like(UFGP15)
+	Dclfld wFgpTO         Like(UTGP15)  
+	
+	DclFld ErrorCount	  Type( *Integer4 )
+	DclFld DeptCode       Type(*String)
+	
+	// Instances
+	DclFld frmParameters  Type(frmParameters)
+	DclFld frmFocusGroups Type(frmFocusGroups)
+		
+	DclFld wExit  Type(*Boolean) Inz(*False) Access(*Public) 
+	DclFld wApply Type(*Boolean) Inz(*False) Access(*Public) 
+	
+	DclFld Name(_NL) Type(*String)		// Initialized in constructor to environment.newline	
+	
+	DclDB Name(AS400) DBName("TDST")
+	
+	DclDiskFile Name(DSSRLCKL7) Type(*Update) Org(*Indexed) +
+		DB(AS400) File('*Libl/DSSRLCKL7') Impopen( *No ) Addrec(*Yes)
+	
+	DclDiskFile Name(DSSRLCKL8) Type(*Input) Org(*Indexed) +
+		DB(AS400) File('*Libl/DSSRLCKL8') Impopen( *No ) RnmFmt(RDSSRLCK8)	
+
+	DclDiskFile Name(DSUSRDA) Type(*Input) Org(*Indexed) +
+		DB(AS400) File('*Libl/DSUSRDA') Impopen( *No )
+	
+	DclDiskFile Name(IPUSERS) Type(*Input) Org(*Indexed) +
+		DB(AS400) File('*Libl/IPUSERS') Impopen( *No )
+		
+	DclDiskFile Name(IPDEPTS) Type(*Input) Org(*Indexed) +
+		DB(AS400) File('*Libl/IPDEPTS') Impopen( *No )
+		
+	DclDiskFile Name(DS911AP) Type(*Input)  +
+		DB(AS400) File('*Libl/DS911AP') Impopen( *No )	
+		
+
+	/Region Declare Parameter lists
+//	DclPlist  Name( ClrMbrParms )
+//		DclParm ClrMember Type(*Char) Len(10) DBDirection( *Input )	    // Only to iSeries
+
+	/EndRegion
+
+	BegConstructor Access(*Public)
+	    dclsrparm	externalpgmdb	type(asna.VisualRPG.Runtime.Database)
+	
+	 	InitializeComponent()
+		
+	    // Set Connection  
+	    *this.AS400 = externalpgmdb
+		
+		_NL	= Environment.NewLine    // Used in AS/400 Call error messages 
+	EndConstructor
+
+	/region Windows Form Designer generated code
+    
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(frmInitial))
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.StatusLabel = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.uxDept = *new System.Windows.Forms.ComboBox()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.uxUser = *new System.Windows.Forms.TextBox()
+		*this.uxFileGroup = *new System.Windows.Forms.TextBox()
+		*this.btnContinue = *new System.Windows.Forms.Button()
+		*this.btnExit = *new System.Windows.Forms.Button()
+		*this.uxChanging = *new System.Windows.Forms.GroupBox()
+		*this.rbWeekly = *new System.Windows.Forms.RadioButton()
+		*this.rbDaily = *new System.Windows.Forms.RadioButton()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.uxMethod = *new System.Windows.Forms.GroupBox()
+		*this.rbFocusGroups = *new System.Windows.Forms.RadioButton()
+		*this.rbParameters = *new System.Windows.Forms.RadioButton()
+		*this.statusStrip1.SuspendLayout()
+		*this.uxChanging.SuspendLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.uxMethod.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(13, 56)
+		*this.label3.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(85, 18)
+		*this.label3.TabIndex = 0
+		*this.label3.Text = "Department"
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.StatusLabel})
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 403)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Padding = *new System.Windows.Forms.Padding(3, 0, 21, 0)
+		*this.statusStrip1.Size = *new System.Drawing.Size(807, 22)
+		*this.statusStrip1.TabIndex = 9
+		*this.statusStrip1.Text = "Processing..."
+		//
+		//StatusLabel
+		//
+		*this.StatusLabel.Name = "StatusLabel"
+		*this.StatusLabel.Size = *new System.Drawing.Size(51, 17)
+		*this.StatusLabel.Text = "FrmInitial"
+		//
+		//uxDept
+		//
+		*this.uxDept.FormattingEnabled = *True
+		*this.uxDept.Items.AddRange(*new System.Object[] {"25 (default)", "10 ADULT H/L", "11 TOYS", "12 PLUSH", "13 MEDIA", "14 JEWELRY/WATCHES", "15 STATIONERY, BOOKS", "16 KIDS' HOME"})
+		*this.uxDept.Location = *new System.Drawing.Point(161, 54)
+		*this.uxDept.Margin = *new System.Windows.Forms.Padding(4)
+		*this.uxDept.MaxLength = 3
+		*this.uxDept.Name = "uxDept"
+		*this.uxDept.Size = *new System.Drawing.Size(367, 26)
+		*this.uxDept.TabIndex = 2
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(13, 12)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(63, 18)
+		*this.label1.TabIndex = 33
+		*this.label1.Text = "You are:"
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(339, 12)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(115, 18)
+		*this.label2.TabIndex = 34
+		*this.label2.Text = "Using Filegroup:"
+		//
+		//uxUser
+		//
+		*this.uxUser.Enabled = *False
+		*this.uxUser.Location = *new System.Drawing.Point(161, 10)
+		*this.uxUser.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxUser.Name = "uxUser"
+		*this.uxUser.Size = *new System.Drawing.Size(130, 24)
+		*this.uxUser.TabIndex = 0
+		//
+		//uxFileGroup
+		//
+		*this.uxFileGroup.Location = *new System.Drawing.Point(489, 10)
+		*this.uxFileGroup.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxFileGroup.MaxLength = 3
+		*this.uxFileGroup.Name = "uxFileGroup"
+		*this.uxFileGroup.Size = *new System.Drawing.Size(39, 24)
+		*this.uxFileGroup.TabIndex = 1
+		//
+		//btnContinue
+		//
+		*this.btnContinue.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnContinue.Location = *new System.Drawing.Point(562, 336)
+		*this.btnContinue.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.btnContinue.Name = "btnContinue"
+		*this.btnContinue.Size = *new System.Drawing.Size(100, 28)
+		*this.btnContinue.TabIndex = 37
+		*this.btnContinue.Text = "&Continue"
+		*this.btnContinue.UseVisualStyleBackColor = *True
+		//
+		//btnExit
+		//
+		*this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		*this.btnExit.Location = *new System.Drawing.Point(693, 336)
+		*this.btnExit.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.btnExit.Name = "btnExit"
+		*this.btnExit.Size = *new System.Drawing.Size(100, 28)
+		*this.btnExit.TabIndex = 38
+		*this.btnExit.Text = "E&xit"
+		*this.btnExit.UseVisualStyleBackColor = *True
+		//
+		//uxChanging
+		//
+		*this.uxChanging.Controls.Add(*this.rbWeekly)
+		*this.uxChanging.Controls.Add(*this.rbDaily)
+		*this.uxChanging.Location = *new System.Drawing.Point(17, 104)
+		*this.uxChanging.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxChanging.Name = "uxChanging"
+		*this.uxChanging.Padding = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxChanging.Size = *new System.Drawing.Size(219, 121)
+		*this.uxChanging.TabIndex = 39
+		*this.uxChanging.TabStop = *False
+		*this.uxChanging.Text = "Changing"
+		//
+		//rbWeekly
+		//
+		*this.rbWeekly.AutoSize = *True
+		*this.rbWeekly.Location = *new System.Drawing.Point(23, 74)
+		*this.rbWeekly.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbWeekly.Name = "rbWeekly"
+		*this.rbWeekly.Size = *new System.Drawing.Size(75, 22)
+		*this.rbWeekly.TabIndex = 1
+		*this.rbWeekly.Text = "Weekly"
+		*this.rbWeekly.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		*this.rbWeekly.UseVisualStyleBackColor = *True
+		//
+		//rbDaily
+		//
+		*this.rbDaily.AutoSize = *True
+		*this.rbDaily.Checked = *True
+		*this.rbDaily.Location = *new System.Drawing.Point(23, 34)
+		*this.rbDaily.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbDaily.Name = "rbDaily"
+		*this.rbDaily.Size = *new System.Drawing.Size(58, 22)
+		*this.rbDaily.TabIndex = 0
+		*this.rbDaily.TabStop = *True
+		*this.rbDaily.Text = "Daily"
+		*this.rbDaily.UseVisualStyleBackColor = *True
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//uxMethod
+		//
+		*this.uxMethod.Controls.Add(*this.rbFocusGroups)
+		*this.uxMethod.Controls.Add(*this.rbParameters)
+		*this.uxMethod.Location = *new System.Drawing.Point(298, 104)
+		*this.uxMethod.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxMethod.Name = "uxMethod"
+		*this.uxMethod.Padding = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxMethod.Size = *new System.Drawing.Size(219, 121)
+		*this.uxMethod.TabIndex = 40
+		*this.uxMethod.TabStop = *False
+		*this.uxMethod.Text = "Method"
+		//
+		//rbFocusGroups
+		//
+		*this.rbFocusGroups.AutoSize = *True
+		*this.rbFocusGroups.Location = *new System.Drawing.Point(23, 74)
+		*this.rbFocusGroups.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbFocusGroups.Name = "rbFocusGroups"
+		*this.rbFocusGroups.Size = *new System.Drawing.Size(122, 22)
+		*this.rbFocusGroups.TabIndex = 1
+		*this.rbFocusGroups.Text = "Focus Groups"
+		*this.rbFocusGroups.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		*this.rbFocusGroups.UseVisualStyleBackColor = *True
+		//
+		//rbParameters
+		//
+		*this.rbParameters.AutoSize = *True
+		*this.rbParameters.Checked = *True
+		*this.rbParameters.Location = *new System.Drawing.Point(23, 34)
+		*this.rbParameters.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.rbParameters.Name = "rbParameters"
+		*this.rbParameters.Size = *new System.Drawing.Size(103, 22)
+		*this.rbParameters.TabIndex = 0
+		*this.rbParameters.TabStop = *True
+		*this.rbParameters.Text = "Parameters"
+		*this.rbParameters.UseVisualStyleBackColor = *True
+		//
+		//frmInitial
+		//
+		*this.AcceptButton = *this.btnContinue
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(9, 18)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.BackColor = System.Drawing.SystemColors.Control
+		*this.CancelButton = *this.btnExit
+		*this.ClientSize = *new System.Drawing.Size(807, 425)
+		*this.Controls.Add(*this.uxMethod)
+		*this.Controls.Add(*this.uxChanging)
+		*this.Controls.Add(*this.btnExit)
+		*this.Controls.Add(*this.btnContinue)
+		*this.Controls.Add(*this.uxFileGroup)
+		*this.Controls.Add(*this.uxUser)
+		*this.Controls.Add(*this.label2)
+		*this.Controls.Add(*this.label1)
+		*this.Controls.Add(*this.uxDept)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.label3)
+		*this.Font = *new System.Drawing.Font("Microsoft Sans Serif", 11.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.ForeColor = System.Drawing.SystemColors.ControlText
+		*this.Icon = (resources.GetObject("$this.Icon") *As System.Drawing.Icon)
+		*this.Margin = *new System.Windows.Forms.Padding(4)
+		*this.Name = "frmInitial"
+		*this.ShowInTaskbar = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Detail Allocators Workbench"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		*this.statusStrip1.ResumeLayout(*False)
+		*this.statusStrip1.PerformLayout()
+		*this.uxChanging.ResumeLayout(*False)
+		*this.uxChanging.PerformLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.uxMethod.ResumeLayout(*False)
+		*this.uxMethod.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+
+	/endregion
+
+	BegSr btnContinue_Click Access(*Private) Event(*this.btnContinue.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld wLoTyp   Like(LOTYP)
+		
+		SetMousePtr *Hourglass
+        
+		// If form data validates clean...
+        If ( Not ValidateForm() )
+           LeaveSR
+        Endif
+        
+        // Construct From and To Member Names
+		If rbDaily.Checked
+		   FrmMbr = 'DLOAD'
+		   ToMbr = 'F' + FileGroup.ToString('000')
+		   wLOTYP = "Daily"
+		Else
+		   FrmMbr = 'WELOAD'
+		   ToMbr = 'DPT' + Department.ToString('000') + FileGroup.ToString('000')
+		   wLOTYP = "Weekly"
+	    EndIf
+        
+        // Is member Locked
+        If Not DSSRLCKL8.IsOpen
+           Open DSSRLCKL8
+        Endif	
+        
+        // Is the Summary WorkBench Using this
+        SetRange DSSRLCKL8  FirstKey(12, Department, 'S') 
+	    DoUntil DSSRLCKL8.IsEof
+          Read DSSRLCKL8 
+          If DSSRLCKL8.IsEof
+             Leave
+          Endif   
+          If LoTyp = wLoTyp
+			   errorProvider1.SetError( uxDept, "Department Locked by Summary WorkBench: " + LOUSR)
+			   LeaveSR
+          Endif
+		  
+        Enddo
+        
+        // Is member Locked
+        If Not DSSRLCKL7.IsOpen
+           Open DSSRLCKL7
+        Endif	
+           
+		ReadRange DSSRLCKL7 FirstKey(12,ToMbr) Access( *NoLock )
+        If %Found(DSSRLCKL7) 
+			errorProvider1.SetError( uxFileGroup, "File Group Locked by: " + LOUSR)
+			Unlock RDSSRLCK
+			LeaveSR
+		Else
+			Clear  RDSSRLCK
+			
+			LODEPT= Department
+			LOKEY = 12
+			LOUSR = As400.User.ToString().Trim().ToUpper() 
+			LOMBR = ToMbr.Trim()
+			LODAT = %TimeStamp
+			LOMOD = "D"
+			LOTYP = wLoTyp
+			
+			Write RDSSRLCK
+		Endif
+         		
+		// Create Second Form instance passing parms to Constructor		
+		If rbParameters.Checked
+			If (frmParameters = *Nothing) or (frmParameters.Isdisposed)
+			   frmParameters = *New frmParameters(AS400, AS400Profile, Department, FileGroup)
+				
+			   frmParameters.wToMbr1 = ToMbr.Trim()
+			   frmParameters.wFrMbr1 = FrmMbr.Trim() 
+			   frmParameters.wCountry1 = Country
+			Endif
+
+			frmParameters.ShowDialog()	
+			
+			wExit  = frmParameters.wExit1
+			wApply = frmParameters.wApply1
+			
+		   frmParameters = *Nothing
+			  
+		Else
+			If (frmFocusGroups = *Nothing) or (frmFocusGroups.Isdisposed)
+				frmFocusGroups = *New frmFocusGroups(AS400, AS400Profile, Department, FileGroup, LOTYP, +
+									FrmMbr, ToMbr)
+				
+			Endif	
+			
+			frmFocusGroups.ShowDialog()
+			
+			wExit  = frmFocusGroups.wExit1
+			wApply = frmFocusGroups.wApply1
+			
+			frmFocusGroups = *Nothing
+		EndIf   
+		
+		If wApply = *True
+			LeaveSR 
+		Else
+			RmvLock() 
+		Endif
+		
+		If wExit = *True
+			Unload *This
+			LeaveSR
+		Endif		
+	EndSr
+
+	//------------------------------------------------------------	
+	// validate the form
+	//------------------------------------------------------------
+    BegFunc ValidateForm Type( *Boolean )
+    
+		DclFld wDEPT  	Type( *Char )    Len(3)
+
+        // Clear any previously registered errors.
+        ClearErrors()
+        
+        // Reformat text boxes
+        uxFileGroup.Text = uxFileGroup.Text.Trim()
+       	uxDept.Text = uxDept.Text.Trim()
+        
+        // Validate file group value
+		Try
+			FileGroup = Convert.toInt32( uxFileGroup.Text )
+		Catch type( System.Exception )
+			errorProvider1.SetError( uxFileGroup, "File Group is Invalid")
+			ErrorCount += 1 
+			uxFileGroup.Focus()
+			LeaveSr ( ErrorCount = 0 )          
+		Endtry
+		
+		If FileGroup = *Zero
+			errorProvider1.SetError( uxFileGroup, "Please enter a File Group")
+			ErrorCount += 1 
+            uxFileGroup.Focus()
+		EndIf
+		
+		If FileGroup < wFgpFrom *OR FileGroup > wFgpTO
+			errorProvider1.SetError( uxFileGroup, "The Entered File Group is not within your range")
+			ErrorCount += 1 
+            uxFileGroup.Focus()
+		EndIf
+		
+		// Validate Department code
+		If uxDept.Text = String.Empty
+			errorProvider1.SetError( uxDept, "Please enter a Department Number")
+			ErrorCount += 1 
+            uxDept.Focus()
+            LeaveSr ( ErrorCount = 0 )  
+		EndIf
+		
+		// Check against department file
+		SelectedDept# = %Subst(uxDept.Text.Trim():1)
+		Try 
+			Department = Convert.ToInt32(SelectedDept#)
+		Catch type( System.Exception )
+			errorProvider1.SetError( uxDept, "Department is Invalid")
+			ErrorCount += 1 
+			uxDept.Focus()
+			LeaveSr ( ErrorCount = 0 )          
+		Endtry
+		
+		// Check against department file 
+		Chain DSUSRDA Key(AS400Profile, Department)
+		If DSUSRDA.IsFound
+			uxDept.Text = USDEPT.ToString('000')
+			Chain IPDEPTS Key(USDEPT)
+			If IPDEPTS.IsFound
+				uxDept.Text = %Trim(uxDept.Text + ' ' + DNAM)
+			EndIf
+		Else
+			errorProvider1.SetError( uxDept, "You have selected an Invalid Department")
+			ErrorCount += 1
+			uxDept.Focus()
+			LeaveSr ( ErrorCount = 0 )
+		EndIf
+	   	
+		wDept = Department.toString('000')
+            
+      	// Leave true if ErrorCount = 0, otherwise false.
+        LeaveSr ( ErrorCount = 0 )
+    EndFunc 	
+ 
+	//------------------------------------------------------------
+	// Clear Error
+	//------------------------------------------------------------
+    BegSr ClearErrors
+        // Clear all errors.
+        FileGroup    = 0
+        SelectedDept = 0
+		ErrorCount   = 0
+		errorprovider1.Clear()
+	EndSr     
+
+	BegSr Form_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.EventArgs)
+		
+		
+		uxFileGroup.Text = *Blanks
+		wFgpFrom = 0
+		wFgpTo   = 0
+		
+		// open files
+		OpenData()
+		
+		// Authority Check
+		//VldUser()
+		
+//		If Not user_Valid
+//		   LeaveSR
+//		Endif 
+		
+		// Set AS400 User Profile  
+		uxUser.Text = AS400.User.ToString().ToUpper().Trim()		// Display profile on screen
+		uxUser.Enabled = *False
+		AS400Profile = uxUser.Text.Trim()
+		
+		// Load List Box
+		LoadListBox()
+		
+		// Set File Group box
+		Chain DSUSRDA Key(AS400Profile.ToUpper())
+		  If DSUSRDA.IsFound 
+	       Chain IPUSERS Key(USIPPR)
+			  If IPUSERS.IsFound
+			     uxFileGroup.Text = UFGP15.ToString('000')
+			     wFgpFrom = UFGP15
+			     wFgpTo   = UTGP15
+			  EndIf
+		  Endif	  
+		
+		// Set Default Radio buttons
+		rbDaily.Checked      = *True
+		rbParameters.Checked = *True
+		
+		uxFileGroup.focus()
+	EndSr
+	
+	//------------------------------------------------------------
+	// Check if User is authorized to this screen
+	//------------------------------------------------------------  
+//    BegSr VldUser
+//        
+//		user_Valid = userCheck.getUserAuth( AS400 )
+//      
+//		If  user_Valid.Equals(*False)
+//		
+//			MsgBox Msg( "You are not authorised to this screen.  Please contact TDS/IS.") +
+//					   Icon(*Information) Title()
+//					   
+//			Dispose()
+//		EndiF
+//    Endsr
+
+	//--------------------------------------------------------------------------
+	// Load List Box
+	//--------------------------------------------------------------------------
+    BegSr LoadListBox
+       
+        DclFld wIdx  	Type( *Integer4 )
+       
+//        Clear DeptArr
+        uxDept.Items.Clear()
+        wIdx = 0
+		SetRange DSUSRDA FirstKey(AS400Profile)
+		DoUntil DSUSRDA.IsEof
+			Read DSUSRDA
+			If Not DSUSRDA.IsEof
+			  	DeptCode = USDEPT.ToString('000')
+				Chain IPDEPTS Key(USDEPT)
+				If IPDEPTS.IsFound
+					DeptCode = %Trim(DeptCode + ' ' + DNAM)
+				EndIf
+				uxDept.Items.Add(DeptCode)
+				IPUSer = USIPPR.trim()
+//				DeptARR[wIdx] = DeptCode
+				wIdx = wIdx + 1 
+			EndIf
+		EndDo	
+    EndSr   
+    
+	//------------------------------------------------------------
+	// Open database & files
+	//------------------------------------------------------------
+	BegSr OpenData 
+	
+		// Open DB connection.
+		If Not AS400.IsOpen
+			Connect AS400
+		Endif
+	
+	
+		// Open Department file
+        If NOT IPDEPTS.IsOpen
+			Open IPDEPTS
+		Endif
+	
+	
+		// Open Department file
+        If NOT IPUSERS.IsOpen
+			Open IPUSERS
+		Endif	
+		
+	
+		// Open Department file
+        If NOT DSUSRDA.IsOpen
+			Open DSUSRDA
+		Endif
+		
+		
+		// Country Code
+        If NOT DS911AP.IsOpen
+		   Open DS911AP
+		   Country = *blanks
+		   Read DS911AP
+		   If Not DS911AP.IsEof
+		      Country = DCOD
+		   Endif   
+		Endif		
+				
+	EndSr
+	
+	/Region Close Routines	
+	//------------------------------------------------------------	
+	// Close Routines
+	//------------------------------------------------------------	
+		
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	
+	BegSr EndProgram
+	
+		// Close Files
+		Close *All	
+		
+	EndSR
+	
+	
+	// Close Routine
+	BegSr Form_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+		
+		EndProgram()
+	EndSr
+	
+	BegSr btnExit_Click Access(*Private) Event(*this.btnExit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		wExit = *True
+		Unload *This
+	EndSr
+	
+//------------------------------------------------------------   
+// Remove lock from DSSRLCK file
+//------------------------------------------------------------   
+    BegSr RmvLock
+    
+    If NOT DSSRLCKL7.IsOpen
+	   Open DSSRLCKL7
+	Endif
+	 
+    DeleteRange DSSRLCKL7 FirstKey(12,ToMbr.Trim()) 
+	    
+    Unlock RDSSRLCK
+    
+    EndSr     	    
+   
+	
+/endregion		
+	
+EndClass

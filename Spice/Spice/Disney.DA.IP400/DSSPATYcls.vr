@@ -1,0 +1,191 @@
+Using System
+Using System.Data
+Using System.IO
+Using System.Text
+
+BegClass DSSPATYcls Access(*Public)
+
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(DSSPATY) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+
+	DclFld APPTypesTbl Type(DataTable)
+	
+	DclFld pAppType		  Type(String)
+	DclFld pDescription   Type(String)
+	DclFld pPrefix        Type(String)
+	DclFld pMaxComponents Type(Decimal)
+	DclFld pProtectColour Type(String)
+	DclFld pDefaultColour Type(Decimal)
+	DclFld pProtectSize   Type(String)
+	DclFld pDefaultSize   Type(Decimal)
+	DclFld pXMLpath       Type(String)
+			
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+	
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"APPTypesTbl.xml")
+		LoadDataTableFromXML()	
+	EndConstructor
+
+	/Region Properties
+	BegProp AppType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pAppType
+		EndGet
+	EndProp
+	
+	BegProp Description Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDescription
+		EndGet
+	EndProp
+	
+	BegProp Prefix Type(String) Access(*Public)
+		BegGet
+			LeaveSR pPrefix
+		EndGet
+	EndProp
+	
+	BegProp MaxComponents Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pMaxComponents
+		EndGet
+	EndProp
+	
+	BegProp ProtectColour Type(String) Access(*Public)
+		BegGet
+			LeaveSR pProtectColour
+		EndGet
+	EndProp
+	
+	BegProp DefaultColour Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pDefaultColour
+		EndGet
+	EndProp
+
+	BegProp ProtectSize Type(String) Access(*Public)
+		BegGet
+			LeaveSR pProtectSize
+		EndGet
+	Endprop
+	
+	BegProp DefaultSize Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pDefaultSize
+		EndGet
+	EndProp
+	
+	/EndRegion
+
+	BegSR LoadDataTableFromXML Access(*Private)
+			
+		If APPTypesTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				CreateAPPTypesTblXML()
+			Else
+				APPTypesTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSR
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys Type(DataColumn) Rank(1)
+		
+		APPTypesTbl = *New DataTable("APPTypesTbl")
+
+		APPTypesTbl.Columns.Add(*New DataColumn("AppType", *TypeOf(String)))
+		APPTypesTbl.Columns["AppType"].ReadOnly = *True
+
+		APPTypesTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		APPTypesTbl.Columns["Description"].ReadOnly = *True
+
+		APPTypesTbl.Columns.Add(*New DataColumn("TypeDescription", *TypeOf(String)))
+		APPTypesTbl.Columns["TypeDescription"].Expression = "AppType + ' - ' + Description"
+		APPTypesTbl.Columns["TypeDescription"].ReadOnly = *True
+		
+		APPTypesTbl.Columns.Add(*New DataColumn("Prefix", *TypeOf(String)))
+		APPTypesTbl.Columns["Prefix"].ReadOnly = *True
+		
+		APPTypesTbl.Columns.Add(*New DataColumn("MaxComponents", *TypeOf(Decimal)))
+		APPTypesTbl.Columns["MaxComponents"].ReadOnly = *True
+		
+		APPTypesTbl.Columns.Add(*New DataColumn("ProtectColour", *TypeOf(String)))
+		APPTypesTbl.Columns["ProtectColour"].ReadOnly = *True
+		
+		APPTypesTbl.Columns.Add(*New DataColumn("DefaultColour", *TypeOf(Decimal)))
+		APPTypesTbl.Columns["DefaultColour"].ReadOnly = *True		
+		
+		APPTypesTbl.Columns.Add(*New DataColumn("ProtectSize", *TypeOf(String)))
+		APPTypesTbl.Columns["ProtectSize"].ReadOnly = *True	
+		
+		APPTypesTbl.Columns.Add(*New DataColumn("DefaultSize", *TypeOf(Decimal)))
+		APPTypesTbl.Columns["DefaultSize"].ReadOnly = *True		
+				
+		Keys = *New DataColumn[] {APPTypesTbl.Columns("AppType")}
+		APPTypesTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr CreateAPPTypesTblXML Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSSPATY.IsOpen
+			Open DSSPATY
+		EndIf
+		
+		DoUntil DSSPATY.IsEof
+			Read DSSPATY
+			If Not DSSPATY.IsEof
+				dr = APPTypesTbl.NewRow()
+				
+				dr.Item["AppType"]       = ATYTYP.Trim()
+				dr.Item["Description"]   = ATYDES.Trim()
+				dr.Item("Prefix")        = ATYPFX.Trim()
+				dr.Item("MaxComponents") = ATYMAX
+				dr.Item("ProtectColour") = ATYPCR.Trim()
+				dr.Item("DefaultColour") = ATYDCR
+				dr.Item("ProtectSize")   = ATYPSZ.Trim()
+				dr.Item("DefaultSize")   = ATYDSZ
+
+				APPTypesTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		APPTypesTbl.WriteXml(pXMLpath)
+		
+		Close DSSPATY
+	EndSr
+	
+	BegFunc GetAPPTypesTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR APPTypesTbl
+	EndFunc
+	
+	BegFunc GetAPPTypeDetails Type(*Boolean) Access(*Public)
+		DclSrParm AppType Type(String)
+		
+		DclFld dr Type(DataRow)
+		
+		dr = APPTypesTbl.Rows.Find(AppType)
+		If dr <> *Nothing
+			pAppType       = dr.Item["AppType"]       *As String
+			pDescription   = dr.Item["Description"]   *As String
+			pPrefix        = dr.Item("Prefix")        *As String
+			pMaxComponents = dr.Item("MaxComponents") *As Decimal
+			pProtectColour = dr.Item("ProtectColour") *As String
+			pDefaultColour = dr.Item("DefaultColour") *As Decimal
+			pProtectSize   = dr.Item("ProtectSize")   *As String
+			pDefaultSize   = dr.Item("DefaultSize")   *As Decimal
+				
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+EndClass

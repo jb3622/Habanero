@@ -1,0 +1,26 @@
+C:\Dev\Visual Studio 2005\Devtip\Spice\Copy of Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\Devtip\Spice\Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\IDASH\SPICE\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\IDASH\SPICE\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\Devtip\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\Devtip\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\SPICE\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\0145 Aurora changes\bin\SPICE\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\bin\SPICE\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\APP-Changes\bin\SPICE\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\APP-Changes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\post8_3_0fixes\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\post8_3_0fixes\bin\SPICE\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\post8_3_0fixes\bin\SPICE\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.Spice.StoreSearchBO.pdb
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.dll
+C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.pdb

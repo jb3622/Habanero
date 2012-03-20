@@ -1,0 +1,3493 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Composition>
+    <Code>AMK</Code>
+    <Description>DO NOT IMPORT OR EXPORT OUTSIDE EUROPE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>ANL</Code>
+    <Description>X</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>ANR</Code>
+    <Description>X</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>AUA</Code>
+    <Description>X</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAC</Code>
+    <Description>SURVEILLANCE LICENCE FOR CN &amp; GSP EXC CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAE</Code>
+    <Description>USE DAE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAP</Code>
+    <Description>IMPORT LICENCE FROM CN &amp; GSP EXC CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAQ</Code>
+    <Description>EXPORT LIC 078.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAR</Code>
+    <Description>EXPORT LIC 078.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAS</Code>
+    <Description>ADD MAY APPLY</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAU</Code>
+    <Description>SURVEILLANCE LICENCE REQ, GSP EXC CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAW</Code>
+    <Description>ANTI DUMPING DUTY FROM CN REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAX</Code>
+    <Description>EXPORT LICENCE CAT 10 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAY</Code>
+    <Description>EXPORT LIC 009.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CAZ</Code>
+    <Description>EXPORT LIC 093.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CA9</Code>
+    <Description>DPO,DTI,LIC,TQ. GSP EXCL MU,MO,CN 9.6%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CBE</Code>
+    <Description>ITEM REQUIRES A SURVEILLANCE LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CBH</Code>
+    <Description>IMPORT LICENCE FROM CN &amp; GSP EXC CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CBI</Code>
+    <Description>EXPORT LIC 026.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CBR</Code>
+    <Description>EXPORT LICENCE CAT 018 REQ EXC TH.NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CBY</Code>
+    <Description>SURVEILANCE LIC FOR CN &amp; GSP EXC CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CB2</Code>
+    <Description>CAT 83/GSP EXCLD MO.MY.TH.CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CB3</Code>
+    <Description>USE DB3</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CB7</Code>
+    <Description>EXPORT LIC 078.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CB8</Code>
+    <Description>IMPORT LICENCE FROM CN. SURV LIC FOR VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCA</Code>
+    <Description>USE DCA</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCC</Code>
+    <Description>SURV LIC FOR CN REQ. GSP EXC CN,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCE</Code>
+    <Description>EXPORT LIC 067 EXC CN.GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCF</Code>
+    <Description>EXPORT LIC 084 EXC CN. GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCI</Code>
+    <Description>GSP EXC HK,TH &amp;CN TOY SURV LICENCE</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>CCK</Code>
+    <Description>DPO, DTI CAT 161,GSP EXCL.MO, CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCL</Code>
+    <Description>EXPORT LICENCE CAT 123</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCM</Code>
+    <Description>USE DCM</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCO</Code>
+    <Description>GSP EXC CN,TH &amp; CN TOY SURV LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCP</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCR</Code>
+    <Description>EXPORT LIC 026.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCS</Code>
+    <Description>EXPORT LICENCE CAT 78 REQUIRED &amp; NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CCW</Code>
+    <Description>EXPORT LICENCE CAT 78 REQUIRED. NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CC0</Code>
+    <Description>EXPORT LIC 005.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CC4</Code>
+    <Description>EXPORT LIC 021.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CC5</Code>
+    <Description>EXPORT LIC 024.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CC6</Code>
+    <Description>EXPORT LIC 004.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CC7</Code>
+    <Description>EXPORT LIC 068.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDD</Code>
+    <Description>EXPORT LIC 012.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDF</Code>
+    <Description>EXPORT LICENCE CAT 15 REQUIRED NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDG</Code>
+    <Description>EXPORT LIC 157.GSP EXC CN,MO.MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDI</Code>
+    <Description>EXPORT LIC 157.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDJ</Code>
+    <Description>DPO, DTI CAT 161, GSP EXCL. MO, CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDL</Code>
+    <Description>EXPORT LIC 72 EXC CN.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDM</Code>
+    <Description>EXPORT LICENCE CAT 21 REQUIRED NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDO</Code>
+    <Description>EXPORT LICENCE CAT 015 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDQ</Code>
+    <Description>SURVEILLANCE LICENCE FOR VN FOOTWEAR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDR</Code>
+    <Description>EXPORT LIC 027 EXC CN,ID,LK,TH,VN,PH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDU</Code>
+    <Description>EXPORT LIC 007.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDV</Code>
+    <Description>EXPORT LIC 012.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CDW</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CD2</Code>
+    <Description>ADD MAY APPLY</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CD6</Code>
+    <Description>EXPORT LIC 156.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CEG</Code>
+    <Description>EXPORT LIC 012.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CEJ</Code>
+    <Description>USE DEJ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CEK</Code>
+    <Description>USE DEK</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CES</Code>
+    <Description>EXPORT LIC 021.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CEU</Code>
+    <Description>EXPORT LICENCE 059.GSP EXC PK,IN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CEV</Code>
+    <Description>EXPORT LIC 027 EXC ID,PH,LK,TH,VN,CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CEX</Code>
+    <Description>EXPORT LIC 161.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CEZ</Code>
+    <Description>EXPORT LIC 159.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CE0</Code>
+    <Description>SURVEILLANCE LIC REQ FOR VIETNAM</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CFC</Code>
+    <Description>.</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>CFD</Code>
+    <Description>SURV LIC FOR CN &amp; VN.GSP EXC CN,BR,ID,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CFF</Code>
+    <Description>SURVEILLANCE LIC REQ FOR VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CFG</Code>
+    <Description>CAT 67, DPO REQ, GSP (EXCL CHINA) 9.6%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CFI</Code>
+    <Description>SURVEILLANCE LICENCE FOR VN FOOTWEAR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CFJ</Code>
+    <Description>.</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>CFL</Code>
+    <Description>EXPORT LICENCE CAT 84 EXC CN, GSP EXC CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CFU</Code>
+    <Description>EXPORT LIC 021.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CF2</Code>
+    <Description>EXPORT LIC 026.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGB</Code>
+    <Description>IMPORT LICENCE FROM CN &amp; GSP FROM CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGC</Code>
+    <Description>EXPORT LIC 161 EX TW.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGI</Code>
+    <Description>EXPORT LIC 078.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGM</Code>
+    <Description>EXPORT LIC 005.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGN</Code>
+    <Description>SURV LIC FOR CN &amp; GSP EXC CN,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGO</Code>
+    <Description>CODE RETIRED&gt; PLEASE USE GB &amp; CGB</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>CGP</Code>
+    <Description>EXPORT LICENCE CAT 015 REQUIRED GSP+6</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGQ</Code>
+    <Description>EXPORT LIC 014.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGW</Code>
+    <Description>EXPORT LICENCE CAT 24 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CGZ</Code>
+    <Description>EXPORT LIC 078.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CG0</Code>
+    <Description>EXPORT LIC 005 EXC LK .GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CG1</Code>
+    <Description>EXPORT LIC 013.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CG9</Code>
+    <Description>EXPORT LIC 088.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CHE</Code>
+    <Description>IMPORT LICENCE FROM CN &amp; GSP EXC CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CHH</Code>
+    <Description>EXPORT LIC 014.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CHJ</Code>
+    <Description>EXPORT LIC 073 EXC LK. GSP EXC CN &amp;TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CHT</Code>
+    <Description>EXPORT LICENCE CAT 78,GSP EXC CN,TH,MO</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CHW</Code>
+    <Description>EXPORT LIC 068.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CH3</Code>
+    <Description>EXPORT LIC CAT 112 EXC CN &amp; VN REQ + GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CH4</Code>
+    <Description>EXPORT LICENCE CAT 96 REQUIRED + GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIB</Code>
+    <Description>EXPORT LIC 087 EXC CN,HK .GSP EXC CN,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIC</Code>
+    <Description>EXPORT LIC 066.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIG</Code>
+    <Description>EXPORT LICENCE CAT 20 REQUIRED, NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIH</Code>
+    <Description>EXPORT LIC 066.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIR</Code>
+    <Description>EXPORT LIC 067.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIS</Code>
+    <Description>EXPORT LIC 067.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIY</Code>
+    <Description>EXPORT LIC 159.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CIZ</Code>
+    <Description>EXPORT LIC 067 EXC CN.GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJA</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJB</Code>
+    <Description>EXPORT LIC 072.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJC</Code>
+    <Description>EXPORT LIC 040.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJF</Code>
+    <Description>EXPORT LIC 005.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJG</Code>
+    <Description>EXPORT LIC 013.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJH</Code>
+    <Description>SHOE QUOTA FOR CN. VN SURV LIC REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJT</Code>
+    <Description>EXPORT LICENCE CAT 04 REQUIRED. GSP +6</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJY</Code>
+    <Description>EXPORT LIC 026.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CJ6</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CKA</Code>
+    <Description>SURVEILLANCE LICENCE FOR VN FOOTWEAR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CKH</Code>
+    <Description>EXPORT LIC 085.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CKK</Code>
+    <Description>EXPORT LICENCE CAT 27 REQUIRED NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CKL</Code>
+    <Description>GSP EXC CN NO SURVEILLANCE LICENCE REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CKP</Code>
+    <Description>EXPORT LICENCE CAT 78 REQUIRED. NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CKS</Code>
+    <Description>EXPORT LIC 005.GSP EXC HK,MO,MU,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CKT</Code>
+    <Description>EXPORT LIC 005.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CK9</Code>
+    <Description>CAT 5 LIC. GSP EXC CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLA</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQ TURK. SL4CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLB</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLC</Code>
+    <Description>EXPORT LIC 024.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLD</Code>
+    <Description>IMPORT LICENCE &amp; GSP EXC CN REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLF</Code>
+    <Description>EXPORT LIC 028.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLG</Code>
+    <Description>EXPORT LIC 078.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLJ</Code>
+    <Description>EXPORT LIC 007.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLL</Code>
+    <Description>EXPORT LICENCE CAT 28 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLP</Code>
+    <Description>EXPORT LIC 010.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLT</Code>
+    <Description>EXPORT LICENCE CAT 26 REQUIRED, NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLX</Code>
+    <Description>CAT6, DPO,LIC,TQ, GSP EX: MO,MY,TH,CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLY</Code>
+    <Description>EXPORT LIC 024.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CLZ</Code>
+    <Description>EXPORT LIC 015.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMB</Code>
+    <Description>EXPORT LIC 078 EXC ID.GSP EX CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMC</Code>
+    <Description>EXPORT LIC 014 EXC LK. GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMD</Code>
+    <Description>EXPORT LIC 005 EXC LK. GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CME</Code>
+    <Description>EXPORT LIC 076.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMF</Code>
+    <Description>EXPORT LIC 021.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMJ</Code>
+    <Description>EXPORT LIC 008.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMK</Code>
+    <Description>TARIFF QUOTAS AND ADDED DUTY PERCENTAGES</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CML</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMP</Code>
+    <Description>EXPORT LICENCE REQ FRM VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMR</Code>
+    <Description>SURVEILLANCE LIC REQ FOR VIETNAM</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CMS</Code>
+    <Description>EXPORT LIC 010 EXC LK.GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CM1</Code>
+    <Description>EXPORT LIC 083.GSP EXC CN,MO,MU</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CNB</Code>
+    <Description>IMPORT LIC REQ FOR CN. SURV LIC REQ 4 VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CNE</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CNG</Code>
+    <Description>USE DNG</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CNO</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CNR</Code>
+    <Description>GSP EXC CN,TH.CN TOY SURVAILANCE LICENCE</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>CNZ</Code>
+    <Description>EXPORT LIC 088.GSP EXC CN,M0,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CN0</Code>
+    <Description>EXPORT LIC 159.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CN8</Code>
+    <Description>EXPORT LIC 039.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>COA</Code>
+    <Description>EXPORT LIC 004.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CON</Code>
+    <Description>IMPORT LICENCE FROM CN &amp; GSP EXC CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>COW</Code>
+    <Description>DPO.DTI,LIC,CAT 67 GSP EX(MO,MY,TH,CN)</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CPB</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CPE</Code>
+    <Description>EXPORT LIC 010.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CPL</Code>
+    <Description>EXPORT LIC 161 EXC HK. GSP EXC CN,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CPM</Code>
+    <Description>GSP EXC CN,TH NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CPN</Code>
+    <Description>IMPORT LICENCE FROM CN &amp; GSP EXC CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CPO</Code>
+    <Description>CAT 83 GSP EXCL.MO.MY.TH.CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CQB</Code>
+    <Description>EXPORT LIC 083.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CQZ</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CQ6</Code>
+    <Description>EXPORT LIC 067.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CQ8</Code>
+    <Description>EXPORT LIC 084.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRA</Code>
+    <Description>EL CAT 021 REQ.GSP EXC CN,TH,MO,MY</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRD</Code>
+    <Description>EXPORT LICENCE CAT 072 REQUIRED,GSP 6.8%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRE</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRF</Code>
+    <Description>EXPORT LIC 012.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRH</Code>
+    <Description>EXPORT LIC 18 EXC TH.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRJ</Code>
+    <Description>USE DRJ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRK</Code>
+    <Description>EXPORT LIC 008.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRP</Code>
+    <Description>EXPORT LIC 010.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRQ</Code>
+    <Description>EXPORT LIC 039.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRR</Code>
+    <Description>ANTI-DUMPING DUTY MAY APLY,NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CRT</Code>
+    <Description>EXPORT LIC 078.GSP EXC CN,TH,MO,MY</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSA</Code>
+    <Description>EXPORT LIC 024.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSB</Code>
+    <Description>EXPORTLICENCE CAT 78 REQUIRED. NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSE</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSM</Code>
+    <Description>SURVEILLANCE LIC REQ FOR VIETNAM</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSN</Code>
+    <Description>EXPORT LIC 085 EXCCN.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSO</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSS</Code>
+    <Description>EXPORT LIC 024.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSU</Code>
+    <Description>EXPORT LIC 072.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CSX</Code>
+    <Description>EXPORT LIC 159.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CS1</Code>
+    <Description>GSP EXC CN,TH &amp;CN TOY SURV LICENCE</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>CS2</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTA</Code>
+    <Description>EXPORT LIC 007.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTD</Code>
+    <Description>EXPORT LICENCE CAT 161 REQUIRED NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTF</Code>
+    <Description>GSP EXCL.MO MY TH CN. CAT.24 EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTI</Code>
+    <Description>EXPORT LICENCE CAT 19 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTM</Code>
+    <Description>EXPORT LIC 073 EXC LK. GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTQ</Code>
+    <Description>EXPORT LICENCE CAT 27 EXC CN,LK,PH,TH,VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTW</Code>
+    <Description>CN IMPORT LICENCE REQ. SURV LIC FOR VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CTY</Code>
+    <Description>EXPORT LIC 021.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CT0</Code>
+    <Description>EXPORT LICENCE 059. GSP EXC PK,IN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUA</Code>
+    <Description>GSP EXC CN,TH &amp;CN TOY SURV LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUC</Code>
+    <Description>EXPORT LIC 017.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUH</Code>
+    <Description>EXPORT LIC 083.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUJ</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUK</Code>
+    <Description>EXPORT LIC 084.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUM</Code>
+    <Description>EXPORT LIC 157.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUR</Code>
+    <Description>EXPORT LIC 028 EXC LK. GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUS</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUT</Code>
+    <Description>EXPORT LIC 157 FOR CN, NOT TW OR HK</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CUU</Code>
+    <Description>SURVEILLANCE LIC REQ FOR VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CU1</Code>
+    <Description>EXPORT LIC 075.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CWA</Code>
+    <Description>EXPORT LIC 028 EXC ID.GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CWD</Code>
+    <Description>EXPORT LIC 068 EX TH,SG,PH.GSP EXC MY TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CWF</Code>
+    <Description>EXPORT LIC 083.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CWI</Code>
+    <Description>EXPORT LICENCE CAT 21 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CWK</Code>
+    <Description>EXPORT LIC 067 EXC CN.GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CWM</Code>
+    <Description>EXPORT LICENCE CAT 005 REQUIRED.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CWS</Code>
+    <Description>EXPORT LIC 068.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CXA</Code>
+    <Description>CAT 31, DPO, GSP EXC MO MY CN TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CXB</Code>
+    <Description>EXPORT LIC 072.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CXW</Code>
+    <Description>EXPORT LIC. GSP EXC. CN TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CXZ</Code>
+    <Description>EXPORT LIC 040.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CX2</Code>
+    <Description>USE DX2</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CX6</Code>
+    <Description>EXPORT LIC 028.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CX9</Code>
+    <Description>SURVEILLANCE LICENCE FOR VN FOOTWEAR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYA</Code>
+    <Description>EXPORT LIC 024.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYB</Code>
+    <Description>SURV LIC FOR CN.GSP EXC CN,TH,PK,IN,</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYF</Code>
+    <Description>EXPORT LIC 156.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYI</Code>
+    <Description>EXPORT LIC 026.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYJ</Code>
+    <Description>EXPORT LIC 005.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYM</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYQ</Code>
+    <Description>EXPORT LIC 028.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CYY</Code>
+    <Description>EXPORT LICENCE CAT 161 REQUIRED. NO GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CY4</Code>
+    <Description>EXPORT LIC 072.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CY5</Code>
+    <Description>EXPORT LIC 028.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CY7</Code>
+    <Description>EXPORT LIC 075.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CY8</Code>
+    <Description>EXPORT LIC 027 EXC CN,ID,PH,LK,TH,VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZA</Code>
+    <Description>CAT 78, GSP EXC MO,MY,TH,CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZC</Code>
+    <Description>DPO,DTI LIC, CAT 83, GSP EXC MO,MY,CN,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZH</Code>
+    <Description>EXPORT LICENCE CAT 04 REQUIRED. GSP +6</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZI</Code>
+    <Description>LIC,(GSP EX.TH,ID,BR,CN)</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZQ</Code>
+    <Description>CAT 83,DPO, DTI,GSP(EX.MO,MY,TH,CN)</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZS</Code>
+    <Description>DPO, DTI CAT 72, GSP EXC MO, MY, TH, CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZ4</Code>
+    <Description>GSP(-10.5%), SURV LIC (CN)</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZ6</Code>
+    <Description>DPO,DTI,LIC,TQ,GSP(EX.MO,MY,TH,CN)</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>CZ9</Code>
+    <Description>DPO,DTI,LIC 059, GSP EXCL IN,PK 6.4%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C0E</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C0F</Code>
+    <Description>EXPORT LIC 074.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C0J</Code>
+    <Description>EXPORT LIC 072.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C0Q</Code>
+    <Description>EXPORT LIC 028.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C0S</Code>
+    <Description>.</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>C03</Code>
+    <Description>EXPORT LICENCE 009. GSP EXC PK,IN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C06</Code>
+    <Description>EXPORT LIC 157.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C08</Code>
+    <Description>SURVEILLANCE LICENCE FOR VN FOOTWEAR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C09</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C2E</Code>
+    <Description>EXPORT LIC 068 EXC MACAU.GSP EXC CN,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C2M</Code>
+    <Description>EXPORT LIC 026.GSP EXC CN,MY,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C2N</Code>
+    <Description>EXPORT LIC 039.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C3I</Code>
+    <Description>EXPORT LIC 018.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C3L</Code>
+    <Description>CAT 161, DPO, GSP EXCLUDING PK CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C4A</Code>
+    <Description>EXPORT LIC 004 EXC LK.GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C4B</Code>
+    <Description>EXPORT LIC 005.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C4J</Code>
+    <Description>EXPORT LIC 024.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C4P</Code>
+    <Description>EXPORT LIC 074.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C4R</Code>
+    <Description>EXPORT LICENCE CAT 68 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C7G</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C7K</Code>
+    <Description>IMPORT LICENCE FROM CN &amp; GSP EXC CN REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C7Y</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C7Z</Code>
+    <Description>EXPORT LIC 004 EXC LK. GSP EXC CN,MO,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C71</Code>
+    <Description>EXPORT LIC 029.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C74</Code>
+    <Description>EXPORT LIC 084.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C75</Code>
+    <Description>SHOE QUOTA FROM CHINA. SURV LIC REQ VN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C9A</Code>
+    <Description>EXPORT LIC 015.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C9C</Code>
+    <Description>EXPORT LIC 012.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C9F</Code>
+    <Description>EXPORT LIC 006.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C9G</Code>
+    <Description>EXPORT LIC 021.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C9H</Code>
+    <Description>EXPORT LIC 161.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C9J</Code>
+    <Description>EXPORT LIC 005.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C9K</Code>
+    <Description>EXPORT LIC 086.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>C98</Code>
+    <Description>EXPORT LIC 007.GSP EXC CN,MO,MY,TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAA</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAB</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAC</Code>
+    <Description>GSP EXC CN REQUIRED. NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAD</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAE</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAF</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAG</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAJ</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAK</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAL</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAM</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAN</Code>
+    <Description>GSP EXC MY,ID REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAO</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAS</Code>
+    <Description>GSP EXC MY,TH REQ &amp; NO EL, ADD MAY APPLY</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAT</Code>
+    <Description>GSP EXC BN,HK,TH,KZ REQ. NO EXPORT LICEN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DAV</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DA2</Code>
+    <Description>GSP EXC CN,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DA3</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DA4</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DA5</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DA7</Code>
+    <Description>GSP EXC MY,ID REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DA8</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBA</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBB</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBC</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBD</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBE</Code>
+    <Description>GSP EXC CN,TH, NO EXPORT LICENCE REQUIRE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBF</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBH</Code>
+    <Description>GSP EXC CN REQUIRED.NO SURVEILANCE LICEN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBL</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBM</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBN</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBO</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBQ</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBR</Code>
+    <Description>GSP10.5%,ANTI DUMPING CN 30.6%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBS</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBT</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBU</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBV</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DBW</Code>
+    <Description>GSP EXC TH,CN REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DB0</Code>
+    <Description>GSP EX BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DB1</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DB3</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DB5</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DB8</Code>
+    <Description>GSP EXC CN,BR,ID,TH.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCA</Code>
+    <Description>GSP EXCL CN -1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCB</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCD</Code>
+    <Description>GSP EXC MY &amp; TH, NO EXPORT LICENCE REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCH</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCI</Code>
+    <Description>GSP CN EXCL 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCJ</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCM</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCN</Code>
+    <Description>GSP EXC CN FREE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCO</Code>
+    <Description>GSP EXCL CN 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCR</Code>
+    <Description>GSP EXC CN REQUIRED, NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCT</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCU</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCV</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCX</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCY</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DCZ</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDC</Code>
+    <Description>GSP EXC CN,TH,ID REQ.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDH</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDP</Code>
+    <Description>GSP EXCL CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDQ</Code>
+    <Description>GSP EXC CN,BR,ID,TH &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDR</Code>
+    <Description>GSP EXC CN REQUIRED NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDS</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDY</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DDZ</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DD2</Code>
+    <Description>GSP EXC MY,TH REQ &amp; NO EL. ADD MAY APPLY</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DD3</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DD9</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEA</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEB</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DED</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEE</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEF</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEH</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEI</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEJ</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEK</Code>
+    <Description>GSP (EXCL CN) 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEL</Code>
+    <Description>GSP REQ EXC MY,ID &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEO</Code>
+    <Description>GSP EXC CN,TH &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEP</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEQ</Code>
+    <Description>GSP EXC CN,TH REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DER</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DEY</Code>
+    <Description>GSP EXC CN, NO EXPORT LICENCE REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DE0</Code>
+    <Description>GSP EXC BR,ID,TH &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DE7</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DE8</Code>
+    <Description>GSP EXC CN,TH REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFA</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFB</Code>
+    <Description>GSP EXC TH. NO EXPORT LICENCE REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFE</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFF</Code>
+    <Description>GSP EXC CN,ID,TH &amp; BR, NO QUOTA REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFG</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFH</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFI</Code>
+    <Description>GSP EXC CN,BR,ID,TH.NO IMPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFJ</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFK</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFM</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFN</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFR</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFT</Code>
+    <Description>CODE CHANGED TO A44 28/1/99</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFX</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFY</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DFZ</Code>
+    <Description>GSP EXC MY,ID REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DF3</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DF4</Code>
+    <Description>RATE 0%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DF6</Code>
+    <Description>CAT20,DPO,DTI,LIC,TQ,GSP EXC MO,MY,TH,CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DF7</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>DGA</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGF</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGG</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGH</Code>
+    <Description>GSP EXC CN 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGJ</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGK</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGL</Code>
+    <Description>GSP EXC MY,ID REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGP</Code>
+    <Description>GSP EXCL.CN.TH   NO LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGR</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGS</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGT</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGU</Code>
+    <Description>GSP EXC BN,HK,TH,KZ REQ.NO EXPORT LICENC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGV</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGW</Code>
+    <Description>DPO,DTI,LIC TQ, GSP EXCL MU,MO,CN,9.6%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGX</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DGY</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DG2</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DG4</Code>
+    <Description>GSP EXC MY REQUIRD &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DG5</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DG8</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHA</Code>
+    <Description>GSP EXC BN,TH,KZ REQ.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHB</Code>
+    <Description>GSP EXC BN,TH,KZ REQ NP EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHC</Code>
+    <Description>GSP EXC BN,TH,KZ REQ NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHD</Code>
+    <Description>GSP EXC BN,TH,KZ REQ.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHI</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHK</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHM</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHN</Code>
+    <Description>GSP EXC BN,TH,KZ REQ.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHQ</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHR</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHS</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHU</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHY</Code>
+    <Description>GSP EXC MY REQUIRED  &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DHZ</Code>
+    <Description>GSP EXC MY REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DH6</Code>
+    <Description>GSP EX CN 4.5%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DH8</Code>
+    <Description>GSP(EX TH,BR,AR),</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DIG</Code>
+    <Description>GSP EXC CN,MO,MY,TH.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DIL</Code>
+    <Description>NO GSP FOR CN ORIGIN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DIN</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DIO</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DIU</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DIV</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DIW</Code>
+    <Description>GSP EXC BR,ID,TH,CN REQ.NO EXPORT LICENC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DI5</Code>
+    <Description>CAT 24 DPO REQUIRED GSP EX CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DI6</Code>
+    <Description>NO LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DI7</Code>
+    <Description>GSP EXC CN NO LICENCE DPO REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DI8</Code>
+    <Description>GSP ECL BR, TH</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DI9</Code>
+    <Description>GSP EXCL MX TH BR. HOME USE ENTRY</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJD</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJE</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJJ</Code>
+    <Description>GSP EXC BR REQUIRED &amp; O EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJK</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJL</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJM</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJN</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJP</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJQ</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJR</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJS</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJU</Code>
+    <Description>NO EXPORT LICENCE REQ, GSP EXC CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJW</Code>
+    <Description>GSP EXC BN,TH,KZ REQ. NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJX</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ0</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ2</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ3</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ4</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ5</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ7</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ8</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DJ9</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>DKA</Code>
+    <Description>GSP EXC CN,TH,ID,BR REQUIRED NO EXPORT L</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DKB</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DKE</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DKL</Code>
+    <Description>GSP EXC CN. NO SURVEILLANCE LICENCE REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DKM</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DKU</Code>
+    <Description>GSP EXC CN &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DKW</Code>
+    <Description>NO GSP OR EXPORT LICENCE REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DKZ</Code>
+    <Description>GSP EXC MY REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DK2</Code>
+    <Description>NO EXPORT LICENCE REQ. GSP EXC CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DK7</Code>
+    <Description>GSP EXC MY REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLA</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLD</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO IMPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLE</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLH</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLI</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLN</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLR</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLU</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLV</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DLW</Code>
+    <Description>GSP EXC MY,ID REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DL1</Code>
+    <Description>DUTY 4.7% - GSP EXC CN 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DL8</Code>
+    <Description>GSP EXC CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DL9</Code>
+    <Description>GSP EXC CN 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMA</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMC</Code>
+    <Description>ADDED FOR RA LOAD</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>DMH</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMI</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMM</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMN</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMO</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMQ</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMR</Code>
+    <Description>NO EXPORT LICENCE, GSP EXC CN,TH,ID,BR.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMT</Code>
+    <Description>GSP EXC CN, NO EXPORT ICENCE REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMU</Code>
+    <Description>NO EXPORT LICEMCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMX</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DMZ</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DM9</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNA</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNG</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNH</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNI</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNJ</Code>
+    <Description>NO EXPORT LICENCE REQ. GSP EXC CN.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNK</Code>
+    <Description>DPO, DTI CAT68, GSP EXCL MY,TH,MO,CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNL</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNN</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNP</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNQ</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNR</Code>
+    <Description>GSP EXCL. CN. 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNS</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNT</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNV</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNX</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DNY</Code>
+    <Description>GSP EXC MY,ID REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DN4</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DN5</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DN6</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DN7</Code>
+    <Description>GSP EXC MY REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DN8</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DOC</Code>
+    <Description>GSP EXC CN KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DOF</Code>
+    <Description>CAT67 GSP EXC.MO.MY.TH.CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DOH</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPA</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPC</Code>
+    <Description>GSP EXC MY,TH, NO EXPORT LICENCE REQUIRE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPG</Code>
+    <Description>NO LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPH</Code>
+    <Description>GSP EXC BR RY &amp; NO EXPORT LICENCE REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPI</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPJ</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPK</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPM</Code>
+    <Description>GSP EXC CN, TH. NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPP</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPQ</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPR</Code>
+    <Description>GSP EXCL. BR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPS</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPT</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPU</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPW</Code>
+    <Description>GSP EXC CN, NO EXPORT LICENCE REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPX</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPY</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DPZ</Code>
+    <Description>GSP EXC MY REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DP8</Code>
+    <Description>DUTY FREE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DP9</Code>
+    <Description>DUTY FREE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQC</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQE</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQF</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQG</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQH</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQI</Code>
+    <Description>GSP EXC CN,IN,PK,TH REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQJ</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQK</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQL</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQM</Code>
+    <Description>GSP EXC BR,ID,TH,CN REQ.NO EXPORT LICE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQN</Code>
+    <Description>GSP EXC MY REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQQ</Code>
+    <Description>GSP EXC TH, ID, CN &amp; BR REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQR</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQS</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQT</Code>
+    <Description>GSP EXC TH, ID, CN &amp; BR REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQU</Code>
+    <Description>GSP EXC TH,PK,IN,CN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQV</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQW</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQX</Code>
+    <Description>GSP EXC KR,BR,ID,TH,CN REQ.NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQY</Code>
+    <Description>GSP EXCL.CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQ1</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQ3</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQ5</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DQ9</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRB</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRC</Code>
+    <Description>GSP EXC CN,TH,PK.IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRI</Code>
+    <Description>GSP EXC BR,ID,TH,CN REQ.NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRJ</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRM</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRN</Code>
+    <Description>GSP EXC TH,ID,CN,BR. NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRQ</Code>
+    <Description>GSP EXC CN, REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRS</Code>
+    <Description>GSP EXCL.CN.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRU</Code>
+    <Description>GSP EXC CN &amp; TH REQUIRED. NO EL</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRW</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DRZ</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DR4</Code>
+    <Description>GSP FREE (EX CN)</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DR9</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSC</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSD</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSF</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSG</Code>
+    <Description>GSP EXC.TH,ID,CN,BR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSH</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSI</Code>
+    <Description>GSP EXC CN,IN,PK,TH REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSJ</Code>
+    <Description>GSP EXC TH,PK,IN,CN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSL</Code>
+    <Description>GSP(EXC TH ID CN BR)</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSM</Code>
+    <Description>GSP EXC CN,BR,ID,TH.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DST</Code>
+    <Description>ESP EXC CN REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSV</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSW</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSY</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DSZ</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DS1</Code>
+    <Description>GSP EXCL CN 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DS3</Code>
+    <Description>GSP EXC BR,ID,TH,CN REQ.NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DS4</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DTH</Code>
+    <Description>ITEMS DOES NOT REQUIRE QUOTA OR EXP LIC]</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DTO</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DTP</Code>
+    <Description>NO GSP OR EXPORT LICENCE REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DTR</Code>
+    <Description>GSP EXC BR REQUIRES &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DTS</Code>
+    <Description>GSP EXC CN - 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DTT</Code>
+    <Description>NO GSP OR EXPORT LICENCE REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DTZ</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DUA</Code>
+    <Description>GSP EXCL,CN,DUTY=0.8%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DUF</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DUI</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DUN</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DUP</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DUU</Code>
+    <Description>GSP EXC CN,BR,ID,TH.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DVC</Code>
+    <Description>GSP REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DVU</Code>
+    <Description>GSP EXC TH,CN &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DVW</Code>
+    <Description>GSP EXC CN &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWC</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWD</Code>
+    <Description>GSP EXC CN,MO REQ.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWE</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWG</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWL</Code>
+    <Description>GSP EXC TH,KZ,BN. NO EXPORT LICENCE REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWN</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWT</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DWW</Code>
+    <Description>GSP EX CN, TH, NO SURVEILLANCE LIC REQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DW0</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DXD</Code>
+    <Description>GSP EXC. TH, PK,IN,CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DXF</Code>
+    <Description>GSP 1.4%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DXM</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DXS</Code>
+    <Description>GSP EXC TH, ID, CN, BR</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DXV</Code>
+    <Description>GSP(EXCL CN)FREE.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DX2</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DX3</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DX4</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DX7</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DX8</Code>
+    <Description>GSP EXC CN,1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DX9</Code>
+    <Description>GSP EXC CN,BR,ID,TH &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DYD</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DYP</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DYS</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DYT</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DYW</Code>
+    <Description>GSP EXC TH,PK,IN,CN. 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DYZ</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DY0</Code>
+    <Description>GSP EXC BR,ID,TH,CN REQ.NO EXPORT LICENC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DY2</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DY3</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DZJ</Code>
+    <Description>GSP EX(MO,TH,MY,CN) CAT 87. DPO, DTI, TQ</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DZK</Code>
+    <Description>GSP</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DZM</Code>
+    <Description>NO EXPORT LICENCE OR GSP REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DZX</Code>
+    <Description>GSP EXC CN.TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DZZ</Code>
+    <Description>GSP EXC MY  1.4%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DZ1</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>DZ5</Code>
+    <Description>GSP,EXCL.TH,PK,IN,CN-FREE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0A</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0B</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0C</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0D</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0G</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0M</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0T</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0X</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D0Y</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D01</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D05</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D07</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D08</Code>
+    <Description>GSP EXC CN,BR,ID,TH.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D10</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D11</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D15</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D2A</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D2P</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D2T</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D3H</Code>
+    <Description>GSP REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D4C</Code>
+    <Description>GSP EXC TH,MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D4L</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D44</Code>
+    <Description>NO EXPORT LICENCE, GSP OR ADD REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D5G</Code>
+    <Description>DUTY 4.7% - GSP EXC CN 1.2%</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7A</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7E</Code>
+    <Description>GSP EXC CN,TH,PK,IN REQ.NO EXP LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7F</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7K</Code>
+    <Description>GSP EX CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7M</Code>
+    <Description>GSP EXCL.CN,FREE.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7R</Code>
+    <Description>GSP EXC CN,KZ,RU REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7S</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7T</Code>
+    <Description>GSP  REQUIRED.NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D7W</Code>
+    <Description>GSP EXC BR REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D70</Code>
+    <Description>GSP EXC BN,TH,KZ REQ. NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D8U</Code>
+    <Description>.</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D9B</Code>
+    <Description>GSP EXC CN REQUIRED &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D9J</Code>
+    <Description>GSP EXC MY,ID REQ. NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D9N</Code>
+    <Description>GSP EXC MY REQ &amp; NO EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D9P</Code>
+    <Description>GSP EXC BR,ID,TH,CN REQ.NO EXPORT LICENC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D90</Code>
+    <Description>GSP EXC CN,TH REQ &amp; NO EXPORT LIC</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>D99</Code>
+    <Description>GSP FREE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>EUR</Code>
+    <Description>EUR 1 REQUIRED</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>ML </Code>
+    <Description>LOADED FOR RA</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>OQ </Code>
+    <Description>LOADED FOR RA</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>PM </Code>
+    <Description>LOADED FOR RA</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>TI </Code>
+    <Description>EXPORT LIC CAT 19, GSP EXC MY TH MO CN</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>VY </Code>
+    <Description>LOADED FOR RA</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>WB </Code>
+    <Description>GSP REQUIRED FROM ALL ORIGINS</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>XX </Code>
+    <Description>ADDED FOR RA LOAD</Description>
+    <Status>false</Status>
+  </Composition>
+  <Composition>
+    <Code>XXX</Code>
+    <Description>ITEM REQUIRES TWO TARIFF CLASSIFICATIONS</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>XXY</Code>
+    <Description>ITEM REQUIRES THREE TARIFFS</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>XYY</Code>
+    <Description>ITEM NEEDS SURVEILANCE &amp; EXPORT LICENCE</Description>
+    <Status>true</Status>
+  </Composition>
+  <Composition>
+    <Code>Z4 </Code>
+    <Description>GSP(-10.5%),SURV LICENCE(CN)</Description>
+    <Status>true</Status>
+  </Composition>
+</DocumentElement>

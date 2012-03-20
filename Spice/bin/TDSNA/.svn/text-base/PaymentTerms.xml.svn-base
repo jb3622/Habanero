@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <PaymentTerms>
+    <PayTerms>LC</PayTerms>
+    <Description>LC AT SITE</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>TT</PayTerms>
+    <Description>TELEGRAPHIC TRANSFER</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>00</PayTerms>
+    <Description>IMMEDIATE PAYMENT</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>10</PayTerms>
+    <Description>10 DAYS</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>14</PayTerms>
+    <Description>NET 14 DAYS</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>3E</PayTerms>
+    <Description>30DAYS END OF MTH</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>30</PayTerms>
+    <Description>NET 30</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>60</PayTerms>
+    <Description>60 DAYS END OF MONTH</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>90</PayTerms>
+    <Description>90 DAYS</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>45</PayTerms>
+    <Description>NET 45</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>T4</PayTerms>
+    <Description>TT 45 DAYS</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>L6</PayTerms>
+    <Description>LC 60 DAYS</Description>
+  </PaymentTerms>
+  <PaymentTerms>
+    <PayTerms>L3</PayTerms>
+    <Description>LC 30 DAYS</Description>
+  </PaymentTerms>
+</DocumentElement>

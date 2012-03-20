@@ -1,0 +1,623 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Ports>
+    <PortCode>515</PortCode>
+    <Description>ALICANTE,SPAIN</Description>
+    <PortCodeDescription>515 - ALICANTE,SPAIN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>210</PortCode>
+    <Description>ASHOD, ISRAEL</Description>
+    <PortCodeDescription>210 - ASHOD, ISRAEL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>17041</PortCode>
+    <Description>ATLANTA, GA</Description>
+    <PortCodeDescription>17041 - ATLANTA, GA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>22575</PortCode>
+    <Description>BALBOA, PANAMA</Description>
+    <PortCodeDescription>22575 - BALBOA, PANAMA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>130</PortCode>
+    <Description>BANGALORE - INDIA</Description>
+    <PortCodeDescription>130 - BANGALORE - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>54901</PortCode>
+    <Description>BANGKOK, THAILAND</Description>
+    <PortCodeDescription>54901 - BANGKOK, THAILAND</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>50</PortCode>
+    <Description>BEIJING, CHINA</Description>
+    <PortCodeDescription>50 - BEIJING, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>98005</PortCode>
+    <Description>BELLEVUE, WA</Description>
+    <PortCodeDescription>98005 - BELLEVUE, WA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99993</PortCode>
+    <Description>BOMBAY - INDIA</Description>
+    <PortCodeDescription>99993 - BOMBAY - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>11231</PortCode>
+    <Description>BROOKLYN, NY</Description>
+    <PortCodeDescription>11231 - BROOKLYN, NY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>90621</PortCode>
+    <Description>BUENA PARK, CA</Description>
+    <PortCodeDescription>90621 - BUENA PARK, CA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58023</PortCode>
+    <Description>BUSAN, SOUTH KOREA</Description>
+    <PortCodeDescription>58023 - BUSAN, SOUTH KOREA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>150</PortCode>
+    <Description>CALCUTTA - INDIA</Description>
+    <PortCodeDescription>150 - CALCUTTA - INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>33300</PortCode>
+    <Description>CALLAO, PERU</Description>
+    <PortCodeDescription>33300 - CALLAO, PERU</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53357</PortCode>
+    <Description>CHENNAI MADRAS, INDIA</Description>
+    <PortCodeDescription>53357 - CHENNAI MADRAS, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>10</PortCode>
+    <Description>CHITTAGONG,BANGLADESH</Description>
+    <PortCodeDescription>10 - CHITTAGONG,BANGLADESH</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57067</PortCode>
+    <Description>CHIWAN, CHINA</Description>
+    <PortCodeDescription>57067 - CHIWAN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>81788</PortCode>
+    <Description>CITY OF IND, CA</Description>
+    <PortCodeDescription>81788 - CITY OF IND, CA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>14031</PortCode>
+    <Description>CLARENCE, NY</Description>
+    <PortCodeDescription>14031 - CLARENCE, NY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>54201</PortCode>
+    <Description>COLOMBO, SRI LANKA</Description>
+    <PortCodeDescription>54201 - COLOMBO, SRI LANKA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>90220</PortCode>
+    <Description>COMPTON, CA</Description>
+    <PortCodeDescription>90220 - COMPTON, CA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>47933</PortCode>
+    <Description>CRAWFORDSVILLE, IN</Description>
+    <PortCodeDescription>47933 - CRAWFORDSVILLE, IN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57051</PortCode>
+    <Description>DALIAN, CHINA</Description>
+    <PortCodeDescription>57051 - DALIAN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>525</PortCode>
+    <Description>DALLAS, TEXAS</Description>
+    <PortCodeDescription>525 - DALLAS, TEXAS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55201</PortCode>
+    <Description>DANANG, VIETNAM</Description>
+    <PortCodeDescription>55201 - DANANG, VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>48130</PortCode>
+    <Description>DEXTER, MI</Description>
+    <PortCodeDescription>48130 - DEXTER, MI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>490</PortCode>
+    <Description>DUBAI</Description>
+    <PortCodeDescription>490 - DUBAI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>79113</PortCode>
+    <Description>DURBAN, SOUTH AFRICA</Description>
+    <PortCodeDescription>79113 - DURBAN, SOUTH AFRICA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>24021</PortCode>
+    <Description>ELPASO, TEXAS</Description>
+    <PortCodeDescription>24021 - ELPASO, TEXAS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>41323</PortCode>
+    <Description>FELIXSTOWE, ENG.</Description>
+    <PortCodeDescription>41323 - FELIXSTOWE, ENG.</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>46037</PortCode>
+    <Description>FISHERS, IN</Description>
+    <PortCodeDescription>46037 - FISHERS, IN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>305</PortCode>
+    <Description>FUZHOU, CHINA</Description>
+    <PortCodeDescription>305 - FUZHOU, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>520</PortCode>
+    <Description>GUANGZHOU, CHINA</Description>
+    <PortCodeDescription>520 - GUANGZHOU, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>20500</PortCode>
+    <Description>GUATEMALA</Description>
+    <PortCodeDescription>20500 - GUATEMALA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>595</PortCode>
+    <Description>HAI PHONG, VIETNAM</Description>
+    <PortCodeDescription>595 - HAI PHONG, VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99979</PortCode>
+    <Description>HAIFA, ISRAEL</Description>
+    <PortCodeDescription>99979 - HAIFA, ISRAEL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>370</PortCode>
+    <Description>HANOI, VIETNAM</Description>
+    <PortCodeDescription>370 - HANOI, VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99999</PortCode>
+    <Description>HO CHI MINH, VIETNAM</Description>
+    <PortCodeDescription>99999 - HO CHI MINH, VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58201</PortCode>
+    <Description>HONG KONG</Description>
+    <PortCodeDescription>58201 - HONG KONG</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99978</PortCode>
+    <Description>ISTANBUL, TURKEY</Description>
+    <PortCodeDescription>99978 - ISTANBUL, TURKEY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>660</PortCode>
+    <Description>ITAJAI, BRAZIL</Description>
+    <PortCodeDescription>660 - ITAJAI, BRAZIL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99974</PortCode>
+    <Description>IZMIR - TURKEY</Description>
+    <PortCodeDescription>99974 - IZMIR - TURKEY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99998</PortCode>
+    <Description>JAKARTA, INDONESIA</Description>
+    <PortCodeDescription>99998 - JAKARTA, INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58309</PortCode>
+    <Description>KAOHSUING, TAIWAN</Description>
+    <PortCodeDescription>58309 - KAOHSUING, TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>430</PortCode>
+    <Description>KARACHI, PAKISTAN</Description>
+    <PortCodeDescription>430 - KARACHI, PAKISTAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58301</PortCode>
+    <Description>KEELUNG, TAIWAN</Description>
+    <PortCodeDescription>58301 - KEELUNG, TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>77914</PortCode>
+    <Description>KENYA</Description>
+    <PortCodeDescription>77914 - KENYA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58840</PortCode>
+    <Description>KOBE, JAPAN</Description>
+    <PortCodeDescription>58840 - KOBE, JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>54930</PortCode>
+    <Description>LAEM CHABANG, THAILAND</Description>
+    <PortCodeDescription>54930 - LAEM CHABANG, THAILAND</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>33301</PortCode>
+    <Description>LIMA, PERU</Description>
+    <PortCodeDescription>33301 - LIMA, PERU</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>48150</PortCode>
+    <Description>LIVONIA, MI</Description>
+    <PortCodeDescription>48150 - LIVONIA, MI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>41352</PortCode>
+    <Description>LONDON (HETHRO), ENG.</Description>
+    <PortCodeDescription>41352 - LONDON (HETHRO), ENG.</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>27041</PortCode>
+    <Description>LOS ANGELES - PORT OF</Description>
+    <PortCodeDescription>27041 - LOS ANGELES - PORT OF</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>90007</PortCode>
+    <Description>ENTRY</Description>
+    <PortCodeDescription>90007 - ENTRY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>630</PortCode>
+    <Description>LOS ANGELES, CA</Description>
+    <PortCodeDescription>630 - LOS ANGELES, CA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55357</PortCode>
+    <Description>MACAU</Description>
+    <PortCodeDescription>55357 - MACAU</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99985</PortCode>
+    <Description>MADRAS, INDIA</Description>
+    <PortCodeDescription>99985 - MADRAS, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>22556</PortCode>
+    <Description>MANILA, PHILIPPINES</Description>
+    <PortCodeDescription>22556 - MANILA, PHILIPPINES</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>20061</PortCode>
+    <Description>MANZANILLO, PANAMA</Description>
+    <PortCodeDescription>20061 - MANZANILLO, PANAMA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>510</PortCode>
+    <Description>MEMPHIS, TN</Description>
+    <PortCodeDescription>510 - MEMPHIS, TN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>77913</PortCode>
+    <Description>MOMBASA, KENYA</Description>
+    <PortCodeDescription>77913 - MOMBASA, KENYA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99977</PortCode>
+    <Description>MONTREAL, CANADA</Description>
+    <PortCodeDescription>99977 - MONTREAL, CANADA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>56151</PortCode>
+    <Description>MUARA, BRUNEI</Description>
+    <PortCodeDescription>56151 - MUARA, BRUNEI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53300</PortCode>
+    <Description>MUMBAI, INDIA</Description>
+    <PortCodeDescription>53300 - MUMBAI, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>91605</PortCode>
+    <Description>N. HOLLYWOOD, CA</Description>
+    <PortCodeDescription>91605 - N. HOLLYWOOD, CA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58857</PortCode>
+    <Description>NAGOYA, JAPAN</Description>
+    <PortCodeDescription>58857 - NAGOYA, JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57001</PortCode>
+    <Description>NAN JING, CHINA (NEW)</Description>
+    <PortCodeDescription>57001 - NAN JING, CHINA (NEW)</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53398</PortCode>
+    <Description>NEPAL, INDIA</Description>
+    <PortCodeDescription>53398 - NEPAL, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99994</PortCode>
+    <Description>NEW DELHI, INDIA</Description>
+    <PortCodeDescription>99994 - NEW DELHI, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>10011</PortCode>
+    <Description>NEW YORK, NY</Description>
+    <PortCodeDescription>10011 - NEW YORK, NY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>46011</PortCode>
+    <Description>NEWARK, NEW JERSEY</Description>
+    <PortCodeDescription>46011 - NEWARK, NEW JERSEY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53313</PortCode>
+    <Description>NHAVA SHEVA, INDIA</Description>
+    <PortCodeDescription>53313 - NHAVA SHEVA, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>66666</PortCode>
+    <Description>NINGBO, CHINA</Description>
+    <PortCodeDescription>66666 - NINGBO, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>38654</PortCode>
+    <Description>OLIVE BRANCH, MS</Description>
+    <PortCodeDescription>38654 - OLIVE BRANCH, MS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>640</PortCode>
+    <Description>OMAN</Description>
+    <PortCodeDescription>640 - OMAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99982</PortCode>
+    <Description>OSAKA, JAPAN</Description>
+    <PortCodeDescription>99982 - OSAKA, JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55735</PortCode>
+    <Description>PENANG, MALAYSIA</Description>
+    <PortCodeDescription>55735 - PENANG, MALAYSIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>20</PortCode>
+    <Description>PHNOM PENH, CAMBODIA</Description>
+    <PortCodeDescription>20 - PHNOM PENH, CAMBODIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>680</PortCode>
+    <Description>PORT KELANG, MALAYSIA</Description>
+    <PortCodeDescription>680 - PORT KELANG, MALAYSIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>650</PortCode>
+    <Description>PORT LOUIS, MAURITIUS</Description>
+    <PortCodeDescription>650 - PORT LOUIS, MAURITIUS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>29071</PortCode>
+    <Description>PROVIDENCE, RI</Description>
+    <PortCodeDescription>29071 - PROVIDENCE, RI</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>20506</PortCode>
+    <Description>PUERTO QUETZAL, GUATEMALA</Description>
+    <PortCodeDescription>20506 - PUERTO QUETZAL, GUATEMALA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>420</PortCode>
+    <Description>PUSAN/ KWANG YANK, SOUTH</Description>
+    <PortCodeDescription>420 - PUSAN/ KWANG YANK, SOUTH</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57000</PortCode>
+    <Description>QINGDAO, CHINA</Description>
+    <PortCodeDescription>57000 - QINGDAO, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>94903</PortCode>
+    <Description>SANRAFAEL, CA</Description>
+    <PortCodeDescription>94903 - SANRAFAEL, CA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>390</PortCode>
+    <Description>SANTOS, BRAZIL</Description>
+    <PortCodeDescription>390 - SANTOS, BRAZIL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99983</PortCode>
+    <Description>SAO PAULO, BRAZIL</Description>
+    <PortCodeDescription>99983 - SAO PAULO, BRAZIL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>17031</PortCode>
+    <Description>SAVANNAH, GA</Description>
+    <PortCodeDescription>17031 - SAVANNAH, GA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>18512</PortCode>
+    <Description>SCRANTON, PA</Description>
+    <PortCodeDescription>18512 - SCRANTON, PA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99997</PortCode>
+    <Description>SEMARANG,INDONESIA</Description>
+    <PortCodeDescription>99997 - SEMARANG,INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>240</PortCode>
+    <Description>SEOUL, KOREA</Description>
+    <PortCodeDescription>240 - SEOUL, KOREA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57035</PortCode>
+    <Description>SHANGHAI, CHINA</Description>
+    <PortCodeDescription>57035 - SHANGHAI, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57018</PortCode>
+    <Description>SHEKOU, CHINA</Description>
+    <PortCodeDescription>57018 - SHEKOU, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57002</PortCode>
+    <Description>SHENZHEN, CHINA</Description>
+    <PortCodeDescription>57002 - SHENZHEN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>99969</PortCode>
+    <Description>SIHANOUKVILLE, CAMBODIA</Description>
+    <PortCodeDescription>99969 - SIHANOUKVILLE, CAMBODIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55976</PortCode>
+    <Description>SINGAPORE</Description>
+    <PortCodeDescription>55976 - SINGAPORE</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>43174</PortCode>
+    <Description>SOUTHAMPTON, ENG.</Description>
+    <PortCodeDescription>43174 - SOUTHAMPTON, ENG.</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>77777</PortCode>
+    <Description>ST LUCIA</Description>
+    <PortCodeDescription>77777 - ST LUCIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>180</PortCode>
+    <Description>SURUBAYA, INDONESIA</Description>
+    <PortCodeDescription>180 - SURUBAYA, INDONESIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58303</PortCode>
+    <Description>TAICHUNG, TAIWAN</Description>
+    <PortCodeDescription>58303 - TAICHUNG, TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>340</PortCode>
+    <Description>TAIPAI, TAIWAN</Description>
+    <PortCodeDescription>340 - TAIPAI, TAIWAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>78800</PortCode>
+    <Description>TAOMASINA, MADAGASCAR</Description>
+    <PortCodeDescription>78800 - TAOMASINA, MADAGASCAR</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>21599</PortCode>
+    <Description>TECUCIGALPA, HONDURAS</Description>
+    <PortCodeDescription>21599 - TECUCIGALPA, HONDURAS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>200</PortCode>
+    <Description>TEL AVIV, ISRAEL</Description>
+    <PortCodeDescription>200 - TEL AVIV, ISRAEL</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58886</PortCode>
+    <Description>TOKYO, JAPAN</Description>
+    <PortCodeDescription>58886 - TOKYO, JAPAN</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>79261</PortCode>
+    <Description>TORONTO, CANADA</Description>
+    <PortCodeDescription>79261 - TORONTO, CANADA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>500</PortCode>
+    <Description>VARACRUZ, MEXICO</Description>
+    <PortCodeDescription>500 - VARACRUZ, MEXICO</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55200</PortCode>
+    <Description>VIETNAM</Description>
+    <PortCodeDescription>55200 - VIETNAM</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>91789</PortCode>
+    <Description>WALNUT, WA</Description>
+    <PortCodeDescription>91789 - WALNUT, WA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57071</PortCode>
+    <Description>XIAMEN, CHINA</Description>
+    <PortCodeDescription>57071 - XIAMEN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57017</PortCode>
+    <Description>XINGANG, CHINA</Description>
+    <PortCodeDescription>57017 - XINGANG, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>600</PortCode>
+    <Description>YANTIAN, CHINA</Description>
+    <PortCodeDescription>600 - YANTIAN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>53395</PortCode>
+    <Description>NEW TUTICORIN, INDIA</Description>
+    <PortCodeDescription>53395 - NEW TUTICORIN, INDIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>2833</PortCode>
+    <Description>RENO, NEVADA</Description>
+    <PortCodeDescription>2833 - RENO, NEVADA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>2715</PortCode>
+    <Description>CAPITAN, CALIFORNIA</Description>
+    <PortCodeDescription>2715 - CAPITAN, CALIFORNIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>55750</PortCode>
+    <Description>TANJUNG PELEPAS, MALAYSIA</Description>
+    <PortCodeDescription>55750 - TANJUNG PELEPAS, MALAYSIA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57043</PortCode>
+    <Description>TIANJIN, CHINA</Description>
+    <PortCodeDescription>57043 - TIANJIN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>57056</PortCode>
+    <Description>DONGGUAN, CHINA</Description>
+    <PortCodeDescription>57056 - DONGGUAN, CHINA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>3003</PortCode>
+    <Description>ABERDEEN-HOQUIAM, WASH</Description>
+    <PortCodeDescription>3003 - ABERDEEN-HOQUIAM, WASH</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58000</PortCode>
+    <Description>PUERTO CORTES, HONDURAS</Description>
+    <PortCodeDescription>58000 - PUERTO CORTES, HONDURAS</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58010</PortCode>
+    <Description>SAN SALVADOR, EL SALVADOR</Description>
+    <PortCodeDescription>58010 - SAN SALVADOR, EL SALVADOR</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58020</PortCode>
+    <Description>CORINTO, NICARAGUA</Description>
+    <PortCodeDescription>58020 - CORINTO, NICARAGUA</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58030</PortCode>
+    <Description>GENOA, ITALY</Description>
+    <PortCodeDescription>58030 - GENOA, ITALY</PortCodeDescription>
+  </Ports>
+  <Ports>
+    <PortCode>58040</PortCode>
+    <Description>MANAGUA, NICARAGUA</Description>
+    <PortCodeDescription>58040 - MANAGUA, NICARAGUA</PortCodeDescription>
+  </Ports>
+</DocumentElement>

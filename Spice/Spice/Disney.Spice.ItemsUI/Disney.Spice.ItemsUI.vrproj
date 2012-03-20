@@ -1,0 +1,325 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{c8354475-6cc8-4450-8469-8d8861a3b91c}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Disney.Spice.ItemsUI</RootNamespace>
+    <AssemblyName>Disney.Spice.ItemsUI</AssemblyName>
+    <StartupObject>ItemSelection.SelectItem</StartupObject>
+    <Name>Disney.Spice.ItemsUI</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DefineDebug>True</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>False</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <DefineConstants>
+    </DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="*ComponentFactory.Krypton.Toolkit, Version=4.1.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
+    <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
+      <Name>ASNA.DataGate.Client</Name>
+      <AssemblyName>ASNA.DataGate.Client.dll</AssemblyName>
+    </Reference>
+    <Reference Include="ASNA.VisualRPG.Runtime, Version=8.1.432.0, Culture=neutral, PublicKeyToken=d7106be54d30c861">
+      <Name>ASNA.VisualRPG.Runtime</Name>
+      <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
+    </Reference>
+    <Reference Include="Disney.DA.IP400, Version=8.3.5.22734, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.DA.IP400</Name>
+      <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.ErrorProvider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.ErrorProvider</Name>
+      <AssemblyName>Disney.Spice.ErrorProvider.dll</AssemblyName>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.ErrorProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.5.18239, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.ItemsBO</Name>
+      <AssemblyName>Disney.Spice.ItemsBO.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.LookUp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.LookUp</Name>
+      <AssemblyName>Disney.Spice.LookUp.dll</AssemblyName>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.LookUp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DisneyMenu, Version=8.3.5.16611, Culture=neutral, PublicKeyToken=null">
+      <Name>DisneyMenu</Name>
+      <AssemblyName>DisneyMenu.exe</AssemblyName>
+      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Design">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddAPPEcomDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddItem.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="AddOnlineEcomDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddStyleDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeAPPEcomDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeItem.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="ChangeItemPackDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeItemAddMarketUPC.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeItemNewVATCode.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeItemSizesBandM.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeMarketSizes.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeAddSize.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePendCharCode.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePendPromo.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePendSubClass.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls.vr">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CopyItem.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="CopyStyleDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dspItemPOs.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeOnlineEcomDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeItemSizes.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBundleRetailPrice.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectSizeBandM.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmItemAPPAdd.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmItemAPPChange.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SizeStyleSelect.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeStyleDetails.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vr">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Settings.settings</DependentUpon>
+      <LastGenOutput>Settings.Designer.vr</LastGenOutput>
+    </Compile>
+    <Compile Include="Properties\Settings.settings.Designer.vr">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Settings.settings</DependentUpon>
+      <LastGenOutput>Settings.Designer.vr</LastGenOutput>
+    </Compile>
+    <Compile Include="SelectItem.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectMarket.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMarketSize.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectSize.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSizeGroup.vr">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="AddAPPEcomDetails.resx">
+      <DependentUpon>AddAPPEcomDetails.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddOnlineEcomDetails.resx">
+      <DependentUpon>AddOnlineEcomDetails.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddStyleDetails.resx">
+      <DependentUpon>AddStyleDetails.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeAPPEcomDetails.resx">
+      <DependentUpon>ChangeAPPEcomDetails.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeItem.resx">
+      <DependentUpon>ChangeItem.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeItemPackDetails.resx">
+      <DependentUpon>ChangeItemPackDetails.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeItemAddMarketUPC.resx">
+      <DependentUpon>ChangeItemAddMarketUPC.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeItemNewVATCode.resx">
+      <DependentUpon>ChangeItemNewVATCode.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeItemSizes.resx">
+      <DependentUpon>ChangeItemSizes.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeItemSizesBandM.resx">
+      <DependentUpon>ChangeItemSizesBandM.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeMarketSizes.resx">
+      <DependentUpon>ChangeMarketSizes.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeAddSize.resx">
+      <DependentUpon>ChangeAddSize.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePendCharCode.resx">
+      <DependentUpon>ChangePendCharCode.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePendPromo.resx">
+      <DependentUpon>ChangePendPromo.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePendSubClass.resx">
+      <DependentUpon>ChangePendSubClass.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyStyleDetails.resx">
+      <DependentUpon>CopyStyleDetails.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dspItemPOs.resx">
+      <DependentUpon>dspItemPOs.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeOnlineEcomDetails.resx">
+      <DependentUpon>ChangeOnlineEcomDetails.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBundleRetailPrice.resx">
+      <DependentUpon>frmBundleRetailPrice.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmItemAPPAdd.resx">
+      <DependentUpon>frmItemAPPAdd.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmItemAPPChange.resx">
+      <DependentUpon>frmItemAPPChange.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectSizeBandM.resx">
+      <DependentUpon>SelectSizeBandM.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SizeStyleSelect.resx">
+      <DependentUpon>SizeStyleSelect.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeStyleDetails.resx">
+      <DependentUpon>ChangeStyleDetails.vr</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectItem.resx">
+      <DependentUpon>SelectItem.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectMarket.resx">
+      <DependentUpon>SelectMarket.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddMarketSize.resx">
+      <DependentUpon>AddMarketSize.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectSize.resx">
+      <DependentUpon>SelectSize.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSizeGroup.resx">
+      <DependentUpon>AddSizeGroup.vr</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vr</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\ASNA\VisualRPG\8.1\ASNA.VisualRPG.targets" />
+</Project>

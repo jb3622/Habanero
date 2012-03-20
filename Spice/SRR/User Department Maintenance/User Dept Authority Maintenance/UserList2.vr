@@ -1,0 +1,611 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using TheDisneyStore.Dash
+
+BegClass UserList2 Extends(System.Windows.Forms.Form) Access(*Public)
+
+/region Default Constructor and Windows Form Designer generated code
+	
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld uxApply System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider2 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld uxDept3 System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxAS400UsrPrf3 System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxIPUsrPrf3 System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld uxAuthorityLevel3 System.Windows.Forms.TextBox Access(*Public) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	DclFld Caller_Dept2 Like( USDEPT ) Access( *Public )
+    DclFld Caller_UserPrf2 Like( USUSPR ) Access( *Public )
+    DclFld Caller_IPUserPrf2 Like( USIPPR ) Access( *Public )
+	DclFld Caller_Auth2 Like( USAUTH ) Access( *Public )
+	DclFld uxBack System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld toolStripStatusLabel1 System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld Selection_type  Type(*Char)  Len(1)  
+	
+	DclFld MsgId Type( *char ) Len( 7 )
+	DclFld Msg Type( *char ) Len( 100 )
+	DclFld ErrorCount	Type( *Integer4 )
+	DclFld Dept#	Type( *Zoned ) Len( 3,0 )	
+	DclFld Idx		Type( *Packed ) Len( 3,0 )	
+	DclFld UserID	Type( *char ) Len( 10 )	
+	DclFld AuthLevel	Type( *Zoned ) Len( 2,0 )	
+	DclFld wRtnCode     Type( *Zoned ) Len( 1,0 )
+	
+// Constants	
+	DclConst Digits Value( '0123456789' )
+	
+	DclFld UserList Type( UserList )  
+	
+	/region declare data files
+	
+	DclDB AS400 DBName( "TDST" )
+	
+	DclDiskFile  DSUSRDA +
+		Type( *Update  ) + 
+		AddRec (*Yes)    +
+		Org( *Indexed ) + 
+		File( "*LIBL/DSUSRDA" ) +
+		DB( AS400 ) +
+		ImpOpen( *No ) 
+		
+	DclDiskFile  IPDEPTS +
+          Type( *Input  ) + 
+          Org( *Indexed ) + 
+          File( "*LIBL/IPDEPTS" ) +
+          DB( AS400 ) +
+          ImpOpen( *No )  
+
+    DclDiskFile  IPUSERS +
+          Type( *Input  ) + 
+          Org( *Indexed ) + 
+          File( "*LIBL/IPUSERS" ) +
+          DB( AS400 ) +
+          ImpOpen( *No )  	
+		
+    /endregion
+	
+	BegConstructor Access(*Public)
+	       dclsrparm p_DB type(*object)
+	       DclsrParm p_Selection  Type(*Char) Len(1)
+	       DclsrParm p_As400User  Type(*Char) Len(10)
+	       DclsrParm p_IPUser     Type(*Char) Len(4)
+	       DclsrParm p_Dept       Type(*Zoned) Len(3,0)
+	       DclsrParm p_Auth       Type(*Zoned) Len(2,0)
+	      
+		//
+		   InitializeComponent()
+
+           AS400             = p_DB *As asna.VisualRPG.Runtime.Database
+           Selection_Type    = p_Selection 
+           Caller_UserPrf2   = p_As400User.ToUpper()
+           Caller_IPUserPrf2 = p_IPUser.ToUpper()
+           Caller_Dept2      = p_Dept
+           Caller_Auth2      = p_Auth
+            
+		
+	EndConstructor
+
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(UserList2))
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.uxDept3 = *new System.Windows.Forms.TextBox()
+		*this.uxAS400UsrPrf3 = *new System.Windows.Forms.TextBox()
+		*this.uxIPUsrPrf3 = *new System.Windows.Forms.TextBox()
+		*this.uxAuthorityLevel3 = *new System.Windows.Forms.TextBox()
+		*this.errorProvider2 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.uxApply = *new System.Windows.Forms.Button()
+		*this.uxBack = *new System.Windows.Forms.Button()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.toolStripStatusLabel1 = *new System.Windows.Forms.ToolStripStatusLabel()
+		(*this.errorProvider2 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.statusStrip1.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(13, 36)
+		*this.label1.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(37, 16)
+		*this.label1.TabIndex = 1
+		*this.label1.Text = "Dept"
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(13, 79)
+		*this.label2.Margin = *new System.Windows.Forms.Padding(4, 0, 4, 0)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(124, 16)
+		*this.label2.TabIndex = 3
+		*this.label2.Text = "AS/400 User Profile"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(13, 121)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(93, 16)
+		*this.label3.TabIndex = 5
+		*this.label3.Text = "IP User Profile"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Location = *new System.Drawing.Point(13, 164)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(95, 16)
+		*this.label4.TabIndex = 7
+		*this.label4.Text = "Authority Level"
+		//
+		//uxDept3
+		//
+		*this.uxDept3.Location = *new System.Drawing.Point(145, 33)
+		*this.uxDept3.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxDept3.MaxLength = 3
+		*this.uxDept3.Name = "uxDept3"
+		*this.uxDept3.Size = *new System.Drawing.Size(39, 22)
+		*this.uxDept3.TabIndex = 0
+		//
+		//uxAS400UsrPrf3
+		//
+		*this.uxAS400UsrPrf3.Location = *new System.Drawing.Point(145, 76)
+		*this.uxAS400UsrPrf3.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxAS400UsrPrf3.MaxLength = 10
+		*this.uxAS400UsrPrf3.Name = "uxAS400UsrPrf3"
+		*this.uxAS400UsrPrf3.Size = *new System.Drawing.Size(119, 22)
+		*this.uxAS400UsrPrf3.TabIndex = 1
+		//
+		//uxIPUsrPrf3
+		//
+		*this.uxIPUsrPrf3.Location = *new System.Drawing.Point(145, 118)
+		*this.uxIPUsrPrf3.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxIPUsrPrf3.MaxLength = 5
+		*this.uxIPUsrPrf3.Name = "uxIPUsrPrf3"
+		*this.uxIPUsrPrf3.Size = *new System.Drawing.Size(49, 22)
+		*this.uxIPUsrPrf3.TabIndex = 2
+		//
+		//uxAuthorityLevel3
+		//
+		*this.uxAuthorityLevel3.Location = *new System.Drawing.Point(145, 161)
+		*this.uxAuthorityLevel3.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxAuthorityLevel3.MaxLength = 2
+		*this.uxAuthorityLevel3.Name = "uxAuthorityLevel3"
+		*this.uxAuthorityLevel3.Size = *new System.Drawing.Size(39, 22)
+		*this.uxAuthorityLevel3.TabIndex = 3
+		//
+		//errorProvider2
+		//
+		*this.errorProvider2.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+		*this.errorProvider2.ContainerControl = *this
+		//
+		//uxApply
+		//
+		*this.uxApply.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxApply.Location = *new System.Drawing.Point(783, 650)
+		*this.uxApply.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxApply.Name = "uxApply"
+		*this.uxApply.Size = *new System.Drawing.Size(85, 30)
+		*this.uxApply.TabIndex = 4
+		*this.uxApply.Text = "&Apply"
+		*this.uxApply.UseVisualStyleBackColor = *True
+		//
+		//uxBack
+		//
+		*this.uxBack.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.uxBack.Location = *new System.Drawing.Point(886, 650)
+		*this.uxBack.Margin = *new System.Windows.Forms.Padding(3, 2, 3, 2)
+		*this.uxBack.Name = "uxBack"
+		*this.uxBack.Size = *new System.Drawing.Size(85, 30)
+		*this.uxBack.TabIndex = 5
+		*this.uxBack.Text = "&Back"
+		*this.uxBack.UseVisualStyleBackColor = *True
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.toolStripStatusLabel1})
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 697)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Size = *new System.Drawing.Size(1028, 22)
+		*this.statusStrip1.TabIndex = 8
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//toolStripStatusLabel1
+		//
+		*this.toolStripStatusLabel1.Name = "toolStripStatusLabel1"
+		*this.toolStripStatusLabel1.Size = *new System.Drawing.Size(51, 17)
+		*this.toolStripStatusLabel1.Text = "UserList2"
+		//
+		//UserList2
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(8, 16)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(1028, 719)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.uxBack)
+		*this.Controls.Add(*this.uxApply)
+		*this.Controls.Add(*this.uxAuthorityLevel3)
+		*this.Controls.Add(*this.uxIPUsrPrf3)
+		*this.Controls.Add(*this.uxAS400UsrPrf3)
+		*this.Controls.Add(*this.uxDept3)
+		*this.Controls.Add(*this.label4)
+		*this.Controls.Add(*this.label3)
+		*this.Controls.Add(*this.label2)
+		*this.Controls.Add(*this.label1)
+		*this.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.Icon = (resources.GetObject("$this.Icon") *As System.Drawing.Icon)
+		*this.Margin = *new System.Windows.Forms.Padding(4)
+		*this.Name = "UserList2"
+		*this.Text = "User Dept Authority Maintenance"
+		(*this.errorProvider2 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.statusStrip1.ResumeLayout(*False)
+		*this.statusStrip1.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+	/endregion
+	
+	
+/region declare Validation	
+//------------------------------------------------------------
+// Validate the data on the form.
+//------------------------------------------------------------
+	BegFunc ValidateForm Type( *Boolean )
+	  
+	    // Reset Errors
+	    ClearErrors()
+	    
+	    // If delete mode leave do not do any validation
+	    If Selection_type = "D"
+	       LeaveSR ( ErrorCount = 0 )
+	    Endif   
+  
+		// Check for nothiung being entered
+        If ( uxDept3.Text.Trim() = String.Empty ) 
+             errorprovider2.SetError( uxDept3, "Dept Must Be Entered" ) 
+             ErrorCount += 1 
+             uxDept3.Focus()
+        Endif     
+             
+		If ( uxAS400UsrPrf3.Text.Trim() = String.Empty )
+		      errorprovider2.SetError( uxAS400UsrPrf3, "AS400 User Profile Must Be Entered" )
+		      ErrorCount += 1
+		      uxAS400UsrPrf3.Focus()
+		Endif     
+		        
+		If ( uxIPUsrPrf3.Text.Trim() = String.Empty )
+		      errorprovider2.SetError( uxIPUsrPrf3, "IP User Profile Must Be Entered" )
+		      ErrorCount += 1 
+		      uxIPUsrPrf3.Focus()
+		Endif     
+		       
+		If ( uxAuthorityLevel3.Text.Trim() = String.Empty )
+              errorprovider2.SetError( uxAuthorityLevel3, "Authority Must Be Entered" ) 
+              ErrorCount += 1
+              uxAuthorityLevel3.Focus()
+        Endif      
+        
+        If    ErrorCount > 0
+              LeaveSR ( ErrorCount = 0 )
+        Endif      
+        
+	// Check for errors in opposite order of data entry
+	// to ensure the cursor ends up in the top-most error.
+	// 
+	// Check Authority level is in range 0-99
+		Exsr	ValidateAuthLevel
+	// Check IP User Profile exists
+		Exsr	ValidateIPUsrPrf
+	// Check AS/400 User Profile exists
+		Exsr	ValidateAS400UsrPrf
+	// Check entered department exists on IPDEPTS
+		Exsr	ValidateDept
+		
+	// Leave true if ErrorCount = 0, otherwise false.
+        LeaveSr ( ErrorCount = 0 )
+    EndFunc
+    
+//------------------------------------------------------------
+// Validate Authority is between 0-99
+//------------------------------------------------------------
+    BegSr ValidateAuthLevel
+    
+       	If uxAuthorityLevel3.Text.Trim() <> String.Empty
+
+			// convert the string to numeric for checkingkey
+			If %check( Digits, uxAuthorityLevel3.Text.Trim() ) <> *Zero
+				errorprovider2.SetError( uxAuthorityLevel3, "Non numeric data in Authority level" ) 
+				ErrorCount += 1 
+				uxAuthorityLevel3.Focus()
+			
+			Else
+				AuthLevel = Convert.ToDecimal( uxAuthorityLevel3.Text )
+			Endif
+		Endif
+	EndSr        
+//------------------------------------------------------------
+// Validate IP User Profile exists
+//------------------------------------------------------------
+    BegSr ValidateIPUsrPrf
+		If uxIPUsrPrf3.Text.Trim() <> String.Empty
+			// Set IP user to upper case
+			uxIPUsrPrf3.Text = uxIPUsrPrf3.Text.ToUpper().Trim()
+			
+			Chain IPUsers Key( uxIPUsrPrf3.Text )
+
+			If NOT IPUsers.IsFound
+				errorprovider2.SetError( uxIPUsrPrf3, "IP User not found" )
+				ErrorCount += 1 
+				uxIPUsrPrf3.Focus()
+			Endif
+		Endif
+	EndSr        
+//------------------------------------------------------------
+// Validate AS/400 User Profile exists
+//------------------------------------------------------------
+    BegSr ValidateAS400UsrPrf
+		If uxAS400UsrPrf3.Text.Trim() <> String.Empty
+			uxAS400UsrPrf3.Text = uxAS400UsrPrf3.Text.ToUpper()
+			Call '*LIBL/CHKOBJCL'  DB( AS400 )
+				DclParm Name( Obj ) CpyFrom( uxAS400UsrPrf3.Text.Trim() ) +
+					Len( 10 ) Type( *Char )
+				DclParm Name( ObjLib ) CpyFrom( '*LIBL' ) +
+					Len( 10 ) Type( *Char )
+				DclParm Name( ObjType ) CpyFrom( '*USRPRF' ) +
+					Len( 7 ) Type( *Char )
+				DclParm Name( Mbr ) CpyFrom( '*NONE' ) +
+					Len( 10 ) Type( *Char )
+				DclParm Name( AUT ) CpyFrom( '*NONE' ) +
+					Len( 9 ) Type( *Char )
+				DclParm Name( MsgId )
+				DclParm Name( Msg )
+				// If there is an error on the CHKOBJ
+				If MsgId <> ''
+					errorprovider2.SetError( uxAS400UsrPrf3, Msg ) 
+					ErrorCount += 1 
+					uxAS400UsrPrf3.Focus()
+				Endif
+		Endif
+	EndSr        
+//------------------------------------------------------------
+// Validate entered department exists on IPDEPTS
+//------------------------------------------------------------
+    BegSr ValidateDept
+		If uxDept3.Text.Trim() <> String.Empty
+
+			// convert the string to numeric for use as key
+			If %check( Digits, uxDept3.Text.Trim() ) <> *Zero
+				errorprovider2.SetError( uxDept3, "Non numeric data in Department" ) 
+				ErrorCount += 1 
+				uxDept3.Focus()
+			
+			Else
+				Dept# = Convert.ToDecimal( uxDept3.Text )
+				
+				Chain IPDEPTS Key( Dept# )
+				If NOT IPDEPTS.IsFound
+					errorprovider2.SetError( uxDept3, "Department Not Found" )
+					ErrorCount += 1 
+					uxDept3.Focus()
+				Endif
+			Endif
+		Endif
+	EndSr     
+
+   
+//------------------------------------------------------------
+// Clear Error
+//------------------------------------------------------------
+    BegSr ClearErrors
+        // Clear all errors.
+		ErrorCount = 0
+		errorprovider2.Clear()
+	EndSr        
+    
+   /endregion	  
+ 
+/region declare Events
+
+// Main
+    BegSr UserList2_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		// Clear & set Fields
+	    
+	    uxDept3.Text           = *Blanks
+	    uxAS400UsrPrf3.Text    = *Blanks	     
+	    uxIPUsrPrf3.Text       = *Blanks
+	    uxAuthorityLevel3.Text = *Blanks
+	     
+	    If Selection_Type <> "A"
+	       uxDept3.Text           = Caller_Dept2
+	       uxAS400UsrPrf3.Text    = Caller_UserPrf2
+	       uxIPUsrPrf3.Text       = Caller_IPUserPrf2 
+	       uxAuthorityLevel3.Text = Caller_Auth2
+	    Endif
+	    
+	    *this.Text = 'Add User'
+	    *this.uxApply.Text = "&Add"
+	    
+	    // If delete requested then disable text boxes
+		If Selection_type = "D"
+		   *this.Text = 'Delete User'
+		   uxDept3.Enabled = *False
+		   uxIPUsrPrf3.Enabled = *False
+		   uxAS400UsrPrf3.Enabled = *False
+		   uxAuthorityLevel3.Enabled = *False
+		   *this.uxApply.Text = "&Delete"
+		Endif
+		
+		// If Update requested then disable UserProfile boxes
+		If Selection_type = "U"
+		   *this.Text = 'Update User'
+		   *this.uxApply.Text = "&Update"
+		   uxAS400UsrPrf3.Enabled = *False
+		Endif
+		
+		// Loged in user cannot change his/her own profile 
+		If uxAs400UsrPrf3.Text = AS400.User.ToUpper()
+		   *this.uxApply.Enabled = *False
+		Endif   
+				
+	EndSr
+
+// Apply Changes
+ 	BegSr uxApply_Click Access(*Private) Event(*this.uxApply.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		SetMousePtr *Hourglass
+		
+		// Open Files
+		OpenData()
+		
+		
+		// Validate Form
+		
+		If (ValidateForm() )  
+				     
+		
+		// Set Fields
+		
+		If  Selection_Type = "A"
+		       uxAS400UsrPrf3.Text = uxAS400UsrPrf3.Text.Trim()
+		       Caller_UserPrf2   = uxAS400UsrPrf3.Text.Trim()
+		
+		   Try
+		       Caller_Dept2   = Convert.ToDecimal( uxDept3.Text )
+		    Catch type( System.Exception ) 
+		       Caller_Dept2 = 0
+		   EndTry
+		
+		Endif
+		
+		Chain DSUSRDA Key( Caller_UserPrf2, Caller_Dept2 ) 
+		
+		Try
+			USAUTH   = Convert.ToDecimal( uxAuthorityLevel3.Text )
+		 Catch type( System.Exception ) 
+		   	USAUTH = 0
+		EndTry
+		
+		Try
+		    USDEPT   = Convert.ToDecimal( uxDept3.Text )
+		 Catch type( System.Exception ) 
+		    USDEPT = 0
+		EndTry
+		
+		USUSPR   = uxAS400UsrPrf3.Text.ToUpper()
+		USIPPR   = uxIPUsrPrf3.Text.Trim()
+		USCHGU   = AS400.User.ToUpper()
+		USCHGD   = %TimeStamp 
+		
+		Select
+		
+		// Delete
+		  When DSUSRDA.IsFound *And Selection_type = "D" 
+		     MsgBox( "You are about to Delete " + Caller_UserPrf2 ) Buttons( *OKCANCEL ) Icon( *EXCLAMATION ) RtnCode( wRtnCode )
+		     
+		     If wRtnCode = 1
+		        Delete RDSUSRDA
+		       Else
+		        LeaveSR
+		     Endif
+		     		     
+		// Update     
+		  When DSUSRDA.IsFound *And Selection_type = "U" 
+		       Update RDSUSRDA Err( *EXTENDED ) 
+		       If %Error
+		           MsgBox( "User/Dept Already Exists" )
+		           LeaveSR
+		         Else
+		            MsgBox( "Record Updated Successfully" )
+		       Endif    
+		     
+		// Add     
+		  When Not DSUSRDA.IsFound *And Selection_type = "A" 
+		       Write RDSUSRDA
+		       MsgBox( "Record Updated Successfully" ) 
+		  
+		  // Add when User Already Exists    
+		  When DSUSRDA.IsFound *And Selection_type = "A" 
+		       MsgBox( "User " + %Trim(USUSPR) + " Already Exists") 
+		       LeaveSR
+		     
+		  Other     
+		     MsgBox( "Record not found" )
+		     LeaveSR
+		
+		EndSL
+		
+		// Completed 
+		Unload *This
+		
+		Endif
+				
+	EndSr
+ 
+// Cancel 	
+	BegSr uxCancel_Click Access(*Private) Event(*this.uxBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		Unload *This
+		
+	EndSr
+	
+  
+   /endregion	
+
+// Open Files	
+    BegSr OpenData 
+	// Open DB connection.
+		If Not AS400.IsOpen
+			Connect AS400
+		Endif
+	// Open Sales Reactive Replenishment User file
+        If NOT DSUSRDA.IsOpen
+			Open DSUSRDA
+		Endif
+	// Open Department file
+        If NOT IPDEPTS.IsOpen
+			Open IPDEPTS
+		Endif
+	// Open IP Users file
+        If NOT IPUSERS.IsOpen
+			Open IPUSERS
+		Endif
+		
+    EndSr
+	
+EndClass

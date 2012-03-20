@@ -1,0 +1,1024 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+
+BegClass Frm_Search Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/region Default Constructor and Windows Form Designer generated code
+	
+	
+	//Declare the Database
+	Dcldb			Name(AS400) dbname('TDST') 
+	
+	//Declare the Files
+	Dcldiskfile		Name(IPDEPTS) +
+					type(*Input) +
+					org(*indexed)+
+					File('*libl/IPDEPTS') +
+					db(AS400) +
+					ImpOpen(*No) 
+					
+	Dcldiskfile		Name(IPITHDR) +
+					type(*Input) +
+					org(*indexed)+
+					File('*libl/IPITHDR') +
+					db(AS400) +
+					ImpOpen(*No) 
+					
+	Dcldiskfile		Name(IPITHDRC) +
+					type(*Input) +
+					org(*indexed)+
+					File('*libl/IPITHDRC') +
+					RnmFmt(ITHDR, ITHDRC)  + 
+					db(AS400) +
+					ImpOpen(*No) 
+					
+	Dcldiskfile		Name(DSITHDR) +
+					type(*Update) +
+					org(*indexed)+
+					File('*libl/DSITHDR') +
+					Impopen(*No)		  +	
+					db(AS400) +
+					 
+					 
+	
+	DclFld Lst_Dept System.Windows.Forms.ListBox Access(*Private) WithEvents(*Yes)
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld Rdo_UPC System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld Rdo_Class System.Windows.Forms.RadioButton Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label7 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label9 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld Txt_MinDspQty System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld Grp_UPC System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld Txt_Style System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld Txt_Vendor System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld Txt_Class System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld Grp_Class System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld Btn_Search System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	DclFld BtnPos1 Type(Point) New(574, 105)
+	DclFld BtnPos2 Type(Point) New(539, 158)
+	DclFld BtnPos3 Type(Point) New(406, 105)
+	DclFld BtnPos4 Type(Point) New(406, 158)
+	DclFld Txt_UPC System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld Btn_Exit System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld GrpPos  Type(Point) New(406, 26)
+	DclFld Wrk_MinDspNum *Integer2
+	DclFld DeptChar Type(String)
+	DclFld Wrk_DeptCode *Integer2
+	DclFld Wrk_UPC Type(String)
+	DclFld Wrk_Class	*Integer2 
+	DclFld Wrk_Vendor	*Integer2
+	DclFld Wrk_Style	*Integer2
+	DclFld Wrk_Colour   *Integer2
+	DclFld Wrk_Size     *Integer2
+	DclFld QrySelect	*String
+	DclFld DGV_Item System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld groupBox2 System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld Btn_Reset System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld Grp_Search System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld Lbl_NoRecs System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld toolStripStatusLabel1 System.Windows.Forms.ToolStripStatusLabel Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld QryKey		*String
+	DclFld Btn_Apply System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld Error   *Integer2
+	DclFld Counter *Integer2
+	DclFld Dept System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Class System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Vendor System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Style System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Colour System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Size System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld UPC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Item_Desc System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld MinDistLot System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld MInDspQty System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld UpdateFlg System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld x       *Integer2
+	 
+	
+	 
+	 
+	
+	BegConstructor Access(*Public)
+		DclSrParm AS400       Type(ASNA.VisualRPG.Runtime.Database)
+		InitializeComponent()
+		*This.AS400 = AS400
+		
+		If Not IPDEPTS.IsOpen
+			Open IPDEPTS
+		EndIf
+		
+		If Not IPITHDR.IsOpen
+			Open IPITHDR
+		EndIf
+		
+		If Not IPITHDRC.IsOpen
+			Open IPITHDRC
+		EndIf
+		
+				
+	EndConstructor
+
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle3 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.Lst_Dept = *new System.Windows.Forms.ListBox()
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.label2 = *new System.Windows.Forms.Label()
+		*this.Txt_MinDspQty = *new System.Windows.Forms.TextBox()
+		*this.Grp_Search = *new System.Windows.Forms.GroupBox()
+		*this.Rdo_UPC = *new System.Windows.Forms.RadioButton()
+		*this.Rdo_Class = *new System.Windows.Forms.RadioButton()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.Txt_UPC = *new System.Windows.Forms.TextBox()
+		*this.Grp_UPC = *new System.Windows.Forms.GroupBox()
+		*this.Txt_Style = *new System.Windows.Forms.TextBox()
+		*this.Txt_Vendor = *new System.Windows.Forms.TextBox()
+		*this.Txt_Class = *new System.Windows.Forms.TextBox()
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.label9 = *new System.Windows.Forms.Label()
+		*this.Grp_Class = *new System.Windows.Forms.GroupBox()
+		*this.Btn_Search = *new System.Windows.Forms.Button()
+		*this.Btn_Exit = *new System.Windows.Forms.Button()
+		*this.DGV_Item = *new System.Windows.Forms.DataGridView()
+		*this.groupBox2 = *new System.Windows.Forms.GroupBox()
+		*this.Btn_Reset = *new System.Windows.Forms.Button()
+		*this.Lbl_NoRecs = *new System.Windows.Forms.Label()
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.toolStripStatusLabel1 = *new System.Windows.Forms.ToolStripStatusLabel()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.Btn_Apply = *new System.Windows.Forms.Button()
+		*this.Dept = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Class = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Vendor = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Style = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Colour = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Size = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.UPC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Item_Desc = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.MinDistLot = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.MInDspQty = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.UpdateFlg = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Grp_Search.SuspendLayout()
+		*this.Grp_UPC.SuspendLayout()
+		*this.Grp_Class.SuspendLayout()
+		(*this.DGV_Item *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.groupBox2.SuspendLayout()
+		*this.statusStrip1.SuspendLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//Lst_Dept
+		//
+		*this.Lst_Dept.FormattingEnabled = *True
+		*this.Lst_Dept.Location = *new System.Drawing.Point(124, 57)
+		*this.Lst_Dept.Name = "Lst_Dept"
+		*this.Lst_Dept.Size = *new System.Drawing.Size(252, 56)
+		*this.Lst_Dept.Sorted = *True
+		*this.Lst_Dept.TabIndex = 1
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Location = *new System.Drawing.Point(12, 54)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(62, 13)
+		*this.label1.TabIndex = 7
+		*this.label1.Text = "Department"
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(12, 142)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(80, 13)
+		*this.label2.TabIndex = 11
+		*this.label2.Text = "Min Display Qty"
+		//
+		//Txt_MinDspQty
+		//
+		*this.Txt_MinDspQty.AcceptsTab = *True
+		*this.Txt_MinDspQty.Location = *new System.Drawing.Point(112, 139)
+		*this.Txt_MinDspQty.Name = "Txt_MinDspQty"
+		*this.Txt_MinDspQty.Size = *new System.Drawing.Size(58, 20)
+		*this.Txt_MinDspQty.TabIndex = 2
+		//
+		//Grp_Search
+		//
+		*this.Grp_Search.Controls.Add(*this.label2)
+		*this.Grp_Search.Controls.Add(*this.label1)
+		*this.Grp_Search.Controls.Add(*this.Rdo_UPC)
+		*this.Grp_Search.Controls.Add(*this.Rdo_Class)
+		*this.Grp_Search.Controls.Add(*this.Txt_MinDspQty)
+		*this.Grp_Search.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.2, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.Grp_Search.Location = *new System.Drawing.Point(12, 26)
+		*this.Grp_Search.Name = "Grp_Search"
+		*this.Grp_Search.Size = *new System.Drawing.Size(379, 232)
+		*this.Grp_Search.TabIndex = 13
+		*this.Grp_Search.TabStop = *False
+		*this.Grp_Search.Text = "Search Options"
+		//
+		//Rdo_UPC
+		//
+		*this.Rdo_UPC.AutoSize = *True
+		*this.Rdo_UPC.Location = *new System.Drawing.Point(317, 195)
+		*this.Rdo_UPC.Name = "Rdo_UPC"
+		*this.Rdo_UPC.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.Rdo_UPC.Size = *new System.Drawing.Size(47, 17)
+		*this.Rdo_UPC.TabIndex = 4
+		*this.Rdo_UPC.TabStop = *True
+		*this.Rdo_UPC.Text = "UPC"
+		*this.Rdo_UPC.UseVisualStyleBackColor = *True
+		//
+		//Rdo_Class
+		//
+		*this.Rdo_Class.AutoSize = *True
+		*this.Rdo_Class.Location = *new System.Drawing.Point(257, 195)
+		*this.Rdo_Class.Name = "Rdo_Class"
+		*this.Rdo_Class.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+		*this.Rdo_Class.Size = *new System.Drawing.Size(45, 17)
+		*this.Rdo_Class.TabIndex = 3
+		*this.Rdo_Class.TabStop = *True
+		*this.Rdo_Class.Text = "Item"
+		*this.Rdo_Class.UseVisualStyleBackColor = *True
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(17, 30)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(29, 13)
+		*this.label3.TabIndex = 0
+		*this.label3.Text = "UPC"
+		//
+		//Txt_UPC
+		//
+		*this.Txt_UPC.AcceptsTab = *True
+		*this.Txt_UPC.Location = *new System.Drawing.Point(147, 27)
+		*this.Txt_UPC.MaxLength = 12
+		*this.Txt_UPC.Name = "Txt_UPC"
+		*this.Txt_UPC.Size = *new System.Drawing.Size(81, 20)
+		*this.Txt_UPC.TabIndex = 5
+		//
+		//Grp_UPC
+		//
+		*this.Grp_UPC.Controls.Add(*this.Txt_UPC)
+		*this.Grp_UPC.Controls.Add(*this.label3)
+		*this.Grp_UPC.Location = *new System.Drawing.Point(406, 26)
+		*this.Grp_UPC.Name = "Grp_UPC"
+		*this.Grp_UPC.Size = *new System.Drawing.Size(242, 68)
+		*this.Grp_UPC.TabIndex = 14
+		*this.Grp_UPC.TabStop = *False
+		//
+		//Txt_Style
+		//
+		*this.Txt_Style.AcceptsTab = *True
+		*this.Txt_Style.Location = *new System.Drawing.Point(147, 84)
+		*this.Txt_Style.MaxLength = 4
+		*this.Txt_Style.Name = "Txt_Style"
+		*this.Txt_Style.Size = *new System.Drawing.Size(45, 20)
+		*this.Txt_Style.TabIndex = 8
+		//
+		//Txt_Vendor
+		//
+		*this.Txt_Vendor.AcceptsTab = *True
+		*this.Txt_Vendor.Location = *new System.Drawing.Point(147, 52)
+		*this.Txt_Vendor.MaxLength = 5
+		*this.Txt_Vendor.Name = "Txt_Vendor"
+		*this.Txt_Vendor.Size = *new System.Drawing.Size(45, 20)
+		*this.Txt_Vendor.TabIndex = 7
+		//
+		//Txt_Class
+		//
+		*this.Txt_Class.AcceptsTab = *True
+		*this.Txt_Class.Location = *new System.Drawing.Point(147, 21)
+		*this.Txt_Class.MaxLength = 4
+		*this.Txt_Class.Name = "Txt_Class"
+		*this.Txt_Class.Size = *new System.Drawing.Size(45, 20)
+		*this.Txt_Class.TabIndex = 6
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Location = *new System.Drawing.Point(17, 86)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(30, 13)
+		*this.label7.TabIndex = 17
+		*this.label7.Text = "Style"
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(17, 55)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(41, 13)
+		*this.label8.TabIndex = 16
+		*this.label8.Text = "Vendor"
+		//
+		//label9
+		//
+		*this.label9.AutoSize = *True
+		*this.label9.Location = *new System.Drawing.Point(17, 24)
+		*this.label9.Name = "label9"
+		*this.label9.Size = *new System.Drawing.Size(32, 13)
+		*this.label9.TabIndex = 15
+		*this.label9.Text = "Class"
+		//
+		//Grp_Class
+		//
+		*this.Grp_Class.Controls.Add(*this.label8)
+		*this.Grp_Class.Controls.Add(*this.Txt_Style)
+		*this.Grp_Class.Controls.Add(*this.label9)
+		*this.Grp_Class.Controls.Add(*this.Txt_Vendor)
+		*this.Grp_Class.Controls.Add(*this.label7)
+		*this.Grp_Class.Controls.Add(*this.Txt_Class)
+		*this.Grp_Class.Location = *new System.Drawing.Point(406, 102)
+		*this.Grp_Class.Name = "Grp_Class"
+		*this.Grp_Class.Size = *new System.Drawing.Size(207, 120)
+		*this.Grp_Class.TabIndex = 21
+		*this.Grp_Class.TabStop = *False
+		//
+		//Btn_Search
+		//
+		*this.Btn_Search.Location = *new System.Drawing.Point(594, 234)
+		*this.Btn_Search.Name = "Btn_Search"
+		*this.Btn_Search.Size = *new System.Drawing.Size(75, 23)
+		*this.Btn_Search.TabIndex = 9
+		*this.Btn_Search.Text = "Search"
+		*this.Btn_Search.UseVisualStyleBackColor = *True
+		//
+		//Btn_Exit
+		//
+		*this.Btn_Exit.Location = *new System.Drawing.Point(1197, 905)
+		*this.Btn_Exit.Name = "Btn_Exit"
+		*this.Btn_Exit.Size = *new System.Drawing.Size(75, 23)
+		*this.Btn_Exit.TabIndex = 22
+		*this.Btn_Exit.Text = "Exit"
+		*this.Btn_Exit.UseVisualStyleBackColor = *True
+		//
+		//DGV_Item
+		//
+		*this.DGV_Item.AllowUserToAddRows = *False
+		*this.DGV_Item.AllowUserToDeleteRows = *False
+		*this.DGV_Item.AllowUserToOrderColumns = *True
+		*this.DGV_Item.AllowUserToResizeColumns = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((255 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		dataGridViewCellStyle1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+		dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption
+		dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False
+		*this.DGV_Item.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.DGV_Item.Anchor = ((((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Bottom) *BitOr System.Windows.Forms.AnchorStyles.Left) *BitOr System.Windows.Forms.AnchorStyles.Right) *As System.Windows.Forms.AnchorStyles)
+		*this.DGV_Item.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
+		*this.DGV_Item.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+		dataGridViewCellStyle2.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+		dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True
+		*this.DGV_Item.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2
+		*this.DGV_Item.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.DGV_Item.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Dept, *this.Class, *this.Vendor, *this.Style, *this.Colour, *this.Size, *this.UPC, *this.Item_Desc, *this.MinDistLot, *this.MInDspQty, *this.UpdateFlg})
+		*this.DGV_Item.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+		*this.DGV_Item.GridColor = System.Drawing.SystemColors.ControlLight
+		*this.DGV_Item.Location = *new System.Drawing.Point(15, 19)
+		*this.DGV_Item.Name = "DGV_Item"
+		dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+		dataGridViewCellStyle3.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+		dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True
+		*this.DGV_Item.RowHeadersDefaultCellStyle = dataGridViewCellStyle3
+		*this.DGV_Item.RowHeadersVisible = *False
+		*this.DGV_Item.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.DGV_Item.Size = *new System.Drawing.Size(1225, 592)
+		*this.DGV_Item.TabIndex = 0
+		//
+		//groupBox2
+		//
+		*this.groupBox2.Controls.Add(*this.DGV_Item)
+		*this.groupBox2.Location = *new System.Drawing.Point(12, 264)
+		*this.groupBox2.Margin = *new System.Windows.Forms.Padding(0)
+		*this.groupBox2.Name = "groupBox2"
+		*this.groupBox2.Size = *new System.Drawing.Size(1260, 629)
+		*this.groupBox2.TabIndex = 6
+		*this.groupBox2.TabStop = *False
+		//
+		//Btn_Reset
+		//
+		*this.Btn_Reset.Location = *new System.Drawing.Point(406, 234)
+		*this.Btn_Reset.Name = "Btn_Reset"
+		*this.Btn_Reset.Size = *new System.Drawing.Size(75, 23)
+		*this.Btn_Reset.TabIndex = 23
+		*this.Btn_Reset.Text = "Reset"
+		*this.Btn_Reset.UseVisualStyleBackColor = *True
+		//
+		//Lbl_NoRecs
+		//
+		*this.Lbl_NoRecs.AutoSize = *True
+		*this.Lbl_NoRecs.Font = *new System.Drawing.Font("Microsoft Sans Serif", 14, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.Lbl_NoRecs.ForeColor = System.Drawing.Color.DarkRed
+		*this.Lbl_NoRecs.Location = *new System.Drawing.Point(731, 102)
+		*this.Lbl_NoRecs.Name = "Lbl_NoRecs"
+		*this.Lbl_NoRecs.Size = *new System.Drawing.Size(442, 24)
+		*this.Lbl_NoRecs.TabIndex = 24
+		*this.Lbl_NoRecs.Text = "No Records Found for Search Criteria Entered"
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Items.AddRange(*new System.Windows.Forms.ToolStripItem[] {*this.toolStripStatusLabel1})
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 951)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Size = *new System.Drawing.Size(1284, 22)
+		*this.statusStrip1.TabIndex = 25
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//toolStripStatusLabel1
+		//
+		*this.toolStripStatusLabel1.Name = "toolStripStatusLabel1"
+		*this.toolStripStatusLabel1.Size = *new System.Drawing.Size(64, 17)
+		*this.toolStripStatusLabel1.Text = "Frm_Search"
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//Btn_Apply
+		//
+		*this.Btn_Apply.Location = *new System.Drawing.Point(1110, 905)
+		*this.Btn_Apply.Name = "Btn_Apply"
+		*this.Btn_Apply.Size = *new System.Drawing.Size(75, 23)
+		*this.Btn_Apply.TabIndex = 26
+		*this.Btn_Apply.Text = "Apply"
+		*this.Btn_Apply.UseVisualStyleBackColor = *True
+		//
+		//Dept
+		//
+		*this.Dept.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.Dept.HeaderText = "Department"
+		*this.Dept.Name = "Dept"
+		*this.Dept.ReadOnly = *True
+		//
+		//Class
+		//
+		*this.Class.HeaderText = "Class"
+		*this.Class.Name = "Class"
+		*this.Class.ReadOnly = *True
+		*this.Class.Width = 62
+		//
+		//Vendor
+		//
+		*this.Vendor.HeaderText = "Vendor"
+		*this.Vendor.Name = "Vendor"
+		*this.Vendor.ReadOnly = *True
+		*this.Vendor.Width = 71
+		//
+		//Style
+		//
+		*this.Style.HeaderText = "Style"
+		*this.Style.Name = "Style"
+		*this.Style.ReadOnly = *True
+		*this.Style.Width = 58
+		//
+		//Colour
+		//
+		*this.Colour.HeaderText = "Colour"
+		*this.Colour.Name = "Colour"
+		*this.Colour.ReadOnly = *True
+		*this.Colour.Width = 68
+		//
+		//Size
+		//
+		*this.Size.HeaderText = "Size"
+		*this.Size.Name = "Size"
+		*this.Size.ReadOnly = *True
+		*this.Size.Width = 56
+		//
+		//UPC
+		//
+		*this.UPC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.UPC.HeaderText = "UPC"
+		*this.UPC.MinimumWidth = 15
+		*this.UPC.Name = "UPC"
+		*this.UPC.ReadOnly = *True
+		*this.UPC.Width = 150
+		//
+		//Item_Desc
+		//
+		*this.Item_Desc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.Item_Desc.HeaderText = "Item_Desc"
+		*this.Item_Desc.Name = "Item_Desc"
+		*this.Item_Desc.ReadOnly = *True
+		*this.Item_Desc.Width = 250
+		//
+		//MinDistLot
+		//
+		*this.MinDistLot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.MinDistLot.HeaderText = "Minimum Distribution Lot"
+		*this.MinDistLot.Name = "MinDistLot"
+		*this.MinDistLot.ReadOnly = *True
+		//
+		//MInDspQty
+		//
+		*this.MInDspQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.MInDspQty.HeaderText = "Min Display Qty"
+		*this.MInDspQty.Name = "MInDspQty"
+		*this.MInDspQty.Width = 75
+		//
+		//UpdateFlg
+		//
+		*this.UpdateFlg.HeaderText = "UpdateFlg"
+		*this.UpdateFlg.Name = "UpdateFlg"
+		*this.UpdateFlg.Visible = *False
+		*this.UpdateFlg.Width = 89
+		//
+		//Frm_Search
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(1284, 973)
+		*this.Controls.Add(*this.Btn_Apply)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.Lbl_NoRecs)
+		*this.Controls.Add(*this.Btn_Reset)
+		*this.Controls.Add(*this.Btn_Exit)
+		*this.Controls.Add(*this.Btn_Search)
+		*this.Controls.Add(*this.Lst_Dept)
+		*this.Controls.Add(*this.groupBox2)
+		*this.Controls.Add(*this.Grp_Search)
+		*this.Controls.Add(*this.Grp_UPC)
+		*this.Controls.Add(*this.Grp_Class)
+		*this.Name = "Frm_Search"
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Frm_search"
+		*this.WindowState = System.Windows.Forms.FormWindowState.Maximized
+		*this.Grp_Search.ResumeLayout(*False)
+		*this.Grp_Search.PerformLayout()
+		*this.Grp_UPC.ResumeLayout(*False)
+		*this.Grp_UPC.PerformLayout()
+		*this.Grp_Class.ResumeLayout(*False)
+		*this.Grp_Class.PerformLayout()
+		(*this.DGV_Item *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.groupBox2.ResumeLayout(*False)
+		*this.statusStrip1.ResumeLayout(*False)
+		*this.statusStrip1.PerformLayout()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+	/endregion
+	
+	BegSr Form1_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		//Setup initial screen				        
+        Grp_Class.Visible = *False
+        Btn_Search.Location = BtnPos1
+        Btn_Reset.Location = BtnPos3
+        Rdo_Class.Checked = *True
+        Lbl_NoRecs.Visible = *False
+        Btn_Apply.Enabled = *False
+        
+        //Build the Depatrment list        
+        Exsr Build_Dept_List        
+    EndSr
+	
+	BegSr Build_Dept_List
+	
+		  DclFld Department Type(String)
+		
+		  SetLL IPDEPTS *LoVal
+		  DoUntil IPDEPTS.IsEof 
+			Read IPDEPTS
+						
+		    	If not IPDEPTS.IsEof
+					Department = %Trim(DDPT + '  ' + DNAM)
+					Lst_Dept.Items.Add(Department)
+				EndIf
+		  EndDo
+	EndSr
+	
+	
+	
+			
+	BegSr Rdo_Class_CheckedChanged Access(*Private) Event(*this.Rdo_Class.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Rdo_Class.Checked = *True
+			Grp_UPC.Visible = *False
+			Grp_Class.Visible = *True
+			Grp_Class.Location = GrpPos
+			Btn_Search.Location = BtnPos2
+			Btn_Reset.Location = BtnPos4
+			ErrorProvider1.SetError(Txt_UPC, String.Empty)
+	    Endif
+		
+	EndSr
+	
+	BegSr Rdo_UPC_CheckedChanged Access(*Private) Event(*this.Rdo_UPC.CheckedChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If Rdo_UPC.Checked = *True
+			Grp_UPC.Visible = *True
+			Grp_Class.Visible = *False
+			Btn_Search.Location = BtnPos1
+			Btn_Reset.Location = BtnPos3
+			Txt_Class.Text = *Blanks
+			Wrk_Class = 0
+			Txt_Vendor.Text = *Blanks
+			Wrk_Vendor = 0
+			Txt_Style.Text = *Blanks
+			Wrk_Style = 0
+			QrySelect = *Blanks
+			ErrorProvider1.SetError(Txt_Class, String.Empty)
+			ErrorProvider1.SetError(Txt_Vendor, String.Empty)
+			ErrorProvider1.SetError(Txt_Style, String.Empty)
+		Endif
+        
+	EndSr
+	
+	
+	
+		
+	BegSr Btn_Search_Click Access(*Private) Event(*this.Btn_Search.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+			
+			
+			
+		ExSr Class_ReadSR
+		
+		
+		If Error = 0 and QrySelect <> *Blanks
+		SetMousePtr *HOURGLASS
+		Btn_Search.Enabled = *False
+		Exsr Load_GridSR
+		Endif	
+		
+	EndSr
+	
+		
+	BegSr	Class_ReadSR
+			
+			Error = 0	
+			ErrorProvider1.SetError(Txt_MinDspQty, String.Empty)
+			ErrorProvider1.SetError(Txt_Class, String.Empty)
+			ErrorProvider1.SetError(Txt_Vendor, String.Empty)
+			ErrorProvider1.SetError(Txt_Style, String.Empty)
+			ErrorProvider1.SetError(Txt_UPC, String.Empty)
+			Rdo_UPC.Enabled = *True			
+			
+			
+			
+			//Department		
+			If Lst_Dept.SelectedItem <> *Nothing and Lst_Dept.SelectedItem.ToString() <> ' '
+				DeptChar = %Subst(Lst_Dept.SelectedItem.ToString(), 1, 3) 
+				Wrk_DeptCode = Int32.Parse(DeptChar)
+				If Wrk_DeptCode <> 0
+					QrySelect  = ' DIDPT = ' + Wrk_DeptCode 
+				Endif
+			Endif
+			
+			//Minimum Display Quantity
+			If Txt_MinDspQty.Text <> String.Empty and Txt_MinDspQty <> *Nothing	
+				Try
+  					Wrk_MinDspNum = Int32.Parse(Txt_MinDspQty.Text)
+				Catch Err Exception
+					errorProvider1.SetError(Txt_MinDspQty, "Enter a valid number")
+					Error +=1
+					Rdo_UPC.Enabled = *False
+					Btn_Search.Enabled = *False
+				EndTry
+										
+			If QrySelect <> String.Empty and QrySelect <> *Nothing
+				QrySelect += '  *AND'
+			Endif
+			QrySelect  += ' DMDQT = ' + Wrk_MinDspNum 
+			Endif
+			
+			//UPC
+			If Txt_UPC.Text <> String.Empty and Txt_UPC.Text <> *Nothing
+				Try
+  					Wrk_UPC	= Int64.Parse(Txt_UPC.Text)
+				Catch Err Exception
+					errorProvider1.SetError(Txt_UPC, "Enter a valid number")
+					Error +=1
+					Btn_Search.Enabled = *False
+					Rdo_Class.Enabled = *False					
+			EndTry
+				
+				 
+				Wrk_UPC = %Trim(Txt_UPC.Text)			
+				
+				
+				Chain IPITHDRC Key(Wrk_UPC)
+				If %Found
+					Wrk_Class	= ICLS
+					Wrk_Vendor	= IVEN
+					Wrk_Style	= ISTY
+					If QrySelect <> String.Empty and QrySelect <> *Nothing
+					QrySelect += '  *AND'
+					Endif
+					QrySelect  += ' DICLS = ' + Wrk_Class + '  *AND '
+					QrySelect  += ' DIVEN = ' + Wrk_Vendor + '  *AND '
+					QrySelect  += ' DISTY = ' + Wrk_Style
+					
+					errorProvider1.SetError(Txt_UPC, String.Empty)
+					Error = 0
+					
+				 
+				 Else
+					errorProvider1.SetError(Txt_UPC, "UPC not Valid")
+					Error +=1
+					Txt_UPC.Text = *Blanks
+					Wrk_UPC = 0
+				 
+				Endif
+			Endif
+	
+			
+			//Class
+			If Txt_Class.Text <> String.Empty and Txt_Class.Text <> *Nothing
+				Try
+  					Wrk_Class	= Int32.Parse(Txt_Class.Text)
+				Catch Err Exception
+					errorProvider1.SetError(Txt_Class, "Enter a valid number")
+					Error +=1
+					Rdo_UPC.Enabled = *False
+					Btn_Search.Enabled = *False
+				EndTry
+							
+				If QrySelect <> String.Empty and QrySelect <> *Nothing
+				QrySelect += '  *AND'
+				Endif
+				QrySelect  += ' DICLS = ' + Wrk_Class 
+			Endif
+			
+			//Vendor
+			If	Txt_Vendor.Text <> String.Empty and Txt_Vendor.Text <> *Nothing
+				Try
+  					Wrk_Vendor	= Int32.Parse(Txt_Vendor.Text)
+				Catch Err Exception
+					errorProvider1.SetError(Txt_Vendor, "Enter a valid number")
+					Error +=1
+					Rdo_UPC.Enabled = *False
+					Btn_Search.Enabled = *False
+				EndTry
+				
+				If QrySelect <> String.Empty and QrySelect <> *Nothing
+				QrySelect += '  *AND'
+				Endif
+				QrySelect  += ' DIVEN = ' + Wrk_Vendor 
+			Endif
+			
+			//Style
+			If	Txt_Style.Text <> String.Empty and Txt_Style.Text <> *Nothing
+				Try
+  					Wrk_Style	= Int32.Parse(Txt_Style.Text)
+				Catch Err Exception
+					errorProvider1.SetError(Txt_Style, "Enter a valid number")
+					Error +=1
+					Rdo_UPC.Enabled = *False
+					Btn_Search.Enabled = *False
+				EndTry
+				
+				If QrySelect <> String.Empty and QrySelect <> *Nothing
+				QrySelect += '  *AND'
+				Endif
+				QrySelect  += ' DISTY = ' + Wrk_Style 
+			Endif
+		
+	EndSr
+	
+		
+	BegSr	Load_GridSR
+	
+			DclFld DGV_Row         Type(DataGridViewRow)
+			DclFld DGV_ButtonCell  Type(DataGridViewButtonCell)
+			DclFld DGV_TextBoxCell Type(DataGridViewTextBoxCell)
+			
+			If Not DSITHDR.IsOpen
+				DSITHDR.QrySelect = QrySelect
+				Open DSITHDR
+			EndIf
+			
+			
+			DoUntil DSITHDR.IsEof 
+				Read	DSITHDR
+					If Not DSITHDR.IsEof
+					
+						Chain	IPITHDR Key(DICLS, DIVEN, DISTY, DICLR, DISIZ)
+						DGV_Row = *New DataGridViewRow()
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row (Department).				
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (DIDPT)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row (Class).	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (DICLS)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row (Vendor).
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (DIVEN)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row (tyle).	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (DISTY)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row (Size).	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (DISIZ)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row (Colour).
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (DICLR)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = %Trim(IUPD)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = %Trim(IDES)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (IMLT)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = (DMDQT)
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+				
+				//Instance a DataGridViewCell. Add a value and add the cell to the Row.	
+				DGV_TextBoxCell = *New DataGridViewTextBoxCell()
+				DGV_TextBoxCell.Value = ' '
+				DGV_Row.Cells.Add(DGV_TextBoxCell)
+						
+												
+				//Add the Row to the Grid
+				DGV_Item.Rows.Add(DGV_Row)	
+				
+				Endif
+				
+				If DGV_Row = *Nothing
+					Lbl_NoRecs.Visible = *True
+				Else
+					Btn_Apply.Enabled = *True
+				Endif
+					
+			Enddo
+			
+			Close DSITHDR
+	
+	//Check sto see if any cell within the grid has changed and executes subroutine 		
+		AddHandler SourceObject(DGV_Item) SourceEvent(CellValueChanged) HandlerSR(DGV_Item_CellValueChanged)
+
+	EndSr
+	
+		
+	BegSr Btn_Reset_Click Access(*Private) Event(*this.Btn_Reset.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		Lbl_NoRecs.Visible = *False
+		Lst_Dept.ClearSelected()
+		DeptChar = *Blanks
+		Wrk_DeptCode = 0
+		Txt_MinDspQty.Text = *Blanks
+		Wrk_MinDspNum = 0
+		Txt_Class.Text = *Blanks
+		Wrk_Class = 0
+		Txt_Vendor.Text = *Blanks
+		Wrk_Vendor = 0
+		Txt_Style.Text = *Blanks
+		Wrk_Style = 0
+		Txt_UPC.Text = *Blanks
+		Wrk_UPC = 0
+		DGV_Item.rows.Clear()
+		Btn_Search.Enabled = *True
+		QrySelect = *Blanks
+		Error = 0	
+		ErrorProvider1.SetError(Txt_MinDspQty, String.Empty)
+		ErrorProvider1.SetError(Txt_Class, String.Empty)
+		ErrorProvider1.SetError(Txt_Vendor, String.Empty)
+		ErrorProvider1.SetError(Txt_Style, String.Empty)
+		ErrorProvider1.SetError(Txt_UPC, String.Empty)
+		Btn_Apply.Enabled = *False
+		Rdo_UPC.Enabled = *True
+		Rdo_Class.Enabled = *True
+		
+	EndSr
+	
+	// Cell values changed process
+	BegSr DGV_Item_CellValueChanged Access(*Private) 
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		//Declare local work variables
+		DclFld Conv *Integer2
+				
+			DGV_Item.Item[e.ColumnIndex, e.RowIndex].ErrorText = String.Empty
+			Btn_Apply.Enabled = *True
+				
+		
+		//Validate Minimum Display Quantity entered
+			
+				
+				Try
+				Conv = System.Convert.ToInt32(DGV_Item.Item['MinDspQty' , e.RowIndex].Value) 
+				Catch Err Exception
+					DGV_Item.Item['MinDspQty', e.RowIndex].ErrorText =  "Please Enter a valid Number" 
+					Btn_Apply.Enabled = *False
+				EndTry
+				DGV_Item['UpdateFlg' , e.RowIndex].Value = 'Y'
+	EndSr
+	
+	
+	BegSr Btn_Apply_Click Access(*Private) Event(*this.Btn_Apply.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		SetMousePtr *HOURGLASS
+		Open DSITHDR
+	//Read through Grid and Update records to DB File
+	Counter = DGV_Item.RowCount - 1
+		For Index(x = 0) to(Counter)
+			If DGV_Item.Item['UpdateFlg' , x].Value.ToString() = 'Y' 	
+				//Convert to numerics
+				Wrk_Class     = System.Convert.ToInt32(DGV_Item.Item['Class'     , x].Value) 
+				Wrk_Vendor    = System.Convert.ToInt32(DGV_Item.Item['Vendor'    , x].Value)
+				Wrk_Style     = System.Convert.ToInt32(DGV_Item.Item['Style'     , x].Value)
+				Wrk_Colour    = System.Convert.ToInt32(DGV_Item.Item['Colour'    , x].Value)
+				Wrk_Size      = System.Convert.ToInt32(DGV_Item.Item['Size'      , x].Value)
+				Wrk_MinDspNum = System.Convert.ToInt32(DGV_Item.Item['MinDspQty' , x].Value)
+											
+				Chain DSITHDR Key(Wrk_Class, Wrk_Vendor, Wrk_Style, Wrk_Colour, Wrk_Size)
+					If	DSITHDR.IsFound
+						DMDQT	=	Wrk_MinDspNum
+						Update DSITHDR
+					Endif
+			Endif
+		EndFor
+		
+		Close DSITHDR
+		Unload *This
+	EndSr
+	
+	
+	
+	BegSr Btn_Exit_Click Access(*Private) Event(*this.Btn_Exit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		Unload *This
+	EndSr
+	
+		
+EndClass
+
+
+

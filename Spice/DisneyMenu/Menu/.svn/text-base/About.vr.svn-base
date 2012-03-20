@@ -1,0 +1,150 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Reflection
+Using System.Text
+Using System.Windows.Forms
+
+DclNameSpace Disney.Menu
+
+BegClass About Extends(System.Windows.Forms.Form) Access(*Internal)
+
+	/region Default Constructor and Windows Form Designer generated code
+	
+	DclFld label1 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld labelVersion System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld buttonOK System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld pictureBox System.Windows.Forms.PictureBox Access(*Private) WithEvents(*Yes)
+	DclFld label2 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	
+	BegConstructor Access(*Public)
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent()
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	EndConstructor
+
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		DclFld resources System.ComponentModel.ComponentResourceManager New(*typeof(About))
+		*this.label1 = *new System.Windows.Forms.Label()
+		*this.labelVersion = *new System.Windows.Forms.Label()
+		*this.buttonOK = *new System.Windows.Forms.Button()
+		*this.pictureBox = *new System.Windows.Forms.PictureBox()
+		*this.label2 = *new System.Windows.Forms.Label()
+		(*this.pictureBox *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//label1
+		//
+		*this.label1.AutoSize = *True
+		*this.label1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 15.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label1.Location = *new System.Drawing.Point(12, 9)
+		*this.label1.Name = "label1"
+		*this.label1.Size = *new System.Drawing.Size(217, 25)
+		*this.label1.TabIndex = 0
+		*this.label1.Text = "Disney Menu Version"
+		//
+		//labelVersion
+		//
+		*this.labelVersion.AutoSize = *True
+		*this.labelVersion.Font = *new System.Drawing.Font("Microsoft Sans Serif", 14.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.labelVersion.Location = *new System.Drawing.Point(284, 10)
+		*this.labelVersion.Name = "labelVersion"
+		*this.labelVersion.Size = *new System.Drawing.Size(75, 24)
+		*this.labelVersion.TabIndex = 1
+		*this.labelVersion.Text = "Version"
+		//
+		//buttonOK
+		//
+		*this.buttonOK.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.buttonOK.Location = *new System.Drawing.Point(323, 228)
+		*this.buttonOK.Name = "buttonOK"
+		*this.buttonOK.Size = *new System.Drawing.Size(66, 26)
+		*this.buttonOK.TabIndex = 2
+		*this.buttonOK.Text = "Ok"
+		*this.buttonOK.UseVisualStyleBackColor = *True
+		//
+		//pictureBox
+		//
+		*this.pictureBox.Image = (resources.GetObject("pictureBox.Image") *As System.Drawing.Image)
+		*this.pictureBox.Location = *new System.Drawing.Point(17, 58)
+		*this.pictureBox.Name = "pictureBox"
+		*this.pictureBox.Size = *new System.Drawing.Size(158, 165)
+		*this.pictureBox.TabIndex = 3
+		*this.pictureBox.TabStop = *False
+		//
+		//label2
+		//
+		*this.label2.AutoSize = *True
+		*this.label2.Location = *new System.Drawing.Point(14, 241)
+		*this.label2.Name = "label2"
+		*this.label2.Size = *new System.Drawing.Size(140, 13)
+		*this.label2.TabIndex = 4
+		*this.label2.Text = "DisneyMenu written for TDS"
+		//
+		//About
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(459, 263)
+		*this.Controls.Add(*this.label2)
+		*this.Controls.Add(*this.pictureBox)
+		*this.Controls.Add(*this.buttonOK)
+		*this.Controls.Add(*this.labelVersion)
+		*this.Controls.Add(*this.label1)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+		*this.MaximizeBox = *False
+		*this.MinimizeBox = *False
+		*this.Name = "About"
+		*this.ShowIcon = *False
+		*this.ShowInTaskbar = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "About"
+		(*this.pictureBox *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+
+	/endregion
+	
+	BegSr About_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld   AssemblyCurrent Type(Assembly)
+		DclArray AssemblyAttr    Type(*Object) Rank(1)
+		
+		DclFld   Version         Type(*String)
+		DclFld   AssemblyType    Type(*Object)
+		
+		labelVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+	EndSr
+
+	BegSr buttonOK_Click Access(*Private) Event(*this.buttonOK.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		Unload *this
+	EndSr
+EndClass

@@ -1,0 +1,225 @@
+// ===============================================
+// Joseph Urbina
+// 1st July 2009
+// IPSTRTBcls	
+// Data Access Layer - Store Group Selection table
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+Using System.Data
+Using System.Collections
+Using System.IO
+
+BegClass IPSTRTBcls Access(*Public)
+		
+	DclFld DSCNTAPcls Type(DSCNTAPcls)
+	DclFld ds         Type(DataSet)
+	DclFld dt	      Type(DataTable)
+	DclFld dcStores   Type(DataColumn) 
+	DclFld drStores   Type(DataRow)
+	DclFld User_Key   Type(String)
+	DclFld LibName    Type(String)
+	DclFld Market     Type(String)  
+		
+	DclArray Name(StoresArray) Dim(999) Type(*Char) Len(1) Inz(' ') 
+	
+	DclDs	     Name(Str)
+		DclDsFld Name(Str1) Type(*Char) Len(1) Dim(999)
+	
+	DclDB Name(PgmDB) DbName("TDST")	
+	DclDiskFile Name(IPSTRTB)  Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) 
+		
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB  Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Market Type(String)
+				
+		*this.PgmDB  = PgmDB
+		*This.Market = Market
+		
+		If DSCNTAPcls = *Nothing
+		   DSCNTAPcls = *New DSCNTAPcls(PgmDB) 
+	    Endif
+	    
+		DSCNTAPcls.GetCountryCode(Market)
+		LibName = DSCNTAPcls.MrchLibName + '/' + 'IPSTRTB'
+				
+	EndConstructor
+	
+	//Properties
+	BegProp Record_Key Type(String) Access(*Public)
+		BegGet
+			LeaveSR SKEY
+		EndGet
+	EndProp
+	
+	BegProp Store_Selection_Array Type(*Char) Len(999) Access(*Public)
+		BegGet
+			LeaveSR SARR
+		EndGet
+	EndProp
+		
+	// Methods
+	BegFunc Check_Record_Key Type(*Boolean) Access(*Public)
+		DclSrParm Record_Key Type(String)
+		
+		If Not IPSTRTB.IsOpen
+			Open IPSTRTB FilePath(LibName)
+		EndIf
+		
+		Chain From(IPSTRTB) Key(Record_key) Access(*NoLock)
+		If %Found
+		    Close IPSTRTB
+			LeaveSR *Off
+		Else
+			Close IPSTRTB
+			LeaveSR *On
+		EndIf
+	EndFunc
+	
+	//Creates a DataSet/DataTable accessed by Record Key.
+	BegFunc Get_Stores_By_Record_Key Type(DataTable) Access(*Public)
+		DclSrParm Record_Key	     Type(String)
+		
+		DclFld dtStores	 Type( DataTable ) New()
+		DclFld RowIndex  Type(*Integer2)		
+																				
+		If Not IPSTRTB.IsOpen
+			Open IPSTRTB FilePath(LibName)
+		EndIf
+				
+		//Create Store Number Column
+		dcStores = *New DataColumn( 'clmStore' )
+		dcStores.DataType = System.Type.GetType("System.Int32")
+		dcStores.ColumnName = "clmStore"
+		dcStores.Caption = "Store"
+		dtStores.Columns.Add(dcStores)
+				
+										
+		//Chain to IPSTRTB
+		Chain From(IPSTRTB) Key(Record_Key) Access(*NoLock)
+					If %Found 
+						Str = SARR
+						StoresArray = Str1
+						Do FromVal(0) Toval(998) Index(RowIndex)
+							If StoresArray(RowIndex) = '1'
+								drStores = dtStores.NewRow()
+								drStores.Item[0] = RowIndex	+ 1 //SARR is a field of length 999 starting at 1. The array starts at 0
+								dtStores.Rows.Add(drStores)
+						    Endif
+						EndDo							
+					Endif
+					
+		Close IPSTRTB
+		LeaveSR dtStores
+	EndFunc
+	
+	//Creates a DataSet/DataTable for all User Store Groups
+	BegFunc GetStoreGroupDataSet Type(DataTable) Access(*Public)
+			
+		
+		DclFld dc		Type(DataColumn) 
+		DclFld dr		Type(DataRow)
+		
+		ds = *New DataSet("Spice")
+		dt = *New DataTable("StoreGroups")	
+		ds.Tables.Add(dt)		
+							
+		If Not IPSTRTB.IsOpen
+			Open IPSTRTB FilePath(LibName)
+		EndIf
+		
+		//Create Store Group Column
+		dc = *New DataColumn( 'clmSKEY' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSKEY"
+		dc.Caption = "Store Group"
+		dt.Columns.Add(dc)
+		
+		//Create Store group Description Column
+		dc = *New DataColumn( 'clmSNAM' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSNAM"
+		dc.Caption = "Store Group Description"
+		dt.Columns.Add(dc)
+		
+		//Read file and create rows in DataTable				
+		Setll IPSTRTB Key('U')
+			DoUntil IPSTRTB.IsEof
+				Read IPSTRTB
+				If not IPSTRTB.IsEof 
+					SubStr BaseStr(SKEY) StartPos(1) Sublen(1) Target(User_Key) Err (*IN90)
+					If User_Key = 'U' 
+						If SARR <> *All'0'
+							dr = dt.NewRow()
+							dr.Item[0] = SKEY
+							dr.Item[1] = SNAM
+							dt.Rows.Add( dr )
+						Endif
+					Else
+						Leave
+					Endif	
+				Endif
+			Enddo
+					
+		Close IPSTRTB
+		LeaveSR dt
+	EndFunc
+	
+	//Creates a DataSet/DataTable as above but accessed by Description Search
+	BegFunc GetStoreGroupDataSetSearch Type(DataTable) Access(*Public)
+		DclSrParm KeyDesc Type(String)
+					
+		DclFld dt		 Type( DataTable ) New()
+		DclFld dc		 Type( DataColumn ) 
+		DclFld dr		 Type( DataRow )
+		DclFld Name(Pos) Type(*ZONED) Len(5,0)
+										
+		If Not IPSTRTB.IsOpen
+			Open IPSTRTB FilePath(LibName)
+		EndIf
+		
+		//Create Store Group Column
+		dc = *New DataColumn( 'clmSKEY' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSKEY"
+		dc.Caption = "Store Group"
+		dt.Columns.Add(dc)
+		
+		//Create Store Group Description Column
+		dc = *New DataColumn( 'clmSNAM' )
+		dc.DataType = System.Type.GetType("System.String")
+		dc.ColumnName = "clmSNAM"
+		dc.Caption = "Store group Description"
+		dt.Columns.Add(dc)
+		
+		//Read file and create rows in DataTable				
+		Setll IPSTRTB Key('U')
+		DoUntil IPSTRTB.IsEof
+			Read IPSTRTB
+			Pos = %Scan (KeyDesc.Trim(), SNAM.Trim(), 1)
+			If Pos <> 0
+				If not IPSTRTB.IsEof
+					SubStr BaseStr(SKEY) StartPos(1) Sublen(1) Target(User_Key) Err (*IN90)
+					If User_Key = 'U' 
+						If SARR <> *All'0'
+							dr = dt.NewRow()
+							dr.Item[0] = SKEY
+							dr.Item[1] = SNAM
+							dt.Rows.Add( dr )
+						Endif
+					Else
+						Leave
+					Endif
+				Endif
+			Endif
+		Enddo
+		
+		Close IPSTRTB
+		LeaveSR dt
+	EndFunc
+	
+EndClass
+

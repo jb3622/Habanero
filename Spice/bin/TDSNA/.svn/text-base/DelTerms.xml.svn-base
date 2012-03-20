@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <DelTerms>
+    <DelTermsCode>XXX</DelTermsCode>
+    <Description>OTHER                    </Description>
+  </DelTerms>
+  <DelTerms>
+    <DelTermsCode>EXW</DelTermsCode>
+    <Description>EX WORKS                 </Description>
+  </DelTerms>
+  <DelTerms>
+    <DelTermsCode>FOB</DelTermsCode>
+    <Description>FREE ON BOARD            </Description>
+  </DelTerms>
+  <DelTerms>
+    <DelTermsCode>CIF</DelTermsCode>
+    <Description>COST/INS/FRT AT ARRV PORT</Description>
+  </DelTerms>
+  <DelTerms>
+    <DelTermsCode>DDP</DelTermsCode>
+    <Description>DELIVERED DOMICILE PAID  </Description>
+  </DelTerms>
+</DocumentElement>

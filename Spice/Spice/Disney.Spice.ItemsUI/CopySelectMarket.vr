@@ -1,0 +1,40 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Text
+Using Disney.Spice.ItemsBO
+
+BegClass CopySelectMarket Extends(Disney.Spice.ItemsUI.SelectMarket) Access(*Public)
+
+/Region Declares	
+	DclFld User        Type(Disney.Menu.Users)               Access(*Private)
+	DclFld Environment Type(Disney.Menu.Environments)        Access(*Private)
+	DclFld ItemsBO     Type(Disney.Spice.ItemsBO.Items)      Access(*Private)
+/EndRegion	
+
+/Region Constructor	
+	BegConstructor Access(*Public) Base(User,Environment,ItemsBO)
+		DclSrParm User        Type(Disney.Menu.Users)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		DclSrParm ItemsBO     Type(Disney.Spice.ItemsBO.Items)
+		
+		*this.User        = User
+		*this.Environment = Environment
+		*this.ItemsBO     = ItemsBO
+	EndConstructor
+/EndRegion	
+
+/Region Methods 
+	BegFunc Copy Type(Boolean) Access(*Public)
+		DclSrParm ItemStyle Type(Disney.DA.IP400.ItemStyle)
+					
+		*Base.Text = "Spice - Copy Select Markets"
+							
+		*Base.ShowDialog()
+
+		LeaveSR *true
+	EndFunc
+/EndRegion	
+	
+EndClass

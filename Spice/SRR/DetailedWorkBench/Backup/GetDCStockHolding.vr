@@ -1,0 +1,61 @@
+Using System
+Using System.Text
+
+DclNameSpace Disney.SRR
+
+BegClass GetDCStockHolding Access(*Public)
+	
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSSETDTL) Type(*Input) Org(*Indexed) File('DSSETDTL') Db(PgmDB) ImpOpen(*No)
+	DclDiskFile Name(DSEUALG)  Type(*Input) Org(*Indexed) File('DSEUALG')  Db(PgmDB) ImpOpen(*No)
+	DclDiskFile Name(IPCMPNY)  Type(*Input) Org(*Arrival) File('IPCMPNY')  Db(PgmDB) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.PgmDB = PgmDB
+	EndConstructor
+	
+	BegFunc GetDCStockHolding Type(*Integer4) Access(*Public)
+		DclSrParm Class  Type(*Zoned) Len(4,0)
+		DclSrParm Vendor Type(*Zoned) Len(5,0)
+		DclSrParm Style  Type(*Zoned) Len(4,0)
+		DclSrParm Colour Type(*Zoned) Len(3,0)
+		DclSrParm Size   Type(*Zoned) Len(4,0)
+		
+		DclFld DCStockHolding Type(*Integer4)
+		
+		If Not IPCMPNY.IsOpen
+			Open IPCMPNY
+		EndIf
+		
+		Read IPCMPNY
+		If IPCMPNY.IsEof
+			Throw *New Exception('Company record is missing')
+		EndIf
+		
+		If Not DSSETDTL.IsOpen
+			Open DSSETDTL
+		EndIf
+		
+		If Not DSEUALG.IsOpen
+			Open DSEUALG
+		EndIf
+				
+		Chain DSSETDTL Key(Class,Vendor,Style,Colour,Size)
+		If DSSETDTL.IsFound
+			DCStockHolding = SDQTY
+			
+			Chain DSEUALG Key(CDDC1,Class,Vendor,Style,Colour,Size)
+			If DSEUALG.IsFound And AEGQTY > *Zero
+				DCStockHolding -= AEGQTY
+			EndIf
+		EndIf
+		
+		Close IPCMPNY
+		Close DSSETDTL
+		Close DSEUALG
+		
+		LeaveSR DCStockHolding
+	EndFunc
+EndClass

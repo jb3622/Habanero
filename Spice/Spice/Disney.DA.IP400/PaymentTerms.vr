@@ -1,0 +1,100 @@
+Using System
+Using System.Text
+Using System.IO
+Using System.Data
+Using System.Xml
+
+BegClass PaymentTerms Access(*Public)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(IPTERMS) Type(*Input) Org(*Arrival) DB(PgmDB) ImpOpen(*No)
+
+	DclFld PaymentTerms Type(DataTable) Access(*Private)
+	DclFld pPayTerms    Type(String)    Access(*Private)
+	DclFld pDescription Type(String)    Access(*Private)
+	DclFld pXMLpath     Type(String)    Access(*Private)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"PaymentTerms.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If PaymentTerms = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				PaymentTerms.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys Type(DataColumn) Rank(1)
+
+		PaymentTerms = *New DataTable("PaymentTerms")
+
+		PaymentTerms.Columns.Add(*New DataColumn("PayTerms", *TypeOf(String)))
+		PaymentTerms.Columns["PayTerms"].ReadOnly = *True
+
+		PaymentTerms.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		PaymentTerms.Columns["Description"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {PaymentTerms.Columns("PayTerms")}
+		PaymentTerms.PrimaryKey = Keys
+	EndSr
+	
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not IPTERMS.IsOpen
+			Open IPTERMS
+		EndIf
+		
+		DoUntil IPTERMS.IsEof
+			Read IPTERMS
+			If Not IPTERMS.IsEof
+				dr = PaymentTerms.NewRow()
+				
+				dr.Item("PayTerms")    = TCOD
+				dr.Item["Description"] = TDES.Trim()
+				
+				PaymentTerms.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		PaymentTerms.WriteXml(pXMLpath)
+		
+		Close IPTERMS
+	EndSr
+	
+	BegFunc GetPaymentTerms Type(*Boolean) Access(*Public)
+		DclSrParm Terms Type(String)
+
+		DclFld dr Type(DataRow)
+		
+		dr = PaymentTerms.Rows.Find(Terms)
+		If dr <> *Nothing
+			pPayTerms    = dr.Item("PayTerms")    *As String
+			pDescription = dr.Item("Description") *As String
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetPaymentTermsTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR PaymentTerms
+	EndFunc
+EndClass

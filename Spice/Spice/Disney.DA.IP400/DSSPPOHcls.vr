@@ -1,0 +1,1278 @@
+// ===============================================
+// Joseph Urbina
+// 3rd August 2009
+// DSSPPOHcls	
+// Data Access Layer - Spice PO Header and Detail Files
+//------------------------------------------------
+// Modification
+//================================================
+// Joseph Urbina
+// 4th November 2009
+// Added method ChkStageSetID
+//================================================
+// Clayton
+// 15 December 2009
+// Re-wrote Get,Update, and write Methods
+//================================================
+
+Using System
+Using System.Data
+Using System.Text
+Using System.Windows.Forms
+
+BegClass DSSPPOHcls Access(*Public)
+	
+	/Region Declares	
+	DclFld User Type(Disney.Menu.Users) Access(*Private)
+	
+	DclFld dsOrderH      Type(DataSet)     Access(*Private)
+	DclFld dtOrderH	     Type(DataTable)   Access(*Private)
+	DclFld dcOrderH	     Type(DataColumn)  Access(*Private)
+	DclFld drOrderH	     Type(DataRow)  Access(*Private)
+	DclFld FilterString  Type(*String)	Access(*Private)
+	DclFld CheckClass    Type(*Boolean) Access(*Private)
+	DclFld CheckChar     Type(*Boolean) Access(*Private)
+	DclFld ClassItem     Type(DataRowView) Access(*Private)
+	DclFld CharItem      Type(DataRowView) Access(*Private)
+	DclFld ClassOK		 Type(*Boolean)    Access(*Private)
+	DclFld CharOK		 Type(*Boolean) 	    Access(*Private)
+	DclFld xClass_Select Type(*Zoned)  Len(4,0) Access(*Private)
+	DclFld xChar_Select  Type(*Char)   Len(3)   Access(*Private)
+	DclFld Class_Select  Type(CheckedListBox)   Access(*Private)
+	DclFld Char_Select   Type(CheckedListBox)   Access(*Private)
+	DclFld WrkDate       Type(*Date)            Access(*Private)	
+	
+	DclDB Name(PgmDB) DbName("TDST")
+	
+	DclDiskFile Name(POHQRY)      Type(*Input)  Org(*Arrival) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPPOH:RPOHQRY) File(DSSPPOHL1)
+	DclDiskFile Name(DSSPPOHL1)   Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	DclDiskFile Name(POHL1update) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*Yes) RnmFmt(RDSSPPOH:POHL1UPD) File(DSSPPOHL1)
+	
+	DclDiskFile Name(DSSPPOHL3) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPPOH:RPOHL3)
+	DclDiskFile Name(DSSPPOHL2) Type(*Input)  Org(*Indexed) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPPOH:RPOHL2)
+
+	DclDiskFile Name(DSSPPOH)   Type(*Output) Org(*Arrival) ImpOpen(*No) DB(PgmDB) RnmFmt(RDSSPPOH:RPOH)
+	DclDiskFile Name(DSSPPOV)   Type(*Update) Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*Yes)
+	
+	DclDiskFile Name(DSSPXCLL1) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	DclDiskFile Name(DSSPXCHL1) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB)
+	
+	DclDiskFile Name(DSSPEHL) Type(*Input) Org(*Indexed) ImpOpen(*No) DB(PgmDB) AddRec(*Yes)
+	/EndRegion
+	
+	/Region Constructor				
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User  Type(Disney.Menu.Users)
+		
+		*this.PgmDB = PgmDB
+		*this.User  = User
+	EndConstructor
+	/EndRegion
+	
+	/Region Properties
+	DclFld pSpicePOnumber Type(String) Access(*Private)
+	BegProp SpicePOnumber Type(String) Access(*Public)
+		BegGet
+			LeaveSR pSpicePOnumber
+		EndGet
+	EndProp
+	
+	DclFld pSpicePOversion Type(Int16) Access(*Private)
+	BegProp SpicePOversion Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pSpicePOversion
+		EndGet
+	EndProp
+	
+	DclFld pPOPreviousVer Type(Int16) Access(*Private)
+	BegProp POPreviousVer Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pPOPreviousVer
+		EndGet
+	EndProp
+	
+	DclFld pIPPOnumber Type(String) Access(*Private)
+	BegProp IPPOnumber Type(String) Access(*Public)
+		BegGet
+			LeaveSR pIPPOnumber
+		EndGet
+		BegSet
+			pIPPOnumber = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pIPPOrevision Type(Int16) Access(*Private)
+	BegProp IPPOrevision Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pIPPOrevision
+		EndGet
+		BegSet
+			pIPPOrevision = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDepartment Type(Int16) Access(*Private)
+	BegProp Department Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pDepartment
+		EndGet
+		BegSet
+			pDepartment = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pVendor Type(Int32) Access(*Private)
+	BegProp Vendor Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pVendor
+		EndGet
+		BegSet
+			pVendor = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pTerms Type(String) Access(*Private)
+	BegProp Terms Type(String) Access(*Public)
+		BegGet
+			LeaveSR pTerms
+		EndGet
+		BegSet
+			pTerms = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pOrderDate Type(DateTime) Access(*Private)
+	BegProp OrderDate Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pOrderDate
+		EndGet
+		BegSet
+			pOrderDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pAnticipateDate Type(DateTime) Access(*Private)
+	BegProp AnticipateDate Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pAnticipateDate
+		EndGet
+		BegSet
+			pAnticipateDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pShipDate Type(DateTime) Access(*Private)
+	BegProp ShipDate Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pShipDate
+		EndGet
+		BegSet
+			pShipDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCancelDate Type(DateTime) Access(*Private)
+	BegProp CancelDate Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pCancelDate
+		EndGet
+		BegSet
+			pCancelDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pStageSetDateID Type(Int32) Access(*Private)
+	BegProp StageSetDateID Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pStageSetDateID
+		EndGet
+		BegSet
+			pStageSetDateID = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pStageSetDate Type(DateTime) Access(*Private)
+	BegProp StageSetDate Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pStageSetDate
+		EndGet
+		BegSet
+			pStageSetDate = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pMarket Type(String) Access(*Private)
+	BegProp Market Type(String) Access(*Public)
+		BegGet
+			LeaveSR pMarket
+		EndGet
+		BegSet
+			pMarket = *PropVal
+		EndSet
+	EndProp	
+	
+	DclFld pShipTo Type(Int16) Access(*Private)
+	BegProp ShipTo Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pShipTo
+		EndGet
+		BegSet
+			pShipTo = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pShipVia Type(String) Access(*Public)
+	BegProp ShipVia Type(String) Access(*Public)
+		BegGet
+			LeaveSR pShipVia
+		EndGet
+		BegSet
+			pShipVia = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pShipToMethod Type(String) Access(*Public)
+	BegProp ShipToMethod Type(String) Access(*Public)
+		BegGet
+			LeaveSR pShipToMethod
+		EndGet
+		BegSet
+			pShipToMethod = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pShipToRounding Type(String) Access(*Public)
+	BegProp ShipToRounding Type(String) Access(*Public)
+		BegGet
+			LeaveSR pShipToRounding
+		EndGet
+		BegSet
+			pShipToRounding = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pFreightChg Type(String) Access(*Private)
+	BegProp FreightChargeCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pFreightChg
+		EndGet
+		BegSet
+			pFreightChg = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pLandingFactor Type(Decimal) Access(*Private)
+	BegProp LandingFactor Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pLandingFactor
+		EndGet
+		BegSet
+			pLandingFactor = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pCurrencyCode Type(String) Access(*Private)
+	BegProp CurrencyCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCurrencyCode
+		EndGet
+		BegSet
+			pCurrencyCode = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pCurrencyRate Type(Decimal) Access(*Private)
+	BegProp CurrencyRate Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pCurrencyRate
+		EndGet
+		BegSet
+			pCurrencyRate = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pTotalUnits Type(Int32) Access(*Private)
+	BegProp TotalUnits Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pTotalUnits
+		EndGet
+		BegSet
+			pTotalUnits = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pTotalLines Type(Int16) Access(*Private)
+	BegProp TotalLines Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pTotalLines
+		EndGet
+		BegSet
+			pTotalLines = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pTotalPacks Type(Int16) Access(*Private)
+	BegProp TotalPacks Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pTotalPacks
+		EndGet
+		BegSet
+			pTotalPacks = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pTotalCost Type(Decimal) Access(*Private)
+	BegProp TotalCost Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pTotalCost
+		EndGet
+		BegSet
+			pTotalCost = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pTotalRetail Type(Decimal) Access(*Private)
+	BegProp TotalRetail Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pTotalRetail
+		EndGet
+		BegSet
+			pTotalRetail = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pMargin Type(Decimal) Access(*Private)
+	BegProp Margin Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pMargin
+		EndGet
+		BegSet
+			pMargin = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pMarginPercent Type(Decimal) Access(*Private)
+	BegProp MarginPercent Type(Decimal) Access(*Public)
+		BegGet
+			LeaveSR pMarginPercent
+		EndGet
+		BegSet
+			pMarginPercent = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pPortOfDeparture Type(Int32) Access(*Private)
+	BegProp PortOfDeparture Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pPortOfDeparture
+		EndGet
+		BegSet
+			pPortOfDeparture = *PropVal
+		EndSet
+	EndProp
+
+	DclFld pPortOfEntry Type(Int32) Access(*Private)
+	BegProp PortOfEntry Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pPortOfEntry
+		EndGet
+		BegSet
+			pPortOfEntry = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pDeliveryTerms Type(String) Access(*Private)
+	BegProp DeliveryTerms Type(String) Access(*Public)
+		BegGet
+			LeaveSR pDeliveryTerms
+		EndGet
+		BegSet
+			pDeliveryTerms = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pOwner Type(String) Access(*Private)
+	BegProp Owner Type(String) Access(*Public)
+		BegGet
+			LeaveSR pOwner
+		EndGet
+	EndProp
+	
+	DclFld pIPuserInitials Type(String) Access(*Private)
+	BegProp IPuserInitials Type(String) Access(*Public)
+		BegGet
+			LeaveSR pIPuserInitials
+		EndGet
+		BegSet
+			pIPuserInitials = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pStatus Type(String) Access(*Private)
+	BegProp Status Type(String) Access(*Public)
+		BegGet
+			LeaveSR pStatus
+		EndGet
+		BegSet
+			pStatus = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pEASreference Type(Int32) Access(*Private)
+	BegProp EASreference Type(Int32) Access(*Public)
+		BegGet
+			LeaveSR pEASreference
+		EndGet
+	EndProp
+	
+	DclFld pEASapprovalStatus Type(String) Access(*Private)
+	BegProp EASapprovalStatus Type(String) Access(*Public)
+		BegGet
+			LeaveSR pEASapprovalStatus
+		EndGet
+	EndProp
+	
+	DclFld pNewLine Type(Boolean) Access(*Private)
+	BegProp NewLine Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pNewLine
+		EndGet
+		BegSet
+			pNewLine = *PropVal
+		EndSet
+	EndProp
+	
+	DclFld pCreateDateTime Type(DateTime) Access(*Private)
+	BegProp CreateDateTime Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pCreateDateTime
+		EndGet
+	EndProp
+	
+	DclFld pCreateUser Type(String) Access(*Private)
+	BegProp CreateUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCreateUser
+		EndGet
+	EndProp
+	
+	DclFld pChangeSeq Type(Int16) Access(*Private)
+	BegProp ChangeSeq Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR pChangeSeq
+		EndGet
+	EndProp
+	
+	DclFld pChangeType Type(String) Access(*Private)
+	BegProp ChangeType Type(String) Access(*Public)
+		BegGet
+			LeaveSR pChangeType
+		EndGet
+	EndProp
+
+	DclFld pChangeDateTime Type(DateTime) Access(*Private)
+	BegProp ChangeDateTime Type(DateTime) Access(*Public)
+		BegGet
+			LeaveSR pChangeDateTime
+		EndGet
+	EndProp
+	
+	DclFld pChangeUser Type(String) Access(*Private)
+	BegProp ChangeUser Type(String) Access(*Public)
+		BegGet
+			LeaveSR pChangeUser
+		EndGet
+	EndProp
+	/EndRegion
+		
+    /Region Methods
+	BegSr BuildDataTable
+		DclFld cnt Type(Int32) Inz(0)
+	
+		Try
+			//Create Selection Column
+			dcOrderH = *New DataColumn( 'clmSelect' )
+			dcOrderH.DataType = System.Type.GetType("System.Boolean")
+			dcOrderH.ColumnName = "clmSelect"
+			dcOrderH.Caption = "Select"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create Spice PO Number Column
+			dcOrderH = *New DataColumn( 'clmSpicePO' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmSpicePO"
+			dcOrderH.Caption = "Spice PO #"
+			dtOrderH.Columns.Add(dcOrderH)
+					
+			//Create Revision Number Column
+			dcOrderH = *New DataColumn( 'clmRevisionNumber' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmRevisionNumber"
+			dcOrderH.Caption = "Revision Number"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create IP PO Number Column
+			dcOrderH = *New DataColumn( 'clmIPPO' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmIPPO"
+			dcOrderH.Caption = "IP PO#"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create Vendor Number Column
+			dcOrderH = *New DataColumn( 'clmVendor' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmVendor"
+			dcOrderH.Caption = "Vendor"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create Vendor Name Column
+			dcOrderH = *New DataColumn( 'clmVendorName' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmVendorName"
+			dcOrderH.Caption = "Vendor Name"
+			dtOrderH.Columns.Add(dcOrderH)
+					
+			//Create Ship Date Column
+			dcOrderH = *New DataColumn( 'clmShipDate' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmShipDate"
+			dcOrderH.Caption = "Ship Date"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create Order Date Column
+			dcOrderH = *New DataColumn( 'clmOrderDate' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmOrderDate"
+			dcOrderH.Caption = "Order Date"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create Market Column
+			dcOrderH = *New DataColumn( 'clmMarket' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmMarket"
+			dcOrderH.Caption = "Market"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create Store Column
+			dcOrderH = *New DataColumn( 'clmStore' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmStore"
+			dcOrderH.Caption = "Store"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create Status Column
+			dcOrderH = *New DataColumn( 'clmStatus' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmStatus"
+			dcOrderH.Caption = "Status"
+			dtOrderH.Columns.Add(dcOrderH)
+			
+			//Create ChangeID Column
+			dcOrderH = *New DataColumn( 'clmPadlock' )
+			dcOrderH.DataType = System.Type.GetType("System.String")
+			dcOrderH.ColumnName = "clmPadlock"
+			dcOrderH.Caption = "Padlock"
+ 			dtOrderH.Columns.Add(dcOrderH)
+			
+			If POHQRY.IsOpen
+				Close POHQRY
+			EndIf
+															
+			POHQRY.QrySelect = FilterString.ToString()
+			If (POHQRY.QrySelect = String.Empty)
+				DclFld ex Type(Exception)
+				ex = *New Exception("Selection string is blank.")
+				Throw ex
+			EndIf
+			
+			Open POHQRY		
+			
+			Try
+				DoUntil POHQRY.IsEof
+					Read POHQRY
+					If not POHQRY.IsEof
+						cnt = cnt + 1
+						If (cnt > 5)
+							
+						EndIf
+						
+						If Class_Select <> *Nothing
+						   Filter_On_Class(POHSPO)
+						Else
+							ClassOk   = *True
+						Endif 
+						
+						If Char_Select <> *Nothing
+						   Filter_On_Char(POHSPO)
+						Else
+							CharOk   = *True
+						Endif 
+						
+						If ClassOK = *True *And CharOK = *True
+							drOrderH = dtOrderH.NewRow()
+							drOrderH.Item[0]  = *False	
+							drOrderH.Item[1]  = POHSPO
+							drOrderH.Item[2]  = POHRNO
+							drOrderH.Item[3]  = POHIPO
+							drOrderH.Item[4]  = POHVEN
+							drOrderH.Item[5]  = ""
+							
+							If POHSDT <> *Zero
+								Wrkdate = POHSDT
+								drOrderH.Item[6]  = WrkDate.ToString('dd - MMM - yyyy').ToUpper()
+							Else
+								drOrderH.Item[6]  = POHSDT
+							Endif
+							
+							If POHODT <> *Zero
+								Wrkdate = POHODT
+								drOrderH.Item[7]  = WrkDate.ToString('dd - MMM - yyyy').ToUpper()
+							Else
+								drOrderH.Item[7]  = POHODT
+							Endif
+							
+							drOrderH.Item[8]  = POHMKT
+							drOrderH.Item[9]  = POHSTR
+							drOrderH.Item[10] = POHSTS
+							drOrderH.Item[11] = '1'
+							dtOrderH.Rows.Add(drOrderH)
+						Endif
+					Endif
+				Enddo	
+			Finally
+				POHQRY.QrySelect = String.Empty
+				Close POHQRY
+			EndTry
+		Catch Name(exc) Type(Exception)
+			Throw exc
+		EndTry	
+	EndSr
+
+	BegFunc GetPOheader Type(Boolean) Access(*Public)
+		DclSrParm POnumber Type(String)
+		
+		If Not DSSPPOHL1.IsOpen
+			Open DSSPPOHL1
+		EndIf
+		
+		Chain DSSPPOHL1 Key(POnumber) Access(*NoLock)
+		If DSSPPOHL1.IsFound
+			pSpicePOnumber   = POHSPO
+			pSpicePOversion  = POHVER
+			pPOPreviousVer   = POHVER
+			pIPPOnumber      = POHIPO
+			pIPPOrevision    = POHRNO
+			pDepartment      = POHDPT
+			pVendor          = POHVEN
+			pTerms           = POHTCD.Trim()
+			pOrderDate       = CvtToDateTime(POHODT)
+			pAnticipateDate  = CvtToDateTime(POHADT)
+			pShipDate        = CvtToDateTime(POHSDT)
+			pCancelDate      = CvtToDateTime(POHCDT)
+			pStageSetDateID  = POHSSI
+			pStageSetDate    = CvtToDateTime(POHSSD)
+			pMarket          = POHMKT
+			pShipTo          = POHSTR
+			pShipToMethod    = POHSTM
+			PShipToRounding  = POHRND
+			pShipVia         = POHVIA.Trim()
+			pFreightChg      = POHFRC
+			pLandingFactor   = POHLNF
+			pCurrencyCode    = POHCYC
+			pCurrencyRate    = POHCYR
+			pTotalUnits      = POHUNI
+			pTotalLines      = POHLIN
+			pTotalPacks      = POHPCK
+			pTotalCost       = POHCST
+			pTotalRetail     = POHRET
+			pMargin          = POHMAV
+			pMarginPercent   = POHMAP
+			pPortOfDeparture = POHPDP
+			pPortOfEntry     = POHPEN
+			pDeliveryTerms   = POHDLV.Trim()
+			pOwner           = POHOWN.Trim()
+			pIPuserInitials  = POHIPU.Trim()
+			pStatus          = POHSTS
+			pEASreference    = POHEAS
+			pEASapprovalStatus = POHAST
+			
+			If POHNPO = 'Y'
+				pNewLine = *True
+			Else
+				pNewLine = *False
+			EndIf
+			
+			pCreateDateTime = CvtToDateTime(POHCRD, POHCRT)
+			pCreateUser     = POHCRU.Trim()
+			pChangeSeq      = POHCGS
+			pChangeType     = POHCGT
+			
+			If POHCHD = *Zero
+				pChangeDateTime = *New DateTime(0001, 01, 01, 0, 0, 0)
+			Else
+				pChangeDateTime = CvtToDateTime(POHCHD, POHCHT)
+			EndIf
+			
+			pChangeUser  = POHCHU.Trim()
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetPOStatus Type(String) Access(*Public)
+		DclSrParm POnumber Type(String)
+				
+		If Not DSSPPOHL1.IsOpen
+			Open DSSPPOHL1
+		EndIf
+		
+		Chain DSSPPOHL1 Key(POnumber) Access(*NoLock)
+		If DSSPPOHL1.IsFound
+			LeaveSR POHSTS		
+		Else
+			LeaveSR String.Empty
+		Endif
+	EndFunc
+	
+	BegFunc GetPreviousPOheader Type(Boolean) Access(*Public)
+		DclSrParm POnumber Type(String)
+		//DclSrParm CurrentVersion Type(Int16)
+		
+		If Not DSSPPOHL2.IsOpen
+			Open DSSPPOHL2
+		EndIf
+		
+		SetGT File(DSSPPOHL2)  Key(POnumber)
+		ReadPE From(DSSPPOHL2) Key(POnumber)
+		If DSSPPOHL2.IsEof
+			LeaveSR *False
+		EndIf
+		
+		pSpicePOnumber   = POHSPO
+		pSpicePOversion  = POHVER
+		pPOPreviousVer   = POHVER
+		pIPPOnumber      = POHIPO
+		pIPPOrevision    = POHRNO
+		pDepartment      = POHDPT
+		pVendor          = POHVEN
+		pTerms           = POHTCD.Trim()
+		pOrderDate       = CvtToDateTime(POHODT)
+		pAnticipateDate  = CvtToDateTime(POHADT)
+		pShipDate        = CvtToDateTime(POHSDT)
+		pCancelDate      = CvtToDateTime(POHCDT)
+		pStageSetDateID  = POHSSI
+		pStageSetDate    = CvtToDateTime(POHSSD)
+		pMarket          = POHMKT
+		pShipTo          = POHSTR
+		pShipToMethod    = POHSTM
+		pShipToRounding  = POHRND
+		pShipVia         = POHVIA.Trim()
+		pFreightChg      = POHFRC
+		pLandingFactor   = POHLNF
+		pCurrencyCode    = POHCYC
+		pCurrencyRate    = POHCYR
+		pTotalUnits      = POHUNI
+		pTotalLines      = POHLIN
+		pTotalPacks      = POHPCK
+		pTotalCost       = POHCST
+		pTotalRetail     = POHRET
+		pMargin          = POHMAV
+		pMarginPercent   = POHMAP
+		pPortOfDeparture = POHPDP
+		pPortOfEntry     = POHPEN
+		pDeliveryTerms   = POHDLV.Trim()
+		pOwner           = POHOWN.Trim()
+		pIPuserInitials  = POHIPU.Trim()
+		pStatus          = POHSTS
+		pEASreference    = POHEAS
+		pEASapprovalStatus = POHAST
+		
+		If POHNPO = 'Y'
+			pNewLine = *True
+		Else
+			pNewLine = *False
+		EndIf
+		
+		pCreateDateTime = CvtToDateTime(POHCRD, POHCRT)
+		pCreateUser     = POHCRU.Trim()
+		pChangeSeq      = POHCGS
+		pChangeType     = POHCGT
+		
+		If POHCHD = *Zero
+			pChangeDateTime = *New DateTime(0001, 01, 01, 0, 0, 0)
+		Else
+			pChangeDateTime = CvtToDateTime(POHCHD, POHCHT)
+		EndIf
+		
+		pChangeUser  = POHCHU.Trim()
+		
+		LeaveSR *True
+	EndFunc
+	
+	BegFunc UpdatePOheader Type(Boolean) Access(*Public)
+		DclSrParm POnumber Type(String)
+		
+		DclFld UpdateDate Type(Int32)
+		DclFld UpdateTime Type(Int32)
+		DclFld UpdateUser Type(String)
+		
+		DclFld CGSvalue Type(Int16)
+		DclFld Owner    Type(String)
+		
+		If Not DSSPPOH.IsOpen
+			Open DSSPPOH
+		EndIf
+		
+		If Not POHL1update.IsOpen
+			Open POHL1update
+		EndIf
+		
+		// Update existing record
+		Chain From(POHL1update) Key(POnumber)
+		If Not POHL1update.IsFound
+			LeaveSR *False
+		EndIf
+		
+		UpdateDate = CvtFromDateTime(DateTime.Now.Date)
+		UpdateTime = CvtToIPtime(DateTime.Now)
+		UpdateUser = PgmDB.User.ToUpper()
+		
+		POHCHD = UpdateDate
+		POHCHT = UpdateTime
+		POHCHU = UpdateUser
+		
+		CGSvalue = POHCGS
+		Owner    = POHOWN
+		
+		Update POHL1UPD
+		
+		
+		pPOPreviousVer = POHVER
+		
+		// Write new PO header
+		POHSPO         = POnumber
+		pSpicePOnumber = POHSPO
+		
+		POHVER          = pPOPreviousVer + 1
+		pSpicePOversion = POHVER
+		
+		POHIPO = pIPPOnumber
+		//POHRNO = pIPPOrevision
+		POHDPT = pDepartment
+		POHVEN = pVendor
+		POHTCD = pTerms
+		POHODT = CvtFromDateTime(pOrderDate)
+		POHADT = CvtFromDateTime(pAnticipateDate)
+		POHSDT = CvtFromDateTime(pShipDate)
+		POHCDT = CvtFromDateTime(pCancelDate)
+		POHSSI = pStageSetDateID
+		POHSSD = CvtFromDateTime(pStageSetDate)
+		POHMKT = pMarket
+		POHSTR = pShipTo
+		POHSTM = pShipToMethod
+		POHRND = pShipToRounding
+		POHVIA = pShipVia
+		POHFRC = pFreightChg
+		POHLNF = pLandingFactor
+		POHCYC = pCurrencyCode
+		POHCYR = pCurrencyRate
+		POHUNI = pTotalUnits
+		POHLIN = pTotalLines
+		POHPCK = pTotalPacks
+		POHCST = pTotalCost
+		POHRET = pTotalRetail
+		POHMAV = pMargin
+		POHMAP = pMarginPercent
+		POHPDP = pPortOfDeparture
+		POHPEN = pPortOfEntry
+		POHDLV = pDeliveryTerms
+		POHOWN = Owner
+		POHIPU = pIPuserInitials
+		
+		If POHSTS = 'OA' +
+		And POHIPO <> String.Empty +
+		Or POHSTS = 'RA' +
+		Or POHSTS = 'RR' +
+		Or POHSTS = 'RP' +
+		Or POHSTS = 'OE' +
+		Or POHSTS = 'RE'
+			POHSTS = 'RP'
+		Else
+			POHSTS = 'OP'
+		EndIf
+		
+		POHEAS = *Zero
+		POHAST = *Blank
+
+		If pNewLine = *True
+			POHNPO = 'Y'
+		Else
+			POHNPO = 'N'
+		EndIf
+		
+		POHCGS = CGSvalue
+		
+		POHCGT = *Blank
+		POHCHD = 99991231
+		POHCHT = 235959
+		POHCHU = *Blanks
+		
+		Write POHL1UPD
+				
+		//---------------------------------------------
+		// Write a log record
+		//---------------------------------------------
+		If Not DSSPEHL.IsOpen
+			Open DSSPEHL
+		EndIf
+		
+		EHLTYP  = 'PO'
+		EHLKEY  = POHSPO
+		SetGT  DSSPEHL Key(EHLTYP,EHLKEY)
+		ReadPE DSSPEHL Key(EHLTYP,EHLKEY)
+		If DSSPEHL.IsEof
+			EHLREF = 1
+		Else
+			EHLREF += 1
+		EndIf
+		
+		Clear RDSSPEHL Exclude(*NoKey)
+
+		EHLDES  = "PO Modified in SPICE Database"
+
+		EHLCRD  = UpdateDate
+		EHLCRT  = UpdateTime
+		EHLCRU  = UpdateUser
+
+		Write RDSSPEHL
+		
+		LeaveSR *True
+	EndFunc
+
+	BegFunc WritePOheader Type(Boolean) Access(*Public)
+		
+		If Not DSSPPOH.IsOpen
+			Open DSSPPOH
+		EndIf
+		
+		POHSPO         = NextSpicePOnumber()
+		pSpicePOnumber = POHSPO
+		
+		POHVER          = 1
+		pSpicePOversion = 1
+		pPOPreviousVer  = 1
+		
+		POHIPO = *Blank
+		POHRNO = *Zero
+		POHDPT = pDepartment
+		POHVEN = pVendor
+		POHTCD = pTerms
+		POHODT = CvtFromDateTime(pOrderDate)
+		POHADT = CvtFromDateTime(pAnticipateDate)
+		POHSDT = CvtFromDateTime(pShipDate)
+		POHCDT = CvtFromDateTime(pCancelDate)
+		POHSSI = pStageSetDateID
+		POHSSD = CvtFromDateTime(pStageSetDate)
+		POHMKT = pMarket
+		POHSTR = pShipTo
+		POHSTM = pShipToMethod
+		POHRND = pShipToRounding
+		POHVIA = pShipVia
+		POHFRC = pFreightChg
+		POHLNF = pLandingFactor
+		POHCYC = pCurrencyCode
+		POHCYR = pCurrencyRate
+		POHUNI = pTotalUnits
+		POHLIN = pTotalLines
+		POHPCK = pTotalPacks
+		POHCST = pTotalCost
+		POHRET = pTotalRetail
+		POHMAV = pMargin
+		POHMAP = pMarginPercent
+		POHPDP = pPortOfDeparture
+		POHPEN = pPortOfEntry
+		POHDLV = pDeliveryTerms
+		POHOWN = PgmDB.User.ToUpper()
+		POHIPU = pIPuserInitials
+		POHSTS = 'OP'
+		POHEAS = *Zero
+		POHAST = *Blank
+			
+		If pNewLine = *True
+			POHNPO = 'Y'
+		Else
+			POHNPO = 'N'
+		EndIf
+			
+		POHCRD = CvtFromDateTime(DateTime.Now.Date)
+		POHCRT = CvtToIPtime(DateTime.Now)
+		POHCRU = PgmDB.User.ToUpper()
+		POHCGS = *Zero
+		POHCGT = *Blank
+		POHCHD = 99991231
+		POHCHT = 235959
+		POHCHU = *Blanks
+		
+		// Initial new fields added by Bart 16/03/2010
+		POHFRD = *Zero
+		POHLRD = *Zero
+		POHLSD = *Zero
+		POHFVD = *Zero
+		POHLVD = *Zero
+		POHFR# = *Zero
+		POHLR# = *Zero
+		POHIN# = *Blank
+		
+		Write RPOH
+
+
+		// Write a log record
+		If Not DSSPEHL.IsOpen
+			Open DSSPEHL
+		EndIf
+		
+		EHLTYP  = 'PO'
+		EHLKEY  = POHSPO
+		EHLREF  = 1
+		EHLDES  = 'PO Created in SPICE Database'
+		EHLCRD  = POHCRD
+		EHLCRT  = POHCRT
+		EHLCRU  = POHCRU
+
+		Write RDSSPEHL
+				
+		LeaveSR *true
+	EndFunc
+	
+	BegFunc CvtToDateTime Type(DateTime) Access(*Private)
+		DclSrParm Date Type(*Zoned) Len(8,0)
+		DclSrParm Time Type(*Zoned) Len(6,0)
+	
+		//DclFld ConvertedDateTime Type(DateTime)
+		DclFld StrDate Type(String)
+		DclFld StrTime Type(String)
+		DclFld Year    Type(Int32)
+		DclFld Month   Type(Int32)
+		DclFld Day     Type(Int32)
+		DclFld Hour    Type(Int32)
+		DclFld Minute  Type(Int32)
+		DclFld Seconds Type(Int32)
+		
+		If Date <> *Zero
+			StrDate = Date.ToString('00000000')
+			Year    = Convert.ToInt32(StrDate.SubString(0,4))
+			Month   = Convert.ToInt32(StrDate.SubString(4,2))
+			Day     = Convert.ToInt32(StrDate.SubString(6,2))
+		Else
+			Year  = 1
+			Month = 1
+			Day   = 1
+		EndIf
+		
+		If Time <> *Zero
+			StrTime = Time.ToString('000000')
+			Hour    = Convert.ToInt32(StrTime.SubString(0,2))
+			Minute  = Convert.ToInt32(StrTime.SubString(2,2))
+			Seconds = Convert.ToInt32(StrTime.SubString(4,2))
+		Else
+			Hour    = 0
+			Minute  = 0
+			Seconds = 0
+		EndIf
+		
+		LeaveSR (*New DateTime(Year, Month, Day, Hour, Minute, Seconds))
+	EndFunc
+	
+	BegFunc CvtToDateTime Type(DateTime) Access(*Private)
+		DclSrParm Date Type(*Zoned) Len(8,0)
+	
+		DclFld StrDate Type(String)
+		DclFld Year    Type(Int32)
+		DclFld Month   Type(Int32)
+		DclFld Day     Type(Int32)
+		
+		If Date <> *Zero
+			StrDate = Date.ToString('00000000')
+			Year    = Convert.ToInt32(StrDate.SubString(0,4))
+			Month   = Convert.ToInt32(StrDate.SubString(4,2))
+			Day     = Convert.ToInt32(StrDate.SubString(6,2))
+			
+			LeaveSR (*New DateTime(Year, Month, Day, 0, 0, 0))
+		Else
+			LeaveSR DateTime.MinValue
+		EndIf
+	EndFunc
+
+	BegFunc CvtFromDateTime Type(Int32) Access(*Private)
+		DclSrParm DateValue Type(DateTime)
+		
+		DclFld StrDate Type(Stringbuilder)
+		
+		If  DateValue = DateTime.MinValue
+			LeaveSR 00010101
+		Else
+			StrDate = *New StringBuilder()
+			StrDate.Append(DateValue.Year.ToString('0000'))
+			StrDate.Append(DateValue.Month.ToString('00'))
+			StrDate.Append(DateValue.Day.ToString('00'))
+			
+			LeaveSR (Convert.ToInt32(StrDate.ToString()))
+		EndIf
+	EndFunc
+	
+	BegFunc CvtToIPtime Type(Int32) Access(*Private)
+		DclSrParm Time Type(DateTime)
+		
+		DclFld StrTime Type(Stringbuilder)
+		
+		StrTime = *New StringBuilder()
+		StrTime.Append(Time.Hour.ToString('00'))
+		StrTime.Append(Time.Minute.ToString('00'))
+		StrTime.Append(Time.Second.ToString('00'))
+		
+		LeaveSR (Convert.ToInt32(StrTime.ToString()))
+	EndFunc
+	
+	BegFunc NextSpicePOnumber Type(String) Access(*Private)
+	
+		DclFld Number    Type(Int32)
+		DclFld Letter    Type(String)
+		DclFld Alphabet  Type(String) inz("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+		DclFld I         Type(Int16)
+				
+		DclArray Alpha Len(1) Type(*Char) Dim(26) 
+				
+		MoveaRR Source(Alphabet) Target(Alpha)
+												
+		If Not DSSPPOV.IsOpen
+			Open DSSPPOV
+		EndIf
+		
+		Chain From(DSSPPOV) Key(10)
+		If DSSPPOV.IsFound
+			Number  = Convert.ToInt32(POVvalue.SubString(1,4))
+			Letter = POVvalue.SubString(0:1)
+			If Number = 9999
+				Number = 1
+				If Letter = 'Z'
+					Letter = 'A'
+				Else
+					i = %Lookup(Letter: Alpha)
+					Letter = Alpha(i + 1)
+				EndIf
+			Else
+				Number += 1
+			EndIf
+			
+			POVvalue = Letter + Number.ToString('0000')
+			POVuser = PgmDB.User.ToUpper()
+			POVtime = DateTime.Now
+			
+			Update RDSSPPOV
+		Else
+			POVkey = 10
+			POVvalue = 'A0001'
+			POVdesc = 'Last SPICE PO number'
+			POVuser = PgmDB.User.ToUpper()
+			POVtime = DateTime.Now
+			
+			Write RDSSPPOV
+		EndIf
+			
+		LeaveSR POVvalue
+	EndFunc
+	
+	BegSR Filter_On_Class Access(*Private)
+		DclSrParm xOrderH_Select Type(*Char) Len(5)
+			
+		If Not DSSPXCLL1.IsOpen
+			Open DSSPXCLL1
+		EndIf
+					  
+		CheckClass = *False
+		ClassOK    = *False
+		ForEach ClassItem Collection(Class_Select.CheckedItems)
+			xClass_Select = ClassItem.Item("ClassCode").tostring()
+			
+			Chain From(DSSPXCLL1) Key(xOrderH_Select, xClass_Select) Access(*NoLock)
+			If %Found
+				CheckClass = *True
+				Leave
+			Else
+				CheckClass = *False
+			EndIf
+		EndFor
+			
+		If Class_Select <> *Nothing *and CheckClass = *True *or Class_Select =  *Nothing
+			ClassOK = *True
+		Else
+			ClassOK = *False
+		Endif		    	 
+	EndSR
+		
+	BegSR Filter_On_Char
+		DclSrParm xOrderH_Select Type(*Char) Len(5)
+			
+		If Not DSSPXCHL1.IsOpen
+		   Open DSSPXCHL1
+		EndIf
+					  
+		CheckChar = *False
+		CharOK    = *False
+		ForEach CharItem Collection(Char_Select.CheckedItems)
+			xChar_Select = CharItem.Item("CharCode").tostring()
+			
+			Chain From(DSSPXCHL1) Key(xOrderH_Select, xChar_Select) Access(*NoLock)
+			If %Found
+				CheckChar = *True
+				Leave
+			Else
+				CheckChar = *False
+			EndIf
+		EndFor
+			
+		If Char_Select <> *Nothing *and CheckChar = *True *or Char_Select =  *Nothing 
+			CharOK      =  *True
+		Else
+			CharOK      =  *False	
+		Endif		
+	EndSR
+	    
+	BegFunc Filtered_OrderHeader  Type(DataTable) Access(*Public)
+		DclSrParm FilterString	  Type(*String)
+		DclSrParm Class_Select    Type(CheckedListBox)
+		DclSrParm Char_Select     Type(CheckedListBox)
+				
+		*This.FilterString = FilterString
+		*This.Class_Select = Class_Select	
+		*This.Char_Select  = Char_Select
+									
+	    dsOrderH = *New DataSet("Spice")
+	    dtOrderH = *New DataTable("POHeader")
+	    dsOrderH.Tables.Add(dtOrderH)
+					
+		Exsr BuildDataTable
+		
+		LeaveSR dtOrderH
+	EndFunc
+	
+	//Check for existance of Stage Set Date ID on Active Orders  
+	BegFunc ChkStageSetID Type(*Boolean) Access(*Public)
+		DclSrParm StageSetID Type(*Zoned) len(5,0)
+		
+		If Not DSSPPOHL3.IsOpen
+			Open DSSPPOHL3
+		EndIf
+		
+		Chain From(DSSPPOHL3) Key(StageSetID) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+	EndFunc
+	/EndRegion
+EndClass

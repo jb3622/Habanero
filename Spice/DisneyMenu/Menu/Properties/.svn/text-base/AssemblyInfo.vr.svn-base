@@ -1,0 +1,35 @@
+﻿Using System.Reflection
+Using System.Runtime.CompilerServices
+Using System.Runtime.InteropServices
+
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+SetAssemblyAttribute AssemblyTitle("Menu")
+SetAssemblyAttribute AssemblyDescription("")
+SetAssemblyAttribute AssemblyConfiguration("")
+SetAssemblyAttribute AssemblyCompany("Walt Disney International")
+SetAssemblyAttribute AssemblyProduct("Menu")
+SetAssemblyAttribute AssemblyCopyright("Copyright © Walt Disney International 2009")
+SetAssemblyAttribute AssemblyTrademark("")
+SetAssemblyAttribute AssemblyCulture("")
+
+// Setting ComVisible to false makes the types in this assembly not visible 
+// to COM components.  If you need to access a type in this assembly from 
+// COM, set the ComVisible attribute to true on that type.
+SetAssemblyAttribute ComVisible(*False)
+
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+SetAssemblyAttribute Guid("0d9b8863-1762-4835-a1df-9aca8dbd60d8")
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+SetAssemblyAttribute AssemblyVersion("8.3.5.*")
+SetAssemblyAttribute AssemblyFileVersion("8.3.5.0")

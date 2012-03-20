@@ -1,0 +1,28 @@
+      
+
+
+ItemManagement
+<add key="LocalLanguage" value="English"/>
+<add key="IsVATRequired" value="Yes"/>
+<add key="IsStyleNumberInputRequired" value="No"/>
+      <add key="IsPromoCodeMandatory" value="Yes"/>
+      <add key="IsCompositionCodeEditable" value="Yes"/>
+      <add key="IsCommodityCodeEditable" value="Yes"/>
+      <add key="PreSelectAllMarkets" value="No"/>
+<add key="ShowListPrice" value="No"/>
+<add key="AllowUPCInput" value="No"/>
+
+
+PO Management
+      <add key="AreStageSetDatesChangeable" value="No"/>
+<add key="IsLandingFactorRequiredForRoadDelivery" value="No"/>
+      <add key="DisplayPOHitsCancelDateWithDayFormat" value="No"/>
+      <add key="DaysBetweenShipDateAndCancelDate" value="0"/>
+
+
+Electronic Approvals (EAS)
+<add key="DisplayFreightCharges" value="No"/>
+
+
+
+Changes for China Release

@@ -1,0 +1,291 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>8</DepartmentCode>
+    <DepartmentName>ART</DepartmentName>
+    <DepartmentCodeName>8 - ART</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>3</Division>
+    <DepartmentCode>9</DepartmentCode>
+    <DepartmentName>COLLECTIBLES</DepartmentName>
+    <DepartmentCodeName>9 - COLLECTIBLES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>10</DepartmentCode>
+    <DepartmentName>ADULT H/L</DepartmentName>
+    <DepartmentCodeName>10 - ADULT H/L</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>11</DepartmentCode>
+    <DepartmentName>TOYS</DepartmentName>
+    <DepartmentCodeName>11 - TOYS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>12</DepartmentCode>
+    <DepartmentName>PLUSH</DepartmentName>
+    <DepartmentCodeName>12 - PLUSH</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>13</DepartmentCode>
+    <DepartmentName>MEDIA</DepartmentName>
+    <DepartmentCodeName>13 - MEDIA</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>14</DepartmentCode>
+    <DepartmentName>JEWELRY/WATCHES</DepartmentName>
+    <DepartmentCodeName>14 - JEWELRY/WATCHES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>15</DepartmentCode>
+    <DepartmentName>STATIONERY, BOOKS</DepartmentName>
+    <DepartmentCodeName>15 - STATIONERY, BOOKS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>16</DepartmentCode>
+    <DepartmentName>KIDS' HOME</DepartmentName>
+    <DepartmentCodeName>16 - KIDS' HOME</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>17</DepartmentCode>
+    <DepartmentName>CHRISTMAS</DepartmentName>
+    <DepartmentCodeName>17 - CHRISTMAS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>18</DepartmentCode>
+    <DepartmentName>CONFECTIONERY</DepartmentName>
+    <DepartmentCodeName>18 - CONFECTIONERY</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>3</Division>
+    <DepartmentCode>19</DepartmentCode>
+    <DepartmentName>WATCHES</DepartmentName>
+    <DepartmentCodeName>19 - WATCHES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>20</DepartmentCode>
+    <DepartmentName>ADULT S/L</DepartmentName>
+    <DepartmentCodeName>20 - ADULT S/L</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>21</DepartmentCode>
+    <DepartmentName>ADULT APPAREL</DepartmentName>
+    <DepartmentCodeName>21 - ADULT APPAREL</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>22</DepartmentCode>
+    <DepartmentName>DISCONTINUED</DepartmentName>
+    <DepartmentCodeName>22 - DISCONTINUED</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>23</DepartmentCode>
+    <DepartmentName>GIRLS</DepartmentName>
+    <DepartmentCodeName>23 - GIRLS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>24</DepartmentCode>
+    <DepartmentName>BOYS</DepartmentName>
+    <DepartmentCodeName>24 - BOYS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>25</DepartmentCode>
+    <DepartmentName>BABY</DepartmentName>
+    <DepartmentCodeName>25 - BABY</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>26</DepartmentCode>
+    <DepartmentName>BASIC MICKEY</DepartmentName>
+    <DepartmentCodeName>26 - BASIC MICKEY</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>27</DepartmentCode>
+    <DepartmentName>KIDS ACCESSORIES</DepartmentName>
+    <DepartmentCodeName>27 - KIDS ACCESSORIES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>28</DepartmentCode>
+    <DepartmentName>COSTUMES</DepartmentName>
+    <DepartmentCodeName>28 - COSTUMES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>29</DepartmentCode>
+    <DepartmentName>MIGHTY DUCKS</DepartmentName>
+    <DepartmentCodeName>29 - MIGHTY DUCKS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>30</DepartmentCode>
+    <DepartmentName>CANDY</DepartmentName>
+    <DepartmentCodeName>30 - CANDY</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>31</DepartmentCode>
+    <DepartmentName>GIFT BOXES</DepartmentName>
+    <DepartmentCodeName>31 - GIFT BOXES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>32</DepartmentCode>
+    <DepartmentName>BATH AND BODY</DepartmentName>
+    <DepartmentCodeName>32 - BATH AND BODY</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>33</DepartmentCode>
+    <DepartmentName>ADULT INITIATIVE</DepartmentName>
+    <DepartmentCodeName>33 - ADULT INITIATIVE</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>34</DepartmentCode>
+    <DepartmentName>VIDEO PRESALE</DepartmentName>
+    <DepartmentCodeName>34 - VIDEO PRESALE</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>2</Division>
+    <DepartmentCode>35</DepartmentCode>
+    <DepartmentName>GIFT SHOP &amp; TDS</DepartmentName>
+    <DepartmentCodeName>35 - GIFT SHOP &amp; TDS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>36</DepartmentCode>
+    <DepartmentName>LION KING THEATRICAL</DepartmentName>
+    <DepartmentCodeName>36 - LION KING THEATRICAL</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>1</Division>
+    <DepartmentCode>37</DepartmentCode>
+    <DepartmentName>PLUSH MINIATURES</DepartmentName>
+    <DepartmentCodeName>37 - PLUSH MINIATURES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>38</DepartmentCode>
+    <DepartmentName>ADULT STATIONERY</DepartmentName>
+    <DepartmentCodeName>38 - ADULT STATIONERY</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>60</DepartmentCode>
+    <DepartmentName>POSTAGE</DepartmentName>
+    <DepartmentCodeName>60 - POSTAGE</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>80</DepartmentCode>
+    <DepartmentName>PARK RETURNS</DepartmentName>
+    <DepartmentCodeName>80 - PARK RETURNS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>85</DepartmentCode>
+    <DepartmentName>PROMOTIONAL/MKTG ITEMS</DepartmentName>
+    <DepartmentCodeName>85 - PROMOTIONAL/MKTG ITEMS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>88</DepartmentCode>
+    <DepartmentName>TEST</DepartmentName>
+    <DepartmentCodeName>88 - TEST</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>5</Division>
+    <DepartmentCode>90</DepartmentCode>
+    <DepartmentName>BASIC MICKEY BLANKS</DepartmentName>
+    <DepartmentCodeName>90 - BASIC MICKEY BLANKS</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>99</DepartmentCode>
+    <DepartmentName>PASSPORTS &amp; CERTIFICATES</DepartmentName>
+    <DepartmentCodeName>99 - PASSPORTS &amp; CERTIFICATES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>390</DepartmentCode>
+    <DepartmentName>COSTUME SALES</DepartmentName>
+    <DepartmentCodeName>390 - COSTUME SALES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>6</Division>
+    <DepartmentCode>601</DepartmentCode>
+    <DepartmentName>SELS BY INSTALLMENT</DepartmentName>
+    <DepartmentCodeName>601 - SELS BY INSTALLMENT</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>710</DepartmentCode>
+    <DepartmentName>STORE OFFICE SUPPLIES</DepartmentName>
+    <DepartmentCodeName>710 - STORE OFFICE SUPPLIES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>720</DepartmentCode>
+    <DepartmentName>STORE OPERATING SUPPLIES</DepartmentName>
+    <DepartmentCodeName>720 - STORE OPERATING SUPPLIES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>730</DepartmentCode>
+    <DepartmentName>WAREHOUSE SUPPLIES</DepartmentName>
+    <DepartmentCodeName>730 - WAREHOUSE SUPPLIES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>740</DepartmentCode>
+    <DepartmentName>DISPLAY SUPPLIES</DepartmentName>
+    <DepartmentCodeName>740 - DISPLAY SUPPLIES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>760</DepartmentCode>
+    <DepartmentName>COSTUMES</DepartmentName>
+    <DepartmentCodeName>760 - COSTUMES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>770</DepartmentCode>
+    <DepartmentName>COMPUTER EQUIP &amp; SUPPLIES</DepartmentName>
+    <DepartmentCodeName>770 - COMPUTER EQUIP &amp; SUPPLIES</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>780</DepartmentCode>
+    <DepartmentName>MARKETING &amp; PROMOTION</DepartmentName>
+    <DepartmentCodeName>780 - MARKETING &amp; PROMOTION</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>70</Division>
+    <DepartmentCode>790</DepartmentCode>
+    <DepartmentName>COSTUMES - NEW 94</DepartmentName>
+    <DepartmentCodeName>790 - COSTUMES - NEW 94</DepartmentCodeName>
+  </AllDepartments>
+  <AllDepartments>
+    <Division>97</Division>
+    <DepartmentCode>977</DepartmentCode>
+    <DepartmentName>GALLERY ITEMS</DepartmentName>
+    <DepartmentCodeName>977 - GALLERY ITEMS</DepartmentCodeName>
+  </AllDepartments>
+</DocumentElement>

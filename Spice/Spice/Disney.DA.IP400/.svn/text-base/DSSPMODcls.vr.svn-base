@@ -1,0 +1,295 @@
+// ===============================================
+// Tarnjit Bhambra
+// 08 April 2009
+// DSSPMODcls	
+// Data Access Layer - Modules
+//------------------------------------------------
+// Modification
+//================================================
+
+Using System
+Using System.Text
+
+BegClass DSSPMODcls Access(*Public)
+
+	DclFld memRecords Type(*Integer4)  Access(*Public)
+	DclFld NxtModuleID Type(*Zoned) Len(5,0) Access(*Public)
+
+	DclDB Name(DB) DbName("TDST")
+	DclDiskFile Name(DSSPMODL1) Type(*Update) Org(*Indexed) ImpOpen(*No) DB(DB) AddRec(*Yes) RnmFmt(Dsspmdr:R_Dsspmdr)
+	
+	DclMemoryFile Name(mDSSPMOD) DBdesc(DB) FileDesc('DSSPMODL1') +
+		RnmFmt(RDSSPMOD, mDSSPMDR) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB Type(ASNA.VisualRPG.Runtime.Database)
+		
+		*this.DB = DB
+	EndConstructor
+	
+	BegConstructor Access(*Public)
+		DclSrParm DB            Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm ApplicationID Type(*Zoned) Len(5,0)
+		DclSrParm ModuleID      Type(*Zoned) Len(5,0)
+		
+		*this.DB = DB
+		
+		GetModuleID(ApplicationID,ModuleID)
+	EndConstructor
+	
+		
+	//Properties
+	BegProp Next_Module_ID Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR NxtModuleID
+		EndGet
+	EndProp
+	
+	BegProp Module_ID Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR MODID
+		EndGet
+	EndProp
+	
+	BegProp Module_Name Type(*Char) Len(35) Access(*Public)
+		BegGet
+			LeaveSR MODNAM
+		EndGet
+		
+		BegSet
+			MODNAM = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Application_ID Type(*Zoned) Len(5,0) Access(*Public)
+		BegGet
+			LeaveSR MODAPP
+		EndGet
+		
+		BegSet
+			MODAPP = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Create_Date Type(*Zoned ) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR MODCRD
+		EndGet
+		
+		BegSet
+			MODCRD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Create_Time Type(*Zoned ) Len(6,0) Access(*Public)
+		BegGet
+			LeaveSR MODCRT
+		EndGet
+		
+		BegSet
+			MODCRT = *PropVal
+		EndSet
+	EndProp
+	
+		BegProp Create_User Type(*Char ) len(10) Access(*Public)
+		BegGet
+			LeaveSR MODCRU 
+		EndGet
+		
+		BegSet
+			MODCRU = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Changed_Date Type(*Zoned ) Len(8,0) Access(*Public)
+		BegGet
+			LeaveSR MODCHD
+		EndGet
+		
+		BegSet
+			MODCHD = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Changed_Time Type(*Zoned ) Len(6,0) Access(*Public)
+		BegGet
+			LeaveSR MODCHT 
+		EndGet
+		
+		BegSet
+			MODCHT  = *PropVal
+		EndSet
+	EndProp
+	
+	BegProp Changed_User Type(*Char ) len(10) Access(*Public)
+		BegGet
+			LeaveSR MODCHU 
+		EndGet
+		
+		BegSet
+			MODCHU  = *PropVal
+		EndSet
+	EndProp
+	
+	// dataSet record Count
+	BegProp DataSet_Record_Count Type(*Integer4) Access(*Public)
+		BegGet
+			LeaveSR memRecords
+		EndGet
+	EndProp
+		
+		
+	// Methods
+	BegFunc GetNextModuleID  Type(*Zoned) Len(5,0)  Access(*Public)
+		DclSrParm ApplicationID Type(*Zoned) Len(5,0)
+		NxtModuleID = *Hival
+		
+		If Not DSSPMODL1.IsOpen
+			Open DSSPMODL1
+		EndIf
+		
+		SetGt File(DSSPMODL1) Key(ApplicationID)
+		Readpe  DSSPMODL1 Key(ApplicationID)
+		If Not %Eof(DSSPMODL1)
+			NxtModuleID = MODID + 1
+		  Else
+		    NxtModuleID = 1	
+		Endif
+		
+		LeaveSR NxtModuleID
+	EndFunc
+	
+	
+	BegFunc GetModuleID Type(*Boolean) Access(*Public)
+		DclSrParm ApplicationID Type(*Zoned) Len(5,0)
+		DclSrParm ModuleID Type(*Zoned) Len(5,0)
+		
+		If Not DSSPMODL1.IsOpen
+			Open DSSPMODL1
+		EndIf
+		
+		Chain From(DSSPMODL1) Key(ApplicationID) Access(*NoLock)
+		If %Found
+			LeaveSR *Off
+		Else
+			LeaveSR *On
+		EndIf
+	EndFunc
+	
+	BegFunc GetModuleIDForUpdate Type(*Boolean) Access(*Public)
+		DclSrParm ApplicationID Type(*Zoned) Len(5,0)
+		DclSrParm ModuleID Type(*Zoned) Len(5,0)
+		
+		If Not DSSPMODL1.IsOpen
+			Open DSSPMODL1
+		EndIf
+		
+		Chain From(DSSPMODL1) Key(ApplicationID) Access(*DFT) Err(*Extended)
+		If Not %Found
+			LeaveSR *On
+		EndIf
+		
+		If %Error = *On
+			Throw *New System.Exception('Failed to get record for update (DSSPMODL1)')
+			LeaveSR *On
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+		
+	BegSR WriteModuleID Access(*Public)
+		DclSrParm ApplicationID Type(*Zoned) Len(5,0)
+		DclSrParm ModuleID Type(*Zoned) Len(5,0)
+	
+		If Not DSSPMODL1.IsOpen
+			Open DSSPMODL1
+		EndIf
+		
+		MODID = ModuleID
+		MODAPP = ApplicationID
+		
+		Write RDSSPMOD Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to write record (DSSPMODL1)')
+		EndIf
+		
+		LeaveSR
+	EndSR
+	
+	BegFunc UpdateModuleID Type(*Boolean) Access(*Public) 
+		DclSrParm ApplicationID Type(*Zoned) Len(5,0)
+		DclSrParm ModuleID Type(*Zoned) Len(5,0)
+		
+		Update RDSSPMOD Err(*Extended)
+		If %Error = *On
+			Throw *New System.Exception('Failed to update record (DSSPMODL1)')
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *Off
+	EndFunc
+	
+	BegFunc DeleteModuleID Type(*Boolean) Access(*Public)
+		DclSrParm ApplicationID Type(*Zoned) Len(5,0)
+		DclSrParm ModuleID Type(*Zoned) Len(5,0)
+		
+		If Not DSSPMODL1.IsOpen
+			Open DSSPMODL1
+		EndIf
+		
+		Delete From(RDSSPMOD) Key(ApplicationID) Err(*Extended) 
+		If %Error = *On
+			LeaveSR *True
+		EndIf
+		
+		LeaveSR *False
+	EndFunc
+	
+	/region Memory files
+	
+	BegFunc setMemDSSPMOD  Type(*Boolean) Access(*Public)
+	
+		If Not DSSPMODL1.IsOpen
+			Open DSSPMODL1
+		EndIf
+	
+	 	If Not mDSSPMOD.IsOpen
+	 		Open mDSSPMOD
+		Endif	
+		
+		Unlock DSSPMODL1 
+		
+		mDSSPMOD.DataSet.Clear()
+		memRecords = *Zero
+	
+		SetLL DSSPMODL1 key(*Start)
+		DoUntil DSSPMODL1.IsEof
+			Read DSSPMODL1 Access(*NoLock)
+			If (Not DSSPMODL1.IsEof)
+			   Write mDSSPMOD
+			   memRecords += 1
+		    Endif
+		Enddo
+	    
+	    Close DSSPMODL1 
+	
+		LeaveSR *True
+	EndFunc	
+	
+	BegFunc ReadDSSPMOD Type(*Boolean) Access(*Public)
+		DclSrParm wIdx Type(*Integer2)
+		
+		If wIdx > memRecords 
+		   LeaveSR *True
+		Endif   
+		
+		Chain mDSSPMOD key(wIdx)
+		If mDSSPMOD.IsEof
+		   Unlock mDSSPMOD
+		   LeaveSR *True
+		Endif
+		
+		LeaveSR *false   
+	EndFunc
+	/EndRegion
+EndClass

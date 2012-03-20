@@ -1,0 +1,537 @@
+Using System
+Using System.Text
+
+DclNameSpace Disney.SRR
+
+BegClass ModelRun Access(*Public)
+
+	DclFld  FrmMbr			Type(*Char)		Len(10)
+	DclFld  ToMbr			Type(*Char)		Len(10)
+	DclFld  FileGroup		Type(*Zoned)	Len(3,0)
+	DclFld  Dept			Type(*Packed)	Len(3,0)
+	DclFld  x				Type( *Integer4 )
+	DclFld  memRecords		Type(*Integer4)
+	
+	DCLARRAY Name(GradeARR) DIM(300) Type(*Char)  Len(6) 
+	
+/Region Declare things
+
+	Dcldb AS400 dbname("TDST")
+	
+    DclDiskFile  Name(DSSRMSG) Type( *Input  ) Org( *Indexed ) +
+		File( "*Libl/DSSRMSG" ) DB( AS400 ) ImpOpen( *No ) AddRec( *No )		
+			
+	DclDiskFile Name(DSSRDTL1) Type(*Input) Org(*Indexed) +
+		DB(AS400) File('*Libl/DSSRDTL1') AddRec(*No) ImpOpen(*No) +
+
+	DclMemoryFile Name(Mem) DBdesc(AS400) Filedesc('*Libl/DSSRDTL') +
+		RnmFmt(RDSSRDTL, MDSSRDTL) ImpOpen(*No)
+
+	DclPlist  Name( CPYMBRParms )
+		DclParm FrmMbr Type(*Char)   Len(10)  DBDirection( *Input )		// Only to iSeries
+		DclParm ToMbr  Type(*Char)   Len(10)  DBDirection( *Input )		// Only to iSeries
+		DclParm Dept   Type(*Packed) Len(3,0) DBDirection( *Input )		// Only to iSeries
+		
+	DclPList Name( DSIPWRAP )
+		DclParm Job    Type(*Char) Len(10)   DBDirection( *Input )
+		DclParm Pgm    Type(*Char) Len(10)   DBDirection( *Input )
+		DclParm Optn1  Type(*Char) Len(153)  DBDirection( *Input )
+		DclParm Optn2  Type(*Char) Len(153)  DBDirection( *Input )
+		DclParm Submit Type(*Char) Len(1)    DBDirection( *Input )
+		DclParm Error  Type(*Char) Len(1)    DBDirection( *Output )
+		
+	DclDS Name(Option1)
+		DclDSfld Name(Buffer) Type(*Char) Len(153)
+		DclDSfld Name(Fld1)   Type(*Char) Len(1)    Overlay(Buffer,  1)
+		DclDSfld Name(Fld2)   Type(*Char) Len(1)    Overlay(Buffer,  5)
+		DclDSfld Name(Fld3)   Type(*Char) Len(3)    Overlay(Buffer, 10)
+		DclDSfld Name(Fld4)   Type(*Char) Len(3)    Overlay(Buffer, 20)
+	
+	DclDS Name(OptionB)
+		DclDSfld Name(Buffer2) Type(*Char) Len(153)
+		DclDSfld Name(Fld1b)    Type(*Char) Len(10)   Overlay(Buffer2,  1)
+		DclDSfld Name(Fld2b)    Type(*Char) Len(10)   Overlay(Buffer2, 11)
+		DclDSfld Name(Fld3b)    Type(*Char) Len(3)    Overlay(Buffer2, 21)
+		DclDSfld Name(Fld4b)    Type(*Char) Len(3)    Overlay(Buffer2, 24)
+	
+    DclPlist  Name( CommandEXC )
+		DclParm Command Type(*Char)   Len(500)     DBDirection( *Input )		// Only to iSeries
+		DclParm Length  Type(*Packed)   Len(15,5)  DBDirection( *Input )		// Only to iSeries
+	
+	 DclPlist  Name( DS883HParms )
+		DclParm DeptP	   Type(*Packed)  Len(3,0)	DBDirection( *Input )
+		DclParm ModeP	   Type(*Char)    Len(1)	DBDirection( *Input )
+		DclParm ClassP     Type(*Packed)  Len(4,0)	DBDirection( *Input )	
+		DclParm VendorP    Type(*Packed)  Len(5,0)	DBDirection( *Input )
+		DclParm StyleP     Type(*Packed)  Len(4,0)	DBDirection( *Input )
+		DclParm ColorP     Type(*Packed)  Len(3,0)	DBDirection( *Input )
+		DclParm SizeP      Type(*Packed)  Len(4,0)	DBDirection( *Input )
+		DclParm HierLevelP Type(*Char)    Len(1)	DBDirection( *Input )
+		DclParm LevelValP  Type(*Char)    Len(3)	DBDirection( *Input )
+		DclParm NewAlcFlgP Type(*Char)    Len(1) 	DBDirection( *Both )
+		DclParm CovCutOP   Type(*Packed)  Len(5,2) 	DBDirection( *Both )
+		DclParm UplftFctP  Type(*Packed)  Len(5,2)	DBDirection( *Both )
+		DclParm SmfFctP    Type(*Packed)  Len(5,2)	DBDirection( *Both )
+		DclParm FrmMbrP	   Type(*Char)    Len(10)   DBDirection( *Input )	
+		DclParm StrMkt	   Type(*Char)    Len(2)    DBDirection( *Input )		
+		DclParm StrGrade   Type(*Char)    Len(3)    DBDirection( *Input )	
+		DclParm AlcLvl     Type(*Char)    Len(1)    DBDirection( *Input )	
+		DclParm CCOLvl     Type(*Char)    Len(1)    DBDirection( *Input )	
+		DclParm FwFLvl     Type(*Char)    Len(1)    DBDirection( *Input )	
+		DclParm SmFTLvl    Type(*Char)    Len(1)    DBDirection( *Input )	
+		
+	DclPlist  Name( DS883HParms2 )	
+		DclParm DeptP	   Type(*Packed) Len(3,0)	DBDirection( *Input )
+		DclParm ModeP	   Type(*Char)   Len(1)		DBDirection( *Input )
+	/EndRegion
+
+/Region Constructor
+	BegConstructor Access(*Public)
+		DclSrParm p_AS400	  Type(asna.VisualRPG.Runtime.Database)
+		
+        *this.As400 = p_AS400
+        
+        // Load Grades into Array
+		For index(x=0) to(%Elem(GradeArr)) 
+		    if %Elem(GradeArr) = x  *Or GradeArr[x] = *Blanks
+		       Leave
+		     Endif     
+		     GradeArr[x] = *Blanks 
+		EndFOR
+
+		
+		If Not DSSRMSG.IsOpen()
+		   Open DSSRMSG
+		Endif
+		
+		SetLL DSSRMSG Key(*Start) Err( *Extended)
+		Do  FromVal(0) ToVal(*Hival) Index(x)
+		   Read DSSRMSG
+           If	DSSRMSG.IsEof // End of file
+                Leave
+           EndIf
+		   *this.GradeArr[x]  = %Char(SGSTR) + %Trim(SGGRD)	
+		Enddo
+		
+	    Close DSSRMSG
+	EndConstructor
+/EndRegion
+
+/Region runModel
+
+	BegFunc runModel   Type(*Boolean)  Access(*Public)
+		DclSrParm wFrmMbr2    Type(*Char)	Len(10)
+		DclSrParm wToMbr2     Type(*Char)	Len(10)
+		DclSrParm wFileGroup2 Type(*Zoned)  Len(3,0)
+		DclSrParm wDept2      Type(*Packed) Len(3,0)
+
+		*this.FrmMbr	= wFrmMbr2
+		*this.ToMbr		= wToMbr2
+		*This.Dept		= wDept2
+		*this.FileGroup = wFileGroup2
+		
+		//-------------------------------------------------------------
+		// Copy Lever's where key less than 5
+		//-------------------------------------------------------------
+		DoEvents
+		Try
+			Call Pgm("*Libl/DS883JC") ParmList( CpyMbrParms ) DB( AS400 )
+		Catch Err Exception
+			MsgBox 'Unable to copy Item records. Contact Support'
+			LeaveSR *False
+		EndTry
+			
+		// Set buffer ready for modeling programs
+		Buffer = *Blank
+		Fld1   = 'M'
+			
+		If %SubSt(wToMbr2,1,3) = 'DPT'
+			Fld2 = 'W'
+		Else
+			Fld2 = 'D'
+		EndIf
+			
+		Fld3   = wDept2.ToString('000')
+		Fld4   = wFileGroup2.ToString('000')
+			
+		//-------------------------------------------------------------
+		// Update levers
+		//-------------------------------------------------------------
+		Job    = 'S882DC0001'
+		Pgm    = 'DS882CC'
+		Optn1  = Buffer		// This is part of a data structure
+		Optn2  = *Blank
+		Submit = 'N'
+		
+		DoEvents
+		
+		Try
+			Call Pgm("*Libl/DSIPWRAP") ParmList( DSIPWRAP ) DB( AS400 )
+			If Error = 'Y'
+				MsgBox 'Error while running DS882CC, contact Support' Icon(*Stop)
+				LeaveSR *False
+			EndIf
+		Catch Err Exception
+			MsgBox 'Error calling DS882CC, contact Support' Icon(*Stop)
+			LeaveSR *False
+		Endtry
+			
+		//-------------------------------------------------------------
+		// Calculate Smooth rate of Sale
+		//-------------------------------------------------------------			
+		Job  = 'S882FC0001'
+		Pgm  = 'DS882EC'
+		
+		DoEvents
+		
+		Try
+			Call Pgm("*Libl/DSIPWRAP") ParmList( DSIPWRAP ) DB( AS400 )
+			If Error = 'Y'
+				MsgBox 'Error while running DS882EC, contact Support' Icon(*Stop)
+				LeaveSR *False
+			EndIf
+		Catch Err Exception
+			MsgBox 'Error Calling DS882EC, contact Support' Icon(*Stop)
+			LeaveSR *False
+		EndTry
+		
+		//-------------------------------------------------------------
+		// Calculate Stock Requirements
+		//-------------------------------------------------------------
+		Job  = 'S882HC0001'
+		Pgm  = 'DS882GC'
+		
+		DoEvents
+		
+		Try
+			Call Pgm("*Libl/DSIPWRAP") ParmList( DSIPWRAP ) DB(AS400 )
+			If Error = 'Y'
+				MsgBox 'Error while running DS882GC, contact Support' Icon(*Stop)
+				LeaveSR *False
+			EndIf
+		Catch Err Exception
+			MsgBox 'Error while running DS882GC, contact Support' Icon(*Stop)
+			LeaveSR *False
+		EndTry
+
+		// Report Success
+		LeaveSr *True
+	EndFunc
+/EndRegion	
+
+/Region CreateMembers
+	// --------------------------------------------------------------------------
+	// Create members in 4 lever files and DSSRDTL file 
+	// --------------------------------------------------------------------------
+	BegFunc  CreateMembers   Type(*Boolean)  Access(*Public)
+		DclSrParm wFrmMbr2		Type(*Char)		Len(10)
+		DclSrParm wToMbr2		Type(*Char)		Len(10)
+		DclSrParm wFileGroup2  Type(*Zoned)	Len(3,0)
+		DclSrParm wDept2		Type(*Packed)	Len(3,0)
+
+		 *this.FrmMbr	 = wFrmMbr2
+		 *this.ToMbr	 = wToMbr2
+		 *This.Dept      = wDept2
+		 *this.FileGroup = wFileGroup2
+			
+		 // Create Members
+		 DoEvents
+		 Try
+		     Call Pgm( "*Libl/DS883IC") ParmList( CpyMbrParms ) DB( AS400 )
+		   Catch Err Exception
+		  	 LeaveSR *False
+		 EndTry
+		 
+		 LeaveSr *True
+	EndFunc
+/endRegion
+
+/Region ApplyChanges	
+	// --------------------------------------------------------------------------
+	// Apply changes back top the AS400
+	// --------------------------------------------------------------------------
+	BegFunc ApplyChanges   Type(*Boolean)  Access(*Public)
+		DclSrParm wFrmMbr2		Type(*Char)	  Len(10)
+		DclSrParm wToMbr2		Type(*Char)	  Len(10)
+		DclSrParm wFileGroup2	Type(*Zoned)  Len(3,0)
+		DclSrParm wDept2		Type(*Packed) Len(3,0)
+
+		*this.FrmMbr	= wFrmMbr2
+		*this.ToMbr		= wToMbr2
+		*This.Dept		= wDept2
+		*this.FileGroup = wFileGroup2
+			
+		// Set buffer ready for modeling programs
+		Buffer2 = *Blank
+		Fld1b  = wToMbr2
+		Fld2b  = wFrmMbr2
+		Fld3b  = wDept2.ToString('000')
+		Fld4b  = *Blanks
+			
+		//-------------------------------------------------------------
+		// Program 
+		//-------------------------------------------------------------
+		Job    = 'S883DC0001'
+		Pgm    = 'DS883CC'
+		Optn1  = Buffer2		// This is part of a data structure
+		Optn2  = *Blank
+		Submit = 'N'
+		Error =  'N'
+		Command = 'SBMJOB CMD(CALL PGM(DSIPWRAP) PARM(' + "'"+%Trim(Job)+"'" + ' ' +"'"+%Trim(Pgm)+"'" +' '+"'"+%Trim(Optn1)+"'" +' '+ "'" +%Trim(Optn2)+"'" +' '+"'"+%Trim(Submit)+"'" +' '+ "'"+%Trim(Error)+"'"+ ')) JOBQ(QGPL/QTXTSRCH)' 
+		Length  = %Size(Command) 
+			
+		DoEvents
+		
+		Try
+			Call Pgm("QCMDEXC") ParmList(CommandEXC) DB( AS400 )
+		Catch Err Exception
+			MsgBox 'Error calling DS883CC, contact Support' Icon(*Stop)
+			LeaveSR *False
+		Endtry
+			
+		LeaveSR *True
+	EndFunc
+/EndRegion
+
+/Region RtvInheritedValue
+	// --------------------------------------------------------------------------
+	// Calll Program to close files
+	// --------------------------------------------------------------------------
+	BegFunc  RtvInheritedValue  Type(*Boolean)  Access(*Public)
+		
+		 // Refresh Workbench Files
+		DoEvents
+		Try
+		   	Call Pgm( "*Libl/DS883HR") ParmList( *None )  DB( AS400 )
+		Catch Err Exception
+			LeaveSR *False
+		EndTry
+		 
+		LeaveSr *True
+	EndFunc
+	
+	// --------------------------------------------------------------------------
+	// Refresh all the workbench files with realtime information 
+	// --------------------------------------------------------------------------
+	BegFunc  RtvInheritedValue  Type(*Boolean)  Access(*Public)
+		DclSrParm wDept 	 Type(*Zoned)  Len(3,0)
+		DclSrParm wMode      Type(*Char)  Len(1)
+		  
+		Deptp  = wDept
+		ModeP  = wMode
+		 
+		 // Refresh Workbench Files
+		 DoEvents
+		 Try
+		     Call Pgm( "*Libl/DS883HR") ParmList( DS883HParms2 ) DB( AS400 )
+		   Catch Err Exception
+		  	 LeaveSR *False
+		 EndTry
+		 
+		 LeaveSr *True
+	EndFunc
+	
+	// --------------------------------------------------------------------------
+	// Retrieve the inherited lever value from the AS400  
+	// --------------------------------------------------------------------------
+	BegFunc  RtvInheritedValue  Type(*Boolean)  Access(*Public)
+		DclSrParm wDept 	 Type(*Zoned)  Len(3,0)
+		DclSrParm wMode      Type(*Char)  Len(1)
+		DclSrParm wClass     Type(*Zoned) Len(4,0)
+		DclSrParm wVendor    Type(*Zoned) Len(5,0)
+		DclSrParm wStyle     Type(*Zoned) Len(4,0)
+		DclSrParm wColor     Type(*Zoned) Len(3,0)
+		DclSrParm wSize      Type(*Zoned) Len(4,0)
+		DclSrParm wHierLevel Type(*Char)  Len(1)
+		DclSrParm wLevelVal  Type(*Char)  Len(3) 
+		DclSrParm wNewAlcFlg Type(*Char)  Len(1) 	By(*REFERENCE)
+		DclSrParm wCovCutO   Type(*Zoned)  Len(5,2) By(*REFERENCE)	
+		DclSrParm wUplftFct  Type(*Zoned)  Len(5,2) By(*REFERENCE)
+		DclSrParm wSmfFct    Type(*Zoned)  Len(5,2) By(*REFERENCE)
+		DclSrParm wFrmMbr    Type(*Char)  Len(10)
+		DclSrParm wStrMkt    Type(*Char)  Len(2)
+		DclSrParm wStrGrade  Type(*Char)  Len(3)
+		DclSrParm wAlcLvl    Type(*Char)  Len(1)
+		DclSrParm wCCOLvl    Type(*Char)  Len(1)
+		DclSrParm wFwFLvl    Type(*Char)  Len(1)
+		DclSrParm wSmFTLv    Type(*Char)  Len(1)
+		 	
+		// Set Up Key Values
+		Deptp	   = wDept
+		ModeP	   = wMode	
+		ClassP	   = wClass
+		VendorP	   = wVendor
+		StyleP	   = wStyle
+		ColorP	   = wColor
+		SizeP	   = wSize
+		HierLevelP = wHierLevel
+		LevelValP  = wLevelVal
+		NewAlcFlgP = wNewAlcFlg
+		CovCutOP   = wCovCutO 
+		UplftFctP  = wUplftFct
+		SmfFctP    = wSmfFct 
+		FrmMbrP    = wFrmMbr
+		StrMkt	   = wStrMkt
+		StrGrade   = wStrGrade
+		AlcLvl     = wAlcLvl  
+		CCOLvl     = wCCOLvl 
+		FwFLvl     = wFwFLvl 
+		SmFTLvl    = wSmFTLv 
+		
+		 // Refresh Workbench Files
+		 DoEvents
+		 Try
+		   	Call Pgm( "*Libl/DS883HR") ParmList( DS883HParms ) DB( AS400 )
+			wNewAlcFlg = NewAlcFlgP
+			wCovCutO   = CovCutOP 
+			wUplftFct  = UplftFctP
+			wSmfFct    = SmfFctP 
+			
+		   Catch Err Exception
+		  	 LeaveSR *False
+		 EndTry
+		 
+		 LeaveSr *True
+	EndFunc
+/endRegion	
+
+/Region setMemFile
+	BegFunc  setMemFile Type(*Boolean)  Access(*Public)
+		DclSrParm MemberName1  Type(*Char)   Len(10)
+		
+		If DSSRDTL1.IsOpen
+			Close DSSRDTL1
+		EndIf
+		
+		DSSRDTL1.MemberName = MemberName1.Trim()
+		Open DSSRDTL1
+		
+		If Not Mem.IsOpen
+			Open Mem
+		EndIf
+		
+		mem.Dataset.Clear() 
+		memRecords = *Zero
+		
+		// Create the dataset from the iSeries file
+		SetLL DSSRDTL1 Key(*Start)
+		DoUntil DSSRDTL1.IsEof
+			Read DSSRDTL1
+			If (Not DSSRDTL1.IsEof) 
+				Write Mem
+				memRecords += 1
+			EndIf
+		EndDo
+		Close DSSRDTL1
+		
+		LeaveSR  *True
+	EndFunc
+/EndRegion	
+	
+/Region getTotals	
+	// --------------------------------------------------------------------------
+	// After a model run get totals from DSSRDTL (Member) as per level 
+	// --------------------------------------------------------------------------
+	BegFunc  getTotals Type(*Boolean)  Access(*Public)
+		DclSrParm wDept 	 Type(*Zoned)   Len(3,0)
+		DclSrParm M_Item      Type(*Char)   Len(24)
+		DclSrParm M_Store     Type(*Zoned)   Len(3,0)
+		DclSrParm M_Market    Type(*Char)   Len(2)
+		DclSrParm M_Grade     Type(*Char)   Len(3)
+		DclSrParm wLevel2N    Type(*Zoned)  Len(1,0)
+		DclSrParm M_TOTSTCKW  Type(*Zoned)  Len(7,0) 	By(*REFERENCE)
+		DclSrParm M_MDLREQTW  Type(*Zoned)  Len(7,0)	By(*REFERENCE)	
+		DclSrParm M_NEWSROSW  Type(*Zoned)  Len(6,2)	By(*REFERENCE)
+		DclSrParm M_PRALQTYW  Type(*Zoned)  Len(7,0)	By(*REFERENCE)
+		
+		//DclFld Changed Type(*Boolean)
+	     
+		DclFld Dept	Like(SRDEPT)
+		DclFld CLS		Like(SRCLS)
+		DclFld VEN		Like(SRVEN)
+		DclFld STY		Like(SRSTY) 
+		Dclfld CLR		Like(SRCLR)
+		DclFld SIZ		Like(SRSIZ)
+		DclFld Store	Like(SRSTR)
+		DclFld Market	Like(SRMKT)
+		
+		DclFld SearchString  Type(*Char) Len(6)
+	     
+		CLS = Convert.ToInt32( %Subst(M_ITEM:1:4) ) 
+		VEN = Convert.ToInt32( %Subst(M_ITEM:6:5) )
+		STY = Convert.ToInt32( %Subst(M_ITEM:12:4) )
+		CLR = Convert.ToInt32( %Subst(M_ITEM:17:3) )
+		SIZ = Convert.ToInt32( %Subst(M_ITEM:21:4) )
+		Dept = wDept 
+		Store = M_STORE
+		Market = M_MARKET
+	     
+		M_TOTSTCKW = 0 
+		M_MDLREQTW = 0
+		M_NEWSROSW = 0
+		M_PRALQTYW = 0
+	     
+	    Do fromVal(1) toVal(*Hival)  Index(x) 
+         	  
+			Chain mem Key(x)
+		    If x > memRecords 
+         	    Leave
+            Endif   
+		    
+			If CLS = SRCLS *And VEN = SRVEN  *And STY = SRSTY  *And CLR =  SRCLR *And SIZ = SRSIZ 
+			Else
+				Iterate 
+			Endif 
+	        
+			Select
+	     
+			// Item/Store
+			When wLevel2N = 1
+				If Store = SRSTR
+					M_TOTSTCKW += SRSTRQ 
+			        M_MDLREQTW += SRRPQT
+			        M_NEWSROSW += SRSRST
+			        M_PRALQTYW += SRPRAQ
+		            Leave
+				Endif  
+					        
+			// Item/Grade
+			When wLevel2N = 2
+				SearchString = %Char(SRSTR) + %Trim(M_GRADE)                
+		 		If %LookUp(SearchString:*this.GradeARR:0) = -1 
+		 			Iterate
+		 		Endif			   
+	       
+				M_TOTSTCKW += SRSTRQ 
+				If SRRPQT > 0
+					M_MDLREQTW += SRRPQT
+				Endif
+				M_NEWSROSW += SRSRST
+				M_PRALQTYW += SRPRAQ	
+	              
+			// Item/Market
+			When wLevel2N = 3
+				If Market = SRMKT
+					M_TOTSTCKW += SRSTRQ 
+					If SRRPQT > 0
+						M_MDLREQTW += SRRPQT
+					Endif
+					M_NEWSROSW += SRSRST
+					M_PRALQTYW += SRPRAQ
+				Endif  
+	       
+			// Item
+			When wLevel2N = 4
+				M_TOTSTCKW += SRSTRQ
+				If SRRPQT > 0 
+					M_MDLREQTW += SRRPQT 
+				Endif
+				M_NEWSROSW += SRSRST
+				M_PRALQTYW += SRPRAQ
+			EndSL 
+		Enddo  
+		 
+		 LeaveSr *True
+	EndFunc
+/EndRegion	
+EndClass

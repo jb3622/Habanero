@@ -1,0 +1,173 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Colour>
+    <ColourCode>0</ColourCode>
+    <ColourName>NO COLOR</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>1</ColourCode>
+    <ColourName>BLACK</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>2</ColourCode>
+    <ColourName>2ND BLACK</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>20</ColourCode>
+    <ColourName>WHITE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>21</ColourCode>
+    <ColourName>2ND WHITE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>22</ColourCode>
+    <ColourName>3RD WHITE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>50</ColourCode>
+    <ColourName>GRAY</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>51</ColourCode>
+    <ColourName>2ND GRAY</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>100</ColourCode>
+    <ColourName>PINK</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>101</ColourCode>
+    <ColourName>2ND PINK</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>200</ColourCode>
+    <ColourName>RED</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>201</ColourCode>
+    <ColourName>2ND RED</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>300</ColourCode>
+    <ColourName>PURPLE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>301</ColourCode>
+    <ColourName>2ND PURPLE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>400</ColourCode>
+    <ColourName>BLUE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>401</ColourCode>
+    <ColourName>2ND BLUE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>450</ColourCode>
+    <ColourName>DENIM</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>451</ColourCode>
+    <ColourName>2ND DENIM</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>500</ColourCode>
+    <ColourName>GREEN</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>501</ColourCode>
+    <ColourName>2ND GREEN</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>600</ColourCode>
+    <ColourName>YELLOW</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>601</ColourCode>
+    <ColourName>2ND YELLOW</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>700</ColourCode>
+    <ColourName>ORANGE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>701</ColourCode>
+    <ColourName>2ND ORANGE</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>800</ColourCode>
+    <ColourName>BROWN</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>801</ColourCode>
+    <ColourName>2ND BROWN</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>850</ColourCode>
+    <ColourName>NEUTRAL</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>851</ColourCode>
+    <ColourName>2ND NEUTRAL</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>890</ColourCode>
+    <ColourName>BLACK</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>900</ColourCode>
+    <ColourName>MULTI</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>901</ColourCode>
+    <ColourName>2ND MULTI</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>950</ColourCode>
+    <ColourName>METALLIC</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>951</ColourCode>
+    <ColourName>2ND METALLIC</ColourName>
+    <Status>true</Status>
+  </Colour>
+  <Colour>
+    <ColourCode>999</ColourCode>
+    <ColourName>APP COLOR</ColourName>
+    <Status>true</Status>
+  </Colour>
+</DocumentElement>

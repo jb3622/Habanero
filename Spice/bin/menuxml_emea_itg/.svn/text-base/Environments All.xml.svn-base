@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- List of Servers and the Environments held there -->
+<Environments>
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDST (Development)" Image="BackgroundUK.jpg" DateFormat="DMY"/>
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDST (Integration Europe)" Image="BackgroundUK.jpg"/>
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDST (Integration NA)"     Image="BackgroundUS.jpg"/>
+  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDST (QA)"          Image="BackgroundUK.jpg"/>
+  <Environment HostName="TDS2.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDS2 Europe (Live)" Image="BackgroundUK.jpg" EnvironmentType="*Production"/>
+  <Environment HostName="TDS1.TDS.DISNEY.COM" Domain="SWNA" EnvironmentName="TDS1 NA (Live)"     Image="BackgroundUS.jpg" EnvironmentType="*Production" DateFormat="MDY"/>
+</Environments>

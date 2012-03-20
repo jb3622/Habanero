@@ -1,0 +1,560 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.DA.IP400
+
+BegClass frmStgSetDateUpd Extends(System.Windows.Forms.Form) Access(*Public)
+/Region Declares
+	Dcldb Name(Pgmdb) dbname('TDST') 
+	
+	DclFld DSSPSSDcls		Type(DSSPSSDcls)
+	DclFld DSSPPOHcls		Type(DSSPPOHcls)
+	DclFld WrkDate1			Type(String)
+	DclFld WrkDate2			Type(*Date)
+	DclFld wrkDate			Type(*Date)
+ 	DclFld xStgSetDateID    Type(*Zoned) Len(5,0)
+	DclFld WrkDate3			Type(*Integer4)
+	DclFld CheckFound		Type(Boolean)
+	DclFld StageSetDateID	Type(String)
+	DclFld xcancel		    Type(Boolean)		
+ 	DclFld TodayString	    Type(String)
+ 	DclFld TodayDate	    Type(*Date)
+ 	DclFld TodayInteger	    Type(*Integer4)
+ 	DclFld User				Type(Disney.Menu.Users)
+	DclFld Environments   	Type(Disney.Menu.Environments)
+	DclFld DateFormat		Type(String)
+/EndRegion	
+	
+/Region Constructors
+	BegConstructor Access(*Public)
+		DclSrParm Pgmdb      Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm User         Type(Disney.Menu.Users)
+		DclSrParm Environments Type(Disney.Menu.Environments)
+				
+		InitializeComponent()
+	
+		*This.Pgmdb = Pgmdb
+		*This.User  = User	
+		*This.Environments = Environments
+		*This.DateFormat   = Environments.DateFormat
+				
+	EndConstructor
+/EndRegion
+		    
+/Region Default Windows Form Designer generated code
+		DclFld btnHelp System.Windows.Forms.Button				 Access(*Private) WithEvents(*Yes)
+		DclFld btnCancel System.Windows.Forms.Button			 Access(*Private) WithEvents(*Yes)
+		DclFld btnOK System.Windows.Forms.Button				 Access(*Private) WithEvents(*Yes)
+		DclFld btnDelete System.Windows.Forms.Button			 Access(*Private) WithEvents(*Yes)
+		DclFld lblStgSetDateID System.Windows.Forms.Label		 Access(*Private) WithEvents(*Yes)
+		DclFld grp2 System.Windows.Forms.GroupBox				 Access(*Private) WithEvents(*Yes)
+		DclFld grp1 System.Windows.Forms.GroupBox				 Access(*Private) WithEvents(*Yes)
+		DclFld txtCreateDate System.Windows.Forms.TextBox		 Access(*Private) WithEvents(*Yes)
+		DclFld lblChangedUser System.Windows.Forms.Label		 Access(*Private) WithEvents(*Yes)
+		DclFld lblChangedTime System.Windows.Forms.Label		 Access(*Private) WithEvents(*Yes)
+		DclFld lblChangedDate System.Windows.Forms.Label		 Access(*Private) WithEvents(*Yes)
+		DclFld lblCreateTime System.Windows.Forms.Label			 Access(*Private) WithEvents(*Yes)
+		DclFld lblCreateUser System.Windows.Forms.Label			 Access(*Private) WithEvents(*Yes)
+		DclFld lblCreateDate System.Windows.Forms.Label			 Access(*Private) WithEvents(*Yes)
+		DclFld lblStgSetDate System.Windows.Forms.Label			 Access(*Private) WithEvents(*Yes)
+		DclFld txtChangeDate System.Windows.Forms.TextBox		 Access(*Private) WithEvents(*Yes)
+		DclFld txtCreateUser System.Windows.Forms.TextBox		 Access(*Private) WithEvents(*Yes)
+		DclFld txtCreateTime System.Windows.Forms.TextBox		 Access(*Private) WithEvents(*Yes)
+		DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+		DclFld txtChangeUser System.Windows.Forms.TextBox		 Access(*Private) WithEvents(*Yes)
+		DclFld txtChangeTime System.Windows.Forms.TextBox		 Access(*Private) WithEvents(*Yes)
+		DclFld DTPicker System.Windows.Forms.DateTimePicker		 Access(*Private) WithEvents(*Yes)   
+		DclFld txtStgSetDateID System.Windows.Forms.TextBox      Access(*Private) WithEvents(*Yes) 
+		DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+		
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		*this.btnCancel = *new System.Windows.Forms.Button()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.grp1 = *new System.Windows.Forms.GroupBox()
+		*this.txtStgSetDateID = *new System.Windows.Forms.TextBox()
+		*this.lblStgSetDate = *new System.Windows.Forms.Label()
+		*this.lblStgSetDateID = *new System.Windows.Forms.Label()
+		*this.DTPicker = *new System.Windows.Forms.DateTimePicker()
+		*this.btnOK = *new System.Windows.Forms.Button()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.btnDelete = *new System.Windows.Forms.Button()
+		*this.grp2 = *new System.Windows.Forms.GroupBox()
+		*this.txtChangeUser = *new System.Windows.Forms.TextBox()
+		*this.txtChangeTime = *new System.Windows.Forms.TextBox()
+		*this.txtChangeDate = *new System.Windows.Forms.TextBox()
+		*this.txtCreateUser = *new System.Windows.Forms.TextBox()
+		*this.txtCreateTime = *new System.Windows.Forms.TextBox()
+		*this.txtCreateDate = *new System.Windows.Forms.TextBox()
+		*this.lblChangedUser = *new System.Windows.Forms.Label()
+		*this.lblChangedTime = *new System.Windows.Forms.Label()
+		*this.lblChangedDate = *new System.Windows.Forms.Label()
+		*this.lblCreateTime = *new System.Windows.Forms.Label()
+		*this.lblCreateUser = *new System.Windows.Forms.Label()
+		*this.lblCreateDate = *new System.Windows.Forms.Label()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.grp1.SuspendLayout()
+		*this.grp2.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//btnCancel
+		//
+		*this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.btnCancel.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.btnCancel.Location = *new System.Drawing.Point(290, 231)
+		*this.btnCancel.Name = "btnCancel"
+		*this.btnCancel.Size = *new System.Drawing.Size(75, 23)
+		*this.btnCancel.TabIndex = 1
+		*this.btnCancel.Text = "Cancel"
+		*this.btnCancel.UseVisualStyleBackColor = *True
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//grp1
+		//
+		*this.grp1.Controls.Add(*this.txtStgSetDateID)
+		*this.grp1.Controls.Add(*this.lblStgSetDate)
+		*this.grp1.Controls.Add(*this.lblStgSetDateID)
+		*this.grp1.Controls.Add(*this.DTPicker)
+		*this.grp1.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.grp1.Location = *new System.Drawing.Point(6, 12)
+		*this.grp1.Name = "grp1"
+		*this.grp1.Size = *new System.Drawing.Size(359, 91)
+		*this.grp1.TabIndex = 5
+		*this.grp1.TabStop = *False
+		*this.grp1.Text = "Stage Set Date"
+		//
+		//txtStgSetDateID
+		//
+		*this.txtStgSetDateID.Location = *new System.Drawing.Point(145, 25)
+		*this.txtStgSetDateID.Name = "txtStgSetDateID"
+		*this.txtStgSetDateID.Size = *new System.Drawing.Size(100, 20)
+		*this.txtStgSetDateID.TabIndex = 6
+		//
+		//lblStgSetDate
+		//
+		*this.lblStgSetDate.AutoSize = *True
+		*this.lblStgSetDate.Location = *new System.Drawing.Point(9, 54)
+		*this.lblStgSetDate.Name = "lblStgSetDate"
+		*this.lblStgSetDate.Size = *new System.Drawing.Size(80, 13)
+		*this.lblStgSetDate.TabIndex = 5
+		*this.lblStgSetDate.Text = "Stage Set Date"
+		//
+		//lblStgSetDateID
+		//
+		*this.lblStgSetDateID.AutoSize = *True
+		*this.lblStgSetDateID.Location = *new System.Drawing.Point(9, 29)
+		*this.lblStgSetDateID.Name = "lblStgSetDateID"
+		*this.lblStgSetDateID.Size = *new System.Drawing.Size(92, 13)
+		*this.lblStgSetDateID.TabIndex = 4
+		*this.lblStgSetDateID.Text = "Stage Set date ID"
+		//
+		//DTPicker
+		//
+		*this.DTPicker.CustomFormat = ""
+		*this.DTPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+		*this.DTPicker.Location = *new System.Drawing.Point(145, 50)
+		*this.DTPicker.Name = "DTPicker"
+		*this.DTPicker.Size = *new System.Drawing.Size(158, 20)
+		*this.DTPicker.TabIndex = 2
+		//
+		//btnOK
+		//
+		*this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.btnOK.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.btnOK.Location = *new System.Drawing.Point(211, 231)
+		*this.btnOK.Name = "btnOK"
+		*this.btnOK.Size = *new System.Drawing.Size(75, 23)
+		*this.btnOK.TabIndex = 4
+		*this.btnOK.Text = "OK"
+		*this.btnOK.UseVisualStyleBackColor = *True
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.btnHelp.Font = *new System.Drawing.Font("Microsoft Sans Serif", 8.25, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.btnHelp.Location = *new System.Drawing.Point(6, 231)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 7
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//btnDelete
+		//
+		*this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.btnDelete.Location = *new System.Drawing.Point(132, 231)
+		*this.btnDelete.Name = "btnDelete"
+		*this.btnDelete.Size = *new System.Drawing.Size(75, 23)
+		*this.btnDelete.TabIndex = 8
+		*this.btnDelete.Text = "Delete"
+		*this.btnDelete.UseVisualStyleBackColor = *True
+		//
+		//grp2
+		//
+		*this.grp2.Controls.Add(*this.txtChangeUser)
+		*this.grp2.Controls.Add(*this.txtChangeTime)
+		*this.grp2.Controls.Add(*this.txtChangeDate)
+		*this.grp2.Controls.Add(*this.txtCreateUser)
+		*this.grp2.Controls.Add(*this.txtCreateTime)
+		*this.grp2.Controls.Add(*this.txtCreateDate)
+		*this.grp2.Controls.Add(*this.lblChangedUser)
+		*this.grp2.Controls.Add(*this.lblChangedTime)
+		*this.grp2.Controls.Add(*this.lblChangedDate)
+		*this.grp2.Controls.Add(*this.lblCreateTime)
+		*this.grp2.Controls.Add(*this.lblCreateUser)
+		*this.grp2.Controls.Add(*this.lblCreateDate)
+		*this.grp2.Location = *new System.Drawing.Point(6, 109)
+		*this.grp2.Name = "grp2"
+		*this.grp2.Size = *new System.Drawing.Size(359, 115)
+		*this.grp2.TabIndex = 9
+		*this.grp2.TabStop = *False
+		*this.grp2.Text = "Audit"
+		//
+		//txtChangeUser
+		//
+		*this.txtChangeUser.Location = *new System.Drawing.Point(256, 77)
+		*this.txtChangeUser.Name = "txtChangeUser"
+		*this.txtChangeUser.ReadOnly = *True
+		*this.txtChangeUser.Size = *new System.Drawing.Size(86, 20)
+		*this.txtChangeUser.TabIndex = 11
+		//
+		//txtChangeTime
+		//
+		*this.txtChangeTime.Location = *new System.Drawing.Point(256, 49)
+		*this.txtChangeTime.Name = "txtChangeTime"
+		*this.txtChangeTime.ReadOnly = *True
+		*this.txtChangeTime.Size = *new System.Drawing.Size(86, 20)
+		*this.txtChangeTime.TabIndex = 10
+		//
+		//txtChangeDate
+		//
+		*this.txtChangeDate.Location = *new System.Drawing.Point(256, 24)
+		*this.txtChangeDate.Name = "txtChangeDate"
+		*this.txtChangeDate.ReadOnly = *True
+		*this.txtChangeDate.Size = *new System.Drawing.Size(86, 20)
+		*this.txtChangeDate.TabIndex = 9
+		//
+		//txtCreateUser
+		//
+		*this.txtCreateUser.Location = *new System.Drawing.Point(79, 77)
+		*this.txtCreateUser.Name = "txtCreateUser"
+		*this.txtCreateUser.ReadOnly = *True
+		*this.txtCreateUser.Size = *new System.Drawing.Size(86, 20)
+		*this.txtCreateUser.TabIndex = 8
+		//
+		//txtCreateTime
+		//
+		*this.txtCreateTime.Location = *new System.Drawing.Point(79, 49)
+		*this.txtCreateTime.Name = "txtCreateTime"
+		*this.txtCreateTime.ReadOnly = *True
+		*this.txtCreateTime.Size = *new System.Drawing.Size(86, 20)
+		*this.txtCreateTime.TabIndex = 7
+		//
+		//txtCreateDate
+		//
+		*this.txtCreateDate.Location = *new System.Drawing.Point(79, 24)
+		*this.txtCreateDate.Name = "txtCreateDate"
+		*this.txtCreateDate.ReadOnly = *True
+		*this.txtCreateDate.Size = *new System.Drawing.Size(86, 20)
+		*this.txtCreateDate.TabIndex = 6
+		//
+		//lblChangedUser
+		//
+		*this.lblChangedUser.AutoSize = *True
+		*this.lblChangedUser.Location = *new System.Drawing.Point(174, 81)
+		*this.lblChangedUser.Name = "lblChangedUser"
+		*this.lblChangedUser.Size = *new System.Drawing.Size(75, 13)
+		*this.lblChangedUser.TabIndex = 5
+		*this.lblChangedUser.Text = "Changed User"
+		//
+		//lblChangedTime
+		//
+		*this.lblChangedTime.AutoSize = *True
+		*this.lblChangedTime.Location = *new System.Drawing.Point(174, 53)
+		*this.lblChangedTime.Name = "lblChangedTime"
+		*this.lblChangedTime.Size = *new System.Drawing.Size(76, 13)
+		*this.lblChangedTime.TabIndex = 4
+		*this.lblChangedTime.Text = "Changed Time"
+		//
+		//lblChangedDate
+		//
+		*this.lblChangedDate.AutoSize = *True
+		*this.lblChangedDate.Location = *new System.Drawing.Point(174, 28)
+		*this.lblChangedDate.Name = "lblChangedDate"
+		*this.lblChangedDate.Size = *new System.Drawing.Size(76, 13)
+		*this.lblChangedDate.TabIndex = 3
+		*this.lblChangedDate.Text = "Changed Date"
+		//
+		//lblCreateTime
+		//
+		*this.lblCreateTime.AutoSize = *True
+		*this.lblCreateTime.Location = *new System.Drawing.Point(9, 53)
+		*this.lblCreateTime.Name = "lblCreateTime"
+		*this.lblCreateTime.Size = *new System.Drawing.Size(64, 13)
+		*this.lblCreateTime.TabIndex = 2
+		*this.lblCreateTime.Text = "Create Time"
+		//
+		//lblCreateUser
+		//
+		*this.lblCreateUser.AutoSize = *True
+		*this.lblCreateUser.Location = *new System.Drawing.Point(9, 81)
+		*this.lblCreateUser.Name = "lblCreateUser"
+		*this.lblCreateUser.Size = *new System.Drawing.Size(63, 13)
+		*this.lblCreateUser.TabIndex = 1
+		*this.lblCreateUser.Text = "Create User"
+		//
+		//lblCreateDate
+		//
+		*this.lblCreateDate.AutoSize = *True
+		*this.lblCreateDate.Location = *new System.Drawing.Point(9, 28)
+		*this.lblCreateDate.Name = "lblCreateDate"
+		*this.lblCreateDate.Size = *new System.Drawing.Size(64, 13)
+		*this.lblCreateDate.TabIndex = 0
+		*this.lblCreateDate.Text = "Create Date"
+		//
+		//frmStgSetDateUpd
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.AutoSize = *True
+		*this.BackColor = System.Drawing.SystemColors.ActiveBorder
+		*this.ClientSize = *new System.Drawing.Size(371, 260)
+		*this.Controls.Add(*this.grp2)
+		*this.Controls.Add(*this.btnDelete)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.grp1)
+		*this.Controls.Add(*this.btnOK)
+		*this.Controls.Add(*this.btnCancel)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.Name = "frmStgSetDateUpd"
+		*this.ShowIcon = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "Stage Set Date Maintenance"
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.grp1.ResumeLayout(*False)
+		*this.grp1.PerformLayout()
+		*this.grp2.ResumeLayout(*False)
+		*this.grp2.PerformLayout()
+		*this.ResumeLayout(*False)
+	EndSr
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+/EndRegion
+		
+/Region Methods	
+	BegFunc frmStgSetDateUpd_Load Type(Boolean) Access(*Public) 
+		DclSrParm WrkDate		  Type(*Date)
+		DclSrParm StageSetDateID  Type(String)
+		
+		//Format DateTimePicker		
+		If DateFormat = "DMY"
+			dtPicker.CustomFormat  = "dd MMMM yyyy"
+		Else
+			dtPicker.CustomFormat  = "MMMM dd yyyy"
+		Endif
+				
+		*This.wrkDate			= WrkDate
+		*This.StageSetDateID	= StageSetDateID	
+		
+		 xCancel = *False       
+        // Ensure we havent lost our Object
+		If DSSPSSDcls = *Nothing
+		   DSSPSSDcls = *New DSSPSSDcls(Pgmdb) 
+	    Endif
+        
+        *this.text				 = "Update/Delete Mode"
+		txtStgSetDateID.Text	 = StageSetDateID
+		txtStgSetDateID.ReadOnly = *True
+		DTPicker.Value			 = WrkDate
+		btnDelete.Visible		 = *true 
+		DTPicker.focus()
+		   
+		//Convert to Integer
+		xStgSetDateID = Convert.ToInt32(StageSetDateID)
+		   
+		//Get the record with selected ID
+		DSSPSSDcls.GetStageSetID(xStgSetDateID)
+		   
+		//Fill the Update form with DB data
+		wrkDate			   = DSSPSSDcls.Create_Date
+		If DateFormat = "DMY"
+			TxtCreateDate.Text = wrkDate.ToString('dd - MMM - yyyy').ToUpper()
+		Else
+			TxtCreateDate.Text = wrkDate.ToString('MMM - dd - yyyy').ToUpper()
+		Endif
+		
+		TxtCreateTime.Text = DSSPSSDcls.Create_Time.ToString('00:00:00')
+		TxtCreateUser.Text = DSSPSSDcls.Create_User.ToString()
+		   
+		//Check if changed data exists
+		Try
+			wrkDate = DSSPSSDcls.Changed_Date
+			
+			If DateFormat = "DMY"
+				TxtChangeDate.Text = wrkDate.ToString('dd - MMM - yyyy').ToUpper()
+			Else
+				TxtChangeDate.Text = wrkDate.ToString('MMM - dd - yyyy').ToUpper()
+			Endif
+			
+		Catch type(system.Exception )
+			TxtChangeDate.Text = String.Empty
+		EndTry
+		   
+		  //Fill Update Form
+		If DSSPSSDcls.Changed_Time <> *Zero
+			TxtChangeTime.Text = DSSPSSDcls.Changed_Time.ToString('00:00:00')
+		Else
+			TxtChangeTime.Text = String.Empty
+		EndIf
+		
+		TxtChangeUser.Text = DSSPSSDcls.Changed_User.ToString()
+		               
+        *This.ShowDialog()
+        
+        LeaveSr xCancel
+        		
+	EndFunc
+/Endregion
+	
+/Region Button Events
+	
+	//OK Button pressed
+	BegSr btnOK_Click Access(*Private) Event(*this.btnOK.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		ErrorProvider1.Clear()			
+		SetMousePtr *HourGlass
+			
+		// Ensure we havent lost our Object
+		If DSSPSSDcls = *Nothing
+		   DSSPSSDcls = *New DSSPSSDcls(Pgmdb) 
+	    Endif
+	    
+	    // Ensure we havent lost our Object
+		If DSSPPOHcls = *Nothing
+		   DSSPPOHcls = *New DSSPPOHcls(Pgmdb, User) 
+	    Endif
+	    	    	    	    
+	    // Set up Variables for Change Mode
+	    WrkDate1	 = DTPicker.Value
+		WrkDate2	 = Wrkdate1
+		WrkDate3	 = Wrkdate2
+		TodayString	 = %Date
+		TodayDate	 = TodayString
+		TodayInteger = TodayDate
+			    
+		//Date cannot be less than todays date. 
+		If WrkDate3 < TodayInteger
+			ErrorProvider1.setError(DTPicker, "Date Cannot be in the past")
+			LeaveSR
+		Endif
+		
+		//Check if date already on file     
+		CheckFound	  = DSSPSSDcls.GetStageSetDate(Wrkdate3)
+		If CheckFound = *Off
+			ErrorProvider1.setError(DTPicker, "Date Already on File")
+			LeaveSR
+		Endif	
+		
+		//Check if any orders have this date assigned
+		CheckFound	  = DSSPPOHcls.ChkStageSetID(xStgSetDateID)
+		If CheckFound = *Off
+			ErrorProvider1.setError(DTPicker, "This date cannot be changed as Orders exist")
+			LeaveSR
+		Endif	
+				    
+		If xCancel = *Off
+		//Only carry on if record found
+			 If DSSPSSDcls.GetStageSetIDForUpdate(xStgSetDateID) = *False
+				DSSPSSDcls.StageSet_Date = WrkDate3 		     
+				DSSPSSDcls.Changed_Date  = %Date
+				DSSPSSDcls.Changed_Time  = %Time
+				DSSPSSDcls.Changed_User  = Pgmdb.User().ToUpper()
+				
+				//Update the record
+				DSSPSSDcls.UpdateStageSetID(xStgSetDateID)
+			Endif
+		Endif	
+		
+		Unload *this
+		LeaveSr
+		
+	EndSr
+	
+	BegSr btnCancel_Click Access(*Private) Event(*this.btnCancel.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		Unload *This
+		xCancel = *True
+		
+	EndSr
+	
+	BegSr btnDelete_Click Access(*Private) Event(*this.btnDelete.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		DclFld MsgBoxCode  Type(*integer2)
+		
+		 // Ensure we havent lost our Object
+		If DSSPPOHcls = *Nothing
+		   DSSPPOHcls = *New DSSPPOHcls(Pgmdb, User) 
+	    Endif
+	    
+		//Check if any orders have this date assigned
+		CheckFound	  = DSSPPOHcls.ChkStageSetID(xStgSetDateID)
+		If CheckFound = *Off
+			ErrorProvider1.setError(DTPicker, "This date cannot be Deleted as Orders exist")
+			LeaveSR
+		Endif	
+						
+		MsgBox '                S T A G E   S E T   D A T E   D E L E T I O N' + Environment.NewLine + Environment.NewLine  +  'Are you sure you want to delete the selected Stage Set Date' Buttons(*YesNo) +
+		       Icon(*Question) DftButton(1) RtnCode(MsgBoxCode)
+		
+		// No Selected then do not delete records
+		If MsgBoxCode = 7
+		   LeaveSR
+		Endif   
+		
+		SetMousePtr *HourGlass
+			
+		// Ensure we havent lost our Object
+		If DSSPSSDcls = *Nothing
+		   DSSPSSDcls = *New DSSPSSDcls(Pgmdb) 
+	    Endif
+	    		
+	    // Delete Method
+	     DSSPSSDcls.DeleteStageSetID(xStgSetDateID)
+		 
+		 Unload *this
+		 LeaveSR
+	EndSr
+	
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+
+	EndSr
+	
+/Endregion
+	
+	
+EndClass

@@ -1,0 +1,288 @@
+Using System
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using System.Xml
+Using System.IO
+Using Disney.Menu
+Using System.Configuration
+Using System.Collections.Specialized
+
+DclNameSpace Disney.Menu
+
+BegClass Environments Access(*Public)
+	
+	DclArray Name(ArrayOfHosts)         Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfDomains)       Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfEnvironNames)  Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfPorts)         Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfLabels)        Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfPoolTimeOuts)  Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfPlatformAttrs) Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfEnvironTypes)  Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfDateFormats)   Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfPrinter1)      Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfPrinter2)      Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfPrinter3)      Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfEnvironXML)    Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfApplXML)       Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfMenuSettingsFolderNames) Type(String) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfImages) Type(System.Drawing.Image) Rank(1) New(9) Access(*Private)
+	DclArray Name(ArrayOfBackGroundColors) Type(String) Rank(1) New(9) Access(*Private)
+
+	DclFld EnvironmentsCount   Type(Int16) Access(*Private)
+	DclFld SelectedEnvironment Type(Int16) Access(*Private)
+	DclFld menuXmlFolderName   Type(String) Access(*Public) Inz("MenuXml") Shared(*Yes) 
+	
+	BegConstructor Access(*Public)
+		ExSr PopulateArrays
+	EndConstructor
+	
+	BegProp NoOfEnvironments Type(Int16) Access(*Public)
+		BegGet
+			LeaveSR EnvironmentsCount
+		EndGet
+	EndProp
+	
+	BegProp Name Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfEnvironNames[SelectedEnvironment]
+		EndGet
+	EndProp
+
+	BegProp Server Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfHosts[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp Port Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfPorts[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp Label Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfLabels[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp PoolingTimeOut Type(*String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfPoolTimeOuts[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp PlatformAttribute Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfPlatformAttrs[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp Image Type(System.Drawing.Image) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfImages[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp EnvironmentType Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfEnvironTypes[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp Domain Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfDomains[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp MenuSettingsFolderName Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfMenuSettingsFolderNames[SelectedEnvironment]
+		EndGet
+	EndProp	
+	
+	BegProp BackGroundColor Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfBackGroundColors[SelectedEnvironment]
+		EndGet
+	EndProp	
+	
+	BegProp DateFormat Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfDateFormats[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp PathToEnvironmentXML Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfEnvironXML[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp PathToApplicationXML Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfApplXML[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp Printer1 Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfPrinter1[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp Printer2 Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfPrinter2[SelectedEnvironment]
+		EndGet
+	EndProp
+	
+	BegProp Printer3 Type(String) Access(*Public)
+		BegGet
+			LeaveSR ArrayOfPrinter3[SelectedEnvironment]
+		EndGet
+	EndProp
+		
+	BegFunc GetEnvironmentsIntoComboBox Type(System.Windows.Forms.ComboBox) Access(*Public)
+		DclSrParm EnvironList Type(ComboBox)
+		
+		DclFld NumberOf Type(Int16)
+	
+		If EnvironmentsCount > *Zero
+			Do FromVal(*Zero) ToVal(EnvironmentsCount - 1) Index(NumberOf)
+				EnvironList.Items.Add(ArrayOfEnvironNames[NumberOf])
+			EndDo
+		EndIf
+		
+		LeaveSR EnvironList
+	EndFunc
+	
+	BegSr GetEnvironmentDetails Access(*Public)
+		DclSrParm EnvironmentName Type(ComboBox)
+		
+		DclFld Counter Type(Int16)
+		
+		For Index(Counter) to(EnvironmentsCount)
+			If EnvironmentName.SelectedItem.ToString() = ArrayOfEnvironNames[Counter]
+				SelectedEnvironment = Counter
+				LeaveSR
+			EndIf
+		EndFor
+	EndSr
+	
+	BegSr GetEnvironmentDetails Access(*Public)
+		DclSrParm DomainName Type(String)
+		
+		DclFld Counter Type(Int16)
+		
+		For Index(Counter) to(EnvironmentsCount)
+			If (DomainName = ArrayOfDomains[Counter] And ArrayOfEnvironTypes[Counter] = "*Production")
+				SelectedEnvironment = Counter
+				LeaveSR
+			EndIf
+		EndFor
+		
+		Throw *New System.Exception("Production Environment Configuration not found for Domain")
+	EndSr
+	
+	BegSr PopulateArrays
+		
+		DclFld XmlReader    Type(System.Xml.XmlTextReader)
+		DclFld Index        Type(*Integer2) Inz(-1)
+		DclFld EnvironImage Type(System.Drawing.Image)
+		DclFld ImageName    Type(*String)
+		
+		XmlReader = *New System.Xml.XmlTextReader(Path.Combine(System.Environment.CurrentDirectory.Trim(), "Environments.xml"))
+				
+		DoUntil XmlReader.EOF = *True
+			XmlReader.Read()     // Error processing
+		
+			If XmlReader.EOF = *True
+				Leave
+			EndIf
+			
+			If XmlReader.Name = "Environment"
+				Index += 1
+				
+				ArrayOfHosts[Index]        = XmlReader.GetAttribute("HostName")
+				ArrayOfDomains[Index]      = XmlReader.GetAttribute("Domain")
+				ArrayOfEnvironNames[Index] = XmlReader.GetAttribute("EnvironmentName")
+				ArrayOfMenuSettingsFolderNames[Index] = XmlReader.GetAttribute("MenuSettingsFolder")
+				ArrayOfBackGroundColors[Index] = XmlReader.GetAttribute("BackColor")
+				
+				If XmlReader.GetAttribute("Port") <> *Nothing
+					ArrayOfPorts[Index] = XmlReader.GetAttribute("Port")
+				Else
+					ArrayOfPorts[Index] = "5042"
+				EndIf
+				
+				If XmlReader.GetAttribute("Label") <> *Nothing
+					ArrayOfLabels[Index] = XmlReader.GetAttribute("Label")
+				Else
+					ArrayOfLabels[Index] = "DG400"
+				EndIf
+				
+				If XmlReader.GetAttribute("PoolingTimeOut") <> *Nothing
+					ArrayOfPoolTimeOuts[Index] = XmlReader.GetAttribute("PoolingTimeOut")
+				Else
+					ArrayOfPoolTimeOuts[Index] = "5"
+				EndIf
+				
+				If XmlReader.GetAttribute("PlatformAttribute") <> *Nothing
+					ArrayOfPlatformAttrs[Index]= XmlReader.GetAttribute("PlatformAttribute")
+				Else
+					ArrayOfPlatformAttrs[Index]= "*DATALINK"
+				EndIf
+				
+				If XmlReader.GetAttribute("EnvironmentType") <> *Nothing
+					ArrayOfEnvironTypes[Index] = XmlReader.GetAttribute("EnvironmentType")
+				Else
+					ArrayOfEnvironTypes[Index] = "*NonProduction"
+				EndIf
+				
+				If XmlReader.GetAttribute("DateFormat") <> *Nothing
+					ArrayOfDateFormats[Index] = XmlReader.GetAttribute("DateFormat")
+				Else
+					ArrayOfDateFormats[Index] = "DMY"
+				EndIf
+				
+				If XmlReader.GetAttribute("PathToEnvironmentXML") <> *Nothing
+					ArrayOfEnvironXML[Index] = XmlReader.GetAttribute("PathToEnvironmentXML")
+				EndIf
+				
+				If XmlReader.GetAttribute("PathToApplicationXML") <> *Nothing
+					ArrayOfApplXML[Index] = XmlReader.GetAttribute("PathToApplicationXML")
+				EndIf
+								
+				If XmlReader.GetAttribute("Image") <> *Nothing
+					ImageName = XmlReader.GetAttribute("Image")
+					EnvironImage = EnvironImage.FromFile(ImageName)
+					ArrayOfImages[Index] = EnvironImage
+				EndIf
+								
+				If XmlReader.GetAttribute("Printer1") <> *Nothing
+					ArrayOfPrinter1[Index] = XmlReader.GetAttribute("Printer1")
+				Else
+					ArrayOfPrinter1[Index] = "QPRINT"
+				EndIf
+								
+				If XmlReader.GetAttribute("Printer2") <> *Nothing
+					ArrayOfPrinter2[Index] = XmlReader.GetAttribute("Printer2")
+				Else
+					ArrayOfPrinter2[Index] = "QPRINT"
+				EndIf
+								
+				If XmlReader.GetAttribute("Printer3") <> *Nothing
+					ArrayOfPrinter3[Index] = XmlReader.GetAttribute("Printer3")
+				Else
+					ArrayOfPrinter3[Index] = "QPRINT"
+				EndIf
+			EndIf
+		EndDo
+		
+		*This.EnvironmentsCount = Index + 1
+	EndSr
+EndClass

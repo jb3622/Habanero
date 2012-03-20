@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <SpecialHandlingCodes>
+    <SpecialHandlingCode>1</SpecialHandlingCode>
+    <Description>TBD- PZ Template Lookup from Mozart</Description>
+  </SpecialHandlingCodes>
+  <SpecialHandlingCodes>
+    <SpecialHandlingCode>2</SpecialHandlingCode>
+    <Description>ABCABCABC</Description>
+  </SpecialHandlingCodes>
+</DocumentElement>
+

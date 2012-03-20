@@ -1,0 +1,1983 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+Using Disney.Menu
+
+BegClass ChangeItemSizes Extends(System.Windows.Forms.Form) Access(*Public) 
+
+	/Region Define things        
+	DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+	DclFld label10 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblMarkets System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblLongDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblVendor System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblClass System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblVendorName System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld lblClassName System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld btnBack System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld btnNext System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld btnHelp System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld btnAddSize System.Windows.Forms.Button Access(*Internal) WithEvents(*Yes)
+	DclFld dgvSizes System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	DclFld m_ItemSizeOverride Type(Disney.DA.IP400.ItemSizeOverride) Access(*Private)
+	DclFld dataGridViewTextBoxColumn1 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn2 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn3 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn4 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn5 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn6 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn7 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn8 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn9 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn10 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn11 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn12 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn13 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn14 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn15 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn16 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn17 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn18 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn19 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn20 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn21 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn22 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn23 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn24 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn25 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Size System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Pending System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld History System.Windows.Forms.DataGridViewButtonColumn Access(*Private) WithEvents(*Yes)
+	DclFld POenquiry System.Windows.Forms.DataGridViewButtonColumn Access(*Private) WithEvents(*Yes)
+	DclFld SizeDesc System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld CasePackType System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld CaseQuantity System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld DistroQuantity System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Weight System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Height System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Length System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Width System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld VendorUPC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld DisneyUPC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld SKU System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Class System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Vendor System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Style System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Colour System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PackLocked System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingPackQty System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingDistroQty System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingCasePackType System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingPackWeight System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingPackHeight System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingPackLength System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingPackWidth System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld PendingFlag System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld SuppressBOCard System.Windows.Forms.DataGridViewCheckBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld dataGridViewTextBoxColumn26 System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	
+	/EndRegion
+	
+	DclFld PgmDB          Type(ASNA.VisualRPG.Runtime.Database) Access(*Private)
+	DclFld Environment    Type(Disney.Menu.Environments) Access(*Private)
+	DclFld ItemsBO        Type(Disney.Spice.ItemsBO.Items) Access(*Private)
+	DclFld ChangeAddSize  Type(Disney.Spice.ItemsUI.ChangeAddSize) Access(*Private)
+	DclFld Sizes          Type(DataTable) Access(*Private)
+	DclFld ItemStyle      Type(Disney.DA.IP400.ItemStyle) Access(*Private)
+	DclFld ErrPro         Type(Disney.Spice.ErrorProvider.ErrorProviderWithCount) Access(*Private)
+	DclFld UPCSave		  Type(Int64) Access(*Private)
+	DclFld UPCCheckDigit  Type(Boolean)
+	DclFld ResultUPC      Type(Int64)
+	DclFld LongItemNumber Type(Disney.DA.IP400.LongItemNumber)
+	DclFld GridClass	  Type(Int16)
+	DclFld GridVendor	  Type(Int32)
+	DclFld GridStyle	  Type(Int16)
+	DclFld GridColour	  Type(Int16)
+	DclFld GridSize		  Type(Int16)
+	DclFld GridSizeDesc	  Type(String)	
+	
+	/Region Constructor and Designer bits
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		DclSrParm ItemsBO     Type(Disney.Spice.ItemsBO.Items)
+		DclSrParm ItemStyle   Type(Disney.DA.IP400.ItemStyle)
+		DclSrParm ItemSizeOverride Type(Disney.DA.IP400.ItemSizeOverride)
+		
+		InitializeComponent()
+		
+		Try		
+			*this.PgmDB       = PgmDB
+			*this.Environment = Environment
+			*this.ItemsBO     = ItemsBO
+			*this.ItemStyle   = ItemStyle
+			*this.m_ItemSizeOverride = ItemSizeOverride
+			
+		Catch Name(e) Type(System.Exception)	
+			Throw e
+		EndTry
+		
+	EndConstructor
+
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.lblMarkets = *new System.Windows.Forms.Label()
+		*this.label10 = *new System.Windows.Forms.Label()
+		*this.lblLongDesc = *new System.Windows.Forms.Label()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.lblVendor = *new System.Windows.Forms.Label()
+		*this.lblClass = *new System.Windows.Forms.Label()
+		*this.lblVendorName = *new System.Windows.Forms.Label()
+		*this.lblClassName = *new System.Windows.Forms.Label()
+		*this.label4 = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.btnBack = *new System.Windows.Forms.Button()
+		*this.btnNext = *new System.Windows.Forms.Button()
+		*this.btnHelp = *new System.Windows.Forms.Button()
+		*this.dgvSizes = *new System.Windows.Forms.DataGridView()
+		*this.Size = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Pending = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.History = *new System.Windows.Forms.DataGridViewButtonColumn()
+		*this.POenquiry = *new System.Windows.Forms.DataGridViewButtonColumn()
+		*this.SizeDesc = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.CasePackType = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.CaseQuantity = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.DistroQuantity = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Weight = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Height = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Length = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Width = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.VendorUPC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.DisneyUPC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.SKU = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Class = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Vendor = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Style = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Colour = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PackLocked = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingPackQty = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingDistroQty = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingCasePackType = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingPackWeight = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingPackHeight = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingPackLength = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingPackWidth = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.PendingFlag = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.SuppressBOCard = *new System.Windows.Forms.DataGridViewCheckBoxColumn()
+		*this.btnAddSize = *new System.Windows.Forms.Button()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.dataGridViewTextBoxColumn1 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn2 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn3 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn4 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn5 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn6 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn7 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn8 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn9 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn10 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn11 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn12 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn13 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn14 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn15 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn16 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn17 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn18 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn19 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn20 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn21 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn22 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn23 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn24 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn25 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.dataGridViewTextBoxColumn26 = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		(*this.dgvSizes *As System.ComponentModel.ISupportInitialize).BeginInit()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.SuspendLayout()
+		//
+		//lblMarkets
+		//
+		*this.lblMarkets.AutoSize = *True
+		*this.lblMarkets.Location = *new System.Drawing.Point(59, 6)
+		*this.lblMarkets.Name = "lblMarkets"
+		*this.lblMarkets.Size = *new System.Drawing.Size(168, 13)
+		*this.lblMarkets.TabIndex = 580
+		*this.lblMarkets.Text = "UK, AU, FR, IT, SP ......................"
+		//
+		//label10
+		//
+		*this.label10.AutoSize = *True
+		*this.label10.Location = *new System.Drawing.Point(14, 6)
+		*this.label10.Name = "label10"
+		*this.label10.Size = *new System.Drawing.Size(45, 13)
+		*this.label10.TabIndex = 579
+		*this.label10.Text = "Markets"
+		//
+		//lblLongDesc
+		//
+		*this.lblLongDesc.AutoSize = *True
+		*this.lblLongDesc.Location = *new System.Drawing.Point(112, 65)
+		*this.lblLongDesc.Name = "lblLongDesc"
+		*this.lblLongDesc.Size = *new System.Drawing.Size(182, 13)
+		*this.lblLongDesc.TabIndex = 578
+		*this.lblLongDesc.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(14, 65)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(87, 13)
+		*this.label8.TabIndex = 577
+		*this.label8.Text = "Long Description"
+		//
+		//lblVendor
+		//
+		*this.lblVendor.AutoSize = *True
+		*this.lblVendor.Location = *new System.Drawing.Point(59, 44)
+		*this.lblVendor.Name = "lblVendor"
+		*this.lblVendor.Size = *new System.Drawing.Size(42, 13)
+		*this.lblVendor.TabIndex = 576
+		*this.lblVendor.Text = "XXXXX"
+		//
+		//lblClass
+		//
+		*this.lblClass.AutoSize = *True
+		*this.lblClass.Location = *new System.Drawing.Point(59, 26)
+		*this.lblClass.Name = "lblClass"
+		*this.lblClass.Size = *new System.Drawing.Size(35, 13)
+		*this.lblClass.TabIndex = 575
+		*this.lblClass.Text = "XXXX"
+		//
+		//lblVendorName
+		//
+		*this.lblVendorName.AutoSize = *True
+		*this.lblVendorName.Location = *new System.Drawing.Point(112, 44)
+		*this.lblVendorName.Name = "lblVendorName"
+		*this.lblVendorName.Size = *new System.Drawing.Size(182, 13)
+		*this.lblVendorName.TabIndex = 574
+		*this.lblVendorName.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//lblClassName
+		//
+		*this.lblClassName.AutoSize = *True
+		*this.lblClassName.Location = *new System.Drawing.Point(112, 26)
+		*this.lblClassName.Name = "lblClassName"
+		*this.lblClassName.Size = *new System.Drawing.Size(182, 13)
+		*this.lblClassName.TabIndex = 573
+		*this.lblClassName.Text = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+		//
+		//label4
+		//
+		*this.label4.AutoSize = *True
+		*this.label4.Location = *new System.Drawing.Point(14, 44)
+		*this.label4.Name = "label4"
+		*this.label4.Size = *new System.Drawing.Size(41, 13)
+		*this.label4.TabIndex = 572
+		*this.label4.Text = "Vendor"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Location = *new System.Drawing.Point(14, 26)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(32, 13)
+		*this.label3.TabIndex = 571
+		*this.label3.Text = "Class"
+		//
+		//btnBack
+		//
+		*this.btnBack.Location = *new System.Drawing.Point(98, 429)
+		*this.btnBack.Name = "btnBack"
+		*this.btnBack.Size = *new System.Drawing.Size(75, 23)
+		*this.btnBack.TabIndex = 2
+		*this.btnBack.Text = "Back"
+		*this.btnBack.UseVisualStyleBackColor = *True
+		//
+		//btnNext
+		//
+		*this.btnNext.Location = *new System.Drawing.Point(794, 429)
+		*this.btnNext.Name = "btnNext"
+		*this.btnNext.Size = *new System.Drawing.Size(75, 23)
+		*this.btnNext.TabIndex = 4
+		*this.btnNext.Text = "Next"
+		*this.btnNext.UseVisualStyleBackColor = *True
+		//
+		//btnHelp
+		//
+		*this.btnHelp.Location = *new System.Drawing.Point(17, 429)
+		*this.btnHelp.Name = "btnHelp"
+		*this.btnHelp.Size = *new System.Drawing.Size(75, 23)
+		*this.btnHelp.TabIndex = 1
+		*this.btnHelp.Text = "Help"
+		*this.btnHelp.UseVisualStyleBackColor = *True
+		//
+		//dgvSizes
+		//
+		*this.dgvSizes.AllowUserToAddRows = *False
+		*this.dgvSizes.AllowUserToDeleteRows = *False
+		*this.dgvSizes.AllowUserToResizeRows = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((192 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		*this.dgvSizes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.dgvSizes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.dgvSizes.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Size, *this.Pending, *this.History, *this.POenquiry, *this.SizeDesc, *this.CasePackType, *this.CaseQuantity, *this.DistroQuantity, *this.Weight, *this.Height, *this.Length, *this.Width, *this.VendorUPC, *this.DisneyUPC, *this.SKU, *this.Class, *this.Vendor, *this.Style, *this.Colour, *this.PackLocked, *this.PendingPackQty, *this.PendingDistroQty, *this.PendingCasePackType, *this.PendingPackWeight, *this.PendingPackHeight, *this.PendingPackLength, *this.PendingPackWidth, *this.PendingFlag, *this.SuppressBOCard})
+		*this.dgvSizes.Location = *new System.Drawing.Point(22, 95)
+		*this.dgvSizes.Name = "dgvSizes"
+		*this.dgvSizes.Size = *new System.Drawing.Size(847, 315)
+		*this.dgvSizes.TabIndex = 0
+		//
+		//Size
+		//
+		*this.Size.DataPropertyName = "Size"
+		*this.Size.FillWeight = 50
+		*this.Size.Frozen = *True
+		*this.Size.HeaderText = "Size Code"
+		*this.Size.MinimumWidth = 50
+		*this.Size.Name = "Size"
+		*this.Size.ReadOnly = *True
+		*this.Size.Width = 74
+		//
+		//Pending
+		//
+		*this.Pending.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.Pending.DataPropertyName = "Pending"
+		*this.Pending.Frozen = *True
+		*this.Pending.HeaderText = "P"
+		*this.Pending.MinimumWidth = 20
+		*this.Pending.Name = "Pending"
+		*this.Pending.ReadOnly = *True
+		*this.Pending.Width = 20
+		//
+		//History
+		//
+		*this.History.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.History.Frozen = *True
+		*this.History.HeaderText = "History"
+		*this.History.MinimumWidth = 50
+		*this.History.Name = "History"
+		*this.History.Text = "View"
+		*this.History.UseColumnTextForButtonValue = *True
+		*this.History.Width = 50
+		//
+		//POenquiry
+		//
+		*this.POenquiry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.POenquiry.DataPropertyName = "POenquiry"
+		*this.POenquiry.DefaultCellStyle = dataGridViewCellStyle2
+		*this.POenquiry.Frozen = *True
+		*this.POenquiry.HeaderText = "POs"
+		*this.POenquiry.MinimumWidth = 50
+		*this.POenquiry.Name = "POenquiry"
+		*this.POenquiry.Text = "View"
+		*this.POenquiry.UseColumnTextForButtonValue = *True
+		*this.POenquiry.Width = 50
+		//
+		//SizeDesc
+		//
+		*this.SizeDesc.DataPropertyName = "SizeDesc"
+		*this.SizeDesc.Frozen = *True
+		*this.SizeDesc.HeaderText = "Name"
+		*this.SizeDesc.Name = "SizeDesc"
+		*this.SizeDesc.ReadOnly = *True
+		*this.SizeDesc.Width = 60
+		//
+		//CasePackType
+		//
+		*this.CasePackType.DataPropertyName = "CasePackType"
+		*this.CasePackType.HeaderText = "Case Pack Type"
+		*this.CasePackType.MinimumWidth = 40
+		*this.CasePackType.Name = "CasePackType"
+		*this.CasePackType.ReadOnly = *True
+		*this.CasePackType.Width = 102
+		//
+		//CaseQuantity
+		//
+		*this.CaseQuantity.DataPropertyName = "CaseQuantity"
+		*this.CaseQuantity.HeaderText = "Case Qty"
+		*this.CaseQuantity.MinimumWidth = 40
+		*this.CaseQuantity.Name = "CaseQuantity"
+		*this.CaseQuantity.ReadOnly = *True
+		*this.CaseQuantity.Resizable = System.Windows.Forms.DataGridViewTriState.True
+		*this.CaseQuantity.Width = 70
+		//
+		//DistroQuantity
+		//
+		*this.DistroQuantity.DataPropertyName = "DistroQuantity"
+		*this.DistroQuantity.HeaderText = "Distro/Inner Qty"
+		*this.DistroQuantity.MinimumWidth = 50
+		*this.DistroQuantity.Name = "DistroQuantity"
+		*this.DistroQuantity.ReadOnly = *True
+		*this.DistroQuantity.Width = 98
+		//
+		//Weight
+		//
+		*this.Weight.DataPropertyName = "Weight"
+		*this.Weight.HeaderText = "Weight"
+		*this.Weight.MinimumWidth = 60
+		*this.Weight.Name = "Weight"
+		*this.Weight.ReadOnly = *True
+		*this.Weight.Width = 66
+		//
+		//Height
+		//
+		*this.Height.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.Height.DataPropertyName = "Height"
+		*this.Height.HeaderText = "Height"
+		*this.Height.Name = "Height"
+		*this.Height.ReadOnly = *True
+		*this.Height.Width = 63
+		//
+		//Length
+		//
+		*this.Length.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.Length.DataPropertyName = "Length"
+		*this.Length.HeaderText = "Length"
+		*this.Length.Name = "Length"
+		*this.Length.ReadOnly = *True
+		*this.Length.Width = 65
+		//
+		//Width
+		//
+		*this.Width.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.Width.DataPropertyName = "Width"
+		*this.Width.HeaderText = "Width"
+		*this.Width.Name = "Width"
+		*this.Width.ReadOnly = *True
+		*this.Width.Width = 60
+		//
+		//VendorUPC
+		//
+		*this.VendorUPC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.VendorUPC.DataPropertyName = "VendorUPC"
+		*this.VendorUPC.HeaderText = "Vendor UPC"
+		*this.VendorUPC.MaxInputLength = 12
+		*this.VendorUPC.MinimumWidth = 50
+		*this.VendorUPC.Name = "VendorUPC"
+		*this.VendorUPC.Width = 84
+		//
+		//DisneyUPC
+		//
+		*this.DisneyUPC.DataPropertyName = "DisneyUPC"
+		*this.DisneyUPC.HeaderText = "Disney UPC"
+		*this.DisneyUPC.MaxInputLength = 84
+		*this.DisneyUPC.MinimumWidth = 84
+		*this.DisneyUPC.Name = "DisneyUPC"
+		*this.DisneyUPC.ReadOnly = *True
+		*this.DisneyUPC.Resizable = System.Windows.Forms.DataGridViewTriState.False
+		*this.DisneyUPC.Width = 84
+		//
+		//SKU
+		//
+		*this.SKU.DataPropertyName = "SKU"
+		*this.SKU.HeaderText = "SKU"
+		*this.SKU.MinimumWidth = 40
+		*this.SKU.Name = "SKU"
+		*this.SKU.ReadOnly = *True
+		*this.SKU.Width = 54
+		//
+		//Class
+		//
+		*this.Class.DataPropertyName = "Class"
+		*this.Class.HeaderText = "Class"
+		*this.Class.Name = "Class"
+		*this.Class.ReadOnly = *True
+		*this.Class.Visible = *False
+		*this.Class.Width = 57
+		//
+		//Vendor
+		//
+		*this.Vendor.DataPropertyName = "Vendor"
+		*this.Vendor.HeaderText = "Vendor"
+		*this.Vendor.Name = "Vendor"
+		*this.Vendor.ReadOnly = *True
+		*this.Vendor.Visible = *False
+		*this.Vendor.Width = 66
+		//
+		//Style
+		//
+		*this.Style.DataPropertyName = "Style"
+		*this.Style.HeaderText = "Style"
+		*this.Style.Name = "Style"
+		*this.Style.ReadOnly = *True
+		*this.Style.Visible = *False
+		*this.Style.Width = 55
+		//
+		//Colour
+		//
+		*this.Colour.DataPropertyName = "Colour"
+		*this.Colour.HeaderText = "Colour"
+		*this.Colour.Name = "Colour"
+		*this.Colour.ReadOnly = *True
+		*this.Colour.Visible = *False
+		*this.Colour.Width = 62
+		//
+		//PackLocked
+		//
+		*this.PackLocked.DataPropertyName = "PackLocked"
+		*this.PackLocked.HeaderText = "PackLocked"
+		*this.PackLocked.Name = "PackLocked"
+		*this.PackLocked.Visible = *False
+		*this.PackLocked.Width = 93
+		//
+		//PendingPackQty
+		//
+		*this.PendingPackQty.DataPropertyName = "PendingPackQty"
+		*this.PendingPackQty.HeaderText = "PendingPackQty"
+		*this.PendingPackQty.MinimumWidth = 50
+		*this.PendingPackQty.Name = "PendingPackQty"
+		*this.PendingPackQty.ReadOnly = *True
+		*this.PendingPackQty.Visible = *False
+		*this.PendingPackQty.Width = 112
+		//
+		//PendingDistroQty
+		//
+		*this.PendingDistroQty.DataPropertyName = "PendingDistroQty"
+		*this.PendingDistroQty.HeaderText = "PendingDistroQty"
+		*this.PendingDistroQty.MinimumWidth = 50
+		*this.PendingDistroQty.Name = "PendingDistroQty"
+		*this.PendingDistroQty.ReadOnly = *True
+		*this.PendingDistroQty.Visible = *False
+		*this.PendingDistroQty.Width = 114
+		//
+		//PendingCasePackType
+		//
+		*this.PendingCasePackType.DataPropertyName = "PendingCasePackType"
+		*this.PendingCasePackType.HeaderText = "PendingCasePackType"
+		*this.PendingCasePackType.MinimumWidth = 50
+		*this.PendingCasePackType.Name = "PendingCasePackType"
+		*this.PendingCasePackType.ReadOnly = *True
+		*this.PendingCasePackType.Visible = *False
+		*this.PendingCasePackType.Width = 144
+		//
+		//PendingPackWeight
+		//
+		*this.PendingPackWeight.DataPropertyName = "PendingPAckWeight"
+		*this.PendingPackWeight.HeaderText = "PendingPackWeight"
+		*this.PendingPackWeight.MinimumWidth = 50
+		*this.PendingPackWeight.Name = "PendingPackWeight"
+		*this.PendingPackWeight.ReadOnly = *True
+		*this.PendingPackWeight.Visible = *False
+		*this.PendingPackWeight.Width = 130
+		//
+		//PendingPackHeight
+		//
+		*this.PendingPackHeight.DataPropertyName = "PendingPackHeight"
+		*this.PendingPackHeight.HeaderText = "PendingPackHeight"
+		*this.PendingPackHeight.MinimumWidth = 50
+		*this.PendingPackHeight.Name = "PendingPackHeight"
+		*this.PendingPackHeight.ReadOnly = *True
+		*this.PendingPackHeight.Visible = *False
+		*this.PendingPackHeight.Width = 127
+		//
+		//PendingPackLength
+		//
+		*this.PendingPackLength.DataPropertyName = "PendingPackLength"
+		*this.PendingPackLength.HeaderText = "PendingPackLength"
+		*this.PendingPackLength.MinimumWidth = 50
+		*this.PendingPackLength.Name = "PendingPackLength"
+		*this.PendingPackLength.ReadOnly = *True
+		*this.PendingPackLength.Visible = *False
+		*this.PendingPackLength.Width = 129
+		//
+		//PendingPackWidth
+		//
+		*this.PendingPackWidth.DataPropertyName = "PendingPackWidth"
+		*this.PendingPackWidth.HeaderText = "PendingPackWidth"
+		*this.PendingPackWidth.MinimumWidth = 50
+		*this.PendingPackWidth.Name = "PendingPackWidth"
+		*this.PendingPackWidth.ReadOnly = *True
+		*this.PendingPackWidth.Visible = *False
+		*this.PendingPackWidth.Width = 124
+		//
+		//PendingFlag
+		//
+		*this.PendingFlag.DataPropertyName = "PendingFlag"
+		*this.PendingFlag.HeaderText = "PendingFlag"
+		*this.PendingFlag.MinimumWidth = 20
+		*this.PendingFlag.Name = "PendingFlag"
+		*this.PendingFlag.ReadOnly = *True
+		*this.PendingFlag.Visible = *False
+		*this.PendingFlag.Width = 91
+		//
+		//SuppressBOCard
+		//
+		*this.SuppressBOCard.DataPropertyName = "SuppressBackOrderCard"
+		*this.SuppressBOCard.HeaderText = "Suppress B/O Card"
+		*this.SuppressBOCard.Name = "SuppressBOCard"
+		*this.SuppressBOCard.Resizable = System.Windows.Forms.DataGridViewTriState.True
+		*this.SuppressBOCard.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+		*this.SuppressBOCard.Width = 116
+		//
+		//btnAddSize
+		//
+		*this.btnAddSize.Location = *new System.Drawing.Point(713, 429)
+		*this.btnAddSize.Name = "btnAddSize"
+		*this.btnAddSize.Size = *new System.Drawing.Size(75, 23)
+		*this.btnAddSize.TabIndex = 3
+		*this.btnAddSize.Text = "Add Size"
+		*this.btnAddSize.UseVisualStyleBackColor = *True
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//dataGridViewTextBoxColumn1
+		//
+		*this.dataGridViewTextBoxColumn1.DataPropertyName = "Size"
+		*this.dataGridViewTextBoxColumn1.FillWeight = 50
+		*this.dataGridViewTextBoxColumn1.Frozen = *True
+		*this.dataGridViewTextBoxColumn1.HeaderText = "Size Code"
+		*this.dataGridViewTextBoxColumn1.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1"
+		*this.dataGridViewTextBoxColumn1.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn1.Width = 74
+		//
+		//dataGridViewTextBoxColumn2
+		//
+		*this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		*this.dataGridViewTextBoxColumn2.DataPropertyName = "Pending"
+		*this.dataGridViewTextBoxColumn2.Frozen = *True
+		*this.dataGridViewTextBoxColumn2.HeaderText = "P"
+		*this.dataGridViewTextBoxColumn2.MinimumWidth = 20
+		*this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2"
+		*this.dataGridViewTextBoxColumn2.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn2.Width = 20
+		//
+		//dataGridViewTextBoxColumn3
+		//
+		*this.dataGridViewTextBoxColumn3.DataPropertyName = "SizeDesc"
+		*this.dataGridViewTextBoxColumn3.Frozen = *True
+		*this.dataGridViewTextBoxColumn3.HeaderText = "Name"
+		*this.dataGridViewTextBoxColumn3.MinimumWidth = 30
+		*this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3"
+		*this.dataGridViewTextBoxColumn3.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn3.Width = 60
+		//
+		//dataGridViewTextBoxColumn4
+		//
+		*this.dataGridViewTextBoxColumn4.DataPropertyName = "CasePackType"
+		*this.dataGridViewTextBoxColumn4.Frozen = *True
+		*this.dataGridViewTextBoxColumn4.HeaderText = "Case Pack Type"
+		*this.dataGridViewTextBoxColumn4.MinimumWidth = 40
+		*this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4"
+		*this.dataGridViewTextBoxColumn4.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn4.Width = 102
+		//
+		//dataGridViewTextBoxColumn5
+		//
+		*this.dataGridViewTextBoxColumn5.DataPropertyName = "CaseQuantity"
+		*this.dataGridViewTextBoxColumn5.Frozen = *True
+		*this.dataGridViewTextBoxColumn5.HeaderText = "Case Qty"
+		*this.dataGridViewTextBoxColumn5.MinimumWidth = 40
+		*this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5"
+		*this.dataGridViewTextBoxColumn5.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True
+		*this.dataGridViewTextBoxColumn5.Width = 70
+		//
+		//dataGridViewTextBoxColumn6
+		//
+		*this.dataGridViewTextBoxColumn6.DataPropertyName = "DistroQuantity"
+		*this.dataGridViewTextBoxColumn6.Frozen = *True
+		*this.dataGridViewTextBoxColumn6.HeaderText = "Distro/Inner Qty"
+		*this.dataGridViewTextBoxColumn6.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6"
+		*this.dataGridViewTextBoxColumn6.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn6.Width = 98
+		//
+		//dataGridViewTextBoxColumn7
+		//
+		*this.dataGridViewTextBoxColumn7.DataPropertyName = "Weight"
+		*this.dataGridViewTextBoxColumn7.Frozen = *True
+		*this.dataGridViewTextBoxColumn7.HeaderText = "Weight"
+		*this.dataGridViewTextBoxColumn7.MinimumWidth = 60
+		*this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7"
+		*this.dataGridViewTextBoxColumn7.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn7.Width = 66
+		//
+		//dataGridViewTextBoxColumn8
+		//
+		*this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.dataGridViewTextBoxColumn8.DataPropertyName = "Height"
+		*this.dataGridViewTextBoxColumn8.Frozen = *True
+		*this.dataGridViewTextBoxColumn8.HeaderText = "Height"
+		*this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8"
+		*this.dataGridViewTextBoxColumn8.ReadOnly = *True
+		//
+		//dataGridViewTextBoxColumn9
+		//
+		*this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.dataGridViewTextBoxColumn9.DataPropertyName = "Length"
+		*this.dataGridViewTextBoxColumn9.Frozen = *True
+		*this.dataGridViewTextBoxColumn9.HeaderText = "Length"
+		*this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9"
+		*this.dataGridViewTextBoxColumn9.ReadOnly = *True
+		//
+		//dataGridViewTextBoxColumn10
+		//
+		*this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.dataGridViewTextBoxColumn10.DataPropertyName = "Width"
+		*this.dataGridViewTextBoxColumn10.Frozen = *True
+		*this.dataGridViewTextBoxColumn10.HeaderText = "Width"
+		*this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10"
+		*this.dataGridViewTextBoxColumn10.ReadOnly = *True
+		//
+		//dataGridViewTextBoxColumn11
+		//
+		*this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+		*this.dataGridViewTextBoxColumn11.DataPropertyName = "VendorUPC"
+		*this.dataGridViewTextBoxColumn11.Frozen = *True
+		*this.dataGridViewTextBoxColumn11.HeaderText = "Vendor UPC"
+		*this.dataGridViewTextBoxColumn11.MaxInputLength = 12
+		*this.dataGridViewTextBoxColumn11.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11"
+		//
+		//dataGridViewTextBoxColumn12
+		//
+		*this.dataGridViewTextBoxColumn12.DataPropertyName = "DisneyUPC"
+		*this.dataGridViewTextBoxColumn12.Frozen = *True
+		*this.dataGridViewTextBoxColumn12.HeaderText = "Disney UPC"
+		*this.dataGridViewTextBoxColumn12.MaxInputLength = 84
+		*this.dataGridViewTextBoxColumn12.MinimumWidth = 84
+		*this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12"
+		*this.dataGridViewTextBoxColumn12.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn12.Width = 84
+		//
+		//dataGridViewTextBoxColumn13
+		//
+		*this.dataGridViewTextBoxColumn13.DataPropertyName = "SKU"
+		*this.dataGridViewTextBoxColumn13.Frozen = *True
+		*this.dataGridViewTextBoxColumn13.HeaderText = "SKU"
+		*this.dataGridViewTextBoxColumn13.MinimumWidth = 40
+		*this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13"
+		*this.dataGridViewTextBoxColumn13.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn13.Width = 54
+		//
+		//dataGridViewTextBoxColumn14
+		//
+		*this.dataGridViewTextBoxColumn14.DataPropertyName = "Class"
+		*this.dataGridViewTextBoxColumn14.Frozen = *True
+		*this.dataGridViewTextBoxColumn14.HeaderText = "Class"
+		*this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14"
+		*this.dataGridViewTextBoxColumn14.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn14.Visible = *False
+		*this.dataGridViewTextBoxColumn14.Width = 57
+		//
+		//dataGridViewTextBoxColumn15
+		//
+		*this.dataGridViewTextBoxColumn15.DataPropertyName = "Vendor"
+		*this.dataGridViewTextBoxColumn15.Frozen = *True
+		*this.dataGridViewTextBoxColumn15.HeaderText = "Vendor"
+		*this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15"
+		*this.dataGridViewTextBoxColumn15.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn15.Visible = *False
+		*this.dataGridViewTextBoxColumn15.Width = 66
+		//
+		//dataGridViewTextBoxColumn16
+		//
+		*this.dataGridViewTextBoxColumn16.DataPropertyName = "Style"
+		*this.dataGridViewTextBoxColumn16.Frozen = *True
+		*this.dataGridViewTextBoxColumn16.HeaderText = "Style"
+		*this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16"
+		*this.dataGridViewTextBoxColumn16.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn16.Visible = *False
+		*this.dataGridViewTextBoxColumn16.Width = 55
+		//
+		//dataGridViewTextBoxColumn17
+		//
+		*this.dataGridViewTextBoxColumn17.DataPropertyName = "Colour"
+		*this.dataGridViewTextBoxColumn17.Frozen = *True
+		*this.dataGridViewTextBoxColumn17.HeaderText = "Colour"
+		*this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17"
+		*this.dataGridViewTextBoxColumn17.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn17.Visible = *False
+		*this.dataGridViewTextBoxColumn17.Width = 62
+		//
+		//dataGridViewTextBoxColumn18
+		//
+		*this.dataGridViewTextBoxColumn18.DataPropertyName = "PackLocked"
+		*this.dataGridViewTextBoxColumn18.Frozen = *True
+		*this.dataGridViewTextBoxColumn18.HeaderText = "PackLocked"
+		*this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18"
+		*this.dataGridViewTextBoxColumn18.Visible = *False
+		*this.dataGridViewTextBoxColumn18.Width = 93
+		//
+		//dataGridViewTextBoxColumn19
+		//
+		*this.dataGridViewTextBoxColumn19.DataPropertyName = "PendingPackQty"
+		*this.dataGridViewTextBoxColumn19.Frozen = *True
+		*this.dataGridViewTextBoxColumn19.HeaderText = "PendingPackQty"
+		*this.dataGridViewTextBoxColumn19.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19"
+		*this.dataGridViewTextBoxColumn19.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn19.Visible = *False
+		*this.dataGridViewTextBoxColumn19.Width = 112
+		//
+		//dataGridViewTextBoxColumn20
+		//
+		*this.dataGridViewTextBoxColumn20.DataPropertyName = "PendingDistroQty"
+		*this.dataGridViewTextBoxColumn20.Frozen = *True
+		*this.dataGridViewTextBoxColumn20.HeaderText = "PendingDistroQty"
+		*this.dataGridViewTextBoxColumn20.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20"
+		*this.dataGridViewTextBoxColumn20.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn20.Visible = *False
+		*this.dataGridViewTextBoxColumn20.Width = 114
+		//
+		//dataGridViewTextBoxColumn21
+		//
+		*this.dataGridViewTextBoxColumn21.DataPropertyName = "PendingCasePackType"
+		*this.dataGridViewTextBoxColumn21.Frozen = *True
+		*this.dataGridViewTextBoxColumn21.HeaderText = "PendingCasePackType"
+		*this.dataGridViewTextBoxColumn21.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21"
+		*this.dataGridViewTextBoxColumn21.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn21.Visible = *False
+		*this.dataGridViewTextBoxColumn21.Width = 144
+		//
+		//dataGridViewTextBoxColumn22
+		//
+		*this.dataGridViewTextBoxColumn22.DataPropertyName = "PendingPAckWeight"
+		*this.dataGridViewTextBoxColumn22.Frozen = *True
+		*this.dataGridViewTextBoxColumn22.HeaderText = "PendingPackWeight"
+		*this.dataGridViewTextBoxColumn22.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22"
+		*this.dataGridViewTextBoxColumn22.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn22.Visible = *False
+		*this.dataGridViewTextBoxColumn22.Width = 130
+		//
+		//dataGridViewTextBoxColumn23
+		//
+		*this.dataGridViewTextBoxColumn23.DataPropertyName = "PendingPackHeight"
+		*this.dataGridViewTextBoxColumn23.Frozen = *True
+		*this.dataGridViewTextBoxColumn23.HeaderText = "PendingPackHeight"
+		*this.dataGridViewTextBoxColumn23.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23"
+		*this.dataGridViewTextBoxColumn23.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn23.Visible = *False
+		*this.dataGridViewTextBoxColumn23.Width = 127
+		//
+		//dataGridViewTextBoxColumn24
+		//
+		*this.dataGridViewTextBoxColumn24.DataPropertyName = "PendingPackLength"
+		*this.dataGridViewTextBoxColumn24.Frozen = *True
+		*this.dataGridViewTextBoxColumn24.HeaderText = "PendingPackLength"
+		*this.dataGridViewTextBoxColumn24.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24"
+		*this.dataGridViewTextBoxColumn24.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn24.Visible = *False
+		*this.dataGridViewTextBoxColumn24.Width = 129
+		//
+		//dataGridViewTextBoxColumn25
+		//
+		*this.dataGridViewTextBoxColumn25.DataPropertyName = "PendingPackWidth"
+		*this.dataGridViewTextBoxColumn25.Frozen = *True
+		*this.dataGridViewTextBoxColumn25.HeaderText = "PendingPackWidth"
+		*this.dataGridViewTextBoxColumn25.MinimumWidth = 50
+		*this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25"
+		*this.dataGridViewTextBoxColumn25.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn25.Visible = *False
+		*this.dataGridViewTextBoxColumn25.Width = 124
+		//
+		//dataGridViewTextBoxColumn26
+		//
+		*this.dataGridViewTextBoxColumn26.DataPropertyName = "PendingFlag"
+		*this.dataGridViewTextBoxColumn26.Frozen = *True
+		*this.dataGridViewTextBoxColumn26.HeaderText = "PendingFlag"
+		*this.dataGridViewTextBoxColumn26.MinimumWidth = 20
+		*this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26"
+		*this.dataGridViewTextBoxColumn26.ReadOnly = *True
+		*this.dataGridViewTextBoxColumn26.Visible = *False
+		*this.dataGridViewTextBoxColumn26.Width = 91
+		//
+		//ChangeItemSizes
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.ClientSize = *new System.Drawing.Size(886, 458)
+		*this.Controls.Add(*this.btnAddSize)
+		*this.Controls.Add(*this.lblMarkets)
+		*this.Controls.Add(*this.label10)
+		*this.Controls.Add(*this.lblLongDesc)
+		*this.Controls.Add(*this.label8)
+		*this.Controls.Add(*this.lblVendor)
+		*this.Controls.Add(*this.lblClass)
+		*this.Controls.Add(*this.lblVendorName)
+		*this.Controls.Add(*this.lblClassName)
+		*this.Controls.Add(*this.label4)
+		*this.Controls.Add(*this.label3)
+		*this.Controls.Add(*this.btnBack)
+		*this.Controls.Add(*this.btnNext)
+		*this.Controls.Add(*this.btnHelp)
+		*this.Controls.Add(*this.dgvSizes)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		*this.MaximizeBox = *False
+		*this.MinimizeBox = *False
+		*this.Name = "ChangeItemSizes"
+		*this.ShowIcon = *False
+		*this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+		*this.Text = "SPICE - Change Item"
+		(*this.dgvSizes *As System.ComponentModel.ISupportInitialize).EndInit()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	/EndRegion
+	
+	/Region Form events
+	BegSr FormEvent_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+        		        
+		Try 
+			DclFld ReturnCode Type(Int16)
+			
+			If *this.DialogResult = DialogResult.Cancel
+				MsgBox Title('Item - Change Sizes') MSG('Are you sure you want to Cancel?') Icon(*Question) RtnCode(ReturnCode) Buttons(*YesNo) 
+				If ReturnCode.Equals(6)
+					*this.DialogResult = DialogResult.Abort
+				Else
+					e.Cancel = *true
+				EndIf
+			Else
+				If Not ItemsBO.SpiceDataSet.Tables.Contains("ItemSizes")
+					ItemsBO.SpiceDataSet.Tables.Add(Sizes)
+				EndIf
+				
+				ItemsBO.GetChgSizePricesTbl(ItemStyle,Sizes)		
+			EndIf
+		Catch ex Exception
+			// Trap error
+		EndTry
+	EndSr 
+	
+	BegFunc SafeStringValue Type(String) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR controlValue.ToString()
+		Catch Name(e) Type(Exception)
+			LeaveSR String.Empty
+		EndTry
+	EndFunc
+
+	BegFunc SafeInt16Value Type(Int16) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR Int16.Parse(controlValue.ToString())
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+	BegFunc SafeInt32Value Type(Int32) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR Int32.Parse(controlValue.ToString())
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+	BegFunc SafeInt64Value Type(Int64) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR Int64.Parse(controlValue.ToString())
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+	BegFunc SafeDecimalValue Type(Decimal) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR Decimal.Parse(controlValue.ToString())
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+	BegFunc SafeInt4Value Type(*Integer4) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR controlValue.ToString() *AS *Integer4
+		Catch Name(e) Type(Exception)
+			LeaveSR 0
+		EndTry
+	EndFunc	
+	
+	BegFunc SafeDateValue Type(DateTime) Access(*PRIVATE)
+		DclSrParm controlValue *Object
+		
+		Try
+			LeaveSR controlValue *AS DateTime
+		Catch Name(e) Type(Exception)
+			LeaveSR DateTime.Now
+		EndTry
+	EndFunc
+	
+	BegSR UpdateProperties Access(*Private)
+		DclFld IsFirstRow Type(Boolean)
+		DclFld dte Type(DateTime)
+		DclFld str Type(String)
+		DclFld offerEffectiveDate Type(DateTime)
+		
+		IsFirstRow = *True
+
+		Try
+		
+			ForEach Row Collection(dgvSizes.Rows) Type(DataGridViewRow)		
+//				If (IsFirstRow)
+//					
+//					dte = SafeDateValue(Row.Cells["OfferEffectiveDate"].Value)
+//					str = *this.DateTimeToStringDateValue(dte)
+//					ItemStyle.OfferEffectiveDate = Int32.Parse(str)
+//					ItemStyle.SellingChannel = SafeStringValue(Row.Cells["SellingChannel"].Value)
+//					ItemStyle.SellOutControl = SafeStringValue(Row.Cells["SOControl"].Value)
+//					ItemStyle.SuppressBackOrderCard	= Row.Cells["SuppressBOCard"].Value *AS Boolean
+//				EndIf
+				
+				IsFirstRow = *False
+			EndFor		
+		Catch Name(e) Type(Exception)
+			str = "s"
+		EndTry
+		
+		Try 		
+			ForEach Row Collection(dgvSizes.Rows) Type(DataGridViewRow)
+				offerEffectiveDate = Row.Cells["OfferEffectiveDate"].Value *AS DateTime			
+				Row.Cells["OED"].Value = DateTimeToStringDateValue(offerEffectiveDate)
+			EndFor			
+		Catch Name(exc) Type(Exception)
+			//
+		EndTry	
+	EndSR
+	
+	BegSr FormEvent_FormLoad Access(*Public) Event(*this.Load)
+		DclSrParm sender Type(*Object)
+		DclSrParm e      Type(System.EventArgs)
+		
+		Try		
+			*this.lblMarkets.Text    = ItemsBO.SelectedMarkets
+			*this.lblClass.Text      = ItemStyle.Class.ToString()
+			*this.lblClassName.Text  = ItemStyle.ClassName
+			*this.lblVendor.Text     = ItemStyle.Vendor.ToString()
+			*this.lblVendorName.Text = ItemStyle.VendorName
+			*this.lblLongDesc.Text   = ItemStyle.LongDescription
+			
+			ErrPro = *New Disney.Spice.ErrorProvider.ErrorProviderWithCount(*this.components)
+			ErrPro.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
+			ErrPro.ContainerControl = *this
+
+			DclFld GridSize Type(Int16)
+							
+			If Not ItemsBO.SpiceDataSet.Tables.Contains("ItemSizes")
+				Sizes = ItemsBO.GetItemSizes(ItemStyle.Class,ItemStyle.Vendor,ItemStyle.Style,ItemStyle.Colour)
+				ItemsBO.SpiceDataSet.Tables.Add(Sizes)
+			Else
+				Sizes = ItemsBO.SpiceDataSet.Tables["ItemSizes"]
+			EndIf
+			
+			dgvSizes.AutoGenerateColumns = *False	
+			OverrideSizes(ItemsBO.SpiceDataSet.Tables["ItemSizes"])
+			dgvSizes.DataSource = ItemsBO.SpiceDataSet.Tables["ItemSizes"]
+			
+			// "Sell Out Control"
+			ItemsBO.GetSellOutControlTbl()
+			DclFld colSelloutControl Type(DataGridViewComboBoxColumn)
+			colSelloutControl = *New DataGridViewComboBoxColumn()
+			colSelloutControl.DataPropertyName = "SellOutControl"
+			colSelloutControl.Name = "SOControl"
+			colSelloutControl.DataSource = ItemsBO.SpiceDataSet.Tables("SellOutControlTable")
+			colSelloutControl.DisplayMember = "CodeAndDescription"
+			colSelloutControl.ValueMember = "SellOutControlCode"
+			colSelloutControl.DropDownWidth = 250
+			colSelloutControl.MinimumWidth = 20
+			//colSelloutControl.DisplayIndex = 15
+			colSelloutControl.HeaderText = "S/O Control" 
+			If dgvSizes.Columns.Contains("SOControl") = *False
+				dgvSizes.Columns.Add(colSelloutControl)
+			EndIf
+			
+			// "Selling Channel"
+			ItemsBO.GetSellingChannelTbl()	
+			DclFld colSellingChannel Type(DataGridViewComboBoxColumn)		
+			colSellingChannel = *New DataGridViewComboBoxColumn()
+			colSellingChannel.DataPropertyName = "SellingChannel"
+			colSellingChannel.Name = "SellingChannel"
+			colSellingChannel.DataSource = ItemsBO.SpiceDataSet.Tables("SellingChannelTable")
+			colSellingChannel.DisplayMember = "CodeAndDescription"
+			colSellingChannel.ValueMember = "SellingChannelCode"
+			colSellingChannel.DropDownWidth = 250
+			colSellingChannel.MinimumWidth = 20
+			colSellingChannel.HeaderText = "Selling Channel" 
+			If dgvSizes.Columns.Contains("SellingChannel") = *False
+				dgvSizes.Columns.Add(colSellingChannel)
+			EndIf
+	        
+	        // Add a CalendarColumn for "OfferEffectiveDate"
+	        DclFld colOED Type(CalendarColumn) 
+	        If (dgvSizes.Columns.Contains("OfferEffectiveDate"))
+				dgvSizes.Columns.Remove("OfferEffectiveDate")
+			EndIf
+			colOED = *New CalendarColumn()
+			colOED.Name = "OfferEffectiveDate"
+			colOED.Width = 100			
+			colOED.HeaderText = "Offer Effective Date"
+			dataGridViewCellStyle2.Format = DateFormats.DatePickerFormat
+			dataGridViewCellStyle2.NullValue = *Nothing
+			colOED.DefaultCellStyle = dataGridViewCellStyle2
+			If dgvSizes.Columns.Contains("OfferEffectiveDate") = *False
+				dgvSizes.Columns.Add(colOED)
+			EndIf
+      
+			// Add an invisible column to hold the string date representation held in the database.
+			DclFld textColOED Type(DataGridViewTextBoxColumn)
+	        If (dgvSizes.Columns.Contains("OED"))
+				dgvSizes.Columns.Remove("OED")
+			EndIf
+			textColOED = *New DataGridViewTextBoxColumn()
+			textColOED.Name = "OED"
+			textColOED.Width = 80
+			textColOED.HeaderText = "OED"
+			textColOED.DefaultCellStyle.BackColor = BackColor.White
+			textColOED.DataPropertyName = "OfferEffectiveDate"
+			textColOED.Visible = *False		
+			If dgvSizes.Columns.Contains("OED") = *False
+				dgvSizes.Columns.Add(textColOED)
+			EndIf
+			
+			// Add DataGridViewTextBoxColumn for "Description"
+			DclFld colDescription Type(DataGridViewTextBoxColumn)  
+			colDescription = *New DataGridViewTextBoxColumn()
+			colDescription.Name = "LongDescription"
+			colDescription.Width = 200
+			colDescription.MinimumWidth = 160
+			colDescription.MaxInputLength = 25
+			colDescription.Width = 160
+			colDescription.HeaderText = "Description"
+			colDescription.DataPropertyName = "Description"
+			//AddHandler SourceObject(colDescription)      SourceEvent(TextChanged) HandlerSR(colDescription_TextChanged)
+			If dgvSizes.Columns.Contains("Description") = *False
+				dgvSizes.Columns.Add(colDescription)
+			EndIf
+	
+			Try 
+				ForEach dataRow Collection(dgvSizes.Rows) Type(DataGridViewRow)				
+					If (dataRow.Cells["OED"].Value <> *Nothing) *AND (dataRow.Cells["OED"].Value.ToString().Length = 8)
+						dataRow.Cells["OfferEffectiveDate"].Value = StringDateValueToDateTime(dataRow.Cells["OED"].Value.ToString())				
+					Else
+						dataRow.Cells["OfferEffectiveDate"].Value = DateTime.Now
+					EndIf 
+					
+					If (dataRow.Cells["LongDescription"].Value.ToString() = String.Empty)
+						dataRow.Cells["LongDescription"].Value = ""					
+					EndIf 	
+					
+					If (dataRow.Cells["SellingChannel"].Value = *Nothing)
+						dataRow.Cells["SellingChannel"].Value = ItemsBO.SellingChannel
+					Else
+						If (dataRow.Cells["SellingChannel"].Value.ToString() = "")
+							dataRow.Cells["SellingChannel"].Value = ItemsBO.SellingChannel					
+						EndIf 						
+					EndIf 
+					
+					If (dataRow.Cells["SOControl"].Value = *Nothing)
+						dataRow.Cells["SOControl"].Value = ItemsBO.SellOutControl
+					Else
+						If (dataRow.Cells["SOControl"].Value.ToString() = "")
+							dataRow.Cells["SOControl"].Value = ItemsBO.SellOutControl					
+						EndIf 						
+					EndIf 
+										
+					If (dataRow.Cells["LongDescription"].Value = *Nothing)
+						dataRow.Cells["LongDescription"].Value = ItemsBO.LongDescription
+					Else
+						If (dataRow.Cells["LongDescription"].Value.ToString() = "")
+							dataRow.Cells["LongDescription"].Value = ItemsBO.LongDescription					
+						EndIf 						
+					EndIf	
+					
+					If (dataRow.Cells["SuppressBOCard"].Value = *Nothing)
+						dataRow.Cells["SuppressBOCard"].Value = ItemsBO.SuppressBackOrderCard
+					Else
+						If (dataRow.Cells["SuppressBOCard"].Value.ToString() = "")
+							dataRow.Cells["SuppressBOCard"].Value = ItemsBO.SuppressBackOrderCard			
+						EndIf 						
+					EndIf	
+					
+/*					If(ItemsBO.SuppressBackOrderCard = *True)
+						dataRow.Cells["SuppressBOCard"].Value = *True
+					Else
+						dataRow.Cells["SuppressBOCard"].Value = *False
+					EndIf	*/			
+					
+				EndFor	
+				
+			Catch Name(exc) Type(Exception)
+				// Just trap any errors
+			EndTry	
+			
+			ForEach SizeRow Collection(ItemsBO.SpiceDataSet.Tables["ItemSizes"].Rows) Type(DataRow)
+				GridSize   = SizeRow.Item["Size"] *As Int16 
+				If ItemsBO.GetPendingCasePackDetails(ItemStyle.Class,ItemStyle.Vendor,ItemStyle.Style,ItemStyle.Colour, GridSize)
+					SizeRow.Item["Pending"]     = "P"
+					SizeRow.Item["PendingFlag"] = "Y"
+				EndIf			
+			EndFor
+							
+			ItemsBO.GetSizeGroupTbl(ItemStyle.Class)
+			If ItemsBO.SpiceDataSet.Tables["FilteredSizeGroups"].Rows.Count <> *Zero
+				btnAddSize.Visible = *True
+			Else
+				btnAddSize.Visible = *False
+			EndIf
+
+		Catch Name(ex) Type(System.Exception)	
+			Throw ex
+		EndTry		
+	EndSr
+	
+	BegSR OverrideSizes Access(*Public)
+		DclSrParm sizesTable Type(DataTable)
+		
+		Try		
+			ForEach Row Collection(sizesTable.Rows) Type(DataRow)		
+				
+				If m_ItemSizeOverride.OverrideDescription = *True
+					Row["Description"] = m_ItemSizeOverride.Description
+				EndIf
+				
+				If (m_ItemSizeOverride.OverrideNonEnglishDescription = *True)
+					Row["DescNonEnglish"] = ItemsBO.LocalDescription
+				EndIf
+									
+				If m_ItemSizeOverride.OverrideOfferEffectiveDate = *True
+					Row["OfferEffectiveDate"] = m_ItemSizeOverride.OfferEffectiveDate
+				EndIf
+				
+				If m_ItemSizeOverride.OverrideSelloutControl = *True
+					Row["SellOutControl"] = m_ItemSizeOverride.SellOutControl
+				EndIf
+				
+				If m_ItemSizeOverride.OverrideSellingChannel = *True
+					Row["SellingChannel"] = m_ItemSizeOverride.SellingChannel
+					
+					If (m_ItemSizeOverride.SellingChannel = "Z")
+						Row["SellOutControl"] = "1" // Sell Out Immediately 
+					EndIf
+				EndIf
+				
+				If m_ItemSizeOverride.OverrideSuppressBackOrderCard = *True
+					Row["SuppressBackOrderCard"] = m_ItemSizeOverride.SuppressBackOrderCard
+				EndIf			
+			EndFor	
+					
+		Catch Name(e) Type(System.Exception)	
+			Throw e
+		EndTry
+		
+	EndSR
+	
+	/EndRegion
+	
+	BegFunc StringDateValueToDateTime Type(DateTime) Access(*Public)
+		DclSrParm strDate   Type(String) 				
+		/*  JB: This function converts a string date value (format YYYYMMDD), as stored in the AS400,
+			to a datetime type and returns the datetime.
+		 */		 		
+		DclFld strYear      Type(String)
+		DclFld strMonth     Type(String)
+		DclFld strDay       Type(String)
+		DclFld dtmDate      Type(DateTime)		
+		
+		dtmDate = DateTime.Now
+		Try
+			If(strDate.Length >= 6)
+				strYear = strDate.Substring(0,4)
+				strMonth = strDate.Substring(4,2)
+				strDay = strDate.Substring(6,2)
+				dtmDate = *New DateTime(Int16.Parse(strYear),Int16.Parse(strMonth),Int16.Parse(strDay))
+			Else
+				dtmDate = DateTime.Now
+			EndIf			
+		Catch Name(exc) Type(System.Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)			
+		EndTry		
+			
+		LeaveSR dtmDate 
+	EndFunc
+
+	BegFunc DateTimeToStringDateValue Type(String) Access(*Public)
+		DclSrParm dateToConvert Type(DateTime)				
+		/*  JB: This function converts a datetime to a string date value (format YYYYMMDD), as stored in the AS400
+			and returns the string value.
+		 */
+		DclFld strDate      Type(String)	
+						
+		strDate = String.Empty
+		Try
+			strDate = dateToConvert.Year.ToString() + dateToConvert.Month.ToString().PadLeft(2, O'0') + dateToConvert.Day.ToString().PadLeft(2,O'0')
+		Catch Name(e) Type(System.Exception)
+			Throw e
+		EndTry
+		
+		LeaveSR strDate		
+	EndFunc
+	
+	BegSr btnAddSize_Click Access(*Private) Event(*this.btnAddSize.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld SelectedSizes Type(DataTable)
+		DclFld dr Type(DataRow)
+		
+		Try		
+			ChangeAddSize = *New ChangeAddSize(ItemsBO,ItemStyle,Sizes)
+			
+			SelectedSizes = ChangeAddSize.GetSelectedSizes()
+			If ChangeAddSize.DialogResult <> DialogResult.Cancel
+				ForEach NewSize Collection(SelectedSizes.Rows) Type(DataRow)
+					dr = Sizes.NewRow()
+					
+					dr["Division"]   = ItemStyle.Division
+					dr["Department"] = ItemStyle.Department
+					dr["Class"]      = ItemStyle.Class
+					dr["Vendor"]     = ItemStyle.Vendor
+					dr["Style"]      = ItemStyle.Style
+					dr["Colour"]     = ItemStyle.Colour
+					dr["Size"]       = NewSize["SizeCode"]
+					dr["SizeDesc"]   = NewSize["SizeName"]
+					dr["Pending"]        = String.Empty
+					dr["CasePackType"]   = ItemStyle.CasePackType
+					dr["CaseQuantity"]   = ItemStyle.CaseQuantity
+					dr["DistroQuantity"] = ItemStyle.DistroQuantity
+					dr["Weight"]         = ItemStyle.CartonWeight
+					dr["Height"]         = ItemStyle.CartonHeight
+					dr["Length"]         = ItemStyle.CartonLength
+					dr["Width"]          = ItemStyle.CartonWidth
+					dr["VendorUPC"]      = 0
+					dr["DisneyUPC"]      = 0
+					dr["SKU"]            = ItemsBO.SKU
+					
+					Sizes.Rows.Add(dr)
+				EndFor
+			EndIf
+		Catch Name(ex) Type(System.Exception)	
+			Throw ex
+		EndTry		
+
+	EndSr
+	
+	BegSr dgvSizes_CellClick Access(*Private) Event(*this.dgvSizes.CellClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld History Type(Disney.Spice.LookUp.History)
+		DclFld Enquiry Type(Disney.Spice.ItemsUI.dspItemPOs)
+		DclFld ItemNo  Type(StringBuilder)
+		
+		Try		
+			If  e.RowIndex < 0
+			   LeaveSR
+			Endif
+					
+			If dgvSizes.Columns[e.ColumnIndex].Name = "History"
+				ItemNo = *New StringBuilder()
+				ItemNo.Append((SafeInt16Value(dgvSizes.Item["Class", e.RowIndex].Value)).ToString('0000'))
+				ItemNo.Append((SafeInt32Value(dgvSizes.Item["Vendor",e.RowIndex].Value)).ToString('00000'))
+				ItemNo.Append((SafeInt16Value(dgvSizes.Item["Style", e.RowIndex].Value)).ToString('0000'))
+				ItemNo.Append((SafeInt16Value(dgvSizes.Item["Colour",e.RowIndex].Value)).ToString('000'))
+				ItemNo.Append((SafeInt16Value(dgvSizes.Item["Size",  e.RowIndex].Value)).ToString('0000'))
+			
+				History = *New Disney.Spice.LookUp.History(PgmDB,'ITEM',ItemNo.ToString())
+				History.ShowDialog()
+			EndIf
+					
+			If dgvSizes.Columns[e.ColumnIndex].Name = "POenquiry"
+				Enquiry = *New Disney.Spice.ItemsUI.dspItemPOs(PgmDB,        +
+															   ItemsBO,      +
+															   ItemStyle,    +
+															   dgvSizes.Item["Size",e.RowIndex].Value *As Int16)
+				Enquiry.ShowDialog()
+			EndIf
+		Catch Name(ex) Type(System.Exception)	
+			Throw ex
+		EndTry
+	EndSr
+	
+	BegFunc ItemForOnlineEcom Type(Boolean)
+		DclSrParm SellingChannel Type(String)
+			 		
+		DclFld result         Type(Boolean) Inz(*False)		
+		DclFld dataRow        Type(DataRow)
+		DclFld forOnlineEcom  Type(String)
+				
+		Try
+			If(ItemsBO.SpiceDataSet.Tables["SellingChannelTable"] = *Nothing)
+				ItemsBO.GetSellingChannelTbl()	
+			EndIf
+			
+			dataRow = ItemsBO.SpiceDataSet.Tables["SellingChannelTable"].Rows.Find(SellingChannel)
+			If (dataRow <> *Nothing)		
+				forOnlineEcom = dataRow["OnlineECOM"] *AS String				
+				If (forOnlineEcom <> *Nothing)
+					If (forOnlineEcom.Trim() = "Y")
+						result = *True
+					Else
+						result = *False
+					EndIf
+				EndIf
+			EndIf
+			
+		Catch Name(exc) Type(Exception)
+			//MsgBox TITLE('Error') Msg(exc.Message)  ICON(*Stop)
+		EndTry		
+		LeaveSR result
+	EndFunc
+	
+	BegSr btnNext_Click Access(*Private) Event(*this.btnNext.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		DclFld dv			Type(DataView)
+		DclFld dv2			Type(DataView) //Created to check for duplicate UPC's
+		DclFld DuplicateChk Type(Boolean)
+		DclFld ErrorCheck	Type(Boolean)
+		DclFld sellingChannelItemSize Type(String)
+		DclFld ecomSellingChannel Type(String)
+		DclFld ecomSellingChannelExists Type(Boolean) Inz(*False)
+		
+		Try		
+			
+			UpdateProperties()
+			
+			ErrPro.SetControlError(btnNext,String.Empty)
+			*this.ValidateChildren()
+							
+			If ItemsBO.SpiceDataSet.Tables["ItemSizes"].Rows.Count > 1
+				dv  = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
+				dv2 = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
+				
+				DuplicateChk = *False
+				ErrorCheck   = *False
+												
+				ForEach SizeRow Collection(dv) Type(DataRowView)
+					If Convert.ToInt64(SizeRow.Item("VendorUPC")) <> *Zero
+						ForEach SizeRow2 Collection(dv2) Type(DataRowView)
+							If SizeRow.Item("VendorUPC") = SizeRow2.Item("VendorUPC")  And + 
+								SizeRow.Row <> SizeRow2.Row 
+								DuplicateChk = *True
+							EndIf
+						EndFor
+					Endif
+				EndFor	
+				
+				If DuplicateChk = *True
+					ErrPro.SetControlError(btnNext,"There are duplicate UPC's. Please Correct")
+					LeaveSR
+				EndIf
+				
+				ForEach dgvRow Collection(dgvSizes.Rows) Type(DataGridViewRow)
+					dgvRow.Cells["OED"].Value = *this.DateTimeToStringDateValue(SafeDateValue(dgvRow.Cells["OfferEffectiveDate"].Value))
+										
+					sellingChannelItemSize = dgvRow.Cells["SellingChannel"].Value.ToString()
+					ItemsBO.SellingChannel = sellingChannelItemSize
+					If (ItemForOnlineEcom(sellingChannelItemSize) = *True)
+						ecomSellingChannelExists = *True
+						ecomSellingChannel = sellingChannelItemSize										
+					EndIf
+					
+					If Convert.ToInt64(dgvRow.Cells["VendorUPC"].Value) <> *Zero								
+						// Calculate UPC Checkdigit
+						UPCcheckDigit =  ItemsBO.ChkUPCcheckDigit(ResultUPC)
+						If	UPCcheckDigit = *False
+							dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
+							ErrorCheck = *True
+						EndIf
+						
+						GridClass    = SafeInt16Value(dgvRow.Cells["Class"].Value)
+						GridVendor   = SafeInt16Value(dgvRow.Cells["Vendor"].Value)
+						GridStyle    = SafeInt16Value(dgvRow.Cells["Style"].Value)
+						GridColour   = SafeInt16Value(dgvRow.Cells["Colour"].Value)
+						GridSize     = SafeInt16Value(dgvRow.Cells["Size"].Value)
+						
+						LongItemNumber = *New Disney.DA.IP400.LongItemNumber()
+						longItemNumber.Class  = GridClass
+						LongItemNumber.Vendor = GridVendor
+						LongItemNumber.Style  = GridStyle
+						LongItemNumber.Colour = GridColour
+						LongItemNumber.Size   = GridSize
+						
+						ResultUPC = SafeInt64Value(dgvRow.Cells["VendorUPC"].Value)
+												
+						If Not ItemsBO.ChkUPCunique(ResultUPC, LongItemNumber)
+							dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
+							ErrorCheck = *True
+						EndIf
+									
+						If Not ItemsBO.ChkVendorUPCunique(ResultUPC, LongItemNumber)
+							dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
+							ErrorCheck = *True
+						EndIf
+						
+					Endif
+				EndFor
+		
+				If ErrorCheck = *True
+					ErrPro.SetControlError(btnNext,"There are errors. Please Correct")
+					LeaveSR
+				EndIf
+			EndIf
+			
+			If (ecomSellingChannelExists = *True)				
+				ItemsBO.SellingChannel = ecomSellingChannel
+			EndIf
+			
+			If ErrPro.ErrorCount = *Zero
+				*this.DialogResult = DialogResult.OK
+			EndIf
+		Catch Name(err) Type(System.Exception)	
+			Throw err
+		EndTry
+			
+	EndSr
+	
+	BegSr btnBack_Click Access(*Private) Event(*this.btnBack.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		UpdateProperties()
+				
+		*this.DialogResult = DialogResult.Retry
+	EndSr
+	
+	BegSr btnHelp_Click Access(*Private) Event(*this.btnHelp.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		OsExec CmdLine("iexplore http://teamshareemea.emea.wdpr.disney.com/dcpsites/spice/SpiceUserManual/Pages/default.aspx")
+	EndSr
+	
+	BegSr dgvSizes_DoubleClick Access(*Private) Event(*this.dgvSizes.CellDoubleClick)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld Pending Type(String)
+		
+		Try
+		
+			If e.RowIndex < *Zero
+				LeaveSR
+			EndIf
+			
+			If e.ColumnIndex < *Zero
+				LeaveSR
+			EndIf
+			
+			If dgvSizes.Columns[e.ColumnIndex].Name = "SOControl"
+				LeaveSR
+			EndIf
+			
+			If dgvSizes.Columns[e.ColumnIndex].Name = "OfferEffectiveDate"
+				LeaveSR
+			EndIf		
+			
+			If dgvSizes.Columns[e.ColumnIndex].Name = "SuppressBOCard"
+				LeaveSR
+			EndIf
+
+			If dgvSizes.Columns[e.ColumnIndex].Name = "Description"
+				LeaveSR
+			EndIf
+			
+			If dgvSizes.Columns[e.ColumnIndex].Name = "SellingChannel"
+				LeaveSR
+			EndIf
+
+			If dgvSizes.Columns[e.ColumnIndex].Name = "OfferEffectiveDate"
+				LeaveSR
+			EndIf
+			
+			DclFld ChgPackDtls  Type(ChangeItemPackDetails)
+			
+			//Revamped Joseph Urbina 19/04/2010
+			DclFld GridPackQty         Type(Int32)
+			DclFld GridDistroQty       Type(Int32)
+			DclFld GridPackWeight	   Type(Decimal)	
+			DclFld GridPackHeight      Type(Decimal)
+			DclFld GridPackLength      Type(Decimal)
+			DclFld GridPackWidth       Type(Decimal)
+							
+			If (dgvSizes["PackLocked",e.RowIndex].Value.ToString()) = "Y"
+				MsgBox "These Pack/Carton details have been updated by the DC and cannot be changed" Icon(*Exclamation) Title("Pack details locked")
+				LeaveSR
+			EndIf
+			
+			GridClass    = SafeInt16Value(dgvSizes.Item["Class",    e.RowIndex].Value)
+			GridVendor   = SafeInt32Value(dgvSizes.Item["Vendor",   e.RowIndex].Value)
+			GridStyle    = SafeInt16Value(dgvSizes.Item["Style",    e.RowIndex].Value)
+			GridColour   = SafeInt16Value(dgvSizes.Item["Colour",   e.RowIndex].Value)
+			GridSize     = SafeInt16Value(dgvSizes.Item["Size",     e.RowIndex].Value)
+			GridSizeDesc = SafeStringValue(dgvSizes.Item["SizeDesc", e.RowIndex].Value)
+				
+			Pending     = SafeStringValue(dgvSizes.Item["PendingFlag", e.RowIndex].Value)
+			ChgPackDtls = *New ChangeItemPackDetails(PgmDB, Environment, Pending, GridSize, GridSizeDesc) 
+					
+			If Pending  = 'Y' 
+				ItemsBO.GetPendingCasePackDetails(GridClass, GridVendor, GridStyle, GridColour, GridSize)
+				
+				If ItemsBO.PendingCasePackType <> String.Empty
+					ChgPackDtls.CasePackType = ItemsBO.PendingCasePackType
+				Else
+					ChgPackDtls.CasePackType = dgvSizes["CasePackType",e.RowIndex].Value.ToString()
+				Endif
+				
+				If ItemsBO.PendingCasePackQty <> 0
+					ChgPackDtls.PackQty      = ItemsBO.PendingCasePackQty
+				Else
+					ChgPackDtls.PackQty      = SafeInt32Value(dgvSizes.Item["CaseQuantity",e.RowIndex].Value)
+				Endif
+				
+				If ItemsBO.PendingDistroInnerQty <> 0
+					ChgPackDtls.DistroQty    = ItemsBO.PendingDistroInnerQty
+				Else
+					ChgPackDtls.DistroQty    = SafeInt32Value(dgvSizes.Item["DistroQuantity",e.RowIndex].Value)
+				Endif
+				
+				If ItemsBO.PendingWeight <> 0 
+					ChgPackDtls.PackWeight   = ItemsBO.PendingWeight
+				Else
+					ChgPackDtls.PackWeight   = SafeDecimalValue(dgvSizes.Item["Weight",e.RowIndex].Value)
+				Endif
+				
+				If ItemsBO.PendingHeight <> 0
+					ChgPackDtls.PackHeight   = ItemsBO.PendingHeight
+				Else
+					ChgPackDtls.PackHeight   = SafeDecimalValue(dgvSizes.Item["Height",e.RowIndex].Value)
+				Endif
+				
+				If ItemsBO.PendingLength <> 0
+					ChgPackDtls.PackLength   = ItemsBO.PendingLength
+				Else
+					ChgPackDtls.PackLength   = SafeDecimalValue(dgvSizes.Item["Length",e.RowIndex].Value)
+				Endif
+				
+				If  ItemsBO.PendingWidth <> 0	
+					ChgPackDtls.PackWidth    = ItemsBO.PendingWidth 
+				Else
+					ChgPackDtls.PackWidth    = SafeDecimalValue(dgvSizes.Item["Width",e.RowIndex].Value)
+				Endif
+				
+				ChgPackDtls.ShowDialog()
+				LeaveSr
+			Endif
+			
+			If dgvSizes["PendingCasePackType",e.RowIndex].Value.ToString() <> String.Empty 
+				ChgPackDtls.CasePackType = dgvSizes["PendingCasePackType",e.RowIndex].Value.ToString()
+			Else
+				ChgPackDtls.CasePackType = dgvSizes["CasePackType",e.RowIndex].Value.ToString()
+			Endif
+			
+			If dgvSizes["PendingPackQty",e.RowIndex].Value.ToString() <> String.Empty And + 
+			   dgvSizes["PendingPackQty",e.RowIndex].Value.ToString() <> '0'
+				ChgPackDtls.PackQty      = SafeInt32Value(dgvSizes.Item["PendingPackQty",e.RowIndex].Value)
+			Else
+				ChgPackDtls.PackQty      = SafeInt32Value(dgvSizes.Item["CaseQuantity",e.RowIndex].Value)
+			Endif
+			
+			If dgvSizes["PendingDistroQty",e.RowIndex].Value.ToString() <> String.Empty And +
+				dgvSizes["PendingDistroQty",e.RowIndex].Value.ToString() <> '0'
+				ChgPackDtls.DistroQty    = SafeInt32Value(dgvSizes.Item["PendingDistroQty",e.RowIndex].Value)
+			Else
+				ChgPackDtls.DistroQty    = SafeInt32Value(dgvSizes.Item["DistroQuantity",e.RowIndex].Value)
+			Endif
+			
+			If dgvSizes["PendingPackWeight",e.RowIndex].Value.ToString() <> String.Empty And +
+				dgvSizes["PendingPackWeight",e.RowIndex].Value.ToString() <> '0'
+				ChgPackDtls.PackWeight   = SafeDecimalValue(dgvSizes.Item["PendingPackWeight",e.RowIndex].Value)
+			Else
+				ChgPackDtls.PackWeight   = SafeDecimalValue(dgvSizes.Item["Weight",e.RowIndex].Value )
+			Endif
+					
+			If dgvSizes["PendingPackHeight",e.RowIndex].Value.ToString() <> String.Empty And +
+				dgvSizes["PendingPackHeight",e.RowIndex].Value.ToString() <> '0'
+				ChgPackDtls.PackHeight   = SafeDecimalValue(dgvSizes.Item["PendingPackHeight",e.RowIndex].Value )
+			Else
+				ChgPackDtls.PackHeight   = SafeDecimalValue(dgvSizes.Item["Height",e.RowIndex].Value )
+			Endif
+			
+			If dgvSizes["PendingPackLength",e.RowIndex].Value.ToString() <> String.Empty And +
+				dgvSizes["PendingPackLength",e.RowIndex].Value.ToString() <> '0'
+				ChgPackDtls.PackLength   = SafeDecimalValue(dgvSizes.Item["PendingPackLength",e.RowIndex].Value )
+			Else
+				ChgPackDtls.PackLength   = SafeDecimalValue(dgvSizes.Item["Length",e.RowIndex].Value)
+			Endif
+			
+			If dgvSizes["PendingPackWidth",e.RowIndex].Value.ToString() <> String.Empty And +
+				dgvSizes["PendingPackWidth",e.RowIndex].Value.ToString() <> '0'
+				ChgPackDtls.PackWidth    = SafeDecimalValue(dgvSizes.Item["PendingPackWidth",e.RowIndex].Value )
+			Else
+				ChgPackDtls.PackWidth    = SafeDecimalValue(dgvSizes.Item["Width",e.RowIndex].Value  )
+			Endif
+									
+			ChgPackDtls.ShowDialog()
+					
+			//Only update if anything has changed
+			If ChgPackDtls.DialogResult = DialogResult.OK
+				
+				GridPackQty    = SafeInt32Value(dgvSizes.Item["CaseQuantity",e.RowIndex].Value)
+				GridDistroQty  = SafeInt32Value(dgvSizes.Item["DistroQuantity",e.RowIndex].Value)
+				GridPackWeight = SafeDecimalValue(dgvSizes.Item["Weight",e.RowIndex].Value)
+				GridPackHeight = SafeDecimalValue(dgvSizes.Item["Height",e.RowIndex].Value)
+				GridPackLength = SafeDecimalValue(dgvSizes.Item["Length",e.RowIndex].Value)
+				GridPackWidth  = SafeDecimalValue(dgvSizes.Item["Width",e.RowIndex].Value)
+			 
+				If ChgPackDtls.CasePackType <> dgvSizes["CasePackType",e.RowIndex].Value.ToString() Or +
+					ChgPackDtls.PackWeight  <> GridPackWeight                                       Or +
+					ChgPackDtls.PackHeight  <> GridPackHeight                                       Or +
+					ChgPackDtls.PackLength  <> GridPackLength                                       Or +
+					ChgPackDtls.PackWidth   <> GridPackWidth 
+					
+					dgvSizes.Item["PendingCasePackType",e.RowIndex].Value = ChgPackDtls.CasePackType
+					dgvSizes.Item["PendingPackWeight",e.RowIndex].Value = ChgPackDtls.PackWeight
+					dgvSizes.Item["PendingPackHeight",e.RowIndex].Value = ChgPackDtls.PackHeight
+					dgvSizes.Item["PendingPackLength",e.RowIndex].Value = ChgPackDtls.PackLength
+					dgvSizes.Item["PendingPackWidth",e.RowIndex].Value = ChgPackDtls.PackWidth
+					dgvSizes.Item["Pending",e.RowIndex].Value = "P"
+				Else
+					dgvSizes.Item["PendingCasePackType",e.RowIndex].Value = String.Empty
+					dgvSizes.Item["PendingPackWeight",e.RowIndex].Value = 0
+					dgvSizes.Item["PendingPackHeight",e.RowIndex].Value = 0
+					dgvSizes.Item["PendingPackLength",e.RowIndex].Value = 0
+					dgvSizes.Item["PendingPackWidth",e.RowIndex].Value = 0
+				Endif
+				
+				If ChgPackDtls.PackQty <> GridpackQty Or ChgPackDtls.DistroQty <> GridDistroQty
+					dgvSizes.Item["PendingPackQty",e.RowIndex].Value = ChgPackDtls.PackQty
+					dgvSizes.Item["PendingDistroQty",e.RowIndex].Value = ChgPackDtls.DistroQty
+					dgvSizes.Item["Pending",e.RowIndex].Value = "P"
+				Else
+					dgvSizes.Item["PendingPackQty",e.RowIndex].Value = 0
+					dgvSizes.Item["PendingDistroQty",e.RowIndex].Value = 0
+				Endif
+			EndIf
+		Catch Name(ex) Type(System.Exception)	
+			Throw ex
+		EndTry
+	EndSr
+	
+	BegSr dgvSizes_CellValidated Access(*Private) Event(*this.dgvSizes.CellValidated)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld str            Type(String)
+		
+		If dgvSizes.Columns(e.ColumnIndex).Name.Equals("LongDescription") 
+		
+			str = dgvSizes[e.ColumnIndex,e.RowIndex].Value.ToString()
+			str = str.ToUpper()
+			str = ItemsBO.ReplaceInvalidChrs(str)
+			dgvSizes[e.ColumnIndex,e.RowIndex].Value = str
+		EndIf	
+		 
+		If dgvSizes.Columns(e.ColumnIndex).Name.Equals("SellingChannel") 
+			str	= dgvSizes["SellingChannel",e.RowIndex].Value.ToString()	
+			If(str.Trim() = "Z")
+				dgvSizes["SOControl",e.RowIndex].Value = "1" //Sell Out Immediately
+			EndIf
+		EndIf	
+				
+	EndSr
+	
+	BegSr dgvSizes_CellValidating Access(*Private) Event(*this.dgvSizes.CellValidating)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellValidatingEventArgs
+				
+		DclFld GridClass	  Type(Int16)
+		DclFld GridVendor	  Type(Int32)
+		DclFld GridStyle	  Type(Int16)
+		DclFld GridColour	  Type(Int16)
+		DclFld GridSize		  Type(Int16)
+		DclFld Market         Type(String)
+		DclFld dv             Type(DataView)
+				
+		Try		
+			dgvSizes[e.ColumnIndex,e.RowIndex].ErrorText = String.Empty
+			btnNext.Enabled = *True
+			
+			If dgvSizes.Columns(e.ColumnIndex).Name.Equals("LongDescription") 
+				If e.FormattedValue.ToString() = String.Empty				
+					MsgBox TITLE('Description') Msg('The description can not be blank.') ICON(*Exclamation)
+					dgvSizes.CancelEdit()
+					LeaveSR
+				EndIf
+			EndIf
+					
+			If dgvSizes.Columns(e.ColumnIndex).Name.Equals("VendorUPC") 		
+				 					
+				dgvSizes.Item(e.ColumnIndex,e.RowIndex).ErrorText = String.Empty
+				If Not String.IsNullOrEmpty(e.FormattedValue.ToString())
+					If Int64.TryParse(e.FormattedValue.ToString(),*ByRef ResultUPC)
+						If ResultUPC <> *Zero and ResultUPC	<> UPCSave
+							GridClass  = SafeInt16Value(dgvSizes.Item["Class", e.RowIndex].Value)
+							GridVendor = SafeInt32Value(dgvSizes.Item["Vendor",e.RowIndex].Value)
+							GridStyle  = SafeInt16Value(dgvSizes.Item["Style", e.RowIndex].Value )
+							GridColour = SafeInt16Value(dgvSizes.Item["Colour",e.RowIndex].Value )
+							GridSize   = SafeInt16Value(dgvSizes.Item["Size",  e.RowIndex].Value )
+															
+							// Check if item has been Shipped or If there are outstanding PO's
+							If ItemsBO.ChkItemShipped(GridClass,GridVendor,GridStyle,GridColour,GridSize)
+								MsgBox "UPC cannot be changed : Item has shipped"
+								dgvSizes.CancelEdit()
+								LeaveSR
+							EndIf
+				
+							If Not ItemsBO.ChkLineOrderStatus(GridClass,GridVendor,GridStyle,GridColour,GridSize)
+								MsgBox "UPC cannot be changed : Orders are outstanding"
+								dgvSizes.CancelEdit()
+								LeaveSR
+							EndIf
+														
+							// Calculate UPC Checkdigit
+							UPCcheckDigit =  ItemsBO.ChkUPCcheckDigit(ResultUPC)
+							If	UPCcheckDigit = *False
+								dgvSizes.Item(e.ColumnIndex,e.RowIndex).ErrorText = "UPC CheckDigit not valid, Please correct."
+								btnNext.Enabled = *False							
+								LeaveSR
+							EndIf
+							
+							LongItemNumber = *New Disney.DA.IP400.LongItemNumber()
+							longItemNumber.Class  = GridClass
+							LongItemNumber.Vendor = GridVendor
+							LongItemNumber.Style  = GridStyle
+							LongItemNumber.Colour = GridColour
+							LongItemNumber.Size   = GridSize
+							
+							If Not ItemsBO.ChkUPCunique(ResultUPC, LongItemNumber)
+								dgvSizes.Item(e.ColumnIndex,e.RowIndex).ErrorText = "UPC not unique, enter a different UPC"
+								btnNext.Enabled = *False
+								LeaveSR
+							EndIf
+									
+							If Not ItemsBO.ChkVendorUPCunique(ResultUPC, LongItemNumber)
+								dgvSizes.Item(e.ColumnIndex,e.RowIndex).ErrorText = "UPC not unique, enter a different UPC"
+								btnNext.Enabled = *False
+								LeaveSR
+							EndIf
+									
+							If Not ItemsBO.ChkDisneyUPCunique(ResultUPC, LongItemNumber)
+								dgvSizes.Item(e.ColumnIndex,e.RowIndex).ErrorText = "UPC not unique, enter a different UPC"
+								btnNext.Enabled = *False
+								LeaveSR
+							EndIf
+							
+							dv = *New Dataview(ItemsBO.SpiceDataSet.Tables["AuthorisedMarkets"])
+							dv.RowFilter = "Select = true"
+							ForEach MarketRow Collection(dv) Type(DataRow)
+								Market = SafeStringValue(MarketRow["IPMarket"])
+								
+								If Not ItemsBO.ChkVendorUPCunique(ResultUPC, LongItemNumber, Market)
+									dgvSizes.Item(e.ColumnIndex,e.RowIndex).ErrorText = "UPC not unique, enter a different UPC"
+									btnNext.Enabled = *False
+									LeaveSR
+								EndIf
+							EndFor
+						EndIf
+					Else
+						MsgBox Title('Item - Change Sizes - Error') MSG('Invalid number entered') Icon(*Stop)
+						dgvSizes.CancelEdit()
+					EndIf
+				Else
+					dgvSizes.CancelEdit()
+				EndIf
+			Else
+				If dgvSizes.Item["VendorUPC",e.RowIndex].ErrorText <> String.Empty
+					btnNext.Enabled = *False
+				Endif
+			Endif	
+		Catch Name(err) Type(System.Exception)	
+			Throw err
+		EndTry
+	EndSr
+		
+	BegSr dgvSizes_CellEnter Access(*Private) Event(*this.dgvSizes.CellEnter)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld Remainder Type(Int16)
+		
+		Try
+			Remainder = 0
+			
+			If dgvSizes.Columns(e.ColumnIndex).Name.Equals("VendorUPC") 
+				UPCSave   = SafeInt64Value(dgvSizes.Item["VendorUPC",  e.RowIndex].Value)
+				
+				Remainder = %rem(e.RowIndex, 2)
+				If Remainder > 0
+					dgvSizes.Item["VendorUPC", e.RowIndex].Style.BackColor = Color.FromArgb(192, 255, 192)
+				Else
+					dgvSizes.Item["VendorUPC", e.RowIndex].Style.BackColor = Color.White
+				Endif			
+			Endif		
+		Catch Name(exc) Type(System.Exception)	
+			Throw exc
+		EndTry		
+	EndSr
+	
+
+	BegSr dgvSizes_DataError Access(*Private) Event(*this.dgvSizes.DataError)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewDataErrorEventArgs
+		
+	EndSr
+	BegSr Form_Layout Access(*Private) Event(*this.Layout)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.LayoutEventArgs
+		
+	EndSr
+	BegSr Form_Leave Access(*Private) Event(*this.Leave)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+	EndSr
+	BegSr dgvSizes_CellValueChanged Access(*Private) Event(*this.dgvSizes.CellValueChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		
+	EndSr
+	
+
+	BegSr btnNext_ChangeUICues Access(*Private) Event(*this.btnNext.ChangeUICues)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.UICuesEventArgs
+		
+	EndSr
+EndClass

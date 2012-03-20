@@ -1,0 +1,113 @@
+Using System
+Using System.Text
+Using System.IO
+Using System.Data
+Using System.Xml
+
+BegClass Country Access(*Public)
+
+	DclFld CountryTbl   Type(DataTable) Access(*Private)
+	DclFld pCountryCode Type(String)    Access(*Private)
+	DclFld pCountryDesc Type(String)    Access(*Private)
+	DclFld pXMLpath     Type(String)    Access(*Private)
+
+	DclDB PgmDB DBName("TDST")
+	DclDiskFile Name(DSCNTRY) Type(*Input) Org(*Arrival) DB(PgmDB) ImpOpen(*No)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Country.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+	
+	/Region Properties
+	BegProp CountryCode Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCountryCode
+		EndGet
+	EndProp
+	
+	BegProp CountryName Type(String) Access(*Public)
+		BegGet
+			LeaveSR pCountryDesc
+		EndGet
+	EndProp
+	/EndRegion
+
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If CountryTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				CountryTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+
+		CountryTbl = *New DataTable("Country")
+
+		CountryTbl.Columns.Add(*New DataColumn("CountryCode", *TypeOf(String)))
+		CountryTbl.Columns["CountryCode"].ReadOnly = *True
+
+		CountryTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		CountryTbl.Columns["Description"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {CountryTbl.Columns("CountryCode")}
+		CountryTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSCNTRY.IsOpen
+			Open DSCNTRY
+		EndIf
+		
+		DoUntil DSCNTRY.IsEof
+			Read DSCNTRY
+			If Not DSCNTRY.IsEof
+				dr = CountryTbl.NewRow()
+				
+				dr.Item("CountryCode") = CNCODE
+				dr.Item["Description"] = CNDESC.Trim()
+
+				CountryTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		CountryTbl.WriteXml(pXMLpath)
+		Close DSCNTRY
+	EndSr
+	
+	BegFunc GetCountry Type(*Boolean) Access(*Public)
+		DclSrParm Country Type(String)
+
+		DclFld dr Type(DataRow)
+		
+		dr = CountryTbl.Rows.Find(Country)
+		If dr <> *Nothing
+			pCountryCode = dr.Item("CountryCode")  *As String
+			pCountryDesc = dr.Item["Description"]  *As String
+			
+			LeaveSR *True
+		Else
+			LeaveSR *False
+		EndIf
+	EndFunc
+	
+	BegFunc GetCountryTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR CountryTbl
+	EndFunc
+EndClass

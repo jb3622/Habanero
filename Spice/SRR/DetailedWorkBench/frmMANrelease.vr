@@ -1,0 +1,1269 @@
+Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+
+DclNameSpace Disney.SRR
+
+BegClass frmMANrelease Extends(System.Windows.Forms.Form) Access(*Public)
+
+	/Region Declarations
+	DclFld DGVsets System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld labelDesc System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label6 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label5 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld labelRemainQty System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld labelAllocQty System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld labelDCHolding System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld label7 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld DGVAllocations System.Windows.Forms.DataGridView Access(*Private) WithEvents(*Yes)
+	DclFld btnAllocate System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld errorProvider1 System.Windows.Forms.ErrorProvider Access(*Private) WithEvents(*Yes)
+	DclFld SetGroupBox System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld HoldingGroupBox System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld statusStrip1 System.Windows.Forms.StatusStrip Access(*Private) WithEvents(*Yes)
+	DclFld btnContinue System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtUPC System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtSize System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtColour System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtStyle System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld txtVendor System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld labelPackItem System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
+	DclFld txtClass System.Windows.Forms.TextBox Access(*Private) WithEvents(*Yes)
+	DclFld PackItemGroup System.Windows.Forms.GroupBox Access(*Private) WithEvents(*Yes)
+	DclFld btnCancel System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld DGVcompItem System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld DGVcompUnits System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld DGVcompUPC System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld DGVcompDesc System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Market System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld Store System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld StoreName System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld ReleaseQty System.Windows.Forms.DataGridViewTextBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld SRRallocation System.Windows.Forms.DataGridViewCheckBoxColumn Access(*Private) WithEvents(*Yes)
+	DclFld btnExit System.Windows.Forms.Button Access(*Private) WithEvents(*Yes)
+	DclFld components Type(System.ComponentModel.IContainer) Inz(*Nothing)
+	
+	DclDB Name(PgmDB) DbName("TDST")
+	DclDiskFile Name(IPITHDR)  Type(*Input) Org(*Indexed) File('IPITHDR')  Db(PgmDB) ImpOpen(*no)
+	DclDiskFile Name(IPITHDRC) Type(*Input) Org(*Indexed) File('IPITHDRC') Db(PgmDB) ImpOpen(*no) RnmFmt(ITHDR : ITHDRC)
+	DclDiskFile Name(IPISETS)  Type(*Input) Org(*Indexed) File('IPISETS')  Db(PgmDB) ImpOpen(*no)
+	DclDiskFile Name(DSAPPALC) Type(*Input) Org(*Indexed) File('DSAPPALC') Db(PgmDB) ImpOpen(*no)
+	DclDiskFile Name(DSIALOK)  Type(*Update) Org(*Indexed) File('DSIALOK') Db(PgmDB) ImpOpen(*no) AddRec(*Yes)
+
+	DclFld BuildSetData        Type(BuildSetData)
+	DclFld SetData             Type(SetData)
+	DclFld GetDCStockHolding   Type(GetDCStockHolding)
+	DclFld BuildMANallocations Type(BuildMANallocations)
+	DclFld AllocationDS        Type(DataSet)
+	
+	DclFld DCholding Type(Int32)
+	DclFld AllocQty  Type(Int32)
+	DclFld RemainQty Type(Int32)
+	DclFld PrevQty   Type(Int32)
+	DclFld NewQty    Type(Int32)
+	
+	DclFld Class  Type(*Zoned) Len(4,0)
+	DclFld Vendor Type(*Zoned) Len(5,0)
+	DclFld Style  Type(*Zoned) Len(4,0)
+	DclFld Colour Type(*Zoned) Len(3,0)
+	DclFld Size   Type(*Zoned) Len(4,0)
+	DclFld UPC    Type(*Char)  Len(12)
+	
+	DclDS Name( Option1 ) Access(*Private)
+		DclDSfld Name(BufferA) Type(*Char) Len(153)
+		DclDSfld Name(FldA1)   Type(*Char) Len(23) Overlay(BufferA, 21)
+		
+	DclDS Name( Option2 ) Access(*Private)
+		DclDSfld Name(BufferB) Type(*Char) Len(153)
+	
+	DclPlist  Name( CommandEXC )
+		DclParm Command Type(*Char)   Len(500)   DBDirection( *Input )		// To the iSeries
+		DclParm Length  Type(*Packed) Len(15,5)  DBDirection( *Input )		// To the iSeries
+	
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB      Type(ASNA.VisualRPG.Runtime.Database)
+		
+		InitializeComponent()
+
+		*this.PgmDB = PgmDB
+	EndConstructor
+
+	// Required method for Designer support - do not modify
+	// the contents of this method with the code editor.
+	BegSr InitializeComponent
+		*this.components = *new System.ComponentModel.Container()
+		DclFld dataGridViewCellStyle1 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle4 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle2 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle3 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle5 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle8 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle6 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle7 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		*this.SetGroupBox = *new System.Windows.Forms.GroupBox()
+		*this.DGVsets = *new System.Windows.Forms.DataGridView()
+		*this.DGVcompItem = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.DGVcompUnits = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.DGVcompUPC = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.DGVcompDesc = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.labelDesc = *new System.Windows.Forms.Label()
+		*this.label3 = *new System.Windows.Forms.Label()
+		*this.HoldingGroupBox = *new System.Windows.Forms.GroupBox()
+		*this.label6 = *new System.Windows.Forms.Label()
+		*this.label5 = *new System.Windows.Forms.Label()
+		*this.labelRemainQty = *new System.Windows.Forms.Label()
+		*this.labelAllocQty = *new System.Windows.Forms.Label()
+		*this.labelDCHolding = *new System.Windows.Forms.Label()
+		*this.label7 = *new System.Windows.Forms.Label()
+		*this.DGVAllocations = *new System.Windows.Forms.DataGridView()
+		*this.Market = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.Store = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.StoreName = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.ReleaseQty = *new System.Windows.Forms.DataGridViewTextBoxColumn()
+		*this.SRRallocation = *new System.Windows.Forms.DataGridViewCheckBoxColumn()
+		*this.btnAllocate = *new System.Windows.Forms.Button()
+		*this.btnCancel = *new System.Windows.Forms.Button()
+		*this.errorProvider1 = *new System.Windows.Forms.ErrorProvider(*this.components)
+		*this.statusStrip1 = *new System.Windows.Forms.StatusStrip()
+		*this.PackItemGroup = *new System.Windows.Forms.GroupBox()
+		*this.btnExit = *new System.Windows.Forms.Button()
+		*this.btnContinue = *new System.Windows.Forms.Button()
+		*this.label8 = *new System.Windows.Forms.Label()
+		*this.txtUPC = *new System.Windows.Forms.TextBox()
+		*this.txtSize = *new System.Windows.Forms.TextBox()
+		*this.txtColour = *new System.Windows.Forms.TextBox()
+		*this.txtStyle = *new System.Windows.Forms.TextBox()
+		*this.txtVendor = *new System.Windows.Forms.TextBox()
+		*this.labelPackItem = *new System.Windows.Forms.Label()
+		*this.txtClass = *new System.Windows.Forms.TextBox()
+		*this.SetGroupBox.SuspendLayout()
+		(*this.DGVsets *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.HoldingGroupBox.SuspendLayout()
+		(*this.DGVAllocations *As System.ComponentModel.ISupportInitialize).BeginInit()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.PackItemGroup.SuspendLayout()
+		*this.SuspendLayout()
+		//
+		//SetGroupBox
+		//
+		*this.SetGroupBox.Controls.Add(*this.DGVsets)
+		*this.SetGroupBox.Controls.Add(*this.labelDesc)
+		*this.SetGroupBox.Controls.Add(*this.label3)
+		*this.SetGroupBox.Location = *new System.Drawing.Point(11, 63)
+		*this.SetGroupBox.Name = "SetGroupBox"
+		*this.SetGroupBox.Size = *new System.Drawing.Size(582, 229)
+		*this.SetGroupBox.TabIndex = 11
+		*this.SetGroupBox.TabStop = *False
+		*this.SetGroupBox.Text = "AP Master Item"
+		//
+		//DGVsets
+		//
+		*this.DGVsets.AllowUserToAddRows = *False
+		*this.DGVsets.AllowUserToDeleteRows = *False
+		*this.DGVsets.AllowUserToResizeColumns = *False
+		*this.DGVsets.AllowUserToResizeRows = *False
+		dataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+		*this.DGVsets.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1
+		*this.DGVsets.BackgroundColor = System.Drawing.SystemColors.ControlLight
+		*this.DGVsets.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		*this.DGVsets.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+		*this.DGVsets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.DGVsets.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.DGVcompItem, *this.DGVcompUnits, *this.DGVcompUPC, *this.DGVcompDesc})
+		*this.DGVsets.GridColor = System.Drawing.SystemColors.ControlLight
+		*this.DGVsets.Location = *new System.Drawing.Point(10, 35)
+		*this.DGVsets.Name = "DGVsets"
+		*this.DGVsets.ReadOnly = *True
+		*this.DGVsets.RowHeadersVisible = *False
+		dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((255 *As System.Byte) *As *Integer4), ((224 *As System.Byte) *As *Integer4), ((128 *As System.Byte) *As *Integer4))
+		*this.DGVsets.RowsDefaultCellStyle = dataGridViewCellStyle4
+		*this.DGVsets.Size = *new System.Drawing.Size(562, 178)
+		*this.DGVsets.TabIndex = 11
+		//
+		//DGVcompItem
+		//
+		*this.DGVcompItem.DataPropertyName = "SetItem"
+		*this.DGVcompItem.HeaderText = "Item"
+		*this.DGVcompItem.Name = "DGVcompItem"
+		*this.DGVcompItem.ReadOnly = *True
+		*this.DGVcompItem.Width = 150
+		//
+		//DGVcompUnits
+		//
+		*this.DGVcompUnits.DataPropertyName = "Ratio"
+		dataGridViewCellStyle2.Padding = *new System.Windows.Forms.Padding(0, 0, 10, 5)
+		*this.DGVcompUnits.DefaultCellStyle = dataGridViewCellStyle2
+		*this.DGVcompUnits.HeaderText = "Units"
+		*this.DGVcompUnits.Name = "DGVcompUnits"
+		*this.DGVcompUnits.ReadOnly = *True
+		*this.DGVcompUnits.Width = 80
+		//
+		//DGVcompUPC
+		//
+		*this.DGVcompUPC.DataPropertyName = "ItemUPC"
+		dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.DGVcompUPC.DefaultCellStyle = dataGridViewCellStyle3
+		*this.DGVcompUPC.HeaderText = "UPC"
+		*this.DGVcompUPC.Name = "DGVcompUPC"
+		*this.DGVcompUPC.ReadOnly = *True
+		*this.DGVcompUPC.Width = 110
+		//
+		//DGVcompDesc
+		//
+		*this.DGVcompDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		*this.DGVcompDesc.DataPropertyName = "ItemDescription"
+		*this.DGVcompDesc.HeaderText = "Item Description"
+		*this.DGVcompDesc.Name = "DGVcompDesc"
+		*this.DGVcompDesc.ReadOnly = *True
+		//
+		//labelDesc
+		//
+		*this.labelDesc.AutoSize = *True
+		*this.labelDesc.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.labelDesc.Location = *new System.Drawing.Point(119, 16)
+		*this.labelDesc.Name = "labelDesc"
+		*this.labelDesc.Size = *new System.Drawing.Size(101, 16)
+		*this.labelDesc.TabIndex = 10
+		*this.labelDesc.Text = "ItemDescription"
+		//
+		//label3
+		//
+		*this.label3.AutoSize = *True
+		*this.label3.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label3.Location = *new System.Drawing.Point(6, 16)
+		*this.label3.Name = "label3"
+		*this.label3.Size = *new System.Drawing.Size(107, 16)
+		*this.label3.TabIndex = 7
+		*this.label3.Text = "Item Description:"
+		//
+		//HoldingGroupBox
+		//
+		*this.HoldingGroupBox.Controls.Add(*this.label6)
+		*this.HoldingGroupBox.Controls.Add(*this.label5)
+		*this.HoldingGroupBox.Controls.Add(*this.labelRemainQty)
+		*this.HoldingGroupBox.Controls.Add(*this.labelAllocQty)
+		*this.HoldingGroupBox.Controls.Add(*this.labelDCHolding)
+		*this.HoldingGroupBox.Controls.Add(*this.label7)
+		*this.HoldingGroupBox.Location = *new System.Drawing.Point(603, 63)
+		*this.HoldingGroupBox.Name = "HoldingGroupBox"
+		*this.HoldingGroupBox.Size = *new System.Drawing.Size(255, 229)
+		*this.HoldingGroupBox.TabIndex = 15
+		*this.HoldingGroupBox.TabStop = *False
+		*this.HoldingGroupBox.Text = "Stock Levels"
+		//
+		//label6
+		//
+		*this.label6.AutoSize = *True
+		*this.label6.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label6.Location = *new System.Drawing.Point(7, 99)
+		*this.label6.Name = "label6"
+		*this.label6.Size = *new System.Drawing.Size(120, 16)
+		*this.label6.TabIndex = 5
+		*this.label6.Text = "AP Remaining Qty:"
+		//
+		//label5
+		//
+		*this.label5.AutoSize = *True
+		*this.label5.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label5.Location = *new System.Drawing.Point(7, 63)
+		*this.label5.Name = "label5"
+		*this.label5.Size = *new System.Drawing.Size(121, 16)
+		*this.label5.TabIndex = 4
+		*this.label5.Text = "Allocation Quantity:"
+		//
+		//labelRemainQty
+		//
+		*this.labelRemainQty.AutoSize = *True
+		*this.labelRemainQty.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.labelRemainQty.Location = *new System.Drawing.Point(141, 99)
+		*this.labelRemainQty.Name = "labelRemainQty"
+		*this.labelRemainQty.Size = *new System.Drawing.Size(105, 16)
+		*this.labelRemainQty.TabIndex = 3
+		*this.labelRemainQty.Text = "labelRemainQty"
+		//
+		//labelAllocQty
+		//
+		*this.labelAllocQty.AutoSize = *True
+		*this.labelAllocQty.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.labelAllocQty.Location = *new System.Drawing.Point(141, 63)
+		*this.labelAllocQty.Name = "labelAllocQty"
+		*this.labelAllocQty.Size = *new System.Drawing.Size(88, 16)
+		*this.labelAllocQty.TabIndex = 2
+		*this.labelAllocQty.Text = "labelAllocQty"
+		//
+		//labelDCHolding
+		//
+		*this.labelDCHolding.AutoSize = *True
+		*this.labelDCHolding.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.labelDCHolding.Location = *new System.Drawing.Point(141, 28)
+		*this.labelDCHolding.Name = "labelDCHolding"
+		*this.labelDCHolding.Size = *new System.Drawing.Size(104, 16)
+		*this.labelDCHolding.TabIndex = 1
+		*this.labelDCHolding.Text = "labelDCHolding"
+		//
+		//label7
+		//
+		*this.label7.AutoSize = *True
+		*this.label7.Font = *new System.Drawing.Font("Microsoft Sans Serif", 9.75, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (0 *As System.Byte))
+		*this.label7.Location = *new System.Drawing.Point(7, 28)
+		*this.label7.Name = "label7"
+		*this.label7.Size = *new System.Drawing.Size(111, 16)
+		*this.label7.TabIndex = 0
+		*this.label7.Text = "DC Stockholding:"
+		//
+		//DGVAllocations
+		//
+		*this.DGVAllocations.AllowUserToAddRows = *False
+		*this.DGVAllocations.AllowUserToDeleteRows = *False
+		*this.DGVAllocations.AllowUserToResizeRows = *False
+		dataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+		*this.DGVAllocations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5
+		*this.DGVAllocations.Anchor = (((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Bottom) *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.DGVAllocations.BackgroundColor = System.Drawing.SystemColors.ControlLight
+		*this.DGVAllocations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.DGVAllocations.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Market, *this.Store, *this.StoreName, *this.ReleaseQty, *this.SRRallocation})
+		*this.DGVAllocations.Location = *new System.Drawing.Point(11, 301)
+		*this.DGVAllocations.Name = "DGVAllocations"
+		*this.DGVAllocations.RowHeadersVisible = *False
+		dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((192 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		*this.DGVAllocations.RowsDefaultCellStyle = dataGridViewCellStyle8
+		*this.DGVAllocations.Size = *new System.Drawing.Size(582, 360)
+		*this.DGVAllocations.TabIndex = 16
+		//
+		//Market
+		//
+		*this.Market.DataPropertyName = "Market"
+		dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.Market.DefaultCellStyle = dataGridViewCellStyle6
+		*this.Market.HeaderText = "Market"
+		*this.Market.Name = "Market"
+		*this.Market.ReadOnly = *True
+		*this.Market.Width = 50
+		//
+		//Store
+		//
+		*this.Store.DataPropertyName = "Store"
+		dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+		*this.Store.DefaultCellStyle = dataGridViewCellStyle7
+		*this.Store.HeaderText = "Store"
+		*this.Store.Name = "Store"
+		*this.Store.ReadOnly = *True
+		*this.Store.Width = 70
+		//
+		//StoreName
+		//
+		*this.StoreName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		*this.StoreName.DataPropertyName = "StoreName"
+		*this.StoreName.HeaderText = "Store Name"
+		*this.StoreName.Name = "StoreName"
+		*this.StoreName.ReadOnly = *True
+		//
+		//ReleaseQty
+		//
+		*this.ReleaseQty.DataPropertyName = "ReleaseQty"
+		*this.ReleaseQty.HeaderText = "Release Quantity"
+		*this.ReleaseQty.Name = "ReleaseQty"
+		//
+		//SRRallocation
+		//
+		*this.SRRallocation.DataPropertyName = "SRRallocation"
+		*this.SRRallocation.HeaderText = "Previous SRR Allocation"
+		*this.SRRallocation.Name = "SRRallocation"
+		*this.SRRallocation.ReadOnly = *True
+		//
+		//btnAllocate
+		//
+		*this.btnAllocate.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+		*this.btnAllocate.Location = *new System.Drawing.Point(613, 619)
+		*this.btnAllocate.Name = "btnAllocate"
+		*this.btnAllocate.Size = *new System.Drawing.Size(103, 42)
+		*this.btnAllocate.TabIndex = 17
+		*this.btnAllocate.Text = "Apply"
+		*this.btnAllocate.UseVisualStyleBackColor = *True
+		//
+		//btnCancel
+		//
+		*this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+		*this.btnCancel.Location = *new System.Drawing.Point(730, 619)
+		*this.btnCancel.Name = "btnCancel"
+		*this.btnCancel.Size = *new System.Drawing.Size(103, 42)
+		*this.btnCancel.TabIndex = 18
+		*this.btnCancel.Text = "Back"
+		*this.btnCancel.UseVisualStyleBackColor = *True
+		//
+		//errorProvider1
+		//
+		*this.errorProvider1.ContainerControl = *this
+		//
+		//statusStrip1
+		//
+		*this.statusStrip1.Location = *new System.Drawing.Point(0, 666)
+		*this.statusStrip1.Name = "statusStrip1"
+		*this.statusStrip1.Size = *new System.Drawing.Size(867, 22)
+		*this.statusStrip1.TabIndex = 22
+		*this.statusStrip1.Text = "statusStrip1"
+		//
+		//PackItemGroup
+		//
+		*this.PackItemGroup.Controls.Add(*this.btnExit)
+		*this.PackItemGroup.Controls.Add(*this.btnContinue)
+		*this.PackItemGroup.Controls.Add(*this.label8)
+		*this.PackItemGroup.Controls.Add(*this.txtUPC)
+		*this.PackItemGroup.Controls.Add(*this.txtSize)
+		*this.PackItemGroup.Controls.Add(*this.txtColour)
+		*this.PackItemGroup.Controls.Add(*this.txtStyle)
+		*this.PackItemGroup.Controls.Add(*this.txtVendor)
+		*this.PackItemGroup.Controls.Add(*this.labelPackItem)
+		*this.PackItemGroup.Controls.Add(*this.txtClass)
+		*this.PackItemGroup.Location = *new System.Drawing.Point(11, 2)
+		*this.PackItemGroup.Name = "PackItemGroup"
+		*this.PackItemGroup.Size = *new System.Drawing.Size(847, 58)
+		*this.PackItemGroup.TabIndex = 23
+		*this.PackItemGroup.TabStop = *False
+		*this.PackItemGroup.Text = "AP Master Item"
+		//
+		//btnExit
+		//
+		*this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		*this.btnExit.Location = *new System.Drawing.Point(719, 20)
+		*this.btnExit.Name = "btnExit"
+		*this.btnExit.Size = *new System.Drawing.Size(75, 22)
+		*this.btnExit.TabIndex = 31
+		*this.btnExit.Text = "Back"
+		*this.btnExit.UseVisualStyleBackColor = *True
+		//
+		//btnContinue
+		//
+		*this.btnContinue.Location = *new System.Drawing.Point(600, 20)
+		*this.btnContinue.Name = "btnContinue"
+		*this.btnContinue.Size = *new System.Drawing.Size(75, 22)
+		*this.btnContinue.TabIndex = 30
+		*this.btnContinue.Text = "Continue"
+		*this.btnContinue.UseVisualStyleBackColor = *True
+		//
+		//label8
+		//
+		*this.label8.AutoSize = *True
+		*this.label8.Location = *new System.Drawing.Point(389, 25)
+		*this.label8.Name = "label8"
+		*this.label8.Size = *new System.Drawing.Size(32, 13)
+		*this.label8.TabIndex = 29
+		*this.label8.Text = "UPC:"
+		//
+		//txtUPC
+		//
+		*this.txtUPC.Location = *new System.Drawing.Point(435, 22)
+		*this.txtUPC.MaxLength = 12
+		*this.txtUPC.Name = "txtUPC"
+		*this.txtUPC.Size = *new System.Drawing.Size(133, 20)
+		*this.txtUPC.TabIndex = 28
+		//
+		//txtSize
+		//
+		*this.txtSize.Location = *new System.Drawing.Point(296, 22)
+		*this.txtSize.MaxLength = 4
+		*this.txtSize.Name = "txtSize"
+		*this.txtSize.Size = *new System.Drawing.Size(47, 20)
+		*this.txtSize.TabIndex = 27
+		//
+		//txtColour
+		//
+		*this.txtColour.Location = *new System.Drawing.Point(255, 22)
+		*this.txtColour.MaxLength = 3
+		*this.txtColour.Name = "txtColour"
+		*this.txtColour.Size = *new System.Drawing.Size(32, 20)
+		*this.txtColour.TabIndex = 26
+		//
+		//txtStyle
+		//
+		*this.txtStyle.Location = *new System.Drawing.Point(199, 22)
+		*this.txtStyle.MaxLength = 4
+		*this.txtStyle.Name = "txtStyle"
+		*this.txtStyle.Size = *new System.Drawing.Size(47, 20)
+		*this.txtStyle.TabIndex = 25
+		//
+		//txtVendor
+		//
+		*this.txtVendor.Location = *new System.Drawing.Point(134, 22)
+		*this.txtVendor.MaxLength = 5
+		*this.txtVendor.Name = "txtVendor"
+		*this.txtVendor.Size = *new System.Drawing.Size(56, 20)
+		*this.txtVendor.TabIndex = 23
+		//
+		//labelPackItem
+		//
+		*this.labelPackItem.AutoSize = *True
+		*this.labelPackItem.Location = *new System.Drawing.Point(12, 25)
+		*this.labelPackItem.Name = "labelPackItem"
+		*this.labelPackItem.Size = *new System.Drawing.Size(58, 13)
+		*this.labelPackItem.TabIndex = 24
+		*this.labelPackItem.Text = "Pack Item:"
+		//
+		//txtClass
+		//
+		*this.txtClass.Location = *new System.Drawing.Point(78, 22)
+		*this.txtClass.MaxLength = 4
+		*this.txtClass.Name = "txtClass"
+		*this.txtClass.Size = *new System.Drawing.Size(47, 20)
+		*this.txtClass.TabIndex = 22
+		//
+		//frmMANrelease
+		//
+		*this.AutoScaleDimensions = *new System.Drawing.SizeF(6, 13)
+		*this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		*this.AutoSize = *True
+		*this.ClientSize = *new System.Drawing.Size(867, 688)
+		*this.ControlBox = *False
+		*this.Controls.Add(*this.PackItemGroup)
+		*this.Controls.Add(*this.statusStrip1)
+		*this.Controls.Add(*this.btnCancel)
+		*this.Controls.Add(*this.btnAllocate)
+		*this.Controls.Add(*this.DGVAllocations)
+		*this.Controls.Add(*this.HoldingGroupBox)
+		*this.Controls.Add(*this.SetGroupBox)
+		*this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+		*this.Name = "frmMANrelease"
+		*this.ShowIcon = *False
+		*this.Text = "Manual AP Allocation Release"
+		*this.SetGroupBox.ResumeLayout(*False)
+		*this.SetGroupBox.PerformLayout()
+		(*this.DGVsets *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.HoldingGroupBox.ResumeLayout(*False)
+		*this.HoldingGroupBox.PerformLayout()
+		(*this.DGVAllocations *As System.ComponentModel.ISupportInitialize).EndInit()
+		(*this.errorProvider1 *As System.ComponentModel.ISupportInitialize).EndInit()
+		*this.PackItemGroup.ResumeLayout(*False)
+		*this.PackItemGroup.PerformLayout()
+		*this.ResumeLayout(*False)
+		*this.PerformLayout()
+	EndSr
+	
+	// Clean up any resources being used.
+	// "disposing" is true if managed resources should be disposed; otherwise, false.
+	BegSr Dispose Access(*Protected) Modifier(*Overrides)
+		DclSrParm disposing Type(*Boolean)
+
+		If (disposing *And (components *NE *Nothing))
+			components.Dispose()
+		EndIf
+			
+		*Base.Dispose(disposing)
+	EndSr
+	/EndRegion
+	
+	BegSr Form_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+        
+		SetGroupBox.Visible     = *False
+		HoldingGroupBox.Visible = *False
+		DGVAllocations.Visible  = *False
+		btnAllocate.Visible     = *False
+		btnCancel.Visible       = *False
+		
+		*this.ClientSize = *new System.Drawing.Size(896, 91)
+	EndSr
+
+	BegSr Form_FormClosing Access(*Private) Event(*this.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+        
+		If IPITHDR.IsOpen
+			Close IPITHDR
+		EndIf
+		
+		If IPITHDRC.IsOpen
+			Close IPITHDRC
+		EndIf
+		
+		If IPISETS.IsOpen
+			Close IPISETS
+		EndIf
+		
+		If DSIALOK.IsOpen
+			Close DSIALOK
+		EndIf
+		
+		If DSAPPALC.IsOpen
+			Close DSAPPALC
+		EndIf
+	EndSr
+	
+	BegSr moveToVendor Access(*Private) Event(*this.txtClass.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtClass.TextLength <> *Zero
+			txtUPC.Enabled = *False
+		Else
+			If  txtVendor.TextLength = *Zero +
+			And txtStyle.TextLength  = *Zero +
+			And txtColour.TextLength = *Zero +
+			And txtSize.TextLength   = *Zero
+				txtUPC.Enabled = *True
+			EndIf
+		EndIf
+		
+		If txtClass.TextLength = 4
+			txtVendor.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToStyle Access(*Private) Event(*this.txtVendor.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtVendor.TextLength <> *Zero
+			txtUPC.Enabled = *False
+		Else
+			If  txtClass.TextLength  = *Zero +
+			And txtStyle.TextLength  = *Zero +
+			And txtColour.TextLength = *Zero +
+			And txtSize.TextLength   = *Zero
+				txtUPC.Enabled = *True
+			EndIf
+		EndIf
+		
+		
+		If txtVendor.TextLength = 5
+			txtStyle.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToColour Access(*Private) Event(*this.txtStyle.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtStyle.TextLength <> *Zero
+			txtUPC.Enabled = *False
+		Else
+			If  txtClass.TextLength  = *Zero +
+			And txtVendor.TextLength = *Zero +
+			And txtColour.TextLength = *Zero +
+			And txtSize.TextLength   = *Zero
+				txtUPC.Enabled = *True
+			EndIf
+		EndIf
+		
+		If txtStyle.TextLength = 4
+			txtColour.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToSize Access(*Private) Event(*this.txtColour.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		If txtColour.TextLength <> *Zero
+			txtUPC.Enabled = *False
+		Else
+			If  txtClass.TextLength  = *Zero +
+			And txtVendor.TextLength = *Zero +
+			And txtStyle.TextLength  = *Zero +
+			And txtSize.TextLength   = *Zero
+				txtUPC.Enabled = *True
+			EndIf
+		EndIf				
+		
+		If txtColour.TextLength = 3
+			txtSize.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveToContinue Access(*Private) Event(*this.txtSize.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		If txtSize.TextLength <> *Zero
+			txtUPC.Enabled = *False
+		Else
+			If  txtClass.TextLength  = *Zero +
+			And txtVendor.TextLength = *Zero +
+			And txtStyle.TextLength  = *Zero +
+			And txtColour.TextLength = *Zero
+				txtUPC.Enabled = *True
+			EndIf
+		EndIf		
+		
+		If txtSize.TextLength = 4
+			btnContinue.Select()
+		EndIf
+	EndSr
+	
+	BegSr moveFromUPCtoContinue Access(*Private) Event(*this.txtUPC.TextChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+				
+		If txtUPC.TextLength <> *Zero
+			txtClass.Enabled  = *False
+			txtVendor.Enabled = *False
+			txtStyle.Enabled  = *False
+			txtColour.Enabled = *False
+			txtSize.Enabled   = *False
+			ErrorProvider1.SetError(txtClass,String.Empty)
+			ErrorProvider1.SetError(txtVendor,String.Empty)
+			ErrorProvider1.SetError(txtStyle,String.Empty)
+			ErrorProvider1.SetError(txtColour,String.Empty)
+			ErrorProvider1.SetError(txtSize,String.Empty)
+		Else
+			txtClass.Enabled  = *True
+			txtVendor.Enabled = *True
+			txtStyle.Enabled  = *True
+			txtColour.Enabled = *True
+			txtSize.Enabled   = *True
+			ErrorProvider1.SetError(txtUPC,String.Empty)
+		EndIf
+		
+		If txtUPC.TextLength = 12
+			btnContinue.Select()
+		EndIf
+	EndSr
+	
+	BegFunc GetPackDetails Type(*Boolean)
+		DclSrParm txtClass  Type(TextBox)
+		DclSrParm txtVendor Type(TextBox)
+		DclSrParm txtStyle  Type(TextBox)
+		DclSrParm txtColour Type(TextBox)
+		DclSrParm txtSize   Type(TextBox)
+		
+		DclConst Valid    Value("1")
+		DclConst NotValid Value("0")
+		DclFld   ErrorCount Type(System.Int16)
+		
+		ErrorCount = *Zero
+		ErrorProvider1.Clear()
+		
+		// Validate Item Number
+		If String.IsNullOrEmpty(txtClass.Text)
+			Class = *Zero
+		Else
+			Try
+				Class  = Convert.ToInt16(txtClass.Text)
+			Catch Name(Err) Type(System.Exception)
+				ErrorCount += 1
+				ErrorProvider1.SetError(txtClass,'Invalid Number')
+			EndTry
+		EndIf
+		
+		If String.IsNullOrEmpty(txtVendor.Text)
+			Vendor = *Zero
+		Else
+			Try
+				Vendor = Convert.ToInt32(txtVendor.Text)
+			Catch Name(Err) Type(System.Exception)
+				ErrorCount += 1
+				ErrorProvider1.SetError(txtVendor,'Invalid Number')
+			EndTry
+		EndIf
+		
+		If String.IsNullOrEmpty(txtStyle.Text)
+			Style = *Zero
+		Else
+			Try
+				Style  = Convert.ToInt16(txtStyle.Text)
+			Catch Name(Err) Type(System.Exception)
+				ErrorCount += 1
+				ErrorProvider1.SetError(txtStyle,'Invalid Number')
+			EndTry
+		EndIf
+		
+		If String.IsNullOrEmpty(txtColour.Text)
+			Colour = *Zero
+		Else
+			Try
+				Colour = Convert.ToInt16(txtColour.Text)
+			Catch Name(Err) Type(System.Exception)
+				ErrorCount += 1
+				ErrorProvider1.SetError(txtColour,'Invalid Number')
+			EndTry
+		EndIf
+		
+		If String.IsNullOrEmpty(txtSize.Text)
+			Size = *Zero
+		Else
+			Try
+				Size = Convert.ToInt16(txtSize.Text)
+			Catch Name(Err) Type(System.Exception)
+				ErrorCount += 1
+				ErrorProvider1.SetError(txtSize,'Invalid Number')
+			EndTry
+		EndIf
+		
+		If ErrorCount <> *Zero
+			LeaveSR NotValid
+		EndIf
+		
+		// Check for Item on file
+		If Not IPITHDR.IsOpen
+			Open IPITHDR
+		EndIf
+		
+		Chain From(IPITHDR) Key(Class,Vendor,Style,Colour,Size)
+		If Not IPITHDR.IsFound
+			ErrorProvider1.SetError(txtSize,'Item Not Found')
+			LeaveSR NotValid
+		Else
+			If ISET <> "Y"
+				ErrorProvider1.SetError(txtSize,'Item not defined as a Pack')
+				LeaveSR NotValid
+			Else
+				If Not IPISETS.IsOpen
+					Open IPISETS
+				EndIf
+				
+				Chain From(IPISETS) key(Class,Vendor,Style,Colour,Size)
+				If Not IPISETS.IsFound
+					ErrorProvider1.SetError(txtSize,'Pack is not defined')
+					LeaveSR NotValid
+				Else
+					UPC = IUPD
+					LeaveSR Valid
+				EndIf
+			EndIf
+		EndIf
+	EndFunc
+	
+	BegFunc GetPackDetails Type(*Boolean)
+		DclSrParm txtUPC Type(TextBox)
+		
+		DclConst Valid    Value("1")
+		DclConst NotValid Value("0")
+		
+		ErrorProvider1.Clear()
+		UPC = txtUPC.Text
+		
+		If Not IPITHDRC.IsOpen
+			Open IPITHDRC
+		EndIf
+		
+		Chain From(IPITHDRC) Key(UPC)
+		If Not IPITHDRC.IsFound
+			ErrorProvider1.SetError(txtUPC,'Item Not Found')
+			LeaveSR NotValid
+		Else
+			If ISET <> "Y"
+				ErrorProvider1.SetError(txtUPC,'Item not defined as a Pack')
+				LeaveSR NotValid
+			Else
+				If Not IPISETS.IsOpen
+					Open IPISETS
+				EndIf
+				
+				Class   = ICLS
+				Vendor  = IVEN
+				Style   = ISTY
+				Colour  = ICLR
+				Size    = ISIZ
+				Chain From(IPISETS) key(Class,Vendor,Style,Colour,Size)
+				If Not IPISETS.IsFound
+					ErrorProvider1.SetError(txtUPC,'Pack is not defined')
+					LeaveSR NotValid
+				Else
+					txtClass.Text  = Class
+					txtVendor.Text = Vendor
+					txtStyle.Text  = Style
+					txtColour.Text = Colour
+					txtSize.Text   = Size
+					LeaveSR Valid
+				EndIf
+			EndIf
+		EndIf
+	EndFunc
+
+	BegSr btnContinue_Click Access(*Private) Event(*this.btnContinue.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld Valid Type(*Boolean)
+		
+		If txtUPC.TextLength = 12
+			Valid = GetPackDetails(txtUPC)
+			If Valid = *True
+				ErrorProvider1.Clear()
+				SetMousePtr *HourGlass
+				BuildFormDetails()
+			EndIf
+		Else
+			Valid = GetPackDetails(txtClass,txtVendor,txtStyle,txtColour,txtSize)
+			If Valid = *True
+				ErrorProvider1.Clear()
+				SetMousePtr *HourGlass
+				BuildFormDetails()
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr BuildFormDetails
+	
+		If Not DSIALOK.IsOpen
+			Open DSIALOK
+		EndIf
+		
+		// Lock the master record
+		Chain From(DSIALOK) Key(Class,Vendor,Style,Colour,Size) Access(*NoLock)
+		If %Found(DSIALOK)
+			MsgBox 'AP Master Item is currently in use, please try later'
+			LeaveSR
+		EndIf
+		
+		IACLS = Class
+		IAVEN = Vendor
+		IASTY = Style
+		IACLR = Colour
+		IASIZ = Size
+		IAUSER = PgmDB.User.ToUpper()
+		IAFGP  = *Zero
+		IAJOB  = PgmDB.User.ToUpper()
+		IADTTM = DateTime.Now.ToString('yyyyMMddHHmm')
+		
+		Write IALOK
+		Chain DSIALOK Key(0000) Access(*NoLock)
+		
+		txtClass.Enabled    = *False
+		txtVendor.Enabled   = *False
+		txtStyle.Enabled    = *False
+		txtColour.Enabled   = *False
+		txtSize.Enabled     = *False
+		txtUPC.Enabled      = *False
+		btnContinue.Enabled = *False
+		btnExit.Enabled     = *False
+		
+		*this.SuspendLayout()
+		
+		// Build Set Grid
+		BuildSetData = *New BuildSetData(PgmDB)
+		SetData = BuildSetData.BuildData(Class,Vendor,Style,Colour,Size)
+		
+		DGVsets.AutoGenerateColumns = *False
+		DGVsets.DataSource = SetData.APSet.Tables["Set"]
+		LabelDesc.Text     = SetData.APDesc
+		
+		// Get DC StockHolding
+		GetDCStockHolding = *New GetDCStockHolding(PgmDB)
+		DCholding = GetDCStockHolding.GetDCStockHolding(Class,Vendor,Style,Colour,Size)
+		LabelDCHolding.Text = DCholding.ToString()
+				
+		AllocQty = *Zero
+		LabelAllocQty.Text = String.Empty
+		
+		RemainQty = DCholding
+		LabelRemainQty.Text = RemainQty.ToString()
+				
+		
+		// Build Allocations data
+		BuildMANallocations = *New BuildMANallocations(PgmDB)
+		AllocationDS = BuildMANallocations.BuildData(Class,Vendor,Style,Colour,Size)
+		
+		DGVallocations.AutoGenerateColumns = *False
+		DGVallocations.DataSource = AllocationDS.Tables["StoreList"]
+		
+		*this.ClientSize = *New System.Drawing.Size(896, 702)		
+		SetGroupBox.Visible     = *True
+		HoldingGroupBox.Visible = *True
+		DGVAllocations.Visible  = *True
+		btnAllocate.Visible     = *True
+		btnCancel.Visible       = *True
+		
+		SetMousePtr *Dft
+		
+		AddHandler SourceObject(DGVAllocations) HandlerSr(DGVAllocations_CellBeginEdit) SourceEvent(CellBeginEdit)
+		AddHandler SourceObject(DGVAllocations) HandlerSr(DGVAllocations_CellEndEdit) SourceEvent(CellEndEdit)
+		AddHandler SourceObject(DGVAllocations) HandlerSr(DGVAllocations_DataError) SourceEvent(DataError)
+		AddHandler SourceObject(DGVAllocations) HandlerSr(DGVAllocations_CellValidating) SourceEvent(CellValidating)
+		
+		*this.ResumeLayout()
+	EndSr
+	
+	BegSr btnCancel_Click Access(*Private) Event(*this.btnCancel.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld dv      Type(DataView)
+		DclFld RtnCode Type(System.Int16)
+		
+		dv = *New DataView(AllocationDS.Tables["StoreList"])
+		dv.RowFilter = "ReleaseQty > 0"
+		If dv.Count <> *Zero
+			MsgBox 'Are you sure you wish to Exit, Pending changes are not Allocated ?' Buttons(*YesNo) Icon(*Question) +
+				DftButton(1) RtnCode(RtnCode)
+			If RtnCode <> 6
+				LeaveSR
+			EndIf
+		EndIf
+				
+		// Release lock
+		Delete IALOK Key(Class,Vendor,Style,Colour,Size)
+		
+		DisposeGrid()
+				
+		SetGroupBox.Visible     = *False
+		HoldingGroupBox.Visible = *False
+		DGVAllocations.Visible  = *False
+		btnAllocate.Visible     = *False
+		btnCancel.Visible       = *False
+		
+		txtClass.Enabled  = *True
+		txtClass.Text     = String.Empty
+		txtVendor.Enabled = *True
+		txtVendor.Text    = String.Empty
+		txtStyle.Enabled  = *True
+		txtStyle.Text     = String.Empty
+		txtColour.Enabled = *True
+		txtColour.Text    = String.Empty
+		txtSize.Enabled   = *True
+		txtSize.Text      = String.Empty
+		txtUPC.Enabled    = *True
+		txtUPC.Text       = String.Empty
+		
+		btnContinue.Enabled = *True
+		btnExit.Enabled     = *True
+
+		*this.ClientSize = *new System.Drawing.Size(896, 91)
+	EndSr
+	
+	BegSr btnAllocate_Click Access(*Private) Event(*this.btnAllocate.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		DclFld CmdString Type(StringBuilder)
+		DclFld dv      Type(DataView)
+		DclFld RtnCode Type(System.Int16)
+		
+		dv = *New DataView(AllocationDS.Tables["StoreList"])
+		dv.RowFilter = "ReleaseQty > 0"
+		
+		If dv.Count = *Zero
+			MsgBox 'There are no Allocation Quantities' Buttons(*OK) Icon(*Exclamation)
+			LeaveSR
+		Else
+			MsgBox 'Are you sure you want to apply changes ?' Buttons(*YesNo) Icon(*Question) +
+				DftButton(1) RtnCode(RtnCode)
+			If RtnCode <> 6
+				LeaveSR
+			Else
+				Try
+					BuildMANallocations.Update_DB(Class,Vendor,Style,Colour,Size,dv)
+				Catch Name(Err) Type(System.Exception)
+					MsgBox 'Problem updating the Allocations file, contact support'
+					LeaveSR
+				EndTry
+				
+				Clear BufferA
+				Clear BufferB
+				
+				// Submit job Non-blocking
+				CmdString = *New StringBuilder()
+				CmdString.Append(Class.ToString('0000'))
+				CmdString.Append(Vendor.ToString('00000'))
+				CmdString.Append(Style.ToString('0000'))
+				CmdString.Append(Colour.ToString('000'))
+				CmdString.Append(Size.ToString('0000'))
+				CmdString.Append("MAN")
+				FldA1 =  CmdString.ToString()
+						
+				CmdString = *New StringBuilder()
+				CmdString.Append("SBMJOB CMD(CALL PGM(DSIPWRAP) PARM(")
+				CmdString.Append("'S885EC0001' ")                  // IP Job Name
+				CmdString.Append("'DS885EC' ")                     // Program name
+				CmdString.Append("'" + Option1 + "' ")             // 153 Bytes
+				CmdString.Append("'" + Option2 + "' ")             // 153 Bytes
+				CmdString.Append("'N' ")                           // Submit Job
+				CmdString.Append("' ')) JOBQ(QGPL/QTXTSRCH)")      // Error indicator & Job queue
+				
+				Command = CmdString.ToString()	
+				Length  = CmdString.Length				
+				
+				Try
+					Call Pgm("QCMDEXC") ParmList(CommandEXC) DB( PgmDB )
+				Catch Name(Err) Type(Exception)
+					MsgBox 'Error calling DS885EC from Manual Allocations, Contact Support' Icon(*Stop)
+					LeaveSR
+				Endtry
+				
+				DisposeGrid()
+							
+				// Return to first screen
+				SetGroupBox.Visible     = *False
+				HoldingGroupBox.Visible = *False
+				DGVAllocations.Visible  = *False
+				btnAllocate.Visible     = *False
+				btnCancel.Visible       = *False
+				
+				txtClass.Enabled  = *True
+				txtClass.Text     = String.Empty
+				txtVendor.Enabled = *True
+				txtVendor.Text    = String.Empty
+				txtStyle.Enabled  = *True
+				txtStyle.Text     = String.Empty
+				txtColour.Enabled = *True
+				txtColour.Text    = String.Empty
+				txtSize.Enabled   = *True
+				txtSize.Text      = String.Empty
+				txtUPC.Enabled    = *True
+				txtUPC.Text       = String.Empty
+				
+				btnContinue.Enabled = *True
+				btnExit.Enabled     = *True
+				
+				*this.ClientSize = *new System.Drawing.Size(896, 91)
+			EndIf
+		EndIf		
+	EndSr
+	
+	BegSr DGVAllocations_CellBeginEdit Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellCancelEventArgs
+		
+		If DGVAllocations.Columns[e.ColumnIndex].Name = "ReleaseQty"
+			Try
+				PrevQty = Convert.ToDecimal( DGVAllocations.item[e.ColumnIndex,e.RowIndex].Value )
+			Catch Name(Err) Type(System.Exception)
+				PrevQty = *Zero
+			EndTry
+		EndIf
+	EndSr
+	
+	BegSr DGVAllocations_CellEndEdit Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellEventArgs
+		
+		DclFld Store Type(Int16)
+
+		If DGVAllocations.Columns[e.ColumnIndex].Name = "ReleaseQty"
+		
+			If  String.IsNullOrEmpty(DGVAllocations.Item["ReleaseQty",e.RowIndex].Value.ToString())
+				NewQty = *Zero
+				DGVAllocations.Item["ReleaseQty",e.RowIndex].Value = 0
+			Endif
+		
+			If Not DSAPPALC.IsOpen
+				Open DSAPPALC
+			EndIf
+			
+			AllocQty += (NewQty - PrevQty)
+			RemainQty =  DCholding - AllocQty
+			LabelAllocQty.Text  = AllocQty.ToString()
+			LabelRemainQty.Text = RemainQty.ToString()
+		EndIf
+	EndSr
+	
+	BegSr DGVAllocations_DataError Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewDataErrorEventArgs
+		
+		If DGVAllocations.Columns[e.ColumnIndex].Name = "ReleaseQty"
+		
+			MsgBox 'You have entered an invalid number'
+		
+			e.Cancel = *True
+			
+			DGVAllocations.CancelEdit()
+			DGVAllocations.EndEdit()
+		EndIf
+	EndSr
+	
+	BegSr DGVAllocations_CellValidating Access(*Private)
+		DclSrParm sender *Object
+		DclSrParm e System.Windows.Forms.DataGridViewCellValidatingEventArgs
+		
+		DclFld Store Type(System.Int16)
+		
+		If DGVAllocations.Columns[e.ColumnIndex].Name = "ReleaseQty"
+		
+			If  String.IsNullOrEmpty(e.FormattedValue.ToString())
+				NewQty = *Zero
+			Else
+				Try
+					NewQty = Convert.ToInt32( e.FormattedValue )
+				Catch Name(Err) Exception
+					e.Cancel = *True
+					MsgBox 'You have entered an invalid number'
+					LeaveSR
+				EndTry
+					
+				If NewQty < *Zero
+					e.Cancel = *True
+					MsgBox 'Negative numbers not allowed'
+					LeaveSR
+				EndIf
+				
+				If NewQty > 1000
+					e.Cancel = *True
+					MsgBox 'Cannot allocate more than 1000 Packs !'
+					LeaveSR
+				EndIf
+				
+				If Not DSAPPALC.IsOpen
+					Open DSAPPALC
+				EndIf
+					
+				If NewQty <> *Zero
+					Store = Convert.ToInt16(DGVAllocations.Item["Store",e.RowIndex].Value)
+					Chain From(DSAPPALC) Key('',Class,Vendor,Style,Colour,Size,Store,'S')
+					If DSAPPALC.IsFound
+						e.Cancel = *True
+						MsgBox 'Cannot allocate, Outstanding SRR allocation exists'
+						LeaveSR
+					EndIf
+				EndIf
+				
+				If Convert.ToInt32(e.FormattedValue) <> Convert.ToInt32(DGVAllocations.Item["ReleaseQty",e.RowIndex].Value)		
+					If (RemainQty + PrevQty - NewQty) < *Zero
+						e.Cancel = *True
+						MsgBox 'You cannot over-allocate, please reduce the quantity'
+						LeaveSR
+					EndIf
+				EndIf
+			Endif
+		EndIf
+	EndSr
+	
+	//This disposes of the grid and re-Draws. This was necessary because the form is never disposed.
+	//Once the user allocates a qty the form reverts back to a partial display.
+	//But the grid remains in memory with all the previously entered values.
+	BegSr DisposeGrid Access(*Private)
+		
+		DclFld dataGridViewCellStyle5 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		DclFld dataGridViewCellStyle8 System.Windows.Forms.DataGridViewCellStyle New(*Dft)
+		
+		*this.DGVAllocations.Dispose()		
+				
+		*this.DGVAllocations = *new System.Windows.Forms.DataGridView()		
+		(*this.DGVAllocations *As System.ComponentModel.ISupportInitialize).BeginInit()
+		*this.DGVAllocations.AllowUserToAddRows = *False
+		*this.DGVAllocations.AllowUserToDeleteRows = *False
+		*this.DGVAllocations.AllowUserToResizeRows = *False
+		dataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+		*this.DGVAllocations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5
+		*this.DGVAllocations.Anchor = (((System.Windows.Forms.AnchorStyles.Top *BitOr System.Windows.Forms.AnchorStyles.Bottom) *BitOr System.Windows.Forms.AnchorStyles.Left) *As System.Windows.Forms.AnchorStyles)
+		*this.DGVAllocations.BackgroundColor = System.Drawing.SystemColors.ControlLight
+		*this.DGVAllocations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		*this.DGVAllocations.Columns.AddRange(*new System.Windows.Forms.DataGridViewColumn[] {*this.Market, *this.Store, *this.StoreName, *this.ReleaseQty, *this.SRRallocation})
+		*this.DGVAllocations.Location = *new System.Drawing.Point(11, 301)
+		*this.DGVAllocations.Name = "DGVAllocations"
+		*this.DGVAllocations.RowHeadersVisible = *False
+		dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((192 *As System.Byte) *As *Integer4), ((255 *As System.Byte) *As *Integer4), ((192 *As System.Byte) *As *Integer4))
+		*this.DGVAllocations.RowsDefaultCellStyle = dataGridViewCellStyle8
+		*this.DGVAllocations.Size = *new System.Drawing.Size(582, 360)
+		*this.DGVAllocations.TabIndex = 16
+		*this.Controls.Add(*this.DGVAllocations)
+		(*this.DGVAllocations *As System.ComponentModel.ISupportInitialize).EndInit()
+	
+	EndSr
+	
+	
+	
+	BegSr btnExit_Click Access(*Private) Event(*this.btnExit.Click)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+		*this.DialogResult = DialogResult.Cancel
+		*this.Close()
+	EndSr
+EndClass

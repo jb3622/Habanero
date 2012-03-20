@@ -1,0 +1,79 @@
+Using System
+Using System.Text
+Using System.Xml
+
+DclNameSpace Disney.Menu
+
+BegClass Application Access(*Internal)
+
+	DclFld objXml     Type(System.Xml.XmlDocument) Access(*Private)
+
+	BegConstructor Access(*Public)
+	
+		LoadApplicationXml()
+	EndConstructor
+	
+	DclFld pName    Type(String)  Access(*Private)
+	BegProp Name(Name) Type(String) Access(*Public)
+		BegGet
+			LeaveSR pName
+		EndGet
+	EndProp
+	
+	DclFld pEnabled Type(Boolean) Access(*Private)
+	BegProp Enabled Type(Boolean) Access(*Public)
+		BegGet
+			LeaveSR pEnabled
+		EndGet
+	EndProp
+	
+	DclFld pMessage Type(String)  Access(*Private)
+	BegProp Message Type(String) Access(*Public)
+		BegGet
+			LeaveSR pMessage
+		EndGet
+	EndProp
+
+	BegSr LoadApplicationXml Access(*Private)
+		DclFld XmlAppFile Type(*String) 
+				
+		XmlAppFile = System.Environment.CurrentDirectory.Trim() + "\" + Environments.menuXmlFolderName + "\Applications.xml"
+		
+		objXml = *New Xml.XmlDocument()
+		Try
+			objXml.Load(XmlAppFile)
+		Catch Err Exception
+			Throw *New Exception('Error loading xml file')
+		EndTry
+	EndSr
+	
+	BegFunc GetApplication Type(Boolean) Access(*Public)
+		DclSrParm ApplicationName Type(String)
+		
+		DclFld Node Type(System.Xml.XmlNode)
+		
+		If objXml.HasChildNodes = *True
+            Node = objXml.SelectSingleNode("/Applications/Application[@Name = '" + ApplicationName + "']")
+            
+            If Node <> *Nothing
+            	pName = Node.Attributes["Name"].Value
+            
+				If Node.Attributes["Enabled"] <> *Nothing
+					pEnabled = Node.Attributes["Enabled"].Value
+				Else
+					pEnabled = *False
+				EndIf
+				
+				If Node.Attributes["Message"] <> *Nothing
+					pMessage = Node.Attributes["Message"].Value
+				Else
+					pMessage = String.Empty
+				EndIf
+			EndIf
+			
+			LeaveSR *true
+		Else
+			LeaveSR *false
+		EndIf
+	EndFunc
+EndClass

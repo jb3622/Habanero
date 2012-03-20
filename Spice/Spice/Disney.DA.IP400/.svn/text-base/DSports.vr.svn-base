@@ -1,0 +1,86 @@
+Using System
+Using System.Text
+Using System.Data
+Using System.IO
+Using System.Data
+
+BegClass DSports Access(*Public)
+
+	DclDB Name(PgmDB) DBName("TDST")
+	DclDiskFile Name(DSports) Type(*Input) Org(*Arrival) DB(PgmDB) ImpOpen(*No)
+	
+	DclFld PortsTbl Type(DataTable) Access(*Private)
+	DclFld pXMLpath Type(String)    Access(*Private)
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm Environment Type(Disney.Menu.Environments)
+		
+		*this.PgmDB = PgmDB
+		
+		pXMLpath = Path.Combine(Environment.PathToApplicationXML,"Ports.xml")
+		LoadDataTableFromXML()
+	EndConstructor
+
+	BegSr LoadDataTableFromXML Access(*Private)
+			
+		If PortsTbl = *Nothing
+			CreateTbl()
+			If Not File.Exists(pXMLpath)
+				PopulateDataTable()
+			Else
+				PortsTbl.ReadXml(pXMLpath)
+			EndIf
+		EndIf
+	EndSr
+	
+	BegSr CreateTbl Access(*Private)
+	
+		DclArray Keys    Type(DataColumn) Rank(1)
+
+		PortsTbl = *New DataTable("Ports")
+
+		PortsTbl.Columns.Add(*New DataColumn("PortCode", *TypeOf(Int32)))
+		PortsTbl.Columns["PortCode"].ReadOnly = *True
+
+		PortsTbl.Columns.Add(*New DataColumn("Description", *TypeOf(String)))
+		PortsTbl.Columns["Description"].ReadOnly = *True
+		
+		PortsTbl.Columns.Add(*New DataColumn("PortCodeDescription", *TypeOf(String)))
+		PortsTbl.Columns["PortCodeDescription"].Expression = "PortCode + ' - ' + Description"
+		PortsTbl.Columns["PortCodeDescription"].ReadOnly = *True
+		
+		Keys = *New DataColumn[] {PortsTbl.Columns("PortCode")}
+		PortsTbl.PrimaryKey = Keys
+	EndSr
+	
+	BegSr PopulateDataTable Access(*Private)
+	
+		DclFld dr Type(DataRow)
+		
+		If Not DSports.IsOpen
+			Open DSports
+		EndIf
+		
+		DoUntil DSports.IsEof
+			Read DSports
+			If Not DSports.IsEof
+				dr = PortsTbl.NewRow()
+				
+				dr.Item["PortCode"]    = PCDE
+				dr.Item["Description"] = PDSC.Trim()
+				
+				PortsTbl.Rows.Add(dr)
+			EndIf
+		EndDo
+		
+		PortsTbl.WriteXml(pXMLpath)
+		
+		Close DSports
+	EndSr
+	
+	BegFunc GetPortsTbl Type(DataTable) Access(*Public)
+		
+		LeaveSR PortsTbl
+	EndFunc
+EndClass

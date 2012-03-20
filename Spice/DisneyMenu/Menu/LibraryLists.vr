@@ -1,0 +1,67 @@
+Using System
+Using System.Text
+
+DclNameSpace Disney.Menu
+
+BegClass LibraryLists Access(*Public)
+	
+	DclArray LibList Type(*String) Rank(1)
+	
+	BegConstructor Access(*Public)
+
+	EndConstructor
+	
+	BegProp LibraryList Access(*Public) Rank(1) Type(String)
+		BegGet
+			LeaveSR LibList
+		EndGet
+	EndProp
+	
+	BegFunc GetDefaultLibraryList Type(Boolean) Access(*Public)
+		DclSrParm EnvironName Type(*String)
+	
+		DclFld XmlReader Type(System.Xml.XmlTextReader)
+		DclFld LibPos    Type(*Integer2) Inz(1)
+		DclFld Index     Type(*Integer2) Inz(-1)
+		DclFld Environ   Type(*String)
+		DclFld ListName  Type(*String)
+		DclFld Library   Type(*String)
+				
+		XmlReader = *New System.Xml.XmlTextReader(System.Environment.CurrentDirectory.Trim() + "\LibraryLists.xml")
+						
+		DoUntil XmlReader.EOF = *True
+			XmlReader.Read()
+		
+			If XmlReader.EOF = *True
+				Leave
+			EndIf
+			
+			If XmlReader.Name = "LibraryList"
+				
+				Environ  = XmlReader.GetAttribute("EnvironmentName").ToUpper()
+				ListName = XmlReader.GetAttribute("Name").ToUpper()
+				
+				If Environ = EnvironName.ToUpper() *And ListName = '*DEFAULT'
+					For Index(LibPos) To(35)
+						Library = XmlReader.GetAttribute("Library" + LibPos.ToString())
+						If Library <> *Nothing And Library <> *Blanks
+						
+							If LibList = *Nothing
+								LibList = *New String[35]
+							EndIf	
+						
+							Index += 1
+							LibList[Index] = Library
+						EndIf
+					EndFor
+				EndIf
+			EndIf
+		EndDo
+		
+		If LibList = *Nothing
+			LeaveSR *False
+		Else
+			LeaveSR *True
+		EndIf
+	EndFunc
+EndClass

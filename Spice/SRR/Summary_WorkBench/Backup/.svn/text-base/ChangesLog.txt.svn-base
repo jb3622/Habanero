@@ -1,0 +1,11 @@
+Changes to Summary workbench form classes
+
+13/08//2007 CJ  Exclude OnLine Store (741)
+07/09/2007  CJ  Added Context menu's to grids
+24/10/2007  CJ  On cell double-click check for row number equal to -1, if so ignore event.
+                This is only implemented on popup menu subroutines
+                
+
+23/10/2007 CJ	Grid4 not firing changed event for Allocation flag
+03/10/2008 CJ	Close *All specified in form closing event
+				Combined all classes
