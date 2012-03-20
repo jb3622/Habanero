@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Applications>
-  <Application Name="SRR" Enabled="0" Message="SRR is closed at present, please try later"/>
-  <Application Name="Spice" Enabled="1" Message="SPICE is not available due to essential maintenance"/>
-  <Application Name="EAS" Enabled="1" Message="EAS is not available due to essential maintenance"/>
-</Applications>

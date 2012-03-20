@@ -9,7 +9,7 @@ Using Disney.Menu
 
 BegClass AddMarketSize Extends(System.Windows.Forms.Form) Access(*Public)
 
-	/region Default Constructor and Windows Form Designer generated code
+	/region Windows Form Designer generated code
 	DclFld label8 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
 	DclFld label4 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
 	DclFld label3 System.Windows.Forms.Label Access(*Private) WithEvents(*Yes)
@@ -42,18 +42,6 @@ BegClass AddMarketSize Extends(System.Windows.Forms.Form) Access(*Public)
 	DclFld PgmDB       Type(ASNA.VisualRPG.Runtime.Database)
 	DclFld ItemsBO     Type(Disney.Spice.ItemsBO.Items)
 	DclFld Environment Type(Disney.Menu.Environments)   Access(*Private)
-	
-	BegConstructor Access(*Public)
-		DclSrParm PgmDB        Type(ASNA.VisualRPG.Runtime.Database)
-		DclSrParm ItemsBO      Type(Disney.Spice.ItemsBO.Items)
-		DclSrParm Environment  Type(Disney.Menu.Environments)   
-		
-		InitializeComponent()
-
-		*this.PgmDB       = PgmDB
-		*this.ItemsBO     = ItemsBO
-		*this.Environment = Environment
-	EndConstructor
 
 	BegSr InitializeComponent
 		*this.components = *new System.ComponentModel.Container()
@@ -428,6 +416,22 @@ BegClass AddMarketSize Extends(System.Windows.Forms.Form) Access(*Public)
 	EndSr
 	/EndRegion
 
+	/region Constructors
+	
+	BegConstructor Access(*Public)
+		DclSrParm PgmDB        Type(ASNA.VisualRPG.Runtime.Database)
+		DclSrParm ItemsBO      Type(Disney.Spice.ItemsBO.Items)
+		DclSrParm Environment  Type(Disney.Menu.Environments)   
+		
+		InitializeComponent()
+
+		*this.PgmDB       = PgmDB
+		*this.ItemsBO     = ItemsBO
+		*this.Environment = Environment
+	EndConstructor
+
+    /EndRegion
+				
 	/Region Form Events
 
 	BegSr FormLoad Access(*Private) Event(*this.Load)

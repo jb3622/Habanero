@@ -6,23 +6,6 @@
   </TopLevelMenu>
 
   <TopLevelMenu Name="Applications">
-    <MenuItem Name="SRR" Authority="*Public">
-      <MenuItem Name="Allocators Tools">
-        <MenuItem Name="Summary Workbench" OnClick="_OptionSelected" Option="SumWrkBench"/>
-        <MenuItem Name="Detail Workbench" OnClick="_OptionSelected" Option="DetailWorkbench"/>
-        <MenuItem Name="SRR Manual Allocation" OnClick="_OptionSelected"  Option="SRRManualRelease"/>
-	  <MenuItem Name="SRR Manual Stowaway Allocation" OnClick="_OptionSelected" Option="SRRManualSTWRelease" /> 	
-        </MenuItem>
-      <MenuItem Name="Central Planning Tools">
-        <MenuItem Name="Central Planning Workbench Extract" OnClick="_OptionSelected" Option="CentPlanWorkbench"/>
-        <MenuItem Name="Item Detail Entry" OnClick="_OptionSelected" Option="ItemDetailEntry"/>
-        <MenuItem Name="User Dept Authority Maintenance" OnClick="_OptionSelected" Option="UserDept"/>
-        <MenuItem Name="Item Pattern Maintenance" OnClick="_OptionSelected" Option="ItemPattern"/>
-        <MenuItem Name="Minimum Dsp Quantity Maintenance" OnClick="_OptionSelected" Option="MinDspQty"/>
-        <MenuItem Name="Item Priority Maintenance" OnClick="_OptionSelected" Option="ItemPriority"/>
-        <MenuItem Name="Store Lead Time Maintenance" OnClick="_OptionSelected" Option="StoreLeadTime"/>
-      </MenuItem>
-    </MenuItem>
 
     <MenuItem Name="SPICE" Enabled="1" Authority="*Private" >
 
@@ -35,7 +18,7 @@
                   Enabled="1"/>
 	  <MenuItem Name="Stage Set Dates" OnClick="_OptionSelected" 
                   Option="StageSetDates" 
-                  Enabled="0"/>
+                  Enabled="1"/>
       </MenuItem>
 
       <MenuItem Name="Item Management" Enabled="1">

@@ -801,4 +801,9 @@ BegClass ChangeMarketSizes Extends(System.Windows.Forms.Form) Access(*Public)
 		//m_cellEdit = *False
 	EndSr
 	
+	BegSr dgvMarketPrices_FontChanged Access(*Private) Event(*This.dgvMarketPrices.FontChanged)
+		DclSrParm sender *Object
+		DclSrParm e System.EventArgs
+		
+	EndSr
 EndClass

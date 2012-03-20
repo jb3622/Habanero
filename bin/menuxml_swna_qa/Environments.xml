@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- List of Servers and the Environments held there -->
-<Environments>
-  <Environment HostName="TDST.TDS.DISNEY.COM" Domain="SWNA" EnvironmentName="TDST (QA US)"  Image="BackgroundUK.jpg" DateFormat="MDY" PathToEnvironmentXML="\iDash_QA\TDSNAXML" PathToApplicationXML="\iDashXML_QA\TDSNA" EnvironmentType = "*Production"/>
-</Environments>

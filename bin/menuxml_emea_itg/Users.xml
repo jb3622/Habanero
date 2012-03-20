@@ -1,7 +1,340 @@
 <?xml version="1.0" encoding="utf-8" ?> 
 <!--Contains User Details-->
 <Users>
-  
+  <User UserID="BMURPHY" UserName="Bart Murphy" IPInitials="BXM" UserEnabled="1" TimeOutMinutes="600">
+    <EmailAddress>Bart.R.Murphy.-ND@disney.com</EmailAddress>
+    <Applications>
+      <Application>SRR</Application>
+      <Application>Spice</Application>
+      <Application>EAS</Application>
+    </Applications>
+    <AuthorisedMenuOptions>
+      <MenuOption>DetailWorkbench</MenuOption>
+      <MenuOption>SRRManualRelease</MenuOption>
+	<MenuOption>POEntry</MenuOption>
+    </AuthorisedMenuOptions>
+    <Departments>
+      <Department>12</Department>
+      <Department>13</Department>
+      <Department>14</Department>
+      <Department>21</Department>
+      <Department>22</Department>
+      <Department>23</Department>
+      <Department>28</Department>
+      <Department>31</Department>
+      <Department>33</Department>
+      <Department>34</Department>
+      <Department>36</Department>
+      <Department>38</Department>
+      <Department>39</Department>
+      <Department>40</Department>
+      <Department>43</Department>
+      <Department>48</Department>
+      <Department>49</Department>
+      <Department>56</Department>
+      <Department>57</Department>
+      <Department>60</Department>
+      <Department>61</Department>    
+      <Department>62</Department>    
+      <Department>63</Department>    
+      <Department>64</Department>    
+      <Department>65</Department>    
+      <Department>71</Department>    
+      <Department>82</Department>    
+      <Department>84</Department>    
+      <Department>86</Department>    
+      <Department>92</Department>    
+      <Department>94</Department>    
+      <Department>95</Department>    
+      <Department>96</Department>    
+      <Department>99</Department>    
+      <Department>666</Department>    
+    </Departments>
+    <AuthorisedEnvironments>
+      <Environment>TDST (Integration Europe)</Environment>      
+    </AuthorisedEnvironments>
+    <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
+	<Market>US</Market>
+	<Market>CA</Market>
+    </AuthorisedMarkets>
+  </User>
+  <User UserID="BMORE" UserName="Bart Murphy" IPInitials="BXM" UserEnabled="1" TimeOutMinutes="600">
+    <EmailAddress>Bart.R.Murphy.-ND@disney.com</EmailAddress>
+    <Applications>
+      <Application>SRR</Application>
+      <Application>Spice</Application>
+      <Application>EAS</Application>
+    </Applications>
+    <AuthorisedMenuOptions>
+      <MenuOption>DetailWorkbench</MenuOption>
+      <MenuOption>SRRManualRelease</MenuOption>
+	<MenuOption>POEntry</MenuOption>
+    </AuthorisedMenuOptions>
+    <Departments>
+      <Department>11</Department>
+      <Department>12</Department>
+      <Department>13</Department>
+      <Department>14</Department>
+      <Department>21</Department>
+      <Department>22</Department>
+      <Department>24</Department>
+      <Department>23</Department>
+      <Department>28</Department>
+      <Department>31</Department>
+      <Department>33</Department>
+      <Department>34</Department>
+      <Department>36</Department>
+      <Department>38</Department>
+      <Department>39</Department>
+      <Department>40</Department>
+      <Department>43</Department>
+      <Department>48</Department>
+      <Department>49</Department>
+      <Department>56</Department>
+      <Department>57</Department>
+      <Department>60</Department>
+      <Department>61</Department>    
+      <Department>62</Department>    
+      <Department>63</Department>    
+      <Department>64</Department>    
+      <Department>65</Department>    
+      <Department>71</Department>    
+      <Department>82</Department>    
+      <Department>84</Department>    
+      <Department>86</Department>    
+      <Department>92</Department>    
+      <Department>94</Department>    
+      <Department>95</Department>    
+      <Department>96</Department>    
+      <Department>99</Department>    
+      <Department>666</Department>    
+    </Departments>
+    <AuthorisedEnvironments>
+      <Environment>TDST (Integration Europe)</Environment>      
+    </AuthorisedEnvironments>
+    <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
+    </AuthorisedMarkets>
+  </User>
+
+  <User UserID="DPULLEN" UserName="Dan Pullen" IPInitials="DXP" UserEnabled="1" TimeOutMinutes="600">
+    <EmailAddress>Dan.Pullen@disney.com</EmailAddress>
+    <Applications>
+      <Application>SRR</Application>
+      <Application>Spice</Application>
+      <Application>EAS</Application>
+    </Applications>
+    <AuthorisedMenuOptions>
+      <MenuOption>DetailWorkbench</MenuOption>
+      <MenuOption>SRRManualRelease</MenuOption>
+      <MenuOption>POEntry</MenuOption>
+    </AuthorisedMenuOptions>
+    <Departments>
+      <Department>12</Department>
+      <Department>13</Department>
+      <Department>14</Department>
+      <Department>21</Department>
+      <Department>22</Department>
+      <Department>23</Department>
+      <Department>28</Department>
+      <Department>31</Department>
+      <Department>33</Department>
+      <Department>34</Department>
+      <Department>36</Department>
+      <Department>38</Department>
+      <Department>39</Department>
+      <Department>40</Department>
+      <Department>43</Department>
+      <Department>48</Department>
+      <Department>49</Department>
+      <Department>56</Department>
+      <Department>57</Department>
+      <Department>60</Department>
+      <Department>61</Department>    
+      <Department>62</Department>    
+      <Department>63</Department>    
+      <Department>64</Department>    
+      <Department>65</Department>    
+      <Department>71</Department>    
+      <Department>82</Department>    
+      <Department>84</Department>    
+      <Department>86</Department>    
+      <Department>92</Department>    
+      <Department>94</Department>    
+      <Department>95</Department>    
+      <Department>96</Department>    
+      <Department>99</Department>    
+      <Department>666</Department>    
+    </Departments>
+    <AuthorisedEnvironments>
+      <Environment>TDST (Integration Europe)</Environment>      
+    </AuthorisedEnvironments>
+    <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
+	<Market>US</Market>
+	<Market>CA</Market>
+    </AuthorisedMarkets>
+  </User>
+
+  <User UserID="ASPARSHO" UserName="Amanda Sparshot" IPInitials="BXM" UserEnabled="1" TimeOutMinutes="600">
+    <EmailAddress>Bart.R.Murphy.-ND@disney.com</EmailAddress>
+    <Applications>
+      <Application>SRR</Application>
+      <Application>Spice</Application>
+      <Application>EAS</Application>
+    </Applications>
+    <AuthorisedMenuOptions>
+      <MenuOption>DetailWorkbench</MenuOption>
+      <MenuOption>SRRManualRelease</MenuOption>
+	<MenuOption>POEntry</MenuOption>
+    </AuthorisedMenuOptions>
+    <Departments>
+      <Department>12</Department>
+      <Department>13</Department>
+      <Department>14</Department>
+      <Department>21</Department>
+      <Department>22</Department>
+      <Department>23</Department>
+      <Department>28</Department>
+      <Department>31</Department>
+      <Department>33</Department>
+      <Department>34</Department>
+      <Department>36</Department>
+      <Department>38</Department>
+      <Department>39</Department>
+      <Department>40</Department>
+      <Department>43</Department>
+      <Department>48</Department>
+      <Department>49</Department>
+      <Department>56</Department>
+      <Department>57</Department>
+      <Department>60</Department>
+      <Department>61</Department>    
+      <Department>62</Department>    
+      <Department>63</Department>    
+      <Department>64</Department>    
+      <Department>65</Department>    
+      <Department>71</Department>    
+      <Department>82</Department>    
+      <Department>84</Department>    
+      <Department>86</Department>    
+      <Department>92</Department>    
+      <Department>94</Department>    
+      <Department>95</Department>    
+      <Department>96</Department>    
+      <Department>99</Department>    
+      <Department>666</Department>    
+    </Departments>
+    <AuthorisedEnvironments>
+      <Environment>TDST (Integration Europe)</Environment>      
+    </AuthorisedEnvironments>
+    <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
+	<Market>US</Market>
+	<Market>CA</Market>
+    </AuthorisedMarkets>
+  </User>
+
+  <User UserID="TGLOVER" UserName="Travis Glover" IPInitials="GLO" UserEnabled="1" TimeOutMinutes="600">
+    <EmailAddress>Bart.R.Murphy.-ND@disney.com</EmailAddress>
+    <Applications>
+      <Application>SRR</Application>
+      <Application>Spice</Application>
+      <Application>EAS</Application>
+    </Applications>
+    <AuthorisedMenuOptions>
+      <MenuOption>DetailWorkbench</MenuOption>
+      <MenuOption>SRRManualRelease</MenuOption>
+	<MenuOption>POEntry</MenuOption>
+    </AuthorisedMenuOptions>
+    <Departments>
+      <Department>12</Department>
+      <Department>13</Department>
+      <Department>14</Department>
+      <Department>21</Department>
+      <Department>22</Department>
+      <Department>23</Department>
+      <Department>28</Department>
+      <Department>31</Department>
+      <Department>33</Department>
+      <Department>34</Department>
+      <Department>36</Department>
+      <Department>38</Department>
+      <Department>39</Department>
+      <Department>40</Department>
+      <Department>43</Department>
+      <Department>48</Department>
+      <Department>49</Department>
+      <Department>56</Department>
+      <Department>57</Department>
+      <Department>60</Department>
+      <Department>61</Department>    
+      <Department>62</Department>    
+      <Department>63</Department>    
+      <Department>64</Department>    
+      <Department>65</Department>    
+      <Department>71</Department>    
+      <Department>82</Department>    
+      <Department>84</Department>    
+      <Department>86</Department>    
+      <Department>92</Department>    
+      <Department>94</Department>    
+      <Department>95</Department>    
+      <Department>96</Department>    
+      <Department>99</Department>    
+      <Department>666</Department>    
+    </Departments>
+    <AuthorisedEnvironments>
+      <Environment>TDST (Integration Europe)</Environment>      
+    </AuthorisedEnvironments>
+    <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
+	<Market>US</Market>
+	<Market>CA</Market>
+    </AuthorisedMarkets>
+  </User>
+
   <User UserID="JBROWN" UserName="John Brown" IPInitials="JXB" UserEnabled="1" TimeOutMinutes="600">
     <EmailAddress>John.X.Brown.-ND@disney.com</EmailAddress>
     <Applications>
@@ -52,156 +385,23 @@
       <Department>666</Department>    
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration EU)</Environment>
-      <Environment>TDST (Integration NA)</Environment>
-      <Environment>TDST (Integration CHINA)</Environment>
-      <Environment>TDST (QA EU)</Environment>
-      <Environment>TDST (QA NA)</Environment>
-      <Environment>TDST (QA CHINA)</Environment>
-      <Environment>TDS2 (Production EU)</Environment>
-      <Environment>TDS1 (Production NA)</Environment>
-      <Environment>TDS3 (Production CHINA)</Environment>
+      <Environment>TDST (Integration EU)</Environment>      
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
- 	<Market>US</Market>
-	<Market>CA</Market>
-        <Market>UK</Market>
-        <Market>FR</Market>
-        <Market>SP</Market>
-        <Market>IT</Market>
-        <Market>AU</Market>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
 	<Market>IE</Market>
 	<Market>BE</Market>
 	<Market>DK</Market>
 	<Market>DE</Market>
-    </AuthorisedMarkets>
-   </User>
- 
-  <User UserID="TGLOVER" UserName="Travis Glover" IPInitials="GLO" UserEnabled="1" TimeOutMinutes="600">
-    <EmailAddress>John.X.Brown.-ND@disney.com</EmailAddress>
-    <Applications>
-      <Application>SRR</Application>
-      <Application>Spice</Application>
-      <Application>EAS</Application>
-    </Applications>
-    <AuthorisedMenuOptions>
-      <MenuOption>DetailWorkbench</MenuOption>
-      <MenuOption>SRRManualRelease</MenuOption>
-	<MenuOption>POEntry</MenuOption>
-    </AuthorisedMenuOptions>
-    <Departments>
-      <Department>12</Department>
-      <Department>13</Department>
-      <Department>14</Department>
-      <Department>21</Department>
-      <Department>22</Department>
-      <Department>23</Department>
-      <Department>28</Department>
-      <Department>31</Department>
-      <Department>33</Department>
-      <Department>34</Department>
-      <Department>36</Department>
-      <Department>38</Department>
-      <Department>39</Department>
-      <Department>40</Department>
-      <Department>43</Department>
-      <Department>48</Department>
-      <Department>49</Department>
-      <Department>56</Department>
-      <Department>57</Department>
-      <Department>60</Department>
-      <Department>61</Department>    
-      <Department>62</Department>    
-      <Department>63</Department>    
-      <Department>64</Department>    
-      <Department>65</Department>    
-      <Department>71</Department>    
-      <Department>82</Department>    
-      <Department>84</Department>    
-      <Department>86</Department>    
-      <Department>92</Department>    
-      <Department>94</Department>    
-      <Department>95</Department>    
-      <Department>96</Department>    
-      <Department>99</Department>    
-      <Department>666</Department>    
-    </Departments>
-    <AuthorisedEnvironments>
-      <Environment>TDST (Integration EU)</Environment>
-      <Environment>TDST (Integration NA)</Environment>
-      <Environment>TDST (Integration CHINA)</Environment>
-      <Environment>TDST (QA EU)</Environment>
-      <Environment>TDST (QA NA)</Environment>
-      <Environment>TDST (QA CHINA)</Environment>
-      <Environment>TDST (Production EU)</Environment>
-      <Environment>TDST (Production NA)</Environment>
-      <Environment>TDST (Production CHINA)</Environment>
-    </AuthorisedEnvironments>
-    <AuthorisedMarkets>
-	<Market>US</Market>
-	<Market>CA</Market>
-    </AuthorisedMarkets>
-   </User>
-
-
-   <User UserID="FCALMELAT" UserName="Fabrice Calmelat" IPInitials="FXC" UserEnabled="1" TimeOutMinutes="600">
-    <EmailAddress>Fabrice.Calmelat@email.disney.com</EmailAddress>
-    <Applications>
-      <Application>SRR</Application>
-      <Application>Spice</Application>
-      <Application>EAS</Application>
-    </Applications>
-    <AuthorisedMenuOptions>
-      <MenuOption>DetailWorkbench</MenuOption>
-      <MenuOption>SRRManualRelease</MenuOption>
-	<MenuOption>POEntry</MenuOption>
-    </AuthorisedMenuOptions>
-    <Departments>
-      <Department>12</Department>
-      <Department>13</Department>
-      <Department>14</Department>
-      <Department>21</Department>
-      <Department>22</Department>
-      <Department>23</Department>
-      <Department>28</Department>
-      <Department>31</Department>
-      <Department>33</Department>
-      <Department>34</Department>
-      <Department>36</Department>
-      <Department>38</Department>
-      <Department>39</Department>
-      <Department>40</Department>
-      <Department>43</Department>
-      <Department>48</Department>
-      <Department>49</Department>
-      <Department>56</Department>
-      <Department>57</Department>
-      <Department>60</Department>
-      <Department>61</Department>    
-      <Department>62</Department>    
-      <Department>63</Department>    
-      <Department>64</Department>    
-      <Department>65</Department>    
-      <Department>71</Department>    
-      <Department>82</Department>    
-      <Department>84</Department>    
-      <Department>86</Department>    
-      <Department>92</Department>    
-      <Department>94</Department>    
-      <Department>95</Department>    
-      <Department>96</Department>    
-      <Department>99</Department>    
-      <Department>666</Department>     
-    </Departments>
-    <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
-    </AuthorisedEnvironments>
-    <AuthorisedMarkets>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
   </User>
-
+  
    <User UserID="GLANG" UserName="Grady Lang" IPInitials="GXL" UserEnabled="1" TimeOutMinutes="600">
     <EmailAddress>grady.x.lang.-ND@email.disney.com</EmailAddress>
     <Applications>
@@ -212,7 +412,7 @@
     <AuthorisedMenuOptions>
       <MenuOption>DetailWorkbench</MenuOption>
       <MenuOption>SRRManualRelease</MenuOption>
-	<MenuOption>POEntry</MenuOption>
+	  <MenuOption>POEntry</MenuOption>
     </AuthorisedMenuOptions>
     <Departments>
       <Department>12</Department>
@@ -252,9 +452,10 @@
       <Department>666</Department>     
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
+      <Environment>TDST (Integration Europe)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+	<Market>UK</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -311,9 +512,17 @@
     </Departments>
     <AuthorisedEnvironments>
       <Environment>TDST (Integration EU)</Environment>
-      <Environment>TDST (Integration NA)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -356,7 +565,6 @@
       <Department>64</Department>    
       <Department>65</Department>    
       <Department>71</Department>    
-      <Department>73</Department>
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -368,10 +576,18 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
-      <Environment>TDST (Integration EU)</Environment>
+	<Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -412,8 +628,7 @@
       <Department>63</Department>    
       <Department>64</Department>    
       <Department>65</Department>    
-      <Department>71</Department>  
-      <Department>73</Department>  
+      <Department>71</Department>    
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -425,10 +640,18 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-       <Environment>TDST (Integration NA)</Environment>
        <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -469,8 +692,7 @@
       <Department>63</Department>    
       <Department>64</Department>    
       <Department>65</Department>    
-      <Department>71</Department>   
-      <Department>73</Department> 
+      <Department>71</Department>    
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -482,10 +704,18 @@
       <Department>666</Department>    
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
       <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -494,7 +724,7 @@
     <EmailAddress>Bart.R.Murphy.-ND@disney.com</EmailAddress>
     <Applications>
       <Application>Spice</Application>
-	<Application>SRR</Application>
+	  <Application>SRR</Application>
       <Application>EAS</Application>
     </Applications>
     <AuthorisedMenuOptions>
@@ -527,7 +757,6 @@
       <Department>64</Department>    
       <Department>65</Department>    
       <Department>71</Department>    
-      <Department>73</Department>
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -539,10 +768,18 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-     <Environment>TDST (Integration NA)</Environment>
-      <Environment>TDST (Integration EU)</Environment>
+     <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -584,7 +821,6 @@
       <Department>64</Department>    
       <Department>65</Department>    
       <Department>71</Department>    
-      <Department>73</Department>
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -596,10 +832,18 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-     <Environment>TDST (Integration NA)</Environment>
      <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -641,7 +885,6 @@
       <Department>64</Department>    
       <Department>65</Department>    
       <Department>71</Department>    
-      <Department>73</Department>
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -653,10 +896,18 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
       <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -698,7 +949,6 @@
       <Department>64</Department>    
       <Department>65</Department>    
       <Department>71</Department>    
-      <Department>73</Department>
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -710,10 +960,18 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
       <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -755,7 +1013,6 @@
       <Department>64</Department>    
       <Department>65</Department>    
       <Department>71</Department>    
-      <Department>73</Department>
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -767,15 +1024,22 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
       <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
   </User>
-
   <User UserID="SRRTRAIN10" UserName="SRR Training 10" IPInitials="SR10" UserEnabled="1" TimeOutMinutes="630">
     <EmailAddress>Bart.R.Murphy.-ND@disney.com</EmailAddress>
     <Applications>
@@ -816,7 +1080,6 @@
       <Department>65</Department>  
       <Department>66</Department>      
       <Department>71</Department>    
-      <Department>73</Department>
       <Department>82</Department>    
       <Department>84</Department>    
       <Department>86</Department>    
@@ -828,10 +1091,18 @@
       <Department>666</Department>   
     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
       <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
@@ -874,22 +1145,25 @@
       <Department>99</Department>
      </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
+      <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
  	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
   </User>
 
-
-
-
-
-
-
-  <User UserID="JIIDA" UserName="Joey Iida" IPInitials="JLI" UserEnabled="1" TimeOutMinutes="600">
-    <EmailAddress>joey.iida@email.disney.com</EmailAddress>
+  <User UserID="RCONTRER" UserName="Rene Contreras" IPInitials="RXC" UserEnabled="1" TimeOutMinutes="600">
+    <EmailAddress>rene.a.contreras@email.disney.com</EmailAddress>
     <Applications>
       <Application>SRR</Application>
       <Application>Spice</Application>
@@ -925,17 +1199,25 @@
       <Department>99</Department>
      </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration NA)</Environment>
+      <Environment>TDST (Integration EU)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
+	<Market>IE</Market>
+	<Market>BE</Market>
+	<Market>DK</Market>
+	<Market>DE</Market>
  	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
   </User>
 
-
-  <User UserID="BMURPHY" UserName="Bart Murphy" IPInitials="BXM" UserEnabled="1" TimeOutMinutes="600">
-    <EmailAddress>Bart.R.Murphy.-ND@disney.com</EmailAddress>
+  <User UserID="MSAUNDER" UserName="Martin Saunders" IPInitials="MXS" UserEnabled="1" TimeOutMinutes="600">
+    <EmailAddress>martin.saunders@email.disney.com</EmailAddress>
     <Applications>
       <Application>SRR</Application>
       <Application>Spice</Application>
@@ -950,64 +1232,42 @@
       <Department>12</Department>
       <Department>13</Department>
       <Department>14</Department>
-      <Department>21</Department>
       <Department>22</Department>
       <Department>23</Department>
       <Department>28</Department>
       <Department>31</Department>
-      <Department>33</Department>
-      <Department>34</Department>
-      <Department>36</Department>
-      <Department>38</Department>
       <Department>39</Department>
       <Department>40</Department>
-      <Department>43</Department>
-      <Department>48</Department>
       <Department>49</Department>
       <Department>56</Department>
       <Department>57</Department>
       <Department>60</Department>
-      <Department>61</Department>    
-      <Department>62</Department>    
-      <Department>63</Department>    
-      <Department>64</Department>    
-      <Department>65</Department>    
-      <Department>71</Department>    
-      <Department>82</Department>    
-      <Department>84</Department>    
-      <Department>86</Department>    
-      <Department>92</Department>    
-      <Department>94</Department>    
-      <Department>95</Department>    
-      <Department>96</Department>    
-      <Department>99</Department>    
-      <Department>666</Department>    
-    </Departments>
+      <Department>61</Department>
+      <Department>63</Department>
+      <Department>64</Department>
+      <Department>65</Department>
+      <Department>71</Department>
+      <Department>73</Department>
+      <Department>92</Department>
+      <Department>96</Department>
+      <Department>99</Department>
+     </Departments>
     <AuthorisedEnvironments>
-      <Environment>TDST (Integration EU)</Environment>
-      <Environment>TDST (Integration NA)</Environment>
-      <Environment>TDST (Integration CHINA)</Environment>
-      <Environment>TDST (QA EU)</Environment>
-      <Environment>TDST (QA NA)</Environment>
-      <Environment>TDST (QA CHINA)</Environment>
-      <Environment>TDS2 (Production EU)</Environment>
-      <Environment>TDS1 (Production NA)</Environment>
-      <Environment>TDS3 (Production CHINA)</Environment>
+      <Environment>TDST (Integration Europe)</Environment>
     </AuthorisedEnvironments>
     <AuthorisedMarkets>
- 	<Market>US</Market>
-	<Market>CA</Market>
-        <Market>UK</Market>
-        <Market>FR</Market>
-        <Market>SP</Market>
-        <Market>IT</Market>
-        <Market>AU</Market>
+      <Market>UK</Market>
+      <Market>FR</Market>
+      <Market>SP</Market>
+      <Market>IT</Market>
+      <Market>AU</Market>
 	<Market>IE</Market>
 	<Market>BE</Market>
 	<Market>DK</Market>
 	<Market>DE</Market>
-	<Market>US</Market>
+ 	<Market>US</Market>
 	<Market>CA</Market>
     </AuthorisedMarkets>
   </User>
+
 </Users>

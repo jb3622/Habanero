@@ -971,7 +971,9 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 			ForEach SelectedMkt Collection(MarketsDV) Type(DataRowView)
 				SelectedMkt["VATcode"]  = ItemsBO.GetVATcode(SafeStringValue(SelectedMkt["IPMarket"]), ItemsBO.Class, Size)
 				
-				If SelectedMkt["VATCode"].ToString() = String.Empty
+				DclFld s Type(String)
+				s = SelectedMkt["VATCode"].ToString().Trim()
+				If s = ""
 					SelectedMkt["VATcode"]  = ItemsBO.GetVATcode(SafeStringValue(SelectedMkt["IPMarket"]), ItemsBO.Class)
 				Endif
 					

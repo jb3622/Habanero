@@ -2511,7 +2511,6 @@ BegClass Items Access(*Public)
 		drItemSizes["SellOutControl"]    = SellOutControl
 		drItemSizes["SuppressBackOrderCard"]    = SuppressBackOrderCard
 	
-	
 		ItemSizes.Rows.Add(drItemSizes)
 		SpiceDataSet.Tables.Add(ItemSizes)
 
@@ -2659,6 +2658,10 @@ BegClass Items Access(*Public)
 		DclArray drDomainMarkets Type(DataRow) Rank(1)
 		DclFld   MktCcy          Type(String)
 		DclFld   drCurrency      Type(DataRow)
+		DclFld   sVatCode        Type(String)
+		DclFld   sMarket         Type(String)
+		DclFld   iClass          Type(Int16)
+		DclFld   iSize           Type(Int16)
 		
 		// Create a new MarketSizes table every time
 		If SpiceDS.Tables.Contains("MarketSizes")
@@ -2671,7 +2674,7 @@ BegClass Items Access(*Public)
 			drDomainMarkets = SpiceDS.Tables("DomainMarkets").Select()
 		Else // only those markets that have been selected by user on the SelectMarket screen
 			drDomainMarkets = SpiceDS.Tables("DomainMarkets").Select("Select = true")
-		EndIf		
+		EndIf
 		
 		If SpiceDs.Tables.Contains("ItemSizes")
 			drItemSizes = SpiceDS.Tables("ItemSizes").Select("Select = true")
@@ -2698,12 +2701,26 @@ BegClass Items Access(*Public)
 					dr["ListPrice"] = dr.Item("Retail")		
 							
 					/* validation for the VAT code - VAT code should not be blank */
-					Try			
-						If ((Market["VATcode"] *As String) = String.Empty)
-							dr["VAT"] = DataCache.DefaultVATCode
-						Else
-							dr["VAT"] = Market["VATcode"]
-						EndIf
+					Try	
+					    sMarket = Market["IPMarket"] *AS String
+					    iClass = *this.Class *AS Int16
+					    iSize = Sizes["SizeCode"] *AS Int16
+					    sVatCode = GetVatCode(sMarket,iClass,iSize)
+					    If(sVatCode.Trim() = String.Empty)
+					        sVatCode = GetVatCode(sMarket,iClass)
+					        If(sVatCode.Trim() = String.Empty)
+					           dr["VAT"] = DataCache.DefaultVATCode
+					        Else
+					           dr["VAT"] = sVatCode.Trim()
+					        EndIf
+//							If ((Market["VATcode"] *As String) = String.Empty)
+//								dr["VAT"] = DataCache.DefaultVATCode
+//							Else
+//								dr["VAT"] = Market["VATcode"]
+//							EndIf
+					    Else
+							dr["VAT"] = sVatCode.Trim()
+					    EndIf
 					Catch ex Type(Exception)
 						// trap any VAT code errors				
 					EndTry
@@ -2735,7 +2752,7 @@ BegClass Items Access(*Public)
 				EndIf				
 				
 				dr["VAT"] = Market["VATcode"]
-				dr["ListPrice"] = dr.Item("Retail")	
+				dr["ListPrice"] = dr.Item("Retail")
 				
 				SpiceDS.Tables("MarketSizes").Rows.Add(dr)
 			EndFor
@@ -2832,8 +2849,9 @@ BegClass Items Access(*Public)
 		DclArray Keys         Type(System.Object) Rank(1) New(2)
 		DclFld   ExchangeRate Type(Decimal)
 		DclArray findExistingRows  Type(DataRow) Rank(1)
-
-
+		DclFld   sVATCode Type(String)
+		DclFld   sVATCodeExisting Type(String)
+		
 		Try
 			// We need a list of countries added (from DomainMarkets)
 			Markets = SpiceDS.Tables["DomainMarkets"].Select("Select = true")
@@ -2854,6 +2872,21 @@ BegClass Items Access(*Public)
 					Keys[1] = NewSize["Size"]
 					dr = ExistingMarketPrices.Rows.Find(Keys)
 					If dr <> *Nothing
+						Try 
+							// Check the existing VAT code is correct
+							sVATCodeExisting = dr["VAT"] *AS String
+							sVATCode = GetVatCode(dr["Market"] *AS String,dr["Class"] *AS Int16,dr["Size"] *AS Int16)
+							If (sVATCode.Trim() = "")
+								sVATCode = GetVatCode(dr["Market"] *AS String,dr["Class"] *AS Int16)
+							EndIf
+							If Not (sVATCode.Trim() = "")
+								If Not (sVATCode.Trim() = sVATCodeExisting)
+								  dr["VAT"] = sVATCode.Trim()
+								EndIf
+							EndIf
+						Catch Name(exc) Type(Exception)
+						EndTry
+										
 						MarketPrices.ImportRow(dr)
 					Else
 						dr = MarketPrices.NewRow()

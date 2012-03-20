@@ -59,3 +59,8 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.ItemsBO.
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.ItemsBO\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.pdb
+C:\Spice\bin\SPICE\Disney.Spice.ItemsBO.dll
+C:\Spice\bin\SPICE\Disney.Spice.ItemsBO.pdb
+C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.dll
+C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.pdb

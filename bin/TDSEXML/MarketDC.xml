@@ -9,6 +9,7 @@
   <MarketDC Domain="EMEA" IPMarket="DK" DCCode="723" Default="1"/>
   <MarketDC Domain="EMEA" IPMarket="BE" DCCode="723" Default="1"/>
   <MarketDC Domain="EMEA" IPMarket="IE" DCCode="723" Default="1"/>
+  <MarketDC Domain="EMEA" IPMarket="DE" DCCode="723" Default="1"/>
   <MarketDC Domain="SWNA" IPMarket="US" DCCode="899" Default="1"/>
   <MarketDC Domain="SWNA" IPMarket="US" DCCode="900" Default="0"/>
   <MarketDC Domain="SWNA" IPMarket="CA" DCCode="899" Default="1"/>

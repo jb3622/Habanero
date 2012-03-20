@@ -80,6 +80,16 @@
     <ISOCountryCode>IE</ISOCountryCode>
     <ISOCurrencyCode>EUR</ISOCurrencyCode>
   </Market>
+  <Market>
+    <Domain>EMEA</Domain>
+    <Status>1</Status>
+    <IPMarket>DE</IPMarket>
+    <IPMarketDesc>Germany</IPMarketDesc>
+    <IPCurrencyCode>DE</IPCurrencyCode>
+    <IPMasterMarket>N</IPMasterMarket>
+    <ISOCountryCode>DE</ISOCountryCode>
+    <ISOCurrencyCode>EUR</ISOCurrencyCode>
+  </Market>
  <Market>
     <Domain>EMEA</Domain>
     <Status>0</Status>

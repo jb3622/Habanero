@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- List of Servers and the Environments held there -->
-<Environments>
- <Environment HostName="TDST.TDS.DISNEY.COM" Domain="EMEA" EnvironmentName="TDST (Integration Europe)" Image="BackgroundUK.jpg" DateFormat="DMY" PathToEnvironmentXML="\iDash_ITG\TDSEXML" PathToApplicationXML="\iDashXML_ITG\TDSE" EnvironmentType = "*Production"/>
-
-</Environments>
