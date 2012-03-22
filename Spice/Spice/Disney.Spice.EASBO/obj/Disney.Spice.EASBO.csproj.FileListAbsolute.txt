@@ -48,3 +48,8 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.EASBO.pd
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Spice\Spice\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Spice\Spice\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Spice\Spice\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Spice\Spice\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb

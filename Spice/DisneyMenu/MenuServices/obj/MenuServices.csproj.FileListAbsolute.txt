@@ -189,3 +189,12 @@ C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuService
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuServices\obj\Debug\MenuServices.csproj.GenerateResource.Cache
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.dll
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.pdb
+C:\Spice\Spice\bin\Disney.MenuServices.dll
+C:\Spice\Spice\bin\Disney.MenuServices.pdb
+C:\Spice\Spice\bin\Disney.MenuServices.tlb
+C:\Spice\Spice\DisneyMenu\MenuServices\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.Menu.MessageBox.resources
+C:\Spice\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.Menu.Properties.Resources.resources
+C:\Spice\Spice\DisneyMenu\MenuServices\obj\Debug\MenuServices.csproj.GenerateResource.Cache
+C:\Spice\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.dll
+C:\Spice\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.pdb
