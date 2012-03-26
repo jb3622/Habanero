@@ -31,7 +31,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\IDASH\SPICE\</OutputPath>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -181,9 +181,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
     </Reference>
-    <Reference Include="Disney.Spice.ItemsUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Disney.Spice.ItemsUI, Version=8.3.5.102, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\devtip\bin\SPICE\Disney.Spice.ItemsUI.dll</HintPath>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsUI.dll</HintPath>
     </Reference>
     <Reference Include="Disney.Spice.LookUp, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>

@@ -217,19 +217,31 @@ C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\Menu\obj\De
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\Menu\obj\Debug\Disney.Menu.vrproj.GenerateResource.Cache
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\Menu\obj\Debug\DisneyMenu.exe
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\Menu\obj\Debug\DisneyMenu.pdb
-C:\Spice\DisneyMenu\Menu\bin\Release\DisneyMenu.exe.config
-C:\Spice\DisneyMenu\Menu\bin\Release\DisneyMenu.exe
-C:\Spice\DisneyMenu\Menu\bin\Release\Disney.MenuServices.dll
-C:\Spice\DisneyMenu\Menu\bin\Release\IBM.Data.DB2.iSeries.dll
-C:\Spice\DisneyMenu\Menu\bin\Release\ASNA.DataGate.Client.Security.dll
-C:\Spice\DisneyMenu\Menu\bin\Release\ASNA.DataGate.Ole.dll
-C:\Spice\DisneyMenu\Menu\bin\Release\ASNA.System.Condition.dll
-C:\Spice\DisneyMenu\Menu\bin\Release\Disney.MenuServices.pdb
-C:\Spice\DisneyMenu\Menu\obj\Release\ResolveAssemblyReference.cache
-C:\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.About.resources
-C:\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.MDIcontainer.resources
-C:\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.Options.resources
-C:\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.Resources.resources
-C:\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.SignOn.resources
-C:\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.vrproj.GenerateResource.Cache
-C:\Spice\DisneyMenu\Menu\obj\Release\DisneyMenu.exe
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\DisneyMenu.exe.config
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\DisneyMenu.exe
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\Disney.MenuServices.dll
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\IBM.Data.DB2.iSeries.dll
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\ASNA.DataGate.Client.Security.dll
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\ASNA.DataGate.Ole.dll
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\ASNA.System.Condition.dll
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\bin\Release\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.About.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.MDIcontainer.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.Options.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.Resources.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.SignOn.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\Disney.Menu.vrproj.GenerateResource.Cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Release\DisneyMenu.exe
+C:\TEMP\xDev\root\Spice\bin\DisneyMenu.exe.config
+C:\TEMP\xDev\root\Spice\bin\DisneyMenu.exe
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\Disney.Menu.About.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\Disney.Menu.MDIcontainer.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\Disney.Menu.Options.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\Disney.Menu.Resources.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\Disney.Menu.SignOn.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\Disney.Menu.vrproj.GenerateResource.Cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\DisneyMenu.exe
+C:\TEMP\xDev\root\Spice\DisneyMenu\Menu\obj\Debug\DisneyMenu.pdb
+C:\TEMP\xDev\root\Spice\bin\DisneyMenu.pdb

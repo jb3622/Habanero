@@ -189,3 +189,24 @@ C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuService
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuServices\obj\Debug\MenuServices.csproj.GenerateResource.Cache
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.dll
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.pdb
+C:\TEMP\xDev\IDASH\Disney.MenuServices.dll
+C:\TEMP\xDev\IDASH\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Release\Disney.Menu.MessageBox.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Release\Disney.Menu.Properties.Resources.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Release\MenuServices.csproj.GenerateResource.Cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Release\Disney.MenuServices.dll
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Release\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\IDASH\Disney.MenuServices.dll
+C:\TEMP\xDev\root\IDASH\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\IDASH\Disney.MenuServices.dll
+C:\TEMP\xDev\root\Spice\IDASH\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\bin\Disney.MenuServices.dll
+C:\TEMP\xDev\root\Spice\bin\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.Menu.MessageBox.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.Menu.Properties.Resources.resources
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\MenuServices.csproj.GenerateResource.Cache
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.dll
+C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\bin\Disney.MenuServices.tlb

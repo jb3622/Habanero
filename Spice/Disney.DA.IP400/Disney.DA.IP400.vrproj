@@ -27,7 +27,7 @@
     <DefineTrace>True</DefineTrace>
     <DefineConstants>
     </DefineConstants>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
@@ -39,7 +39,7 @@
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
     <Reference Include="Disney.Spice.DAL, Version=8.3.4272.35391, Culture=neutral, PublicKeyToken=null">
-	  <SpecificVersion>False</SpecificVersion>
+      <SpecificVersion>False</SpecificVersion>
       <Name>Disney.Spice.DAL</Name>
       <AssemblyName>Disney.Spice.DAL.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.Spice.DAL.dll</HintPath>

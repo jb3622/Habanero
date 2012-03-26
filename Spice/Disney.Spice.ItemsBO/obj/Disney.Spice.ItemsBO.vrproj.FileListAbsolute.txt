@@ -59,8 +59,18 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.ItemsBO.
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.ItemsBO\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.pdb
-C:\Spice\bin\SPICE\Disney.Spice.ItemsBO.dll
-C:\Spice\bin\SPICE\Disney.Spice.ItemsBO.pdb
-C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\ResolveAssemblyReference.cache
-C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.dll
-C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.Spice.ItemsBO.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.DA.IP400.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.Spice.DAL.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\DisneyMenu.exe
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\IBM.Data.DB2.iSeries.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\ASNA.DataGate.Ole.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.MenuServices.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\ASNA.DataGate.Client.Security.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\ASNA.System.Condition.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.Spice.DAL.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.DA.IP400.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\obj\Release\Disney.Spice.ItemsBO.dll
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.ItemsBO.dll

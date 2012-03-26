@@ -289,10 +289,9 @@ namespace Disney.Spice.EASUI
                 if (ex.Message != "Not authorised to PO")
                 {
                     throw ex;
-                }                
+                }
                 return;
             }
-
         }
 
         private void itemEASrequest(Int64 requestid)

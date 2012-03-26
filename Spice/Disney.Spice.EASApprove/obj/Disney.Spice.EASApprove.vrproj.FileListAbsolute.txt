@@ -72,3 +72,9 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASApprove\o
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASApprove.vrproj.GenerateResource.Cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASApprove.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASApprove.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASUI.EASApproveReject.resources
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASUI.Resources.resources
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASUI.RejectReasonForm.resources
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASApprove.vrproj.GenerateResource.Cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASApprove.dll

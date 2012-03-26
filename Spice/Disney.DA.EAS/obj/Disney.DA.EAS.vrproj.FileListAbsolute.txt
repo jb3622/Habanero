@@ -49,3 +49,6 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.DA.EAS.pdb
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.DA.EAS\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.DA.EAS\obj\Debug\Disney.DA.EAS.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.DA.EAS\obj\Debug\Disney.DA.EAS.pdb
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.DA.EAS.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.EAS\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.EAS\obj\Release\Disney.DA.EAS.dll

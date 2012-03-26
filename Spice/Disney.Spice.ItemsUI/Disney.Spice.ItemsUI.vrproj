@@ -25,7 +25,7 @@
     <DefineTrace>True</DefineTrace>
     <DefineConstants>
     </DefineConstants>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="*ComponentFactory.Krypton.Toolkit, Version=4.1.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
@@ -37,7 +37,7 @@
       <Name>ASNA.VisualRPG.Runtime</Name>
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
-    <Reference Include="Disney.DA.IP400, Version=8.3.5.22621, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.DA.IP400, Version=8.3.5.20732, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.DA.IP400</Name>
       <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
@@ -50,7 +50,7 @@
       <HintPath>..\..\bin\SPICE\Disney.Spice.ErrorProvider.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.5.22780, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.5.20817, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.Spice.ItemsBO</Name>
       <AssemblyName>Disney.Spice.ItemsBO.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
@@ -63,10 +63,10 @@
       <HintPath>..\..\bin\SPICE\Disney.Spice.LookUp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DisneyMenu, Version=8.3.5.16611, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="DisneyMenu, Version=8.3.5.20696, Culture=neutral, PublicKeyToken=null">
       <Name>DisneyMenu</Name>
       <AssemblyName>DisneyMenu.exe</AssemblyName>
-      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+      <HintPath>..\..\bin\SPICE\DisneyMenu.exe</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System">

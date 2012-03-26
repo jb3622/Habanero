@@ -44,7 +44,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\IDASH\SPICE\</OutputPath>
+    <OutputPath>..\..\bin\spice\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -64,20 +64,15 @@
     </Reference>
     <Reference Include="Disney.Spice.EASApprove, Version=8.3.4.30507, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\version_8.3.4\bin\SPICE\Disney.Spice.EASApprove.dll</HintPath>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.EASApprove.dll</HintPath>
     </Reference>
-    <Reference Include="Disney.Spice.EASBO, Version=8.3.1.28297, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\SPICE\Disney.Spice.EASBO.dll</HintPath>
-    </Reference>
+    <Reference Include="Disney.Spice.EASBO, Version=8.3.5.21113, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Disney.Spice.LookUp, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\SPICE\Disney.Spice.LookUp.dll</HintPath>
     </Reference>
-    <Reference Include="DisneyMenu, Version=8.3.1.27389, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="DisneyMenu, Version=8.3.5.20696, Culture=neutral, processorArchitecture=x86">
       <ExecutableExtension>.exe</ExecutableExtension>
-      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
     </Reference>
     <Reference Include="IBM.Data.DB2.iSeries, Version=10.0.0.0, Culture=neutral, PublicKeyToken=9cdb2ebfb1f93a26">
       <SpecificVersion>False</SpecificVersion>

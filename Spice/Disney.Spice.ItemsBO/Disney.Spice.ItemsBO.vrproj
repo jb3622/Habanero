@@ -24,7 +24,7 @@
     <DefineTrace>True</DefineTrace>
     <DefineConstants>
     </DefineConstants>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
@@ -35,7 +35,7 @@
       <Name>ASNA.VisualRPG.Runtime</Name>
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
-    <Reference Include="Disney.DA.IP400, Version=8.3.5.22621, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.DA.IP400, Version=8.3.5.20732, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.DA.IP400</Name>
       <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>

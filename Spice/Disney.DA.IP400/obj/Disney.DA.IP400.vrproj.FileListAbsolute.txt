@@ -92,26 +92,21 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.DA.IP400\obj\Debug
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.vrproj.GenerateResource.Cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.pdb
-C:\Spice\Spice\Disney.DA.IP400\obj\Debug\ResolveAssemblyReference.cache
-C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.Resources.resources
-C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.vrproj.GenerateResource.Cache
-C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.dll
-C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.pdb
-C:\Spice\bin\SPICE\Disney.DA.IP400.dll.config
-C:\Spice\bin\SPICE\Disney.DA.IP400.dll
-C:\Spice\bin\SPICE\Disney.DA.IP400.pdb
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.DA.IP400.dll.config
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.DA.IP400.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.Spice.DAL.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\DisneyMenu.exe
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\IBM.Data.DB2.iSeries.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\xmldiffpatch.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\ASNA.DataGate.Ole.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.MenuServices.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\ASNA.DataGate.Client.Security.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\ASNA.System.Condition.dll
-C:\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.MenuServices.pdb
-C:\Spice\Spice\Disney.DA.IP400\obj\Release\ResolveAssemblyReference.cache
-C:\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.Resources.resources
-C:\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.vrproj.GenerateResource.Cache
-C:\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.DA.IP400.dll.config
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.DA.IP400.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.Spice.DAL.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\DisneyMenu.exe
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\IBM.Data.DB2.iSeries.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\xmldiffpatch.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\ASNA.DataGate.Ole.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.MenuServices.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\ASNA.DataGate.Client.Security.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\ASNA.System.Condition.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.Spice.DAL.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\bin\Release\Disney.MenuServices.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.Resources.resources
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.vrproj.GenerateResource.Cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.dll
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.DA.IP400.dll.config
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.DA.IP400.dll

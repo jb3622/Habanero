@@ -27,7 +27,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\SPICE\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ASNA.DataGate.Client" />
@@ -54,7 +54,13 @@
       <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Disney.Spice.EASUI, Version=8.3.5.26644, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.Spice.EASApprove, Version=8.3.4.30507, Culture=neutral, PublicKeyToken=null">
+      <Name>Disney.Spice.EASApprove</Name>
+      <AssemblyName>Disney.Spice.EASApprove.dll</AssemblyName>
+      <HintPath>..\..\bin\SPICE\Disney.Spice.EASApprove.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Disney.Spice.EASUI, Version=8.3.5.21169, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.Spice.EASUI</Name>
       <AssemblyName>Disney.Spice.EASUI.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.Spice.EASUI.dll</HintPath>
@@ -81,11 +87,10 @@
       <HintPath>..\..\bin\SPICE\Disney.Spice.LookUp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DisneyMenu, Version=8.3.1.19133, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="DisneyMenu, Version=8.3.5.20696, Culture=neutral, PublicKeyToken=null">
       <Name>DisneyMenu</Name>
       <AssemblyName>DisneyMenu.exe</AssemblyName>
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
+      <HintPath>..\..\bin\SPICE\DisneyMenu.exe</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IBM.Data.DB2.iSeries, Version=10.0.0.0, Culture=neutral, PublicKeyToken=9cdb2ebfb1f93a26">

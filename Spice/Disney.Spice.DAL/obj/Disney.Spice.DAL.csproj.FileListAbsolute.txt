@@ -76,9 +76,9 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.DAL.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\bin\SPICE\Disney.Spice.DAL.pdb
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.DAL\obj\Release\Disney.Spice.DAL.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.DAL\obj\Release\Disney.Spice.DAL.pdb
-C:\Spice\bin\SPICE\Disney.Spice.DAL.dll.config
-C:\Spice\bin\SPICE\Disney.Spice.DAL.dll
-C:\Spice\bin\SPICE\Disney.Spice.DAL.pdb
-C:\Spice\Spice\Disney.Spice.DAL\obj\Debug\ResolveAssemblyReference.cache
-C:\Spice\Spice\Disney.Spice.DAL\obj\Debug\Disney.Spice.DAL.dll
-C:\Spice\Spice\Disney.Spice.DAL\obj\Debug\Disney.Spice.DAL.pdb
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.DAL.dll.config
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.DAL.dll
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.DAL.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.DAL\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.DAL\obj\Release\Disney.Spice.DAL.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.DAL\obj\Release\Disney.Spice.DAL.pdb

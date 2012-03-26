@@ -274,8 +274,8 @@ BegClass SelectMarket Extends(System.Windows.Forms.Form) Access(*Public)
 				ForEach MarketRow Collection(MasterMarkets) Type(DataRowView)
 					MarketRow.Item["Select"]  = *True
 				EndFor
-			EndIf
-
+			Endif	
+					
 			DclFld Index Type(Int16)
 			For (Index = 0) To(dgvMarkets.Rows.Count - 1)
 				If (dgvMarkets.Item("Protect",Index).Value *As Boolean) = *True
@@ -288,7 +288,7 @@ BegClass SelectMarket Extends(System.Windows.Forms.Form) Access(*Public)
 			If(m_Hidden = *False)
 				*this.TopMost = *True
 				*this.ShowDialog()
-			Else
+			Else		
 				ForEach row Collection(dgvMarkets.Rows) Type(System.Windows.Forms.DataGridViewRow)
 					row.Cells["Select"].Value = *True
 				EndFor	

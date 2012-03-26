@@ -104,8 +104,8 @@ C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\bin\SPICE\Disney.Spice
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
 C:\Devtip\Visual Studio 2005\iDash\branches\version_8.3.5\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
-C:\Spice\bin\SPICE\Disney.Spice.POBO.dll
-C:\Spice\bin\SPICE\Disney.Spice.POBO.pdb
-C:\Spice\Spice\Disney.Spice.POBO\obj\Debug\ResolveAssemblyReference.cache
-C:\Spice\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.dll
-C:\Spice\Spice\Disney.Spice.POBO\obj\Debug\Disney.Spice.POBO.pdb
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.POBO.dll
+C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.POBO.pdb
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.POBO\obj\Release\ResolveAssemblyReference.cache
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.dll
+C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.POBO\obj\Release\Disney.Spice.POBO.pdb

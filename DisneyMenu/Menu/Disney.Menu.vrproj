@@ -25,7 +25,7 @@
     <DefineTrace>True</DefineTrace>
     <DefineConstants>
     </DefineConstants>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\spice\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ASNA.DataGate.Client, Version=8.1.432.0, Culture=neutral, PublicKeyToken=78aac8f1f3f86b73">
@@ -36,9 +36,8 @@
       <Name>ASNA.VisualRPG.Runtime</Name>
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
-    <Reference Include="Disney.MenuServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5fe3bc6df19efbba">
+    <Reference Include="Disney.MenuServices, Version=8.3.5.21880, Culture=neutral, PublicKeyToken=5fe3bc6df19efbba">
       <Name>Disney.MenuServices</Name>
-      <SpecificVersion>False</SpecificVersion>
       <AssemblyName>Disney.MenuServices.dll</AssemblyName>
       <HintPath>..\..\bin\Disney.MenuServices.dll</HintPath>
       <Private>True</Private>
