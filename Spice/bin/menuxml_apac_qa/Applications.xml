@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Applications>
-  <Application Name="Spice" Enabled="1" Message="SPICE will be available from 3rd Feb 2010"/>
-  <Application Name="EAS" Enabled="1" Message="EAS will be available from 3rd Feb 2010"/>
-</Applications>

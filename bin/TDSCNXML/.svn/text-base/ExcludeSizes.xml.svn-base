@@ -1,9 +1,0 @@
-<?xml version="1.0" standalone="yes"?>
-<DocumentElement>
-  <ExcludeSizesTbl>
-    <XSizeCode>1111</XSizeCode>
-  </ExcludeSizesTbl>
-  <ExcludeSizesTbl>
-    <XSizeCode>9999</XSizeCode>
-  </ExcludeSizesTbl>
-</DocumentElement>

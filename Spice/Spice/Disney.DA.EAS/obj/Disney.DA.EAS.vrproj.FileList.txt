@@ -1,7 +1,0 @@
-obj\Debug\ResolveAssemblyReference.cache
-..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.DA.EAS.pdb
-obj\Debug\Disney.DA.EAS.pdb
-..\..\..\Documents and Settings\jurbina\My Documents\iDash\Disney.DA.EAS.dll
-obj\Debug\Disney.DA.EAS.dll
-..\..\bin\SPICE\Disney.DA.EAS.dll
-..\..\bin\SPICE\Disney.DA.EAS.pdb
