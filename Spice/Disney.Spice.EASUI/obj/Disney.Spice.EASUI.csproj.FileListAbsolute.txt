@@ -158,3 +158,16 @@ C:\TEMP\xDev\root\IDASH\SPICE\Disney.Spice.EASUI.pdb
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASUI\obj\Release\Disney.Spice.EASUI.pdb
 C:\TEMP\xDev\root\Spice\bin\spice\Disney.Spice.EASUI.dll
 C:\TEMP\xDev\root\Spice\bin\spice\Disney.Spice.EASUI.pdb
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASMain.resources
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASRequest.resources
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmEASSubmitters.resources
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POapprove.resources
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.frmPoModificationSummary.resources
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineDetailsPack.resources
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.POLineForm.resources
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.csproj.GenerateResource.Cache
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.dll
+C:\Spice\Spice\Disney.Spice.EASUI\obj\Debug\Disney.Spice.EASUI.pdb
+C:\Spice\bin\SPICE\Disney.Spice.EASUI.dll
+C:\Spice\bin\SPICE\Disney.Spice.EASUI.pdb

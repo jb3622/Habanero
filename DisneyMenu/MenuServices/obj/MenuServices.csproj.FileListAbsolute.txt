@@ -210,3 +210,12 @@ C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\MenuServices.csproj.Ge
 C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.dll
 C:\TEMP\xDev\root\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.pdb
 C:\TEMP\xDev\root\Spice\bin\Disney.MenuServices.tlb
+C:\Spice\bin\Disney.MenuServices.dll
+C:\Spice\bin\Disney.MenuServices.pdb
+C:\Spice\bin\Disney.MenuServices.tlb
+C:\Spice\DisneyMenu\MenuServices\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.Menu.MessageBox.resources
+C:\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.Menu.Properties.Resources.resources
+C:\Spice\DisneyMenu\MenuServices\obj\Debug\MenuServices.csproj.GenerateResource.Cache
+C:\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.dll
+C:\Spice\DisneyMenu\MenuServices\obj\Debug\Disney.MenuServices.pdb

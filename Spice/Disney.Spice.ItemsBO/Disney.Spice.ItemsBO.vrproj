@@ -35,7 +35,7 @@
       <Name>ASNA.VisualRPG.Runtime</Name>
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
-    <Reference Include="Disney.DA.IP400, Version=8.3.5.20732, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.DA.IP400, Version=8.3.5.15412, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.DA.IP400</Name>
       <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>

@@ -252,7 +252,7 @@ BegClass SignOn Extends(System.Windows.Forms.Form) Access(*Public)
 		
 		Try
 			// Get all the domain-related date formats		
-			domainDateFormats = System.Configuration.ConfigurationManager.GetSection("DateFormats/" + Environment.Domain.Trim()) *AS NameValueCollection					
+			domainDateFormats = System.Configuration.ConfigurationManager.GetSection("DateFormats/" + Environment.Domain.Trim()) *AS NameValueCollection
 			// Get all the domain-related feature switches
 			domainFeatureSwitches = System.Configuration.ConfigurationManager.GetSection("DomainSpecificSettings/" + Environment.Domain.Trim()) *AS NameValueCollection
 			

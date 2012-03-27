@@ -74,3 +74,8 @@ C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\bin\Release\Disney.DA.IP400.p
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\obj\Release\ResolveAssemblyReference.cache
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.ItemsBO\obj\Release\Disney.Spice.ItemsBO.dll
 C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.ItemsBO.dll
+C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.dll
+C:\Spice\Spice\Disney.Spice.ItemsBO\obj\Debug\Disney.Spice.ItemsBO.pdb
+C:\Spice\bin\SPICE\Disney.Spice.ItemsBO.dll
+C:\Spice\bin\SPICE\Disney.Spice.ItemsBO.pdb

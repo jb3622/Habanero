@@ -110,3 +110,11 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POenquiry\ob
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.vrproj.GenerateResource.Cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.pdb
+C:\Spice\bin\SPICE\Disney.Spice.POenquiry.dll
+C:\Spice\bin\SPICE\Disney.Spice.POenquiry.pdb
+C:\Spice\Spice\Disney.Spice.POenquiry\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.POMain.resources
+C:\Spice\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.Resources.resources
+C:\Spice\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.vrproj.GenerateResource.Cache
+C:\Spice\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.dll
+C:\Spice\Spice\Disney.Spice.POenquiry\obj\Debug\Disney.Spice.POenquiry.pdb

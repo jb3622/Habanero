@@ -53,3 +53,11 @@ C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.Spice.EASBO.pdb
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASBO\obj\Release\ResolveAssemblyReference.cache
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.dll
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.pdb
+C:\Spice\bin\SPICE\Disney.Spice.EASBO.dll
+C:\Spice\bin\SPICE\Disney.Spice.EASBO.pdb
+C:\Spice\Spice\Disney.Spice.EASBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.dll
+C:\Spice\Spice\Disney.Spice.EASBO\obj\Debug\Disney.Spice.EASBO.pdb
+C:\Spice\Spice\Disney.Spice.EASBO\obj\Release\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.dll
+C:\Spice\Spice\Disney.Spice.EASBO\obj\Release\Disney.Spice.EASBO.pdb

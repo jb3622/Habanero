@@ -110,3 +110,11 @@ C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.vrproj
 C:\TEMP\xDev\root\Spice\Spice\Disney.DA.IP400\obj\Release\Disney.DA.IP400.dll
 C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.DA.IP400.dll.config
 C:\TEMP\xDev\root\Spice\bin\SPICE\Disney.DA.IP400.dll
+C:\Spice\bin\SPICE\Disney.DA.IP400.dll.config
+C:\Spice\bin\SPICE\Disney.DA.IP400.dll
+C:\Spice\bin\SPICE\Disney.DA.IP400.pdb
+C:\Spice\Spice\Disney.DA.IP400\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.Resources.resources
+C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.vrproj.GenerateResource.Cache
+C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.dll
+C:\Spice\Spice\Disney.DA.IP400\obj\Debug\Disney.DA.IP400.pdb

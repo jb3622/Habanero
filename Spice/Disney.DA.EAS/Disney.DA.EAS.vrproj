@@ -35,13 +35,6 @@
       <Name>ASNA.VisualRPG.Runtime</Name>
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
-    <Reference Include="DisneyMenu, Version=8.3.1.19133, Culture=neutral, PublicKeyToken=null">
-      <Name>DisneyMenu</Name>
-      <AssemblyName>DisneyMenu.exe</AssemblyName>
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\DisneyMenu.exe</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="IBM.Data.DB2.iSeries, Version=10.0.0.0, Culture=neutral, PublicKeyToken=9cdb2ebfb1f93a26">
       <Name>IBM.Data.DB2.iSeries</Name>
       <AssemblyName>IBM.Data.DB2.iSeries.dll</AssemblyName>
@@ -78,6 +71,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DisneyMenu\Menu\Disney.Menu.vrproj">
+      <Name>Disney.Menu</Name>
+      <Project>{59ebc483-398c-4a64-9dcb-9a3dc921df2e}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\ASNA\VisualRPG\8.1\ASNA.VisualRPG.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
