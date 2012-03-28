@@ -1411,7 +1411,17 @@ BegClass ChangeItemSizesBandM Extends(System.Windows.Forms.Form) Access(*Public)
 		EndTry	
 
 	EndSr
-		
+
+	DclFld pUPC Type(String) Access(*Private) Inz(String.Empty)
+	BegProp UPC Type(String) Access(*Private)
+		BegGet
+			LeaveSR pUPC
+		EndGet
+		BegSet
+			pUPC = *PropVal
+		EndSet
+	EndProp
+	
 	BegSr btnNext_Click Access(*Private) Event(*this.btnNext.Click)
 		DclSrParm sender *Object
 		DclSrParm e System.EventArgs
@@ -1420,10 +1430,16 @@ BegClass ChangeItemSizesBandM Extends(System.Windows.Forms.Form) Access(*Public)
 		DclFld dv2			Type(DataView) //Created to check for duplicate UPC's
 		DclFld DuplicateChk Type(Boolean)
 		DclFld ErrorCheck	Type(Boolean)
+		DclFld upcString    Type(String) Inz(String.Empty)
+		DclFld duplicateUPCs   Type(ArrayList)
+		DclFld overrideUPCs    Type(ArrayList)
 		
-		Try		
+		Try
 			UpdateStyleSettings()
 		
+			duplicateUPCs = *New ArrayList()
+			overrideUPCs = *New ArrayList()
+			
 			ErrPro.SetControlError(btnNext,String.Empty)
 			*this.ValidateChildren()
 							
@@ -1433,33 +1449,65 @@ BegClass ChangeItemSizesBandM Extends(System.Windows.Forms.Form) Access(*Public)
 				
 				DuplicateChk = *False
 				ErrorCheck   = *False
-												
+							
 				ForEach SizeRow Collection(dv) Type(DataRowView)
 					If Convert.ToInt64(SizeRow.Item("VendorUPC")) <> *Zero
-						ForEach SizeRow2 Collection(dv2) Type(DataRowView)
-							If SizeRow.Item("VendorUPC") = SizeRow2.Item("VendorUPC")  And + 
-								SizeRow.Row <> SizeRow2.Row 
-								DuplicateChk = *True
-							EndIf
-						EndFor
+						upcString = SafeStringValue(SizeRow["VendorUPC"])	
+						If ItemsBO.OverrideUPCCDValidation(upcString) = *true
+							overrideUPCs.Add(upcString)
+						Else
+							If Not duplicateUPCs.Contains(upcString)
+								duplicateUPCs.Add(upcString)
+							Endif
+						EndIf
 					Endif
-				EndFor	
+				EndFor
+											
+				If duplicateUPCs.Count > 0
+					DuplicateChk = *True
+				EndIf
+												
+//				ForEach SizeRow Collection(dv) Type(DataRowView)
+//					If Convert.ToInt64(SizeRow.Item("VendorUPC")) <> *Zero
+//						ForEach SizeRow2 Collection(dv2) Type(DataRowView)
+//							upcString = SafeStringValue(SizeRow["VendorUPC"])
+//							If ItemsBO.OverrideUPCCDValidation(upcString) = *false
+//								If SizeRow.Item("VendorUPC") = SizeRow2.Item("VendorUPC")  And +
+//									SizeRow.Row <> SizeRow2.Row
+//									DuplicateChk = *True
+//								EndIf
+//							EndIf
+//						EndFor
+//					Endif
+//				EndFor
 				
 				If DuplicateChk = *True
-					ErrPro.SetControlError(btnNext,"There are duplicate UPC's. Please Correct")
+					ErrPro.SetControlError(btnNext,"There are duplicate UPC's. Please Correct")					
 					LeaveSR
 				EndIf
 				
 				ForEach dgvRow Collection(dgvSizes.Rows) Type(DataGridViewRow)
 					dgvRow.Cells["OED"].Value = *this.DateTimeToStringDateValue(SafeDateValue(dgvRow.Cells["OfferEffectiveDate"].Value))
 					
-					If Convert.ToInt64(dgvRow.Cells["VendorUPC"].Value) <> *Zero								
+					If Convert.ToInt64(dgvRow.Cells["VendorUPC"].Value) <> *Zero	
+						
+						ResultUPC = SafeInt64Value(dgvRow.Cells["VendorUPC"].Value)
+						
 						// Calculate UPC Checkdigit
-						UPCcheckDigit =  ItemsBO.ChkUPCcheckDigit(ResultUPC)
-						If	UPCcheckDigit = *False
-							dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
-							ErrorCheck = *True
-						EndIf
+						upcString = SafeStringValue(dgvRow.Cells["VendorUPC"].Value)
+						If Not overrideUPCs.Contains(upcString)
+							UPCcheckDigit =  ItemsBO.ChkUPCcheckDigit(ResultUPC)
+							If	UPCcheckDigit = *False
+								dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
+								ErrorCheck = *True
+							EndIf	
+							
+							If Not ItemsBO.ChkUPCunique(ResultUPC, LongItemNumber)
+								dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
+								ErrorCheck = *True
+							EndIf
+							
+						Endif								
 						
 						GridClass    = SafeInt16Value(dgvRow.Cells["Class"].Value)
 						GridVendor   = SafeInt16Value(dgvRow.Cells["Vendor"].Value)
@@ -1473,19 +1521,7 @@ BegClass ChangeItemSizesBandM Extends(System.Windows.Forms.Form) Access(*Public)
 						LongItemNumber.Style  = GridStyle
 						LongItemNumber.Colour = GridColour
 						LongItemNumber.Size   = GridSize
-						
-						ResultUPC = SafeInt64Value(dgvRow.Cells["VendorUPC"].Value)
-												
-						If Not ItemsBO.ChkUPCunique(ResultUPC, LongItemNumber)
-							dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
-							ErrorCheck = *True
-						EndIf
-									
-						If Not ItemsBO.ChkVendorUPCunique(ResultUPC, LongItemNumber)
-							dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red
-							ErrorCheck = *True
-						EndIf
-						
+
 					Endif
 				EndFor
 				
@@ -1744,8 +1780,7 @@ BegClass ChangeItemSizesBandM Extends(System.Windows.Forms.Form) Access(*Public)
 			dgvSizes[e.ColumnIndex,e.RowIndex].ErrorText = String.Empty
 			btnNext.Enabled = *True
 					
-			If dgvSizes.Columns(e.ColumnIndex).Name.Equals("VendorUPC") 
-					
+			If dgvSizes.Columns(e.ColumnIndex).Name.Equals("VendorUPC")					
 				 					
 				dgvSizes.Item(e.ColumnIndex,e.RowIndex).ErrorText = String.Empty
 				If Not String.IsNullOrEmpty(e.FormattedValue.ToString())

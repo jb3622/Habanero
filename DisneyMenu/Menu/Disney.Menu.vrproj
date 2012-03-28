@@ -36,7 +36,7 @@
       <Name>ASNA.VisualRPG.Runtime</Name>
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
-    <Reference Include="Disney.MenuServices, Version=8.3.5.21880, Culture=neutral, PublicKeyToken=5fe3bc6df19efbba">
+    <Reference Include="Disney.MenuServices, Version=8.3.5.28853, Culture=neutral, PublicKeyToken=5fe3bc6df19efbba">
       <Name>Disney.MenuServices</Name>
       <AssemblyName>Disney.MenuServices.dll</AssemblyName>
       <HintPath>..\..\bin\Disney.MenuServices.dll</HintPath>

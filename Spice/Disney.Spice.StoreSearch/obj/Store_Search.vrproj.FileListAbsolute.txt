@@ -56,3 +56,14 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearch\
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearch\obj\Debug\Store_Search.vrproj.GenerateResource.Cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.pdb
+C:\Spice\bin\SPICE\Disney.Spice.StoreSearch.dll.config
+C:\Spice\bin\SPICE\Disney.Spice.StoreSearch.dll
+C:\Spice\bin\SPICE\Disney.Spice.StoreSearch.pdb
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.ni0104-48.gif
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.frmStoreGroupMain.resources
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.frmStoreSelection.resources
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.Resources.resources
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\Store_Search.vrproj.GenerateResource.Cache
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.dll
+C:\Spice\Spice\Disney.Spice.StoreSearch\obj\Debug\Disney.Spice.StoreSearch.pdb

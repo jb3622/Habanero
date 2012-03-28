@@ -37,7 +37,7 @@
       <Name>ASNA.VisualRPG.Runtime</Name>
       <AssemblyName>ASNA.VisualRPG.Runtime.dll</AssemblyName>
     </Reference>
-    <Reference Include="Disney.DA.IP400, Version=8.3.5.15412, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.DA.IP400, Version=8.3.5.29086, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.DA.IP400</Name>
       <AssemblyName>Disney.DA.IP400.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
@@ -50,7 +50,7 @@
       <HintPath>..\..\bin\SPICE\Disney.Spice.ErrorProvider.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.5.15576, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.5.15776, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.Spice.ItemsBO</Name>
       <AssemblyName>Disney.Spice.ItemsBO.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
@@ -63,7 +63,7 @@
       <HintPath>..\..\bin\SPICE\Disney.Spice.LookUp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DisneyMenu, Version=8.3.5.15328, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="DisneyMenu, Version=8.3.5.29345, Culture=neutral, PublicKeyToken=null">
       <Name>DisneyMenu</Name>
       <AssemblyName>DisneyMenu.exe</AssemblyName>
       <HintPath>..\..\bin\DisneyMenu.exe</HintPath>

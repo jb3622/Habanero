@@ -24,3 +24,8 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.4\bin\SPICE\Disney.Spice.StoreSea
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.4\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.pdb
+C:\Spice\bin\SPICE\Disney.Spice.StoreSearchBO.dll
+C:\Spice\bin\SPICE\Disney.Spice.StoreSearchBO.pdb
+C:\Spice\Spice\Disney.Spice.StoreSearchBO\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.dll
+C:\Spice\Spice\Disney.Spice.StoreSearchBO\obj\Debug\Disney.Spice.StoreSearchBO.pdb

@@ -90,3 +90,12 @@ C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.LookUp\obj\D
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.vrproj.GenerateResource.Cache
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.dll
 C:\Dev\Visual Studio 2005\branches\version_8.3.5\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.pdb
+C:\Spice\bin\SPICE\Disney.Spice.LookUp.dll
+C:\Spice\bin\SPICE\Disney.Spice.LookUp.pdb
+C:\Spice\Spice\Disney.Spice.LookUp\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.Enquiry.resources
+C:\Spice\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.History.resources
+C:\Spice\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.Resources.resources
+C:\Spice\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.vrproj.GenerateResource.Cache
+C:\Spice\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.dll
+C:\Spice\Spice\Disney.Spice.LookUp\obj\Debug\Disney.Spice.LookUp.pdb

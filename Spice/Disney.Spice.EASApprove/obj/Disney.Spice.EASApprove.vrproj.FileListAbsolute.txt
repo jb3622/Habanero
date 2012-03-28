@@ -78,3 +78,10 @@ C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.E
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASUI.RejectReasonForm.resources
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASApprove.vrproj.GenerateResource.Cache
 C:\TEMP\xDev\root\Spice\Spice\Disney.Spice.EASApprove\obj\Release\Disney.Spice.EASApprove.dll
+C:\Spice\Spice\Disney.Spice.EASApprove\obj\Debug\ResolveAssemblyReference.cache
+C:\Spice\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASUI.EASApproveReject.resources
+C:\Spice\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASUI.Resources.resources
+C:\Spice\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASUI.RejectReasonForm.resources
+C:\Spice\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASApprove.vrproj.GenerateResource.Cache
+C:\Spice\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASApprove.dll
+C:\Spice\Spice\Disney.Spice.EASApprove\obj\Debug\Disney.Spice.EASApprove.pdb

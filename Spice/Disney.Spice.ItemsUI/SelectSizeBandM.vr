@@ -877,9 +877,16 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 		*this.DialogResult = DialogResult.Retry
 	EndSr
 	
-	//////
-	///btnNext_Click
-	//////
+	DclFld pUPC Type(String) Access(*Private) Inz(String.Empty)
+	BegProp myUPC Type(String) Access(*Private)
+		BegGet
+			LeaveSR pUPC
+		EndGet
+		BegSet
+			pUPC = *PropVal
+		EndSet
+	EndProp
+
 	BegSr btnNext_Click Access(*Private) Event(*this.btnNext.Click)
 
 		DclSrParm sender *Object
@@ -891,10 +898,16 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 		DclFld DuplicateChk Type(Boolean)
 		DclFld UPC			Type(Int64)
 		DclFld Size         Type(Int16)
-						
+		DclFld upcString    Type(String) Inz(String.Empty)
+		DclFld duplicateUPCs   Type(ArrayList)
+		DclFld overrideUPCs    Type(ArrayList)
+		
 		ErrPro.SetControlError(btnNext,String.Empty)
 		
 		UpdateStyleSettings()
+		
+		duplicateUPCs = *New ArrayList()		
+		overrideUPCs = *New ArrayList()
 		
 		dv  = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
 		dv2 = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
@@ -917,17 +930,37 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 				ErrPro.SetControlError(sender *As control,"One or more values are zero")
 			EndIf
 		EndFor
-				
+		
 		ForEach SizeRow Collection(dv) Type(DataRowView)
 			If Convert.ToInt64(SizeRow.Item("UPC")) <> *Zero
-				ForEach SizeRow2 Collection(dv2) Type(DataRowView)
-						If SizeRow.Item("UPC") = SizeRow2.Item("UPC") And +
-						SizeRow.Row <> SizeRow2.Row 
-						DuplicateChk = *True
-					EndIf
-				EndFor
+				upcString = SafeStringValue(SizeRow["UPC"])	
+				If ItemsBO.OverrideUPCCDValidation(upcString) = *true
+					// Do nothing
+				Else
+					If Not duplicateUPCs.Contains(upcString)
+						duplicateUPCs.Add(upcString)
+					Endif
+				EndIf
 			Endif
 		EndFor	
+			
+		If duplicateUPCs.Count > 0
+			DuplicateChk = *True
+		EndIf
+			
+//		ForEach SizeRow Collection(dv) Type(DataRowView)
+//			If Convert.ToInt64(SizeRow.Item("UPC")) <> *Zero
+//				ForEach SizeRow2 Collection(dv2) Type(DataRowView)
+//					upcString = SafeStringValue(SizeRow["UPC"])
+//					If ItemsBO.OverrideUPCCDValidation(upcString) = *false
+//						If SizeRow.Item("UPC") = SizeRow2.Item("UPC") And +
+//						SizeRow.Row <> SizeRow2.Row 
+//						DuplicateChk = *True
+//						EndIf
+//					EndIf
+//				EndFor
+//			Endif
+//		EndFor	
 		
 		If DuplicateChk = *True
 			ErrPro.SetControlError(sender *As control,"There are duplicate UPC's. Please Correct")
@@ -938,27 +971,30 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 			If Convert.ToInt64(SizeRow.Item("UPC")) <> *Zero
 				UPC = Convert.ToInt64(SizeRow.Item("UPC"))
 				
-				//Calculate UPC Checkdigit	
-				If Not ItemsBO.ChkUPCCheckDigit(UPC)
-					ErrPro.SetControlError(sender *As control,"UPC CheckDigit not valid, Please correct.")
-					LeaveSR
-				EndIf
-				
-				
-				If Not ItemsBO.ChkUPCunique(UPC)
-					ErrPro.SetControlError(sender *As control,"UPC's on the Grid are not Unique, Please correct")
-					LeaveSR
-				EndIf
-								
-				If Not ItemsBO.ChkVendorUPCunique(UPC)
-					ErrPro.SetControlError(sender *As control,"UPC's on the Grid are not Unique, Please correct")
-					LeaveSR
-				EndIf
-								
-				If Not ItemsBO.ChkDisneyUPCunique(UPC)
-					ErrPro.SetControlError(sender *As control,"UPC's on the Grid are not Unique, Please correct")
-					LeaveSR
-				EndIf
+				upcString = SafeStringValue(SizeRow.Item("UPC"))
+				If Not overrideUPCs.Contains(upcString)
+					//Calculate UPC Checkdigit	
+					If Not ItemsBO.ChkUPCCheckDigit(UPC)
+						ErrPro.SetControlError(sender *As control,"UPC CheckDigit not valid, Please correct.")
+						LeaveSR
+					EndIf
+									
+					If Not ItemsBO.ChkUPCunique(UPC)
+						ErrPro.SetControlError(sender *As control,"UPC's on the Grid are not Unique, Please correct")
+						LeaveSR
+					EndIf
+									
+					If Not ItemsBO.ChkVendorUPCunique(UPC)
+						ErrPro.SetControlError(sender *As control,"UPC's on the Grid are not Unique, Please correct")
+						LeaveSR
+					EndIf
+									
+					If Not ItemsBO.ChkDisneyUPCunique(UPC)
+						ErrPro.SetControlError(sender *As control,"UPC's on the Grid are not Unique, Please correct")
+						LeaveSR
+					EndIf
+				EndIf				
+
 			Endif
 		EndFor	
 		

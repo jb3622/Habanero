@@ -7,6 +7,8 @@ Using System.Reflection
 Using System.Text.RegularExpressions
 Using Disney.DA.IP400
 Using Disney.Menu
+Using Disney.Spice.DAL
+Using IBM.Data.DB2.iSeries
 
 BegClass Items Access(*Public)
 	
@@ -61,7 +63,7 @@ BegClass Items Access(*Public)
 	
 	BegProp DataBaseConnection Type(ASNA.VisualRPG.Runtime.Database) Access(*Public)
 		BegGet
-			LeaveSR PgmDB
+			LeaveSR PgmDB			
 		EndGet	
 	EndProp
 	
@@ -2038,7 +2040,21 @@ BegClass Items Access(*Public)
 		
 		LeaveSR SpiceItem.ChkUPCuniqueIMI(UPC,Market)
 	EndFunc
+	
+	BegFunc OverrideUPCCDValidation Type(Boolean) Access(*Public)
+		DclSrParm UPCString Type(String)
 		
+		DclFld   checkDigitOvrRide   Type(Disney.Spice.DAL.UPCCheckDigitOverride)
+		DclFld   db2Connection       Type(iDB2Connection)
+		DclFld   result              Type(Boolean)
+		
+	    db2Connection = *New iDB2Connection(DataCache.DBConnectionString)
+		db2Connection.Open()
+		checkDigitOvrRide = *New Disney.Spice.DAL.UPCCheckDigitOverride(db2Connection)	
+		result = checkDigitOvrRide.OverrideUPCCDValidation(UPCString)
+		LeaveSR result
+	EndFunc
+	
 	BegFunc ChkUPCcheckDigit Type(Boolean) Access(*Public)
 		DclSrParm UPC Type(Int64)
 		
@@ -2052,6 +2068,10 @@ BegClass Items Access(*Public)
 		
 		//Convert UPC to String		
 		UPCString = UPC.ToString('000000000000')
+			
+		If OverrideUPCCDValidation(UPCString)
+			LeaveSR *True
+		Endif		
 		
 		//Move String into Array elements				
 		For Index(DigitIndex = 0) to (11)

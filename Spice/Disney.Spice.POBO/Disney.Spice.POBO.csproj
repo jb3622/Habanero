@@ -63,10 +63,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
     </Reference>
-    <Reference Include="Disney.Spice.ItemsBO, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>
-    </Reference>
     <Reference Include="Disney.Spice.StoreSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\SPICE\Disney.Spice.StoreSearch.dll</HintPath>

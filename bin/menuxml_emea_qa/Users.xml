@@ -16,6 +16,7 @@
 	<MenuOption>POEntry</MenuOption>
     </AuthorisedMenuOptions>
     <Departments>
+	  <Department>8</Department>
 	  <Department>11</Department>
       <Department>12</Department>
       <Department>13</Department>

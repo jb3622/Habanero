@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="ClassDetails.cs" />
     <Compile Include="ColourDetails.cs" />
+    <Compile Include="UPCCheckDigitOverride.cs" />
     <Compile Include="LocalLanguage.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="DeliveryTerms.cs" />
