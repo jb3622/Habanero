@@ -50,7 +50,7 @@
       <HintPath>..\..\bin\SPICE\Disney.Spice.ErrorProvider.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.5.15776, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Disney.Spice.ItemsBO, Version=8.3.5.15916, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.Spice.ItemsBO</Name>
       <AssemblyName>Disney.Spice.ItemsBO.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.Spice.ItemsBO.dll</HintPath>

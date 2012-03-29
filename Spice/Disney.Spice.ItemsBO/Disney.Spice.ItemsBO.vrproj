@@ -41,8 +41,7 @@
       <HintPath>..\..\bin\SPICE\Disney.DA.IP400.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Disney.Spice.DAL, Version=8.3.4272.31586, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Disney.Spice.DAL, Version=8.3.5.15871, Culture=neutral, PublicKeyToken=null">
       <Name>Disney.Spice.DAL</Name>
       <AssemblyName>Disney.Spice.DAL.dll</AssemblyName>
       <HintPath>..\..\bin\SPICE\Disney.Spice.DAL.dll</HintPath>

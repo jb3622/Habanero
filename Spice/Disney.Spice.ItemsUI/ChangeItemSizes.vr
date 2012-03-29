@@ -1462,36 +1462,24 @@ BegClass ChangeItemSizes Extends(System.Windows.Forms.Form) Access(*Public)
 		LeaveSR result
 	EndFunc
 	
-	DclFld pUPC Type(String) Access(*Private) Inz(String.Empty)
-	BegProp UPC Type(String) Access(*Private)
-		BegGet
-			LeaveSR pUPC
-		EndGet
-		BegSet
-			pUPC = *PropVal
-		EndSet
-	EndProp
-	
 	BegSr btnNext_Click Access(*Private) Event(*this.btnNext.Click)
 		DclSrParm sender *Object
 		DclSrParm e System.EventArgs
 				
 		DclFld dv			Type(DataView)
-		DclFld dv2			Type(DataView) //Created to check for duplicate UPC's
-		DclFld DuplicateChk Type(Boolean)
-		DclFld ErrorCheck	Type(Boolean)
+		DclFld DuplicateChk Type(Boolean) Inz(*False)
+		DclFld ErrorCheck	Type(Boolean) Inz(*False)
 		DclFld sellingChannelItemSize Type(String)
 		DclFld ecomSellingChannel Type(String)
 		DclFld ecomSellingChannelExists Type(Boolean) Inz(*False)
 		DclFld upcString    Type(String) Inz(String.Empty)
-		DclArray upcArray   Dim(12) Type(Int32)
 		DclFld duplicateUPCs   Type(ArrayList)
 		DclFld overrideUPCs    Type(ArrayList)
 		
-		Try		
-			duplicateUPCs = *New ArrayList()
-			overrideUPCs = *New ArrayList()
-			
+		duplicateUPCs = *New ArrayList() // list of UPC's duplicated in the grid
+		overrideUPCs = *New ArrayList() // UPC's added to file DS406JW
+		
+		Try	
 			UpdateProperties()
 			
 			ErrPro.SetControlError(btnNext,String.Empty)
@@ -1499,64 +1487,49 @@ BegClass ChangeItemSizes Extends(System.Windows.Forms.Form) Access(*Public)
 							
 			If ItemsBO.SpiceDataSet.Tables["ItemSizes"].Rows.Count > 1
 				dv  = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
-				dv2 = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
 				
-				DuplicateChk = *False
-				ErrorCheck   = *False
-					
+				// Two lists - duplicate UPC's and list of UPC's kept in
+				// DS406JW. Populate the lists
 				ForEach SizeRow Collection(dv) Type(DataRowView)
 					If Convert.ToInt64(SizeRow.Item("VendorUPC")) <> *Zero
 						upcString = SafeStringValue(SizeRow["VendorUPC"])	
 						If ItemsBO.OverrideUPCCDValidation(upcString) = *true
-							// Do nothing
+							overrideUPCs.Add(upcString)
 						Else
 							If Not duplicateUPCs.Contains(upcString)
 								duplicateUPCs.Add(upcString)
+								DuplicateChk = *True
 							Endif
 						EndIf
 					Endif
 				EndFor	
-					
-				If duplicateUPCs.Count > 0
-					DuplicateChk = *True
-				EndIf
-										
-//				ForEach SizeRow Collection(dv) Type(DataRowView)
-//					If Convert.ToInt64(SizeRow.Item("VendorUPC")) <> *Zero
-//						ForEach SizeRow2 Collection(dv2) Type(DataRowView)
-//							upcString = SafeStringValue(SizeRow["VendorUPC"])					
-//							If ItemsBO.OverrideUPCCDValidation(upcString) = *false
-//								If SizeRow.Item("VendorUPC") = SizeRow2.Item("VendorUPC")  And + 
-//									SizeRow.Row <> SizeRow2.Row 
-//									DuplicateChk = *True
-//								EndIf
-//							EndIf
-//						EndFor
-//					Endif
-//				EndFor	
 				
+				// Duplicate UPCs' found - invalid!
 				If DuplicateChk = *True
 					ErrPro.SetControlError(btnNext,"There are duplicate UPC's. Please Correct")					
 					LeaveSR
 				EndIf
-				
+								
+				// Further validation of size rows
 				ForEach dgvRow Collection(dgvSizes.Rows) Type(DataGridViewRow)
 					dgvRow.Cells["OED"].Value = *this.DateTimeToStringDateValue(SafeDateValue(dgvRow.Cells["OfferEffectiveDate"].Value))
-										
+					
+					// selling channel
 					sellingChannelItemSize = dgvRow.Cells["SellingChannel"].Value.ToString()
 					ItemsBO.SellingChannel = sellingChannelItemSize
 					If (ItemForOnlineEcom(sellingChannelItemSize) = *True)
 						ecomSellingChannelExists = *True
 						ecomSellingChannel = sellingChannelItemSize										
 					EndIf
-					
-					If Convert.ToInt64(dgvRow.Cells["VendorUPC"].Value) <> *Zero	
-					
+									    			
+					If Convert.ToInt64(dgvRow.Cells["VendorUPC"].Value) <> *Zero					
 						ResultUPC = SafeInt64Value(dgvRow.Cells["VendorUPC"].Value)
-													
-						// Calculate UPC Checkdigit
+						
+						// Validate the UPC check digit identify duplicates 
+						// (unless the UPC is an override UPC - kept in file DS406JW)
 						upcString = SafeStringValue(dgvRow.Cells["VendorUPC"].Value)
 						If Not overrideUPCs.Contains(upcString)
+						    // Calculate UPC Checkdigit
 							UPCcheckDigit =  ItemsBO.ChkUPCcheckDigit(ResultUPC)
 							If	UPCcheckDigit = *False
 								dgvRow.Cells["VendorUPC"].Style.BackColor = Color.Red

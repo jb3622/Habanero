@@ -876,44 +876,28 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 		ItemsBO.CopyFilteredSizes()
 		*this.DialogResult = DialogResult.Retry
 	EndSr
-	
-	DclFld pUPC Type(String) Access(*Private) Inz(String.Empty)
-	BegProp myUPC Type(String) Access(*Private)
-		BegGet
-			LeaveSR pUPC
-		EndGet
-		BegSet
-			pUPC = *PropVal
-		EndSet
-	EndProp
 
 	BegSr btnNext_Click Access(*Private) Event(*this.btnNext.Click)
-
 		DclSrParm sender *Object
 		DclSrParm e System.EventArgs
 		
 		DclFld dv			Type(DataView)
-		DclFld dv2			Type(DataView) //Created to check for duplicate UPC's
 		DclFld MarketsDV    Type(DataView)
-		DclFld DuplicateChk Type(Boolean)
+		DclFld DuplicateChk Type(Boolean) Inz(*False)
 		DclFld UPC			Type(Int64)
 		DclFld Size         Type(Int16)
 		DclFld upcString    Type(String) Inz(String.Empty)
 		DclFld duplicateUPCs   Type(ArrayList)
 		DclFld overrideUPCs    Type(ArrayList)
 		
-		ErrPro.SetControlError(btnNext,String.Empty)
+		duplicateUPCs = *New ArrayList() // list of UPC's duplicated in the grid
+		overrideUPCs = *New ArrayList() // UPC's added to file DS406JW
 		
-		UpdateStyleSettings()
-		
-		duplicateUPCs = *New ArrayList()		
-		overrideUPCs = *New ArrayList()
+		ErrPro.SetControlError(btnNext,String.Empty)		
+		UpdateStyleSettings()		
 		
 		dv  = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
-		dv2 = *New DataView(ItemsBO.SpiceDataSet.Tables("ItemSizes"))
 		dv.RowFilter  = "Select = true"
-		dv2.RowFilter = "Select = true"
-		DuplicateChk = *False
 		
 		If dv.Count = *Zero
 			ErrPro.SetControlError(sender *As control,"Select one or more Sizes")
@@ -931,46 +915,35 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 			EndIf
 		EndFor
 		
+		// Two lists - duplicate UPC's and list of UPC's kept in
+		// DS406JW. Populate the lists
 		ForEach SizeRow Collection(dv) Type(DataRowView)
 			If Convert.ToInt64(SizeRow.Item("UPC")) <> *Zero
 				upcString = SafeStringValue(SizeRow["UPC"])	
 				If ItemsBO.OverrideUPCCDValidation(upcString) = *true
-					// Do nothing
+					overrideUPCs.Add(upcString)
 				Else
 					If Not duplicateUPCs.Contains(upcString)
 						duplicateUPCs.Add(upcString)
+						DuplicateChk = *True
 					Endif
 				EndIf
 			Endif
 		EndFor	
-			
-		If duplicateUPCs.Count > 0
-			DuplicateChk = *True
-		EndIf
-			
-//		ForEach SizeRow Collection(dv) Type(DataRowView)
-//			If Convert.ToInt64(SizeRow.Item("UPC")) <> *Zero
-//				ForEach SizeRow2 Collection(dv2) Type(DataRowView)
-//					upcString = SafeStringValue(SizeRow["UPC"])
-//					If ItemsBO.OverrideUPCCDValidation(upcString) = *false
-//						If SizeRow.Item("UPC") = SizeRow2.Item("UPC") And +
-//						SizeRow.Row <> SizeRow2.Row 
-//						DuplicateChk = *True
-//						EndIf
-//					EndIf
-//				EndFor
-//			Endif
-//		EndFor	
 		
+		// Duplicate UPCs' found - invalid!
 		If DuplicateChk = *True
 			ErrPro.SetControlError(sender *As control,"There are duplicate UPC's. Please Correct")
 			LeaveSR
 		EndIf
-						
+		
+		// Further validation of size rows		
 		ForEach SizeRow Collection(dv) Type(DataRowView)
 			If Convert.ToInt64(SizeRow.Item("UPC")) <> *Zero
 				UPC = Convert.ToInt64(SizeRow.Item("UPC"))
 				
+				// Validate the UPC check digit identify duplicates 
+				// (unless the UPC is an override UPC - kept in file DS406JW)
 				upcString = SafeStringValue(SizeRow.Item("UPC"))
 				If Not overrideUPCs.Contains(upcString)
 					//Calculate UPC Checkdigit	
@@ -1015,8 +988,7 @@ BegClass SelectSizeBandM Extends(System.Windows.Forms.Form) Access(*Public)
 					
 			EndFor
 		EndFor
-		
-								
+										
 		If ErrPro.ErrorCount = *Zero
 			*this.DialogResult = DialogResult.OK
 			ItemsBO.CopyFilteredSizes()
